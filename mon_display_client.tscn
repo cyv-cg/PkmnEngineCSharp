@@ -1,0 +1,149 @@
+[gd_scene load_steps=9 format=3 uid="uid://l16rqqa7od8i"]
+
+[ext_resource type="Script" path="res://scripts/MonDisplay.cs" id="1_js8pw"]
+[ext_resource type="Texture2D" uid="uid://7gfnigqbivm" path="res://sprites/BattleUI.png" id="2_okm3q"]
+[ext_resource type="Theme" uid="uid://dbghedwaxaxw7" path="res://new_theme.tres" id="3_aqc5j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1devg"]
+atlas = ExtResource("2_okm3q")
+region = Rect2(0, 40, 120, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1euk"]
+atlas = ExtResource("2_okm3q")
+region = Rect2(59, 3, 48, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgd37"]
+atlas = ExtResource("2_okm3q")
+region = Rect2(59, 6, 48, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bed21"]
+atlas = ExtResource("2_okm3q")
+region = Rect2(59, 9, 48, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8idy6"]
+atlas = ExtResource("2_okm3q")
+region = Rect2(27, 13, 80, 1)
+
+[node name="MonDisplayClient" type="Control"]
+custom_minimum_size = Vector2(360, 80)
+layout_mode = 3
+anchor_left = 1.0
+anchor_top = 0.6
+anchor_right = 1.0
+anchor_bottom = 0.6
+offset_left = -360.0
+offset_top = 0.199982
+offset_bottom = 90.2
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("1_js8pw")
+
+[node name="HealthBar" type="Sprite2D" parent="."]
+z_index = -2
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = SubResource("AtlasTexture_1devg")
+centered = false
+
+[node name="BarGreen" type="TextureProgressBar" parent="HealthBar"]
+z_index = 2
+texture_filter = 1
+offset_left = 56.0
+offset_top = 8.97511
+offset_right = 104.0
+offset_bottom = 10.9751
+value = 25.0
+texture_progress = SubResource("AtlasTexture_p1euk")
+
+[node name="BarYellow" type="TextureProgressBar" parent="HealthBar"]
+z_index = 1
+texture_filter = 1
+offset_left = 56.0
+offset_top = 8.97511
+offset_right = 104.0
+offset_bottom = 10.9751
+value = 50.0
+texture_progress = SubResource("AtlasTexture_tgd37")
+
+[node name="BarRed" type="TextureProgressBar" parent="HealthBar"]
+texture_filter = 1
+offset_left = 56.0
+offset_top = 8.97511
+offset_right = 104.0
+offset_bottom = 10.9751
+value = 75.0
+texture_progress = SubResource("AtlasTexture_bed21")
+
+[node name="ExpBar" type="TextureProgressBar" parent="HealthBar"]
+texture_filter = 1
+offset_left = 32.0
+offset_top = 23.0
+offset_right = 112.0
+offset_bottom = 24.0
+value = 90.0
+texture_progress = SubResource("AtlasTexture_8idy6")
+
+[node name="TextContainer" type="Control" parent="HealthBar"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="MonNameLabel" type="RichTextLabel" parent="HealthBar/TextContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+offset_left = 8.66675
+offset_top = 0.28952
+offset_right = 218.667
+offset_bottom = 24.2895
+scale = Vector2(0.333, 0.333)
+theme = ExtResource("3_aqc5j")
+text = "丸い子0123456789Abc"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="MonLevelLabel" type="RichTextLabel" parent="HealthBar/TextContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+offset_left = 88.6666
+offset_right = 154.667
+offset_bottom = 24.0
+scale = Vector2(0.333, 0.333)
+theme = ExtResource("3_aqc5j")
+theme_override_font_sizes/normal_font_size = 26
+text = "999"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="MonMaxHPLabel" type="RichTextLabel" parent="HealthBar/TextContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_direction = 2
+layout_mode = 1
+offset_left = 88.0
+offset_top = 12.0
+offset_right = 178.0
+offset_bottom = 36.0
+scale = Vector2(0.333, 0.333)
+theme = ExtResource("3_aqc5j")
+theme_override_font_sizes/normal_font_size = 26
+text = "9999"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="MonCurrHPLabel" type="RichTextLabel" parent="HealthBar/TextContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_direction = 2
+layout_mode = 1
+offset_left = 50.0
+offset_top = 12.0
+offset_right = 140.0
+offset_bottom = 36.0
+scale = Vector2(0.333, 0.333)
+theme = ExtResource("3_aqc5j")
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "[right]9999[/right]"
+scroll_active = false
+autowrap_mode = 0

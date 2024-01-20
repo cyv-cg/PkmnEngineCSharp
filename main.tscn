@@ -1,0 +1,140 @@
+[gd_scene load_steps=7 format=3 uid="uid://espp42b7wk13"]
+
+[ext_resource type="Script" path="res://GDPrgmInitDev.cs" id="1_nu0mw"]
+[ext_resource type="Script" path="res://scripts/MoveSelectMenu.cs" id="2_2sley"]
+[ext_resource type="Script" path="res://ButtonThing.cs" id="2_t3gpm"]
+[ext_resource type="Script" path="res://scripts/BattleActionSelectionMenu.cs" id="2_xo3lf"]
+[ext_resource type="Script" path="res://scripts/MonSwitchMenu.cs" id="4_i7gyw"]
+[ext_resource type="PackedScene" uid="uid://cjbbqkngd20v8" path="res://battle_scene.tscn" id="6_s4t1v"]
+
+[node name="main" type="Node"]
+script = ExtResource("1_nu0mw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="MoveSelectMenu" type="Node2D" parent="."]
+visible = false
+z_index = 10
+position = Vector2(539, 277)
+script = ExtResource("2_2sley")
+
+[node name="GridContainer" type="GridContainer" parent="MoveSelectMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.5
+offset_top = -51.0
+offset_right = 120.5
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="move0" type="Button" parent="MoveSelectMenu/GridContainer"]
+layout_mode = 2
+text = "Move Name"
+
+[node name="move1" type="Button" parent="MoveSelectMenu/GridContainer"]
+layout_mode = 2
+text = "Move Name"
+
+[node name="move2" type="Button" parent="MoveSelectMenu/GridContainer"]
+layout_mode = 2
+text = "Move Name"
+
+[node name="move3" type="Button" parent="MoveSelectMenu/GridContainer"]
+layout_mode = 2
+text = "Move Name"
+
+[node name="btnBack" type="Button" parent="MoveSelectMenu"]
+offset_left = -165.0
+offset_top = -94.0
+offset_right = -95.0
+offset_bottom = -63.0
+text = "Back"
+
+[node name="BattleActionSelectionMenu" type="Node2D" parent="."]
+visible = false
+z_index = 10
+position = Vector2(223.183, 265.613)
+script = ExtResource("2_xo3lf")
+
+[node name="btnAttack" type="Button" parent="BattleActionSelectionMenu"]
+offset_left = 247.817
+offset_top = 218.387
+offset_right = 462.817
+offset_bottom = 272.387
+text = "attack"
+script = ExtResource("2_t3gpm")
+
+[node name="btnBag" type="Button" parent="BattleActionSelectionMenu"]
+offset_left = 61.8169
+offset_top = 296.387
+offset_right = 276.817
+offset_bottom = 350.387
+text = "bag"
+script = ExtResource("2_t3gpm")
+
+[node name="btnPokemon" type="Button" parent="BattleActionSelectionMenu"]
+offset_left = 432.817
+offset_top = 296.387
+offset_right = 647.817
+offset_bottom = 350.387
+text = "pokemon"
+script = ExtResource("2_t3gpm")
+
+[node name="btnRun" type="Button" parent="BattleActionSelectionMenu"]
+offset_left = 304.817
+offset_top = 296.387
+offset_right = 405.817
+offset_bottom = 350.387
+text = "run"
+script = ExtResource("2_t3gpm")
+
+[node name="MonSwitchMenu" type="Node2D" parent="."]
+visible = false
+z_index = 10
+position = Vector2(811, 127)
+script = ExtResource("4_i7gyw")
+
+[node name="GridContainer" type="GridContainer" parent="MonSwitchMenu"]
+offset_right = 82.0
+offset_bottom = 206.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Button1" type="Button" parent="MonSwitchMenu/GridContainer"]
+layout_mode = 2
+text = "Pokemon"
+
+[node name="Button2" type="Button" parent="MonSwitchMenu/GridContainer"]
+layout_mode = 2
+text = "Pokemon"
+
+[node name="Button3" type="Button" parent="MonSwitchMenu/GridContainer"]
+layout_mode = 2
+text = "Pokemon"
+
+[node name="Button4" type="Button" parent="MonSwitchMenu/GridContainer"]
+layout_mode = 2
+text = "Pokemon"
+
+[node name="Button5" type="Button" parent="MonSwitchMenu/GridContainer"]
+layout_mode = 2
+text = "Pokemon"
+
+[node name="Button6" type="Button" parent="MonSwitchMenu/GridContainer"]
+layout_mode = 2
+text = "Pokemon"
+
+[node name="btnBack" type="Button" parent="MonSwitchMenu"]
+offset_left = 105.0
+offset_top = 202.0
+offset_right = 175.0
+offset_bottom = 227.0
+text = "Back"
+
+[node name="BattleScene" parent="." instance=ExtResource("6_s4t1v")]

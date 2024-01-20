@@ -1,0 +1,100 @@
+[gd_scene load_steps=8 format=3 uid="uid://3vda4elt4odv"]
+
+[ext_resource type="Script" path="res://scripts/MonDisplay.cs" id="1_dd0rt"]
+[ext_resource type="Texture2D" uid="uid://7gfnigqbivm" path="res://sprites/BattleUI.png" id="2_ptpx6"]
+[ext_resource type="Theme" uid="uid://dbghedwaxaxw7" path="res://new_theme.tres" id="3_fo4ko"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rb6sx"]
+atlas = ExtResource("2_ptpx6")
+region = Rect2(12, 19, 112, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1euk"]
+atlas = ExtResource("2_ptpx6")
+region = Rect2(59, 3, 48, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgd37"]
+atlas = ExtResource("2_ptpx6")
+region = Rect2(59, 6, 48, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bed21"]
+atlas = ExtResource("2_ptpx6")
+region = Rect2(59, 9, 48, 2)
+
+[node name="MonDisplayOpp" type="Control"]
+custom_minimum_size = Vector2(360, 60)
+layout_mode = 3
+anchor_top = 0.3
+anchor_bottom = 0.3
+offset_top = -0.400009
+offset_bottom = -0.400009
+grow_vertical = 2
+script = ExtResource("1_dd0rt")
+
+[node name="HealthBar" type="Sprite2D" parent="."]
+z_index = -2
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = SubResource("AtlasTexture_rb6sx")
+centered = false
+
+[node name="BarGreen" type="TextureProgressBar" parent="HealthBar"]
+z_index = 2
+texture_filter = 1
+offset_left = 32.0
+offset_top = 8.97511
+offset_right = 80.0
+offset_bottom = 10.9751
+value = 25.0
+texture_progress = SubResource("AtlasTexture_p1euk")
+
+[node name="BarYellow" type="TextureProgressBar" parent="HealthBar"]
+z_index = 1
+texture_filter = 1
+offset_left = 32.0
+offset_top = 8.97511
+offset_right = 80.0
+offset_bottom = 10.9751
+value = 50.0
+texture_progress = SubResource("AtlasTexture_tgd37")
+
+[node name="BarRed" type="TextureProgressBar" parent="HealthBar"]
+texture_filter = 1
+offset_left = 32.0
+offset_top = 8.97511
+offset_right = 80.0
+offset_bottom = 10.9751
+value = 75.0
+texture_progress = SubResource("AtlasTexture_bed21")
+
+[node name="TextContainer" type="Control" parent="HealthBar"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="MonNameLabel" type="RichTextLabel" parent="HealthBar/TextContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+offset_left = 1.0
+offset_top = 0.28952
+offset_right = 211.0
+offset_bottom = 24.2895
+scale = Vector2(0.333, 0.333)
+theme = ExtResource("3_fo4ko")
+text = "丸い子0123456789Abc"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="MonLevelLabel" type="RichTextLabel" parent="HealthBar/TextContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+offset_left = 80.3333
+offset_top = -0.28952
+offset_right = 146.333
+offset_bottom = 23.7105
+scale = Vector2(0.333, 0.333)
+theme = ExtResource("3_fo4ko")
+theme_override_font_sizes/normal_font_size = 26
+text = "999"
+scroll_active = false
+autowrap_mode = 0

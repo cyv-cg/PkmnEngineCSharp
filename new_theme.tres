@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dbghedwaxaxw7"]
+
+[ext_resource type="FontFile" uid="uid://cjpwnepece6f5" path="res://assets/fonts/silkscreen/slkscr.ttf" id="1_wsbxd"]
+
+[resource]
+default_font = ExtResource("1_wsbxd")
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/constants/outline_size = 8
+RichTextLabel/font_sizes/normal_font_size = 16
+RichTextLabel/fonts/Silkscreen = ExtResource("1_wsbxd")
