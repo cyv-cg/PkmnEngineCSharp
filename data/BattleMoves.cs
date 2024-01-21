@@ -8,60 +8,62 @@ namespace PkmnEngine {
 		public const u16 NUM_MOVES = (u16)BattleMoveID.MOVES_NR_ITEMS;
 
 		#region flags
-		public const u32 MOVE_TARGET_SELECTED			= 0;		// Any adjacent to the user, not user
-		public const u32 MOVE_TARGET_DEPENDS			= 1 << 0;	// 
-		public const u32 MOVE_TARGET_USER_OR_SELECTED	= 1 << 1;	// User or any adjacent
-		public const u32 MOVE_TARGET_RANDOM				= 1 << 2;	// Random opponent
-		public const u32 MOVE_TARGET_BOTH				= 1 << 3;	// 
-		public const u32 MOVE_TARGET_USER				= 1 << 4;	// User only
-		public const u32 MOVE_TARGET_FOES_AND_ALLY		= 1 << 5;	// Adjacent opponents and all allies, not self
-		public const u32 MOVE_TARGET_OPPONENTS_FIELD	= 1 << 6;	// Adjacent opponents, not allies
-		public const u32 MOVE_TARGET_SELECTED_OPPONENT	= 1 << 7;	// Selected opponent, but not ally
-		public const u32 MOVE_TARGET_USER_OR_ALLY		= 1 << 8;	// User or an ally, not opponent
-		public const u32 MOVE_TARGET_SELECTED_ALLY		= 1 << 9;	// Ally, not user or opponent
-		public const u32 MOVE_TARGET_ANY_NOT_USER		= 1 << 10;	// Any opponent or ally, not user
-		public const u32 MOVE_TARGET_USER_FIELD			= 1 << 11;	// All allies
-		public const u32 MOVE_TARGET_ALL				= 1 << 12;	// All mons on field
-		public const u32 MOVE_TARGET_ANY				= 1 << 13;	// Any one mon
-		public const u32 MOVE_TARGET_ALL_OPPONENTS		= 1 << 14;	// Every opponent, no allies
+			public const u32 MOVE_TARGET_SELECTED			= 0;		// Any adjacent to the user, not user
+			public const u32 MOVE_TARGET_DEPENDS			= 1 << 0;	// 
+			public const u32 MOVE_TARGET_USER_OR_SELECTED	= 1 << 1;	// User or any adjacent
+			public const u32 MOVE_TARGET_RANDOM				= 1 << 2;	// Random opponent
+			public const u32 MOVE_TARGET_BOTH				= 1 << 3;	// 
+			public const u32 MOVE_TARGET_USER				= 1 << 4;	// User only
+			public const u32 MOVE_TARGET_FOES_AND_ALLY		= 1 << 5;	// Adjacent opponents and all allies, not self
+			public const u32 MOVE_TARGET_OPPONENTS_FIELD	= 1 << 6;	// Adjacent opponents, not allies
+			public const u32 MOVE_TARGET_SELECTED_OPPONENT	= 1 << 7;	// Selected opponent, but not ally
+			public const u32 MOVE_TARGET_USER_OR_ALLY		= 1 << 8;	// User or an ally, not opponent
+			public const u32 MOVE_TARGET_SELECTED_ALLY		= 1 << 9;	// Ally, not user or opponent
+			public const u32 MOVE_TARGET_ANY_NOT_USER		= 1 << 10;	// Any opponent or ally, not user
+			public const u32 MOVE_TARGET_USER_FIELD			= 1 << 11;	// All allies
+			public const u32 MOVE_TARGET_ALL				= 1 << 12;	// All mons on field
+			public const u32 MOVE_TARGET_ANY				= 1 << 13;	// Any one mon
+			public const u32 MOVE_TARGET_ALL_OPPONENTS		= 1 << 14;	// Every opponent, no allies
 
-		public const u64 FLAG_MAKES_CONTACT				= 1L << 0;
-		public const u64 FLAG_PROTECT_AFFECTED			= 1L << 1;
-		public const u64 FLAG_MAGIC_COAT_AFFECTED		= 1L << 2;
-		public const u64 FLAG_SNATCH_AFFECTED			= 1L << 3;
-		public const u64 FLAG_MIRROR_MOVE_AFFECTED		= 1L << 4;
-		public const u64 FLAG_KINGS_ROCK_AFFECTED		= 1L << 5;
-		public const u64 FLAG_BULLETPROOF_AFFECTED		= 1L << 6;
-		public const u64 FLAG_SHARPNESS_AFFECTED		= 1L << 7;
-		public const u64 FLAG_MEGA_LAUNCHER_AFFECTED	= 1L << 8;
-		public const u64 FLAG_BIG_ROOT_AFFECTED			= 1L << 9;
-		public const u64 FLAG_LIQUID_OOZE_AFFECTED		= 1L << 10;
-		public const u64 FLAG_WIND_MOVE					= 1L << 11;
-		public const u64 FLAG_SOUND_MOVE				= 1L << 12;
-		public const u64 FLAG_USABLE_OUT_OF_BATTLE		= 1L << 13;
-		public const u64 FLAG_PUNCH_MOVE				= 1L << 14;
-		public const u64 FLAG_BITE_MOVE					= 1L << 15;
-		public const u64 FLAG_PULSE_MOVE				= 1L << 16;
-		public const u64 FLAG_GRAVITY_AFFECTED			= 1L << 17;
-		public const u64 FLAG_HIGH_CRITICAL				= 1L << 18;
-		public const u64 FLAG_HIGH_CRITICAL2			= 1L << 19;
-		public const u64 FLAG_ALWAYS_CRITICAL			= 1L << 20;
-		public const u64 FLAG_ALWAYS_HIT				= 1L << 21;
-		public const u64 FLAG_IGNORE_TYPE_EFF			= 1L << 22;
-		public const u64 FLAG_CHIP_AWAY					= 1L << 23;
-		public const u64 FLAG_THAWS_USER				= 1L << 24;
-		public const u64 FLAG_ALWAYS_HIT_RAIN			= 1L << 24;
-		public const u64 FLAG_ALWAYS_HIT_HAIL			= 1L << 25;
-		public const u64 FLAG_USABLE_WHILE_ASLEEP		= 1L << 26;
-		public const u64 FLAG_HITS_SEMI_INVUL_GROUND	= 1L << 27;
-		public const u64 FLAG_HITS_SEMI_INVUL_AIR		= 1L << 28;
-		public const u64 FLAG_HITS_SEMI_INVUL_WATER		= 1L << 29;
-		public const u64 FLAG_ACC_LOSS_IN_SUNLIGHT		= 1L << 30;
-		public const u64 FLAG_PROTECTS					= 1L << 31;
-		public const u64 FLAG_CHARGING_TURN				= 1L << 32;
-		public const u64 FLAG_SEMI_INVUL_TURN			= 1L << 33;
-		public const u64 FLAG_UNUSABLE_BY_SLEEP_TALK	= 1L << 34;
-		public const u64 FLAG_CANNOT_BE_SKETCHED		= 1L << 35;
+		[System.Flags] public enum Flag : ulong {
+			MAKES_CONTACT				= 1L << 0,
+			PROTECT_AFFECTED			= 1L << 1,
+			MAGIC_COAT_AFFECTED			= 1L << 2,
+			SNATCH_AFFECTED				= 1L << 3,
+			MIRROR_MOVE_AFFECTED		= 1L << 4,
+			KINGS_ROCK_AFFECTED			= 1L << 5,
+			BULLETPROOF_AFFECTED		= 1L << 6,
+			SHARPNESS_AFFECTED			= 1L << 7,
+			MEGA_LAUNCHER_AFFECTED		= 1L << 8,
+			BIG_ROOT_AFFECTED			= 1L << 9,
+			LIQUID_OOZE_AFFECTED		= 1L << 10,
+			WIND_MOVE					= 1L << 11,
+			SOUND_MOVE					= 1L << 12,
+			USABLE_OUT_OF_BATTLE		= 1L << 13,
+			PUNCH_MOVE					= 1L << 14,
+			BITE_MOVE					= 1L << 15,
+			PULSE_MOVE					= 1L << 16,
+			GRAVITY_AFFECTED			= 1L << 17,
+			HIGH_CRITICAL				= 1L << 18,
+			HIGH_CRITICAL2				= 1L << 19,
+			ALWAYS_CRITICAL				= 1L << 20,
+			ALWAYS_HIT					= 1L << 21,
+			IGNORE_TYPE_EFF				= 1L << 22,
+			CHIP_AWAY					= 1L << 23,
+			THAWS_USER					= 1L << 24,
+			ALWAYS_HIT_RAIN				= 1L << 25,
+			ALWAYS_HIT_HAIL				= 1L << 26,
+			USABLE_WHILE_ASLEEP			= 1L << 27,
+			HITS_SEMI_INVUL_GROUND		= 1L << 28,
+			HITS_SEMI_INVUL_AIR			= 1L << 29,
+			HITS_SEMI_INVUL_WATER		= 1L << 30,
+			ACC_LOSS_IN_SUNLIGHT		= 1L << 31,
+			PROTECTS					= 1L << 32,
+			CHARGING_TURN				= 1L << 33,
+			SEMI_INVUL_TURN				= 1L << 34,
+			UNUSABLE_BY_SLEEP_TALK		= 1L << 35,
+			CANNOT_BE_SKETCHED			= 1L << 36,
+		}
 		#endregion
 	
 		/// <summary>
@@ -913,7 +915,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_BIG_ROOT_AFFECTED | FLAG_LIQUID_OOZE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.LIQUID_OOZE_AFFECTED
 					);
 				}
 			}
@@ -930,7 +932,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAKES_CONTACT | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -947,7 +949,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED_OPPONENT,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED
 					);
 				}
 			}
@@ -981,7 +983,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_BULLETPROOF_AFFECTED
+						/*flags =*/ Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
@@ -998,7 +1000,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1032,7 +1034,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_SHARPNESS_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_MAKES_CONTACT
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.SHARPNESS_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.MAKES_CONTACT
 					);
 				}
 			}
@@ -1049,7 +1051,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIGH_CRITICAL
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
 					);
 				}
 			}
@@ -1083,7 +1085,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -1100,7 +1102,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_SHARPNESS_AFFECTED | FLAG_HIGH_CRITICAL | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1117,7 +1119,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_SHARPNESS_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -1151,7 +1153,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -1168,7 +1170,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1185,7 +1187,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -1202,7 +1204,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1219,7 +1221,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_HIGH_CRITICAL | FLAG_SHARPNESS_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL | Flag.SHARPNESS_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1236,7 +1238,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1253,7 +1255,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -1270,7 +1272,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1287,7 +1289,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1304,7 +1306,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1321,7 +1323,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1338,7 +1340,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -1372,7 +1374,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK
 					);
 				}
 			}
@@ -1389,7 +1391,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1406,7 +1408,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -1423,7 +1425,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1440,7 +1442,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_HIGH_CRITICAL | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1457,7 +1459,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -1474,7 +1476,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_PULSE_MOVE | FLAG_MEGA_LAUNCHER_AFFECTED | FLAG_BULLETPROOF_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.PULSE_MOVE | Flag.MEGA_LAUNCHER_AFFECTED | Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1491,7 +1493,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1508,7 +1510,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -1525,7 +1527,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -1542,7 +1544,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -1559,7 +1561,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ -4,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1576,7 +1578,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1593,7 +1595,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -1610,7 +1612,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 4,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECTS
+						/*flags =*/ Flag.PROTECTS
 					);
 				}
 			}
@@ -1627,7 +1629,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1644,7 +1646,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1661,7 +1663,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -1695,7 +1697,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ -3,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_BULLETPROOF_AFFECTED
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
@@ -1712,7 +1714,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1729,7 +1731,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1746,7 +1748,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1763,7 +1765,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1780,7 +1782,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -1797,7 +1799,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -1814,7 +1816,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_CHARGING_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
@@ -1831,7 +1833,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1848,7 +1850,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_BITE_MOVE | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -1865,7 +1867,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_BIG_ROOT_AFFECTED | FLAG_SHARPNESS_AFFECTED | FLAG_LIQUID_OOZE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.SHARPNESS_AFFECTED | Flag.LIQUID_OOZE_AFFECTED
 					);
 				}
 			}
@@ -1882,7 +1884,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1899,7 +1901,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -1916,7 +1918,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_HIGH_CRITICAL
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HIGH_CRITICAL
 					);
 				}
 			}
@@ -1933,7 +1935,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_ALWAYS_HIT_RAIN
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT_RAIN
 					);
 				}
 			}
@@ -1950,7 +1952,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_WIND_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_ALWAYS_HIT_HAIL
+						/*flags =*/ Flag.WIND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT_HAIL
 					);
 				}
 			}
@@ -1967,7 +1969,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -1984,7 +1986,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2001,7 +2003,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2018,7 +2020,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -2035,7 +2037,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2052,7 +2054,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2069,7 +2071,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -2086,7 +2088,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2103,7 +2105,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2120,7 +2122,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_SOUND_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2137,7 +2139,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SEMI_INVUL_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
@@ -2154,7 +2156,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2171,7 +2173,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2188,7 +2190,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2205,7 +2207,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2222,7 +2224,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2239,7 +2241,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2256,7 +2258,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -2273,7 +2275,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -2290,7 +2292,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2307,7 +2309,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -2324,7 +2326,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -2341,7 +2343,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HITS_SEMI_INVUL_GROUND
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_GROUND
 					);
 				}
 			}
@@ -2358,7 +2360,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PUNCH_MOVE | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2375,7 +2377,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2392,7 +2394,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2409,7 +2411,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2426,7 +2428,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -2443,7 +2445,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -2460,7 +2462,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -2477,7 +2479,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_SHARPNESS_AFFECTED | FLAG_HIGH_CRITICAL | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2494,7 +2496,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -2511,7 +2513,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2528,7 +2530,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -2545,7 +2547,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_CANNOT_BE_SKETCHED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.CANNOT_BE_SKETCHED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -2562,7 +2564,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2596,7 +2598,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_CHIP_AWAY
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHIP_AWAY
 					);
 				}
 			}
@@ -2613,7 +2615,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2630,7 +2632,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ -6,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -2647,7 +2649,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2664,7 +2666,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -2681,7 +2683,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.SNATCH_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -2698,7 +2700,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2715,7 +2717,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2749,7 +2751,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -2766,7 +2768,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2783,7 +2785,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PUNCH_MOVE | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2800,7 +2802,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2817,7 +2819,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -2834,7 +2836,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -2851,7 +2853,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -2868,7 +2870,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -2885,7 +2887,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -2919,7 +2921,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK
 					);
 				}
 			}
@@ -2936,7 +2938,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -2953,7 +2955,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -2970,7 +2972,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -2987,7 +2989,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -3005,7 +3007,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3022,7 +3024,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ -5,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_IGNORE_TYPE_EFF
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.IGNORE_TYPE_EFF
 					);
 				}
 			}
@@ -3039,7 +3041,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ALL,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3056,7 +3058,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3073,7 +3075,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_HIGH_CRITICAL | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED |FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED |Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3107,7 +3109,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_HIGH_CRITICAL | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3124,7 +3126,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIGH_CRITICAL
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
 					);
 				}
 			}
@@ -3141,7 +3143,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_BITE_MOVE | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3158,7 +3160,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3175,7 +3177,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3209,7 +3211,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_USABLE_OUT_OF_BATTLE
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
 					);
 				}
 			}
@@ -3226,7 +3228,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PULSE_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PULSE_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3243,7 +3245,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3260,7 +3262,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_CHIP_AWAY
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHIP_AWAY
 					);
 				}
 			}
@@ -3277,7 +3279,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3311,7 +3313,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -3328,7 +3330,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -3345,7 +3347,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_USABLE_OUT_OF_BATTLE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
 					);
 				}
 			}
@@ -3379,7 +3381,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 4,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECTS
+						/*flags =*/ Flag.PROTECTS
 					);
 				}
 			}
@@ -3396,7 +3398,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3413,7 +3415,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_USABLE_OUT_OF_BATTLE | FLAG_SEMI_INVUL_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.USABLE_OUT_OF_BATTLE | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
@@ -3430,7 +3432,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3447,7 +3449,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3464,7 +3466,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -3481,7 +3483,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3498,7 +3500,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_USABLE_OUT_OF_BATTLE | FLAG_SEMI_INVUL_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.USABLE_OUT_OF_BATTLE | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
@@ -3515,7 +3517,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PUNCH_MOVE | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3567,7 +3569,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3584,7 +3586,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PUNCH_MOVE | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3601,7 +3603,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3618,7 +3620,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3635,7 +3637,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3652,7 +3654,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -3669,7 +3671,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3686,7 +3688,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3703,7 +3705,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3720,7 +3722,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3737,7 +3739,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_HIGH_CRITICAL | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3754,7 +3756,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -3772,7 +3774,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3789,7 +3791,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3806,7 +3808,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3823,7 +3825,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PULSE_MOVE | FLAG_MEGA_LAUNCHER_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PULSE_MOVE | Flag.MEGA_LAUNCHER_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3840,7 +3842,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3857,7 +3859,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3874,7 +3876,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ -6,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3891,7 +3893,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PUNCH_MOVE | FLAG_LIQUID_OOZE_AFFECTED | FLAG_BIG_ROOT_AFFECTED | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PUNCH_MOVE | Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3908,7 +3910,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_LIQUID_OOZE_AFFECTED | FLAG_BIG_ROOT_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED
 					);
 				}
 			}
@@ -3925,7 +3927,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_BIG_ROOT_AFFECTED | FLAG_LIQUID_OOZE_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.BIG_ROOT_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -3942,7 +3944,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED_OPPONENT,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3959,7 +3961,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_HIGH_CRITICAL | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3976,7 +3978,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -3993,7 +3995,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4010,7 +4012,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4027,7 +4029,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4044,7 +4046,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PUNCH_MOVE | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4061,7 +4063,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4078,7 +4080,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HITS_SEMI_INVUL_GROUND
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_GROUND
 					);
 				}
 			}
@@ -4095,7 +4097,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -4112,7 +4114,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4129,7 +4131,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -4146,7 +4148,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_BULLETPROOF_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
@@ -4180,7 +4182,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4197,7 +4199,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_BULLETPROOF_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
@@ -4214,7 +4216,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4231,7 +4233,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4248,7 +4250,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4265,7 +4267,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4282,7 +4284,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4299,7 +4301,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4333,7 +4335,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_BULLETPROOF_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
@@ -4350,7 +4352,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4367,7 +4369,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4384,7 +4386,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIGH_CRITICAL
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
 					);
 				}
 			}
@@ -4401,7 +4403,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4418,7 +4420,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4435,7 +4437,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4452,7 +4454,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4469,7 +4471,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 2,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4486,7 +4488,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4503,7 +4505,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ALL,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4520,7 +4522,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4537,7 +4539,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 3,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4554,7 +4556,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4571,7 +4573,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4588,7 +4590,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4605,7 +4607,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4622,7 +4624,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 2,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4640,7 +4642,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_MAKES_CONTACT | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4657,7 +4659,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4674,7 +4676,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4691,7 +4693,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4708,7 +4710,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -4725,7 +4727,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4742,7 +4744,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4759,7 +4761,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_BITE_MOVE | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4776,7 +4778,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4793,7 +4795,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4810,7 +4812,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PUNCH_MOVE | FLAG_MAKES_CONTACT | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4827,7 +4829,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4844,7 +4846,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 2,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4861,7 +4863,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_BITE_MOVE | FLAG_MAKES_CONTACT | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4878,7 +4880,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_HITS_SEMI_INVUL_GROUND
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.HITS_SEMI_INVUL_GROUND
 					);
 				}
 			}
@@ -4895,7 +4897,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4912,7 +4914,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4929,7 +4931,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -4946,7 +4948,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_THAWS_USER
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.THAWS_USER
 					);
 				}
 			}
@@ -4963,7 +4965,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4980,7 +4982,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_THAWS_USER
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.THAWS_USER
 					);
 				}
 			}
@@ -4997,7 +4999,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_USABLE_OUT_OF_BATTLE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
 					);
 				}
 			}
@@ -5014,7 +5016,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5031,7 +5033,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -5048,7 +5050,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5065,7 +5067,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5082,7 +5084,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5099,7 +5101,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -5133,7 +5135,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5150,7 +5152,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED_OPPONENT,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_USABLE_OUT_OF_BATTLE | FLAG_SEMI_INVUL_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.USABLE_OUT_OF_BATTLE | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
@@ -5167,7 +5169,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5184,7 +5186,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_BULLETPROOF_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
@@ -5201,7 +5203,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -5218,7 +5220,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ -3,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED
 					);
 				}
 			}
@@ -5252,7 +5254,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5269,7 +5271,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -5286,7 +5288,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -5303,7 +5305,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5320,7 +5322,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_CHARGING_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
@@ -5337,7 +5339,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5354,7 +5356,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5371,7 +5373,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5388,7 +5390,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_ALWAYS_CRITICAL | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.ALWAYS_CRITICAL | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5405,7 +5407,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5422,7 +5424,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5439,7 +5441,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHARPNESS_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SHARPNESS_AFFECTED
 					);
 				}
 			}
@@ -5456,7 +5458,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5473,7 +5475,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5490,7 +5492,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5524,7 +5526,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -5541,7 +5543,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5558,7 +5560,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -5575,7 +5577,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_CHARGING_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.CHARGING_TURN
 					);
 				}
 			}
@@ -5592,7 +5594,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_LIQUID_OOZE_AFFECTED | FLAG_BIG_ROOT_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -5609,7 +5611,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5626,7 +5628,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5643,7 +5645,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5660,7 +5662,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -5677,7 +5679,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5694,7 +5696,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -5711,7 +5713,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5728,7 +5730,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5745,7 +5747,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -5779,7 +5781,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5813,7 +5815,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -5830,7 +5832,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -5864,7 +5866,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -5881,7 +5883,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -5898,7 +5900,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED
 					);
 				}
 			}
@@ -5915,7 +5917,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5932,7 +5934,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HITS_SEMI_INVUL_AIR
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
 					);
 				}
 			}
@@ -5949,7 +5951,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_BULLETPROOF_AFFECTED | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.BULLETPROOF_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -5983,7 +5985,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6017,7 +6019,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -6051,7 +6053,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6068,7 +6070,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6085,7 +6087,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -6102,7 +6104,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6119,7 +6121,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.SNATCH_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -6136,7 +6138,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -6153,7 +6155,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -6170,7 +6172,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PULSE_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED
+						/*flags =*/ Flag.PULSE_MOVE | Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
@@ -6187,7 +6189,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -6204,7 +6206,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -6221,7 +6223,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -6238,7 +6240,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6255,7 +6257,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6272,7 +6274,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6289,7 +6291,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_HITS_SEMI_INVUL_GROUND | FLAG_HITS_SEMI_INVUL_WATER | FLAG_HITS_SEMI_INVUL_AIR
+						/*flags =*/ Flag.HITS_SEMI_INVUL_GROUND | Flag.HITS_SEMI_INVUL_WATER | Flag.HITS_SEMI_INVUL_AIR
 					);
 				}
 			}
@@ -6306,7 +6308,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6323,7 +6325,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6340,7 +6342,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6357,7 +6359,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_GRAVITY_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.GRAVITY_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6374,7 +6376,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6391,7 +6393,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -6408,7 +6410,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6425,7 +6427,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED
 					);
 				}
 			}
@@ -6442,7 +6444,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_LIQUID_OOZE_AFFECTED | FLAG_BIG_ROOT_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED
 					);
 				}
 			}
@@ -6459,7 +6461,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.SNATCH_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -6476,7 +6478,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HITS_SEMI_INVUL_AIR | FLAG_ALWAYS_HIT_RAIN
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.ALWAYS_HIT_RAIN
 					);
 				}
 			}
@@ -6493,7 +6495,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6510,7 +6512,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6527,7 +6529,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6544,7 +6546,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6561,7 +6563,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6578,7 +6580,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_BITE_MOVE
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BITE_MOVE
 					);
 				}
 			}
@@ -6595,7 +6597,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_SOUND_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -6612,7 +6614,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -6629,7 +6631,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6646,7 +6648,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -6663,7 +6665,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_BULLETPROOF_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6680,7 +6682,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -6697,7 +6699,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_CHARGING_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
@@ -6714,7 +6716,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_BITE_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.BITE_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -6731,7 +6733,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6748,7 +6750,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -6765,7 +6767,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6782,7 +6784,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6799,7 +6801,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -6816,7 +6818,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6833,7 +6835,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -6850,7 +6852,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -6867,7 +6869,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6884,7 +6886,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6901,7 +6903,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -6918,7 +6920,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -6935,7 +6937,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -6952,7 +6954,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED
 					);
 				}
 			}
@@ -6986,7 +6988,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -7003,7 +7005,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7020,7 +7022,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7037,7 +7039,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7054,7 +7056,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7071,7 +7073,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7088,7 +7090,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_GRAVITY_AFFECTED | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.GRAVITY_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7122,7 +7124,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_HIGH_CRITICAL | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7139,7 +7141,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7156,7 +7158,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 4,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECTS
+						/*flags =*/ Flag.PROTECTS
 					);
 				}
 			}
@@ -7173,7 +7175,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7190,7 +7192,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7207,7 +7209,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7224,7 +7226,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -7241,7 +7243,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7258,7 +7260,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7275,7 +7277,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7292,7 +7294,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7309,7 +7311,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_SHARPNESS_AFFECTED | FLAG_HIGH_CRITICAL | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7326,7 +7328,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7343,7 +7345,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7360,7 +7362,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7377,7 +7379,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_BIG_ROOT_AFFECTED | FLAG_LIQUID_OOZE_AFFECTED | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.BIG_ROOT_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7394,7 +7396,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7411,7 +7413,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7428,7 +7430,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7445,7 +7447,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -7462,7 +7464,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7479,7 +7481,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -7496,7 +7498,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7513,7 +7515,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7530,7 +7532,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7547,7 +7549,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7564,7 +7566,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7581,7 +7583,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -7598,7 +7600,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7615,7 +7617,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -7632,7 +7634,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -7649,7 +7651,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7666,7 +7668,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7683,7 +7685,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7717,7 +7719,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7734,7 +7736,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ALL,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7751,7 +7753,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7768,7 +7770,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7785,7 +7787,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_BULLETPROOF_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7802,7 +7804,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -7819,7 +7821,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -7836,7 +7838,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HITS_SEMI_INVUL_GROUND
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_GROUND
 					);
 				}
 			}
@@ -7853,7 +7855,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7870,7 +7872,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -7887,7 +7889,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_PROTECT_AFFECTED
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED
 					);
 				}
 			}
@@ -7904,7 +7906,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -7921,7 +7923,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -7938,7 +7940,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_BIG_ROOT_AFFECTED | FLAG_LIQUID_OOZE_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.BIG_ROOT_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7955,7 +7957,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7972,7 +7974,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -7989,7 +7991,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8006,7 +8008,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8023,7 +8025,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8040,7 +8042,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8057,7 +8059,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SOUND_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8074,7 +8076,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8091,7 +8093,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_CHARGING_TURN
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
@@ -8108,7 +8110,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8125,7 +8127,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK
 					);
 				}
 			}
@@ -8142,7 +8144,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED | FLAG_USABLE_OUT_OF_BATTLE
+						/*flags =*/ Flag.SNATCH_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
 					);
 				}
 			}
@@ -8159,7 +8161,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_PROTECT_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -8176,7 +8178,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8193,7 +8195,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8210,7 +8212,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -8227,7 +8229,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8244,7 +8246,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ -5,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8261,7 +8263,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_CANNOT_BE_SKETCHED | FLAG_UNUSABLE_BY_SLEEP_TALK
+						/*flags =*/ Flag.CANNOT_BE_SKETCHED | Flag.UNUSABLE_BY_SLEEP_TALK
 					);
 				}
 			}
@@ -8278,7 +8280,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8295,7 +8297,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -8312,7 +8314,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_BULLETPROOF_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8329,7 +8331,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8363,7 +8365,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8380,7 +8382,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8397,7 +8399,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -8414,7 +8416,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -8431,7 +8433,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8448,7 +8450,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8465,7 +8467,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_BULLETPROOF_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8482,7 +8484,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8516,7 +8518,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8533,7 +8535,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8550,7 +8552,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8567,7 +8569,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8584,7 +8586,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8601,7 +8603,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -8618,7 +8620,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8652,7 +8654,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8669,7 +8671,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8686,7 +8688,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8703,7 +8705,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8720,7 +8722,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_SHARPNESS_AFFECTED | FLAG_HIGH_CRITICAL | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8737,7 +8739,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8754,7 +8756,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -8771,7 +8773,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -8788,7 +8790,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8805,7 +8807,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8822,7 +8824,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 4,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECTS
+						/*flags =*/ Flag.PROTECTS
 					);
 				}
 			}
@@ -8839,7 +8841,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_BULLETPROOF_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8856,7 +8858,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8873,7 +8875,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -8890,7 +8892,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8907,7 +8909,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8924,7 +8926,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_MEGA_LAUNCHER_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MEGA_LAUNCHER_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8941,7 +8943,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8958,7 +8960,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_SOUND_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8975,7 +8977,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -8992,7 +8994,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_ALWAYS_HIT | FLAG_IGNORE_TYPE_EFF
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT | Flag.IGNORE_TYPE_EFF
 					);
 				}
 			}
@@ -9009,7 +9011,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_LIQUID_OOZE_AFFECTED | FLAG_BIG_ROOT_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9026,7 +9028,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SOUND_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9043,7 +9045,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9060,7 +9062,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9077,7 +9079,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9094,7 +9096,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ALL,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SOUND_MOVE
+						/*flags =*/ Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -9111,7 +9113,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9128,7 +9130,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9145,7 +9147,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_MAKES_CONTACT | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SEMI_INVUL_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
@@ -9162,7 +9164,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9179,7 +9181,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9196,7 +9198,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9213,7 +9215,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -9230,7 +9232,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9247,7 +9249,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9264,7 +9266,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_BITE_MOVE | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9281,7 +9283,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9298,7 +9300,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9315,7 +9317,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9332,7 +9334,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9349,7 +9351,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_HIGH_CRITICAL | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9366,7 +9368,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_BULLETPROOF_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
@@ -9383,7 +9385,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9400,7 +9402,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_SHARPNESS_AFFECTED | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9417,7 +9419,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9434,7 +9436,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9451,7 +9453,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9468,7 +9470,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9485,7 +9487,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9502,7 +9504,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9519,7 +9521,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -9536,7 +9538,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9553,7 +9555,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -9570,7 +9572,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9587,7 +9589,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9604,7 +9606,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9621,7 +9623,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9638,7 +9640,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9655,7 +9657,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9672,7 +9674,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 4,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECTS
+						/*flags =*/ Flag.PROTECTS
 					);
 				}
 			}
@@ -9689,7 +9691,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9706,7 +9708,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_SHARPNESS_AFFECTED | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9740,7 +9742,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9757,7 +9759,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_BITE_MOVE
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BITE_MOVE
 					);
 				}
 			}
@@ -9791,7 +9793,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9808,7 +9810,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_SHARPNESS_AFFECTED | FLAG_HIGH_CRITICAL | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9825,7 +9827,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9842,7 +9844,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9859,7 +9861,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9876,7 +9878,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9893,7 +9895,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9910,7 +9912,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9927,7 +9929,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
@@ -9944,7 +9946,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -9961,7 +9963,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_BULLETPROOF_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_THAWS_USER
+						/*flags =*/ Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.THAWS_USER
 					);
 				}
 			}
@@ -9978,7 +9980,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -9995,7 +9997,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10012,7 +10014,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 3,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -10029,7 +10031,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -10046,7 +10048,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10063,7 +10065,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10097,7 +10099,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10114,7 +10116,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10148,7 +10150,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10165,7 +10167,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_HIGH_CRITICAL | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10182,7 +10184,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_SHARPNESS_AFFECTED | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -10199,7 +10201,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIGH_CRITICAL | FLAG_CHARGING_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL | Flag.CHARGING_TURN
 					);
 				}
 			}
@@ -10216,7 +10218,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -10233,7 +10235,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -10250,7 +10252,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -10267,7 +10269,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED
 					);
 				}
 			}
@@ -10284,7 +10286,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -10301,7 +10303,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_SOUND_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -10318,7 +10320,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -10335,7 +10337,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10352,7 +10354,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10369,7 +10371,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10386,7 +10388,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ -4,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10403,7 +10405,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10437,7 +10439,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10454,7 +10456,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ -6,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -10471,7 +10473,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10488,7 +10490,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10505,7 +10507,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10522,7 +10524,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -10539,7 +10541,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -10556,7 +10558,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -10573,7 +10575,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10590,7 +10592,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -10607,7 +10609,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_BULLETPROOF_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
@@ -10641,7 +10643,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -10658,7 +10660,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10682,7 +10684,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -10716,7 +10718,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_SOUND_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10733,7 +10735,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10750,7 +10752,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -10767,7 +10769,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_CHIP_AWAY | FLAG_SHARPNESS_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHIP_AWAY | Flag.SHARPNESS_AFFECTED
 					);
 				}
 			}
@@ -10784,7 +10786,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -10801,7 +10803,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10818,7 +10820,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -10835,7 +10837,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10852,7 +10854,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_ALWAYS_HIT_RAIN
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT_RAIN
 					);
 				}
 			}
@@ -10886,7 +10888,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10903,7 +10905,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10920,7 +10922,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -10937,7 +10939,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_THAWS_USER
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.THAWS_USER
 					);
 				}
 			}
@@ -10954,7 +10956,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10971,7 +10973,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -10988,7 +10990,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11005,7 +11007,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11022,7 +11024,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11039,7 +11041,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_BULLETPROOF_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
@@ -11056,7 +11058,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11073,7 +11075,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11090,7 +11092,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11107,7 +11109,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_BULLETPROOF_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
@@ -11124,7 +11126,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11141,7 +11143,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_HIGH_CRITICAL | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11158,7 +11160,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_MAKES_CONTACT | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SEMI_INVUL_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
@@ -11175,7 +11177,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11192,7 +11194,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11209,7 +11211,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -11243,7 +11245,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED
 					);
 				}
 			}
@@ -11260,7 +11262,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11277,7 +11279,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -11294,7 +11296,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ -3,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11311,7 +11313,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -11328,7 +11330,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -11345,7 +11347,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11362,7 +11364,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -11379,7 +11381,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11396,7 +11398,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 4,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECTS
+						/*flags =*/ Flag.PROTECTS
 					);
 				}
 			}
@@ -11413,7 +11415,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11430,7 +11432,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -11447,7 +11449,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -11464,7 +11466,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_CANNOT_BE_SKETCHED | FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.CANNOT_BE_SKETCHED | Flag.UNUSABLE_BY_SLEEP_TALK | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -11481,7 +11483,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -11498,7 +11500,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11515,7 +11517,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_CHARGING_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
@@ -11532,7 +11534,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_CHARGING_TURN | FLAG_HIGH_CRITICAL
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.CHARGING_TURN | Flag.HIGH_CRITICAL
 					);
 				}
 			}
@@ -11549,7 +11551,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SEMI_INVUL_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
@@ -11566,7 +11568,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HITS_SEMI_INVUL_AIR
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
 					);
 				}
 			}
@@ -11583,7 +11585,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -11600,7 +11602,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11617,7 +11619,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_SHARPNESS_AFFECTED | FLAG_HIGH_CRITICAL | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11634,7 +11636,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -11651,7 +11653,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_CANNOT_BE_SKETCHED | FLAG_USABLE_WHILE_ASLEEP | FLAG_UNUSABLE_BY_SLEEP_TALK
+						/*flags =*/ Flag.CANNOT_BE_SKETCHED | Flag.USABLE_WHILE_ASLEEP | Flag.UNUSABLE_BY_SLEEP_TALK
 					);
 				}
 			}
@@ -11668,7 +11670,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -11685,7 +11687,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_BULLETPROOF_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
@@ -11702,7 +11704,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -11719,7 +11721,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HITS_SEMI_INVUL_AIR
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
 					);
 				}
 			}
@@ -11736,7 +11738,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11753,7 +11755,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -11770,7 +11772,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -11787,7 +11789,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -11804,7 +11806,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11821,7 +11823,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_SOUND_MOVE | FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11855,7 +11857,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIGH_CRITICAL
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
 					);
 				}
 			}
@@ -11872,7 +11874,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND_MOVE | FLAG_USABLE_WHILE_ASLEEP
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE | Flag.USABLE_WHILE_ASLEEP
 					);
 				}
 			}
@@ -11906,7 +11908,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -11923,7 +11925,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED | FLAG_USABLE_OUT_OF_BATTLE
+						/*flags =*/ Flag.SNATCH_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
 					);
 				}
 			}
@@ -11940,7 +11942,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_CHARGING_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
@@ -11957,7 +11959,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_CHARGING_TURN
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
@@ -11974,7 +11976,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -11991,7 +11993,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_HIGH_CRITICAL2 | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL2 | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12008,7 +12010,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12025,7 +12027,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_SOUND_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12042,7 +12044,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12059,7 +12061,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -12076,7 +12078,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -12093,7 +12095,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12110,7 +12112,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12127,7 +12129,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ALL_OPPONENTS,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAGIC_COAT_AFFECTED
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
@@ -12144,7 +12146,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 4,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECTS
+						/*flags =*/ Flag.PROTECTS
 					);
 				}
 			}
@@ -12161,7 +12163,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12178,7 +12180,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12195,7 +12197,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12212,7 +12214,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12229,7 +12231,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12263,7 +12265,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12280,7 +12282,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 3,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
@@ -12297,7 +12299,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12314,7 +12316,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ALL_OPPONENTS,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAGIC_COAT_AFFECTED
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
@@ -12331,7 +12333,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_THAWS_USER
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.THAWS_USER
 					);
 				}
 			}
@@ -12348,7 +12350,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12365,7 +12367,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12382,7 +12384,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12399,7 +12401,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12416,7 +12418,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ALL_OPPONENTS,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAGIC_COAT_AFFECTED
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
@@ -12433,7 +12435,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -12450,7 +12452,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12467,7 +12469,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12484,7 +12486,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_SHARPNESS_AFFECTED | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12501,7 +12503,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_HIGH_CRITICAL | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12518,7 +12520,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12535,7 +12537,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_ALWAYS_CRITICAL | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.ALWAYS_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12552,7 +12554,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12569,7 +12571,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12586,7 +12588,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12603,7 +12605,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12620,7 +12622,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_RANDOM,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_CANNOT_BE_SKETCHED | FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.CANNOT_BE_SKETCHED | Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12637,7 +12639,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12654,7 +12656,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -12671,7 +12673,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12688,7 +12690,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12705,7 +12707,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -12722,7 +12724,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12756,7 +12758,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12773,7 +12775,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12790,7 +12792,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12807,7 +12809,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SOUND_MOVE | FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12824,7 +12826,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HITS_SEMI_INVUL_WATER
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_WATER
 					);
 				}
 			}
@@ -12841,7 +12843,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_ALWAYS_CRITICAL
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_CRITICAL
 					);
 				}
 			}
@@ -12858,7 +12860,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12875,7 +12877,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -12892,7 +12894,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12909,7 +12911,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_USABLE_OUT_OF_BATTLE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
 					);
 				}
 			}
@@ -12926,7 +12928,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12943,7 +12945,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -12960,7 +12962,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -12977,7 +12979,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -12994,7 +12996,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -13011,7 +13013,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13028,7 +13030,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -13045,7 +13047,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13062,7 +13064,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13079,7 +13081,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -13096,7 +13098,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13113,7 +13115,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -13130,7 +13132,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13147,7 +13149,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13164,7 +13166,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -13198,7 +13200,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13215,7 +13217,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13232,7 +13234,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
@@ -13249,7 +13251,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_USABLE_OUT_OF_BATTLE
+						/*flags =*/ Flag.USABLE_OUT_OF_BATTLE
 					);
 				}
 			}
@@ -13266,7 +13268,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_MEGA_LAUNCHER_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.MEGA_LAUNCHER_AFFECTED
 					);
 				}
 			}
@@ -13283,7 +13285,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13300,7 +13302,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HITS_SEMI_INVUL_AIR
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
 					);
 				}
 			}
@@ -13317,7 +13319,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13334,7 +13336,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13351,7 +13353,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13368,7 +13370,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_HITS_SEMI_INVUL_AIR | FLAG_ALWAYS_HIT_RAIN | FLAG_ACC_LOSS_IN_SUNLIGHT
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.ALWAYS_HIT_RAIN | Flag.ACC_LOSS_IN_SUNLIGHT
 					);
 				}
 			}
@@ -13385,7 +13387,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13402,7 +13404,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_BITE_MOVE
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BITE_MOVE
 					);
 				}
 			}
@@ -13419,7 +13421,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13436,7 +13438,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13453,7 +13455,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13470,7 +13472,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13487,7 +13489,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13504,7 +13506,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13538,7 +13540,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -13555,7 +13557,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -13572,7 +13574,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13589,7 +13591,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13606,7 +13608,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ALL_OPPONENTS,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAGIC_COAT_AFFECTED
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
@@ -13623,7 +13625,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13640,7 +13642,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13657,7 +13659,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_IGNORE_TYPE_EFF
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.IGNORE_TYPE_EFF
 					);
 				}
 			}
@@ -13674,7 +13676,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13691,7 +13693,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13708,7 +13710,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ALL,
 						/*priority =*/ 7,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13725,7 +13727,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13742,7 +13744,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIGH_CRITICAL
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
 					);
 				}
 			}
@@ -13759,7 +13761,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13776,7 +13778,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13793,7 +13795,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13810,7 +13812,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13827,7 +13829,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -13844,7 +13846,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -13861,7 +13863,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13878,7 +13880,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_HITS_SEMI_INVUL_AIR
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
 					);
 				}
 			}
@@ -13895,7 +13897,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13912,7 +13914,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_UNUSABLE_BY_SLEEP_TALK | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SOUND_MOVE
+						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
@@ -13929,7 +13931,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13946,7 +13948,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13963,7 +13965,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
@@ -13980,7 +13982,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -13997,7 +13999,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -14014,7 +14016,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14031,7 +14033,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14048,7 +14050,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ -1,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_ALWAYS_HIT | FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14065,7 +14067,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14082,7 +14084,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14099,7 +14101,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14116,7 +14118,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14133,7 +14135,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14150,7 +14152,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14167,7 +14169,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 1,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14201,7 +14203,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -14218,7 +14220,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -14235,7 +14237,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14252,7 +14254,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14269,7 +14271,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HITS_SEMI_INVUL_WATER
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_WATER
 					);
 				}
 			}
@@ -14286,7 +14288,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ -6,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_HITS_SEMI_INVUL_AIR | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -14303,7 +14305,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_ALWAYS_CRITICAL | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.ALWAYS_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14320,7 +14322,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER_FIELD,
 						/*priority =*/ 3,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -14337,7 +14339,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14354,7 +14356,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_ALWAYS_HIT_RAIN
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT_RAIN
 					);
 				}
 			}
@@ -14371,7 +14373,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -14388,7 +14390,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14405,7 +14407,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -14422,7 +14424,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -14439,7 +14441,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_ALL,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -14456,7 +14458,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14473,7 +14475,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_USER,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_SNATCH_AFFECTED
+						/*flags =*/ Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -14490,7 +14492,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -14507,7 +14509,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14524,7 +14526,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14541,7 +14543,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_SHARPNESS_AFFECTED | FLAG_HIGH_CRITICAL | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -14558,7 +14560,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_ALWAYS_HIT
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -14575,7 +14577,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -14592,7 +14594,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -14609,7 +14611,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -14656,7 +14658,7 @@ namespace PkmnEngine {
 	};
 
 	public class BattleMove {
-		public BattleMove(MoveEffectID primaryEffect, MoveEffectID secondaryEffect, Type moveType, u8 power, u8 accuracy, u8 pp, u8 secondaryEffectChance, u32 target, sbyte priority, MoveCategory moveCat, u64 flags)
+		public BattleMove(MoveEffectID primaryEffect, MoveEffectID secondaryEffect, Type moveType, u8 power, u8 accuracy, u8 pp, u8 secondaryEffectChance, u32 target, sbyte priority, MoveCategory moveCat, BattleMoves.Flag flags)
         {
             this.primaryEffect = primaryEffect;
             this.secondaryEffect = secondaryEffect;
@@ -14681,7 +14683,7 @@ namespace PkmnEngine {
 		public readonly u32 target;
 		public readonly sbyte priority;
 		public readonly MoveCategory moveCat;
-		public readonly u64 flags;
+		public readonly BattleMoves.Flag flags;
 	};
 
 	public enum BattleMoveID {

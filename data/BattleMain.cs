@@ -169,7 +169,7 @@ namespace PkmnEngine {
 			BattleMon bm = player.team[monIndex];
 
 			// Mark the the mon has just switched in.
-			bm.SetFlag(BattleMon.BM_FLAG_JUST_SWITCHED_IN);
+			bm.SetFlag(BattleMon.Flag.JUST_SWITCHED_IN);
 
 			// Entry hazards.
 			//DoEntryHazards(state, mon, GetSideFromSlot(teamIndex));
@@ -230,8 +230,8 @@ namespace PkmnEngine {
 				// Get the new state.
 				CurrentState = state.Next();
 
-				await ChooseActions(state);
-				DoBattleActions(state);
+				await ChooseActions(CurrentState);
+				DoBattleActions(CurrentState);
 			}
 		}
 
@@ -266,7 +266,7 @@ namespace PkmnEngine {
 					continue;
 				}
 				// If the mon is in a semi-invulnerable state but did not induce it itself, skip its action.
-				if (actor.HasStatus(Status.SEMI_INVULNERABLE_TURN) && !actor.HasFlag(BattleMon.BM_FLAG_MON_INDUCED_SEMI_INVUL)) {
+				if (actor.HasStatus(Status.SEMI_INVULNERABLE_TURN) && !actor.HasFlag(BattleMon.Flag.MON_INDUCED_SEMI_INVUL)) {
 					continue;
 				}
 
@@ -287,7 +287,7 @@ namespace PkmnEngine {
 				}
 
 				// Now that the mon has had an opportunity to move, mark that it has not just switched in.
-				actor.RemoveFlag(BattleMon.BM_FLAG_JUST_SWITCHED_IN);
+				actor.RemoveFlag(BattleMon.Flag.JUST_SWITCHED_IN);
 			}
 
 			DoEventsAfterTurn();
@@ -317,8 +317,8 @@ namespace PkmnEngine {
 					bm.RemoveStatus(s);
 				}
 
-				bm.RemoveFlag(BattleMon.BM_FLAG_JUST_SWITCHED_IN);
-				bm.RemoveFlag(BattleMon.BM_FLAG_STAT_INCREASED_THIS_TURN);
+				bm.RemoveFlag(BattleMon.Flag.JUST_SWITCHED_IN);
+				bm.RemoveFlag(BattleMon.Flag.STAT_INCREASED_THIS_TURN);
 
 				bm.SetStatusParam(StatusParam.PHYS_DAMAGE_THIS_TURN, 0);
 				bm.SetStatusParam(StatusParam.SPEC_DAMAGE_THIS_TURN, 0);
@@ -337,6 +337,7 @@ namespace PkmnEngine {
 
 			// Cache the state.
 			AddToHistory(CurrentState);
+			CurrentState = CurrentState.Next();
 		}
 
 		/// <summary>
@@ -460,13 +461,13 @@ namespace PkmnEngine {
 				if (bm.HasStatus(Status.AQUA_RING)) {
 					MessageBox(Lang.GetBattleMessage(BattleMessage.A_VEIL_OF_WATER_RESTORED_MONS_HP, bm.GetName()));
 					u16 healAmount = bm.GetPercentOfMaxHp(StatusEffects.AQUA_RING_HEAL_AMOUNT);
-					// TODO: b_HealMon(state, bm, &healAmount, false);
+					bm.HealMon(state, ref healAmount, false);
 				}
 				// Leech Seed
 				if (bm.HasStatus(Status.SEEDED)) {
 					u16 healAmount = bm.GetPercentOfMaxHp(StatusEffects.LEECH_SEED_DRAIN_AMOUNT);
-					//TODO: b_DamageMon(state, bm, &healAmount, true, false);
-					//TODO: b_HealMon(state, GetMonInSlot(state, GetStatusParam(StatusParam.SLOT_SEEDED_BY)), &healAmount);
+					bm.DamageMon(state, ref healAmount, true, false);
+					GetMonInSlot(state, (u8)bm.GetStatusParam(StatusParam.SLOT_SEEDED_BY)).HealMon(state, ref healAmount, false);
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_HP_WAS_SAPPED_BY_LEECH_SEED, bm.GetName()));
 				}
 				// Perish Song
@@ -475,7 +476,7 @@ namespace PkmnEngine {
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_PERISH_COUNT_FELL_TO_N, bm.GetName(), count.ToString()));
 					if (count == 0) {
 						u16 damage = bm.EffMaxHp(state);
-						fainted = false; //TODO: !b_DamageMon(state, bm, &damage, true, false);
+						fainted = bm.DamageMon(state, ref damage, true, false);
 						return;
 					}
 					bm.DecrementStatusParam(StatusParam.PERISH_COUNT);
@@ -500,7 +501,7 @@ namespace PkmnEngine {
 				// Curse
 				if (bm.HasStatus(Status.CURSE)) {
 					u16 damage = bm.GetPercentOfMaxHp(0.25f);
-					//TODO: b_DamageMon(state, bm, &damage, true, false);
+					bm.DamageMon(state, ref damage, true, false);
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_AFFLICTED_BY_CURSE, bm.GetName()));
 				}
 				// Encore
@@ -520,7 +521,7 @@ namespace PkmnEngine {
 				//TODO: if (b_AbilityProc(state, bm, ABILITY_HEATPROOF, false)) {
 				//	damage /= 2;
 				//}
-				fainted = false; //TODO: !b_DamageMon(state, bm, &damage, true, false);
+				fainted = bm.DamageMon(state, ref damage, true, false);
 				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_ITS_BURN, bm.GetName()));
 				if (fainted) {
 					return;
@@ -533,7 +534,7 @@ namespace PkmnEngine {
 					//TODO: b_HealMon(state, bm, &damage, false);
 				//}
 				//else {
-					fainted = false;//TODO: !b_DamageMon(state, bm, &damage, true, false);
+					fainted = bm.DamageMon(state, ref damage, true, false);
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, bm.GetName()));
 				//}
 				if (fainted) {
@@ -553,7 +554,7 @@ namespace PkmnEngine {
 					// Stack additional damage by number of turns afflicted.
 					// TODO: technically, toxic has a separate counter that resets when switching out.
 					u16 totalDamage = (u16)(baseDamage * bm.GetStatusParam(StatusParam.TOXIC_BUILDUP));
-					fainted = false; //TODO: !b_DamageMon(state, bm, &totalDamage, true, false);
+					fainted = bm.DamageMon(state, ref totalDamage, true, false);
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON));
 				//}
 				if (fainted) {
@@ -712,14 +713,14 @@ namespace PkmnEngine {
 					if (bm.DamagedByHail(state)) {
 						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_HAIL, bm.GetName()));
 						u16 damage = bm.GetPercentOfMaxHp(FieldConditions.HAIL_CHIP_DAMAGE);
-						//TODO: b_DamageMon(state, bm, &damage, true, false);
+						bm.DamageMon(state, ref damage, true, false);
 					}
 				}
 				if (state.Weather.Equals(Condition.WEATHER_SANDSTORM)) {
 					if (bm.DamagedBySandstorm(state)) {
 						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_SANDSTORM, bm.GetName()));
 						u16 damage = bm.GetPercentOfMaxHp(FieldConditions.SANDSTORM_CHIP_DAMAGE);
-						//TODO: b_DamageMon(state, bm, &damage, true, false);
+						bm.DamageMon(state, ref damage, true, false);
 					}
 				}
 			}
@@ -811,7 +812,7 @@ namespace PkmnEngine {
 			
 				if (state.Terrain.Condition == Condition.TERRAIN_GRASSY) {
 					u16 healAmount = bm.GetPercentOfMaxHp(FieldConditions.GRASSY_TERRAIN_HEAL_AMOUNT);
-					//TODO: b_HealMon(state, bm, &healAmount, false);
+					bm.HealMon(state, ref healAmount, false);
 				}
 			}
 		}

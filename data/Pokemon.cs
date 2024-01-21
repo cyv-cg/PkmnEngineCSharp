@@ -14,6 +14,7 @@ using static PkmnEngine.BattleMoves;
 using static PkmnEngine.Natures;
 
 using PkmnEngine.Strings;
+using Godot;
 
 namespace PkmnEngine {
 	public class BoxMon : ISerializable<BoxMon> {
@@ -677,10 +678,16 @@ namespace PkmnEngine {
 	}
 
 	public class BattleMon : ISerializable<BattleMon> {
-		public const u32 BM_FLAG_RECEIVED_DAMAGE_THIS_TURN	= 1 << 0; // Marks whether or not the mon has taken damage in the current turn.
-		public const u32 BM_FLAG_JUST_SWITCHED_IN 			= 1 << 1; // Marks if the mon just entered / has gotten to act yet.
-		public const u32 BM_FLAG_STAT_INCREASED_THIS_TURN	= 1 << 2; // Marks if the mon had any stat increase this turn.
-		public const u32 BM_FLAG_MON_INDUCED_SEMI_INVUL		= 1 << 3; // Marks if the mon initiated the semi-invulnerable state it is in.
+		[System.Flags] public enum Flag {
+			RECEIVED_DAMAGE_THIS_TURN	= 1 << 0,	// Marks whether or not the mon has taken damage in the current turn.
+			JUST_SWITCHED_IN			= 1 << 1,	// Marks if the mon just entered / has gotten to act yet.
+			STAT_INCREASED_THIS_TURN	= 1 << 2,	// Marks if the mon had any stat increase this turn.
+			MON_INDUCED_SEMI_INVUL		= 1 << 3	// Marks if the mon initiated the semi-invulnerable state it is in.
+		}
+		//public const u32 BM_FLAG_RECEIVED_DAMAGE_THIS_TURN	= 1 << 0; // Marks whether or not the mon has taken damage in the current turn.
+		//public const u32 BM_FLAG_JUST_SWITCHED_IN 			= 1 << 1; // Marks if the mon just entered / has gotten to act yet.
+		//public const u32 BM_FLAG_STAT_INCREASED_THIS_TURN	= 1 << 2; // Marks if the mon had any stat increase this turn.
+		//public const u32 BM_FLAG_MON_INDUCED_SEMI_INVUL		= 1 << 3; // Marks if the mon initiated the semi-invulnerable state it is in.
 
 		public Buffer Write() {
 			Buffer data = new Buffer();
@@ -707,13 +714,15 @@ namespace PkmnEngine {
 
 			data.AddValue(weight);
 
+			data.AddValue((u16)HeldItem);
+
 			for (u8 i = 0; i < Pokemon.MAX_MOVES; i++) {
 				data.AddValue((u16)moves[i]);
 				data.AddValue(pp[i]);
 				data.AddValue(maxPP[i]);
 			}
 
-			data.AddValue(flags);
+			data.AddValue((u32)flags);
 
 			data.AddValue((u8)status.Count);
 			foreach (Status key in status.Keys) {
@@ -762,6 +771,8 @@ namespace PkmnEngine {
 
 			bm.weight	= data.ReadFloat();
 
+			bm.HeldItem	= (Item)data.Read16();
+
 			bm.moves	= new BattleMoveID[Pokemon.MAX_MOVES];
 			bm.pp		= new u8[Pokemon.MAX_MOVES];
 			bm.maxPP	= new u8[Pokemon.MAX_MOVES];
@@ -771,7 +782,7 @@ namespace PkmnEngine {
 				bm.maxPP[i]	= data.Read8();
 			}
 
-			bm.flags = data.Read32();
+			bm.flags = (Flag)data.Read32();
 
 			u8 statusCount = data.Read8();
 			bm.status = new Dictionary<Status, bool>();
@@ -848,11 +859,13 @@ namespace PkmnEngine {
 		public Ability ability;
 		public float weight;
 
+		public Item HeldItem { get; private set; }
+
 		public BattleMoveID[] moves;
 		public u8[] pp;
 		public u8[] maxPP;
 		
-		private u32 flags;
+		private Flag flags;
 		
 		private Dictionary<Status, bool> status;
 		public Dictionary<StatusParam, u16> statusParams;
@@ -864,6 +877,19 @@ namespace PkmnEngine {
 		public sbyte SpeedStages { get; private set; }
 		public sbyte AccuracyStages { get; private set; }
 		public sbyte EvasivenessStages { get; private set; }
+
+		public void SetStatStage(Stat stat, sbyte stage) {
+			stage = (sbyte)Mathf.Clamp(stage, MIN_STAT_STAGE, MAX_STAT_STAGE);
+			switch (stat) {
+				case Stat.ATTACK:			AttackStages = stage;			break;
+				case Stat.DEFENSE:			DefenseStages = stage;			break;
+				case Stat.SPECIAL_ATTACK:	SpecialAttackStages = stage;	break;
+				case Stat.SPECIAL_DEFENSE:	SpecialDefenseStages = stage;	break;
+				case Stat.SPEED:			SpeedStages = stage;			break;
+				case Stat.ACCURACY:			AccuracyStages = stage;			break;
+				case Stat.EVASION:			EvasivenessStages = stage;		break;
+			}
+		}
 
 		public u16 EffMaxHp(BattleState state) {
 			return MaxHP;
@@ -929,6 +955,71 @@ namespace PkmnEngine {
 		/// <returns>Nickname if available, species name otherwise.</returns>
 		public string GetName() {
 			return Mon.GetName();
+		}
+
+		/// <summary>
+		/// Damages mon.
+		/// Note: 'damage' will be changed to the actual amount of HP subtracted, even if the passed value is different.
+		/// Sources of indirect damage include: burn/poison/confusion/etc., field hazards, bind, etc. (https://pokemondb.net/pokebase/171940/what-are-the-techniques-that-cause-indirect-damage)
+		/// </summary>
+		/// <param name="state">The current BattleState.</param>
+		/// <param name="damage">The amound of damage to deal.</param>
+		/// <param name="force">If force, all checks will be bypassed and HP will be set indiscriminantly.</param>
+		/// <param name="direct">Whether or not the damage is direct.</param>
+		/// <returns>True if the mon's HP > 0 after the damage, and false if not.</returns>
+		public bool DamageMon(BattleState state, ref u16 damage, bool force, bool direct) {
+			//TODO: Magic Guard prevents indirect damage.
+			//if (!b_direct && b_AbilityProc(state, mon, ABILITY_MAGIC_GUARD, true)) {
+			//	return true;
+			//}
+
+			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_DAMAGE, GetName(), damage.ToString()));
+
+			// A bracing (endure) mon cannot lose its last hit point.
+			if (HasStatus(Status.BRACING)) {
+				damage = (u16)Mathf.Min((u16)(EffHp(state) - 1), damage);
+			}
+			else {
+				damage = (u16)Mathf.Min(EffHp(state), damage);
+			}
+
+			HP -= damage;
+
+			// Mark that the mon has received damage this turn.
+			SetFlag(Flag.RECEIVED_DAMAGE_THIS_TURN);
+
+
+			bool fainted = EffHp(state) == 0;
+
+			if (fainted) {
+				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_FAINTED, GetName()));
+				GiveStatus(Status.FAINTED);
+				// TODO: stuff when a mon faints.
+			}
+			// If the last move the mon used was Rage, increase it's attack by 1 stage.
+			else if (moves[GetStatusParam(StatusParam.LAST_USED_MOVE)] == BattleMoveID.RAGE && direct) {
+				MoveEffects.ChangeStat(state, this, 1, Stat.ATTACK);
+			}
+
+			return !fainted;
+		}
+		/// <summary>
+		/// Restores mon's HP. 
+		/// Note: 'amount' will be changed to the amount of HP restored, even if the passed value is different.
+		/// </summary>
+		/// <param name="state">Current BattleState.</param>
+		/// <param name="amount">The amount of HP to restore.</param>
+		/// <param name="force">If force, all checks will be bypassed and HP will be set indiscriminantly.</param>
+		/// <returns>True if HP is successfully restored.</returns>
+		public bool HealMon(BattleState state, ref u16 amount, bool force) {
+			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_RESTORED_HP, GetName()));
+
+			u16 oldHp = EffHp(state);
+
+			amount = (u16)Mathf.Min(amount, EffMaxHp(state) - EffHp(state));
+			HP += amount;
+
+			return EffHp(state) > oldHp;
 		}
 
 		/// <summary>
@@ -1025,26 +1116,22 @@ namespace PkmnEngine {
 			return false;
 		}
 
-		public void SetFlag(u32 bmFlag) {
+		public void SetFlag(Flag bmFlag) {
 			this.flags |= bmFlag;
 		}
-		public void RemoveFlag(u32 bmFlag) {
+		public void RemoveFlag(Flag bmFlag) {
 			this.flags &= ~bmFlag;
 		}
-		public bool HasFlag(u32 bmFlag) {
+		public bool HasFlag(Flag bmFlag) {
 			return (this.flags & bmFlag) != 0;
 		}
 
 		public bool CanBeInflictedWithNVStatus(BattleState state) {
 			// TODO:
 			//// The move Safeguard will protect the party from status conditions for five turns.
-			//u8 side = GetSideFromMon(state, bm);
-			//if (
-			//	(side == SIDE_PLAYER && (state->fieldCondition & CONDITION_1_SAFEGUARD)) ||
-			//	(side == SIDE_OPPONENT && (state->fieldCondition & CONDITION_2_SAFEGUARD))
-			//) {
-			//	return false;
-			//}
+			if (state.SideHasCondition(Side, Condition.SAFEGUARD)) {
+				return false;
+			}
 
 			// TODO: A Pokémon behind a substitute cannot be poisoned, except due to Synchronize or a held Toxic Orb.
 			
@@ -1060,10 +1147,10 @@ namespace PkmnEngine {
 			//	return false;
 			//}
 
-			//// Terrain
-			//if (b_MonIsGrounded(state, bm) && (state->fieldCondition & TERRAIN_MISTY)) {
-			//	return false;
-			//}
+			// Terrain
+			if (IsGrounded(state) && state.Terrain.Equals(Condition.TERRAIN_MISTY)) {
+				return false;
+			}
 
 			//// idfk
 			//if (b_AbilityProc(state, bm, ABILITY_COMATOSE, false)) {
@@ -1172,15 +1259,15 @@ namespace PkmnEngine {
 			}
 
 			// Mons with certain abilities are not damaged.
-			if ( false
+			//if (
 				// TODO:
 				//b_AbilityProc(state, bm, ABILITY_ICE_BODY, false) ||
 				//b_AbilityProc(state, bm, ABILITY_SNOW_CLOAK, false) ||
 				//b_AbilityProc(state, bm, ABILITY_MAGIC_GUARD, false) ||
 				//b_AbilityProc(state, bm, ABILITY_OVERCOAT, false)
-			) {
-				return false;
-			}
+			//) {
+			//	return false;
+			//}
 			
 			// TODO: safety goggles prevent hail damage
 
@@ -1211,16 +1298,16 @@ namespace PkmnEngine {
 			}
 
 			// Mons with certain abilities are not damaged.
-			if ( false
+			//if (
 				// TODO:
 				//b_AbilityProc(state, bm, ABILITY_SAND_FORCE, false) ||
 				//b_AbilityProc(state, bm, ABILITY_SAND_RUSH, false) ||
 				//b_AbilityProc(state, bm, ABILITY_SAND_VEIL, false) ||
 				//b_AbilityProc(state, bm, ABILITY_MAGIC_GUARD, false) ||
 				//b_AbilityProc(state, bm, ABILITY_OVERCOAT, false)
-			) {
-				return false;
-			}
+			//) {
+			//	return false;
+			//}
 			
 			// TODO: safety goggles prevent hail damage
 
@@ -1288,7 +1375,7 @@ namespace PkmnEngine {
 			}
 
 			// Mons affected by throat chop cannot use sound moves.
-			if ((move.flags & FLAG_SOUND_MOVE) != 0 && HasStatus(Status.THROAT_CHOP)) {
+			if ((move.flags & BattleMoves.Flag.SOUND_MOVE) != 0 && HasStatus(Status.THROAT_CHOP)) {
 				if (print) {
 					MessageBox(Lang.GetBattleMessage(BattleMessage.THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES, GetName()));
 				}

@@ -193,27 +193,27 @@ namespace PkmnEngine {
 			defender.SetStatusParam(StatusParam.LAST_MON_HIT_BY, slotUser);
 
 			// If the move is ineffective and the move does not ignore the type chart, then stop here.
-			if (Abs(TypeEffectiveness(defender, gBattleMoves(moveID).moveType)) < 1e-10 && (gBattleMoves(moveID).flags & FLAG_IGNORE_TYPE_EFF) == 0) {
+			if (Abs(TypeEffectiveness(defender, moveID)) < 1e-10 && (gBattleMoves(moveID).flags & BattleMoves.Flag.IGNORE_TYPE_EFF) == 0) {
 				MessageBox(GetBattleMessage(BattleMessage.IMMUNE, defender.GetName()));
 				// Do Contact events.
-				if ((gBattleMoves(moveID).flags & FLAG_MAKES_CONTACT) != 0) {
+				if ((gBattleMoves(moveID).flags & BattleMoves.Flag.MAKES_CONTACT) != 0) {
 			//		//TODO: OnContactMade(state, attacker, defender);
 				}
 			//	return FLAG_MOVE_FAILED;
 			}
 
 			// Check for protect.
-			if ((gBattleMoves(moveID).flags & FLAG_PROTECT_AFFECTED) != 0 && defender.HasStatus(Status.PROTECTION)) {
+			if ((gBattleMoves(moveID).flags & BattleMoves.Flag.PROTECT_AFFECTED) != 0 && defender.HasStatus(Status.PROTECTION)) {
 				MessageBox(GetBattleMessage(BattleMessage.MON_PROTECTED_ITSELF, defender.GetName()));
 				// Do contact events.
-				if ((gBattleMoves(moveID).flags & FLAG_MAKES_CONTACT) != 0) {
+				if ((gBattleMoves(moveID).flags & BattleMoves.Flag.MAKES_CONTACT) != 0) {
 			//		// TODO: OnContactMade(state, attacker, defender);
 				}
 			//	return FLAG_MOVE_FAILED;
 			}
 
 			// If the used move thaws the user, then thaw the user first.
-			if ((gBattleMoves(moveID).flags & FLAG_THAWS_USER) != 0) {
+			if ((gBattleMoves(moveID).flags & BattleMoves.Flag.THAWS_USER) != 0) {
 				//TODO: //BattleMoveEffects::sThawMon(attacker);
 			}
 
@@ -258,7 +258,7 @@ namespace PkmnEngine {
 			}
 
 			// Do contact events.
-			if ((gBattleMoves(moveID).flags & FLAG_MAKES_CONTACT) != 0) {
+			if ((gBattleMoves(moveID).flags & BattleMoves.Flag.MAKES_CONTACT) != 0) {
 				//OnContactMade(state, attacker, defender);
 			}
 
@@ -282,10 +282,10 @@ namespace PkmnEngine {
 		/// @return True if the move hits.
 		private static bool MoveHit(BattleState state, BattleMon attacker, BattleMon defender, BattleMove move) {
 			// The startup of 2-turn moves like Fly or Solar Beam cannot miss, so deal with that here.
-			if ((move.flags & FLAG_SEMI_INVUL_TURN) != 0 && !attacker.HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
+			if ((move.flags & BattleMoves.Flag.SEMI_INVUL_TURN) != 0 && !attacker.HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
 				return true;
 			}
-			if ((move.flags & FLAG_CHARGING_TURN) != 0 && !attacker.HasStatus(Status.CHARGING_TURN)) {
+			if ((move.flags & BattleMoves.Flag.CHARGING_TURN) != 0 && !attacker.HasStatus(Status.CHARGING_TURN)) {
 				return true;
 			}
 
@@ -306,7 +306,7 @@ namespace PkmnEngine {
 			//	}
 			//}
 
-			if ((move.flags & FLAG_ALWAYS_HIT) != 0) {
+			if ((move.flags & BattleMoves.Flag.ALWAYS_HIT) != 0) {
 				return true;
 			}
 			//if ((move->flags & FLAG_ALWAYS_HIT_RAIN) && (state->fieldCondition & WEATHER_RAIN)) {
