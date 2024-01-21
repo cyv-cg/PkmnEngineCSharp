@@ -24,7 +24,7 @@ namespace PkmnEngine {
 
 		#region effects
 		public static u32 Effect_Hit(MoveEffectParams p) {
-			return 0;
+			return Attack(p);
 		}
 		#region non_volatile_effects
 		public static u32 Effect_Burn(MoveEffectParams p) {
@@ -121,214 +121,266 @@ namespace PkmnEngine {
 		#endregion
 		#region stat_changes
 		public static u32 Effect_AttackUp(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 1, Stat.ATTACK);
 		}
 		public static u32 Effect_AttackUp2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 2, Stat.ATTACK);
 		}
 		public static u32 Effect_AttackDown(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -1, Stat.ATTACK);
 		}
 		public static u32 Effect_AttackDown2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -2, Stat.ATTACK);
 		}
 		public static u32 Effect_AttackUpHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 1, Stat.ATTACK);
 		}
 		public static u32 Effect_AttackUpHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 2, Stat.ATTACK);
 		}
 		public static u32 Effect_AttackDownHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -1, Stat.ATTACK);
 		}
 		public static u32 Effect_AttackDownHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -2, Stat.ATTACK);
 		}
 		public static u32 Effect_DefenseUp(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 1, Stat.DEFENSE);
 		}
 		public static u32 Effect_DefenseUp2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 2, Stat.DEFENSE);
 		}
 		public static u32 Effect_DefenseUp3(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 3, Stat.DEFENSE);
 		}
 		public static u32 Effect_DefenseDown(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -1, Stat.DEFENSE);
 		}
 		public static u32 Effect_DefenseDown2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -2, Stat.DEFENSE);
 		}
 		public static u32 Effect_DefenseUpHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 1, Stat.DEFENSE);
 		}
 		public static u32 Effect_DefenseUpHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 2, Stat.DEFENSE);
 		}
 		public static u32 Effect_DefenseDownHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -1, Stat.DEFENSE);
 		}
 		public static u32 Effect_DefenseDownHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -2, Stat.DEFENSE);
 		}
 		public static u32 Effect_SpecialAttackUp(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 1, Stat.SPECIAL_ATTACK);
 		}
 		public static u32 Effect_SpecialAttackUp2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 2, Stat.SPECIAL_ATTACK);
 		}
 		public static u32 Effect_SpecialAttackDown(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -1, Stat.SPECIAL_ATTACK);
 		}
 		public static u32 Effect_SpecialAttackDown2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -2, Stat.SPECIAL_ATTACK);
 		}
 		public static u32 Effect_SpecialAttackUpHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 1, Stat.SPECIAL_ATTACK);
 		}
 		public static u32 Effect_SpecialAttackUpHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 2, Stat.SPECIAL_ATTACK);
 		}
 		public static u32 Effect_SpecialAttackDownHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -1, Stat.SPECIAL_ATTACK);
 		}
 		public static u32 Effect_SpecialAttackDownHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -2, Stat.SPECIAL_ATTACK);
 		}
 		public static u32 Effect_SpecialDefenseUp(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 1, Stat.SPECIAL_DEFENSE);
 		}
 		public static u32 Effect_SpecialDefenseUp2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 2, Stat.SPECIAL_DEFENSE);
 		}
 		public static u32 Effect_SpecialDefenseDown(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -1, Stat.SPECIAL_DEFENSE);
 		}
 		public static u32 Effect_SpecialDefenseDown2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -2, Stat.SPECIAL_DEFENSE);
 		}
 		public static u32 Effect_SpecialDefenseUpHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 1, Stat.SPECIAL_DEFENSE);
 		}
 		public static u32 Effect_SpecialDefenseUpHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 2, Stat.SPECIAL_DEFENSE);
 		}
 		public static u32 Effect_SpecialDefenseDownHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -1, Stat.SPECIAL_DEFENSE);
 		}
 		public static u32 Effect_SpecialDefenseDownHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -2, Stat.SPECIAL_DEFENSE);
 		}
 		public static u32 Effect_SpeedUp(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 1, Stat.SPEED);
 		}
 		public static u32 Effect_SpeedUp2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 2, Stat.SPEED);
 		}
 		public static u32 Effect_SpeedDown(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -1, Stat.SPEED);
 		}
 		public static u32 Effect_SpeedDown2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -2, Stat.SPEED);
 		}
 		public static u32 Effect_SpeedUpHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 1, Stat.SPEED);
 		}
 		public static u32 Effect_SpeedUpHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 2, Stat.SPEED);
 		}
 		public static u32 Effect_SpeedDownHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -1, Stat.SPEED);
 		}
 		public static u32 Effect_SpeedDownHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -2, Stat.SPEED);
 		}
 		public static u32 Effect_AccuracyUp(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 1, Stat.ACCURACY);
 		}
 		public static u32 Effect_AccuracyUp2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 2, Stat.ACCURACY);
 		}
 		public static u32 Effect_AccuracyDown(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -1, Stat.ACCURACY);
 		}
 		public static u32 Effect_AccuracyDown2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -2, Stat.ACCURACY);
 		}
 		public static u32 Effect_AccuracyUpHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 1, Stat.ACCURACY);
 		}
 		public static u32 Effect_AccuracyUpHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 2, Stat.ACCURACY);
 		}
 		public static u32 Effect_AccuracyDownHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -1, Stat.ACCURACY);
 		}
 		public static u32 Effect_AccuracyDownHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -2, Stat.ACCURACY);
 		}
 		public static u32 Effect_EvasionUp(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 1, Stat.EVASION);
 		}
 		public static u32 Effect_EvasionUp2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, 2, Stat.EVASION);
 		}
 		public static u32 Effect_EvasionDown(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -1, Stat.EVASION);
 		}
 		public static u32 Effect_EvasionDown2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.attacker, -2, Stat.EVASION);
 		}
 		public static u32 Effect_EvasionUpHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 1, Stat.EVASION);
 		}
 		public static u32 Effect_EvasionUpHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, 2, Stat.EVASION);
 		}
 		public static u32 Effect_EvasionDownHit(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -1, Stat.EVASION);
 		}
 		public static u32 Effect_EvasionDownHit2(MoveEffectParams p) {
-			return 0;
+			return ChangeStat(p.state, p.target, -2, Stat.EVASION);
 		}
 		public static u32 Effect_AllStatsUp(MoveEffectParams p) {
-			return 0;
+			return Effect_AttackUp(p) | Effect_DefenseUp(p) | Effect_SpecialAttackUp(p) | Effect_SpecialDefenseUp(p) | Effect_SpeedUp(p);
 		}
 		public static u32 Effect_AtkDefDown(MoveEffectParams p) {
-			return 0;
+			return Effect_AttackDown(p) | Effect_DefenseDown(p);
 		}
 		public static u32 Effect_RandomUp2(MoveEffectParams p) {
+			// Cache stat modifier stages.
+			sbyte[] statValues =  new sbyte[] {
+				p.target.AttackStages,
+				p.target.DefenseStages,
+				p.target.SpecialAttackStages,
+				p.target.SpecialDefenseStages,
+				p.target.SpeedStages,
+				p.target.AccuracyStages,
+				p.target.EvasivenessStages
+			};
+			// Count stats at max value.
+			u8 statsAtMax = 0;
+			for (u8 i = 0; i < statValues.Length; i++) {
+				if (statValues[i] == MAX_STAT_STAGE) {
+					statsAtMax++;
+				}
+			}
+
+			// Fails if all stats are at max.
+			if (statsAtMax >= 6) {
+				return FLAG_MOVE_FAILED;
+			}
+			else {
+				// Choose random stats to upgrade.
+				sbyte[] stats = new sbyte[2] { -1, -1 };
+				for (u8 i = 0; i < stats.Length; i++) {
+					do {
+						stats[i] = (sbyte)(p.battle.rand.Next() % statValues.Length);
+					} while ((statValues[stats[i]] == MAX_STAT_STAGE) || (stats[0] == stats[1]));
+				}
+				// Upgrade the stats.
+				for (u8 i = 0; i < 2; i++) {
+					switch (stats[i]) {
+						case 0: Effect_AttackUp2(p); break;
+						case 1: Effect_DefenseUp2(p); break;
+						case 2: Effect_SpecialAttackUp2(p); break;
+						case 3: Effect_SpecialDefenseUp2(p); break;
+						case 4: Effect_SpeedUp2(p); break;
+						case 5: Effect_AccuracyUp2(p); break;
+						case 6: Effect_EvasionUp2(p); break;
+					}
+				}
+			}
 			return 0;
 		}
 		public static u32 Effect_DefAndSpdefDown(MoveEffectParams p) {
-			return 0;
+			return Effect_DefenseDown(p) | Effect_SpecialDefenseDown(p);
 		}
 		public static u32 Effect_DefAndSpdefUp(MoveEffectParams p) {
-			return 0;
+			return Effect_DefenseUp(p) | Effect_SpecialDefenseUp(p);
 		}
 		public static u32 Effect_BellyDrum(MoveEffectParams p) {
+			if (p.target.EffHp(p.state) <= p.target.EffMaxHp(p.state) / 2 || p.target.AttackStages == MAX_STAT_STAGE) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			u16 damage = (u16)(p.target.EffMaxHp(p.state) / 2);
+			p.target.DamageMon(p.state, ref damage, true, false);
+
+			p.target.SetStatStage(Stat.ATTACK, MAX_STAT_STAGE);
+			MessageBox(Lang.GetBattleMessage(BattleMessage.BELLY_DRUM, p.target.GetName()));
 			return 0;
 		}
 		public static u32 Effect_AtkAndDefUp(MoveEffectParams p) {
-			return 0;
+			return Effect_AttackUp(p) | Effect_DefenseUp(p);
 		}
 		public static u32 Effect_AtkDefAccUp(MoveEffectParams p) {
-			return 0;
+			return Effect_AttackUp(p) | Effect_DefenseUp(p) | Effect_AccuracyUp(p);
 		}
 		public static u32 Effect_AtkAndSpatkUp(MoveEffectParams p) {
-			return 0;
+			return Effect_AttackUp(p) | Effect_SpecialAttackUp(p);
 		}
 		public static u32 Effect_AtkSpdUp(MoveEffectParams p) {
-			return 0;
+			return Effect_AttackUp(p) | Effect_SpeedUp(p);
 		}
 		public static u32 Effect_AtkAccUp(MoveEffectParams p) {
-			return 0;
+			return Effect_AttackUp(p) | Effect_AccuracyUp(p);
 		}
 		public static u32 Effect_SpatkSpdefSpdUp(MoveEffectParams p) {
-			return 0;
+			return Effect_SpecialAttackUp(p) | Effect_SpecialDefenseUp(p) | Effect_SpeedUp(p);
 		}
 		public static u32 Effect_AtkDefSpdUp(MoveEffectParams p) {
-			return 0;
+			return Effect_AttackUp(p) | Effect_DefenseUp(p) | Effect_SpeedUp(p);
 		}
 		#endregion
 		#region recoil
