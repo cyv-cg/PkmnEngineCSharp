@@ -82,5 +82,8 @@ namespace PkmnEngine.Strings {
 		public static string GetTypeName(Type typeID) {
 			return StringFormat(TypeNames.gTypeNames(typeID, gSaveBlock.language));
 		}
+		public static string GetItemName(Item itemID) {
+			return StringFormat(ItemNames.gItemName(itemID, gSaveBlock.language));
+		}
 	}
 }
