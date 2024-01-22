@@ -14,6 +14,7 @@ namespace PkmnEngine {
 		public const u16 WAIT_DELAY = 100;
 
 		public static Action<string> MessageBox;
+		public static Action<BattleMon, Ability> AbilityPopup;
 
 		public const float TEXT_DISPLAY_SECONDS = 2f;
 		public const float TEXT_SPEED = 0.025f;

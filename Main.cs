@@ -3,11 +3,11 @@ using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
 
-//using Godot;
 using System;
 
 using static PkmnEngine.Global;
 using PkmnEngine.EnvInterface;
+
 using System.Threading.Tasks;
 
 namespace PkmnEngine {
@@ -20,6 +20,8 @@ namespace PkmnEngine {
 			Inputs.gMenuFuncs[MenuCode.USE_MOVE]		= MoveSelectMenu.Select;
 
 			Global.MessageBox = GodotV.MessageBox.Push;
+			// TODO: this kinda temporary.
+			Global.AbilityPopup = (BattleMon bm, Ability a) => { MessageBox($"{bm.GetName()} | {Strings.Lang.GetAbilityName(a)}"); };
 		}
 
 		public static void Start() {
@@ -39,7 +41,7 @@ namespace PkmnEngine {
 		private static async void StartBattle() {
 			await Task.Delay(50);
 
-			Pokemon snom = new Pokemon(Species.SNOM, 1, false, new u8[] {}, false, 0, OtIdType.PLAYER, 0);
+			Pokemon snom = new Pokemon(Species.SNOM, 100, false, new u8[] {}, false, 0, OtIdType.PLAYER, 0);
 			Pokemon shaymin = new Pokemon(Species.SHAYMIN_LAND_FORME, 100, false, new u8[] {}, false, 0, OtIdType.PLAYER, 0);
 			Pokemon munna = new Pokemon(Species.MUNNA, 69, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
 			munna.SetNickname("丸子");

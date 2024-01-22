@@ -12,6 +12,7 @@ using PkmnEngine.Strings;
 
 // TODO: Get this shit out of here!
 using PkmnEngine.GodotV;
+using System.Linq;
 
 namespace PkmnEngine {
 	public class Battle {
@@ -95,8 +96,7 @@ namespace PkmnEngine {
 		/// </summary>
 		/// <param name="slot">Slot to look in.</param>
 		/// <returns>BattleMon in the given slot. Returns null if empty.</returns>
-		public BattleMon GetMonInSlot(BattleState state, u8 slot)
-		{
+		public BattleMon GetMonInSlot(BattleState state, u8 slot) {
 			// Get the index of the mon in the desired slot.
 			int index = (int)((state.FieldMons >> (BattleState.BITS_PER_MON_INDEX * slot)) & ((1 << BattleState.BITS_PER_MON_INDEX) - 1)) - 1;
 			if (index < 0) {
@@ -108,13 +108,28 @@ namespace PkmnEngine {
 		/// Gets every mon on the field in the current BattleState.
 		/// </summary>
 		/// <returns>Array of all active BattleMons</returns>
-		public BattleMon[] GetAllActiveMons()
-		{
+		public BattleMon[] GetAllActiveMons() {
 			List<BattleMon> mons = new List<BattleMon>();
 			for (u8 i = 0; i < format.numSlots; i++) {
 				mons.Add(GetMonInSlot(CurrentState, i));
 			}
 			return mons.ToArray();
+		}
+
+		/// <summary>
+		/// Determines if any mon on the field activates its ability.
+		/// </summary>
+		/// <param name="ability">The ability to look for.</param>
+		/// <param name="popup">If true, displays the ability activation.</param>
+		/// <returns>True if any active mon ssuccessfully activates the ability.</returns>
+		public bool FieldMonAbilityProc(Ability ability, bool popup) {
+			BattleMon[] fieldMons = GetAllActiveMons();
+			for (u8 i = 0; i < fieldMons.Length; i++) {
+				if (fieldMons[i].AbilityProc(this, ability, popup)) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		/// <summary>
@@ -397,8 +412,7 @@ namespace PkmnEngine {
 		/// TODO: differentiate between player win/loss.
 		/// </summary>
 		/// <returns>True if all Pokemon on one side are fainted.</returns>
-		private bool IsOver()
-		{
+		private bool IsOver() {
 			// Check if all opposing Pokemon are fainted or if all player/ally Pokemon are fainted.
 			
 			bool battleOver = true;

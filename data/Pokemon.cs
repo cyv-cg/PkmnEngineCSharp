@@ -1050,6 +1050,33 @@ namespace PkmnEngine {
 			return false;
 		}
 
+		/// @brief Determines if a mon's ability activates.
+		/// @param state the current BattleState
+		/// @param bm the mon whose ability to check
+		/// @param ability the ability to check
+		/// @param b_popup whether or not to display the activation
+		/// @return true if the mon's ability successfully activates
+		public bool AbilityProc(Battle battle, Ability ability, bool popup) {
+			// Mold Breaker
+			// TODO: Apparently only certain abilities can be negated???
+			// https://bulbapedia.bulbagarden.net/wiki/Ignoring_Abilities#Ignorable_Abilities
+			BattleMon[] fieldMons = battle.GetAllActiveMons();
+			for (u8 i = 0; i < fieldMons.Length; i++) {
+				if (fieldMons[i].ability == Ability.MOLD_BREAKER) {
+					return false;
+				}
+			}
+
+			if (this.ability == ability) {
+				if (popup) {
+					AbilityPopup(this, this.ability);
+				}
+				return true;
+			}
+
+			return false;
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
