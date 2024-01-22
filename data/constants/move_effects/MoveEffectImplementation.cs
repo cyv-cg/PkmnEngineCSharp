@@ -385,22 +385,28 @@ namespace PkmnEngine {
 		#endregion
 		#region recoil
 		public static u32 Effect_RecoilHalfMaxHp(MoveEffectParams p) {
-			return 0;
+			u16 recoil = (u16)(p.attacker.EffMaxHp(p.state) / 2);
+			return DoRecoilDamage(p, ref recoil);
 		}
 		public static u32 Effect_RecoilThirdMaxHp(MoveEffectParams p) {
-			return 0;
+			u16 recoil = (u16)(p.attacker.EffMaxHp(p.state) / 3);
+			return DoRecoilDamage(p, ref recoil);
 		}
 		public static u32 Effect_RecoilQuarterMaxHp(MoveEffectParams p) {
-			return 0;
+			u16 recoil = (u16)(p.attacker.EffMaxHp(p.state) / 4);
+			return DoRecoilDamage(p, ref recoil);
 		}
 		public static u32 Effect_RecoilHalfDealt(MoveEffectParams p) {
-			return 0;
+			u16 recoil = (u16)((Attack(p) & 0xFFFF) / 2);
+			return DoRecoilDamage(p, ref recoil);
 		}
 		public static u32 Effect_RecoilThirdDealt(MoveEffectParams p) {
-			return 0;
+			u16 recoil = (u16)((Attack(p) & 0xFFFF) / 3);
+			return DoRecoilDamage(p, ref recoil);
 		}
 		public static u32 Effect_RecoilQuarterDealt(MoveEffectParams p) {
-			return 0;
+			u16 recoil = (u16)((Attack(p) & 0xFFFF) / 4);
+			return DoRecoilDamage(p, ref recoil);
 		}
 		#endregion
 		#region healing
@@ -449,39 +455,77 @@ namespace PkmnEngine {
 		#endregion
 		#region weather_and_terrain
 		public static u32 Effect_Defog(MoveEffectParams p) {
+			// TODO:
 			return 0;
 		}
 		public static u32 Effect_RainDance(MoveEffectParams p) {
+			if (p.state.Weather.Condition == Condition.WEATHER_RAIN) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.state.SetWeather(Condition.WEATHER_RAIN, p.attacker.HeldItem == Item.DAMP_ROCK ? (u8)8 : (u8)5);
 			return 0;
 		}
 		public static u32 Effect_SunnyDay(MoveEffectParams p) {
+			if (p.state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.state.SetWeather(Condition.WEATHER_HARSH_SUNLIGHT, p.attacker.HeldItem == Item.HEAT_ROCK ? (u8)8 : (u8)5);
 			return 0;
 		}
 		public static u32 Effect_Hail(MoveEffectParams p) {
+			if (p.state.Weather.Condition == Condition.WEATHER_HAIL) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.state.SetWeather(Condition.WEATHER_HAIL, p.attacker.HeldItem == Item.ICY_ROCK ? (u8)8 : (u8)5);
 			return 0;
 		}
 		public static u32 Effect_Sandstorm(MoveEffectParams p) {
+			if (p.state.Weather.Condition == Condition.WEATHER_SANDSTORM) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.state.SetWeather(Condition.WEATHER_SANDSTORM, p.attacker.HeldItem == Item.SMOOTH_ROCK ? (u8)8 : (u8)5);
 			return 0;
 		}
 		public static u32 Effect_Snowscape(MoveEffectParams p) {
+			if (p.state.Weather.Condition == Condition.WEATHER_SNOW) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.state.SetWeather(Condition.WEATHER_SNOW, p.attacker.HeldItem == Item.ICY_ROCK ? (u8)8 : (u8)5);
 			return 0;
 		}
 		public static u32 Effect_ChillyReception(MoveEffectParams p) {
-			return 0;
+			return Effect_Snowscape(p) | Effect_UTurn(p);
 		}
 		public static u32 Effect_ClearTerrain(MoveEffectParams p) {
+			// TODO:
 			return 0;
 		}
 		public static u32 Effect_ElectricTerrain(MoveEffectParams p) {
+			if (p.state.Terrain.Condition == Condition.TERRAIN_ELECTRIC) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.state.SetTerrain(Condition.TERRAIN_ELECTRIC, p.attacker.HeldItem == Item.TERRAIN_EXTENDER ? (u8)8 : (u8)5);
 			return 0;
 		}
 		public static u32 Effect_GrassyTerrain(MoveEffectParams p) {
+			if (p.state.Terrain.Condition == Condition.TERRAIN_GRASSY) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.state.SetTerrain(Condition.TERRAIN_GRASSY, p.attacker.HeldItem == Item.TERRAIN_EXTENDER ? (u8)8 : (u8)5);
 			return 0;
 		}
 		public static u32 Effect_MistyTerrain(MoveEffectParams p) {
+			if (p.state.Terrain.Condition == Condition.TERRAIN_MISTY) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.state.SetTerrain(Condition.TERRAIN_MISTY, p.attacker.HeldItem == Item.TERRAIN_EXTENDER ? (u8)8 : (u8)5);
 			return 0;
 		}
 		public static u32 Effect_PsychicTerrain(MoveEffectParams p) {
+			if (p.state.Terrain.Condition == Condition.TERRAIN_PSYCHIC) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.state.SetTerrain(Condition.TERRAIN_PSYCHIC, p.attacker.HeldItem == Item.TERRAIN_EXTENDER ? (u8)8 : (u8)5);
 			return 0;
 		}
 		#endregion

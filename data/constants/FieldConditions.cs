@@ -115,6 +115,18 @@ namespace PkmnEngine {
 				throw new System.Exception();
 			}
 		}
+		public void SetWeatherTerrain(Condition wt, u8 duration) {
+			if (
+				(wt >= Condition.WEATHER_HARSH_SUNLIGHT && wt <= Condition.WEATHER_SHADOWY_AURA) ||
+				(wt >= Condition.TERRAIN_ELECTRIC && wt <= Condition.TERRAIN_PSYCHIC)
+			) {
+				Condition = wt;
+				DurationRemaining = duration;
+			}
+			else {
+				throw new System.ArgumentException();
+			}
+		}
 
 		public bool Equals(FieldCondition obj) {
 			return this.Condition == obj.Condition;

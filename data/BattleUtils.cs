@@ -11,78 +11,76 @@ using static PkmnEngine.Types;
 using static PkmnEngine.DamageCalc;
 using static PkmnEngine.MoveEffects;
 
-using static System.MathF;
 using PkmnEngine.Strings;
+
+using static System.MathF;
 
 namespace PkmnEngine {
 	public static class BattleUtils {
-		/// @brief Determines if a mon can successfully act through paralysis, freeze, and sleep.
-		/// @param state The current BattleState.
-		/// @param attacker The attacking BattleMon.
-		/// @param moveID ID of the move being used.
-		/// @return True if the mon can act, false otherwise.
-		private static bool MoveStatusBlockers(BattleState state, BattleMon attacker, BattleMoveID moveID) {
-			//BM_PARAMS[0] = GetMonName(attacker->mon);
-
-			//// Paralyzed mons have a chance to not be able to move.
-			//if (b_MonHasStatus(attacker, STATUS_PARALYSIS) && Random01() < PARALYSIS_PROC_CHANCE) {
-			//	// No need to set BM_PARAMS[0] since it's already set above.
-			//	MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_MON_IS_PARALYZED_AND_CANT_MOVE));
-			//	return false;
-			//}
-			//// Frozen mons cannot move.
-			//else if (b_MonHasStatus(attacker, STATUS_FREEZE) && !(gBattleMoves[moveID].flags & FLAG_THAWS_USER)) {
-			//	// A frozen mon has a set chance of thawing out every turn.
-			//	if (Random01() < FREEZE_THAW_CHANCE) {
-			//		BattleMoveEffects::sThawMon(attacker);
-			//	}
-			//	else {
-			//		MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_MON_IS_FROZEN_SOLID));
-			//		return false;
-			//	}
-			//}
-			//// Sleeping mons can only use certain moves.
-			//else if (b_MonHasStatus(attacker, STATUS_SLEEP)) {
-			//	u8 sleepingTurns = GetStatusParam(attacker, STATUS_PARAM_SLEEPING_TURNS);
-			//	IncrementStatusParam(attacker, STATUS_PARAM_SLEEPING_TURNS);
-			//	// Sleeping mons will wake up after a certain number of turns.
-			//	if (sleepingTurns >= attacker->NVStatusDuration) {
-			//		BattleMoveEffects::sWakeUpMon(attacker);
-			//	}
-			//	else {
-			//		// Display that the mon is sleeping.
-			//		MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_MON_IS_FAST_ASLEEP));
-			//		// If the mon cannot use this move while asleep, exit.
-			//		if (!(gBattleMoves[moveID].flags & FLAG_USABLE_WHILE_ASLEEP)) {
-			//			return false;
-			//		}
-			//	}
-			//}
-			//// Confused mons have a chance to hurt themselves instead of acting.
-			//if (b_MonHasStatus(attacker, STATUS_CONFUSION)) {
-			//	MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_MON_IS_CONFUSED));
-			//	u8 confusedTurns = GetStatusParam(attacker, STATUS_PARAM_CONFUSED_TURNS);
-			//	IncrementStatusParam(attacker, STATUS_PARAM_CONFUSED_TURNS);
-			//	// Mons will remain confused for up to 4 turns and have a 25% chance to snap out every turn.
-			//	if ((confusedTurns >= 4) || (Random01() < 0.25)) {
-			//		MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_MON_SNAPPED_OUT_OF_CONFUSION));
-			//		SetStatusParam(attacker, STATUS_PARAM_CONFUSED_TURNS, 0);
-			//		attacker->status &= ~STATUS_CONFUSION;
-			//	}
-			//	// Confused mons have a 33% chance to hurt themselves instead of using their move.
-			//	else if (Random01() < 0.33) {
-			//		// Confusion acts as a physical move with 40 power and no type.
-			//		const struct BattleMove move = {
-			//			.moveType = TYPE_NONE,
-			//			.power = 40,
-			//			.moveCat = CAT_PHYSICAL,
-			//		};
-			//		u16 damage = CalcDamage(attacker, attacker, SIDE_BOTH, SIDE_BOTH, &move, 1, state, false, 1, 1);
-			//		b_DamageMon(state, attacker, &damage, false, true);
-			//		MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_IT_HURT_ITSELF_IN_ITS_CONFUSION));
-			//		return false;
-			//	}
-			//}
+		/// <summary>
+		/// Determines if a mon can successfully act through paralysis, freeze, and sleep.
+		/// </summary>
+		/// <param name="battle">Battle object.</param>
+		/// <param name="state">The current BattleState.</param>
+		/// <param name="attacker">The attacking BattleMon.</param>
+		/// <param name="moveID">ID of the move being used.</param>
+		/// <returns>True if the mon can act, false otherwise.</returns>
+		private static bool MoveStatusBlockers(Battle battle, BattleState state, BattleMon attacker, BattleMoveID moveID) {
+			// Paralyzed mons have a chance to not be able to move.
+			if (attacker.HasStatus(Status.PARALYSIS) && battle.rand.NextDouble() < StatusEffects.PARALYSIS_PROC_CHANCE) {
+				// No need to set BM_PARAMS[0] since it's already set above.
+				MessageBox(GetBattleMessage(BattleMessage.MON_IS_PARALYZED_AND_CANT_MOVE, attacker.GetName()));
+				return false;
+			}
+			// Frozen mons cannot move.
+			else if (attacker.HasStatus(Status.FREEZE) && (gBattleMoves(moveID).flags & Flag.THAWS_USER) == 0) {
+				// A frozen mon has a set chance of thawing out every turn.
+				if (Random01() < StatusEffects.FREEZE_THAW_CHANCE) {
+					ThawMon(attacker);
+				}
+				else {
+					MessageBox(GetBattleMessage(BattleMessage.MON_IS_FROZEN_SOLID, attacker.GetName()));
+					return false;
+				}
+			}
+			// Sleeping mons can only use certain moves.
+			else if (attacker.HasStatus(Status.SLEEP)) {
+				u8 sleepingTurns = (u8)attacker.GetStatusParam(StatusParam.SLEEPING_TURNS);
+				attacker.IncrementStatusParam(StatusParam.SLEEPING_TURNS);
+				// Sleeping mons will wake up after a certain number of turns.
+				if (sleepingTurns >= attacker.GetStatusParam(StatusParam.NV_STATUS_DURATION)) {
+					WakeUpMon(attacker);
+				}
+				else {
+					// Display that the mon is sleeping.
+					MessageBox(GetBattleMessage(BattleMessage.MON_IS_FAST_ASLEEP, attacker.GetName()));
+					// If the mon cannot use this move while asleep, exit.
+					if ((gBattleMoves(moveID).flags & Flag.USABLE_WHILE_ASLEEP) == 0) {
+						return false;
+					}
+				}
+			}
+			// Confused mons have a chance to hurt themselves instead of acting.
+			if (attacker.HasStatus(Status.CONFUSION)) {
+				MessageBox(GetBattleMessage(BattleMessage.MON_IS_CONFUSED, attacker.GetName()));
+				u8 confusedTurns = (u8)attacker.GetStatusParam(StatusParam.CONFUSED_TURNS);
+				attacker.IncrementStatusParam(StatusParam.CONFUSED_TURNS);
+				// Mons will remain confused for up to 4 turns and have a 25% chance to snap out every turn.
+				if ((confusedTurns >= 4) || (battle.rand.NextDouble() < 0.25)) {
+					MessageBox(GetBattleMessage(BattleMessage.MON_SNAPPED_OUT_OF_CONFUSION, attacker.GetName()));
+					attacker.SetStatusParam(StatusParam.CONFUSED_TURNS, 0);
+					attacker.RemoveStatus(Status.CONFUSION);
+				}
+				// Confused mons have a 33% chance to hurt themselves instead of using their move.
+				else if (battle.rand.NextDouble() < 0.33) {
+					// Confusion acts as a physical move with 40 power and no type.
+					// This same effect can be achieved by using tackle and overriding the type effectiveness and power :p
+					u16 damage = CalcDamage(battle, state, attacker, attacker, BattleMoveID.TACKLE, 1, new Mods(), new Overrides(0, 0, 40, 0));
+					attacker.DamageMon(state, ref damage, false, true);
+					MessageBox(GetBattleMessage(BattleMessage.IT_HURT_ITSELF_IN_ITS_CONFUSION));
+					return false;
+				}
+			}
 
 			return true;
 		}
@@ -93,12 +91,12 @@ namespace PkmnEngine {
 		private static bool MoveWeatherBlockers(BattleState state, BattleMoveID moveID) {
 			//// Water type moves cannot be used during extreme sunlight.
 			//if ((state->fieldCondition & WEATHER_EXTREME_SUNLIGHT) && gBattleMoves[moveID].moveType == TYPE_WATER) {
-			//	MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_WATER_ATTACK_EVAPORATED));
+			//	MessageBox(GetBattleMessage(BattleMessage.WATER_ATTACK_EVAPORATED));
 			//	return false;
 			//}
 			//// Fire type moves cannot be used during heavy rain.
 			//else if ((state->fieldCondition & WEATHER_HEAVY_RAIN) && gBattleMoves[moveID].moveType == TYPE_FIRE) {
-			//	MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_FIRE_ATTACK_FIZZLED_OUT));
+			//	MessageBox(GetBattleMessage(BattleMessage.FIRE_ATTACK_FIZZLED_OUT));
 			//	return false;
 			//}
 
@@ -111,7 +109,7 @@ namespace PkmnEngine {
 		private static void CheckSuccessiveProtects(BattleMon attacker, BattleMoveID moveID) {
 			//// Clears successive protect count when not using a protecting move.
 			//if (!(gBattleMoves[moveID].flags & FLAG_PROTECTS)) {
-			//	SetStatusParam(attacker, STATUS_PARAM_SUCCESSIVE_PROTECTS, 0);
+			//	SetStatusParam(attacker, Status.PARAM_SUCCESSIVE_PROTECTS, 0);
 			//}
 		}
 		
@@ -130,17 +128,17 @@ namespace PkmnEngine {
 			u8[] targets = Battle.SplitTargets(slotsTarget);
 
 			//BM_PARAMS[0] = GetMonName(attacker->mon);
-			//BM_PARAMS[1] = lang::GetMoveName(moveID);
+			//BM_PARAMS[1] = GetMoveName(moveID);
 
 			// Check for statuses.
-			if (!MoveStatusBlockers(state, attacker, moveID)) {
+			if (!MoveStatusBlockers(battle, state, attacker, moveID)) {
 				return;
 			}
 			// Clear successive protect counter if applicable.
 			CheckSuccessiveProtects(attacker, moveID);
 
 			//// Only display the move being used if the mon can actually use it.
-			//MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_MON_USED_MOVE));
+			//MessageBox(GetBattleMessage(BattleMessage.MON_USED_MOVE));
 
 			// Weird weather conditions:
 			if (!MoveWeatherBlockers(state, moveID)) {
@@ -235,7 +233,7 @@ namespace PkmnEngine {
 			u32 flags = gMoveEffectMap(gBattleMoves(moveID).primaryEffect)(data);
 			
 			if ((flags & FLAG_MOVE_FAILED) != 0) {
-				//MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_MOVE_FAILED));
+				//MessageBox(GetBattleMessage(BattleMessage.MOVE_FAILED));
 				return flags;
 			}
 
@@ -244,7 +242,7 @@ namespace PkmnEngine {
 			//if (GetEffectiveHP(state, defender) == 0) {
 			//	flags |= FLAG_TARGET_FAINTED;
 			//	//BM_PARAMS[0] = GetMonName(defender->mon);
-			//	//MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_MON_FAINTED));
+			//	//MessageBox(GetBattleMessage(BattleMessage.MON_FAINTED));
 			//	// TODO: remove all the target's actions from the action list, among other things.
 			//	return flags;
 			//}
@@ -294,8 +292,8 @@ namespace PkmnEngine {
 			//	return false;
 			//}
 
-			//if (b_MonHasStatus(defender, STATUS_SEMI_INVULNERABLE_TURN)) {
-			//	switch (GetStatusParam(defender, STATUS_PARAM_SEMI_INVULNERABLE))
+			//if (b_MonHasStatus(defender, Status.SEMI_INVULNERABLE_TURN)) {
+			//	switch (GetStatusParam(defender, Status.PARAM_SEMI_INVULNERABLE))
 			//	{
 			//		case SEMI_INVULNERABLE_AIR:		if (!(move->flags & FLAG_HITS_SEMI_INVUL_AIR))		return false;
 			//		case SEMI_INVULNERABLE_GROUND:	if (!(move->flags & FLAG_HITS_SEMI_INVUL_GROUND))	return false;

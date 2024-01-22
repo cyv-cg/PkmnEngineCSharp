@@ -185,6 +185,7 @@ namespace PkmnEngine {
 
 			// Mark the the mon has just switched in.
 			bm.SetFlag(BattleMon.Flag.JUST_SWITCHED_IN);
+			bm.SetStatusParam(StatusParam.TOXIC_BUILDUP, 0);
 
 			// Entry hazards.
 			//DoEntryHazards(state, mon, GetSideFromSlot(teamIndex));
@@ -420,6 +421,9 @@ namespace PkmnEngine {
 			// Check player/ally Pokemon.
 			foreach (u8 slot in format.SlotsOnSide(SIDE_CLIENT)) {
 				foreach (BattleMon bm in PlayerControllingSlot(slot).team) {
+					if (bm == null) {
+						continue;
+					}
 					if (bm.IsAvailable()) {
 						battleOver = false;
 						break;
@@ -435,6 +439,9 @@ namespace PkmnEngine {
 			battleOver = true;
 			foreach (u8 slot in format.SlotsOnSide(SIDE_REMOTE)) {
 				foreach (BattleMon bm in PlayerControllingSlot(slot).team) {
+					if (bm == null) {
+						continue;
+					}
 					if (bm.IsAvailable()) {
 						battleOver = false;
 						break;
@@ -532,9 +539,9 @@ namespace PkmnEngine {
 			if (bm.HasStatus(Status.BURN)) {
 				u16 damage = bm.GetPercentOfMaxHp(StatusEffects.BURN_CHIP_DAMAGE);
 				// https://bulbapedia.bulbagarden.net/wiki/Heatproof_(Ability)
-				//TODO: if (b_AbilityProc(state, bm, ABILITY_HEATPROOF, false)) {
-				//	damage /= 2;
-				//}
+				if (bm.AbilityProc(this, Ability.HEATPROOF, false)) {
+					damage /= 2;
+				}
 				fainted = bm.DamageMon(state, ref damage, true, false);
 				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_ITS_BURN, bm.GetName()));
 				if (fainted) {
@@ -544,33 +551,34 @@ namespace PkmnEngine {
 			else if (bm.HasStatus(Status.POISON)) {
 				u16 damage = bm.GetPercentOfMaxHp(StatusEffects.POISON_CHIP_DAMAGE);
 				// If the mon has Poison Heal, it heals instead of taking damage.
-				//if (b_AbilityProc(state, bm, ABILITY_POISON_HEAL, false)) {
-					//TODO: b_HealMon(state, bm, &damage, false);
-				//}
-				//else {
+				if (bm.AbilityProc(this, Ability.POISON_HEAL, false)) {
+					bm.HealMon(state, ref damage, false);
+				}
+				else {
 					fainted = bm.DamageMon(state, ref damage, true, false);
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, bm.GetName()));
-				//}
+				}
 				if (fainted) {
 					return;
 				}
 			}
 			else if (bm.HasStatus(Status.TOXIC)) {
 				// Toxic deals damage starting at a set percentage, and grows by that percentage every turn.
-				// Bulbapedia does not say there is a limit on this accumulation.
 				u16 baseDamage = bm.GetPercentOfMaxHp(StatusEffects.TOXIC_CHIP_DAMAGE);
-				bm.IncrementStatusParam(StatusParam.TOXIC_BUILDUP);
-				//TODO: if (b_AbilityProc(state, bm, ABILITY_POISON_HEAL, false)) {
-				//	// Poison Heal does not heal extra from toxic stacks.
-				//	b_HealMon(state, bm, &baseDamage, false);
-				//}
-				//else {
+				// Accumulation is capped at 15 stacks.
+				if (bm.GetStatusParam(StatusParam.TOXIC_BUILDUP) < 15) {
+					bm.IncrementStatusParam(StatusParam.TOXIC_BUILDUP);
+				}
+				if (bm.AbilityProc(this, Ability.POISON_HEAL, false)) {
+					// Poison Heal does not heal extra from toxic stacks.
+					bm.HealMon(state, ref baseDamage, false);
+				}
+				else {
 					// Stack additional damage by number of turns afflicted.
-					// TODO: technically, toxic has a separate counter that resets when switching out.
 					u16 totalDamage = (u16)(baseDamage * bm.GetStatusParam(StatusParam.TOXIC_BUILDUP));
 					fainted = bm.DamageMon(state, ref totalDamage, true, false);
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON));
-				//}
+				}
 				if (fainted) {
 					return;
 				}
@@ -1005,6 +1013,54 @@ namespace PkmnEngine {
 			Actions = newActions;
 		}
 	
+		/// <summary>
+		/// Replaces active weather with new weather.
+		/// </summary>
+		/// <param name="weather">Weather condition to set.</param>
+		/// <param name="duration">Duration of the weather effect in turns. Set to 255 (UINT8_MAX) for (effectively) infinite duration.</param>
+		public void SetWeather(Condition weather, u8 duration) {
+			if (!(weather >= Condition.WEATHER_HARSH_SUNLIGHT && weather <= Condition.WEATHER_SHADOWY_AURA)) {
+				throw new System.ArgumentException();
+			}
+			Weather.SetWeatherTerrain(weather, duration);
+
+			string message = "";
+			message = weather switch {
+				Condition.WEATHER_HARSH_SUNLIGHT => Lang.GetBattleMessage(BattleMessage.SUNLIGHT_BECAME_HARSH),
+				Condition.WEATHER_RAIN => Lang.GetBattleMessage(BattleMessage.STARTED_RAINING),
+				Condition.WEATHER_SANDSTORM => Lang.GetBattleMessage(BattleMessage.SANDSTORM_KICKED_UP),
+				Condition.WEATHER_HAIL => Lang.GetBattleMessage(BattleMessage.STARTED_HAILING),
+				Condition.WEATHER_SNOW => Lang.GetBattleMessage(BattleMessage.STARTED_SNOWING),
+				Condition.WEATHER_FOG => Lang.GetBattleMessage(BattleMessage.FOG_CREPT_UP),
+				Condition.WEATHER_EXTREME_SUNLIGHT => Lang.GetBattleMessage(BattleMessage.SUNLIGHT_BECAME_EXTREMELY_HARSH),
+				Condition.WEATHER_HEAVY_RAIN => Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_STARTED),
+				Condition.WEATHER_STRONG_WIND => Lang.GetBattleMessage(BattleMessage.MYSTERIOUS_WIND_APPEARED),
+				_ => "",
+			};
+			MessageBox(message);
+		}
+		/// <summary>
+		/// Replaces active terrain with new terrain.
+		/// </summary>
+		/// <param name="terrain">Terrain condition to set.</param>
+		/// <param name="duration">Duration of the terrain effect in turns. Set to 255 (UINT8_MAX) for (effectively) infinite duration.</param>
+		public void SetTerrain(Condition terrain, u8 duration) {
+			if (!(terrain >= Condition.TERRAIN_ELECTRIC && terrain <= Condition.TERRAIN_PSYCHIC)) {
+				throw new System.ArgumentException();
+			}
+			Terrain.SetWeatherTerrain(terrain, duration);
+
+			string message = "";
+			message = terrain switch {
+				Condition.TERRAIN_ELECTRIC => Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_START),
+				Condition.TERRAIN_GRASSY => Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_START),
+				Condition.TERRAIN_MISTY => Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_START),
+				Condition.TERRAIN_PSYCHIC => Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_START),
+				_ => "",
+			};
+			MessageBox(message);
+		}
+
 		public bool SideHasCondition(u8 side, params Condition[] condition) {
 			for (u8 i = 0; i < condition.Length; i++) {
 				for (u8 j = 0; j < this.Conditions.Count; j++) {

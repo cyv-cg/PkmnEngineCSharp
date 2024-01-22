@@ -19,6 +19,11 @@ namespace PkmnEngine {
 				}
 				stab = STAB(p.attacker, p.move.moveType);
 			}
+			public Mods() {
+				isCrit = false;
+				typeEff = 1;
+				stab = 1;
+			}
 
 			public readonly bool isCrit;
 			public readonly float typeEff;
@@ -38,7 +43,6 @@ namespace PkmnEngine {
 			public u16 damage;
 		}
 
-		// https://bulbapedia.bulbagarden.net/wiki/Damage#Generation_V_onward
 		/// <summary>
 		/// Calculates damage taken.
 		/// https://bulbapedia.bulbagarden.net/wiki/Damage#Generation_V_onward
@@ -363,45 +367,5 @@ namespace PkmnEngine {
 				_ => 0.0417f,
 			};
 		}
-
-		//int8_t GetAttackStage(struct BattleMon *bm)
-		//{
-		//	u8 stage = ((bm.status & STATUS_ATTACK) >> DEF_STATUS_EFF_IDS::STATUS_ATTACK).to_ulong();
-		//	return (stage & 0b0111) * ((stage & 0b1000) ? 1 : -1);
-		//}
-		//int8_t GetDefenseStage(struct BattleMon *bm)
-		//{
-		//	u8 stage = ((bm.status & STATUS_DEFENSE) >> DEF_STATUS_EFF_IDS::STATUS_DEFENSE).to_ulong();
-		//	return (stage & 0b0111) * ((stage & 0b1000) ? 1 : -1);
-		//}
-		//int8_t GetSpecialAttackStage(struct BattleMon *bm)
-		//{
-		//	u8 stage = ((bm.status & STATUS_SPECIAL_ATTACK) >> DEF_STATUS_EFF_IDS::STATUS_SPECIAL_ATTACK).to_ulong();
-		//	return (stage & 0b0111) * ((stage & 0b1000) ? 1 : -1);
-		//}
-		//int8_t GetSpecialDefenseStage(struct BattleMon *bm)
-		//{
-		//	u8 stage = ((bm.status & STATUS_SPECIAL_DEFENSE) >> DEF_STATUS_EFF_IDS::STATUS_SPECIAL_DEFENSE).to_ulong();
-		//	return (stage & 0b0111) * ((stage & 0b1000) ? 1 : -1);
-		//}
-		//int8_t GetSpeedStage(struct BattleMon *bm)
-		//{
-		//	u8 stage = ((bm.status & STATUS_SPEED) >> DEF_STATUS_EFF_IDS::STATUS_SPEED).to_ulong();
-		//	return (stage & 0b0111) * ((stage & 0b1000) ? 1 : -1);
-		//}
-		//int8_t GetAccuracyStage(struct BattleMon *bm)
-		//{
-		//	u8 stage = ((bm.status & STATUS_ACCURACY) >> DEF_STATUS_EFF_IDS::STATUS_ACCURACY).to_ulong();
-		//	return (stage & 0b0111) * ((stage & 0b1000) ? 1 : -1);
-		//}
-		//int8_t GetEvasionStage(struct BattleMon *bm)
-		//{
-		//	u8 stage = ((bm.status & STATUS_EVASION) >> DEF_STATUS_EFF_IDS::STATUS_EVASION).to_ulong();
-		//	return (stage & 0b0111) * ((stage & 0b1000) ? 1 : -1);
-		//}
-		//int8_t GetCritRateStage(struct BattleMon *bm, int8_t stages)
-		//{
-		//	return Clamp(stages, MIN_STAT_MODIFIER, MAX_STAT_MODIFIER);
-		//}
 	}
 }
