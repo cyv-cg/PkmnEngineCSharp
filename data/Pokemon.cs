@@ -1107,6 +1107,13 @@ namespace PkmnEngine {
 			return false;
 		}
 
+		public bool IsAsleep(Battle battle) {
+			return HasStatus(Status.SLEEP) || AbilityProc(battle, Ability.COMATOSE, false);
+		}
+		public bool IsPoisoned() {
+			return HasStatus(Status.POISON) || HasStatus(Status.TOXIC);
+		}
+
 		public void SetStatusParam(StatusParam param, u16 value) {
 			statusParams[param] = value;
 		}

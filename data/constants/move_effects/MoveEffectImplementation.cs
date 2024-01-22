@@ -6,6 +6,7 @@ using u64 = System.UInt64;
 using static PkmnEngine.Global;
 using static PkmnEngine.Strings.Lang;
 using static PkmnEngine.StatusEffects;
+using static PkmnEngine.DamageCalc;
 
 using PkmnEngine.Strings;
 
@@ -34,10 +35,10 @@ namespace PkmnEngine {
 			return GiveMonNonVolatileStatus(p.state, p.target, Status.BURN, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
 		}
 		public static u32 Effect_CureBurn(MoveEffectParams p) {
-			return 0;
+			return CureBurn(p.attacker);
 		}
 		public static u32 Effect_CureBurnHit(MoveEffectParams p) {
-			return 0;
+			return CureBurn(p.target);
 		}
 		public static u32 Effect_Freeze(MoveEffectParams p) {
 			return GiveMonNonVolatileStatus(p.state, p.attacker, Status.FREEZE, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
@@ -46,10 +47,10 @@ namespace PkmnEngine {
 			return GiveMonNonVolatileStatus(p.state, p.target, Status.FREEZE, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));	
 		}
 		public static u32 Effect_Thaw(MoveEffectParams p) {
-			return 0;
+			return ThawMon(p.attacker);
 		}
 		public static u32 Effect_ThawHit(MoveEffectParams p) {
-			return 0;
+			return ThawMon(p.target);
 		}
 		public static u32 Effect_Paralyze(MoveEffectParams p) {
 			return GiveMonNonVolatileStatus(p.state, p.attacker, Status.PARALYSIS, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
@@ -58,10 +59,10 @@ namespace PkmnEngine {
 			return GiveMonNonVolatileStatus(p.state, p.target, Status.PARALYSIS, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
 		}
 		public static u32 Effect_CureParalysis(MoveEffectParams p) {
-			return 0;
+			return CureParalysis(p.attacker);
 		}
 		public static u32 Effect_CureParalysisHit(MoveEffectParams p) {
-			return 0;
+			return CureParalysis(p.target);
 		}
 		public static u32 Effect_Poison(MoveEffectParams p) {
 			return GiveMonNonVolatileStatus(p.state, p.attacker, Status.POISON, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
@@ -76,10 +77,10 @@ namespace PkmnEngine {
 			return GiveMonNonVolatileStatus(p.state, p.target, Status.TOXIC, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
 		}
 		public static u32 Effect_CurePoison(MoveEffectParams p) {
-			return 0;
+			return CurePoison(p.attacker);
 		}
 		public static u32 Effect_CurePoisonHit(MoveEffectParams p) {
-			return 0;
+			return CurePoison(p.target);
 		}
 		public static u32 Effect_Sleep(MoveEffectParams p) {
 			return GiveMonNonVolatileStatus(p.state, p.attacker, Status.SLEEP, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? GetRandSleepTurns() : p.i_flags & 0xFF));
@@ -88,10 +89,10 @@ namespace PkmnEngine {
 			return GiveMonNonVolatileStatus(p.state, p.target, Status.SLEEP, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? GetRandSleepTurns() : p.i_flags & 0xFF));
 		}
 		public static u32 Effect_WakeUp(MoveEffectParams p) {
-			return 0;
+			return WakeUpMon(p.attacker);
 		}
 		public static u32 Effect_WakeUpHit(MoveEffectParams p) {
-			return 0;
+			return WakeUpMon(p.target);
 		}
 		public static u32 Effect_Confuse(MoveEffectParams p) {
 			if (p.attacker.HasStatus(Status.CONFUSION)) {
@@ -116,7 +117,12 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static u32 Effect_CureNonVolatileStatusHit(MoveEffectParams p) {
-			return 0;
+			return 
+				Effect_CureBurnHit(p) | 
+				Effect_ThawHit(p) |
+				Effect_CureParalysisHit(p) |
+				Effect_CurePoisonHit(p) |
+				Effect_WakeUpHit(p);
 		}
 		#endregion
 		#region stat_changes
@@ -411,45 +417,134 @@ namespace PkmnEngine {
 		#endregion
 		#region healing
 		public static u32 Effect_Absorb75Percent(MoveEffectParams p) {
-			return 0;
+			u32 flags = Attack(p);
+			u16 healAmount = (u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.75f);
+			p.attacker.HealMon(p.state, ref healAmount, false);
+			return flags;
 		}
 		public static u32 Effect_Absorb50Percent(MoveEffectParams p) {
-			return 0;
+			u32 flags = Attack(p);
+			u16 healAmount = (u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.5f);
+			p.attacker.HealMon(p.state, ref healAmount, false);
+			return flags;
 		}
 		public static u32 Effect_Abosrb25Percent(MoveEffectParams p) {
-			return 0;
+			u32 flags = Attack(p);
+			u16 healAmount = (u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.25f);
+			p.attacker.HealMon(p.state, ref healAmount, false);
+			return flags;
 		}
 		public static u32 Effect_HealHalfHit(MoveEffectParams p) {
+			u16 healAmount = (u16)(p.target.EffMaxHp(p.state) / 2);
+			p.target.HealMon(p.state, ref healAmount, false);
 			return 0;
 		}
 		public static u32 Effect_HealQuarterHit(MoveEffectParams p) {
+			u16 healAmount = (u16)(p.target.EffMaxHp(p.state) / 4);
+			p.target.HealMon(p.state, ref healAmount, false);
 			return 0;
 		}
 		public static u32 Effect_HealQuarter(MoveEffectParams p) {
-			return 0;
-		}
-		public static u32 Effect_HealingWish(MoveEffectParams p) {
-			return 0;
-		}
-		public static u32 Effect_JungleHealing(MoveEffectParams p) {
-			return 0;
-		}
-		public static u32 Effect_DreamEater(MoveEffectParams p) {
-			return 0;
-		}
-		public static u32 Effect_StrengthSap(MoveEffectParams p) {
+			u16 healAmount = (u16)(p.attacker.EffMaxHp(p.state) / 4);
+			p.attacker.HealMon(p.state, ref healAmount, false);
 			return 0;
 		}
 		public static u32 Effect_HealHalf(MoveEffectParams p) {
+			u16 healAmount = (u16)(p.attacker.EffMaxHp(p.state) / 2);
+			p.attacker.HealMon(p.state, ref healAmount, false);
+			return 0;
+		}
+		public static u32 Effect_HealingWish(MoveEffectParams p) {
+			// TODO:
+			return 0;
+		}
+		public static u32 Effect_JungleHealing(MoveEffectParams p) {
+			u16 healAmount = p.target.GetPercentOfMaxHp(0.25f);
+			p.target.HealMon(p.state, ref healAmount, false);
+			return Effect_CureNonVolatileStatusHit(p);
+		}
+		public static u32 Effect_DreamEater(MoveEffectParams p) {
+			if (p.target.IsAsleep(p.battle)) {
+				return Effect_Absorb50Percent(p);
+			}
+			else {
+				return FLAG_MOVE_FAILED;
+			}
+		}
+		public static u32 Effect_StrengthSap(MoveEffectParams p) {
+			if (p.target.AttackStages == MIN_STAT_STAGE) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			u16 healAmount = p.target.EffAtk(p.state);
+			Effect_AttackDownHit(p);
+			p.attacker.HealMon(p.state, ref healAmount, false);
+
 			return 0;
 		}
 		public static u32 Effect_Purify(MoveEffectParams p) {
+			if (p.target.HasStatus(STATUS_MASK_NON_VOLATILE)) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			Effect_CureNonVolatileStatusHit(p);
+
+			u16 healAmount = (u16)(p.attacker.EffMaxHp(p.state) / 2);
+			p.target.HealMon(p.state, ref healAmount, false);
+
 			return 0;
 		}
 		public static u32 Effect_Rest(MoveEffectParams p) {
+			// "Rest will now fail if it is used by a Pokémon with Leaf Guard during harsh sunlight".
+			if (
+				p.target.AbilityProc(p.battle, Ability.LEAF_GUARD, true) && 
+				(p.state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT || p.state.Weather.Condition == Condition.WEATHER_EXTREME_SUNLIGHT)
+			) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			// Rest fails if used by a mon already at max HP.
+			if (p.target.EffHp(p.state) == p.target.EffMaxHp(p.state)) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			// Rest overrides all other non-volatile conditions.
+			Effect_CureNonVolatileStatusHit(p);
+			// Rest causes the user to sleep for 2 turns.
+			p.i_flags = 2;
+			Effect_Sleep(p);
+
+			// Rest heals to full HP.
+			u16 healAmount = p.target.EffMaxHp(p.state);
+			p.target.HealMon(p.state, ref healAmount, false);
+
+			MessageBox(Lang.GetBattleMessage(BattleMessage.REST, p.target.GetName()));
+
 			return 0;
 		}
 		public static u32 Effect_Present(MoveEffectParams p) {
+			// https://bulbapedia.bulbagarden.net/wiki/Present_(p.move)
+
+			float prob = (float)p.battle.rand.NextDouble();
+
+			if (prob < 0.1) {
+				// 120 base power attack
+				OverridePower(p, 120);
+			}
+			else if (0.1 <= prob && prob < 0.3) {
+				// Heal 1/4 p.target's max HP
+				u16 healAmount = (u16)(p.target.EffMaxHp(p.state) * 0.25f);
+				p.target.HealMon(p.state, ref healAmount, false);
+			}
+			else if (0.3 <= prob && prob < 0.6) {
+				// 80 base power attack
+				OverridePower(p, 80);
+			}
+			else if (0.6 <= prob) {
+				// 40 base power attack
+				OverridePower(p, 40);
+			}
+
 			return 0;
 		}
 		#endregion
