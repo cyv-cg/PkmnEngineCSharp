@@ -14627,8 +14627,7 @@ namespace PkmnEngine {
 	};
 
 	public struct MoveEffectParams {
-		public MoveEffectParams(Battle battle, BattleState state, BattleMon attacker, BattleMon target, BattleMove move, BattleMoveID moveID, u8 slotAttacker, u8 slotTarget, u8 numTargets, u8 actionIndex, bool isPrimaryEffect, u16 i_flags)
-        {
+		public MoveEffectParams(Battle battle, BattleState state, BattleMon attacker, BattleMon target, BattleMove move, BattleMoveID moveID, u8 slotAttacker, u8 slotTarget, u8 numTargets, u8 actionIndex, bool isPrimaryEffect, u16 i_flags) {
             this.battle = battle;
             this.state = state;
             this.attacker = attacker;

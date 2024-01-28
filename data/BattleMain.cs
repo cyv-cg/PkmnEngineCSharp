@@ -12,7 +12,6 @@ using PkmnEngine.Strings;
 
 // TODO: Get this shit out of here!
 using PkmnEngine.GodotV;
-using System.Linq;
 
 namespace PkmnEngine {
 	public class Battle {
@@ -60,6 +59,19 @@ namespace PkmnEngine {
 		private BattleState[] History { get; set; }
 		public BattleState CurrentState { get; private set; }
 		public u8 TurnCount { get { return (u8)History.Length; } }
+
+		public float Random01() {
+			return (float)rand.NextDouble();
+		}
+		public u16 Random16() {
+			return (u16)(rand.Next() & 0xFFFF);
+		}
+		public u32 Random32() {
+			return ((u32)Random16() << 16) | Random16();
+		}
+		public u64 Random64() {
+			return ((u64)Random32() << 32) | Random32();
+		}
 
 		/// <summary>
 		/// 
@@ -251,7 +263,7 @@ namespace PkmnEngine {
 			}
 		}
 
-		private void DoBattleActions(BattleState state) {
+		private async void DoBattleActions(BattleState state) {
 			// TODO: sort actions by move order.
 			for (u8 i = 0; i < state.ActionCount; i++) {
 				u64 action	= state.Actions[i];
@@ -289,7 +301,7 @@ namespace PkmnEngine {
 				switch (code) {
 					case ActionCode.USE_MOVE: 
 					case ActionCode.DO_MOVE: {
-						if (!UseOrDoMove(state, slot, code, args, flags, actor, i)) {
+						if (!await UseOrDoMove(state, slot, code, args, flags, actor, i)) {
 							return;
 						}
 						break;
@@ -367,7 +379,7 @@ namespace PkmnEngine {
 		/// <param name="actor">BattleMon using the move.</param>
 		/// <param name="index">The index of the action in the state's action array.</param>
 		/// <returns>True if the battle is not over.</returns>
-		private bool UseOrDoMove(BattleState state, u8 slot, ActionCode code, u32 move, u32 targets, BattleMon actor, u8 index) {
+		private async Task<bool> UseOrDoMove(BattleState state, u8 slot, ActionCode code, u32 move, u32 targets, BattleMon actor, u8 index) {
 			u8 moveSlot = (u8)((move & 0x00030000) >> 16);
 
 			// Store the last targeted mon.
@@ -375,12 +387,12 @@ namespace PkmnEngine {
 
 			switch (code) {
 				case ActionCode.USE_MOVE:
-					BattleUtils.UseMove(this, state, slot, (BattleMoveID)(move & 0xFFFF), moveSlot, targets, index);
+					await BattleUtils.UseMove(this, state, slot, (BattleMoveID)(move & 0xFFFF), moveSlot, targets, index);
 					break;
 				case ActionCode.DO_MOVE: {
 					for (u8 i = 0; i < targetsArr.Length; i++) {
 						BattleMon target = GetMonInSlot(state, targetsArr[i]);
-						BattleUtils.DoMove(this, state, actor, target, (BattleMoveID)(move & 0xFFFF), slot, targetsArr[i], (u8)targetsArr.Length, index, true);
+						await BattleUtils.DoMove(this, state, actor, target, (BattleMoveID)(move & 0xFFFF), slot, targetsArr[i], (u8)targetsArr.Length, index, true);
 					}
 					break;
 				}
@@ -532,6 +544,11 @@ namespace PkmnEngine {
 						MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_ENCORE_ENDED, bm.GetName()));
 					}
 					bm.DecrementStatusParam(StatusParam.ENCORE_TURNS);
+				}
+				if (bm.HasStatus(Status.SALT_CURE)) {
+					u16 damage = (bm.HasType(Type.WATER) || bm.HasType(Type.STEEL)) ? bm.GetPercentOfMaxHp(0.25f) : bm.GetPercentOfMaxHp(0.125f);
+					bm.DamageMon(state, ref damage, false, false);
+					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_BEING_SALT_CURED, bm.GetName()));
 				}
 			}
 		}
@@ -992,7 +1009,7 @@ namespace PkmnEngine {
 			Actions = newActions;
 		}
 		/// <summary>
-		/// Inserts a new action into the given state's action array.
+		/// Inserts a new action into the state's action array at a given position.
 		/// </summary>
 		/// <param name="action">The action to insert.</param>
 		/// <param name="i">The index in the state's actions array after which to insert the action.</param>
@@ -1006,7 +1023,7 @@ namespace PkmnEngine {
 			// Add the new action into the array at the given index.
 			newActions[i + 1] = action;
 			// Loop through the rest of the actions, adding them to the new array.
-			for (u8 j = (u8)(i + 1); j < Actions.Length + 1; j++) {
+			for (u8 j = (u8)(i + 1); j < Actions.Length; j++) {
 				newActions[j + 1] = Actions[j];
 			}
 			// Update the state's array.
@@ -1059,6 +1076,13 @@ namespace PkmnEngine {
 				_ => "",
 			};
 			MessageBox(message);
+		}
+
+		public void SetFieldCondition(Condition condition, u8 duration = u8.MaxValue) {
+			Conditions.Add(new FieldCondition(condition, true, 0, false, duration));
+		}
+		public void SetSideCondition(u8 side, Condition condition, u8 duration = u8.MaxValue) {
+			Conditions.Add(new FieldCondition(condition, side, duration));
 		}
 
 		public bool SideHasCondition(u8 side, params Condition[] condition) {

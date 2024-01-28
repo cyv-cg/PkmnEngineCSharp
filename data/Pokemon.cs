@@ -847,13 +847,13 @@ namespace PkmnEngine {
 
 		public u8 Side { get; private set; }
 
-		public u16 MaxHP { get; private set; }
-		public u16 HP { get; private set; }
-		public u16 Atk { get; private set; }
-		public u16 Def { get; private set; }
-		public u16 SpAtk { get; private set; }
-		public u16 SpDef { get; private set; }
-		public u16 Spd { get; private set; }
+		public u16 MaxHP { get; set; }
+		public u16 HP { get; set; }
+		public u16 Atk { get; set; }
+		public u16 Def { get; set; }
+		public u16 SpAtk { get; set; }
+		public u16 SpDef { get; set; }
+		public u16 Spd { get; set; }
 
 		public List<Type> types;
 		public Ability ability;
@@ -891,6 +891,10 @@ namespace PkmnEngine {
 			}
 		}
 
+		public void ChangeSpecies(Species species) {
+			this.Species = species;
+		}
+
 		public u16 EffMaxHp(BattleState state) {
 			return MaxHP;
 		}
@@ -919,10 +923,10 @@ namespace PkmnEngine {
 
 			return def;
 		}
-		public u16 GetEffectiveSpAtk(BattleState state) {
+		public u16 EffSpAtk(BattleState state) {
 			return (u16)(SpAtk * DamageCalc.GetEffectiveStatMultiplier(SpecialAttackStages, Stat.SPECIAL_ATTACK));
 		}
-		public u16 GetEffectiveSpDef(BattleState state) {
+		public u16 EffSpDef(BattleState state) {
 			u16 spDef = (u16)(SpDef * DamageCalc.GetEffectiveStatMultiplier(SpecialDefenseStages, Stat.SPECIAL_DEFENSE));
 
 			if (state.SideHasCondition(Side, Condition.LIGHT_SCREEN, Condition.AURORA_VEIL)) {
@@ -955,6 +959,20 @@ namespace PkmnEngine {
 		/// <returns>Nickname if available, species name otherwise.</returns>
 		public string GetName() {
 			return Mon.GetName();
+		}
+
+		/// <summary>
+		/// Replaces the move in a given slot.
+		/// </summary>
+		/// <param name="moveSlot">Slot of the move to replace.</param>
+		/// <param name="newMove">ID of the new move.</param>
+		public void ReplaceMove(u8 moveSlot, BattleMoveID newMove) {
+			if (moveSlot >= Pokemon.MAX_MOVES) {
+				throw new System.ArgumentOutOfRangeException();
+			}
+			moves[moveSlot]	= newMove;
+			pp[moveSlot]	= gBattleMoves(newMove).pp;
+			maxPP[moveSlot]	= gBattleMoves(newMove).pp;
 		}
 
 		/// <summary>
@@ -1470,6 +1488,9 @@ namespace PkmnEngine {
 		}
 		public u16 GetPercentOfMaxHp(float percent) {
 			return (u16)(MaxHP * percent);
+		}
+		public u16 GetPercentOfCurrHp(float percent) {
+			return (u16)(HP * percent);
 		}
 
 		#region overrides

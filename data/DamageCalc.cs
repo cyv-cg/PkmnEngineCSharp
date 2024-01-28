@@ -43,6 +43,9 @@ namespace PkmnEngine {
 			public u16 damage;
 		}
 
+		public static u16 CalcDamage(MoveEffectParams p, Mods mods, Overrides overrides = null) {
+			return CalcDamage(p.battle, p.state, p.attacker, p.target, p.moveID, p.numTargets, mods, overrides);
+		}
 		/// <summary>
 		/// Calculates damage taken.
 		/// https://bulbapedia.bulbagarden.net/wiki/Damage#Generation_V_onward
@@ -75,8 +78,8 @@ namespace PkmnEngine {
 			// TODO: https://bulbapedia.bulbagarden.net/wiki/Power#Generation_IX
 			u16 effPower = (overrides == null || overrides.power == 0) ? move.power : overrides.power;
 
-			u16 statAtk = move.moveCat == MoveCategory.PHYSICAL ? attacker.EffAtk(state) : attacker.GetEffectiveSpAtk(state);
-			u16 statDef = move.moveCat == MoveCategory.PHYSICAL ? defender.EffDef(state) : defender.GetEffectiveSpDef(state);
+			u16 statAtk = move.moveCat == MoveCategory.PHYSICAL ? attacker.EffAtk(state) : attacker.EffSpAtk(state);
+			u16 statDef = move.moveCat == MoveCategory.PHYSICAL ? defender.EffDef(state) : defender.EffSpDef(state);
 			if (overrides != null && overrides.atk > 0) {
 				statAtk = overrides.atk;
 			}

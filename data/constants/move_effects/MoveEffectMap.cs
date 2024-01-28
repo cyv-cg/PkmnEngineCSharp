@@ -2,10 +2,11 @@ using u8  = System.Byte;
 using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
+using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public static partial class MoveEffects {
-		public static System.Func<MoveEffectParams, u32> gMoveEffectMap(MoveEffectID id) {
+		public static System.Func<MoveEffectParams, Task<u32>> gMoveEffectMap(MoveEffectID id) {
 			return id switch {
 				MoveEffectID.HIT => Effect_Hit,
 				MoveEffectID.BURN => Effect_Burn,

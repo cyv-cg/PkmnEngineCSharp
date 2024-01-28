@@ -78,6 +78,40 @@ namespace PkmnEngine {
 		private static u32 OverridePower(MoveEffectParams p, u16 power) {
 			return Attack(p, 0, -1, 0, 0, power);
 		}
+		private static u32 DoublePowerIf(MoveEffectParams p, bool condition) {
+			return OverridePower(p, (u16)(p.move.power * 2));
+		}
+		private static u32 OverrideType(MoveEffectParams p, Type type) {
+			BattleMove newMove = new BattleMove(
+				p.move.primaryEffect,
+				p.move.secondaryEffect,
+				type,
+				p.move.power,
+				p.move.accuracy,
+				p.move.pp,
+				p.move.secondaryEffectChance,
+				p.move.target,
+				p.move.priority,
+				p.move.moveCat,
+				p.move.flags
+			);
+			return Attack(
+				new MoveEffectParams(
+					p.battle,
+					p.state,
+					p.attacker,
+					p.target,
+					newMove,
+					p.moveID,
+					p.slotAttacker,
+					p.slotTarget,
+					p.numTargets,
+					p.actionIndex,
+					p.isPrimaryEffect,
+					p.i_flags 
+				)
+			);
+		}
 
 		private static float CritRate(MoveEffectParams p, sbyte bias = 0) {
 			sbyte stages = bias;
@@ -198,5 +232,6 @@ namespace PkmnEngine {
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_DAMAGED_BY_RECOIL, p.attacker.GetName()));
 			return recoil;
 		}
+	
 	}
 }

@@ -54,11 +54,21 @@ namespace PkmnEngine {
 		/// <returns>The index in the team of the first available mon, or -1 if none are found.</returns>
 		public sbyte GetFirstAvailableMonIndex() {
 			for (u8 i = 0; i < PARTY_SIZE; i++) {
-				if (team[i].IsAvailable()) {
+				if (team[i] != null && team[i].IsAvailable()) {
 					return (sbyte)i;
 				}
 			}
 			return -1;
+		}
+
+		public u8 NumAvailableMons() {
+			u8 count = 0;
+			for (u8 i = 0; i < PARTY_SIZE; i++) {
+				if (team[i] != null && team[i].IsAvailable()) {
+					count++;
+				}
+			}
+			return count;
 		}
 	}
 }

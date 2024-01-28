@@ -3447,7 +3447,19 @@ namespace PkmnEngine.Strings {
 						Language.CHN_TRA => "\\$和對手同歸於盡了！",
 						_ => throw new System.ArgumentException()
 					};
-
+				case BattleMessage.MON_IS_BEING_SALT_CURED:
+					return lang switch {
+						Language.ENG => "\\$ is being salt cured!",
+						Language.JPN => "\\$はしおづけになった！",
+						Language.GER => "\\$ wurde eingepökelt!",
+						Language.FRE => "\\$ est couvert de sel !",
+						Language.ITA => "\\$ è sotto sale!",
+						Language.SPN => "¡\\$ está en salazón!",
+						Language.KOR => "\\$ 소금에 절여졌다!,",
+						Language.CHN_SIM => "\\$陷入了盐腌状态！",
+						Language.CHN_TRA => "\\$被鹽醃了！",
+						_ => throw new System.ArgumentException()
+					};
 				default:
 					throw new System.ArgumentException();
 			}
@@ -3737,6 +3749,7 @@ namespace PkmnEngine.Strings {
 		MONS_ENCORE_ENDED,
 		MON_USED_DESTINY_BOND,
 		MON_TOOK_ITS_ATTACKER_DOWN_WITH_IT,
+		MON_IS_BEING_SALT_CURED,
 
 
 		NR_ITEMS
