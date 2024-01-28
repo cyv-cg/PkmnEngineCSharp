@@ -49,9 +49,6 @@ namespace PkmnEngine {
 			gSaveBlock.profile = new TrainerProfile("Chris", TrainerModel.PLAYER, snom, shaymin);
 			TrainerProfile ayla = new TrainerProfile("Ayla", TrainerModel.AI_LVL_1, munna);
 
-			snom.GiveMove(BattleMoveID.TACKLE);
-			snom.GiveMove(BattleMoveID.WILL_O_WISP);
-
 			Battle battle = new Battle(BattleFormat.Format_Single, gSaveBlock.profile, ayla);
 		}
 	

@@ -120,9 +120,9 @@ namespace PkmnEngine {
 				stages++;
 			}
 
-			//TODO: if (b_AbilityProc(p.state, p.attacker, ABILITY_SUPER_LUCK, false)) {
-			//	stages++;
-			//}
+			if (p.attacker.AbilityProc(Ability.SUPER_LUCK, false)) {
+				stages++;
+			}
 
 			if ((p.move.flags & BattleMoves.Flag.HIGH_CRITICAL) != 0) {
 				stages++;
@@ -134,9 +134,9 @@ namespace PkmnEngine {
 				stages += 6;
 			}
 
-			//TODO: if (b_AbilityProc(p.state, p.target, ABILITY_BATTLE_ARMOR, false) || b_AbilityProc(p.state, p.target, ABILITY_SHELL_ARMOR, false)) {
-				//stages = MIN_STAT_STAGE;
-			//}
+			if (p.target.AbilityProc(Ability.BATTLE_ARMOR, false) || p.target.AbilityProc(Ability.SHELL_ARMOR, false)) {
+				stages = MIN_STAT_STAGE;
+			}
 
 			return GetEffectiveCritRate(stages);
 		}

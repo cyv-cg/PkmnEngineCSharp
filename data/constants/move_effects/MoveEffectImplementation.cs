@@ -472,7 +472,7 @@ namespace PkmnEngine {
 			return await Effect_CureNonVolatileStatusHit(p);
 		}
 		public static async Task<u32> Effect_DreamEater(MoveEffectParams p) {
-			if (p.target.IsAsleep(p.battle)) {
+			if (p.target.IsAsleep()) {
 				return await Effect_Absorb50Percent(p);
 			}
 			else {
@@ -505,7 +505,7 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_Rest(MoveEffectParams p) {
 			// "Rest will now fail if it is used by a Pokémon with Leaf Guard during harsh sunlight".
 			if (
-				p.target.AbilityProc(p.battle, Ability.LEAF_GUARD, true) && 
+				p.target.AbilityProc(Ability.LEAF_GUARD, true) && 
 				(p.state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT || p.state.Weather.Condition == Condition.WEATHER_EXTREME_SUNLIGHT)
 			) {
 				return FLAG_MOVE_FAILED;
@@ -802,7 +802,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_MultiHit(MoveEffectParams p) {
 			u8 numHits = 2;
-			if (p.attacker.AbilityProc(p.battle, Ability.SKILL_LINK, false)) {
+			if (p.attacker.AbilityProc(Ability.SKILL_LINK, false)) {
 				numHits = 5;
 			}
 			else {
@@ -1046,7 +1046,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Snore(MoveEffectParams p) {
-			if (p.attacker.IsAsleep(p.battle)) {
+			if (p.attacker.IsAsleep()) {
 				await Effect_Hit(p);
 			}
 			else {
@@ -1104,7 +1104,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_SleepTalk(MoveEffectParams p) {
 			// Fails if the mon is not asleep.
-			if (!p.attacker.IsAsleep(p.battle)) {
+			if (!p.attacker.IsAsleep()) {
 				return FLAG_MOVE_FAILED;
 			}
 
@@ -1217,7 +1217,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Nightmare(MoveEffectParams p) {
-			if (p.target.IsAsleep(p.battle)) {
+			if (p.target.IsAsleep()) {
 				return FLAG_MOVE_FAILED;
 			}
 			p.target.GiveStatus(Status.NIGHTMARE);
@@ -1881,7 +1881,7 @@ namespace PkmnEngine {
 				return 0;
 			}
 
-			if (p.target.AbilityProc(p.battle, Ability.OBLIVIOUS, true)) {
+			if (p.target.AbilityProc(Ability.OBLIVIOUS, true)) {
 				MessageBox(Lang.GetBattleMessage(BattleMessage.IMMUNE, p.target.GetName()));
 				return 0;
 			}
@@ -2279,7 +2279,7 @@ namespace PkmnEngine {
 				p.target.HasStatus(Status.FREEZE) ||
 				p.target.HasStatus(Status.PARALYSIS) ||
 				p.target.IsPoisoned() ||
-				p.target.IsAsleep(p.battle)
+				p.target.IsAsleep()
 			);
 		}
 		public static async Task<u32> Effect_Infestation(MoveEffectParams p) {
@@ -2527,7 +2527,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_PopulationBomb(MoveEffectParams p) {
 			u8 numHits = (u8)(p.battle.Random16() % 10);
-			bool skillLink = p.attacker.AbilityProc(p.battle, Ability.SKILL_LINK, false);
+			bool skillLink = p.attacker.AbilityProc(Ability.SKILL_LINK, false);
 			if (skillLink) {
 				numHits = 10;
 			}
@@ -3052,7 +3052,7 @@ namespace PkmnEngine {
 			u8 numHits = (u8)(p.battle.Random16() % 4 + 2);
 			u8 actualHits = 0;
 
-			if (p.attacker.AbilityProc(p.battle, Ability.SKILL_LINK, false)) {
+			if (p.attacker.AbilityProc(Ability.SKILL_LINK, false)) {
 				numHits = 5;
 			}
 
@@ -3145,7 +3145,7 @@ namespace PkmnEngine {
 			return DoublePowerIf(p, p.target.IsPoisoned());
 		}
 		public static async Task<u32> Effect_WakeUpSlap(MoveEffectParams p) {
-			return DoublePowerIf(p, p.target.IsAsleep(p.battle));
+			return DoublePowerIf(p, p.target.IsAsleep());
 		}
 		public static async Task<u32> Effect_WideGuard(MoveEffectParams p) {
 			// TODO:
@@ -3177,7 +3177,7 @@ namespace PkmnEngine {
 			if (p.target.HasStatus(Status.TRANSFORMED | Status.ILLUSION)) {
 				return FLAG_MOVE_FAILED;
 			}
-			if (p.target.AbilityProc(p.battle, Ability.GOOD_AS_GOLD, true)) {
+			if (p.target.AbilityProc(Ability.GOOD_AS_GOLD, true)) {
 				return FLAG_MOVE_FAILED;
 			}
 

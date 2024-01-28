@@ -6,7 +6,6 @@ using u64 = System.UInt64;
 using static PkmnEngine.Global;
 using static PkmnEngine.Strings.Lang;
 using static PkmnEngine.BattleMoves;
-using static PkmnEngine.BattleActionCodes;
 using static PkmnEngine.Types;
 using static PkmnEngine.DamageCalc;
 using static PkmnEngine.MoveEffects;
@@ -118,22 +117,22 @@ namespace PkmnEngine {
 			}
 		}
 		
-		/// @brief Call this when a battle action uses a move. 
+		/// <summary>
+		/// Call this when a battle action uses a move. 
 		/// Performs checks for statuses and weather before entering other routines to use the move, and reduces PP by 1.
 		/// Also calculates hit chance before doing the move.
-		/// @param battle The current Battle.
-		/// @param state The current BattleState.
-		/// @param slotUser The slot on the field of the mon using the move.
-		/// @param moveID The ID of the move being used.
-		/// @param moveSlot The slot of the move being used in the mon's moves array.
-		/// @param slotsTarget The encoded slot(s) of the target mon(s).
-		/// @param index The index of the action in the state's action array.
+		/// </summary>
+		/// <param name="battle">The current Battle.</param>
+		/// <param name="state">The current BattleState.</param>
+		/// <param name="slotUser">The slot on the field of the mon using the move.</param>
+		/// <param name="moveID">The ID of the move being used.</param>
+		/// <param name="moveSlot">The slot of the move being used in the mon's moves array.</param>
+		/// <param name="slotsTarget">The encoded slot(s) of the target mon(s).</param>
+		/// <param name="index">The index of the action in the state's action array.</param>
+		/// <returns></returns>
 		public static async Task UseMove(Battle battle, BattleState state, u8 slotUser, BattleMoveID moveID, u8 moveSlot, u32 slotsTarget, u8 index) {
 			BattleMon attacker = battle.GetMonInSlot(state, slotUser), defender;
 			u8[] targets = Battle.SplitTargets(slotsTarget);
-
-			//BM_PARAMS[0] = GetMonName(attacker.mon);
-			//BM_PARAMS[1] = GetMoveName(moveID);
 
 			// Check for statuses.
 			if (!MoveStatusBlockers(battle, state, attacker, moveID)) {
@@ -141,9 +140,6 @@ namespace PkmnEngine {
 			}
 			// Clear successive protect counter if applicable.
 			CheckSuccessiveProtects(attacker, moveID);
-
-			//// Only display the move being used if the mon can actually use it.
-			//MessageBox(GetBattleMessage(BattleMessage.MON_USED_MOVE));
 
 			// Weird weather conditions:
 			if (!MoveWeatherBlockers(state, moveID)) {
@@ -167,10 +163,6 @@ namespace PkmnEngine {
 				}
 
 				flags = await DoMove(battle, state, attacker, defender, moveID, slotUser, targets[i], (u8)targets.Length, index, true);
-
-				//if (flags & FLAG_SWITCH_TO_MON) {
-				//	state.InsertAction(BATTLE_ACTION_SWITCH(slotUser, (u8)(flags & 0xFFFF)), index);
-				//}
 			}
 		}
 		/// <summary>
@@ -198,13 +190,13 @@ namespace PkmnEngine {
 			defender.SetStatusParam(StatusParam.LAST_MON_HIT_BY, slotUser);
 
 			// If the move is ineffective and the move does not ignore the type chart, then stop here.
-			if (Abs(TypeEffectiveness(defender, moveID)) < 1e-10 && (gBattleMoves(moveID).flags & BattleMoves.Flag.IGNORE_TYPE_EFF) == 0) {
+			if (MonIsImmune(state, defender, moveID)) {
 				MessageBox(GetBattleMessage(BattleMessage.IMMUNE, defender.GetName()));
 				// Do Contact events.
 				if ((gBattleMoves(moveID).flags & BattleMoves.Flag.MAKES_CONTACT) != 0) {
-			//		//TODO: OnContactMade(state, attacker, defender);
+					//TODO: OnContactMade(state, attacker, defender);
 				}
-			//	return FLAG_MOVE_FAILED;
+				return FLAG_MOVE_FAILED;
 			}
 
 			// Check for protect.
@@ -214,7 +206,7 @@ namespace PkmnEngine {
 				if ((gBattleMoves(moveID).flags & BattleMoves.Flag.MAKES_CONTACT) != 0) {
 			//		// TODO: OnContactMade(state, attacker, defender);
 				}
-			//	return FLAG_MOVE_FAILED;
+				return FLAG_MOVE_FAILED;
 			}
 
 			// If the used move thaws the user, then thaw the user first.
@@ -240,7 +232,7 @@ namespace PkmnEngine {
 			u32 flags = await gMoveEffectMap(gBattleMoves(moveID).primaryEffect)(data);
 			
 			if ((flags & FLAG_MOVE_FAILED) != 0) {
-				//MessageBox(GetBattleMessage(BattleMessage.MOVE_FAILED));
+				MessageBox(GetBattleMessage(BattleMessage.MOVE_FAILED));
 				return flags;
 			}
 
@@ -271,6 +263,26 @@ namespace PkmnEngine {
 		}
 
 		/// <summary>
+		/// Determines if a mon is immune to a given move.
+		/// </summary>
+		/// <param name="defender">Mon being attacked.</param>
+		/// <param name="moveID">ID of the move being used.</param>
+		/// <returns>True if the defender is immune to the move.</returns>
+		private static bool MonIsImmune(BattleState state, BattleMon defender, BattleMoveID moveID) {
+			// This is really only used for Thousand Arrows.
+			if ((gBattleMoves(moveID).flags & BattleMoves.Flag.HITS_UNGROUNDED) != 0 && !defender.IsGrounded(state)) {
+				return false;
+			}
+
+			// Type effectiveness check
+			if (Abs(TypeEffectiveness(defender, moveID) - EFF_IMMUNE) < 1e-10 && (gBattleMoves(moveID).flags & BattleMoves.Flag.IGNORE_TYPE_EFF) == 0) {
+				return true;
+			}
+
+			return false;
+		}
+
+		/// <summary>
 		/// Reduces the PP of a mon's move by 1.
 		/// </summary>
 		/// <param name="user">The BattleMon whose PP to decrease.</param>
@@ -279,13 +291,15 @@ namespace PkmnEngine {
 			user.pp[moveSlot] -= 1;
 		}
 
-		// TODO:
-		/// @brief Determines if a mon's move hits its target.
-		/// @param state The current BattleState.
-		/// @param attacker Attacking BattleMon.
-		/// @param defender Defending BattleMon.
-		/// @param move A pointer to the BattleMove in gBattleMoves that is being used.
-		/// @return True if the move hits.
+		/// <summary>
+		/// Determines if a mon's move hits its target.
+		/// </summary>
+		/// <param name="battle">The current Battle.</param>
+		/// <param name="state">The current BattleState.</param>
+		/// <param name="attacker">Attacking BattleMon.</param>
+		/// <param name="defender">Defending BattleMon.</param>
+		/// <param name="moveID">ID of the move being used.</param>
+		/// <returns>True if the move hits.</returns>
 		public static bool MoveHit(Battle battle, BattleState state, BattleMon attacker, BattleMon defender, BattleMoveID moveID) {
 			BattleMove move = gBattleMoves(moveID);
 
@@ -343,9 +357,12 @@ namespace PkmnEngine {
 
 			return hit;
 		}
-		/// @brief Determines if a move's secondary effect will hit.
-		/// @param hitChance The chance for the effect to hit.
-		/// @return True if the effect hits, false if it doesn't.
+		/// <summary>
+		/// Determines if a move's secondary effect will hit.
+		/// </summary>
+		/// <param name="battle"></param>
+		/// <param name="hitChance">The chance for the effect to hit.</param>
+		/// <returns>True if the effect hits, false if it doesn't.</returns>
 		private static bool EffectHit(Battle battle, u8 hitChance) {
 			return (battle.Random01() * 100) <= hitChance;
 		}

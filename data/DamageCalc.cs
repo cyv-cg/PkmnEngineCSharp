@@ -111,14 +111,14 @@ namespace PkmnEngine {
 			if (moveID == BattleMoveID.FACADE && attacker.HasStatus(Status.BURN)) {
 				damage = (u16)(damage / StatusEffects.BURN_ATTACK_MULTIPLIER);
 			}
-			// TODO: Guts ability
-			//else if (b_AbilityProc(state, attacker, ABILITY_GUTS, false) && (attacker.status & STATUS_MASK_NON_VOLATILE) != 0) {
-			//	damage *= 1.5;
-			//	// Offset the atk loss from burn for physical moves.
-			//	if (move.moveCat == CAT_PHYSICAL && (attacker.status & STATUS_BURN) != 0) {
-			//		damage /= BURN_ATTACK_MULTIPLIER;
-			//	}
-			//}
+			// Guts ability
+			else if (attacker.AbilityProc(Ability.GUTS, false) && attacker.HasStatus(StatusEffects.STATUS_MASK_NON_VOLATILE)) {
+				damage =  (u16)(damage * 1.5f);
+				// Offset the atk loss from burn for physical moves.
+				if (move.moveCat == MoveCategory.PHYSICAL && attacker.HasStatus(Status.BURN)) {
+					damage = (u16)(damage / StatusEffects.BURN_ATTACK_MULTIPLIER);
+				}
+			}
 
 			// Charge
 			if (move.moveType == Type.ELECTRIC && attacker.HasStatus(Status.CHARGED)) {
@@ -126,10 +126,10 @@ namespace PkmnEngine {
 				attacker.RemoveStatus(Status.CHARGED);
 			}
 
-			// TODO: Heatproof (https://bulbapedia.bulbagarden.net/wiki/Heatproof_(Ability))
-			//if (move.moveType == Type.FIRE && b_AbilityProc(state, defender, ABILITY_HEATPROOF, false)) {
-			//	damage /= 2;
-			//}
+			// Heatproof (https://bulbapedia.bulbagarden.net/wiki/Heatproof_(Ability))
+			if (move.moveType == Type.FIRE && defender.AbilityProc(Ability.HEATPROOF, false)) {
+				damage /= 2;
+			}
 
 			// Tar Shot
 			if (defender.HasStatus(Status.TAR_SHOT)) {
@@ -270,8 +270,8 @@ namespace PkmnEngine {
 
 		// Same Type Attack Bonus
 		public static float STAB(BattleMon attacker, Type moveType) {
-			// TODO: Adaptability.
-			return attacker.HasType(moveType) ? 1.5f : 1f;
+			// If the attacker shares a type with the move it is using, multiply the damage by 1.5. (2 if the attacker has Adaptability.)
+			return attacker.HasType(moveType) ? (attacker.AbilityProc(Ability.ADAPTABILITY, false) ? 2 : 1.5f) : 1f;
 		}
 		/// <summary>
 		/// Calculates raw type chart.

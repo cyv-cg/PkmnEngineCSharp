@@ -63,6 +63,7 @@ namespace PkmnEngine {
 			SEMI_INVUL_TURN				= 1L << 34,
 			UNUSABLE_BY_SLEEP_TALK		= 1L << 35,
 			CANNOT_BE_SKETCHED			= 1L << 36,
+			HITS_UNGROUNDED				= 1L << 37,
 		}
 		#endregion
 	
@@ -13302,7 +13303,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.HITS_UNGROUNDED
 					);
 				}
 			}

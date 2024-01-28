@@ -137,7 +137,7 @@ namespace PkmnEngine {
 		public bool FieldMonAbilityProc(Ability ability, bool popup) {
 			BattleMon[] fieldMons = GetAllActiveMons();
 			for (u8 i = 0; i < fieldMons.Length; i++) {
-				if (fieldMons[i].AbilityProc(this, ability, popup)) {
+				if (fieldMons[i].AbilityProc(ability, popup)) {
 					return true;
 				}
 			}
@@ -556,7 +556,7 @@ namespace PkmnEngine {
 			if (bm.HasStatus(Status.BURN)) {
 				u16 damage = bm.GetPercentOfMaxHp(StatusEffects.BURN_CHIP_DAMAGE);
 				// https://bulbapedia.bulbagarden.net/wiki/Heatproof_(Ability)
-				if (bm.AbilityProc(this, Ability.HEATPROOF, false)) {
+				if (bm.AbilityProc(Ability.HEATPROOF, false)) {
 					damage /= 2;
 				}
 				fainted = bm.DamageMon(state, ref damage, true, false);
@@ -568,7 +568,7 @@ namespace PkmnEngine {
 			else if (bm.HasStatus(Status.POISON)) {
 				u16 damage = bm.GetPercentOfMaxHp(StatusEffects.POISON_CHIP_DAMAGE);
 				// If the mon has Poison Heal, it heals instead of taking damage.
-				if (bm.AbilityProc(this, Ability.POISON_HEAL, false)) {
+				if (bm.AbilityProc(Ability.POISON_HEAL, false)) {
 					bm.HealMon(state, ref damage, false);
 				}
 				else {
@@ -586,7 +586,7 @@ namespace PkmnEngine {
 				if (bm.GetStatusParam(StatusParam.TOXIC_BUILDUP) < 15) {
 					bm.IncrementStatusParam(StatusParam.TOXIC_BUILDUP);
 				}
-				if (bm.AbilityProc(this, Ability.POISON_HEAL, false)) {
+				if (bm.AbilityProc(Ability.POISON_HEAL, false)) {
 					// Poison Heal does not heal extra from toxic stacks.
 					bm.HealMon(state, ref baseDamage, false);
 				}
@@ -606,7 +606,7 @@ namespace PkmnEngine {
 			if (bm.HasStatus(Status.DROWSY)) {
 				if (bm.GetStatusParam(StatusParam.DROWSING) == 0) {
 					bm.RemoveStatus(Status.DROWSY);
-					//TODO: BattleMoveEffects::sSleepMon(state, bm, GetRandSleepTurns());
+					MoveEffects.SleepMon(state, bm, StatusEffects.GetRandSleepTurns());
 				}
 				bm.DecrementStatusParam(StatusParam.DROWSING);
 			}
@@ -749,14 +749,14 @@ namespace PkmnEngine {
 				}
 
 				if (state.Weather.Equals(Condition.WEATHER_HAIL)) {
-					if (bm.DamagedByHail(state)) {
+					if (bm.DamagedByHail()) {
 						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_HAIL, bm.GetName()));
 						u16 damage = bm.GetPercentOfMaxHp(FieldConditions.HAIL_CHIP_DAMAGE);
 						bm.DamageMon(state, ref damage, true, false);
 					}
 				}
 				if (state.Weather.Equals(Condition.WEATHER_SANDSTORM)) {
-					if (bm.DamagedBySandstorm(state)) {
+					if (bm.DamagedBySandstorm()) {
 						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_SANDSTORM, bm.GetName()));
 						u16 damage = bm.GetPercentOfMaxHp(FieldConditions.SANDSTORM_CHIP_DAMAGE);
 						bm.DamageMon(state, ref damage, true, false);

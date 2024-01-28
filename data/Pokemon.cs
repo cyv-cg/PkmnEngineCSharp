@@ -938,7 +938,7 @@ namespace PkmnEngine {
 		public u16 GetEffectiveSpd(BattleState state) {
 			u16 spd = (u16)(Spd * DamageCalc.GetEffectiveStatMultiplier(SpeedStages, Stat.SPEED));
 
-			bool quickFeet = false; // TODO: b_AbilityProc(state, bm, ABILITY_QUICK_FEET, false) && (bm->status & STATUS_MASK_NON_VOLATILE) != 0;
+			bool quickFeet = AbilityProc(Ability.QUICK_FEET, false) && HasStatus(StatusEffects.STATUS_MASK_NON_VOLATILE);
 			if (HasStatus(Status.PARALYSIS) && !quickFeet) {
 				spd = (u16)(spd * StatusEffects.PARALYSIS_SPEED_MULTIPLIER);
 			}
@@ -974,6 +974,14 @@ namespace PkmnEngine {
 			pp[moveSlot]	= gBattleMoves(newMove).pp;
 			maxPP[moveSlot]	= gBattleMoves(newMove).pp;
 		}
+		public bool KnowsMove(BattleMoveID moveID) {
+			for (u8 i = 0; i < Pokemon.MAX_MOVES; i++) {
+				if (moves[i] == moveID) {
+					return true;
+				}
+			}
+			return false;
+		}
 
 		/// <summary>
 		/// Damages mon.
@@ -986,10 +994,10 @@ namespace PkmnEngine {
 		/// <param name="direct">Whether or not the damage is direct.</param>
 		/// <returns>True if the mon's HP > 0 after the damage, and false if not.</returns>
 		public bool DamageMon(BattleState state, ref u16 damage, bool force, bool direct) {
-			//TODO: Magic Guard prevents indirect damage.
-			//if (!b_direct && b_AbilityProc(state, mon, ABILITY_MAGIC_GUARD, true)) {
-			//	return true;
-			//}
+			// Magic Guard prevents indirect damage.
+			if (!direct && AbilityProc(Ability.MAGIC_GUARD, false)) {
+				return true;
+			}
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_DAMAGE, GetName(), damage.ToString()));
 
@@ -1074,15 +1082,11 @@ namespace PkmnEngine {
 		/// @param ability the ability to check
 		/// @param b_popup whether or not to display the activation
 		/// @return true if the mon's ability successfully activates
-		public bool AbilityProc(Battle battle, Ability ability, bool popup) {
-			// Mold Breaker
-			// TODO: Apparently only certain abilities can be negated???
+		public bool AbilityProc(Ability ability, bool popup) {
 			// https://bulbapedia.bulbagarden.net/wiki/Ignoring_Abilities#Ignorable_Abilities
-			BattleMon[] fieldMons = battle.GetAllActiveMons();
-			for (u8 i = 0; i < fieldMons.Length; i++) {
-				if (fieldMons[i].ability == Ability.MOLD_BREAKER) {
-					return false;
-				}
+			// TODO: Apparently only certain abilities can be negated???
+			if (HasStatus(Status.ABILITY_SUPPRESSION)) {
+				return false;
 			}
 
 			if (this.ability == ability) {
@@ -1125,8 +1129,8 @@ namespace PkmnEngine {
 			return false;
 		}
 
-		public bool IsAsleep(Battle battle) {
-			return HasStatus(Status.SLEEP) || AbilityProc(battle, Ability.COMATOSE, false);
+		public bool IsAsleep() {
+			return HasStatus(Status.SLEEP) || AbilityProc(Ability.COMATOSE, false);
 		}
 		public bool IsPoisoned() {
 			return HasStatus(Status.POISON) || HasStatus(Status.TOXIC);
@@ -1188,26 +1192,25 @@ namespace PkmnEngine {
 			// TODO: A Pokémon behind a substitute cannot be poisoned, except due to Synchronize or a held Toxic Orb.
 			
 
-			// TODO:
-			//// Mons with Purifying Salt cannot be affected.
-			//if (b_AbilityProc(state, bm, ABILITY_PURIFYING_SALT, true)) {
-			//	return false;
-			//}
+			// Mons with Purifying Salt cannot be affected.
+			if (AbilityProc(Ability.PURIFYING_SALT, true)) {
+				return false;
+			}
 
-			//// Mons with Leaf Guard cannot be affected during harsh sunlight.
-			//if (b_AbilityProc(state, bm, ABILITY_LEAF_GUARD, true) && (state->fieldCondition & (WEATHER_HARSH_SUNLIGHT | WEATHER_EXTREME_SUNLIGHT))) {
-			//	return false;
-			//}
+			// Mons with Leaf Guard cannot be affected during harsh sunlight.
+			if (AbilityProc(Ability.LEAF_GUARD, true) && (state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT || state.Weather.Condition == Condition.WEATHER_EXTREME_SUNLIGHT)) {
+				return false;
+			}
 
 			// Terrain
 			if (IsGrounded(state) && state.Terrain.Equals(Condition.TERRAIN_MISTY)) {
 				return false;
 			}
 
-			//// idfk
-			//if (b_AbilityProc(state, bm, ABILITY_COMATOSE, false)) {
-			//	return false;
-			//}
+			// idfk
+			if (AbilityProc(Ability.COMATOSE, false)) {
+				return false;
+			}
 
 			return true;
 		}
@@ -1251,11 +1254,10 @@ namespace PkmnEngine {
 				return false;
 			}
 
-			// TODO:
 			// Pokémon with the Ability Immunity cannot be poisoned.
-			//if (b_AbilityProc(state, bm, ABILITY_IMMUNITY, true)) {
-			//	return false;
-			//}
+			if (AbilityProc(Ability.IMMUNITY, true)) {
+				return false;
+			}
 
 			// Minior in Meteor Form is completely immune to being poisoned.
 			if (Species == Species.MINIOR_METEOR_FORM) {
@@ -1271,11 +1273,10 @@ namespace PkmnEngine {
 				return false;
 			}
 
-			// TODO:
-			//// Terrain
-			//if (IsGrounded(state) && (state->fieldCondition & TERRAIN_ELECTRIC)) {
-			//	return false;
-			//}
+			// Terrain
+			if (IsGrounded(state) && state.Terrain.Condition == Condition.TERRAIN_ELECTRIC) {
+				return false;
+			}
 
 			return true;
 		}
@@ -1287,11 +1288,11 @@ namespace PkmnEngine {
 			return true;
 		}
 
-		/// @brief Determines if a given mon can be damaged by hail.
-		/// @param state current BattleState
-		/// @param bm BattleMon to check
-		/// @return true if the mon can be damaged by hail, false if not
-		public bool DamagedByHail(BattleState state) {
+		/// <summary>
+		/// Determines if a given mon can be damaged by hail.
+		/// </summary>
+		/// <returns>True if the mon can be damaged by hail, false if not.</returns>
+		public bool DamagedByHail() {
 			// Ice types are not damaged.
 			if (HasType(Type.ICE)) {
 				return false;
@@ -1311,26 +1312,28 @@ namespace PkmnEngine {
 			}
 
 			// Mons with certain abilities are not damaged.
-			//if (
-				// TODO:
-				//b_AbilityProc(state, bm, ABILITY_ICE_BODY, false) ||
-				//b_AbilityProc(state, bm, ABILITY_SNOW_CLOAK, false) ||
-				//b_AbilityProc(state, bm, ABILITY_MAGIC_GUARD, false) ||
-				//b_AbilityProc(state, bm, ABILITY_OVERCOAT, false)
-			//) {
-			//	return false;
-			//}
+			if (
+				AbilityProc(Ability.ICE_BODY, false) ||
+				AbilityProc(Ability.SNOW_CLOAK, false) ||
+				AbilityProc(Ability.MAGIC_GUARD, false) ||
+				AbilityProc(Ability.OVERCOAT, false)
+			) {
+				return false;
+			}
 			
-			// TODO: safety goggles prevent hail damage
+			// safety goggles prevent hail damage
+			if (HeldItem == Item.SAFETY_GOGGLES) {
+				return false;
+			}
 
 			// All other mons are damaged by hail.
 			return true;
 		}
-		/// @brief Determines if a given mon can be damaged by a sandstorm.
-		/// @param state current BattleState
-		/// @param bm BattleMon to check
-		/// @return true if the mon can be damaged by sandstorm, false if not
-		public bool DamagedBySandstorm(BattleState state) {
+		/// <summary>
+		/// Determines the mon can be damaged by a sandstorm.
+		/// </summary>
+		/// <returns>True if the mon can be damaged by sandstorm, false if not.</returns>
+		public bool DamagedBySandstorm() {
 			// Rock, steel, and ground types are not damaged.
 			if (HasType(Type.ROCK) || HasType(Type.STEEL) || HasType(Type.GROUND)) {
 				return false;
@@ -1350,18 +1353,20 @@ namespace PkmnEngine {
 			}
 
 			// Mons with certain abilities are not damaged.
-			//if (
-				// TODO:
-				//b_AbilityProc(state, bm, ABILITY_SAND_FORCE, false) ||
-				//b_AbilityProc(state, bm, ABILITY_SAND_RUSH, false) ||
-				//b_AbilityProc(state, bm, ABILITY_SAND_VEIL, false) ||
-				//b_AbilityProc(state, bm, ABILITY_MAGIC_GUARD, false) ||
-				//b_AbilityProc(state, bm, ABILITY_OVERCOAT, false)
-			//) {
-			//	return false;
-			//}
+			if (
+				AbilityProc(Ability.SAND_FORCE, false) ||
+				AbilityProc(Ability.SAND_RUSH, false) ||
+				AbilityProc(Ability.SAND_VEIL, false) ||
+				AbilityProc(Ability.MAGIC_GUARD, false) ||
+				AbilityProc(Ability.OVERCOAT, false)
+			) {
+				return false;
+			}
 			
-			// TODO: safety goggles prevent hail damage
+			// safety goggles prevent sandstorm damage
+			if (HeldItem == Item.SAFETY_GOGGLES) {
+				return false;
+			}
 
 			// All other mons are damaged by sandstorm.
 			return true;
@@ -1372,9 +1377,18 @@ namespace PkmnEngine {
 			// However, there are also several effects that will negate a Pokémon's ungrounded status, making it grounded.
 			// A Pokémon will be grounded if any of the following apply:
 
-			// TODO: It is holding an Iron Ball.
-			// TODO: It is under the effect of Ingrain, Smack Down, or Thousand Arrows.
-			// TODO: Gravity is in effect.
+			// It is holding an Iron Ball.
+			if (HeldItem == Item.IRON_BALL) {
+				return true;
+			}
+			// It is under the effect of Ingrain, Smack Down, or Thousand Arrows.
+			if (HasStatus(Status.ROOTING)) {
+				return true;
+			}
+			// Gravity is in effect.
+			if (state.FieldHasCondition(Condition.GRAVITY)) {
+				return true;
+			}
 
 
 			// A Pokémon is ungrounded if any of the following apply (and there is no effect that makes it grounded):
@@ -1384,11 +1398,13 @@ namespace PkmnEngine {
 				return false;
 			}
 			// It has the Ability Levitate.
-			//TODO: if (b_AbilityProc(state, bm, ABILITY_LEVITATE, false)) {
-			//	return false;
-			//}
+			if (AbilityProc(Ability.LEVITATE, false)) {
+				return false;
+			}
 			// It is holding an Air Balloon.
-			// TODO: air balloon
+			if (HeldItem == Item.AIR_BALLOON) {
+				return false;
+			}
 			// It is under the effect of Magnet Rise or Telekinesis.
 			if (HasStatus(Status.MAGNETIC_LEVITATION | Status.TELEKINESIS)) {
 				return false;
@@ -1450,27 +1466,23 @@ namespace PkmnEngine {
 				return false;
 			}
 
-			// TODO: Imprison
-			//std::vector<u8> opponentSlots;
-			//switch (GetSideFromMon(state, bm)) {
-			//	case SIDE_PLAYER:
-			//		opponentSlots = SlotsOpponent(battle->battleFormat);
-			//		break;
-			//	case SIDE_OPPONENT:
-			//		opponentSlots = SlotsPlayerAndAllies(battle->battleFormat);
-			//		break;
-			//}
-			//for (u8 s: opponentSlots) {
-			//	struct BattleMon *t = GetMonInSlot(state, s);
-			//	if (b_MonHasStatus(t, STATUS_IMPRISON) && b_MonAlreadyKnowsMove(t->mon, bm->moves[moveSlot])) {
-			//		if (b_print) {
-			//			BM_PARAMS[0] = GetMonName(bm->mon);
-			//			BM_PARAMS[1] = lang::GetMoveName(bm->moves[moveSlot]);
-			//			MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_MON_CANT_USE_SEALED_MOVE));
-			//		}
-			//		return false;
-			//	}
-			//}
+			// Imprison
+			if (HasStatus(Status.IMPRISON)) {
+				foreach (BattleMon bm in battle.GetAllActiveMons()) {
+					if (bm.Side == Side) {
+						continue;
+					}
+
+					for (u8 i = 0; i < Pokemon.MAX_MOVES; i++) {
+						if (KnowsMove(bm.moves[i])) {
+							if (print) {
+								MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANT_USE_SEALED_MOVE, GetName(), Lang.GetMoveName(moves[moveSlot])));
+							}
+							return false;
+						}
+					}
+				}
+			}
 
 			// Encore
 			if (HasStatus(Status.ENCORE) && moveSlot != GetStatusParam(StatusParam.ENCORE)) {
