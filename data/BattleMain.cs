@@ -255,13 +255,18 @@ namespace PkmnEngine {
 		{
 			// BUG: Why did I use this here??? Do not use this namespace here!
 			BattleSceneDrawer.SetupScene(this, this.players);
-			while (!IsOver()) {
+			u8 winningSide;
+
+			while (!IsOver(out winningSide)) {
 				// Get the new state.
 				CurrentState = state.Next();
 
 				await ChooseActions(CurrentState);
 				DoBattleActions(CurrentState);
 			}
+
+			// TODO: do some actual battle-end routine.
+			MessageBox($"{players[winningSide].profile.Name} won!");
 		}
 
 		private async void DoBattleActions(BattleState state) {
@@ -285,7 +290,6 @@ namespace PkmnEngine {
 				actor.RemoveStatus(Status.DESTINY_BOND);
 
 				// Fainted mons tell no tales.
-				// TODO: is this the most elegant way to approach this?
 				if (actor.HasStatus(Status.FAINTED)) {
 					continue;
 				}
@@ -413,7 +417,7 @@ namespace PkmnEngine {
 			}
 			actor.SetStatusParam(StatusParam.LAST_TARGETED_MON, targetsArr[0]);
 			
-			if (IsOver()) {
+			if (IsOver(out u8 winningSide)) {
 				// TODO: Enter some battle end routine.
 				return false;
 			}
@@ -426,47 +430,43 @@ namespace PkmnEngine {
 		/// TODO: differentiate between player win/loss.
 		/// </summary>
 		/// <returns>True if all Pokemon on one side are fainted.</returns>
-		private bool IsOver() {
+		private bool IsOver(out u8 winningSide) {
 			// Check if all opposing Pokemon are fainted or if all player/ally Pokemon are fainted.
 			
-			bool battleOver = true;
+			List<u8> availableSides = new List<u8>();
 
-			// Check player/ally Pokemon.
-			foreach (u8 slot in format.SlotsOnSide(SIDE_CLIENT)) {
-				foreach (BattleMon bm in PlayerControllingSlot(slot).team) {
-					if (bm == null) {
-						continue;
+			// Check all sides for any available mons.
+			for (u8 side = 0; side < format.numSides; side++) {
+				foreach (u8 slot in format.SlotsOnSide(side)) {
+					// Check if the player controlling this slot has any mons available.
+					foreach (BattleMon bm in PlayerControllingSlot(slot).team) {
+						// Do not check null mons on this slot's team.
+						if (bm == null) {
+							continue;
+						}
+						if (bm.IsAvailable()) {
+							// If this slot's team has any available mons,
+							// add this slot to the list of available slots.
+							availableSides.Add(slot);
+							break;
+						}
 					}
-					if (bm.IsAvailable()) {
-						battleOver = false;
+					// If we already know that this side is available, then
+					// we don't need to check the other slots on this side.
+					if (availableSides.Contains(side)) {
 						break;
 					}
 				}
 			}
-			// Player lost
-			if (battleOver) {
+
+			// If there is only 1 side that can still fight, then that side is the winner.
+			if (availableSides.Count == 1) {
+				winningSide = availableSides[0];
 				return true;
 			}
 
-			// Check opponent Pokemon.
-			battleOver = true;
-			foreach (u8 slot in format.SlotsOnSide(SIDE_REMOTE)) {
-				foreach (BattleMon bm in PlayerControllingSlot(slot).team) {
-					if (bm == null) {
-						continue;
-					}
-					if (bm.IsAvailable()) {
-						battleOver = false;
-						break;
-					}
-				}
-			}
-			// Player won
-			if (battleOver) {
-				return true;
-			}
-
-			// If we get here, the battle is not over.
+			// If there is more than 1 side that can still fight, then the battle is not over yet.
+			winningSide = 0;
 			return false;
 		}
 	
