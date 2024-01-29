@@ -11,7 +11,7 @@ using System;
 
 namespace PkmnEngine {
 	public class TrainerBattleContext {
-		public TrainerBattleContext(TrainerProfile profile, params u8[] slots) {
+		public TrainerBattleContext(TrainerProfile profile, u8 side, params u8[] slots) {
 			this.profile = profile;
 			this.slots = slots;
 			this.team = new BattleMon[PARTY_SIZE];
@@ -21,10 +21,10 @@ namespace PkmnEngine {
 				if (profile.Team[i] == null) {
 					break;
 				}
-				this.team[i] = new BattleMon(profile.Team[i]);
+				this.team[i] = new BattleMon(profile.Team[i], side);
 			}
 
-			// Assign the controller.
+			// TODO: Assign the controller.
 			controller = profile.model switch {
 				TrainerModel.PLAYER => new BattleControllerClient(),
 				_ => new BattleControllerAI1()

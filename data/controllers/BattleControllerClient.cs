@@ -69,13 +69,13 @@ namespace PkmnEngine.BattleControllers {
 			// If the user has no available moves left, use Struggle.
 			if (isUserStruggling) {
 				option = new MenuArg(MenuCode.BREAK, 0);
-				return BATTLE_ACTION_USE_MOVE(slot, 0, BattleMoveID.STRUGGLE, 1); // TODO: select target
+				return BATTLE_ACTION_USE_MOVE(slot, 0, BattleMoveID.STRUGGLE, BattleUtils.GetDefaultMoveTarget(BattleMoveID.STRUGGLE, bm)); // TODO: select target
 			}
 
 			// Get the user's decision.
 			option = await Inputs.gMenuFuncs[MenuCode.USE_MOVE](bm.moves, bm.pp, bm.maxPP);
 			// Convert to action.
-			u64 action = BATTLE_ACTION_USE_MOVE(slot, (u8)option.args, bm.moves[option.args], 1); // TODO: select target(s)
+			u64 action = BATTLE_ACTION_USE_MOVE(slot, (u8)option.args, bm.moves[option.args], BattleUtils.GetDefaultMoveTarget(bm.moves[option.args], bm)); // TODO: select target(s)
 			return action;
 		}
 	}

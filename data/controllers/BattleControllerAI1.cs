@@ -3,14 +3,16 @@ using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
 
-using System.Threading.Tasks;
-
 using static PkmnEngine.Global;
+using static PkmnEngine.BattleActionCodes;
+
+using System.Threading.Tasks;
 using PkmnEngine.EnvInterface;
 using System;
 
 namespace PkmnEngine.BattleControllers {
 	public class BattleControllerAI1 : IBattleController {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 		public async Task<u64> HandleInputChooseAction(Battle battle, BattleState state, byte slot) {
 			//u32 flag;
 			//MenuArg data = await Inputs.gMenuFuncs[0](); // TODO: that '0' should be clicking the button of the action to do.
@@ -33,17 +35,25 @@ namespace PkmnEngine.BattleControllers {
 			//	}
 			//} while (flag != MENU_FLAG_BREAK);
 
-			await Task.Delay(0);
+			//await Task.Delay(0);
 
-			return 1;
+			return await MenuSelectUseMove(battle, state, slot);
 		}
 
-		public Task<ulong> MenuSelectSwitchToMon(Battle battle, BattleState state, byte slot) {
+		public async Task<u64> MenuSelectSwitchToMon(Battle battle, BattleState state, u8 slot) {
 			throw new NotImplementedException();
 		}
 
-		public Task<ulong> MenuSelectUseMove(Battle battle, BattleState state, byte slot) {
-			throw new NotImplementedException();
+		// Use the first available move.
+		public async Task<u64> MenuSelectUseMove(Battle battle, BattleState state, u8 slot) {
+			BattleMon bm = battle.GetMonInSlot(state, slot);
+			for (u8 i = 0; i < Pokemon.MAX_MOVES; i++) {
+				if (bm.CanUseMove(battle, state, i, false)) {
+					return BATTLE_ACTION_USE_MOVE(slot, i, bm.moves[i], BattleUtils.GetDefaultMoveTarget(bm.moves[i], bm));
+				}
+			}
+			return BATTLE_ACTION_USE_MOVE(slot, 0, BattleMoveID.STRUGGLE, BattleUtils.GetDefaultMoveTarget(BattleMoveID.STRUGGLE, bm));
 		}
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	}
 }
