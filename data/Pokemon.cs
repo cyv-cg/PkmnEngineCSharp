@@ -809,7 +809,7 @@ namespace PkmnEngine {
 		}
 
 		private BattleMon() { }
-		public BattleMon(Pokemon src) {
+		public BattleMon(Pokemon src, u8 side) {
 			this.Mon		= src;
 			this.Species	= src.Box.Species;
 			this.MaxHP		= src.maxHp;
@@ -836,6 +836,7 @@ namespace PkmnEngine {
 				this.maxPP[i]	= src.MaxPP[i];
 			}
 
+			this.Side = side;
 			this.flags = 0;
 			
 			this.status = new Dictionary<Status, bool>();
@@ -994,21 +995,21 @@ namespace PkmnEngine {
 		/// <param name="direct">Whether or not the damage is direct.</param>
 		/// <returns>True if the mon's HP > 0 after the damage, and false if not.</returns>
 		public bool DamageMon(BattleState state, ref u16 damage, bool force, bool direct) {
-			// Magic Guard prevents indirect damage.
-			if (!direct && AbilityProc(Ability.MAGIC_GUARD, false)) {
-				return true;
+			damage = (u16)Mathf.Min(EffHp(state), damage);
+
+			if (!force) {
+				// Magic Guard prevents indirect damage.
+				if (!direct && AbilityProc(Ability.MAGIC_GUARD, false)) {
+					return true;
+				}
+
+				// A bracing (endure) mon cannot lose its last hit point.
+				if (HasStatus(Status.BRACING)) {
+					damage = (u16)Mathf.Min((u16)(EffHp(state) - 1), damage);
+				}
 			}
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_DAMAGE, GetName(), damage.ToString()));
-
-			// A bracing (endure) mon cannot lose its last hit point.
-			if (HasStatus(Status.BRACING)) {
-				damage = (u16)Mathf.Min((u16)(EffHp(state) - 1), damage);
-			}
-			else {
-				damage = (u16)Mathf.Min(EffHp(state), damage);
-			}
-
 			HP -= damage;
 
 			// Mark that the mon has received damage this turn.

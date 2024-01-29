@@ -143,7 +143,21 @@ namespace PkmnEngine {
 		public u8[] SlotsOnSide(u8 side) {
 			return slotsOnSide[side];
 		}
-
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="slot"></param>
+		/// <returns></returns>
+		public u8 SideControllingSlot(u8 slot) {
+			for (u8 i = 0; i < numSides; i++) {
+				for (u8 j = 0; j < slotsOnSide[i].Length; j++) {
+					if (slotsOnSide[i][j] == slot) {
+						return i;
+					}
+				}
+			}
+			throw new System.ArgumentException();
+		}
 
 		// Leaving as const, but storing separately in the unlikely event
 		// that I decide to have more than 2 sides in the battle.

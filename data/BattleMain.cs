@@ -80,7 +80,8 @@ namespace PkmnEngine {
 		/// <returns></returns>
 		private BattleState CreateInitialState(TrainerProfile[] players) {
 			for (u8 i = 0; i < format.numPlayers; i++) {
-				this.players[i] = new TrainerBattleContext(players[i], format.SlotsControlledByPlayerIndex(i));
+				u8[] slots = format.SlotsControlledByPlayerIndex(i);
+				this.players[i] = new TrainerBattleContext(players[i], format.SideControllingSlot(slots[0]), slots);
 			}
 
 			BattleState state = new BattleState(this, this.players);
@@ -154,9 +155,9 @@ namespace PkmnEngine {
 			// to store the slot of a target.
 			List<u8> targets = new List<u8>();
 			for (u8 i = 0; i < 32 / BattleState.BITS_PER_MON_INDEX; i++) {
-				u32 mask = (u32)((1 << BattleState.BITS_PER_MON_INDEX) - 1) << i;
+				u32 mask = (u32)((1 << BattleState.BITS_PER_MON_INDEX) - 1) << (i * BattleState.BITS_PER_MON_INDEX);
 				u8 slot = (u8)((slotsTarget & mask) >> (i * BattleState.BITS_PER_MON_INDEX));
-				if (slot == 0) {
+				if (slot == BattleState.SLOT_EMPTY) {
 					break;
 				}
 				targets.Add(slot);
@@ -982,7 +983,7 @@ namespace PkmnEngine {
 		private u8 NumSlots { get; set; }
 
 		public const u8 BITS_PER_MON_INDEX = 4;
-		public const u8 SLOT_EMPTY = 1 << BITS_PER_MON_INDEX - 1;
+		public const u8 SLOT_EMPTY = (1 << BITS_PER_MON_INDEX) - 1;
 		public u32 FieldMons { get; set; }
 
 		private List<FieldCondition> Conditions { get; set; }

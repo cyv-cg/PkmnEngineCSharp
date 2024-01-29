@@ -370,7 +370,7 @@ namespace PkmnEngine {
 		/// @brief Gets the default target(s) for a given move.
 		/// @param moveID ID of the move.
 		/// @param side Side of the mon using the move. SIDE_PLAYER or SIDE_OPPONENT.
-		/// @return The encoded (+1'd) slot(s) of the default target(s).
+		/// @return The encoded slot(s) of the default target(s).
 		public static u32 GetDefaultMoveTarget(BattleMoveID moveID, BattleMon attacker) {
 			// TODO: fix this whole mess.
 			u32 targetSlots = 0;
@@ -381,7 +381,7 @@ namespace PkmnEngine {
 						case MOVE_TARGET_USER_OR_SELECTED:
 						case MOVE_TARGET_USER_OR_ALLY:
 						case MOVE_TARGET_USER_FIELD:
-							targetSlots = 0;
+							targetSlots = 0b_1111_1111_1111_1111_1111_1111_1111_0000;
 							break;
 						case MOVE_TARGET_SELECTED:
 						case MOVE_TARGET_DEPENDS:
@@ -395,7 +395,7 @@ namespace PkmnEngine {
 						case MOVE_TARGET_ALL:
 						case MOVE_TARGET_ANY:
 						case MOVE_TARGET_ALL_OPPONENTS:
-							targetSlots = 1;
+							targetSlots = 0b_1111_1111_1111_1111_1111_1111_1111_0001;
 							break;
 					}
 					break;
@@ -406,7 +406,7 @@ namespace PkmnEngine {
 						case MOVE_TARGET_USER_OR_SELECTED:
 						case MOVE_TARGET_USER_OR_ALLY:
 						case MOVE_TARGET_USER_FIELD:
-							targetSlots = 1;
+							targetSlots = 0b_1111_1111_1111_1111_1111_1111_1111_0001;
 							break;
 						case MOVE_TARGET_SELECTED:
 						case MOVE_TARGET_DEPENDS:
@@ -420,7 +420,7 @@ namespace PkmnEngine {
 						case MOVE_TARGET_ALL:
 						case MOVE_TARGET_ANY:
 						case MOVE_TARGET_ALL_OPPONENTS:
-							targetSlots = 0;
+							targetSlots = 0b_1111_1111_1111_1111_1111_1111_1111_0000;
 							break;
 					}
 					break;
