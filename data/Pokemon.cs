@@ -391,19 +391,20 @@ namespace PkmnEngine {
 		/// Uses a mon's personality to calculate its ability.
 		/// Returns hidden ability if and only if specified in the BoxMon class and the species has one.
 		/// </summary>
-		public Ability Ability {
-			get {
-				if (Box.HasHiddenAbility && gBaseStats(Box.Species).hiddenAbility != Ability.NONE) {
-					return gBaseStats(Box.Species).hiddenAbility;
-				}
-				if (gBaseStats(Box.Species).ability2 == Ability.NONE || (Box.Personality & 1) != 0) {
-					return gBaseStats(Box.Species).ability1;
-				}
-				else {
-					return gBaseStats(Box.Species).ability2;
-				}
-			}
-		}
+		//public Ability Ability {
+		//	get {
+		//		if (Box.HasHiddenAbility && gBaseStats(Box.Species).hiddenAbility != Ability.NONE) {
+		//			return gBaseStats(Box.Species).hiddenAbility;
+		//		}
+		//		if (gBaseStats(Box.Species).ability2 == Ability.NONE || (Box.Personality & 1) != 0) {
+		//			return gBaseStats(Box.Species).ability1;
+		//		}
+		//		else {
+		//			return gBaseStats(Box.Species).ability2;
+		//		}
+		//	}
+		//}
+		public Ability Ability;
 
 		/// <summary>
 		/// Calculates a mon's Hidden Power type based on its personality.

@@ -1,6 +1,99 @@
 namespace PkmnEngine {
 	public static class Abilities {
 		public const ushort NUM_ABILITIES = 298;
+
+		public static bool CanBeSuppressed(Ability ability) {
+			switch (ability) {
+				case Ability.ARMOR_TAIL:
+				case Ability.AROMA_VEIL:
+				case Ability.AURA_BREAK:
+				case Ability.BATTLE_ARMOR:
+				case Ability.BEADS_OF_RUIN:
+				case Ability.BIG_PECKS:
+				case Ability.BULLETPROOF:
+				case Ability.CLEAR_BODY:
+				case Ability.CONTRARY:
+				case Ability.DAMP:
+				case Ability.DAZZLING:
+				case Ability.DISGUISE:
+				case Ability.DRY_SKIN:
+				case Ability.EARTH_EATER:
+				case Ability.FILTER:
+				case Ability.FLASH_FIRE:
+				case Ability.FLOWER_GIFT:
+				case Ability.FLOWER_VEIL:
+				case Ability.FLUFFY:
+				case Ability.FRIEND_GUARD:
+				case Ability.FUR_COAT:
+				case Ability.GOOD_AS_GOLD:
+				case Ability.GRASS_PELT:
+				case Ability.GUARD_DOG:
+				case Ability.HEATPROOF:
+				case Ability.HEAVY_METAL:
+				case Ability.HYPER_CUTTER:
+				case Ability.ICE_FACE:
+				case Ability.ICE_SCALES:
+				case Ability.ILLUMINATE:
+				case Ability.IMMUNITY:
+				case Ability.INNER_FOCUS:
+				case Ability.INSOMNIA:
+				case Ability.KEEN_EYE:
+				case Ability.LEAF_GUARD:
+				case Ability.LEVITATE:
+				case Ability.LIGHT_METAL:
+				case Ability.LIGHTNING_ROD:
+				case Ability.LIMBER:
+				case Ability.MAGIC_BOUNCE:
+				case Ability.MAGMA_ARMOR:
+				case Ability.MARVEL_SCALE:
+				case Ability.MINDS_EYE:
+				case Ability.MIRROR_ARMOR:
+				case Ability.MOTOR_DRIVE:
+				case Ability.MULTISCALE:
+				case Ability.OBLIVIOUS:
+				case Ability.OVERCOAT:
+				case Ability.OWN_TEMPO:
+				case Ability.PASTEL_VEIL:
+				case Ability.PUNK_ROCK:
+				case Ability.PURIFYING_SALT:
+				case Ability.QUEENLY_MAJESTY:
+				case Ability.SAND_VEIL:
+				case Ability.SAP_SIPPER:
+				case Ability.SHELL_ARMOR:
+				case Ability.SHIELD_DUST:
+				case Ability.SIMPLE:
+				case Ability.SNOW_CLOAK:
+				case Ability.SOLID_ROCK:
+				case Ability.SOUNDPROOF:
+				case Ability.STICKY_HOLD:
+				case Ability.STORM_DRAIN:
+				case Ability.STURDY:
+				case Ability.SUCTION_CUPS:
+				case Ability.SWEET_VEIL:
+				case Ability.SWORD_OF_RUIN:
+				case Ability.TABLETS_OF_RUIN:
+				case Ability.TANGLED_FEET:
+				case Ability.TELEPATHY:
+				case Ability.TERA_SHELL:
+				case Ability.THERMAL_EXCHANGE:
+				case Ability.THICK_FAT:
+				case Ability.UNAWARE:
+				case Ability.VESSEL_OF_RUIN:
+				case Ability.VITAL_SPIRIT:
+				case Ability.VOLT_ABSORB:
+				case Ability.WATER_ABSORB:
+				case Ability.WATER_BUBBLE:
+				case Ability.WATER_VEIL:
+				case Ability.WELL_BAKED_BODY:
+				case Ability.WHITE_SMOKE:
+				case Ability.WIND_RIDER:
+				case Ability.WONDER_GUARD:
+				case Ability.WONDER_SKIN:
+					return true;
+				default:
+					return false;
+			}
+		}
 	}
 	
 	public enum Ability {
@@ -139,6 +232,7 @@ namespace PkmnEngine {
 		MAGMA_ARMOR,
 		MAGNET_PULL,
 		MARVEL_SCALE,
+		MINDS_EYE,
 		MEGA_LAUNCHER,
 		MERCILESS,
 		MIMICRY,
@@ -266,6 +360,7 @@ namespace PkmnEngine {
 		TANGLING_HAIR,
 		TECHNICIAN,
 		TELEPATHY,
+		TERA_SHELL,
 		TERAVOLT,
 		THERMAL_EXCHANGE,
 		THICK_FAT,

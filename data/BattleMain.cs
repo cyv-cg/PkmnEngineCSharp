@@ -73,6 +73,38 @@ namespace PkmnEngine {
 			return ((u64)Random32() << 32) | Random32();
 		}
 
+		public static T[] RunEvent<T>(Callback cb, BattleMon target, object args) {
+			EventHandler[] handlers = FindEventHandler(cb, target);
+			List<T> retVal = new List<T>();
+
+			foreach (EventHandler handler in handlers) {
+				// Ability Suppression
+				if (handler.effect == EffectType.ABILITY && target.HasStatus(Status.ABILITY_SUPPRESSION) && Abilities.CanBeSuppressed(target.ability)) {
+					continue;
+				}
+
+				retVal.Add((T)handler.callback.Invoke(args));
+			}
+			return retVal.ToArray();
+		}
+
+		private static EventHandler[] FindEventHandler(Callback cb, BattleMon target) {
+			List<EventHandler> handlers = new List<EventHandler>();
+
+			// TODO: Status
+			// Ability
+			Ability ability = target.ability;
+			BattleEvent callback = AbilityEffects.gAbilityEvents(ability, cb);
+			if (callback != null) {
+				handlers.Add(new EventHandler(callback, EffectType.ABILITY));
+			}
+			// TODO: Item
+			// TODO: Species
+			// TODO: Side
+
+			return handlers.ToArray();
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>

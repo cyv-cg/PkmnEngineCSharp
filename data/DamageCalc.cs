@@ -43,6 +43,8 @@ namespace PkmnEngine {
 			public u16 damage;
 		}
 
+		public const float SAME_TYPE_ATTACK_BONUS = 1.5f;
+
 		public static u16 CalcDamage(MoveEffectParams p, Mods mods, Overrides overrides = null) {
 			return CalcDamage(p.battle, p.state, p.attacker, p.target, p.moveID, p.numTargets, mods, overrides);
 		}
@@ -111,12 +113,21 @@ namespace PkmnEngine {
 			if (moveID == BattleMoveID.FACADE && attacker.HasStatus(Status.BURN)) {
 				damage = (u16)(damage / StatusEffects.BURN_ATTACK_MULTIPLIER);
 			}
-			// Guts ability
-			else if (attacker.AbilityProc(Ability.GUTS, false) && attacker.HasStatus(StatusEffects.STATUS_MASK_NON_VOLATILE)) {
-				damage =  (u16)(damage * 1.5f);
-				// Offset the atk loss from burn for physical moves.
-				if (move.moveCat == MoveCategory.PHYSICAL && attacker.HasStatus(Status.BURN)) {
-					damage = (u16)(damage / StatusEffects.BURN_ATTACK_MULTIPLIER);
+
+			if (move.moveCat == MoveCategory.PHYSICAL) {
+				foreach (float f in Battle.RunEvent<float>(Callback.OnModifyAtk, attacker, new OnModifyAtkParams(attacker))) {
+					damage = (u16)(damage * f);
+				}
+				foreach (float f in Battle.RunEvent<float>(Callback.OnSourceModifyAtk, defender, new OnSourceModifyAtkParams(move))) {
+					damage = (u16)(damage * f);
+				}
+			}
+			if (move.moveCat == MoveCategory.SPECIAL) {
+				foreach (float f in Battle.RunEvent<float>(Callback.OnModifySpAtk, attacker, new OnModifySpAtkParams(attacker))) {
+					damage = (u16)(damage * f);
+				}
+				foreach (float f in Battle.RunEvent<float>(Callback.OnSourceModifySpAtk, defender, new OnSourceModifySpAtkParams(move))) {
+					damage = (u16)(damage * f);
 				}
 			}
 
@@ -124,11 +135,6 @@ namespace PkmnEngine {
 			if (move.moveType == Type.ELECTRIC && attacker.HasStatus(Status.CHARGED)) {
 				damage *= 2;
 				attacker.RemoveStatus(Status.CHARGED);
-			}
-
-			// Heatproof (https://bulbapedia.bulbagarden.net/wiki/Heatproof_(Ability))
-			if (move.moveType == Type.FIRE && defender.AbilityProc(Ability.HEATPROOF, false)) {
-				damage /= 2;
 			}
 
 			// Tar Shot
@@ -270,8 +276,18 @@ namespace PkmnEngine {
 
 		// Same Type Attack Bonus
 		public static float STAB(BattleMon attacker, Type moveType) {
-			// If the attacker shares a type with the move it is using, multiply the damage by 1.5. (2 if the attacker has Adaptability.)
-			return attacker.HasType(moveType) ? (attacker.AbilityProc(Ability.ADAPTABILITY, false) ? 2 : 1.5f) : 1f;
+			float stab = 1;
+			if (attacker.HasType(moveType)) {
+				stab = SAME_TYPE_ATTACK_BONUS;
+			}
+			float[] mods = Battle.RunEvent<float>(Callback.OnModifyStab, attacker, new OnModifyStabParams(attacker, moveType));
+			if (mods.Length != 0) {
+				stab = 1;
+				foreach (float mod in mods) {
+					stab *= mod;
+				}
+			}
+			return stab;
 		}
 		/// <summary>
 		/// Calculates raw type chart.
