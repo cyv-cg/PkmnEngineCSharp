@@ -6,14 +6,7 @@ using u64 = System.UInt64;
 using System.Collections.Generic;
 
 namespace PkmnEngine {
-	public static partial class AbilityEffects {
-		private static T ValidateParams<T>(object p) {
-			if (p.GetType() != typeof(T)) {
-				throw new System.ArgumentException($"Expected {typeof(T)}, received {p.GetType()}.");
-			}
-			return (T)p;
-		}
-
+	public static class AbilityEffects {
 		public static BattleEvent gAbilityEvents(Ability ability, Callback cb) {
 			if (AbilityEvents.ContainsKey(ability) && AbilityEvents[ability].ContainsKey(cb)) {
 				return AbilityEvents[ability][cb];
@@ -30,29 +23,36 @@ namespace PkmnEngine {
 			Ability.ADAPTABILITY,
 			new Dictionary<Callback, BattleEvent>() {{
 				Callback.OnModifyStab,
-				Adaptability_OnModifyStab
+				BattleEvents.Ability_Adaptability_OnModifyStab
 			}}
 		}, 
 		{
 			Ability.GUTS,
 			new Dictionary<Callback, BattleEvent>() {{ 
 				Callback.OnModifyAtk,
-				Guts_OnModifyAtk
+				BattleEvents.Ability_Guts_OnModifyAtk
 			}}
 		}, 
 		{
 			Ability.HEATPROOF,
 			new Dictionary<Callback, BattleEvent>() {{
 				Callback.OnSourceModifyAtk, 
-				Heatproof_OnSourceModifyAtk
+				BattleEvents.Ability_Heatproof_OnSourceModifyAtk
 			}, {
 				Callback.OnSourceModifySpAtk,
-				Heatproof_OnSourceModifySpAtk
+				BattleEvents.Ability_Heatproof_OnSourceModifySpAtk
 			}, {
 				Callback.OnDamage,
-				Heatproof_OnDamage
+				BattleEvents.Ability_Heatproof_OnDamage
 			}}
 		},
+		{
+			Ability.POISON_HEAL,
+			new Dictionary<Callback, BattleEvent>() {{
+				Callback.OnDamage,
+				BattleEvents.Ability_PoisonHeal_OnDamage
+			}}
+		}
 
 		
 		};

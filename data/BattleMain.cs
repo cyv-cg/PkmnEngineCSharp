@@ -73,6 +73,13 @@ namespace PkmnEngine {
 			return ((u64)Random32() << 32) | Random32();
 		}
 
+		public static float RunEventChain(Callback cb, BattleMon target, object args) {
+			float chain = 1;
+			foreach (float x in RunEvent<float>(cb, target, args)) {
+				chain *= x;
+			}
+			return chain;
+		}
 		public static T[] RunEvent<T>(Callback cb, BattleMon target, object args) {
 			EventHandler[] handlers = FindEventHandler(cb, target);
 			List<T> retVal = new List<T>();
@@ -90,11 +97,18 @@ namespace PkmnEngine {
 
 		private static EventHandler[] FindEventHandler(Callback cb, BattleMon target) {
 			List<EventHandler> handlers = new List<EventHandler>();
+			BattleEvent callback;
 
-			// TODO: Status
+			// Status
+			foreach (Status s in target.Statuses) {
+				callback = StatusEffects.gStatusEvents(s, cb);
+				if (callback != null) {
+					handlers.Add(new EventHandler(callback, EffectType.STATUS));
+				}
+			}
 			// Ability
 			Ability ability = target.ability;
-			BattleEvent callback = AbilityEffects.gAbilityEvents(ability, cb);
+			callback = AbilityEffects.gAbilityEvents(ability, cb);
 			if (callback != null) {
 				handlers.Add(new EventHandler(callback, EffectType.ABILITY));
 			}
@@ -527,13 +541,13 @@ namespace PkmnEngine {
 				if (bm.HasStatus(Status.AQUA_RING)) {
 					MessageBox(Lang.GetBattleMessage(BattleMessage.A_VEIL_OF_WATER_RESTORED_MONS_HP, bm.GetName()));
 					u16 healAmount = bm.GetPercentOfMaxHp(StatusEffects.AQUA_RING_HEAL_AMOUNT);
-					bm.HealMon(state, ref healAmount, false);
+					bm.HealMon(ref healAmount, false);
 				}
 				// Leech Seed
 				if (bm.HasStatus(Status.SEEDED)) {
 					u16 healAmount = bm.GetPercentOfMaxHp(StatusEffects.LEECH_SEED_DRAIN_AMOUNT);
-					bm.DamageMon(state, ref healAmount, true, false);
-					GetMonInSlot(state, (u8)bm.GetStatusParam(StatusParam.SLOT_SEEDED_BY)).HealMon(state, ref healAmount, false);
+					bm.DamageMon(ref healAmount, true, false);
+					GetMonInSlot(state, (u8)bm.GetStatusParam(StatusParam.SLOT_SEEDED_BY)).HealMon(ref healAmount, false);
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_HP_WAS_SAPPED_BY_LEECH_SEED, bm.GetName()));
 				}
 				// Perish Song
@@ -542,7 +556,7 @@ namespace PkmnEngine {
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_PERISH_COUNT_FELL_TO_N, bm.GetName(), count.ToString()));
 					if (count == 0) {
 						u16 damage = bm.EffMaxHp(state);
-						fainted = bm.DamageMon(state, ref damage, true, false);
+						fainted = bm.DamageMon(ref damage, true, false);
 						return;
 					}
 					bm.DecrementStatusParam(StatusParam.PERISH_COUNT);
@@ -567,7 +581,7 @@ namespace PkmnEngine {
 				// Curse
 				if (bm.HasStatus(Status.CURSE)) {
 					u16 damage = bm.GetPercentOfMaxHp(0.25f);
-					bm.DamageMon(state, ref damage, true, false);
+					bm.DamageMon(ref damage, true, false);
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_AFFLICTED_BY_CURSE, bm.GetName()));
 				}
 				// Encore
@@ -580,59 +594,60 @@ namespace PkmnEngine {
 				}
 				if (bm.HasStatus(Status.SALT_CURE)) {
 					u16 damage = (bm.HasType(Type.WATER) || bm.HasType(Type.STEEL)) ? bm.GetPercentOfMaxHp(0.25f) : bm.GetPercentOfMaxHp(0.125f);
-					bm.DamageMon(state, ref damage, false, false);
+					bm.DamageMon(ref damage, false, false);
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_BEING_SALT_CURED, bm.GetName()));
 				}
 			}
 		}
 		private void HandleNonVolatileStatuses(BattleState state, BattleMon bm, ref bool fainted) {
-			if (bm.HasStatus(Status.BURN)) {
-				u16 damage = bm.GetPercentOfMaxHp(StatusEffects.BURN_CHIP_DAMAGE);
-				// https://bulbapedia.bulbagarden.net/wiki/Heatproof_(Ability)
-				if (bm.AbilityProc(Ability.HEATPROOF, false)) {
-					damage /= 2;
-				}
-				fainted = bm.DamageMon(state, ref damage, true, false);
-				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_ITS_BURN, bm.GetName()));
-				if (fainted) {
-					return;
-				}
-			}
-			else if (bm.HasStatus(Status.POISON)) {
-				u16 damage = bm.GetPercentOfMaxHp(StatusEffects.POISON_CHIP_DAMAGE);
-				// If the mon has Poison Heal, it heals instead of taking damage.
-				if (bm.AbilityProc(Ability.POISON_HEAL, false)) {
-					bm.HealMon(state, ref damage, false);
-				}
-				else {
-					fainted = bm.DamageMon(state, ref damage, true, false);
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, bm.GetName()));
-				}
-				if (fainted) {
-					return;
-				}
-			}
-			else if (bm.HasStatus(Status.TOXIC)) {
-				// Toxic deals damage starting at a set percentage, and grows by that percentage every turn.
-				u16 baseDamage = bm.GetPercentOfMaxHp(StatusEffects.TOXIC_CHIP_DAMAGE);
-				// Accumulation is capped at 15 stacks.
-				if (bm.GetStatusParam(StatusParam.TOXIC_BUILDUP) < 15) {
-					bm.IncrementStatusParam(StatusParam.TOXIC_BUILDUP);
-				}
-				if (bm.AbilityProc(Ability.POISON_HEAL, false)) {
-					// Poison Heal does not heal extra from toxic stacks.
-					bm.HealMon(state, ref baseDamage, false);
-				}
-				else {
-					// Stack additional damage by number of turns afflicted.
-					u16 totalDamage = (u16)(baseDamage * bm.GetStatusParam(StatusParam.TOXIC_BUILDUP));
-					fainted = bm.DamageMon(state, ref totalDamage, true, false);
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON));
-				}
-				if (fainted) {
-					return;
-				}
-			}
+			Battle.RunEvent<object>(Callback.OnResidual, bm, new OnResidualParams(bm));
+			//if (bm.HasStatus(Status.BURN)) {
+			//	u16 damage = bm.GetPercentOfMaxHp(StatusEffects.BURN_CHIP_DAMAGE);
+			//	// https://bulbapedia.bulbagarden.net/wiki/Heatproof_(Ability)
+			//	if (bm.AbilityProc(Ability.HEATPROOF, false)) {
+			//		damage /= 2;
+			//	}
+			//	fainted = bm.DamageMon(ref damage, true, false);
+			//	MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_ITS_BURN, bm.GetName()));
+			//	if (fainted) {
+			//		return;
+			//	}
+			//}
+			//else if (bm.HasStatus(Status.POISON)) {
+			//	u16 damage = bm.GetPercentOfMaxHp(StatusEffects.POISON_CHIP_DAMAGE);
+			//	// If the mon has Poison Heal, it heals instead of taking damage.
+			//	if (bm.AbilityProc(Ability.POISON_HEAL, false)) {
+			//		bm.HealMon(ref damage, false);
+			//	}
+			//	else {
+			//		fainted = bm.DamageMon(ref damage, true, false);
+			//		MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, bm.GetName()));
+			//	}
+			//	if (fainted) {
+			//		return;
+			//	}
+			//}
+			//else if (bm.HasStatus(Status.TOXIC)) {
+			//	// Toxic deals damage starting at a set percentage, and grows by that percentage every turn.
+			//	u16 baseDamage = bm.GetPercentOfMaxHp(StatusEffects.TOXIC_CHIP_DAMAGE);
+			//	// Accumulation is capped at 15 stacks.
+			//	if (bm.GetStatusParam(StatusParam.TOXIC_BUILDUP) < 15) {
+			//		bm.IncrementStatusParam(StatusParam.TOXIC_BUILDUP);
+			//	}
+			//	if (bm.AbilityProc(Ability.POISON_HEAL, false)) {
+			//		// Poison Heal does not heal extra from toxic stacks.
+			//		bm.HealMon(ref baseDamage, false);
+			//	}
+			//	else {
+			//		// Stack additional damage by number of turns afflicted.
+			//		u16 totalDamage = (u16)(baseDamage * bm.GetStatusParam(StatusParam.TOXIC_BUILDUP));
+			//		fainted = bm.DamageMon(ref totalDamage, true, false);
+			//		MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON));
+			//	}
+			//	if (fainted) {
+			//		return;
+			//	}
+			//}
 		}
 		private void HandleNextTurnStatuses(BattleState state, BattleMon bm, ref bool fainted) {
 			// The turn after a mon is inflicted with drowsy, it falls asleep.
@@ -785,14 +800,14 @@ namespace PkmnEngine {
 					if (bm.DamagedByHail()) {
 						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_HAIL, bm.GetName()));
 						u16 damage = bm.GetPercentOfMaxHp(FieldConditions.HAIL_CHIP_DAMAGE);
-						bm.DamageMon(state, ref damage, true, false);
+						bm.DamageMon(ref damage, true, false);
 					}
 				}
 				if (state.Weather.Equals(Condition.WEATHER_SANDSTORM)) {
 					if (bm.DamagedBySandstorm()) {
 						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_SANDSTORM, bm.GetName()));
 						u16 damage = bm.GetPercentOfMaxHp(FieldConditions.SANDSTORM_CHIP_DAMAGE);
-						bm.DamageMon(state, ref damage, true, false);
+						bm.DamageMon(ref damage, true, false);
 					}
 				}
 			}
@@ -884,7 +899,7 @@ namespace PkmnEngine {
 			
 				if (state.Terrain.Condition == Condition.TERRAIN_GRASSY) {
 					u16 healAmount = bm.GetPercentOfMaxHp(FieldConditions.GRASSY_TERRAIN_HEAL_AMOUNT);
-					bm.HealMon(state, ref healAmount, false);
+					bm.HealMon(ref healAmount, false);
 				}
 			}
 		}

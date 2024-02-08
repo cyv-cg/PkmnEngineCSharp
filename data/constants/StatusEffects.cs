@@ -5,6 +5,8 @@ using u64 = System.UInt64;
 
 using static PkmnEngine.Global;
 
+using System.Collections.Generic;
+
 namespace PkmnEngine {
 	public static class StatusEffects {
 		public const u16 NUM_STATUSES = (u16)Status.NR_ITEMS;
@@ -134,7 +136,8 @@ namespace PkmnEngine {
 			Status.PROTECTION,
 			Status.BANEFUL_BUNKER,
 			Status.OBSTRUCT,
-			Status.LUCKY_CHANT
+			Status.LUCKY_CHANT,
+			Status.RAGE
 		};
 		#endregion
 
@@ -142,6 +145,46 @@ namespace PkmnEngine {
 		public const u8 SEMI_INVULNERABLE_AIR		= 1 << 1;
 		public const u8 SEMI_INVULNERABLE_WATER		= 1 << 2;
 		public const u8 SEMI_INVULNERABLE_PHANTOM	= 1 << 3;
+
+		public static BattleEvent gStatusEvents(Status status, Callback cb) {
+			if (StatusEvents.ContainsKey(status) && StatusEvents[status].ContainsKey(cb)) {
+				return StatusEvents[status][cb];
+			}
+			else {
+				return null;
+			}
+		}
+		private static readonly Dictionary<Status, Dictionary<Callback, BattleEvent>> StatusEvents = new() { {
+		
+			Status.BURN,
+			new Dictionary<Callback, BattleEvent>() {{
+				Callback.OnResidual,
+				BattleEvents.Status_Burn_OnResidual
+			}}
+		},
+		{
+			Status.POISON,
+			new Dictionary<Callback, BattleEvent>() {{
+				Callback.OnResidual,
+				BattleEvents.Status_Poison_OnResidual
+			}}
+		},
+		{
+			Status.TOXIC,
+			new Dictionary<Callback, BattleEvent>() {{
+				Callback.OnResidual,
+				BattleEvents.Status_Toxic_OnResidual
+			}}
+		},
+		{
+			Status.RAGE,
+			new Dictionary<Callback, BattleEvent>() {{
+				Callback.OnDamage,
+				BattleEvents.Status_Rage_OnDamage
+			}}
+		}
+
+		};
 	}
 
 	public enum StatusParam {
@@ -265,6 +308,7 @@ namespace PkmnEngine {
 				BANEFUL_BUNKER,
 				OBSTRUCT,
 				LUCKY_CHANT,
+				RAGE,
 		NR_ITEMS // This one is just to keep track of the total number of bits needed to store statuses and should not be used.
 	};
 }

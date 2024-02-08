@@ -369,7 +369,7 @@ namespace PkmnEngine {
 			}
 
 			u16 damage = (u16)(p.target.EffMaxHp(p.state) / 2);
-			p.target.DamageMon(p.state, ref damage, true, false);
+			p.target.DamageMon(ref damage, true, false);
 
 			p.target.SetStatStage(Stat.ATTACK, MAX_STAT_STAGE);
 			MessageBox(Lang.GetBattleMessage(BattleMessage.BELLY_DRUM, p.target.GetName()));
@@ -427,39 +427,39 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_Absorb75Percent(MoveEffectParams p) {
 			u32 flags = Attack(p);
 			u16 healAmount = (u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.75f);
-			p.attacker.HealMon(p.state, ref healAmount, false);
+			p.attacker.HealMon(ref healAmount, false);
 			return flags;
 		}
 		public static async Task<u32> Effect_Absorb50Percent(MoveEffectParams p) {
 			u32 flags = Attack(p);
 			u16 healAmount = (u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.5f);
-			p.attacker.HealMon(p.state, ref healAmount, false);
+			p.attacker.HealMon(ref healAmount, false);
 			return flags;
 		}
 		public static async Task<u32> Effect_Abosrb25Percent(MoveEffectParams p) {
 			u32 flags = Attack(p);
 			u16 healAmount = (u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.25f);
-			p.attacker.HealMon(p.state, ref healAmount, false);
+			p.attacker.HealMon(ref healAmount, false);
 			return flags;
 		}
 		public static async Task<u32> Effect_HealHalfHit(MoveEffectParams p) {
 			u16 healAmount = (u16)(p.target.EffMaxHp(p.state) / 2);
-			p.target.HealMon(p.state, ref healAmount, false);
+			p.target.HealMon(ref healAmount, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_HealQuarterHit(MoveEffectParams p) {
 			u16 healAmount = (u16)(p.target.EffMaxHp(p.state) / 4);
-			p.target.HealMon(p.state, ref healAmount, false);
+			p.target.HealMon(ref healAmount, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_HealQuarter(MoveEffectParams p) {
 			u16 healAmount = (u16)(p.attacker.EffMaxHp(p.state) / 4);
-			p.attacker.HealMon(p.state, ref healAmount, false);
+			p.attacker.HealMon(ref healAmount, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_HealHalf(MoveEffectParams p) {
 			u16 healAmount = (u16)(p.attacker.EffMaxHp(p.state) / 2);
-			p.attacker.HealMon(p.state, ref healAmount, false);
+			p.attacker.HealMon(ref healAmount, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_HealingWish(MoveEffectParams p) {
@@ -468,7 +468,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_JungleHealing(MoveEffectParams p) {
 			u16 healAmount = p.target.GetPercentOfMaxHp(0.25f);
-			p.target.HealMon(p.state, ref healAmount, false);
+			p.target.HealMon(ref healAmount, false);
 			return await Effect_CureNonVolatileStatusHit(p);
 		}
 		public static async Task<u32> Effect_DreamEater(MoveEffectParams p) {
@@ -486,7 +486,7 @@ namespace PkmnEngine {
 
 			u16 healAmount = p.target.EffAtk(p.state);
 			await Effect_AttackDownHit(p);
-			p.attacker.HealMon(p.state, ref healAmount, false);
+			p.attacker.HealMon(ref healAmount, false);
 
 			return 0;
 		}
@@ -498,7 +498,7 @@ namespace PkmnEngine {
 			await Effect_CureNonVolatileStatusHit(p);
 
 			u16 healAmount = (u16)(p.attacker.EffMaxHp(p.state) / 2);
-			p.target.HealMon(p.state, ref healAmount, false);
+			p.target.HealMon(ref healAmount, false);
 
 			return 0;
 		}
@@ -524,7 +524,7 @@ namespace PkmnEngine {
 
 			// Rest heals to full HP.
 			u16 healAmount = p.target.EffMaxHp(p.state);
-			p.target.HealMon(p.state, ref healAmount, false);
+			p.target.HealMon(ref healAmount, false);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.REST, p.target.GetName()));
 
@@ -542,7 +542,7 @@ namespace PkmnEngine {
 			else if (0.1 <= prob && prob < 0.3) {
 				// Heal 1/4 p.target's max HP
 				u16 healAmount = (u16)(p.target.EffMaxHp(p.state) * 0.25f);
-				p.target.HealMon(p.state, ref healAmount, false);
+				p.target.HealMon(ref healAmount, false);
 			}
 			else if (0.3 <= prob && prob < 0.6) {
 				// 80 base power attack
@@ -714,7 +714,7 @@ namespace PkmnEngine {
 			u32 flags = Attack(p);
 			// Mon faints after.
 			u16 damage = p.attacker.EffHp(p.state);
-			p.attacker.DamageMon(p.state, ref damage, true, false);
+			p.attacker.DamageMon(ref damage, true, false);
 
 			return flags;
 		}
@@ -729,7 +729,7 @@ namespace PkmnEngine {
 			u32 flags = Attack(p);
 			// Mon then loses 50% of its HP.
 			u16 damage = p.attacker.GetPercentOfMaxHp(0.5f);
-			p.attacker.DamageMon(p.state, ref damage, true, false);
+			p.attacker.DamageMon(ref damage, true, false);
 
 			return flags;
 		}
@@ -1025,20 +1025,20 @@ namespace PkmnEngine {
 			
 			if (p.attacker.EffHp(p.state) > avgHp) {
 				u16 diff = (u16)(p.attacker.EffHp(p.state) - avgHp);
-				p.attacker.DamageMon(p.state, ref diff, true, false);
+				p.attacker.DamageMon(ref diff, true, false);
 			}
 			else {
 				u16 diff = (u16)(avgHp - p.attacker.EffHp(p.state));
-				p.attacker.HealMon(p.state, ref diff, true);
+				p.attacker.HealMon(ref diff, true);
 			}
 
 			if (p.target.EffHp(p.state) > avgHp) {
 				u16 diff = (u16)(p.target.EffHp(p.state) - avgHp);
-				p.target.DamageMon(p.state, ref diff, true, false);
+				p.target.DamageMon(ref diff, true, false);
 			}
 			else {
 				u16 diff = (u16)(avgHp - p.target.EffHp(p.state));
-				p.target.HealMon(p.state, ref diff, true);
+				p.target.HealMon(ref diff, true);
 			}
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.PAIN_SPLIT));
@@ -1236,7 +1236,7 @@ namespace PkmnEngine {
 
 			// Otherwise, cut HP in half and curse the p.target.
 			u16 selfDamage = p.attacker.GetPercentOfMaxHp(0.5f);
-			p.attacker.DamageMon(p.state, ref selfDamage, true, false);
+			p.attacker.DamageMon(ref selfDamage, true, false);
 			p.target.GiveStatus(Status.CURSE);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_PUT_A_CURSE_ON_MON, p.attacker.GetName(), p.target.GetName()));
@@ -1381,7 +1381,7 @@ namespace PkmnEngine {
 				healAmount = p.target.GetPercentOfMaxHp(0.5f);
 			}
 
-			p.target.HealMon(p.state, ref healAmount, false);
+			p.target.HealMon(ref healAmount, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_HiddenPower(MoveEffectParams p) {
@@ -1493,7 +1493,7 @@ namespace PkmnEngine {
 			await Effect_AttackDownHit2(p);
 			await Effect_SpecialAttackDownHit2(p);
 			u16 damage = p.attacker.EffMaxHp(p.state);
-			p.attacker.DamageMon(p.state, ref damage, true, false);
+			p.attacker.DamageMon(ref damage, true, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_Facade(MoveEffectParams p) {
@@ -1839,7 +1839,7 @@ namespace PkmnEngine {
 			else {
 				healAmount = p.target.GetPercentOfMaxHp(0.5f);
 			}
-			p.target.HealMon(p.state, ref healAmount, false);
+			p.target.HealMon(ref healAmount, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_BodyPress(MoveEffectParams p) {
@@ -2049,7 +2049,7 @@ namespace PkmnEngine {
 			}
 
 			u16 damage = (u16)(p.target.EffMaxHp(p.state) / 2);
-			p.target.DamageMon(p.state, ref damage, true, false);
+			p.target.DamageMon(ref damage, true, false);
 			ChangeStat(p.state, p.target, 2, Stat.ATTACK);
 			ChangeStat(p.state, p.target, 2, Stat.SPECIAL_ATTACK);
 			ChangeStat(p.state, p.target, 2, Stat.SPEED);
@@ -2058,8 +2058,8 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_FinalGambit(MoveEffectParams p) {
 			u16 damage = p.attacker.EffHp(p.state);
-			p.attacker.DamageMon(p.state, ref damage, true, false);
-			p.target.DamageMon(p.state, ref damage, false, true);
+			p.attacker.DamageMon(ref damage, true, false);
+			p.target.DamageMon(ref damage, false, true);
 			return 0;
 		}
 		public static async Task<u32> Effect_Bite(MoveEffectParams p) {
@@ -2514,7 +2514,7 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_PollenPuff(MoveEffectParams p) {
 			if (p.target.Side == p.attacker.Side) {
 				u16 healAmount = p.target.GetPercentOfMaxHp(0.5f);
-				p.target.HealMon(p.state, ref healAmount, false);
+				p.target.HealMon(ref healAmount, false);
 				return 0;
 			}
 			else {
@@ -2656,6 +2656,10 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_QuickGuard(MoveEffectParams p) {
 			// TODO:
+			return 0;
+		}
+		public static async Task<u32> Effect_Rage(MoveEffectParams p) {
+			p.attacker.GiveStatus(Status.RAGE);
 			return 0;
 		}
 		public static async Task<u32> Effect_RageFist(MoveEffectParams p) {

@@ -4,8 +4,15 @@ using u32 = System.UInt32;
 using u64 = System.UInt64;
 
 namespace PkmnEngine {
-	public static partial class AbilityEffects {
-		private static object Heatproof_OnSourceModifySpAtk(object p) {
+	public struct OnSourceModifySpAtkParams {
+		public OnSourceModifySpAtkParams(BattleMove move) {
+			this.move = move;
+		}
+		public BattleMove move;
+	}
+	
+	internal static partial class BattleEvents {
+		public static object Ability_Heatproof_OnSourceModifySpAtk(object p) {
 			OnSourceModifySpAtkParams cbParams = ValidateParams<OnSourceModifySpAtkParams>(p);
 
 			if (cbParams.move.moveType == Type.FIRE) {

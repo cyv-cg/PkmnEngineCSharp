@@ -63,7 +63,12 @@ namespace PkmnEngine.Strings {
 				}
 			}
 			catch (Exception e) {
-				Console.WriteLine(e.Message);
+				string message = "[ ";
+				foreach (string s in mnemonic) {
+					message += s + " ";
+				}
+				message += "]";
+				Console.WriteLine(e.Message + "\n" + raw + "\n" + message);
 			}
 			return raw;
 		}

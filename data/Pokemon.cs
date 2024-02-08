@@ -871,6 +871,16 @@ namespace PkmnEngine {
 		
 		private Dictionary<Status, bool> status;
 		public Dictionary<StatusParam, u16> statusParams;
+		public Status[] Statuses { get {
+				List<Status> statuses = new List<Status>();
+				foreach (Status s in status.Keys) {
+					if (status[s]) {
+						statuses.Add(s);
+					}
+				}
+				return statuses.ToArray();
+			}
+		}
 
 		public sbyte AttackStages { get; private set; }
 		public sbyte DefenseStages { get; private set; }
@@ -995,8 +1005,8 @@ namespace PkmnEngine {
 		/// <param name="force">If force, all checks will be bypassed and HP will be set indiscriminantly.</param>
 		/// <param name="direct">Whether or not the damage is direct.</param>
 		/// <returns>True if the mon's HP > 0 after the damage, and false if not.</returns>
-		public bool DamageMon(BattleState state, ref u16 damage, bool force, bool direct) {
-			damage = (u16)Mathf.Min(EffHp(state), damage);
+		public bool DamageMon(ref u16 damage, bool force, bool direct) {			
+			damage = (u16)Mathf.Min(HP, damage);
 
 			if (!force) {
 				// Magic Guard prevents indirect damage.
@@ -1006,29 +1016,27 @@ namespace PkmnEngine {
 
 				// A bracing (endure) mon cannot lose its last hit point.
 				if (HasStatus(Status.BRACING)) {
-					damage = (u16)Mathf.Min((u16)(EffHp(state) - 1), damage);
+					damage = (u16)Mathf.Min((u16)(HP - 1), damage);
 				}
 			}
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_DAMAGE, GetName(), damage.ToString()));
-			HP -= damage;
+			HP = (u16)(HP - damage);
 
 			// Mark that the mon has received damage this turn.
 			SetFlag(Flag.RECEIVED_DAMAGE_THIS_TURN);
 
 
-			bool fainted = EffHp(state) == 0;
+			bool fainted = HP == 0;
 
 			if (fainted) {
 				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_FAINTED, GetName()));
 				GiveStatus(Status.FAINTED);
 				// TODO: stuff when a mon faints.
 			}
-			// If the last move the mon used was Rage, increase it's attack by 1 stage.
-			else if (moves[GetStatusParam(StatusParam.LAST_USED_MOVE)] == BattleMoveID.RAGE && direct) {
-				MoveEffects.ChangeStat(state, this, 1, Stat.ATTACK);
+			else {
+				Battle.RunEvent<object>(Callback.OnDamage, this, new OnDamageParams(this, damage, force, direct));
 			}
-
 			return !fainted;
 		}
 		/// <summary>
@@ -1039,15 +1047,15 @@ namespace PkmnEngine {
 		/// <param name="amount">The amount of HP to restore.</param>
 		/// <param name="force">If force, all checks will be bypassed and HP will be set indiscriminantly.</param>
 		/// <returns>True if HP is successfully restored.</returns>
-		public bool HealMon(BattleState state, ref u16 amount, bool force) {
+		public bool HealMon(ref u16 amount, bool force) {
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_RESTORED_HP, GetName()));
 
-			u16 oldHp = EffHp(state);
+			u16 oldHp = HP;
 
-			amount = (u16)Mathf.Min(amount, EffMaxHp(state) - EffHp(state));
-			HP += amount;
+			amount = (u16)Mathf.Min(amount, MaxHP - HP);
+			HP = (u16)(HP + amount);
 
-			return EffHp(state) > oldHp;
+			return HP > oldHp;
 		}
 
 		/// <summary>

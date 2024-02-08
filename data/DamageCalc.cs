@@ -115,20 +115,12 @@ namespace PkmnEngine {
 			}
 
 			if (move.moveCat == MoveCategory.PHYSICAL) {
-				foreach (float f in Battle.RunEvent<float>(Callback.OnModifyAtk, attacker, new OnModifyAtkParams(attacker))) {
-					damage = (u16)(damage * f);
-				}
-				foreach (float f in Battle.RunEvent<float>(Callback.OnSourceModifyAtk, defender, new OnSourceModifyAtkParams(move))) {
-					damage = (u16)(damage * f);
-				}
+				damage = (u16)(damage * Battle.RunEventChain(Callback.OnModifyAtk, attacker, new OnModifyAtkParams(attacker)));
+				damage = (u16)(damage * Battle.RunEventChain(Callback.OnSourceModifyAtk, defender, new OnSourceModifyAtkParams(move)));
 			}
 			if (move.moveCat == MoveCategory.SPECIAL) {
-				foreach (float f in Battle.RunEvent<float>(Callback.OnModifySpAtk, attacker, new OnModifySpAtkParams(attacker))) {
-					damage = (u16)(damage * f);
-				}
-				foreach (float f in Battle.RunEvent<float>(Callback.OnSourceModifySpAtk, defender, new OnSourceModifySpAtkParams(move))) {
-					damage = (u16)(damage * f);
-				}
+				damage = (u16)(damage * Battle.RunEventChain(Callback.OnModifySpAtk, attacker, new OnModifySpAtkParams(attacker)));
+				damage = (u16)(damage * Battle.RunEventChain(Callback.OnSourceModifySpAtk, defender, new OnSourceModifySpAtkParams(move)));
 			}
 
 			// Charge
@@ -280,13 +272,7 @@ namespace PkmnEngine {
 			if (attacker.HasType(moveType)) {
 				stab = SAME_TYPE_ATTACK_BONUS;
 			}
-			float[] mods = Battle.RunEvent<float>(Callback.OnModifyStab, attacker, new OnModifyStabParams(attacker, moveType));
-			if (mods.Length != 0) {
-				stab = 1;
-				foreach (float mod in mods) {
-					stab *= mod;
-				}
-			}
+			stab *= Battle.RunEventChain(Callback.OnModifyStab, attacker, new OnModifyStabParams(attacker, moveType));
 			return stab;
 		}
 		/// <summary>

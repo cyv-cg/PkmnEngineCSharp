@@ -41,7 +41,7 @@ namespace PkmnEngine {
 			}
 
 			// Deal damage to mon.
-			bool fainted = !p.target.DamageMon(p.state, ref damage, false, true);
+			bool fainted = !p.target.DamageMon(ref damage, false, true);
 
 			if (mods.isCrit) {
 				MessageBox(Lang.GetBattleMessage(BattleMessage.CRITICAL_HIT));
@@ -62,7 +62,7 @@ namespace PkmnEngine {
 				// ...cause the attacker to faint.
 				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_ITS_ATTACKER_DOWN_WITH_IT, p.target.GetName())); 
 				u16 DBdamage = p.target.EffMaxHp(p.state);
-				p.attacker.DamageMon(p.state, ref damage, true, false);
+				p.attacker.DamageMon(ref damage, true, false);
 			}
 
 			return damage 
@@ -228,7 +228,7 @@ namespace PkmnEngine {
 		}
 	
 		private static u32 DoRecoilDamage(MoveEffectParams p, ref u16 recoil) {
-			p.attacker.DamageMon(p.state, ref recoil, true, false);
+			p.attacker.DamageMon(ref recoil, true, false);
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_DAMAGED_BY_RECOIL, p.attacker.GetName()));
 			return recoil;
 		}

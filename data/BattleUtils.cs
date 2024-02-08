@@ -72,11 +72,11 @@ namespace PkmnEngine {
 					attacker.RemoveStatus(Status.CONFUSION);
 				}
 				// Confused mons have a 33% chance to hurt themselves instead of using their move.
-				else if (battle.rand.NextDouble() < 0.33) {
+				else if (battle.Random01() < 0.33) {
 					// Confusion acts as a physical move with 40 power and no type.
 					// This same effect can be achieved by using tackle and overriding the type effectiveness and power :p
 					u16 damage = CalcDamage(battle, state, attacker, attacker, BattleMoveID.TACKLE, 1, new Mods(), new Overrides(0, 0, 40, 0));
-					attacker.DamageMon(state, ref damage, false, true);
+					attacker.DamageMon(ref damage, false, true);
 					MessageBox(GetBattleMessage(BattleMessage.IT_HURT_ITSELF_IN_ITS_CONFUSION));
 					return false;
 				}

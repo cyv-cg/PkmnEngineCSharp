@@ -9,7 +9,7 @@ using PkmnEngine.Strings;
 namespace PkmnEngine {
 	public static partial class MoveEffects {
 		public static u32 ChangeStat(BattleState state, BattleMon bm, sbyte n, Stat effID) {
-			if (n < 0 && state.SideHasCondition(bm.Side, Condition.MIST)) {
+			if (state != null && n < 0 && state.SideHasCondition(bm.Side, Condition.MIST)) {
 				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_PROTECTED_BY_THE_MIST, bm.GetName()));
 				return 0;
 			}

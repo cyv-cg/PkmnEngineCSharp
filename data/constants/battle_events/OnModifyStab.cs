@@ -4,8 +4,17 @@ using u32 = System.UInt32;
 using u64 = System.UInt64;
 
 namespace PkmnEngine {
-	public static partial class AbilityEffects {
-		private static object Adaptability_OnModifyStab(object p) {
+	public struct OnModifyStabParams {
+		public OnModifyStabParams(BattleMon bm, Type moveType) {
+			this.bm = bm;
+			this.moveType = moveType;
+		}
+		public BattleMon bm;
+		public Type moveType;
+	}
+
+	internal static partial class BattleEvents {
+		public static object Ability_Adaptability_OnModifyStab(object p) {
 			OnModifyStabParams cbParams = ValidateParams<OnModifyStabParams>(p);
 
 			if (cbParams.bm.HasType(cbParams.moveType)) {

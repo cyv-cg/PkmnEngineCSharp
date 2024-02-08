@@ -4,19 +4,30 @@ using u32 = System.UInt32;
 using u64 = System.UInt64;
 
 namespace PkmnEngine {
+	internal static partial class BattleEvents {
+		private static T ValidateParams<T>(object p) {
+			if (p.GetType() != typeof(T)) {
+				throw new System.ArgumentException($"Expected {typeof(T)}, received {p.GetType()}.");
+			}
+			return (T)p;
+		}
+	}
+
 	public delegate object BattleEvent(object callbackParams);
 
 	public readonly struct EventHandler {
 		public EventHandler(BattleEvent callback, EffectType effect) {
 			this.callback = callback;
-            this.effect = effect;
-        }
+			this.effect = effect;
+		}
 		public readonly BattleEvent callback;
 		public readonly EffectType effect;
 	}
 
 	public enum EffectType {
 		ABILITY,
+		STATUS,
+		MOVE,
 	}
 
 	public enum Callback {
@@ -25,49 +36,7 @@ namespace PkmnEngine {
 		OnModifySpAtk,
 		OnSourceModifyAtk,
 		OnSourceModifySpAtk,
-		OnDamage
+		OnDamage,
+		OnResidual,
 	}
-
-	#region Params structs
-	public struct OnModifyStabParams {
-		public OnModifyStabParams(BattleMon bm, Type moveType) {
-            this.bm = bm;
-            this.moveType = moveType;
-        }
-		public BattleMon bm;
-		public Type moveType;
-	}
-	public struct OnModifyAtkParams {
-		public OnModifyAtkParams(BattleMon bm) {
-			this.bm = bm;
-		}
-		public BattleMon bm;
-	}
-	public struct OnModifySpAtkParams {
-		public OnModifySpAtkParams(BattleMon bm) {
-			this.bm = bm;
-		}
-		public BattleMon bm;
-	}
-	public struct OnSourceModifyAtkParams {
-		public OnSourceModifyAtkParams(BattleMove move) {
-            this.move = move;
-        }
-		public BattleMove move;
-	}
-	public struct OnSourceModifySpAtkParams {
-		public OnSourceModifySpAtkParams(BattleMove move) {
-            this.move = move;
-        }
-		public BattleMove move;
-	}
-	public struct OnDamageParams {
-		public OnDamageParams(u16 damage, Status status) {
-            this.damage = damage;
-            this.status = status;
-        }
-		public u16 damage;
-		public Status status;
-	}
-	#endregion
 }
