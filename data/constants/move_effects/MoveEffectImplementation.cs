@@ -565,35 +565,35 @@ namespace PkmnEngine {
 			if (p.state.Weather.Condition == Condition.WEATHER_RAIN) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetWeather(Condition.WEATHER_RAIN, p.attacker.HeldItem == Item.DAMP_ROCK ? (u8)8 : (u8)5);
+			p.state.SetWeather(Condition.WEATHER_RAIN, p.attacker);
 			return 0;
 		}
 		public static async Task<u32> Effect_SunnyDay(MoveEffectParams p) {
 			if (p.state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetWeather(Condition.WEATHER_HARSH_SUNLIGHT, p.attacker.HeldItem == Item.HEAT_ROCK ? (u8)8 : (u8)5);
+			p.state.SetWeather(Condition.WEATHER_HARSH_SUNLIGHT, p.attacker);
 			return 0;
 		}
 		public static async Task<u32> Effect_Hail(MoveEffectParams p) {
 			if (p.state.Weather.Condition == Condition.WEATHER_HAIL) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetWeather(Condition.WEATHER_HAIL, p.attacker.HeldItem == Item.ICY_ROCK ? (u8)8 : (u8)5);
+			p.state.SetWeather(Condition.WEATHER_HAIL, p.attacker);
 			return 0;
 		}
 		public static async Task<u32> Effect_Sandstorm(MoveEffectParams p) {
 			if (p.state.Weather.Condition == Condition.WEATHER_SANDSTORM) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetWeather(Condition.WEATHER_SANDSTORM, p.attacker.HeldItem == Item.SMOOTH_ROCK ? (u8)8 : (u8)5);
+			p.state.SetWeather(Condition.WEATHER_SANDSTORM, p.attacker);
 			return 0;
 		}
 		public static async Task<u32> Effect_Snowscape(MoveEffectParams p) {
 			if (p.state.Weather.Condition == Condition.WEATHER_SNOW) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetWeather(Condition.WEATHER_SNOW, p.attacker.HeldItem == Item.ICY_ROCK ? (u8)8 : (u8)5);
+			p.state.SetWeather(Condition.WEATHER_SNOW, p.attacker);
 			return 0;
 		}
 		public static async Task<u32> Effect_ChillyReception(MoveEffectParams p) {
@@ -1388,26 +1388,17 @@ namespace PkmnEngine {
 			return OverrideType(p, p.attacker.Mon.HiddenPowerType);
 		}
 		public static async Task<u32> Effect_PsychUp(MoveEffectParams p) {
-			p.target.SetStatStage(Stat.ATTACK, p.attacker.AttackStages);
-			p.target.SetStatStage(Stat.DEFENSE, p.attacker.DefenseStages);
-			p.target.SetStatStage(Stat.SPECIAL_ATTACK, p.attacker.SpecialAttackStages);
-			p.target.SetStatStage(Stat.SPECIAL_DEFENSE, p.attacker.SpecialDefenseStages);
-			p.target.SetStatStage(Stat.SPEED, p.attacker.SpeedStages);
-			p.target.SetStatStage(Stat.ACCURACY, p.attacker.AccuracyStages);
-			p.target.SetStatStage(Stat.EVASION, p.attacker.EvasivenessStages);
+			p.attacker.SetStatStage(Stat.ATTACK, p.target.AttackStages);
+			p.attacker.SetStatStage(Stat.DEFENSE, p.target.DefenseStages);
+			p.attacker.SetStatStage(Stat.SPECIAL_ATTACK, p.target.SpecialAttackStages);
+			p.attacker.SetStatStage(Stat.SPECIAL_DEFENSE, p.target.SpecialDefenseStages);
+			p.attacker.SetStatStage(Stat.SPEED, p.target.SpeedStages);
+			p.attacker.SetStatStage(Stat.ACCURACY, p.target.AccuracyStages);
+			p.attacker.SetStatStage(Stat.EVASION, p.target.EvasivenessStages);
 			
-			if (p.attacker.HasStatus(Status.GETTING_PUMPED)) {
-				p.target.GiveStatus(Status.GETTING_PUMPED);
-				p.attacker.RemoveStatus(Status.GETTING_PUMPED);
+			if (p.target.HasStatus(Status.GETTING_PUMPED)) {
+				p.attacker.GiveStatus(Status.GETTING_PUMPED);
 			}
-
-			p.attacker.SetStatStage(Stat.ATTACK, 0);
-			p.attacker.SetStatStage(Stat.DEFENSE, 0);
-			p.attacker.SetStatStage(Stat.SPECIAL_ATTACK, 0);
-			p.attacker.SetStatStage(Stat.SPECIAL_DEFENSE, 0);
-			p.attacker.SetStatStage(Stat.SPEED, 0);
-			p.attacker.SetStatStage(Stat.ACCURACY, 0);
-			p.attacker.SetStatStage(Stat.EVASION, 0);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_COPIED_MONS_STAT_CHANGES, p.attacker.GetName(), p.target.GetName()));
 

@@ -3,6 +3,12 @@ using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
 
+using static PkmnEngine.Global;
+using static PkmnEngine.BattleEvents;
+using PkmnEngine.Strings;
+
+using System.Collections.Generic;
+
 namespace PkmnEngine {
 	public static class FieldConditions {
 		public const float HAIL_CHIP_DAMAGE				= 1.0f / 16;
@@ -44,6 +50,295 @@ namespace PkmnEngine {
 				throw new System.Exception($"Floating point error: {eff}");
 			}
 		}
+
+		public static (BattleEvent callback, sbyte priority) gConditionEvents(Condition condition, Callback cb) {
+			if (ConditionEvents.ContainsKey(condition) && ConditionEvents[condition].ContainsKey(cb)) {
+				return ConditionEvents[condition][cb];
+			}
+			else {
+				return (null, 0);
+			}
+		}
+
+		private static readonly Dictionary<Condition, Dictionary<Callback, (BattleEvent callback, sbyte priority)>> ConditionEvents = new() { {
+		
+			Condition.WEATHER_HARSH_SUNLIGHT,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.HEAT_ROCK) {
+							return (u8)8;
+						}
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnWeatherModifyDamage,
+					(Weather_HarshSunlight_OnWeatherModifyDamage, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Weather_HarshSunlight_OnFieldResidual, 1)
+				},
+				{
+					Callback.OnStatusImmunityCheck,
+					(Weather_HarshSunlight_OnStatusImmunityCheck, 0)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Weather_HarshSunlight_OnWeatherSet, 0)
+				}
+			}
+		},
+		{
+			Condition.WEATHER_EXTREME_SUNLIGHT,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						return u8.MaxValue;
+					}, 0)
+				},
+				{
+					Callback.OnTrySetWeatherCheck,
+					((object p) => {
+						MessageBox(Lang.GetBattleMessage(BattleMessage.EXTREME_SUNLIGHT_NOT_LESSENED));
+						return false;
+					}, 0)
+				},
+				{
+					Callback.OnWeatherModifyDamage,
+					(Weather_HarshSunlight_OnWeatherModifyDamage, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Weather_ExtremeSunlight_OnFieldResidual, 1)
+				},
+				{
+					Callback.OnStatusImmunityCheck,
+					(Weather_HarshSunlight_OnStatusImmunityCheck, 0)
+				},
+				{
+					Callback.OnTryMoveCheck,
+					(Weather_ExtremeSunlight_OnTryMoveCheck, 0)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Weather_ExtremeSunlight_OnWeatherSet, 0)
+				}
+			}
+		},
+		{
+			Condition.WEATHER_RAIN,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.DAMP_ROCK) {
+							return (u8)8;
+						}
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnWeatherModifyDamage,
+					(Weather_Rain_OnWeatherModifyDamage, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Weather_Rain_OnFieldResidual, 1)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Weather_Rain_OnWeatherSet, 0)
+				}
+			}
+		},
+		{
+			Condition.WEATHER_HEAVY_RAIN,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						return u8.MaxValue;
+					}, 0)
+				},
+				{
+					Callback.OnTrySetWeatherCheck,
+					((object p) => {
+						MessageBox(Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_NOT_LESSENED));
+						return false;
+					}, 0)
+				},
+				{
+					Callback.OnWeatherModifyDamage,
+					(Weather_Rain_OnWeatherModifyDamage, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Weather_HeavyRain_OnFieldResidual, 1)
+				},
+				{
+					Callback.OnTryMoveCheck,
+					(Weather_HeavyRain_OnTryMoveCheck, 0)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Weather_HeavyRain_OnWeatherSet, 0)
+				}
+			}
+		},
+		{
+			Condition.WEATHER_SANDSTORM,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.SMOOTH_ROCK) {
+							return (u8)8;
+						}
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnModifySpDef,
+					(Weather_Sandstorm_OnModifySpDef, 10)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Weather_Sandstorm_OnFieldResidual, 1)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Weather_Sandstorm_OnWeatherSet, 0)
+				}
+			}
+		},
+		{
+			Condition.WEATHER_HAIL,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.ICY_ROCK) {
+							return (u8)8;
+						}
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Weather_Hail_OnFieldResidual, 1)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Weather_Hail_OnWeatherSet, 0)
+				}
+			}
+		},
+		{
+			Condition.WEATHER_SNOW,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.ICY_ROCK) {
+							return (u8)8;
+						}
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Weather_Snow_OnFieldResidual, 1)
+				},
+				{
+					Callback.OnModifyDef,
+					(Weather_Snow_OnModifyDef, 10)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Weather_Snow_OnWeatherSet, 0)
+				}
+			}
+		},
+		{
+			Condition.WEATHER_FOG,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						return u8.MaxValue;
+					}, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Weather_Fog_OnFieldResidual, 1)
+				},
+				{
+					Callback.OnFieldModifyAcc,
+					((object p) => {
+						return FieldConditions.FOG_ACCURACY_REDUCTION;
+					}, 0)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Weather_Fog_OnWeatherSet, 0)
+				}
+			}
+		},
+		{
+			Condition.WEATHER_STRONG_WIND,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						return u8.MaxValue;
+					}, 0)
+				},
+				{
+					Callback.OnTrySetWeatherCheck,
+					((object p) => {
+						MessageBox(Lang.GetBattleMessage(BattleMessage.STRONG_WINDS_NOT_LESSENED));
+						return false;
+					}, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Weather_StrongWind_OnFieldResidual, 1)
+				},
+				{
+					Callback.OnModifyEffectiveness,
+					(Weather_StrongWind_OnModifyEffectiveness, -1)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Weather_StrongWind_OnWeatherSet, 0)
+				}
+			}
+		},
+		{
+			Condition.WEATHER_SHADOWY_AURA,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Weather_ShadowyAura_OnFieldResidual, 1)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Weather_ShadowyAura_OnWeatherSet, 0)
+				}
+			}
+		}
+		
+		};
 	}
 
 	public class FieldCondition : ISerializable<FieldCondition> {
@@ -128,6 +423,10 @@ namespace PkmnEngine {
 			}
 		}
 
+		public bool IsActive() {
+			return Infinite || DurationRemaining > 0;
+		}
+
 		public bool Equals(FieldCondition obj) {
 			return this.Condition == obj.Condition;
 		}
@@ -135,36 +434,6 @@ namespace PkmnEngine {
 			return this.Condition == obj;
 		}
 	}
-
-	//// Weather effects. All mutually exclusive and timed.
-	//public enum Weather {
-	//	NONE,
-	//	HARSH_SUNLIGHT,
-	//	RAIN,
-	//	SANDSTORM,
-	//	HAIL,
-	//	SNOW,
-	//	FOG,
-	//	EXTREME_SUNLIGHT,
-	//	HEAVY_RAIN,
-	//	STRONG_WIND,
-	//	SHADOWY_AURA // unused
-	//}
-
-	//// Terrain effects. All mutually exclusive and also timed.
-	//public enum Terrain {
-	//	NONE,
-	//	ELECTRIC,
-	//	GRASSY,
-	//	MISTY,
-	//	PSYCHIC
-	//}
-
-	//public enum FieldModifier {
-	//	GRAVITY				= 1 << 0,
-	//	WATER_SPORT			= 1 << 1,
-	//	MUD_SPORT			= 1 << 2,
-	//}
 
 	public enum Condition {
 		// Weather
@@ -210,17 +479,4 @@ namespace PkmnEngine {
 		SAFEGUARD,
 		MIST,
 	}
-
-	//public enum ConditionTurns {
-	//	WEATHER,
-	//	TERRAIN,
-	//	WATER_SPORT,
-	//	MUD_SPORT,
-	//	TAILWIND,
-	//	REFLECT,
-	//	LIGHT_SCREEN,
-	//	AURORA_VEIL,
-	//	SAFEGUARD,
-	//	MIST
-	//};
 }

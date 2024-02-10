@@ -13,10 +13,7 @@ namespace PkmnEngine {
 			public Mods(MoveEffectParams p, float critChance) {
 				isCrit = p.battle.rand.NextDouble() < critChance;
 				typeEff = TypeEffectiveness(p.target, p.move.moveType);
-				if ((p.state.Weather.Condition == Condition.WEATHER_STRONG_WIND) && typeEff >= EFF_NORMAL && p.target.HasType(Type.FLYING)) {
-					//MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_WIND_WEAKENED_ATTACK));
-					typeEff = EFF_NORMAL;
-				}
+				typeEff *= Battle.RunEventChain(Callback.OnModifyEffectiveness, p.battle, new OnModifyEffectivenessParams(p.state, p.target, p.moveID, typeEff));
 				stab = STAB(p.attacker, p.move.moveType);
 			}
 			public Mods() {
@@ -368,7 +365,7 @@ namespace PkmnEngine {
 				-6 or -5 or -4 or -3 or -2 or -1 => 0,
 				1 => 0.125f,
 				2 => 0.5f,
-				3 => 1,
+				3 or 4 or 5 or 6 => 1,
 				_ => 0.0417f,
 			};
 		}

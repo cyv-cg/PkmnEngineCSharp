@@ -116,16 +116,8 @@ namespace PkmnEngine {
 		private static float CritRate(MoveEffectParams p, sbyte bias = 0) {
 			sbyte stages = bias;
 
-			if (p.attacker.HasStatus(Status.GETTING_PUMPED)) {
-				stages++;
-			}
-
-			if (p.attacker.AbilityProc(Ability.SUPER_LUCK, false)) {
-				stages++;
-			}
-
 			if ((p.move.flags & BattleMoves.Flag.HIGH_CRITICAL) != 0) {
-				stages++;
+				stages += 1;
 			}
 			if ((p.move.flags & BattleMoves.Flag.HIGH_CRITICAL2) != 0) {
 				stages += 2;
@@ -134,8 +126,11 @@ namespace PkmnEngine {
 				stages += 6;
 			}
 
-			if (p.target.AbilityProc(Ability.BATTLE_ARMOR, false) || p.target.AbilityProc(Ability.SHELL_ARMOR, false)) {
-				stages = MIN_STAT_STAGE;
+			foreach (sbyte v in Battle.RunEvent<sbyte>(Callback.OnModifyCritRatio, p.attacker, new OnModifyCritRatioParams())) {
+				stages += v;
+			}
+			foreach (sbyte v in Battle.RunEvent<sbyte>(Callback.OnSourceModifyCritRatio, p.target, new OnSourceModifyCritRatioParams())) {
+				stages += v;
 			}
 
 			return GetEffectiveCritRate(stages);

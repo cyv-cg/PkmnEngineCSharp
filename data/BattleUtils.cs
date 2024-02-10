@@ -84,26 +84,6 @@ namespace PkmnEngine {
 
 			return true;
 		}
-		/// <summary>
-		/// Determines if a given move can be used during the current weather conditions and prints message if not.
-		/// </summary>
-		/// <param name="state">Current BattleState.</param>
-		/// <param name="moveID">ID of the move being used.</param>
-		/// <returns>True if the move can be used, false if not.</returns>
-		private static bool MoveWeatherBlockers(BattleState state, BattleMoveID moveID) {
-			// Water type moves cannot be used during extreme sunlight.
-			if ((state.Weather.Condition == Condition.WEATHER_EXTREME_SUNLIGHT) && gBattleMoves(moveID).moveType == Type.WATER) {
-				MessageBox(GetBattleMessage(BattleMessage.WATER_ATTACK_EVAPORATED));
-				return false;
-			}
-			// Fire type moves cannot be used during heavy rain.
-			else if ((state.Weather.Condition == Condition.WEATHER_HEAVY_RAIN) && gBattleMoves(moveID).moveType == Type.FIRE) {
-				MessageBox(GetBattleMessage(BattleMessage.FIRE_ATTACK_FIZZLED_OUT));
-				return false;
-			}
-
-			return true;
-		}
 		
 		/// <summary>
 		/// Sets a mon's successive protect counter to zero if it uses a non-protecting move.
@@ -142,7 +122,7 @@ namespace PkmnEngine {
 			CheckSuccessiveProtects(attacker, moveID);
 
 			// Weird weather conditions:
-			if (!MoveWeatherBlockers(state, moveID)) {
+			if (!Battle.RunEventCheck(Callback.OnTryMoveCheck, battle, new OnTryMoveCheckParams(state, attacker, moveID))) {
 				return;
 			}
 
@@ -157,6 +137,7 @@ namespace PkmnEngine {
 			for (u8 i = 0; i < targets.Length; i++) {
 				defender = battle.GetMonInSlot(state, targets[i]);
 
+				// BUG: this causes the "but it missed" line to print *before* saying that the attacker even used a move.
 				if (!MoveHit(battle, state, attacker, defender, moveID)) {
 					MessageBox(GetBattleMessage(BattleMessage.MON_AVOIDED_ATTACK, defender.GetName()));
 					continue;
@@ -348,9 +329,7 @@ namespace PkmnEngine {
 
 			float roll = battle.Random01();
 
-			if (state.Weather.Condition == Condition.WEATHER_FOG) {
-				roll *= FieldConditions.FOG_ACCURACY_REDUCTION;
-			}
+			roll *= Battle.RunEventChain(Callback.OnFieldModifyAcc, battle, null);
 
 			float hitChance = DamageCalc.CalculateHitChance(state, attacker, defender, moveID);
 			bool hit = roll <= hitChance;

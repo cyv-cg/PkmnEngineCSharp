@@ -317,7 +317,45 @@ namespace PkmnEngine.Strings {
 						Language.CHN_TRA => "神秘的亂流停止了！",
 						_ => throw new System.ArgumentException()
 					};
-
+				case BattleMessage.EXTREME_SUNLIGHT_NOT_LESSENED:
+					return lang switch {
+						Language.ENG => "The extremely harsh sunlight was not lessened at all!",
+						Language.JPN => "{非常|ひじょう}に{厳|きび}しい{日差|ひざ}しはまったく{和|やわ}らいでいない！",
+						Language.GER => "Das extrem harte Sonnenlicht wurde nicht im Geringsten gemildert!",
+						Language.FRE => "La lumière extrêmement dure du soleil ne s'est pas atténuée du tout !",
+						Language.ITA => "La luce del sole, estremamente intensa, non si è affatto attenuata!",
+						Language.SPN => "La luz del sol, extremadamente dura, no disminuyó en absoluto.",
+						Language.KOR => "극도로 강렬한 햇빛은 전혀 줄어들지 않았습니다!",
+						Language.CHN_SIM => "极其刺眼的阳光却没有丝毫减弱！",
+						Language.CHN_TRA => "極其刺眼的陽光卻沒有絲毫減弱！",
+						_ => throw new System.ArgumentException()
+					};
+				case BattleMessage.HEAVY_RAIN_NOT_LESSENED:
+					return lang switch {
+						Language.ENG => "There is no relief from this heavy rain!",
+						Language.JPN => "この{大雨|おおあめ}から{解放|かいほう}されることはない！",
+						Language.GER => "Es gibt keine Erleichterung bei diesem starken Regen!",
+						Language.FRE => "Ces pluies diluviennes n'ont pas de répit !",
+						Language.ITA => "Non c'è sollievo da questa pioggia battente!",
+						Language.SPN => "Esta lluvia torrencial no da tregua.",
+						Language.KOR => "이 폭우에 안심할 수 없습니다!",
+						Language.CHN_SIM => "这场大雨丝毫没有缓解！",
+						Language.CHN_TRA => "這場大雨絲毫沒有緩解！",
+						_ => throw new System.ArgumentException()
+					};
+				case BattleMessage.STRONG_WINDS_NOT_LESSENED:
+					return lang switch {
+						Language.ENG => "The mysterious strong winds blow on regardless!",
+						Language.JPN => "{謎|なぞ}の{強風|きょうふう}は{関係|かんけい}なく{吹|ふ}き{続|つづ}ける！",
+						Language.GER => "Die mysteriösen starken Winde wehen trotzdem weiter!",
+						Language.FRE => "Les mystérieux vents forts soufflent malgré tout !",
+						Language.ITA => "I misteriosi e forti venti soffiano senza sosta!",
+						Language.SPN => "Los fuertes vientos misteriosos soplan a pesar de todo.",
+						Language.KOR => "신비한 강풍이 거침없이 불어옵니다!",
+						Language.CHN_SIM => "神秘的强风不顾一切地吹来！",
+						Language.CHN_TRA => "神秘的強風不顧一切地吹來！",
+						_ => throw new System.ArgumentException()
+					};
 				case BattleMessage.MON_WAS_BURNED:
 					return lang switch {
 						Language.ENG => "\\$ was burned!",
@@ -2147,6 +2185,71 @@ namespace PkmnEngine.Strings {
 						Language.CHN_TRA => "神秘的亂流減弱了攻擊！",
 						_ => throw new System.ArgumentException()
 					};
+				case BattleMessage.MYSTERIOUS_WIND_BLOWS_ON:
+					return lang switch {
+						Language.ENG => "The mysterious air current blows on!",
+						Language.JPN => "{不思議|ふしぎ}な{気流|きりゅ}が{吹|ふ}き{荒|あら}れる！",
+						Language.GER => "Der geheimnisvolle Luftstrom weht weiter!",
+						Language.FRE => "Le mystérieux courant d'air souffle !",
+						Language.ITA => "La misteriosa corrente d'aria continua a soffiare!",
+						Language.SPN => "¡La misteriosa corriente de aire sigue soplando!",
+						Language.KOR => "신비한 기류가 불어옵니다!",
+						Language.CHN_SIM => "神秘氣流襲來！",
+						Language.CHN_TRA => "神秘氣流襲來！",
+						_ => throw new System.ArgumentException()
+					};
+				case BattleMessage.SHADOWY_AURA_APPEARED:
+					return lang switch {
+						Language.ENG => "A shadowy aura filled the sky!",
+						Language.JPN => "{影|かげ}のようなオーラが{空|そら}を{満|み}たした！",
+						Language.GER => "Eine schattenhafte Aura erfüllte den Himmel!",
+						Language.FRE => "Une aura d'ombre remplit le ciel !",
+						Language.ITA => "Un'aura d'ombra riempì il cielo!",
+						Language.SPN => "¡Un aura sombría llenó el cielo!",
+						Language.KOR => "어둠의 기운이 하늘을 가득 채웠습니다!",
+						Language.CHN_SIM => "天空中弥漫着一股阴暗的气息！",
+						Language.CHN_TRA => "天空中瀰漫著一股陰暗的氣息！",
+						_ => throw new System.ArgumentException()
+					};
+				case BattleMessage.SHADOWY_AURA_DISAPPEARED:
+					return lang switch {
+						Language.ENG => "The shadowy aura faded away!",
+						Language.JPN => "{影|かげ}のようなオーラが{消|き}えていった！",
+						Language.GER => "Die schattenhafte Aura verblasste!",
+						Language.FRE => "L'aura d'ombre se dissipe !",
+						Language.ITA => "L'aura oscura si è dissolta!",
+						Language.SPN => "¡El aura sombría se desvaneció!",
+						Language.KOR => "어둠의 기운이 사라졌습니다!",
+						Language.CHN_SIM => "阴暗气息消散！",
+						Language.CHN_TRA => "陰暗氣息消散！",
+						_ => throw new System.ArgumentException()
+					};
+				case BattleMessage.LIGHT_SHOWERED_FROM_SHADOWY_AURA:
+					return lang switch {
+						Language.ENG => "Bursts of light showered from the shadowy aura!",
+						Language.JPN => "{影|かげ}のようなオーラから{光|ひかり}の{破片|はへん}がはじけた！",
+						Language.GER => "Aus der schattenhaften Aura brechen Lichtsplitter hervor!",
+						Language.FRE => "Des éclats de lumière jaillissent de l'aura d'ombre !",
+						Language.ITA => "Dall'aura d'ombra si sprigionano frammenti di luce!",
+						Language.SPN => "¡Disparos de luz estallan del aura sombría!",
+						Language.KOR => "어둠의 기운에서 빛의 파편이 터져 나옵니다!",
+						Language.CHN_SIM => "一道道光芒从黑暗气息中爆射而出！",
+						Language.CHN_TRA => "一道道光芒從黑暗氣息中爆射而出！",
+						_ => throw new System.ArgumentException()
+					};
+				case BattleMessage.FLASHING_LIGHT_STRIKES_MON:
+					return lang switch {
+						Language.ENG => "The flashing light strikes \\$!",
+						Language.JPN => "{閃光|せんこう}が\\$を{襲|おそ}う！",
+						Language.GER => "Das blinkende Licht fällt \\$ auf!",
+						Language.FRE => "La lumière clignotante frappe \\$ !",
+						Language.ITA => "La luce lampeggiante colpisce \\$!",
+						Language.SPN => "¡La luz intermitente golpea \\$!",
+						Language.KOR => "깜박이는 불빛이 \\$를 강타합니다!",
+						Language.CHN_SIM => "闪烁的光芒击中了\\$！",
+						Language.CHN_TRA => "閃爍的光芒擊中了\\$！",
+						_ => throw new System.ArgumentException()
+					};
 				case BattleMessage.MON_WHIPPED_UP_A_WHIRLWIND:
 					return lang switch {
 						Language.ENG => "\\$ whipped up a whirlwind!",
@@ -3485,7 +3588,10 @@ namespace PkmnEngine.Strings {
 		SUNLIGHT_BECAME_EXTREMELY_HARSH,
 		HEAVY_RAIN_STARTED,
 		MYSTERIOUS_WIND_APPEARED,
-
+		SHADOWY_AURA_APPEARED,
+		SHADOWY_AURA_DISAPPEARED,
+		LIGHT_SHOWERED_FROM_SHADOWY_AURA,
+		FLASHING_LIGHT_STRIKES_MON,
 		SUNLIGHT_FADED,
 		RAIN_STOPPED,
 		SANDSTORM_SUBSIDED,
@@ -3495,7 +3601,9 @@ namespace PkmnEngine.Strings {
 		EXTREME_SUNLIGHT_FADED,
 		HEAVY_RAIN_STOPPED,
 		MYSTERIOUS_WIND_DISAPPEARED,
-
+		EXTREME_SUNLIGHT_NOT_LESSENED,
+		HEAVY_RAIN_NOT_LESSENED,
+		STRONG_WINDS_NOT_LESSENED,
 		MON_WAS_BURNED,
 		MON_ALREADY_BURNED,
 		MON_CURED_OF_BURN,
@@ -3650,6 +3758,7 @@ namespace PkmnEngine.Strings {
 		WATER_ATTACK_EVAPORATED,
 		WIND_WEAKENED_ATTACK,
 		MON_WHIPPED_UP_A_WHIRLWIND,
+		MYSTERIOUS_WIND_BLOWS_ON,
 		MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER,
 		A_VEIL_OF_WATER_RESTORED_MONS_HP,
 		MONS_PP_WAS_REDUCED,

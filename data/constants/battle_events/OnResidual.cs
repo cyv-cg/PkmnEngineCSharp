@@ -8,9 +8,13 @@ using PkmnEngine.Strings;
 
 namespace PkmnEngine {
 	public struct OnResidualParams {
-		public OnResidualParams(BattleMon bm) {
+		public OnResidualParams(Battle battle, BattleState state, BattleMon bm) {
+			this.battle = battle;
+			this.state = state;
 			this.bm = bm;
 		}
+		public Battle battle;
+		public BattleState state;
 		public BattleMon bm;
 	}
 	
@@ -19,9 +23,9 @@ namespace PkmnEngine {
 			OnResidualParams cbParams = ValidateParams<OnResidualParams>(p);
 
 			u16 damage = cbParams.bm.GetPercentOfMaxHp(StatusEffects.BURN_CHIP_DAMAGE);
-			cbParams.bm.DamageMon(ref damage, false, false);
+			cbParams.bm.DamageMon(ref damage, true, false);
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_ITS_BURN, cbParams.bm.GetName()));
-			return 1;
+			return null;
 		}
 		public static object Status_Poison_OnResidual(object p) {
 			OnResidualParams cbParams = ValidateParams<OnResidualParams>(p);
@@ -31,7 +35,7 @@ namespace PkmnEngine {
 			if (damage > 0) {
 				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, cbParams.bm.GetName()));
 			}
-			return damage;
+			return null;
 		}
 		public static object Status_Toxic_OnResidual(object p) {
 			OnResidualParams cbParams = ValidateParams<OnResidualParams>(p);
@@ -49,7 +53,48 @@ namespace PkmnEngine {
 			if (baseDamage > 0) {
 				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, cbParams.bm.GetName()));
 			}
-			return totalDamage;
+			return null;
+		}
+
+		public static object Status_AquaRing_OnResidual(object p) {
+			OnResidualParams cbParams = ValidateParams<OnResidualParams>(p);
+
+			MessageBox(Lang.GetBattleMessage(BattleMessage.A_VEIL_OF_WATER_RESTORED_MONS_HP, cbParams.bm.GetName()));
+			u16 healAmount = cbParams.bm.GetPercentOfMaxHp(StatusEffects.AQUA_RING_HEAL_AMOUNT);
+			cbParams.bm.HealMon(ref healAmount, false);
+
+			return null;
+		}
+		public static object Status_Seeded_OnResidual(object p) {
+			OnResidualParams cbParams = ValidateParams<OnResidualParams>(p);
+
+			u16 healAmount = cbParams.bm.GetPercentOfMaxHp(StatusEffects.LEECH_SEED_DRAIN_AMOUNT);
+			cbParams.bm.DamageMon(ref healAmount, true, false);
+			BattleMon monSeededBy = cbParams.battle.GetMonInSlot(cbParams.state, (u8)cbParams.bm.GetStatusParam(StatusParam.SLOT_SEEDED_BY));
+			if (monSeededBy != null) {
+				monSeededBy.HealMon(ref healAmount, false);
+				MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_HP_WAS_SAPPED_BY_LEECH_SEED, cbParams.bm.GetName()));
+			}
+
+			return null;
+		}
+		public static object Status_SaltCure_OnResidual(object p) {
+			OnResidualParams cbParams = ValidateParams<OnResidualParams>(p);
+
+			u16 damage = (cbParams.bm.HasType(Type.WATER) || cbParams.bm.HasType(Type.STEEL)) ? cbParams.bm.GetPercentOfMaxHp(0.25f) : cbParams.bm.GetPercentOfMaxHp(0.125f);
+			cbParams.bm.DamageMon(ref damage, true, false);
+			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_BEING_SALT_CURED, cbParams.bm.GetName()));
+
+			return null;
+		}
+		public static object Status_Curse_OnResidual(object p) {
+			OnResidualParams cbParams = ValidateParams<OnResidualParams>(p);
+
+			u16 damage = cbParams.bm.GetPercentOfMaxHp(0.25f);
+			cbParams.bm.DamageMon(ref damage, true, false);
+			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_AFFLICTED_BY_CURSE, cbParams.bm.GetName()));
+
+			return null;
 		}
 	} 
 }

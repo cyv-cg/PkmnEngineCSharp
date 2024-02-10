@@ -80,9 +80,22 @@ namespace PkmnEngine {
 			}
 			return chain;
 		}
+		public static bool RunEventCheck(Callback cb, BattleMon target, object args) {
+			foreach (bool x in RunEvent<bool>(cb, target, args)) {
+				if (!x) {
+					return false;
+				}
+			}
+			return true;
+		}
+		public static void RunEvent(Callback cb, BattleMon target, object args) {
+			RunEvent<object>(cb, target, args);
+		}
 		public static T[] RunEvent<T>(Callback cb, BattleMon target, object args) {
 			EventHandler[] handlers = FindEventHandler(cb, target);
 			List<T> retVal = new List<T>();
+
+			// TODO: sort handlers by priority.
 
 			foreach (EventHandler handler in handlers) {
 				// Ability Suppression
@@ -92,29 +105,107 @@ namespace PkmnEngine {
 
 				retVal.Add((T)handler.callback.Invoke(args));
 			}
+
+			return retVal.ToArray();
+		}
+
+		public static void RunEvent(Callback cb, Battle target, object args) {
+			RunEvent<object>(cb, target.CurrentState, args);
+		}
+		public static float RunEventChain(Callback cb, Battle target, object args) {
+			float chain = 1;
+			foreach (float x in RunEvent<float>(cb, target.CurrentState, args)) {
+				chain *= x;
+			}
+			return chain;
+		}
+		public static bool RunEventCheck(Callback cb, Battle target, object args) {
+			foreach (bool x in RunEvent<bool>(cb, target.CurrentState, args)) {
+				if (!x) {
+					return false;
+				}
+			}
+			return true;
+		}
+		public static float RunEventChain(Callback cb, BattleState target, object args) {
+			float chain = 1;
+			foreach (float x in RunEvent<float>(cb, target, args)) {
+				chain *= x;
+			}
+			return chain;
+		}
+		public static bool RunEventCheck(Callback cb, BattleState target, object args) {
+			foreach (bool x in RunEvent<bool>(cb, target, args)) {
+				if (!x) {
+					return false;
+				}
+			}
+			return true;
+		}
+		public static void RunEvent(Callback cb, BattleState target, object args) {
+			RunEvent<object>(cb, target, args);
+		}
+		public static T[] RunEvent<T>(Callback cb, BattleState target, object args) {
+			EventHandler[] handlers = FindEventHandler(cb, target);
+			List<T> retVal = new List<T>();
+
+			// TODO: sort handlers by priority.
+
+			foreach (EventHandler handler in handlers) {
+				retVal.Add((T)handler.callback.Invoke(args));
+			}
+
 			return retVal.ToArray();
 		}
 
 		private static EventHandler[] FindEventHandler(Callback cb, BattleMon target) {
 			List<EventHandler> handlers = new List<EventHandler>();
 			BattleEvent callback;
+			sbyte priority;
 
 			// Status
 			foreach (Status s in target.Statuses) {
-				callback = StatusEffects.gStatusEvents(s, cb);
+				(callback, priority) = StatusEffects.gStatusEvents(s, cb);
 				if (callback != null) {
-					handlers.Add(new EventHandler(callback, EffectType.STATUS));
+					handlers.Add(new EventHandler(callback, EffectType.STATUS, priority));
 				}
 			}
 			// Ability
 			Ability ability = target.ability;
-			callback = AbilityEffects.gAbilityEvents(ability, cb);
+			(callback, priority) = AbilityEffects.gAbilityEvents(ability, cb);
 			if (callback != null) {
-				handlers.Add(new EventHandler(callback, EffectType.ABILITY));
+				handlers.Add(new EventHandler(callback, EffectType.ABILITY, priority));
 			}
 			// TODO: Item
 			// TODO: Species
 			// TODO: Side
+
+			return handlers.ToArray();
+		}
+		public static EventHandler[] FindEventHandler(Callback cb, BattleState target) {
+			List<EventHandler> handlers = new List<EventHandler>();
+			BattleEvent callback;
+			sbyte priority;
+
+			// Weather
+			FieldCondition weather = target.Weather;
+			(callback, priority) = FieldConditions.gConditionEvents(weather.Condition, cb);
+			if (callback != null) {
+				handlers.Add(new EventHandler(callback, EffectType.WEATHER, priority));
+			}
+			// Terrain
+			FieldCondition terrain = target.Terrain;
+			(callback, priority) = FieldConditions.gConditionEvents(terrain.Condition, cb);
+			if (callback != null) {
+				handlers.Add(new EventHandler(callback, EffectType.TERRAIN, priority));
+			}
+			// Conditions
+			foreach (FieldCondition condition in target.FieldConditions) {
+				(callback, priority) = FieldConditions.gConditionEvents(condition.Condition, cb);
+				if (callback != null) {
+					handlers.Add(new EventHandler(callback, EffectType.CONDITION, priority));
+				}
+			}
 
 			return handlers.ToArray();
 		}
@@ -130,7 +221,7 @@ namespace PkmnEngine {
 				this.players[i] = new TrainerBattleContext(players[i], format.SideControllingSlot(slots[0]), slots);
 			}
 
-			BattleState state = new BattleState(this, this.players);
+			BattleState state = new BattleState(this);
 			return state;
 		}
 
@@ -157,8 +248,8 @@ namespace PkmnEngine {
 		/// <returns>BattleMon in the given slot. Returns null if empty.</returns>
 		public BattleMon GetMonInSlot(BattleState state, u8 slot) {
 			// Get the index of the mon in the desired slot.
-			int index = (int)((state.FieldMons >> (BattleState.BITS_PER_MON_INDEX * slot)) & ((1 << BattleState.BITS_PER_MON_INDEX) - 1)) - 1;
-			if (index < 0) {
+			int index = (int)((state.FieldMons >> (BattleState.BITS_PER_MON_INDEX * slot)) & ((1 << BattleState.BITS_PER_MON_INDEX) - 1));
+			if (index == BattleState.SLOT_EMPTY) {
 				return null;
 			}
 			return PlayerControllingSlot(slot).team[index];
@@ -233,7 +324,7 @@ namespace PkmnEngine {
 			// Bitwise and will zero out the segment in which this index will be stored.
 			state.FieldMons &= mask;
 			// Finally, we store this index in the appropriate slot.
-			state.FieldMons |= (u32)((monIndex + 1) << shift);
+			state.FieldMons |= (u32)(monIndex << shift);
 
 			if (monIndex < 0) {
 				return;
@@ -297,15 +388,22 @@ namespace PkmnEngine {
 		/// 
 		/// </summary>
 		/// <param name="state"></param>
-		private async void Start(BattleState state)
-		{
+		private async void Start(BattleState state) {
 			// BUG: Why did I use this here??? Do not use this namespace here!
 			BattleSceneDrawer.SetupScene(this, this.players);
 			u8 winningSide;
 
 			while (!IsOver(out winningSide)) {
 				// Get the new state.
-				CurrentState = state.Next();
+				CurrentState = CurrentState.Next();
+
+				for (u8 i = 0; i < format.numSlots; i++) {
+					BattleMon bm = GetMonInSlot(CurrentState, i);
+					if (bm == null) {
+						continue;
+					}
+					Battle.RunEvent(Callback.OnStart, bm, new OnStartParams(CurrentState, bm));
+				}
 
 				await ChooseActions(CurrentState);
 				DoBattleActions(CurrentState);
@@ -385,12 +483,15 @@ namespace PkmnEngine {
 			DoAfterTurnTerrainEvents(CurrentState);
 
 
+
 			for (u8 i = 0; i < format.numSlots; i++) {
 				BattleMon bm = GetMonInSlot(CurrentState, i);
 				if (bm == null) {
 					continue;
 				}
 
+				Battle.RunEvent(Callback.OnEnd, bm, new OnEndParams(CurrentState, bm));
+				
 				// Remove transient conditions.
 				foreach (Status s in StatusEffects.STATUS_MASK_TRANSIENT) {
 					bm.RemoveStatus(s);
@@ -416,7 +517,7 @@ namespace PkmnEngine {
 
 			// Cache the state.
 			AddToHistory(CurrentState);
-			CurrentState = CurrentState.Next();
+			//CurrentState = CurrentState.Next();
 		}
 
 		/// <summary>
@@ -538,29 +639,29 @@ namespace PkmnEngine {
 				}
 
 				// Aqua Ring
-				if (bm.HasStatus(Status.AQUA_RING)) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.A_VEIL_OF_WATER_RESTORED_MONS_HP, bm.GetName()));
-					u16 healAmount = bm.GetPercentOfMaxHp(StatusEffects.AQUA_RING_HEAL_AMOUNT);
-					bm.HealMon(ref healAmount, false);
-				}
+				//if (bm.HasStatus(Status.AQUA_RING)) {
+				//	MessageBox(Lang.GetBattleMessage(BattleMessage.A_VEIL_OF_WATER_RESTORED_MONS_HP, bm.GetName()));
+				//	u16 healAmount = bm.GetPercentOfMaxHp(StatusEffects.AQUA_RING_HEAL_AMOUNT);
+				//	bm.HealMon(ref healAmount, false);
+				//}
 				// Leech Seed
-				if (bm.HasStatus(Status.SEEDED)) {
-					u16 healAmount = bm.GetPercentOfMaxHp(StatusEffects.LEECH_SEED_DRAIN_AMOUNT);
-					bm.DamageMon(ref healAmount, true, false);
-					GetMonInSlot(state, (u8)bm.GetStatusParam(StatusParam.SLOT_SEEDED_BY)).HealMon(ref healAmount, false);
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_HP_WAS_SAPPED_BY_LEECH_SEED, bm.GetName()));
-				}
+				//if (bm.HasStatus(Status.SEEDED)) {
+				//	u16 healAmount = bm.GetPercentOfMaxHp(StatusEffects.LEECH_SEED_DRAIN_AMOUNT);
+				//	bm.DamageMon(ref healAmount, true, false);
+				//	GetMonInSlot(state, (u8)bm.GetStatusParam(StatusParam.SLOT_SEEDED_BY)).HealMon(ref healAmount, false);
+				//	MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_HP_WAS_SAPPED_BY_LEECH_SEED, bm.GetName()));
+				//}
 				// Perish Song
-				if (bm.HasStatus(Status.PERISH_SONG)) {
-					u8 count = (u8)bm.GetStatusParam(StatusParam.PERISH_COUNT);
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_PERISH_COUNT_FELL_TO_N, bm.GetName(), count.ToString()));
-					if (count == 0) {
-						u16 damage = bm.EffMaxHp(state);
-						fainted = bm.DamageMon(ref damage, true, false);
-						return;
-					}
-					bm.DecrementStatusParam(StatusParam.PERISH_COUNT);
-				}
+				//if (bm.HasStatus(Status.PERISH_SONG)) {
+				//	u8 count = (u8)bm.GetStatusParam(StatusParam.PERISH_COUNT);
+				//	MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_PERISH_COUNT_FELL_TO_N, bm.GetName(), count.ToString()));
+				//	if (count == 0) {
+				//		u16 damage = bm.EffMaxHp(state);
+				//		fainted = bm.DamageMon(ref damage, true, false);
+				//		return;
+				//	}
+				//	bm.DecrementStatusParam(StatusParam.PERISH_COUNT);
+				//}
 				// Throat Chop
 				if (bm.HasStatus(Status.THROAT_CHOP)) {
 					u8 count = (u8)bm.GetStatusParam(StatusParam.THROAT_CHOP);
@@ -579,11 +680,11 @@ namespace PkmnEngine {
 					bm.DecrementStatusParam(StatusParam.TAUNT);
 				}
 				// Curse
-				if (bm.HasStatus(Status.CURSE)) {
-					u16 damage = bm.GetPercentOfMaxHp(0.25f);
-					bm.DamageMon(ref damage, true, false);
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_AFFLICTED_BY_CURSE, bm.GetName()));
-				}
+				//if (bm.HasStatus(Status.CURSE)) {
+				//	u16 damage = bm.GetPercentOfMaxHp(0.25f);
+				//	bm.DamageMon(ref damage, true, false);
+				//	MessageBox(Lang.GetBattleMessage(BattleMessage.MON_AFFLICTED_BY_CURSE, bm.GetName()));
+				//}
 				// Encore
 				if (bm.HasStatus(Status.ENCORE)) {
 					if (bm.GetStatusParam(StatusParam.ENCORE_TURNS) == 0) {
@@ -592,15 +693,15 @@ namespace PkmnEngine {
 					}
 					bm.DecrementStatusParam(StatusParam.ENCORE_TURNS);
 				}
-				if (bm.HasStatus(Status.SALT_CURE)) {
-					u16 damage = (bm.HasType(Type.WATER) || bm.HasType(Type.STEEL)) ? bm.GetPercentOfMaxHp(0.25f) : bm.GetPercentOfMaxHp(0.125f);
-					bm.DamageMon(ref damage, false, false);
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_BEING_SALT_CURED, bm.GetName()));
-				}
+				//if (bm.HasStatus(Status.SALT_CURE)) {
+				//	u16 damage = (bm.HasType(Type.WATER) || bm.HasType(Type.STEEL)) ? bm.GetPercentOfMaxHp(0.25f) : bm.GetPercentOfMaxHp(0.125f);
+				//	bm.DamageMon(ref damage, false, false);
+				//	MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_BEING_SALT_CURED, bm.GetName()));
+				//}
 			}
 		}
 		private void HandleNonVolatileStatuses(BattleState state, BattleMon bm, ref bool fainted) {
-			Battle.RunEvent<object>(Callback.OnResidual, bm, new OnResidualParams(bm));
+			Battle.RunEvent(Callback.OnResidual, bm, new OnResidualParams(this, state, bm));
 			//if (bm.HasStatus(Status.BURN)) {
 			//	u16 damage = bm.GetPercentOfMaxHp(StatusEffects.BURN_CHIP_DAMAGE);
 			//	// https://bulbapedia.bulbagarden.net/wiki/Heatproof_(Ability)
@@ -660,15 +761,18 @@ namespace PkmnEngine {
 			}
 			// Taking Aim
 			if (bm.HasStatus(Status.TAKING_AIM)) {
+				if (bm.GetStatusParam(StatusParam.TAKING_AIM) == 0) {
+					bm.RemoveStatus(Status.TAKING_AIM);
+				}
 				bm.DecrementStatusParam(StatusParam.TAKING_AIM);
 			}
 			// Laser Focus
-			if (bm.HasStatus(Status.LASER_FOCUS)) {
-				if (bm.GetStatusParam(StatusParam.LASER_FOCUS) == 0) {
-					bm.RemoveStatus(Status.LASER_FOCUS);
-				}
-				bm.DecrementStatusParam(StatusParam.LASER_FOCUS);
-			}
+			//if (bm.HasStatus(Status.LASER_FOCUS)) {
+			//	if (bm.GetStatusParam(StatusParam.LASER_FOCUS) == 0) {
+			//		bm.RemoveStatus(Status.LASER_FOCUS);
+			//	}
+			//	bm.DecrementStatusParam(StatusParam.LASER_FOCUS);
+			//}
 		}
 
 		/// <summary>
@@ -677,78 +781,80 @@ namespace PkmnEngine {
 		/// <param name="state"></param>
 		/// <param name="fainted"></param>
 		private void DoAfterTurnWeatherEvents(BattleState state, ref bool fainted) {
-			// If there is active weather, decrement the counter.
-			if (!state.Weather.Equals(Condition.WEATHER_NONE) && state.Weather.DurationRemaining > 0) {
-				state.Weather.DecrementDuration();
-				// If the weather count hits zero, remove the flag and display the change.
-				if (state.Weather.DurationRemaining == 0) {
-					string message = "";
-					switch (state.Weather.Condition) {
-						case Condition.WEATHER_HARSH_SUNLIGHT:
-							message = Lang.GetBattleMessage(BattleMessage.SUNLIGHT_FADED);
-							break;
-						case Condition.WEATHER_RAIN:
-							message = Lang.GetBattleMessage(BattleMessage.RAIN_STOPPED);
-							break;
-						case Condition.WEATHER_SANDSTORM:
-							message = Lang.GetBattleMessage(BattleMessage.SANDSTORM_SUBSIDED);
-							break;
-						case Condition.WEATHER_HAIL:
-							message = Lang.GetBattleMessage(BattleMessage.HAIL_STOPPED);
-							break;
-						case Condition.WEATHER_SNOW:
-							message = Lang.GetBattleMessage(BattleMessage.SNOW_STOPPED);
-							break;
-						case Condition.WEATHER_FOG:
-							message = Lang.GetBattleMessage(BattleMessage.FOG_LIFTED);
-							break;
-						case Condition.WEATHER_EXTREME_SUNLIGHT:
-							message = Lang.GetBattleMessage(BattleMessage.EXTREME_SUNLIGHT_FADED);
-							break;
-						case Condition.WEATHER_HEAVY_RAIN:
-							message = Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_STOPPED);
-							break;
-						case Condition.WEATHER_STRONG_WIND:
-							message = Lang.GetBattleMessage(BattleMessage.MYSTERIOUS_WIND_DISAPPEARED);
-							break;
-						case Condition.WEATHER_SHADOWY_AURA:
-						default:
-							message = "";
-							break;
-					}
-					MessageBox(message);
-					state.Weather.ClearWeatherTerrain();
-				}
-				else {
-					string message = "";
-					switch (state.Weather.Condition) {
-						case Condition.WEATHER_HARSH_SUNLIGHT:
-						case Condition.WEATHER_EXTREME_SUNLIGHT:
-							message = Lang.GetBattleMessage(BattleMessage.SUNLIGHT_IS_HARSH);
-							break;
-						case Condition.WEATHER_RAIN:
-						case Condition.WEATHER_HEAVY_RAIN:
-							message = Lang.GetBattleMessage(BattleMessage.ITS_RAINING);
-							break;
-						case Condition.WEATHER_SANDSTORM:
-							message = Lang.GetBattleMessage(BattleMessage.SANDSTORM_IS_RAGING);
-							break;
-						case Condition.WEATHER_HAIL:
-							message = Lang.GetBattleMessage(BattleMessage.ITS_HAILING);
-							break;
-						case Condition.WEATHER_SNOW:
-							message = Lang.GetBattleMessage(BattleMessage.ITS_SNOWING);
-							break;
-						case Condition.WEATHER_STRONG_WIND:
-						case Condition.WEATHER_FOG:
-						case Condition.WEATHER_SHADOWY_AURA:
-						default:
-							message = "";
-							break;
-					}
-					MessageBox(message);
-				}
-			}
+			RunEvent(Callback.OnFieldResidual, CurrentState, new OnFieldResidualParams(this, state));
+
+			//// If there is active weather, decrement the counter.
+			//if (!state.Weather.Equals(Condition.WEATHER_NONE) && state.Weather.DurationRemaining > 0) {
+			//	state.Weather.DecrementDuration();
+			//	// If the weather count hits zero, remove the flag and display the change.
+			//	if (state.Weather.DurationRemaining == 0) {
+			//		string message = "";
+			//		switch (state.Weather.Condition) {
+						//case Condition.WEATHER_HARSH_SUNLIGHT:
+						//	message = Lang.GetBattleMessage(BattleMessage.SUNLIGHT_FADED);
+						//	break;
+						//case Condition.WEATHER_RAIN:
+						//	message = Lang.GetBattleMessage(BattleMessage.RAIN_STOPPED);
+						//	break;
+						//case Condition.WEATHER_SANDSTORM:
+						//	message = Lang.GetBattleMessage(BattleMessage.SANDSTORM_SUBSIDED);
+						//	break;
+						//case Condition.WEATHER_HAIL:
+						//	message = Lang.GetBattleMessage(BattleMessage.HAIL_STOPPED);
+						//	break;
+						//case Condition.WEATHER_SNOW:
+						//	message = Lang.GetBattleMessage(BattleMessage.SNOW_STOPPED);
+							//break;
+						//case Condition.WEATHER_FOG:
+						//	message = Lang.GetBattleMessage(BattleMessage.FOG_LIFTED);
+						//	break;
+						//case Condition.WEATHER_EXTREME_SUNLIGHT:
+						//	message = Lang.GetBattleMessage(BattleMessage.EXTREME_SUNLIGHT_FADED);
+						//	break;
+						//case Condition.WEATHER_HEAVY_RAIN:
+						//	message = Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_STOPPED);
+						//	break;
+						//case Condition.WEATHER_STRONG_WIND:
+						//	message = Lang.GetBattleMessage(BattleMessage.MYSTERIOUS_WIND_DISAPPEARED);
+						//	break;
+					//	case Condition.WEATHER_SHADOWY_AURA:
+					//	default:
+					//		message = "";
+					//		break;
+					//}
+					//MessageBox(message);
+					//state.Weather.ClearWeatherTerrain();
+				//}
+				//else {
+				//	string message = "";
+				//	switch (state.Weather.Condition) {
+						//case Condition.WEATHER_HARSH_SUNLIGHT:
+						//case Condition.WEATHER_EXTREME_SUNLIGHT:
+						//	message = Lang.GetBattleMessage(BattleMessage.SUNLIGHT_IS_HARSH);
+						//	break;
+						//case Condition.WEATHER_RAIN:
+						//case Condition.WEATHER_HEAVY_RAIN:
+						//	message = Lang.GetBattleMessage(BattleMessage.ITS_RAINING);
+						//	break;
+						//case Condition.WEATHER_SANDSTORM:
+						//	message = Lang.GetBattleMessage(BattleMessage.SANDSTORM_IS_RAGING);
+						//	break;
+						//case Condition.WEATHER_HAIL:
+						//	message = Lang.GetBattleMessage(BattleMessage.ITS_HAILING);
+						//	break;
+						//case Condition.WEATHER_SNOW:
+						//	message = Lang.GetBattleMessage(BattleMessage.ITS_SNOWING);
+							//break;
+						//case Condition.WEATHER_STRONG_WIND:
+						//case Condition.WEATHER_FOG:
+				//		case Condition.WEATHER_SHADOWY_AURA:
+				//		default:
+				//			message = "";
+				//			break;
+				//	}
+				//	MessageBox(message);
+				//}
+			//}
 
 			// Water and Mud Sports
 			ResolveCondition(state, Condition.WATER_SPORT, BattleMessage.WATER_SPORT_END);
@@ -789,28 +895,28 @@ namespace PkmnEngine {
 				);
 			}
 
-			// In-battle effects are handled after counting down.
-			for (u8 i = 0; i < format.numSlots; i++) {
-				BattleMon bm = GetMonInSlot(state, i);
-				if (bm == null) {
-					continue;
-				}
+			//// In-battle effects are handled after counting down.
+			//for (u8 i = 0; i < format.numSlots; i++) {
+			//	BattleMon bm = GetMonInSlot(state, i);
+			//	if (bm == null) {
+			//		continue;
+			//	}
 
-				if (state.Weather.Equals(Condition.WEATHER_HAIL)) {
-					if (bm.DamagedByHail()) {
-						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_HAIL, bm.GetName()));
-						u16 damage = bm.GetPercentOfMaxHp(FieldConditions.HAIL_CHIP_DAMAGE);
-						bm.DamageMon(ref damage, true, false);
-					}
-				}
-				if (state.Weather.Equals(Condition.WEATHER_SANDSTORM)) {
-					if (bm.DamagedBySandstorm()) {
-						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_SANDSTORM, bm.GetName()));
-						u16 damage = bm.GetPercentOfMaxHp(FieldConditions.SANDSTORM_CHIP_DAMAGE);
-						bm.DamageMon(ref damage, true, false);
-					}
-				}
-			}
+			//	if (state.Weather.Equals(Condition.WEATHER_HAIL)) {
+			//		if (bm.DamagedByHail()) {
+			//			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_HAIL, bm.GetName()));
+			//			u16 damage = bm.GetPercentOfMaxHp(FieldConditions.HAIL_CHIP_DAMAGE);
+			//			bm.DamageMon(ref damage, true, false);
+			//		}
+			//	}
+			//	if (state.Weather.Equals(Condition.WEATHER_SANDSTORM)) {
+			//		if (bm.DamagedBySandstorm()) {
+			//			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_SANDSTORM, bm.GetName()));
+			//			u16 damage = bm.GetPercentOfMaxHp(FieldConditions.SANDSTORM_CHIP_DAMAGE);
+			//			bm.DamageMon(ref damage, true, false);
+			//		}
+			//	}
+			//}
 		}
 		private void ResolveCondition(BattleState state, Condition condition, BattleMessage message) {
 			if (state.FieldHasCondition(condition, out FieldCondition c)) {
@@ -910,19 +1016,7 @@ namespace PkmnEngine {
 			Buffer data = new Buffer();
 
 			data.AddValue(FieldMons);
-
-			data.AddValue((u8)Teams.Length);
-			foreach (BattleMon[] team in Teams) {
-				for (u8 i = 0; i < PARTY_SIZE; i++) {
-					BattleMon bm = team[i];
-					if (bm != null) {
-						data.AddValue(bm);
-					}
-					else {
-						data.AddValue(new Buffer());
-					}
-				}
-			}
+			data.AddValue(NumSlots);
 
 			data.AddValue(Weather);
 			data.AddValue(Terrain);
@@ -945,21 +1039,7 @@ namespace PkmnEngine {
 			BattleState state = new BattleState();
 
 			state.FieldMons = data.Read32();
-
-			u8 numTeams = data.Read8();
-			state.Teams = new BattleMon[numTeams][];
-			for (u8 i = 0; i < numTeams; i++) {
-				state.Teams[i] = new BattleMon[PARTY_SIZE];
-				for (u8 j = 0; j < PARTY_SIZE; j++) {
-					Buffer bmData = data.ReadBuffer();
-					if (bmData.Size > 0) {
-						state.Teams[i][j] = BattleMon.Load(bmData);
-					}
-					else {
-						state.Teams[i][j] = null;
-					}
-				}
-			}
+			state.NumSlots = data.Read8();
 
 			state.Weather = FieldCondition.Load(data.ReadBuffer());
 			state.Terrain = FieldCondition.Load(data.ReadBuffer());
@@ -982,16 +1062,9 @@ namespace PkmnEngine {
 		}
 
 		public BattleState() { }
-		public BattleState(Battle target, TrainerBattleContext[] players) {
+		public BattleState(Battle target) {
 			this.FieldMons = u32.MaxValue;
 			this.NumSlots = target.format.numSlots;
-			this.Teams = new BattleMon[players.Length][];
-			for (u8 i = 0; i < NumSlots; i++) {
-				this.Teams[i] = new BattleMon[PARTY_SIZE];
-				for (u8 j = 0; j < PARTY_SIZE; j++) {
-					this.Teams[i][j] = players[i].team[j];
-				}
-			}
 			this.Actions = new u64[0];
 			this.Weather = new FieldCondition(Condition.WEATHER_NONE, true, 0, false, 0);
 			this.Terrain = new FieldCondition(Condition.TERRAIN_NONE, true, 0, false, 0);
@@ -1009,6 +1082,10 @@ namespace PkmnEngine {
 			return state;
 		}
 
+		private u8 NumSlots { get; set; }
+
+		public const u8 BITS_PER_MON_INDEX = 4;
+		public const u8 SLOT_EMPTY = (1 << BITS_PER_MON_INDEX) - 1;
 		/*
 			This needs to keep track of the index of the mon in the party.
 			It does not need to store which team the mon is in because that can be inferred from where in the number the
@@ -1025,15 +1102,20 @@ namespace PkmnEngine {
 			unused   | t5   | t4   | t3   | t2   | t1   | t0  
 			********************************************************** 
 		*/
-
-		public BattleMon[][] Teams { get; private set; }
-		private u8 NumSlots { get; set; }
-
-		public const u8 BITS_PER_MON_INDEX = 4;
-		public const u8 SLOT_EMPTY = (1 << BITS_PER_MON_INDEX) - 1;
 		public u32 FieldMons { get; set; }
 
 		private List<FieldCondition> Conditions { get; set; }
+		public FieldCondition[] FieldConditions { 
+			get {
+				List<FieldCondition> activeConditions = new List<FieldCondition>();
+				foreach (FieldCondition c in Conditions) {
+					if (c.IsActive()) {
+						activeConditions.Add(c);
+					}
+				}
+				return activeConditions.ToArray();
+			}
+		}
 		public FieldCondition Weather { get; private set; }
 		public FieldCondition Terrain { get; private set; }
 
@@ -1083,26 +1165,16 @@ namespace PkmnEngine {
 		/// </summary>
 		/// <param name="weather">Weather condition to set.</param>
 		/// <param name="duration">Duration of the weather effect in turns. Set to 255 (UINT8_MAX) for (effectively) infinite duration.</param>
-		public void SetWeather(Condition weather, u8 duration) {
+		public void SetWeather(Condition weather, BattleMon source) {
 			if (!(weather >= Condition.WEATHER_HARSH_SUNLIGHT && weather <= Condition.WEATHER_SHADOWY_AURA)) {
 				throw new System.ArgumentException();
 			}
+			if (!Battle.RunEventCheck(Callback.OnTrySetWeatherCheck, this, null)) {
+				return;
+			}
+			u8 duration = (u8)PkmnEngine.FieldConditions.gConditionEvents(weather, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
 			Weather.SetWeatherTerrain(weather, duration);
-
-			string message = "";
-			message = weather switch {
-				Condition.WEATHER_HARSH_SUNLIGHT => Lang.GetBattleMessage(BattleMessage.SUNLIGHT_BECAME_HARSH),
-				Condition.WEATHER_RAIN => Lang.GetBattleMessage(BattleMessage.STARTED_RAINING),
-				Condition.WEATHER_SANDSTORM => Lang.GetBattleMessage(BattleMessage.SANDSTORM_KICKED_UP),
-				Condition.WEATHER_HAIL => Lang.GetBattleMessage(BattleMessage.STARTED_HAILING),
-				Condition.WEATHER_SNOW => Lang.GetBattleMessage(BattleMessage.STARTED_SNOWING),
-				Condition.WEATHER_FOG => Lang.GetBattleMessage(BattleMessage.FOG_CREPT_UP),
-				Condition.WEATHER_EXTREME_SUNLIGHT => Lang.GetBattleMessage(BattleMessage.SUNLIGHT_BECAME_EXTREMELY_HARSH),
-				Condition.WEATHER_HEAVY_RAIN => Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_STARTED),
-				Condition.WEATHER_STRONG_WIND => Lang.GetBattleMessage(BattleMessage.MYSTERIOUS_WIND_APPEARED),
-				_ => "",
-			};
-			MessageBox(message);
+			Battle.RunEvent(Callback.OnWeatherSet, this, new OnWeatherSetParams(this, source));
 		}
 		/// <summary>
 		/// Replaces active terrain with new terrain.

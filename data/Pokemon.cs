@@ -1020,11 +1020,13 @@ namespace PkmnEngine {
 				}
 			}
 
-			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_DAMAGE, GetName(), damage.ToString()));
+			//MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_DAMAGE, GetName(), damage.ToString()));
 			HP = (u16)(HP - damage);
 
 			// Mark that the mon has received damage this turn.
 			SetFlag(Flag.RECEIVED_DAMAGE_THIS_TURN);
+
+			System.Console.WriteLine(this.GetName() + " | " + HP + "/" + MaxHP);
 
 
 			bool fainted = HP == 0;
@@ -1035,7 +1037,7 @@ namespace PkmnEngine {
 				// TODO: stuff when a mon faints.
 			}
 			else {
-				Battle.RunEvent<object>(Callback.OnDamage, this, new OnDamageParams(this, damage, force, direct));
+				Battle.RunEvent(Callback.OnDamage, this, new OnDamageParams(this, damage, force, direct));
 			}
 			return !fainted;
 		}

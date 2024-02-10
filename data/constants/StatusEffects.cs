@@ -4,6 +4,7 @@ using u32 = System.UInt32;
 using u64 = System.UInt64;
 
 using static PkmnEngine.Global;
+using static PkmnEngine.BattleEvents;
 
 using System.Collections.Generic;
 
@@ -19,6 +20,7 @@ namespace PkmnEngine {
 
 		public const u8 SLEEP_MIN_TURNS = 1;
 		public const u8 SLEEP_MAX_TURNS = 6;
+		// TODO: this should not use the global Random16
 		public static u8 GetRandSleepTurns() { return (u8)(Random16() % SLEEP_MAX_TURNS + SLEEP_MIN_TURNS); }
 
 		public const float BURN_CHIP_DAMAGE	= 1.0f / 8;
@@ -146,41 +148,97 @@ namespace PkmnEngine {
 		public const u8 SEMI_INVULNERABLE_WATER		= 1 << 2;
 		public const u8 SEMI_INVULNERABLE_PHANTOM	= 1 << 3;
 
-		public static BattleEvent gStatusEvents(Status status, Callback cb) {
+		public static (BattleEvent callback, sbyte priority) gStatusEvents(Status status, Callback cb) {
 			if (StatusEvents.ContainsKey(status) && StatusEvents[status].ContainsKey(cb)) {
 				return StatusEvents[status][cb];
 			}
 			else {
-				return null;
+				return (null, 0);
 			}
 		}
-		private static readonly Dictionary<Status, Dictionary<Callback, BattleEvent>> StatusEvents = new() { {
+
+		private static readonly Dictionary<Status, Dictionary<Callback, (BattleEvent callback, sbyte priority)>> StatusEvents = new() { {
 		
 			Status.BURN,
-			new Dictionary<Callback, BattleEvent>() {{
+			new Dictionary<Callback, (BattleEvent, sbyte)>() {{
 				Callback.OnResidual,
-				BattleEvents.Status_Burn_OnResidual
+				(Status_Burn_OnResidual, 10)
 			}}
 		},
 		{
 			Status.POISON,
-			new Dictionary<Callback, BattleEvent>() {{
+			new Dictionary<Callback, (BattleEvent, sbyte)>() {{
 				Callback.OnResidual,
-				BattleEvents.Status_Poison_OnResidual
+				(Status_Poison_OnResidual, 9)
 			}}
 		},
 		{
 			Status.TOXIC,
-			new Dictionary<Callback, BattleEvent>() {{
+			new Dictionary<Callback, (BattleEvent, sbyte)>() {{
 				Callback.OnResidual,
-				BattleEvents.Status_Toxic_OnResidual
+				(Status_Toxic_OnResidual, 9)
+			}}
+		},
+		{
+			Status.AQUA_RING,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnResidual,
+				(Status_AquaRing_OnResidual, 6)
+			}}
+		},
+		{
+			Status.SEEDED,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnResidual,
+				(Status_Seeded_OnResidual, 8)
 			}}
 		},
 		{
 			Status.RAGE,
-			new Dictionary<Callback, BattleEvent>() {{
+			new Dictionary<Callback, (BattleEvent, sbyte)>() {{
 				Callback.OnDamage,
-				BattleEvents.Status_Rage_OnDamage
+				(Status_Rage_OnDamage, 0)
+			}}
+		},
+		{
+			Status.PERISH_SONG,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnEnd,
+				(Status_PerishSong_OnEnd, 24)
+			}}
+		},
+		{
+			Status.SALT_CURE,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnResidual,
+				(Status_SaltCure_OnResidual, 13)
+			}}
+		},
+		{
+			Status.CURSE,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnResidual,
+				(Status_Curse_OnResidual, 12)
+			}}
+		},
+		{
+			Status.LASER_FOCUS,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.OnModifyCritRatio,
+					(Status_LaserFocus_OnModifyCritRatio, 0)
+				}, 
+				{
+					Callback.OnEnd,
+					(Status_LaserFocus_OnEnd, 0)
+				}
+			}
+		},
+		{
+			Status.GETTING_PUMPED,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnModifyCritRatio,
+				(Status_GettingPumped_OnModifyCritRatio, 0)
 			}}
 		}
 
