@@ -45,8 +45,6 @@ namespace PkmnEngine {
 					}
 				}
 			}
-
-			Start(initialState);
 		}
 
 		public readonly int seed;
@@ -387,8 +385,7 @@ namespace PkmnEngine {
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="state"></param>
-		private async void Start(BattleState state) {
+		public async void Start() {
 			// BUG: Why did I use this here??? Do not use this namespace here!
 			BattleSceneDrawer.SetupScene(this, this.players);
 			u8 winningSide;

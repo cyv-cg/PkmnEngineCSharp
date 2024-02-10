@@ -50,6 +50,7 @@ namespace PkmnEngine {
 			TrainerProfile ayla = new TrainerProfile("Ayla", TrainerModel.AI_LVL_1, munna);
 
 			Battle battle = new Battle(BattleFormat.Format_Single, gSaveBlock.profile, ayla);
+			battle.Start();
 		}
 	
 		private static void Test() {
