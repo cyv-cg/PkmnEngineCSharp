@@ -18,6 +18,8 @@ namespace PkmnEngine {
 		public const u8 SIDE_CLIENT = 0;
 		public const u8 SIDE_REMOTE = 1;
 
+		private static List<NextTurnEvent> OnNextTurn = new List<NextTurnEvent>();
+
 		public Battle() {
 			this.seed = (int)System.DateTimeOffset.Now.ToUnixTimeMilliseconds();
 		}
@@ -101,7 +103,28 @@ namespace PkmnEngine {
 					continue;
 				}
 
-				retVal.Add((T)handler.callback.Invoke(args));
+				if (cb != Callback.OnNextTurn) {
+					retVal.Add((T)handler.callback.Invoke(args));
+				}
+				else {
+					// First, act on all existing next-turn events.
+					for (u8 i = 0; i < OnNextTurn.Count;) {
+						NextTurnEvent @event = OnNextTurn[i];
+						// But only act if the target is the same.
+						if (@event.args.bm != target) {
+							// Only iterate if the event is *not* performed.
+							// This is because performed events are removed, so the list is shortened.
+							i++;
+							continue;
+						}
+						// Add it to the return list.
+						retVal.Add((T)@event.battleEvent.Invoke(@event.args));
+						// Remove this event from the list.
+						OnNextTurn.RemoveAt(i);
+					}
+					// If there is another next-turn event for this target, then queue it up.
+					OnNextTurn.Add(new NextTurnEvent(handler.callback, new OnNextTurnParams((BattleState)args, target)));
+				}
 			}
 
 			return retVal.ToArray();
@@ -125,26 +148,26 @@ namespace PkmnEngine {
 			}
 			return true;
 		}
-		public static float RunEventChain(Callback cb, BattleState target, object args) {
+		public static float RunEventChain(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
 			float chain = 1;
-			foreach (float x in RunEvent<float>(cb, target, args)) {
+			foreach (float x in RunEvent<float>(cb, target, args, side)) {
 				chain *= x;
 			}
 			return chain;
 		}
-		public static bool RunEventCheck(Callback cb, BattleState target, object args) {
-			foreach (bool x in RunEvent<bool>(cb, target, args)) {
+		public static bool RunEventCheck(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
+			foreach (bool x in RunEvent<bool>(cb, target, args, side)) {
 				if (!x) {
 					return false;
 				}
 			}
 			return true;
 		}
-		public static void RunEvent(Callback cb, BattleState target, object args) {
-			RunEvent<object>(cb, target, args);
+		public static void RunEvent(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
+			RunEvent<object>(cb, target, args, side);
 		}
-		public static T[] RunEvent<T>(Callback cb, BattleState target, object args) {
-			EventHandler[] handlers = FindEventHandler(cb, target);
+		public static T[] RunEvent<T>(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
+			EventHandler[] handlers = FindEventHandler(cb, target, side);
 			List<T> retVal = new List<T>();
 
 			// TODO: sort handlers by priority.
@@ -175,12 +198,16 @@ namespace PkmnEngine {
 				handlers.Add(new EventHandler(callback, EffectType.ABILITY, priority));
 			}
 			// TODO: Item
-			// TODO: Species
-			// TODO: Side
+			// Species
+			Species species = target.Species;
+			(callback, priority) = SpeciesEffects.gSpeciesEvents(species, cb);
+			if (callback != null) {
+				handlers.Add(new EventHandler(callback, EffectType.SPECIES, priority));
+			}
 
 			return handlers.ToArray();
 		}
-		public static EventHandler[] FindEventHandler(Callback cb, BattleState target) {
+		private static EventHandler[] FindEventHandler(Callback cb, BattleState target, u8 side = u8.MaxValue) {
 			List<EventHandler> handlers = new List<EventHandler>();
 			BattleEvent callback;
 			sbyte priority;
@@ -199,9 +226,11 @@ namespace PkmnEngine {
 			}
 			// Conditions
 			foreach (FieldCondition condition in target.FieldConditions) {
-				(callback, priority) = FieldConditions.gConditionEvents(condition.Condition, cb);
-				if (callback != null) {
-					handlers.Add(new EventHandler(callback, EffectType.CONDITION, priority));
+				if (condition.AffectsWholeField || (side != u8.MaxValue && condition.AffectedSide == side)) {
+					(callback, priority) = FieldConditions.gConditionEvents(condition.Condition, cb);
+					if (callback != null) {
+						handlers.Add(new EventHandler(callback, EffectType.CONDITION, priority));
+					}
 				}
 			}
 
@@ -470,16 +499,10 @@ namespace PkmnEngine {
 		private void DoEventsAfterTurn() {
 			// TODO: maybe move all this into BattleState.Next()?
 
-			bool fainted = false;
-
-			// Do status effect stuff.
-			DoAfterTurnStatusEvents(CurrentState);
-			// Do weather stuff.
-			DoAfterTurnWeatherEvents(CurrentState, ref fainted);
-			// Do terrain stuff.
-			DoAfterTurnTerrainEvents(CurrentState);
-
-
+			RunEvent(Callback.OnFieldResidual, CurrentState, new OnFieldResidualParams(this, CurrentState));
+			for (u8 side = 0; side < format.numSides; side++) {
+				RunEvent(Callback.OnSideResidual, CurrentState, new OnSideResidualParams(this, CurrentState, side), side);
+			}
 
 			for (u8 i = 0; i < format.numSlots; i++) {
 				BattleMon bm = GetMonInSlot(CurrentState, i);
@@ -487,6 +510,8 @@ namespace PkmnEngine {
 					continue;
 				}
 
+				Battle.RunEvent(Callback.OnResidual, bm, new OnResidualParams(this, CurrentState, bm));
+				Battle.RunEvent(Callback.OnNextTurn, bm, CurrentState);
 				Battle.RunEvent(Callback.OnEnd, bm, new OnEndParams(CurrentState, bm));
 				
 				// Remove transient conditions.
@@ -612,399 +637,6 @@ namespace PkmnEngine {
 			// If there is more than 1 side that can still fight, then the battle is not over yet.
 			winningSide = 0;
 			return false;
-		}
-	
-		/// <summary>
-		/// Performs actions for certain status effects.
-		/// </summary>
-		/// <param name="state"></param>
-		private void DoAfterTurnStatusEvents(BattleState state) {
-			for (u8 i = 0; i < format.numSlots; i++) {
-				BattleMon bm = GetMonInSlot(state, i);
-				if (bm == null) {
-					continue;
-				}
-				bool fainted = false;
-
-				HandleNonVolatileStatuses(state, bm, ref fainted);
-				if (fainted) {
-					return;
-				}
-				HandleNextTurnStatuses(state, bm, ref fainted);
-				if (fainted) {
-					return;
-				}
-
-				// Aqua Ring
-				//if (bm.HasStatus(Status.AQUA_RING)) {
-				//	MessageBox(Lang.GetBattleMessage(BattleMessage.A_VEIL_OF_WATER_RESTORED_MONS_HP, bm.GetName()));
-				//	u16 healAmount = bm.GetPercentOfMaxHp(StatusEffects.AQUA_RING_HEAL_AMOUNT);
-				//	bm.HealMon(ref healAmount, false);
-				//}
-				// Leech Seed
-				//if (bm.HasStatus(Status.SEEDED)) {
-				//	u16 healAmount = bm.GetPercentOfMaxHp(StatusEffects.LEECH_SEED_DRAIN_AMOUNT);
-				//	bm.DamageMon(ref healAmount, true, false);
-				//	GetMonInSlot(state, (u8)bm.GetStatusParam(StatusParam.SLOT_SEEDED_BY)).HealMon(ref healAmount, false);
-				//	MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_HP_WAS_SAPPED_BY_LEECH_SEED, bm.GetName()));
-				//}
-				// Perish Song
-				//if (bm.HasStatus(Status.PERISH_SONG)) {
-				//	u8 count = (u8)bm.GetStatusParam(StatusParam.PERISH_COUNT);
-				//	MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_PERISH_COUNT_FELL_TO_N, bm.GetName(), count.ToString()));
-				//	if (count == 0) {
-				//		u16 damage = bm.EffMaxHp(state);
-				//		fainted = bm.DamageMon(ref damage, true, false);
-				//		return;
-				//	}
-				//	bm.DecrementStatusParam(StatusParam.PERISH_COUNT);
-				//}
-				// Throat Chop
-				if (bm.HasStatus(Status.THROAT_CHOP)) {
-					u8 count = (u8)bm.GetStatusParam(StatusParam.THROAT_CHOP);
-					if (count == 0) {
-						bm.RemoveStatus(Status.THROAT_CHOP);
-					}
-					bm.DecrementStatusParam(StatusParam.THROAT_CHOP);
-				}
-				// Taunt
-				if (bm.HasStatus(Status.TAUNT)) {
-					u8 count = (u8)bm.GetStatusParam(StatusParam.TAUNT);
-					if (count == 0) {
-						bm.RemoveStatus(Status.THROAT_CHOP);
-						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_SHOOK_OFF_THE_TAUNT, bm.GetName()));
-					}
-					bm.DecrementStatusParam(StatusParam.TAUNT);
-				}
-				// Curse
-				//if (bm.HasStatus(Status.CURSE)) {
-				//	u16 damage = bm.GetPercentOfMaxHp(0.25f);
-				//	bm.DamageMon(ref damage, true, false);
-				//	MessageBox(Lang.GetBattleMessage(BattleMessage.MON_AFFLICTED_BY_CURSE, bm.GetName()));
-				//}
-				// Encore
-				if (bm.HasStatus(Status.ENCORE)) {
-					if (bm.GetStatusParam(StatusParam.ENCORE_TURNS) == 0) {
-						bm.RemoveStatus(Status.ENCORE);
-						MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_ENCORE_ENDED, bm.GetName()));
-					}
-					bm.DecrementStatusParam(StatusParam.ENCORE_TURNS);
-				}
-				//if (bm.HasStatus(Status.SALT_CURE)) {
-				//	u16 damage = (bm.HasType(Type.WATER) || bm.HasType(Type.STEEL)) ? bm.GetPercentOfMaxHp(0.25f) : bm.GetPercentOfMaxHp(0.125f);
-				//	bm.DamageMon(ref damage, false, false);
-				//	MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_BEING_SALT_CURED, bm.GetName()));
-				//}
-			}
-		}
-		private void HandleNonVolatileStatuses(BattleState state, BattleMon bm, ref bool fainted) {
-			Battle.RunEvent(Callback.OnResidual, bm, new OnResidualParams(this, state, bm));
-			//if (bm.HasStatus(Status.BURN)) {
-			//	u16 damage = bm.GetPercentOfMaxHp(StatusEffects.BURN_CHIP_DAMAGE);
-			//	// https://bulbapedia.bulbagarden.net/wiki/Heatproof_(Ability)
-			//	if (bm.AbilityProc(Ability.HEATPROOF, false)) {
-			//		damage /= 2;
-			//	}
-			//	fainted = bm.DamageMon(ref damage, true, false);
-			//	MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_ITS_BURN, bm.GetName()));
-			//	if (fainted) {
-			//		return;
-			//	}
-			//}
-			//else if (bm.HasStatus(Status.POISON)) {
-			//	u16 damage = bm.GetPercentOfMaxHp(StatusEffects.POISON_CHIP_DAMAGE);
-			//	// If the mon has Poison Heal, it heals instead of taking damage.
-			//	if (bm.AbilityProc(Ability.POISON_HEAL, false)) {
-			//		bm.HealMon(ref damage, false);
-			//	}
-			//	else {
-			//		fainted = bm.DamageMon(ref damage, true, false);
-			//		MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, bm.GetName()));
-			//	}
-			//	if (fainted) {
-			//		return;
-			//	}
-			//}
-			//else if (bm.HasStatus(Status.TOXIC)) {
-			//	// Toxic deals damage starting at a set percentage, and grows by that percentage every turn.
-			//	u16 baseDamage = bm.GetPercentOfMaxHp(StatusEffects.TOXIC_CHIP_DAMAGE);
-			//	// Accumulation is capped at 15 stacks.
-			//	if (bm.GetStatusParam(StatusParam.TOXIC_BUILDUP) < 15) {
-			//		bm.IncrementStatusParam(StatusParam.TOXIC_BUILDUP);
-			//	}
-			//	if (bm.AbilityProc(Ability.POISON_HEAL, false)) {
-			//		// Poison Heal does not heal extra from toxic stacks.
-			//		bm.HealMon(ref baseDamage, false);
-			//	}
-			//	else {
-			//		// Stack additional damage by number of turns afflicted.
-			//		u16 totalDamage = (u16)(baseDamage * bm.GetStatusParam(StatusParam.TOXIC_BUILDUP));
-			//		fainted = bm.DamageMon(ref totalDamage, true, false);
-			//		MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON));
-			//	}
-			//	if (fainted) {
-			//		return;
-			//	}
-			//}
-		}
-		private void HandleNextTurnStatuses(BattleState state, BattleMon bm, ref bool fainted) {
-			// The turn after a mon is inflicted with drowsy, it falls asleep.
-			if (bm.HasStatus(Status.DROWSY)) {
-				if (bm.GetStatusParam(StatusParam.DROWSING) == 0) {
-					bm.RemoveStatus(Status.DROWSY);
-					MoveEffects.SleepMon(state, bm, StatusEffects.GetRandSleepTurns());
-				}
-				bm.DecrementStatusParam(StatusParam.DROWSING);
-			}
-			// Taking Aim
-			if (bm.HasStatus(Status.TAKING_AIM)) {
-				if (bm.GetStatusParam(StatusParam.TAKING_AIM) == 0) {
-					bm.RemoveStatus(Status.TAKING_AIM);
-				}
-				bm.DecrementStatusParam(StatusParam.TAKING_AIM);
-			}
-			// Laser Focus
-			//if (bm.HasStatus(Status.LASER_FOCUS)) {
-			//	if (bm.GetStatusParam(StatusParam.LASER_FOCUS) == 0) {
-			//		bm.RemoveStatus(Status.LASER_FOCUS);
-			//	}
-			//	bm.DecrementStatusParam(StatusParam.LASER_FOCUS);
-			//}
-		}
-
-		/// <summary>
-		/// Performs actions for certain weather.
-		/// </summary>
-		/// <param name="state"></param>
-		/// <param name="fainted"></param>
-		private void DoAfterTurnWeatherEvents(BattleState state, ref bool fainted) {
-			RunEvent(Callback.OnFieldResidual, CurrentState, new OnFieldResidualParams(this, state));
-
-			//// If there is active weather, decrement the counter.
-			//if (!state.Weather.Equals(Condition.WEATHER_NONE) && state.Weather.DurationRemaining > 0) {
-			//	state.Weather.DecrementDuration();
-			//	// If the weather count hits zero, remove the flag and display the change.
-			//	if (state.Weather.DurationRemaining == 0) {
-			//		string message = "";
-			//		switch (state.Weather.Condition) {
-						//case Condition.WEATHER_HARSH_SUNLIGHT:
-						//	message = Lang.GetBattleMessage(BattleMessage.SUNLIGHT_FADED);
-						//	break;
-						//case Condition.WEATHER_RAIN:
-						//	message = Lang.GetBattleMessage(BattleMessage.RAIN_STOPPED);
-						//	break;
-						//case Condition.WEATHER_SANDSTORM:
-						//	message = Lang.GetBattleMessage(BattleMessage.SANDSTORM_SUBSIDED);
-						//	break;
-						//case Condition.WEATHER_HAIL:
-						//	message = Lang.GetBattleMessage(BattleMessage.HAIL_STOPPED);
-						//	break;
-						//case Condition.WEATHER_SNOW:
-						//	message = Lang.GetBattleMessage(BattleMessage.SNOW_STOPPED);
-							//break;
-						//case Condition.WEATHER_FOG:
-						//	message = Lang.GetBattleMessage(BattleMessage.FOG_LIFTED);
-						//	break;
-						//case Condition.WEATHER_EXTREME_SUNLIGHT:
-						//	message = Lang.GetBattleMessage(BattleMessage.EXTREME_SUNLIGHT_FADED);
-						//	break;
-						//case Condition.WEATHER_HEAVY_RAIN:
-						//	message = Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_STOPPED);
-						//	break;
-						//case Condition.WEATHER_STRONG_WIND:
-						//	message = Lang.GetBattleMessage(BattleMessage.MYSTERIOUS_WIND_DISAPPEARED);
-						//	break;
-					//	case Condition.WEATHER_SHADOWY_AURA:
-					//	default:
-					//		message = "";
-					//		break;
-					//}
-					//MessageBox(message);
-					//state.Weather.ClearWeatherTerrain();
-				//}
-				//else {
-				//	string message = "";
-				//	switch (state.Weather.Condition) {
-						//case Condition.WEATHER_HARSH_SUNLIGHT:
-						//case Condition.WEATHER_EXTREME_SUNLIGHT:
-						//	message = Lang.GetBattleMessage(BattleMessage.SUNLIGHT_IS_HARSH);
-						//	break;
-						//case Condition.WEATHER_RAIN:
-						//case Condition.WEATHER_HEAVY_RAIN:
-						//	message = Lang.GetBattleMessage(BattleMessage.ITS_RAINING);
-						//	break;
-						//case Condition.WEATHER_SANDSTORM:
-						//	message = Lang.GetBattleMessage(BattleMessage.SANDSTORM_IS_RAGING);
-						//	break;
-						//case Condition.WEATHER_HAIL:
-						//	message = Lang.GetBattleMessage(BattleMessage.ITS_HAILING);
-						//	break;
-						//case Condition.WEATHER_SNOW:
-						//	message = Lang.GetBattleMessage(BattleMessage.ITS_SNOWING);
-							//break;
-						//case Condition.WEATHER_STRONG_WIND:
-						//case Condition.WEATHER_FOG:
-				//		case Condition.WEATHER_SHADOWY_AURA:
-				//		default:
-				//			message = "";
-				//			break;
-				//	}
-				//	MessageBox(message);
-				//}
-			//}
-
-			// Water and Mud Sports
-			ResolveCondition(state, Condition.WATER_SPORT, BattleMessage.WATER_SPORT_END);
-			ResolveCondition(state, Condition.MUD_SPORT, BattleMessage.MUD_SPORT_END);
-			
-			// Side-specific conditions.
-			for (u8 side = 0; side < format.numSides; side++) {
-				// Tailwind.
-				ResolveCondition(state, side, Condition.TAILWIND,
-					BattleMessage.ALLY_TAILWIND_END,
-					BattleMessage.ENEMY_TAILWIND_END
-				);
-
-				// Reflect, Light Screen, Aurora Veil
-				ResolveCondition(state, side, Condition.REFLECT,
-					BattleMessage.ALLY_REFLECT_WORE_OFF,
-					BattleMessage.OPPONENT_REFLECT_WORE_OFF
-				);
-				ResolveCondition(state, side, Condition.LIGHT_SCREEN,
-					BattleMessage.ALLY_LIGHT_SCREEN_WORE_OFF,
-					BattleMessage.OPPONENT_LIGHT_SCREEN_WORE_OFF
-				);
-				ResolveCondition(state, side, Condition.AURORA_VEIL,
-					BattleMessage.ALLY_AURORA_VEIL_WORE_OFF,
-					BattleMessage.OPPONENT_AURORA_VEIL_WORE_OFF	
-				);
-
-				// Safeguard
-				ResolveCondition(state, side, Condition.SAFEGUARD,
-					BattleMessage.PLAYER_NO_LONGER_PROTECTED_BY_SAFEGUARD,
-					BattleMessage.OPPONENT_NO_LONGER_PROTECTED_BY_SAFEGUARD
-				);
-
-				// Mist
-				ResolveCondition(state, side, Condition.MIST, 
-					BattleMessage.YOUR_TEAM_NO_LONGER_PROTECTED_BY_MIST, 
-					BattleMessage.OPPOSING_TEAM_NO_LONGER_PROTECTED_BY_MIST
-				);
-			}
-
-			//// In-battle effects are handled after counting down.
-			//for (u8 i = 0; i < format.numSlots; i++) {
-			//	BattleMon bm = GetMonInSlot(state, i);
-			//	if (bm == null) {
-			//		continue;
-			//	}
-
-			//	if (state.Weather.Equals(Condition.WEATHER_HAIL)) {
-			//		if (bm.DamagedByHail()) {
-			//			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_HAIL, bm.GetName()));
-			//			u16 damage = bm.GetPercentOfMaxHp(FieldConditions.HAIL_CHIP_DAMAGE);
-			//			bm.DamageMon(ref damage, true, false);
-			//		}
-			//	}
-			//	if (state.Weather.Equals(Condition.WEATHER_SANDSTORM)) {
-			//		if (bm.DamagedBySandstorm()) {
-			//			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_SANDSTORM, bm.GetName()));
-			//			u16 damage = bm.GetPercentOfMaxHp(FieldConditions.SANDSTORM_CHIP_DAMAGE);
-			//			bm.DamageMon(ref damage, true, false);
-			//		}
-			//	}
-			//}
-		}
-		private void ResolveCondition(BattleState state, Condition condition, BattleMessage message) {
-			if (state.FieldHasCondition(condition, out FieldCondition c)) {
-				if (c.DurationRemaining == 0) {
-					state.RemoveCondition(c);
-					MessageBox(Lang.GetBattleMessage(message));
-				}
-				c.DecrementDuration();
-			}
-		}
-		private void ResolveCondition(BattleState state, u8 side, Condition condition, BattleMessage clientMessage, BattleMessage remoteMessage) {
-			if (state.SideHasCondition(side, condition, out FieldCondition c)) {
-				if (c.DurationRemaining == 0) {
-					state.RemoveCondition(c);
-					if (side == SIDE_CLIENT) {
-						MessageBox(Lang.GetBattleMessage(clientMessage));
-					}
-					else {
-						MessageBox(Lang.GetBattleMessage(remoteMessage));
-					}
-				}
-				c.DecrementDuration();
-			}
-		}
-
-		/// <summary>
-		/// Performs actions for certain terrain.
-		/// </summary>
-		/// <param name="state"></param>
-		private void DoAfterTurnTerrainEvents(BattleState state) {
-			// If there is active terrain, decrement the counter.
-			if (!state.Terrain.Equals(Condition.TERRAIN_NONE) && state.Terrain.DurationRemaining > 0) {
-				state.Terrain.DecrementDuration();
-				// If the terrain count hits zero, remove the flag and display the change.
-				if (state.Terrain.DurationRemaining == 0) {
-					string message = "";
-					switch (state.Terrain.Condition) {
-						case Condition.TERRAIN_ELECTRIC:
-							message = Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_END);
-							break;
-						case Condition.TERRAIN_GRASSY:
-							message = Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_END);
-							break;
-						case Condition.TERRAIN_MISTY:
-							message = Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_END);
-							break;
-						case Condition.TERRAIN_PSYCHIC:
-							message = Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_END);
-							break;
-						default:
-							message = "";
-							break;
-					}
-					MessageBox(message);
-					state.Terrain.ClearWeatherTerrain();
-				}
-				else {
-					string message = "";
-					switch (state.Terrain.Condition) {
-						case Condition.TERRAIN_ELECTRIC:
-							message = Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_ACTIVE);
-							break;
-						case Condition.TERRAIN_GRASSY:
-							message = Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_ACTIVE);
-							break;
-						case Condition.TERRAIN_MISTY:
-							message = Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_ACTIVE);
-							break;
-						case Condition.TERRAIN_PSYCHIC:
-							message = Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_ACTIVE);
-							break;
-						default:
-							message = "";
-							break;
-					}
-					MessageBox(message);
-				}
-			}
-
-			// In-battle effects are handled after counting down.
-			for (u8 i = 0; i < format.numSlots; i++) {
-				BattleMon bm = GetMonInSlot(state, i);
-				if (bm == null || !bm.IsGrounded(state)) {
-					continue;
-				}
-			
-				if (state.Terrain.Condition == Condition.TERRAIN_GRASSY) {
-					u16 healAmount = bm.GetPercentOfMaxHp(FieldConditions.GRASSY_TERRAIN_HEAL_AMOUNT);
-					bm.HealMon(ref healAmount, false);
-				}
-			}
 		}
 	}
 
@@ -1166,7 +798,7 @@ namespace PkmnEngine {
 			if (!(weather >= Condition.WEATHER_HARSH_SUNLIGHT && weather <= Condition.WEATHER_SHADOWY_AURA)) {
 				throw new System.ArgumentException();
 			}
-			if (!Battle.RunEventCheck(Callback.OnTrySetWeatherCheck, this, null)) {
+			if (!Battle.RunEventCheck(Callback.OnTrySetWeather, this, null)) {
 				return;
 			}
 			u8 duration = (u8)PkmnEngine.FieldConditions.gConditionEvents(weather, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
@@ -1178,30 +810,41 @@ namespace PkmnEngine {
 		/// </summary>
 		/// <param name="terrain">Terrain condition to set.</param>
 		/// <param name="duration">Duration of the terrain effect in turns. Set to 255 (UINT8_MAX) for (effectively) infinite duration.</param>
-		public void SetTerrain(Condition terrain, u8 duration) {
+		public void SetTerrain(Condition terrain, BattleMon source) {
 			if (!(terrain >= Condition.TERRAIN_ELECTRIC && terrain <= Condition.TERRAIN_PSYCHIC)) {
 				throw new System.ArgumentException();
 			}
-			Terrain.SetWeatherTerrain(terrain, duration);
+			// TODO: This *may* need a future OnTrySetTerrain callback.
+			//if (!Battle.RunEventCheck(Callback.OnTrySetWeather, this, null)) {
+			//	return;
+			//}
 
-			string message = "";
-			message = terrain switch {
-				Condition.TERRAIN_ELECTRIC => Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_START),
-				Condition.TERRAIN_GRASSY => Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_START),
-				Condition.TERRAIN_MISTY => Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_START),
-				Condition.TERRAIN_PSYCHIC => Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_START),
-				_ => "",
-			};
-			MessageBox(message);
+			u8 duration = (u8)PkmnEngine.FieldConditions.gConditionEvents(terrain, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+			Terrain.SetWeatherTerrain(terrain, duration);
+			Battle.RunEvent(Callback.OnWeatherSet, this, new OnWeatherSetParams(this, source));
 		}
 
-		public void SetFieldCondition(Condition condition, u8 duration = u8.MaxValue) {
+		public void SetFieldCondition(Condition condition, BattleMon source) {
+			u8 duration = (u8)PkmnEngine.FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+			SetFieldCondition(condition, duration);
+		}
+		private void SetFieldCondition(Condition condition, u8 duration = u8.MaxValue) {
 			Conditions.Add(new FieldCondition(condition, true, 0, false, duration));
 		}
-		public void SetSideCondition(u8 side, Condition condition, u8 duration = u8.MaxValue) {
+		public void SetSideCondition(u8 side, Condition condition, BattleMon source) {
+			u8 duration = (u8)PkmnEngine.FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+			SetSideCondition(side, condition, duration);
+		}
+		private void SetSideCondition(u8 side, Condition condition, u8 duration = u8.MaxValue) {
 			Conditions.Add(new FieldCondition(condition, side, duration));
 		}
 
+		/// <summary>
+		/// Determines if the given side has one or more of the given conditions.
+		/// </summary>
+		/// <param name="side"></param>
+		/// <param name="condition"></param>
+		/// <returns></returns>
 		public bool SideHasCondition(u8 side, params Condition[] condition) {
 			for (u8 i = 0; i < condition.Length; i++) {
 				for (u8 j = 0; j < this.Conditions.Count; j++) {

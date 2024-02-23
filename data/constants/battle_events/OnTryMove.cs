@@ -9,8 +9,8 @@ using static PkmnEngine.BattleMoves;
 using PkmnEngine.Strings;
 
 namespace PkmnEngine {
-	public struct OnTryMoveCheckParams {
-		public OnTryMoveCheckParams(BattleState state, BattleMon bm, BattleMoveID moveID) {
+	public struct OnTryMoveParams {
+		public OnTryMoveParams(BattleState state, BattleMon bm, BattleMoveID moveID) {
 			this.state = state;
 			this.bm = bm;
 			this.moveID = moveID;
@@ -21,8 +21,8 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
-		public static object Weather_ExtremeSunlight_OnTryMoveCheck(object p) {
-			OnTryMoveCheckParams cbParams = ValidateParams<OnTryMoveCheckParams>(p);
+		public static object Weather_ExtremeSunlight_OnTryMove(object p) {
+			OnTryMoveParams cbParams = ValidateParams<OnTryMoveParams>(p);
 
 			BattleMove move = gBattleMoves(cbParams.moveID);
 
@@ -33,8 +33,8 @@ namespace PkmnEngine {
 
 			return true;
 		}
-		public static object Weather_HeavyRain_OnTryMoveCheck(object p) {
-			OnTryMoveCheckParams cbParams = ValidateParams<OnTryMoveCheckParams>(p);
+		public static object Weather_HeavyRain_OnTryMove(object p) {
+			OnTryMoveParams cbParams = ValidateParams<OnTryMoveParams>(p);
 
 			BattleMove move = gBattleMoves(cbParams.moveID);
 

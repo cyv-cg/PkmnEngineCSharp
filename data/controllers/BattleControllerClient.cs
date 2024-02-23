@@ -55,7 +55,6 @@ namespace PkmnEngine.BattleControllers {
 		/// <param name="slot">Slot of the acting mon.</param>
 		/// <returns>Action code for the chosen move.</returns>
 		public async Task<u64>  MenuSelectUseMove(Battle battle, BattleState state, u8 slot) {
-			// TODO: move availability.
 			BattleMon bm = battle.GetMonInSlot(state, slot);
 
 			// Determine if the user has any usable moves left.
@@ -72,10 +71,14 @@ namespace PkmnEngine.BattleControllers {
 				return BATTLE_ACTION_USE_MOVE(slot, 0, BattleMoveID.STRUGGLE, BattleUtils.GetDefaultMoveTarget(BattleMoveID.STRUGGLE, bm)); // TODO: select target
 			}
 
-			// Get the user's decision.
-			option = await Inputs.gMenuFuncs[MenuCode.USE_MOVE](bm.moves, bm.pp, bm.maxPP);
-			// Convert to action.
-			u64 action = BATTLE_ACTION_USE_MOVE(slot, (u8)option.args, bm.moves[option.args], BattleUtils.GetDefaultMoveTarget(bm.moves[option.args], bm)); // TODO: select target(s)
+			u64 action;
+			do {
+				// Get the user's decision.
+				option = await Inputs.gMenuFuncs[MenuCode.USE_MOVE](bm.moves, bm.pp, bm.maxPP);
+				// Convert to action.
+				action = BATTLE_ACTION_USE_MOVE(slot, (u8)option.args, bm.moves[option.args], BattleUtils.GetDefaultMoveTarget(bm.moves[option.args], bm)); // TODO: select target(s)
+			}
+			while (!bm.CanUseMove(battle, state, (u8)option.args, true));
 			return action;
 		}
 	}

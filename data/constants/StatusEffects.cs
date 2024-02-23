@@ -166,6 +166,13 @@ namespace PkmnEngine {
 			}}
 		},
 		{
+			Status.PARALYSIS,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnModifySpd,
+				(Status_Paralysis_OnModifySpd, 0)
+			}}
+		},
+		{
 			Status.POISON,
 			new Dictionary<Callback, (BattleEvent, sbyte)>() {{
 				Callback.OnResidual,
@@ -240,7 +247,61 @@ namespace PkmnEngine {
 				Callback.OnModifyCritRatio,
 				(Status_GettingPumped_OnModifyCritRatio, 0)
 			}}
-		}
+		},
+		{
+			Status.THROAT_CHOP,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.OnResidual,
+					(Status_ThroatChop_OnResidual, 0)
+				},
+				{
+					Callback.OnTrySelectMove,
+					(Status_ThroatChop_OnTryUseMove, 0)
+				}
+			}
+		},
+		{
+			Status.TAUNT,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.OnResidual,
+					(Status_Taunt_OnResidual, 0)
+				},
+				{
+					Callback.OnTrySelectMove,
+					(Status_Taunt_OnTryUseMove, 0)
+				}
+			}
+		},
+		{
+			Status.ENCORE,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.OnResidual,
+					(Status_Encore_OnResidual, 0)
+				},
+				{
+					Callback.OnTrySelectMove,
+					(Status_Encore_OnTryUseMove, 0)
+				}
+			}
+		},
+		{
+			Status.DROWSY,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnNextTurn,
+				(Status_Drowsy_OnNextTurn, 23)
+			}}
+		},
+		{
+			Status.TAKING_AIM,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnNextTurn,
+				(Status_TakingAim_OnNextTurn, 0)
+			}}
+		},
+
 
 		};
 	}

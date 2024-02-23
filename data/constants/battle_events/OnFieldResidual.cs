@@ -194,5 +194,78 @@ namespace PkmnEngine {
 
 			return null;
 		}
+
+		public static object Terrain_Electric_OnFieldResidual(object p) {
+			OnFieldResidualParams cbParams = ValidateParams<OnFieldResidualParams>(p);
+
+			cbParams.state.Terrain.DecrementDuration();
+
+			if (cbParams.state.Terrain.DurationRemaining == 0) {
+				MessageBox(Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_END));
+				cbParams.state.Terrain.ClearWeatherTerrain();
+			}
+			else {
+				MessageBox(Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_ACTIVE));
+			}
+
+			return null;
+		}
+		public static object Terrain_Grassy_OnFieldResidual(object p) {
+			OnFieldResidualParams cbParams = ValidateParams<OnFieldResidualParams>(p);
+
+			cbParams.state.Terrain.DecrementDuration();
+
+			if (cbParams.state.Terrain.DurationRemaining == 0) {
+				MessageBox(Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_END));
+				cbParams.state.Terrain.ClearWeatherTerrain();
+			}
+			else {
+				MessageBox(Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_ACTIVE));
+			}
+
+			// Heal mons.
+			foreach (BattleMon bm in cbParams.battle.GetAllActiveMons()) {
+				if (bm == null || !bm.IsGrounded(cbParams.state)) {
+					continue;
+				}
+			
+				if (cbParams.state.Terrain.Condition == Condition.TERRAIN_GRASSY) {
+					u16 healAmount = bm.GetPercentOfMaxHp(FieldConditions.GRASSY_TERRAIN_HEAL_AMOUNT);
+					bm.HealMon(ref healAmount, false);
+				}
+			}
+
+			return null;
+		}
+		public static object Terrain_Misty_OnFieldResidual(object p) {
+			OnFieldResidualParams cbParams = ValidateParams<OnFieldResidualParams>(p);
+
+			cbParams.state.Terrain.DecrementDuration();
+
+			if (cbParams.state.Terrain.DurationRemaining == 0) {
+				MessageBox(Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_END));
+				cbParams.state.Terrain.ClearWeatherTerrain();
+			}
+			else {
+				MessageBox(Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_ACTIVE));
+			}
+
+			return null;
+		}
+		public static object Terrain_Psychic_OnFieldResidual(object p) {
+			OnFieldResidualParams cbParams = ValidateParams<OnFieldResidualParams>(p);
+
+			cbParams.state.Terrain.DecrementDuration();
+
+			if (cbParams.state.Terrain.DurationRemaining == 0) {
+				MessageBox(Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_END));
+				cbParams.state.Terrain.ClearWeatherTerrain();
+			}
+			else {
+				MessageBox(Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_ACTIVE));
+			}
+
+			return null;
+		}
 	}
 }

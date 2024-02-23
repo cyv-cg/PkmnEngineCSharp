@@ -16,7 +16,7 @@ namespace PkmnEngine {
 		public static Action<string> MessageBox;
 		public static Action<BattleMon, Ability> AbilityPopup;
 
-		public const float TEXT_DISPLAY_SECONDS = 2f;
+		public const float TEXT_DISPLAY_SECONDS = 1f;
 		public const float TEXT_SPEED = 0.025f;
 
 		public static u16 HIHALF32(u32 n) { return (u16)((n & 0xFFFF0000) >> 16); }

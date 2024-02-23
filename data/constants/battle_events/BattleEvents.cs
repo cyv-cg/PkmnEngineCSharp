@@ -27,6 +27,14 @@ namespace PkmnEngine {
 		public readonly EffectType effect;
 		public readonly sbyte priority;
 	}
+	public readonly struct NextTurnEvent {
+		public NextTurnEvent(BattleEvent battleEvent, OnNextTurnParams args) {
+			this.battleEvent = battleEvent;
+			this.args = args;
+		}
+		public readonly BattleEvent battleEvent;
+		public readonly OnNextTurnParams args;
+	}
 
 	public struct DurationCallbackParams {
 		public DurationCallbackParams(BattleMon source) {
@@ -40,7 +48,6 @@ namespace PkmnEngine {
 		STATUS,
 		ITEM,
 		SPECIES,
-		SIDE,
 		WEATHER,
 		TERRAIN,
 		CONDITION,
@@ -53,21 +60,28 @@ namespace PkmnEngine {
 		OnModifyDef,
 		OnModifySpAtk,
 		OnModifySpDef,
+		OnModifySpd,
 		OnSourceModifyAtk,
 		OnSourceModifySpAtk,
 		OnFieldModifyAcc,
 		OnDamage,
 		OnResidual,
+		OnFieldResidual,
+		OnSideResidual,
 		OnStart,
 		OnEnd,
 		OnModifyCritRatio,
 		OnSourceModifyCritRatio,
 		OnWeatherModifyDamage,
-		OnFieldResidual,
+		OnModifyDamage,
 		OnStatusImmunityCheck,
-		OnTryMoveCheck,
-		OnTrySetWeatherCheck,
+		OnTryMove,
+		OnTrySelectMove,
+		OnTrySetWeather,
+		OnTryAddNonVolatile,
+		OnTryChangeStat,
 		OnWeatherSet,
 		DurationCallback,
+		OnNextTurn,
 	}
 }

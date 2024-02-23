@@ -96,5 +96,39 @@ namespace PkmnEngine {
 
 			return null;
 		}
+		public static object Status_ThroatChop_OnResidual(object p) {
+			OnResidualParams cbParams = ValidateParams<OnResidualParams>(p);
+
+			u8 count = (u8)cbParams.bm.GetStatusParam(StatusParam.THROAT_CHOP);
+			if (count == 0) {
+				cbParams.bm.RemoveStatus(Status.THROAT_CHOP);
+			}
+			cbParams.bm.DecrementStatusParam(StatusParam.THROAT_CHOP);
+
+			return null;
+		}
+		public static object Status_Taunt_OnResidual(object p) {
+			OnResidualParams cbParams = ValidateParams<OnResidualParams>(p);
+
+			u8 count = (u8)cbParams.bm.GetStatusParam(StatusParam.TAUNT);
+			if (count == 0) {
+				cbParams.bm.RemoveStatus(Status.THROAT_CHOP);
+				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_SHOOK_OFF_THE_TAUNT, cbParams.bm.GetName()));
+			}
+			cbParams.bm.DecrementStatusParam(StatusParam.TAUNT);
+
+			return null;
+		}
+		public static object Status_Encore_OnResidual(object p) {
+			OnResidualParams cbParams = ValidateParams<OnResidualParams>(p);
+
+			if (cbParams.bm.GetStatusParam(StatusParam.ENCORE_TURNS) == 0) {
+				cbParams.bm.RemoveStatus(Status.ENCORE);
+				MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_ENCORE_ENDED, cbParams.bm.GetName()));
+			}
+			cbParams.bm.DecrementStatusParam(StatusParam.ENCORE_TURNS);
+
+			return null;
+		}
 	} 
 }

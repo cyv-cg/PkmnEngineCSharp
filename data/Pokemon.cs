@@ -915,24 +915,11 @@ namespace PkmnEngine {
 		}
 		public u16 EffAtk(BattleState state) {
 			u16 atk = (u16)(Atk * DamageCalc.GetEffectiveStatMultiplier(AttackStages, Stat.ATTACK));
-
-			if (HasStatus(Status.BURN)) {
-				atk = (u16)(atk * StatusEffects.BURN_ATTACK_MULTIPLIER);
-			}
-
+			atk = (u16)(atk * Battle.RunEventChain(Callback.OnModifyAtk, this, new OnModifySpdParams(state, this)));
 			return atk;
 		}
 		public u16 EffDef(BattleState state) {
 			u16 def = (u16)(Def * DamageCalc.GetEffectiveStatMultiplier(DefenseStages, Stat.DEFENSE));
-
-			if (state.Weather.Equals(Condition.WEATHER_SNOW) && HasType(Type.ICE)) {
-				def = (u16)(def * FieldConditions.SNOW_DEF_BOOST);
-			}
-
-			if (state.SideHasCondition(Side, Condition.REFLECT, Condition.AURORA_VEIL)) {
-				def *= 2;
-			}
-
 			return def;
 		}
 		public u16 EffSpAtk(BattleState state) {
@@ -940,28 +927,12 @@ namespace PkmnEngine {
 		}
 		public u16 EffSpDef(BattleState state) {
 			u16 spDef = (u16)(SpDef * DamageCalc.GetEffectiveStatMultiplier(SpecialDefenseStages, Stat.SPECIAL_DEFENSE));
-
-			if (state.SideHasCondition(Side, Condition.LIGHT_SCREEN, Condition.AURORA_VEIL)) {
-				spDef *= 2;
-			}
-
 			return spDef;
 		}
 		public u16 GetEffectiveSpd(BattleState state) {
-			u16 spd = (u16)(Spd * DamageCalc.GetEffectiveStatMultiplier(SpeedStages, Stat.SPEED));
-
-			bool quickFeet = AbilityProc(Ability.QUICK_FEET, false) && HasStatus(StatusEffects.STATUS_MASK_NON_VOLATILE);
-			if (HasStatus(Status.PARALYSIS) && !quickFeet) {
-				spd = (u16)(spd * StatusEffects.PARALYSIS_SPEED_MULTIPLIER);
-			}
-			if (quickFeet) {
-				spd = (u16)(spd /  StatusEffects.PARALYSIS_SPEED_MULTIPLIER);
-			}
-
-			if (state.SideHasCondition(Side, Condition.TAILWIND)) {
-				spd = (u16)(spd * FieldConditions.TAILWIND_SPEED_BOOST);
-			}
-
+			u16 spd = Spd;
+			spd = (u16)(spd * DamageCalc.GetEffectiveStatMultiplier(SpeedStages, Stat.SPEED));
+			spd = (u16)(spd * Battle.RunEventChain(Callback.OnModifySpd, this, new OnModifySpdParams(state, this)));
 			return spd;
 		}
 
@@ -1194,40 +1165,13 @@ namespace PkmnEngine {
 			return (this.flags & bmFlag) != 0;
 		}
 
-		public bool CanBeInflictedWithNVStatus(BattleState state) {
-			// TODO:
-			//// The move Safeguard will protect the party from status conditions for five turns.
-			if (state.SideHasCondition(Side, Condition.SAFEGUARD)) {
-				return false;
-			}
-
+		public bool CanBeInflictedWithNVStatus(BattleState state, Status status) {
 			// TODO: A Pokémon behind a substitute cannot be poisoned, except due to Synchronize or a held Toxic Orb.
 			
-
-			// Mons with Purifying Salt cannot be affected.
-			if (AbilityProc(Ability.PURIFYING_SALT, true)) {
-				return false;
-			}
-
-			// Mons with Leaf Guard cannot be affected during harsh sunlight.
-			if (AbilityProc(Ability.LEAF_GUARD, true) && (state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT || state.Weather.Condition == Condition.WEATHER_EXTREME_SUNLIGHT)) {
-				return false;
-			}
-
-			// Terrain
-			if (IsGrounded(state) && state.Terrain.Equals(Condition.TERRAIN_MISTY)) {
-				return false;
-			}
-
-			// idfk
-			if (AbilityProc(Ability.COMATOSE, false)) {
-				return false;
-			}
-
-			return true;
+			return Battle.RunEventCheck(Callback.OnTryAddNonVolatile, state, new OnTryAddNonVolatileParams(state, this, status));
 		}
 		public bool CanBeBurned(BattleState state) {
-			if (!CanBeInflictedWithNVStatus(state)) {
+			if (!CanBeInflictedWithNVStatus(state, Status.BURN)) {
 				return false;
 			}
 
@@ -1239,7 +1183,7 @@ namespace PkmnEngine {
 			return true;
 		}
 		public bool CanBeFrozen(BattleState state) {
-			if (!CanBeInflictedWithNVStatus(state)) {
+			if (!CanBeInflictedWithNVStatus(state, Status.FREEZE)) {
 				return false;
 			}
 
@@ -1247,7 +1191,7 @@ namespace PkmnEngine {
 			return !HasType(Type.ICE);
 		}
 		public bool CanBeParalyzed(BattleState state) {
-			if (!CanBeInflictedWithNVStatus(state)) {
+			if (!CanBeInflictedWithNVStatus(state, Status.PARALYSIS)) {
 				return false;
 			}
 
@@ -1255,7 +1199,7 @@ namespace PkmnEngine {
 			return !HasType(Type.ELECTRIC);
 		}
 		public bool CanBePoisoned(BattleState state) {
-			if (!CanBeInflictedWithNVStatus(state)) {
+			if (!CanBeInflictedWithNVStatus(state, Status.POISON)) {
 				return false;
 			}
 
@@ -1266,34 +1210,19 @@ namespace PkmnEngine {
 				return false;
 			}
 
-			// Pokémon with the Ability Immunity cannot be poisoned.
-			if (AbilityProc(Ability.IMMUNITY, true)) {
-				return false;
-			}
-
-			// Minior in Meteor Form is completely immune to being poisoned.
-			if (Species == Species.MINIOR_METEOR_FORM) {
-				return false;
-			}
-
 			return true;
 		}
 		public bool CanFallAsleep(BattleState state) {
 			// Also determines if a mon is affected by Yawn.
 
-			if (!CanBeInflictedWithNVStatus(state)) {
-				return false;
-			}
-
-			// Terrain
-			if (IsGrounded(state) && state.Terrain.Condition == Condition.TERRAIN_ELECTRIC) {
+			if (!CanBeInflictedWithNVStatus(state, Status.SLEEP)) {
 				return false;
 			}
 
 			return true;
 		}
 		public bool CanBeConfused(BattleState state) {
-			if (!CanBeInflictedWithNVStatus(state)) {
+			if (!CanBeInflictedWithNVStatus(state, Status.CONFUSION)) {
 				return false;
 			}
 			
@@ -1433,16 +1362,20 @@ namespace PkmnEngine {
 				return false;
 			}
 
+			// If the move's PP is zero, the move cannot be selected.
+			if (pp[moveSlot] == 0) {
+				return false;
+			}
+
+			if (!Battle.RunEventCheck(Callback.OnTrySelectMove, this, new OnTrySelectMoveParams(state, this, moves[moveSlot], print))) {
+				return false;
+			}
+
 			// Gigaton Hammer
 			if ((moves[moveSlot] == BattleMoveID.GIGATON_HAMMER) && GetStatusParam(StatusParam.LAST_USED_MOVE) == moveSlot) {
 				if (print) {
 					MessageBox(Lang.GetBattleMessage(BattleMessage.CANNOT_USE_MOVE_TWICE_IN_A_ROW, Lang.GetMoveName(BattleMoveID.GIGATON_HAMMER)));
 				}
-				return false;
-			}
-
-			// If the move's PP is zero, the move cannot be selected.
-			if (pp[moveSlot] == 0) {
 				return false;
 			}
 
@@ -1454,26 +1387,10 @@ namespace PkmnEngine {
 				return false;
 			}
 
-			// Mons affected by throat chop cannot use sound moves.
-			if ((move.flags & BattleMoves.Flag.SOUND_MOVE) != 0 && HasStatus(Status.THROAT_CHOP)) {
-				if (print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES, GetName()));
-				}
-				return false;
-			}
-
 			// Tormented mons cannot use the same move twice in a row.
 			if (HasStatus(Status.TORMENT) && GetStatusParam(StatusParam.LAST_USED_MOVE) == moveSlot) {
 				if (print) {
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_THE_SAME_MOVE_TWICE_DUE_TO_TORMENT, GetName()));
-				}
-				return false;
-			}
-
-			// Taunted mons cannot use status moves.
-			if (HasStatus(Status.TAUNT) && (move.moveCat == MoveCategory.STATUS)) {
-				if (print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_MOVE_AFTER_THE_TAUNT, GetName(), Lang.GetMoveName(moves[moveSlot])));
 				}
 				return false;
 			}
@@ -1496,14 +1413,6 @@ namespace PkmnEngine {
 				}
 			}
 
-			// Encore
-			if (HasStatus(Status.ENCORE) && moveSlot != GetStatusParam(StatusParam.ENCORE)) {
-				if (print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_MUST_DO_AN_ENCORE, GetName()));
-				}
-				return false;
-			}
-
 			return true;
 		}
 
@@ -1520,6 +1429,9 @@ namespace PkmnEngine {
 		#region overrides
 		public bool Equals(BattleMon obj) {
 			return this.Write().ToString() == obj.Write().ToString();
+		}
+		public override string ToString() {
+			return GetName();
 		}
 		#endregion
 	}

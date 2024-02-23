@@ -60,6 +60,16 @@ namespace PkmnEngine {
 			}
 		}
 
+		private static void ResolveCondition(BattleState state, Condition condition, BattleMessage message) {
+			if (state.FieldHasCondition(condition, out FieldCondition c)) {
+				if (c.DurationRemaining == 0) {
+					state.RemoveCondition(c);
+					MessageBox(Lang.GetBattleMessage(message));
+				}
+				c.DecrementDuration();
+			}
+		}
+
 		private static readonly Dictionary<Condition, Dictionary<Callback, (BattleEvent callback, sbyte priority)>> ConditionEvents = new() { {
 		
 			Condition.WEATHER_HARSH_SUNLIGHT,
@@ -101,7 +111,7 @@ namespace PkmnEngine {
 					}, 0)
 				},
 				{
-					Callback.OnTrySetWeatherCheck,
+					Callback.OnTrySetWeather,
 					((object p) => {
 						MessageBox(Lang.GetBattleMessage(BattleMessage.EXTREME_SUNLIGHT_NOT_LESSENED));
 						return false;
@@ -120,8 +130,8 @@ namespace PkmnEngine {
 					(Weather_HarshSunlight_OnStatusImmunityCheck, 0)
 				},
 				{
-					Callback.OnTryMoveCheck,
-					(Weather_ExtremeSunlight_OnTryMoveCheck, 0)
+					Callback.OnTryMove,
+					(Weather_ExtremeSunlight_OnTryMove, 0)
 				},
 				{
 					Callback.OnWeatherSet,
@@ -165,7 +175,7 @@ namespace PkmnEngine {
 					}, 0)
 				},
 				{
-					Callback.OnTrySetWeatherCheck,
+					Callback.OnTrySetWeather,
 					((object p) => {
 						MessageBox(Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_NOT_LESSENED));
 						return false;
@@ -180,8 +190,8 @@ namespace PkmnEngine {
 					(Weather_HeavyRain_OnFieldResidual, 1)
 				},
 				{
-					Callback.OnTryMoveCheck,
-					(Weather_HeavyRain_OnTryMoveCheck, 0)
+					Callback.OnTryMove,
+					(Weather_HeavyRain_OnTryMove, 0)
 				},
 				{
 					Callback.OnWeatherSet,
@@ -251,15 +261,11 @@ namespace PkmnEngine {
 				},
 				{
 					Callback.OnFieldResidual,
-					(Weather_Snow_OnFieldResidual, 1)
-				},
-				{
-					Callback.OnModifyDef,
-					(Weather_Snow_OnModifyDef, 10)
+					(Terrain_Grassy_OnFieldResidual, 5)
 				},
 				{
 					Callback.OnWeatherSet,
-					(Weather_Snow_OnWeatherSet, 0)
+					(Terrain_Grassy_OnWeatherSet, 0)
 				}
 			}
 		},
@@ -298,7 +304,7 @@ namespace PkmnEngine {
 					}, 0)
 				},
 				{
-					Callback.OnTrySetWeatherCheck,
+					Callback.OnTrySetWeather,
 					((object p) => {
 						MessageBox(Lang.GetBattleMessage(BattleMessage.STRONG_WINDS_NOT_LESSENED));
 						return false;
@@ -334,6 +340,279 @@ namespace PkmnEngine {
 				{
 					Callback.OnWeatherSet,
 					(Weather_ShadowyAura_OnWeatherSet, 0)
+				}
+			}
+		},
+
+		{
+			Condition.TERRAIN_ELECTRIC,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.TERRAIN_EXTENDER) {
+							return (u8)8;
+						}
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Terrain_Electric_OnFieldResidual, 2)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Terrain_Electric_OnWeatherSet, 0)
+				},
+				{
+					Callback.OnWeatherModifyDamage,
+					(Terrain_Electric_OnWeatherModifyDamage, 0)
+				},
+				{
+					Callback.OnTryAddNonVolatile,
+					(Terrain_Electric_OnTryAddNonVolatile, 0)
+				}
+			}
+		},
+		{
+			Condition.TERRAIN_GRASSY,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.TERRAIN_EXTENDER) {
+							return (u8)8;
+						}
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Terrain_Grassy_OnFieldResidual, 2)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Terrain_Grassy_OnWeatherSet, 0)
+				},
+				{
+					Callback.OnWeatherModifyDamage,
+					(Terrain_Grassy_OnWeatherModifyDamage, 0)
+				}
+			}
+		},
+		{
+			Condition.TERRAIN_MISTY,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.TERRAIN_EXTENDER) {
+							return (u8)8;
+						}
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Terrain_Misty_OnFieldResidual, 2)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Terrain_Misty_OnWeatherSet, 0)
+				},
+				{
+					Callback.OnWeatherModifyDamage,
+					(Terrain_Misty_OnWeatherModifyDamage, 0)
+				},
+				{
+					Callback.OnTryAddNonVolatile,
+					(Terrain_Misty_OnTryAddNonVolatile, 0)
+				}
+			}
+		},
+		{
+			Condition.TERRAIN_PSYCHIC,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.TERRAIN_EXTENDER) {
+							return (u8)8;
+						}
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					(Terrain_Psychic_OnFieldResidual, 2)
+				},
+				{
+					Callback.OnWeatherSet,
+					(Terrain_Psychic_OnWeatherSet, 0)
+				},
+				{
+					Callback.OnWeatherModifyDamage,
+					(Terrain_Psychic_OnWeatherModifyDamage, 0)
+				}
+			}
+		},
+
+		{
+			Condition.WATER_SPORT,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => { return (u8)5; }, 0)
+				},
+				{
+					Callback.OnWeatherModifyDamage,
+					(Condition_WaterSport_OnWeatherModifyDamage, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					((object p) => {
+						ResolveCondition(((OnFieldResidualParams)p).state, Condition.WATER_SPORT, BattleMessage.WATER_SPORT_END);
+						return null;
+					}, 27)
+				}
+			}
+		},
+		{
+			Condition.MUD_SPORT,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => { return (u8)5; }, 0)
+				},
+				{
+					Callback.OnWeatherModifyDamage,
+					(Condition_MudSport_OnWeatherModifyDamage, 0)
+				},
+				{
+					Callback.OnFieldResidual,
+					((object p) => {
+						ResolveCondition(((OnFieldResidualParams)p).state, Condition.MUD_SPORT, BattleMessage.WATER_SPORT_END);
+						return null;
+					}, 27)
+				}
+			}
+		},
+
+		{
+			Condition.REFLECT,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.LIGHT_CLAY) {
+							return (u8)8;
+						}
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnModifyDamage,
+					(Condition_Reflect_OnModifyDamage, 0)
+				},
+				{
+					Callback.OnSideResidual,
+					(Condition_Reflect_OnSideResidual, 26)
+				}
+			}
+		},
+		{
+			Condition.LIGHT_SCREEN,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.LIGHT_CLAY) {
+							return (u8)8;
+						}
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnModifyDamage,
+					(Condition_LightScreen_OnModifyDamage, 0)
+				},
+				{
+					Callback.OnSideResidual,
+					(Condition_LightScreen_OnSideResidual, 26)
+				}
+			}
+		},
+		{
+			Condition.AURORA_VEIL,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.LIGHT_CLAY) {
+							return (u8)8;
+						}
+						return (u8)5;
+					}, 0)
+				},
+				{
+					Callback.OnModifyDamage,
+					(Condition_AuroraVeil_OnModifyDamage, 0)
+				},
+				{
+					Callback.OnSideResidual,
+					(Condition_AuroraVeil_OnSideResidual, 26)
+				}
+			}
+		},
+
+		{
+			Condition.TAILWIND,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => { return (u8)5; }, 0)
+				},
+				{
+					Callback.OnModifySpd,
+					(Condition_Tailwind_OnModifySpd, 0)
+				},
+				{
+					Callback.OnSideResidual,
+					(Condition_Tailwind_OnSideResidual, 26)
+				}
+			}
+		},
+		{
+			Condition.SAFEGUARD,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => { return (u8)5; }, 0)
+				},
+				{
+					Callback.OnTryAddNonVolatile,
+					(Condition_Safeguard_OnTryAddNonVolatile, 0)
+				},
+				{
+					Callback.OnSideResidual,
+					(Condition_SafeGuard_OnSideResidual, 25)
+				}
+			}
+		},
+		{
+			Condition.MIST,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback,
+					((object p) => { return (u8)5; }, 0)
+				},
+				{
+					Callback.OnTryChangeStat,
+					(Condition_Mist_OnTryChangeStat, 0)
+				},
+				{
+					Callback.OnSideResidual,
+					(Condition_Mist_OnSideResidual, 26)
 				}
 			}
 		}

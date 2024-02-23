@@ -78,6 +78,41 @@ namespace PkmnEngine {
 				Callback.OnModifyCritRatio,
 				(Ability_SuperLuck_OnModifyCritRatio, 0)
 			}}
+		},
+		{
+			Ability.QUICK_FEET,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnModifySpd,
+				(Ability_QuickFeet_OnModifySpd, 0)
+			}}
+		},
+		{
+			Ability.PURIFYING_SALT,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTryAddNonVolatile,
+				((object p) => { return false; }, 0)
+			}}
+		},
+		{
+			Ability.COMATOSE,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTryAddNonVolatile,
+				((object p) => { return false; /*idfk*/ }, 0)
+			}}
+		},
+		{
+			Ability.LEAF_GUARD,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTryAddNonVolatile,
+				(Ability_LeafGuard_OnTryAddNonVolatile, 0)
+			}}
+		},
+		{
+			Ability.IMMUNITY,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTryAddNonVolatile,
+				(Ability_Immunity_OnTryAddNonVolatile, 0)
+			}}
 		}
 
 		

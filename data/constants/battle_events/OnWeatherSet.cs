@@ -77,5 +77,26 @@ namespace PkmnEngine {
 			MessageBox(Lang.GetBattleMessage(BattleMessage.SHADOWY_AURA_APPEARED));
 			return null;
 		}
+
+		public static object Terrain_Electric_OnWeatherSet(object p) {
+			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			MessageBox(Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_START));
+			return null;
+		}
+		public static object Terrain_Grassy_OnWeatherSet(object p) {
+			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			MessageBox(Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_START));
+			return null;
+		}
+		public static object Terrain_Misty_OnWeatherSet(object p) {
+			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			MessageBox(Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_START));
+			return null;
+		}
+		public static object Terrain_Psychic_OnWeatherSet(object p) {
+			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			MessageBox(Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_START));
+			return null;
+		}
 	}
 }

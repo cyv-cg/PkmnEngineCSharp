@@ -122,7 +122,7 @@ namespace PkmnEngine {
 			CheckSuccessiveProtects(attacker, moveID);
 
 			// Weird weather conditions:
-			if (!Battle.RunEventCheck(Callback.OnTryMoveCheck, battle, new OnTryMoveCheckParams(state, attacker, moveID))) {
+			if (!Battle.RunEventCheck(Callback.OnTryMove, battle, new OnTryMoveParams(state, attacker, moveID))) {
 				return;
 			}
 

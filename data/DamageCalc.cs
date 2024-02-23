@@ -77,8 +77,17 @@ namespace PkmnEngine {
 			// TODO: https://bulbapedia.bulbagarden.net/wiki/Power#Generation_IX
 			u16 effPower = (overrides == null || overrides.power == 0) ? move.power : overrides.power;
 
-			u16 statAtk = move.moveCat == MoveCategory.PHYSICAL ? attacker.EffAtk(state) : attacker.EffSpAtk(state);
-			u16 statDef = move.moveCat == MoveCategory.PHYSICAL ? defender.EffDef(state) : defender.EffSpDef(state);
+			u16 statAtk = move.moveCat switch {
+				MoveCategory.PHYSICAL => (u16)(attacker.EffAtk(state) * Battle.RunEventChain(Callback.OnSourceModifyAtk, defender, new OnSourceModifyAtkParams(move))),
+				MoveCategory.SPECIAL => (u16)(attacker.EffSpAtk(state) * Battle.RunEventChain(Callback.OnSourceModifySpAtk, defender, new OnSourceModifySpAtkParams(move))),
+				_ => 0
+			};
+			u16 statDef = move.moveCat switch {
+				MoveCategory.PHYSICAL => (u16)(defender.EffDef(state)),
+				MoveCategory.SPECIAL => (u16)(defender.EffSpDef(state)),
+				_ => 0
+			};
+
 			if (overrides != null && overrides.atk > 0) {
 				statAtk = overrides.atk;
 			}
@@ -111,15 +120,6 @@ namespace PkmnEngine {
 				damage = (u16)(damage / StatusEffects.BURN_ATTACK_MULTIPLIER);
 			}
 
-			if (move.moveCat == MoveCategory.PHYSICAL) {
-				damage = (u16)(damage * Battle.RunEventChain(Callback.OnModifyAtk, attacker, new OnModifyAtkParams(attacker)));
-				damage = (u16)(damage * Battle.RunEventChain(Callback.OnSourceModifyAtk, defender, new OnSourceModifyAtkParams(move)));
-			}
-			if (move.moveCat == MoveCategory.SPECIAL) {
-				damage = (u16)(damage * Battle.RunEventChain(Callback.OnModifySpAtk, attacker, new OnModifySpAtkParams(attacker)));
-				damage = (u16)(damage * Battle.RunEventChain(Callback.OnSourceModifySpAtk, defender, new OnSourceModifySpAtkParams(move)));
-			}
-
 			// Charge
 			if (move.moveType == Type.ELECTRIC && attacker.HasStatus(Status.CHARGED)) {
 				damage *= 2;
@@ -131,60 +131,9 @@ namespace PkmnEngine {
 				damage *= 2;
 			}
 
-			// Weather
-			if (state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT) {
-				if (move.moveType == Type.FIRE || moveID == BattleMoveID.HYDRO_STEAM) {
-					damage = (u16)(damage * FieldConditions.WEATHER_DAMAGE_BOOST);
-				}
-				else if (move.moveType == Type.WATER) {
-					damage = (u16)(damage * FieldConditions.WEATHER_DAMAGE_REDUCTION);
-				}
-			}
-			else if (state.Weather.Condition == Condition.WEATHER_RAIN) {
-				if (move.moveType == Type.FIRE) {
-					damage = (u16)(damage * FieldConditions.WEATHER_DAMAGE_REDUCTION);
-				}
-				else if (move.moveType == Type.WATER) {
-					damage = (u16)(damage * FieldConditions.WEATHER_DAMAGE_BOOST);
-				}
-			}
-
-			// Water Sport
-			if (state.FieldHasCondition(Condition.WATER_SPORT) && (move.moveType == Type.FIRE)) {
-				damage = (u16)(damage * FieldConditions.WATER_SPORT_MULTIPLIER);
-			}
-			// Mud Sport
-			if (state.FieldHasCondition(Condition.MUD_SPORT) && (move.moveType == Type.ELECTRIC)) {
-				damage = (u16)(damage * FieldConditions.MUD_SPORT_MULTIPLIER);
-			}
-
-			// Terrain
-			if (attacker.IsGrounded(state)) {
-				// Increases the power of Electric-type moves used by Pokémon on the ground by 30%.
-				if ((state.Terrain.Condition == Condition.TERRAIN_ELECTRIC) && move.moveType == Type.ELECTRIC) {
-					damage = (u16)(damage * FieldConditions.TERRAIN_DAMAGE_BOOST);
-				}
-				else if (state.Terrain.Condition == Condition.TERRAIN_GRASSY) {
-					// Increases the power of Grass-type moves used by Pokémon on the ground by 30%.
-					if (move.moveType == Type.GRASS) {
-						damage = (u16)(damage * FieldConditions.TERRAIN_DAMAGE_BOOST);
-					}
-				}
-				// Increases the power of Psychic-type moves used by Pokémon on the ground by 30%.
-				else if (state.Terrain.Condition == Condition.TERRAIN_PSYCHIC && move.moveType == Type.PSYCHIC) {
-					damage = (u16)(damage * FieldConditions.TERRAIN_DAMAGE_BOOST);
-				}
-			}
-			if (defender.IsGrounded(state)) {
-				// Halves the damage taken by Pokémon on the ground from Dragon-type moves.
-				if ((state.Terrain.Condition == Condition.TERRAIN_MISTY) && move.moveType == Type.DRAGON) {
-					damage = (u16)(damage * FieldConditions.TERRAIN_DAMAGE_REDUCTION);
-				}
-				// Halves the power of Bulldoze, Earthquake, and Magnitude.
-				if (moveID == BattleMoveID.BULLDOZE || moveID == BattleMoveID.EARTHQUAKE || moveID == BattleMoveID.MAGNITUDE) {
-					damage = (u16)(damage * FieldConditions.TERRAIN_DAMAGE_REDUCTION);
-				}
-			}
+			// Weather & Terrain
+			damage = (u16)(damage * Battle.RunEventChain(Callback.OnWeatherModifyDamage, state, new OnWeatherModifyDamageParams(state, moveID, attacker, defender)));
+			damage = (u16)(damage * Battle.RunEventChain(Callback.OnModifyDamage, state, new OnModifyDamageParams(battle, state, defender.Side, attacker, defender, moveID, mods), defender.Side));
 
 			return damage;
 		}
@@ -219,15 +168,15 @@ namespace PkmnEngine {
 				mult *= 2;
 			}
 
-			// Reflect, Light Screen, and Aurora Veil
-			if (
-				((gBattleMoves(moveID).moveCat == MoveCategory.PHYSICAL && state.SideHasCondition(target.Side, Condition.REFLECT)) ||
-				(gBattleMoves(moveID).moveCat == MoveCategory.SPECIAL && state.SideHasCondition(target.Side, Condition.LIGHT_SCREEN)) ||
-				state.SideHasCondition(target.Side, Condition.AURORA_VEIL)) &&
-				!isCrit
-			) {
-				mult *= 0.5f;
-			}
+			//// Reflect, Light Screen, and Aurora Veil
+			//if (
+			//	((gBattleMoves(moveID).moveCat == MoveCategory.PHYSICAL && state.SideHasCondition(target.Side, Condition.REFLECT)) ||
+			//	(gBattleMoves(moveID).moveCat == MoveCategory.SPECIAL && state.SideHasCondition(target.Side, Condition.LIGHT_SCREEN)) ||
+			//	state.SideHasCondition(target.Side, Condition.AURORA_VEIL)) &&
+			//	!isCrit
+			//) {
+			//	mult *= 0.5f;
+			//}
 
 			// Collision Course and Electro Drift
 			if (
