@@ -130,5 +130,16 @@ namespace PkmnEngine {
 
 			return null;
 		}
+		public static object Status_Disable_OnResidual(object p) {
+			OnResidualParams cbParams = ValidateParams<OnResidualParams>(p);
+
+			if (cbParams.bm.GetStatusParam(StatusParam.DISABLE) == 0) {
+				cbParams.bm.RemoveStatus(Status.DISABLE);
+				MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_MOVE_NO_LONGER_DISABLED, cbParams.bm.GetName()));
+			}
+			cbParams.bm.DecrementStatusParam(StatusParam.DISABLE);
+
+			return null;
+		}
 	} 
 }

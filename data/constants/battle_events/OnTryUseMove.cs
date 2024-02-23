@@ -9,15 +9,17 @@ using PkmnEngine.Strings;
 
 namespace PkmnEngine {
 	public struct OnTrySelectMoveParams {
-		public OnTrySelectMoveParams(BattleState state, BattleMon bm, BattleMoveID moveID, bool print) {
+		public OnTrySelectMoveParams(BattleState state, BattleMon bm, BattleMoveID moveID, u8 moveSlot, bool print) {
 			this.state = state;
 			this.bm = bm;
 			this.MoveID = moveID;
+			this.moveSlot = moveSlot;
 			this.print = print;
 		}
 		public BattleState state;
 		public BattleMon bm;
 		public BattleMoveID MoveID;
+		public u8 moveSlot;
 		public bool print;
 	}
 	
@@ -55,6 +57,18 @@ namespace PkmnEngine {
 			if (cbParams.MoveID != cbParams.bm.moves[cbParams.bm.GetStatusParam(StatusParam.ENCORE)]) {
 				if (cbParams.print) {
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_MUST_DO_AN_ENCORE, cbParams.bm.GetName()));
+				}
+				return false;
+			}
+
+			return true;
+		}
+		public static object Status_Disable_OnTryUseMove(object p) {
+			OnTrySelectMoveParams cbParams = ValidateParams<OnTrySelectMoveParams>(p);
+
+			if (cbParams.bm.HasStatus(Status.DISABLE) && cbParams.bm.GetStatusParam(StatusParam.DISABLED_SLOT) == cbParams.moveSlot) {
+				if (cbParams.print) {
+					MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_MOVE_WAS_DISABLED, cbParams.bm.GetName(), Lang.GetMoveName(cbParams.MoveID)));
 				}
 				return false;
 			}

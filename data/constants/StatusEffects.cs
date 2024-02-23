@@ -301,6 +301,19 @@ namespace PkmnEngine {
 				(Status_TakingAim_OnNextTurn, 0)
 			}}
 		},
+		{
+			Status.DISABLE,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.OnResidual,
+					(Status_Disable_OnResidual, 17)
+				},
+				{
+					Callback.OnTrySelectMove,
+					(Status_Disable_OnTryUseMove, 0)
+				}
+			}
+		}
 
 
 		};

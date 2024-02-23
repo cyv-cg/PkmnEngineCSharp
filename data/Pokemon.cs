@@ -1367,7 +1367,7 @@ namespace PkmnEngine {
 				return false;
 			}
 
-			if (!Battle.RunEventCheck(Callback.OnTrySelectMove, this, new OnTrySelectMoveParams(state, this, moves[moveSlot], print))) {
+			if (!Battle.RunEventCheck(Callback.OnTrySelectMove, this, new OnTrySelectMoveParams(state, this, moves[moveSlot], moveSlot, print))) {
 				return false;
 			}
 
@@ -1375,14 +1375,6 @@ namespace PkmnEngine {
 			if ((moves[moveSlot] == BattleMoveID.GIGATON_HAMMER) && GetStatusParam(StatusParam.LAST_USED_MOVE) == moveSlot) {
 				if (print) {
 					MessageBox(Lang.GetBattleMessage(BattleMessage.CANNOT_USE_MOVE_TWICE_IN_A_ROW, Lang.GetMoveName(BattleMoveID.GIGATON_HAMMER)));
-				}
-				return false;
-			}
-
-			// Disable
-			if (HasStatus(Status.DISABLE) && GetStatusParam(StatusParam.DISABLED_SLOT) == moveSlot) {
-				if (print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_MOVE_WAS_DISABLED, GetName(), Lang.GetMoveName(moves[moveSlot])));
 				}
 				return false;
 			}

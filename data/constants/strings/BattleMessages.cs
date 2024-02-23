@@ -2809,6 +2809,19 @@ namespace PkmnEngine.Strings {
 						Language.CHN_TRA => "封住了\\$的\\$！",
 						_ => throw new System.ArgumentException()
 					};
+				case BattleMessage.MONS_MOVE_NO_LONGER_DISABLED:
+					return lang switch {
+						Language.ENG => "\\$’s move is no longer disabled!",
+						Language.JPN => "\\$のかなしばりが{解|と}けた！",
+						Language.GER => "Die Attacke von \\$ ist nicht mehr blockiert!",
+						Language.FRE => "La capacité \\$ n’est plus sous entrave !",
+						Language.ITA => "La mossa di \\$ non è più bloccata!",
+						Language.SPN => "¡\\$ ya no está bloqueado!",
+						Language.KOR => "\\$의 사슬묶기가 풀렸다!",
+						Language.CHN_SIM => "\\$的 定身法解除了！",
+						Language.CHN_TRA => "\\$的 定身法解除了！",
+						_ => throw new System.ArgumentException()
+					};
 				case BattleMessage.MON_BRACED_ITSELF:
 					return lang switch {
 						Language.ENG => "\\$ braced itself!",
@@ -3801,6 +3814,7 @@ namespace PkmnEngine.Strings {
 		MON_IS_OVERFLOWING_WITH_SPACE_POWER,
 		MON_TUCKED_IN_ITS_HEAD,
 		MONS_MOVE_WAS_DISABLED,
+		MONS_MOVE_NO_LONGER_DISABLED,
 		MON_BRACED_ITSELF,
 		MON_IS_STORING_ENERGY,
 		MON_UNLEASHED_ITS_ENERGY,
