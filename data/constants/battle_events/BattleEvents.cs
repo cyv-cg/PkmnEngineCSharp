@@ -13,6 +13,13 @@ namespace PkmnEngine {
 			}
 			return (T)p;
 		}
+
+		public static u8 EventDuration(BattleMon source, Status status) {
+			return (u8)StatusEffects.gStatusEvents(status, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+		}
+		public static u8 EventDuration(BattleMon source, Condition condition) {
+			return (u8)FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+		}
 	}
 
 	public delegate object BattleEvent(object callbackParams);

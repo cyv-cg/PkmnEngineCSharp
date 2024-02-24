@@ -9,13 +9,15 @@ using PkmnEngine.Strings;
 
 namespace PkmnEngine {
 	public struct OnTrySelectMoveParams {
-		public OnTrySelectMoveParams(BattleState state, BattleMon bm, BattleMoveID moveID, u8 moveSlot, bool print) {
+		public OnTrySelectMoveParams(Battle battle, BattleState state, BattleMon bm, BattleMoveID moveID, u8 moveSlot, bool print) {
+			this.battle = battle;
 			this.state = state;
 			this.bm = bm;
 			this.MoveID = moveID;
 			this.moveSlot = moveSlot;
 			this.print = print;
 		}
+		public Battle battle;
 		public BattleState state;
 		public BattleMon bm;
 		public BattleMoveID MoveID;
@@ -71,6 +73,42 @@ namespace PkmnEngine {
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_MOVE_WAS_DISABLED, cbParams.bm.GetName(), Lang.GetMoveName(cbParams.MoveID)));
 				}
 				return false;
+			}
+
+			return true;
+		}
+		public static object Status_Torment_OnTryUseMove(object p) {
+			OnTrySelectMoveParams cbParams = ValidateParams<OnTrySelectMoveParams>(p);
+
+			// Tormented mons cannot use the same move twice in a row.
+			if (cbParams.bm.HasStatus(Status.TORMENT) && cbParams.bm.GetStatusParam(StatusParam.LAST_USED_MOVE) == cbParams.moveSlot) {
+				if (cbParams.print) {
+					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_THE_SAME_MOVE_TWICE_DUE_TO_TORMENT, cbParams.bm.GetName()));
+				}
+				return false;
+			}
+
+			return true;
+		}
+		public static object Status_Imprison_OnTryUseMove(object p) {
+			OnTrySelectMoveParams cbParams = ValidateParams<OnTrySelectMoveParams>(p);
+
+			// Imprison
+			if (cbParams.bm.HasStatus(Status.IMPRISON)) {
+				foreach (BattleMon bm in cbParams.battle.GetAllActiveMons()) {
+					if (bm.Side == cbParams.bm.Side) {
+						continue;
+					}
+
+					for (u8 i = 0; i < Pokemon.MAX_MOVES; i++) {
+						if (cbParams.bm.KnowsMove(bm.moves[i])) {
+							if (cbParams.print) {
+								MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANT_USE_SEALED_MOVE, cbParams.bm.GetName(), Lang.GetMoveName(cbParams.bm.moves[cbParams.moveSlot])));
+							}
+							return false;
+						}
+					}
+				}
 			}
 
 			return true;

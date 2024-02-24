@@ -305,6 +305,10 @@ namespace PkmnEngine {
 			Status.DISABLE,
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
+					Callback.DurationCallback,
+					((object p) => { return (u8)4; }, 0)
+				},
+				{
 					Callback.OnResidual,
 					(Status_Disable_OnResidual, 17)
 				},
@@ -313,6 +317,20 @@ namespace PkmnEngine {
 					(Status_Disable_OnTryUseMove, 0)
 				}
 			}
+		},
+		{
+			Status.TORMENT,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTrySelectMove,
+				(Status_Torment_OnTryUseMove, 0)
+			}}
+		},
+		{
+			Status.IMPRISON,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTrySelectMove,
+				(Status_Imprison_OnTryUseMove, 0)
+			}}
 		}
 
 

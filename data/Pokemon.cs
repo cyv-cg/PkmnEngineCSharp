@@ -1367,45 +1367,15 @@ namespace PkmnEngine {
 				return false;
 			}
 
-			if (!Battle.RunEventCheck(Callback.OnTrySelectMove, this, new OnTrySelectMoveParams(state, this, moves[moveSlot], moveSlot, print))) {
-				return false;
-			}
-
-			// Gigaton Hammer
-			if ((moves[moveSlot] == BattleMoveID.GIGATON_HAMMER) && GetStatusParam(StatusParam.LAST_USED_MOVE) == moveSlot) {
+			// Stop moves that can't be used twice in a row.
+			if ((gBattleMoves(moves[moveSlot]).flags & BattleMoves.Flag.CANNOT_USE_MOVE_TWICE) != 0 && GetStatusParam(StatusParam.LAST_USED_MOVE) == moveSlot) {
 				if (print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.CANNOT_USE_MOVE_TWICE_IN_A_ROW, Lang.GetMoveName(BattleMoveID.GIGATON_HAMMER)));
+					MessageBox(Lang.GetBattleMessage(BattleMessage.CANNOT_USE_MOVE_TWICE_IN_A_ROW, Lang.GetMoveName(moves[moveSlot])));
 				}
 				return false;
 			}
 
-			// Tormented mons cannot use the same move twice in a row.
-			if (HasStatus(Status.TORMENT) && GetStatusParam(StatusParam.LAST_USED_MOVE) == moveSlot) {
-				if (print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_THE_SAME_MOVE_TWICE_DUE_TO_TORMENT, GetName()));
-				}
-				return false;
-			}
-
-			// Imprison
-			if (HasStatus(Status.IMPRISON)) {
-				foreach (BattleMon bm in battle.GetAllActiveMons()) {
-					if (bm.Side == Side) {
-						continue;
-					}
-
-					for (u8 i = 0; i < Pokemon.MAX_MOVES; i++) {
-						if (KnowsMove(bm.moves[i])) {
-							if (print) {
-								MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANT_USE_SEALED_MOVE, GetName(), Lang.GetMoveName(moves[moveSlot])));
-							}
-							return false;
-						}
-					}
-				}
-			}
-
-			return true;
+			return Battle.RunEventCheck(Callback.OnTrySelectMove, this, new OnTrySelectMoveParams(battle, state, this, moves[moveSlot], moveSlot, print));
 		}
 
 		public float GetHpPercent() {

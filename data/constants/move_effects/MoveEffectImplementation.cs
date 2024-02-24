@@ -951,7 +951,7 @@ namespace PkmnEngine {
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_MOVE_WAS_DISABLED, p.target.GetName(), Lang.GetMoveName(p.target.moves[slot])));
 
 			p.target.GiveStatus(Status.DISABLE);
-			p.target.SetStatusParam(StatusParam.DISABLE, 5);
+			p.target.SetStatusParam(StatusParam.DISABLE, BattleEvents.EventDuration(p.attacker, Status.DISABLE));
 			p.target.SetStatusParam(StatusParam.DISABLED_SLOT, slot);
 
 			return 0;

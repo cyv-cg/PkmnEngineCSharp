@@ -801,7 +801,7 @@ namespace PkmnEngine {
 			if (!Battle.RunEventCheck(Callback.OnTrySetWeather, this, null)) {
 				return;
 			}
-			u8 duration = (u8)PkmnEngine.FieldConditions.gConditionEvents(weather, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+			u8 duration = BattleEvents.EventDuration(source, weather);
 			Weather.SetWeatherTerrain(weather, duration);
 			Battle.RunEvent(Callback.OnWeatherSet, this, new OnWeatherSetParams(this, source));
 		}
@@ -819,7 +819,7 @@ namespace PkmnEngine {
 			//	return;
 			//}
 
-			u8 duration = (u8)PkmnEngine.FieldConditions.gConditionEvents(terrain, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+			u8 duration = BattleEvents.EventDuration(source, terrain);
 			Terrain.SetWeatherTerrain(terrain, duration);
 			Battle.RunEvent(Callback.OnWeatherSet, this, new OnWeatherSetParams(this, source));
 		}

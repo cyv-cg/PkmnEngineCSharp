@@ -64,6 +64,7 @@ namespace PkmnEngine {
 			UNUSABLE_BY_SLEEP_TALK		= 1L << 35,
 			CANNOT_BE_SKETCHED			= 1L << 36,
 			HITS_UNGROUNDED				= 1L << 37,
+			CANNOT_USE_MOVE_TWICE		= 1L << 38,
 		}
 		#endregion
 	
@@ -5629,7 +5630,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CANNOT_USE_MOVE_TWICE
 					);
 				}
 			}
