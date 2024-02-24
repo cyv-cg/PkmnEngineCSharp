@@ -29,37 +29,37 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Condition_Reflect_OnModifyDamage(object p) {
-			OnModifyDamageParams cbParams = ValidateParams<OnModifyDamageParams>(p);
+			OnModifyDamageParams args = ValidateParams<OnModifyDamageParams>(p);
 
-			BattleMove move = gBattleMoves(cbParams.moveID);
-			if (cbParams.defender != cbParams.attacker && move.moveCat == MoveCategory.PHYSICAL && !cbParams.mods.isCrit) {
+			BattleMove move = gBattleMoves(args.moveID);
+			if (args.defender != args.attacker && move.moveCat == MoveCategory.PHYSICAL && !args.mods.isCrit) {
 				return 0.66f;
 			}
 
 			return 1f;
 		}
 		public static object Condition_LightScreen_OnModifyDamage(object p) {
-			OnModifyDamageParams cbParams = ValidateParams<OnModifyDamageParams>(p);
+			OnModifyDamageParams args = ValidateParams<OnModifyDamageParams>(p);
 
-			BattleMove move = gBattleMoves(cbParams.moveID);
-			if (cbParams.defender != cbParams.attacker && move.moveCat == MoveCategory.SPECIAL && !cbParams.mods.isCrit) {
+			BattleMove move = gBattleMoves(args.moveID);
+			if (args.defender != args.attacker && move.moveCat == MoveCategory.SPECIAL && !args.mods.isCrit) {
 				return 0.66f;
 			}
 
 			return 1f;
 		}
 		public static object Condition_AuroraVeil_OnModifyDamage(object p) {
-			OnModifyDamageParams cbParams = ValidateParams<OnModifyDamageParams>(p);
+			OnModifyDamageParams args = ValidateParams<OnModifyDamageParams>(p);
 
-			BattleMove move = gBattleMoves(cbParams.moveID);
+			BattleMove move = gBattleMoves(args.moveID);
 			// Reduction does not stack on top of Reflect/Light Screen.
-			if (cbParams.state.SideHasCondition(cbParams.side, Condition.REFLECT) && move.moveCat == MoveCategory.PHYSICAL) {
+			if (args.state.SideHasCondition(args.side, Condition.REFLECT) && move.moveCat == MoveCategory.PHYSICAL) {
 				return 1f;
 			}
-			if (cbParams.state.SideHasCondition(cbParams.side, Condition.REFLECT) && move.moveCat == MoveCategory.SPECIAL) {
+			if (args.state.SideHasCondition(args.side, Condition.REFLECT) && move.moveCat == MoveCategory.SPECIAL) {
 				return 1f;
 			}
-			if (cbParams.defender != cbParams.attacker && move.moveCat != MoveCategory.STATUS && !cbParams.mods.isCrit) {
+			if (args.defender != args.attacker && move.moveCat != MoveCategory.STATUS && !args.mods.isCrit) {
 				return 0.66f;
 			}
 

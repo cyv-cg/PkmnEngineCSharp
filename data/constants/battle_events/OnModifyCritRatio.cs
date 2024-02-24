@@ -13,18 +13,18 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Ability_SuperLuck_OnModifyCritRatio(object p) {
-			OnModifyCritRatioParams cbParams = ValidateParams<OnModifyCritRatioParams>(p);
+			OnModifyCritRatioParams args = ValidateParams<OnModifyCritRatioParams>(p);
 
 			return 1;
 		}
 
 		public static object Status_LaserFocus_OnModifyCritRatio(object p) {
-			OnModifyCritRatioParams cbParams = ValidateParams<OnModifyCritRatioParams>(p);
+			OnModifyCritRatioParams args = ValidateParams<OnModifyCritRatioParams>(p);
 
 			return MAX_STAT_STAGE;
 		}
 		public static object Status_GettingPumped_OnModifyCritRatio(object p) {
-			OnModifyCritRatioParams cbParams = ValidateParams<OnModifyCritRatioParams>(p);
+			OnModifyCritRatioParams args = ValidateParams<OnModifyCritRatioParams>(p);
 
 			return 1;
 		}

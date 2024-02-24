@@ -44,32 +44,32 @@ namespace PkmnEngine {
 		}
 
 		public static object Condition_Reflect_OnSideResidual(object p) {
-			OnSideResidualParams cbParams = ValidateParams<OnSideResidualParams>(p);
-			ResolveCondition(cbParams.state, cbParams.side, Condition.REFLECT,
+			OnSideResidualParams args = ValidateParams<OnSideResidualParams>(p);
+			ResolveCondition(args.state, args.side, Condition.REFLECT,
 				BattleMessage.ALLY_REFLECT_WORE_OFF,
 				BattleMessage.OPPONENT_REFLECT_WORE_OFF
 			);
 			return null;
 		}
 		public static object Condition_LightScreen_OnSideResidual(object p) {
-			OnSideResidualParams cbParams = ValidateParams<OnSideResidualParams>(p);
-			ResolveCondition(cbParams.state, cbParams.side, Condition.LIGHT_SCREEN,
+			OnSideResidualParams args = ValidateParams<OnSideResidualParams>(p);
+			ResolveCondition(args.state, args.side, Condition.LIGHT_SCREEN,
 				BattleMessage.ALLY_LIGHT_SCREEN_WORE_OFF,
 				BattleMessage.OPPONENT_LIGHT_SCREEN_WORE_OFF
 			);
 			return null;
 		}
 		public static object Condition_AuroraVeil_OnSideResidual(object p) {
-			OnSideResidualParams cbParams = ValidateParams<OnSideResidualParams>(p);
-			ResolveCondition(cbParams.state, cbParams.side, Condition.AURORA_VEIL,
+			OnSideResidualParams args = ValidateParams<OnSideResidualParams>(p);
+			ResolveCondition(args.state, args.side, Condition.AURORA_VEIL,
 				BattleMessage.ALLY_AURORA_VEIL_WORE_OFF,
 				BattleMessage.OPPONENT_AURORA_VEIL_WORE_OFF	
 			);
 			return null;
 		}
 		public static object Condition_Tailwind_OnSideResidual(object p) {
-			OnSideResidualParams cbParams = ValidateParams<OnSideResidualParams>(p);
-			ResolveCondition(cbParams.state, cbParams.side, Condition.TAILWIND,
+			OnSideResidualParams args = ValidateParams<OnSideResidualParams>(p);
+			ResolveCondition(args.state, args.side, Condition.TAILWIND,
 				BattleMessage.ALLY_TAILWIND_END,
 				BattleMessage.ENEMY_TAILWIND_END
 			);
@@ -77,16 +77,16 @@ namespace PkmnEngine {
 		}
 
 		public static object Condition_SafeGuard_OnSideResidual(object p) {
-			OnSideResidualParams cbParams = ValidateParams<OnSideResidualParams>(p);
-			ResolveCondition(cbParams.state, cbParams.side, Condition.SAFEGUARD,
+			OnSideResidualParams args = ValidateParams<OnSideResidualParams>(p);
+			ResolveCondition(args.state, args.side, Condition.SAFEGUARD,
 				BattleMessage.PLAYER_NO_LONGER_PROTECTED_BY_SAFEGUARD,
 				BattleMessage.OPPONENT_NO_LONGER_PROTECTED_BY_SAFEGUARD
 			);
 			return null;
 		}
 		public static object Condition_Mist_OnSideResidual(object p) {
-			OnSideResidualParams cbParams = ValidateParams<OnSideResidualParams>(p);
-			ResolveCondition(cbParams.state, cbParams.side, Condition.MIST, 
+			OnSideResidualParams args = ValidateParams<OnSideResidualParams>(p);
+			ResolveCondition(args.state, args.side, Condition.MIST, 
 				BattleMessage.YOUR_TEAM_NO_LONGER_PROTECTED_BY_MIST, 
 				BattleMessage.OPPOSING_TEAM_NO_LONGER_PROTECTED_BY_MIST
 			);

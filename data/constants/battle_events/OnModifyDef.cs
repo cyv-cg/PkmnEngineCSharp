@@ -13,9 +13,9 @@ namespace PkmnEngine {
 
 	internal static partial class BattleEvents {
 		public static object Weather_Snow_OnModifyDef(object p) {
-			OnModifyDefParams cbParams = ValidateParams<OnModifyDefParams>(p);
+			OnModifyDefParams args = ValidateParams<OnModifyDefParams>(p);
 
-			if (cbParams.bm.HasType(Type.ICE)) {
+			if (args.bm.HasType(Type.ICE)) {
 				return 1.5f;
 			}
 			return 1f;

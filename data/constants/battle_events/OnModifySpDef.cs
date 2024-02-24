@@ -13,9 +13,9 @@ namespace PkmnEngine {
 
 	internal static partial class BattleEvents {
 		public static object Weather_Sandstorm_OnModifySpDef(object p) {
-			OnModifySpDefParams cbParams = ValidateParams<OnModifySpDefParams>(p);
+			OnModifySpDefParams args = ValidateParams<OnModifySpDefParams>(p);
 
-			if (cbParams.bm.HasType(Type.ROCK)) {
+			if (args.bm.HasType(Type.ROCK)) {
 				return 1.5f;
 			}
 

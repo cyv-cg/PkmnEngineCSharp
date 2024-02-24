@@ -19,29 +19,29 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Ability_Heatproof_OnDamage(object p) {
-			OnDamageParams cbParams = ValidateParams<OnDamageParams>(p);
+			OnDamageParams args = ValidateParams<OnDamageParams>(p);
 
-			if (cbParams.bm.HasStatus(Status.BURN)) {
-				return cbParams.damage / 2;
+			if (args.bm.HasStatus(Status.BURN)) {
+				return args.damage / 2;
 			}
-			return cbParams.damage;
+			return args.damage;
 		}
 		public static object Ability_PoisonHeal_OnDamage(object p) {
-			OnDamageParams cbParams = ValidateParams<OnDamageParams>(p);
+			OnDamageParams args = ValidateParams<OnDamageParams>(p);
 
-			u16 healAmount = cbParams.bm.GetPercentOfMaxHp(StatusEffects.POISON_CHIP_DAMAGE);
-			if (cbParams.bm.HasStatus(Status.POISON, Status.TOXIC)) {
-				cbParams.bm.HealMon(ref healAmount, false);
+			u16 healAmount = args.bm.GetPercentOfMaxHp(StatusEffects.POISON_CHIP_DAMAGE);
+			if (args.bm.HasStatus(Status.POISON, Status.TOXIC)) {
+				args.bm.HealMon(ref healAmount, false);
 			}
 			return 1;
 		}
 
 		public static object Status_Rage_OnDamage(object p) {
-			OnDamageParams cbParams = ValidateParams<OnDamageParams>(p);
+			OnDamageParams args = ValidateParams<OnDamageParams>(p);
 
 			// If the last move the mon used was Rage, increase it's attack by 1 stage.
-			if (cbParams.bm.HasStatus(Status.RAGE) && cbParams.direct) {
-				MoveEffects.ChangeStat(null, cbParams.bm, 1, Stat.ATTACK);
+			if (args.bm.HasStatus(Status.RAGE) && args.direct) {
+				MoveEffects.ChangeStat(null, args.bm, 1, Stat.ATTACK);
 			}
 
 			return 1;

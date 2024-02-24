@@ -19,11 +19,11 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Weather_StrongWind_OnModifyEffectiveness(object p) {
-			OnModifyEffectivenessParams cbParams = ValidateParams<OnModifyEffectivenessParams>(p);
+			OnModifyEffectivenessParams args = ValidateParams<OnModifyEffectivenessParams>(p);
 
-			if ((cbParams.state.Weather.Condition == Condition.WEATHER_STRONG_WIND) && cbParams.typeEff >= Types.EFF_NORMAL && cbParams.defender.HasType(Type.FLYING)) {
+			if ((args.state.Weather.Condition == Condition.WEATHER_STRONG_WIND) && args.typeEff >= Types.EFF_NORMAL && args.defender.HasType(Type.FLYING)) {
 				//MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_WIND_WEAKENED_ATTACK));
-				return Types.EFF_NORMAL / cbParams.typeEff;
+				return Types.EFF_NORMAL / args.typeEff;
 			}
 
 			return 1f;

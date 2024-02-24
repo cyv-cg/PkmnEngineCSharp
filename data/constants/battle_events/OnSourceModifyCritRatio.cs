@@ -13,7 +13,7 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Ability_BattleArmor_OnSourceModifyCritRatio(object p) {
-			OnSourceModifyCritRatioParams cbParams = ValidateParams<OnSourceModifyCritRatioParams>(p);
+			OnSourceModifyCritRatioParams args = ValidateParams<OnSourceModifyCritRatioParams>(p);
 
 			return -100;
 		}

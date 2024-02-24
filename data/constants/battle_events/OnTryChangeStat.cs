@@ -21,10 +21,10 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Condition_Mist_OnTryChangeStat(object p) {
-			OnTryChangeStatParams cbParams = ValidateParams<OnTryChangeStatParams>(p);
+			OnTryChangeStatParams args = ValidateParams<OnTryChangeStatParams>(p);
 
-			if (cbParams.state.SideHasCondition(cbParams.bm.Side, Condition.MIST) && cbParams.delta < 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_PROTECTED_BY_THE_MIST, cbParams.bm.GetName()));
+			if (args.state.SideHasCondition(args.bm.Side, Condition.MIST) && args.delta < 0) {
+				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_PROTECTED_BY_THE_MIST, args.bm.GetName()));
 				return false;
 			}
 

@@ -18,83 +18,83 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Weather_HarshSunlight_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.SUNLIGHT_BECAME_HARSH));
 			return null;
 		}
 		public static object Weather_ExtremeSunlight_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.SUNLIGHT_BECAME_EXTREMELY_HARSH));
 			return null;
 		}
 		public static object Weather_Rain_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.STARTED_RAINING));
 			return null;
 		}
 		public static object Weather_HeavyRain_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_STARTED));
 			return null;
 		}
 		public static object Weather_Sandstorm_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.SANDSTORM_KICKED_UP));
 			return null;
 		}
 		public static object Weather_Hail_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.STARTED_HAILING));
 			return null;
 		}
 		public static object Weather_Snow_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.STARTED_SNOWING));
 			return null;
 		}
 		public static object Weather_Fog_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.FOG_CREPT_UP));
 			return null;
 		}
 		public static object Weather_StrongWind_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MYSTERIOUS_WIND_APPEARED));
 			return null;
 		}
 		public static object Weather_ShadowyAura_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.SHADOWY_AURA_APPEARED));
 			return null;
 		}
 
 		public static object Terrain_Electric_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 			MessageBox(Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_START));
 			return null;
 		}
 		public static object Terrain_Grassy_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 			MessageBox(Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_START));
 			return null;
 		}
 		public static object Terrain_Misty_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_START));
 			return null;
 		}
 		public static object Terrain_Psychic_OnWeatherSet(object p) {
-			OnWeatherSetParams cbParams = ValidateParams<OnWeatherSetParams>(p);
+			OnWeatherSetParams args = ValidateParams<OnWeatherSetParams>(p);
 			MessageBox(Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_START));
 			return null;
 		}

@@ -15,9 +15,9 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Weather_HarshSunlight_OnStatusImmunityCheck(object p) {
-			OnStatusImmunityCheckParams cbParams = ValidateParams<OnStatusImmunityCheckParams>(p);
+			OnStatusImmunityCheckParams args = ValidateParams<OnStatusImmunityCheckParams>(p);
 
-			if (cbParams.status == Status.FREEZE) {
+			if (args.status == Status.FREEZE) {
 				return false;
 			}
 

@@ -21,18 +21,18 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Ability_LeafGuard_OnTryAddNonVolatile(object p) {
-			OnTryAddNonVolatileParams cbParams = ValidateParams<OnTryAddNonVolatileParams>(p);
+			OnTryAddNonVolatileParams args = ValidateParams<OnTryAddNonVolatileParams>(p);
 
-			if (cbParams.state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT || cbParams.state.Weather.Condition == Condition.WEATHER_EXTREME_SUNLIGHT) {
+			if (args.state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT || args.state.Weather.Condition == Condition.WEATHER_EXTREME_SUNLIGHT) {
 				return false;
 			}
 
 			return true;
 		}
 		public static object Ability_Immunity_OnTryAddNonVolatile(object p) {
-			OnTryAddNonVolatileParams cbParams = ValidateParams<OnTryAddNonVolatileParams>(p);
+			OnTryAddNonVolatileParams args = ValidateParams<OnTryAddNonVolatileParams>(p);
 
-			if (cbParams.status == Status.POISON || cbParams.status == Status.TOXIC) {
+			if (args.status == Status.POISON || args.status == Status.TOXIC) {
 				return false;
 			}
 
@@ -40,9 +40,9 @@ namespace PkmnEngine {
 		}
 
 		public static object Terrain_Electric_OnTryAddNonVolatile(object p) {
-			OnTryAddNonVolatileParams cbParams = ValidateParams<OnTryAddNonVolatileParams>(p);
+			OnTryAddNonVolatileParams args = ValidateParams<OnTryAddNonVolatileParams>(p);
 
-			if (cbParams.status == Status.SLEEP || cbParams.status == Status.DROWSY) {
+			if (args.status == Status.SLEEP || args.status == Status.DROWSY) {
 				return false;
 			}
 
@@ -53,9 +53,9 @@ namespace PkmnEngine {
 		}
 		
 		public static object Condition_Safeguard_OnTryAddNonVolatile(object p) {
-			OnTryAddNonVolatileParams cbParams = ValidateParams<OnTryAddNonVolatileParams>(p);
+			OnTryAddNonVolatileParams args = ValidateParams<OnTryAddNonVolatileParams>(p);
 
-			if (cbParams.state.SideHasCondition(cbParams.bm.Side, Condition.SAFEGUARD)) {
+			if (args.state.SideHasCondition(args.bm.Side, Condition.SAFEGUARD)) {
 				return false;
 			}
 

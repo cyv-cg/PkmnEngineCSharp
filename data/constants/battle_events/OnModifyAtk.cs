@@ -13,9 +13,9 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Ability_Guts_OnModifyAtk(object p) {
-			OnModifyAtkParams cbParams = ValidateParams<OnModifyAtkParams>(p);
+			OnModifyAtkParams args = ValidateParams<OnModifyAtkParams>(p);
 
-			if (cbParams.bm.HasStatus(StatusEffects.STATUS_MASK_NON_VOLATILE)) {
+			if (args.bm.HasStatus(StatusEffects.STATUS_MASK_NON_VOLATILE)) {
 				return 1.5f;
 			}
 			return 1.0f;

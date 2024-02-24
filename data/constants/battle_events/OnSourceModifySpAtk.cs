@@ -13,9 +13,9 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Ability_Heatproof_OnSourceModifySpAtk(object p) {
-			OnSourceModifySpAtkParams cbParams = ValidateParams<OnSourceModifySpAtkParams>(p);
+			OnSourceModifySpAtkParams args = ValidateParams<OnSourceModifySpAtkParams>(p);
 
-			if (cbParams.move.moveType == Type.FIRE) {
+			if (args.move.moveType == Type.FIRE) {
 				return 0.5f;
 			}
 			return 1.0f;

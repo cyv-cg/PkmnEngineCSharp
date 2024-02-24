@@ -18,15 +18,15 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Status_Drowsy_OnNextTurn(object p) {
-			OnNextTurnParams cbParams = ValidateParams<OnNextTurnParams>(p);
+			OnNextTurnParams args = ValidateParams<OnNextTurnParams>(p);
 			// The turn after a mon is inflicted with drowsy, it falls asleep.
-			cbParams.bm.RemoveStatus(Status.DROWSY);
-			MoveEffects.SleepMon(cbParams.state, cbParams.bm, StatusEffects.GetRandSleepTurns());
+			args.bm.RemoveStatus(Status.DROWSY);
+			MoveEffects.SleepMon(args.state, args.bm, StatusEffects.GetRandSleepTurns());
 			return null;
 		}
 		public static object Status_TakingAim_OnNextTurn(object p) {
-			OnNextTurnParams cbParams = ValidateParams<OnNextTurnParams>(p);
-			cbParams.bm.RemoveStatus(Status.TAKING_AIM);
+			OnNextTurnParams args = ValidateParams<OnNextTurnParams>(p);
+			args.bm.RemoveStatus(Status.TAKING_AIM);
 			return null;
 		}
 	}

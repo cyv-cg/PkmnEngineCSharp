@@ -27,12 +27,12 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Status_ThroatChop_OnTryUseMove(object p) {
-			OnTrySelectMoveParams cbParams = ValidateParams<OnTrySelectMoveParams>(p);
+			OnTrySelectMoveParams args = ValidateParams<OnTrySelectMoveParams>(p);
 
-			BattleMove move = gBattleMoves(cbParams.MoveID);
+			BattleMove move = gBattleMoves(args.MoveID);
 			if ((move.flags & Flag.SOUND_MOVE) != 0) {
-				if (cbParams.print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES, cbParams.bm.GetName()));
+				if (args.print) {
+					MessageBox(Lang.GetBattleMessage(BattleMessage.THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES, args.bm.GetName()));
 				}
 				return false;
 			}
@@ -40,12 +40,12 @@ namespace PkmnEngine {
 			return true;
 		}
 		public static object Status_Taunt_OnTryUseMove(object p) {
-			OnTrySelectMoveParams cbParams = ValidateParams<OnTrySelectMoveParams>(p);
+			OnTrySelectMoveParams args = ValidateParams<OnTrySelectMoveParams>(p);
 
-			BattleMove move = gBattleMoves(cbParams.MoveID);
+			BattleMove move = gBattleMoves(args.MoveID);
 			if (move.moveCat == MoveCategory.STATUS) {
-				if (cbParams.print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_MOVE_AFTER_THE_TAUNT, cbParams.bm.GetName(), Lang.GetMoveName(cbParams.MoveID)));
+				if (args.print) {
+					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_MOVE_AFTER_THE_TAUNT, args.bm.GetName(), Lang.GetMoveName(args.MoveID)));
 				}
 				return false;
 			}
@@ -53,12 +53,12 @@ namespace PkmnEngine {
 			return true;
 		}
 		public static object Status_Encore_OnTryUseMove(object p) {
-			OnTrySelectMoveParams cbParams = ValidateParams<OnTrySelectMoveParams>(p);
+			OnTrySelectMoveParams args = ValidateParams<OnTrySelectMoveParams>(p);
 
-			BattleMove move = gBattleMoves(cbParams.MoveID);
-			if (cbParams.MoveID != cbParams.bm.moves[cbParams.bm.GetStatusParam(StatusParam.ENCORE)]) {
-				if (cbParams.print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_MUST_DO_AN_ENCORE, cbParams.bm.GetName()));
+			BattleMove move = gBattleMoves(args.MoveID);
+			if (args.MoveID != args.bm.moves[args.bm.GetStatusParam(StatusParam.ENCORE)]) {
+				if (args.print) {
+					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_MUST_DO_AN_ENCORE, args.bm.GetName()));
 				}
 				return false;
 			}
@@ -66,11 +66,11 @@ namespace PkmnEngine {
 			return true;
 		}
 		public static object Status_Disable_OnTryUseMove(object p) {
-			OnTrySelectMoveParams cbParams = ValidateParams<OnTrySelectMoveParams>(p);
+			OnTrySelectMoveParams args = ValidateParams<OnTrySelectMoveParams>(p);
 
-			if (cbParams.bm.HasStatus(Status.DISABLE) && cbParams.bm.GetStatusParam(StatusParam.DISABLED_SLOT) == cbParams.moveSlot) {
-				if (cbParams.print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_MOVE_WAS_DISABLED, cbParams.bm.GetName(), Lang.GetMoveName(cbParams.MoveID)));
+			if (args.bm.HasStatus(Status.DISABLE) && args.bm.GetStatusParam(StatusParam.DISABLED_SLOT) == args.moveSlot) {
+				if (args.print) {
+					MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_MOVE_WAS_DISABLED, args.bm.GetName(), Lang.GetMoveName(args.MoveID)));
 				}
 				return false;
 			}
@@ -78,12 +78,12 @@ namespace PkmnEngine {
 			return true;
 		}
 		public static object Status_Torment_OnTryUseMove(object p) {
-			OnTrySelectMoveParams cbParams = ValidateParams<OnTrySelectMoveParams>(p);
+			OnTrySelectMoveParams args = ValidateParams<OnTrySelectMoveParams>(p);
 
 			// Tormented mons cannot use the same move twice in a row.
-			if (cbParams.bm.HasStatus(Status.TORMENT) && cbParams.bm.GetStatusParam(StatusParam.LAST_USED_MOVE) == cbParams.moveSlot) {
-				if (cbParams.print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_THE_SAME_MOVE_TWICE_DUE_TO_TORMENT, cbParams.bm.GetName()));
+			if (args.bm.HasStatus(Status.TORMENT) && args.bm.GetStatusParam(StatusParam.LAST_USED_MOVE) == args.moveSlot) {
+				if (args.print) {
+					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_THE_SAME_MOVE_TWICE_DUE_TO_TORMENT, args.bm.GetName()));
 				}
 				return false;
 			}
@@ -91,19 +91,20 @@ namespace PkmnEngine {
 			return true;
 		}
 		public static object Status_Imprison_OnTryUseMove(object p) {
-			OnTrySelectMoveParams cbParams = ValidateParams<OnTrySelectMoveParams>(p);
+			OnTrySelectMoveParams args = ValidateParams<OnTrySelectMoveParams>(p);
 
 			// Imprison
-			if (cbParams.bm.HasStatus(Status.IMPRISON)) {
-				foreach (BattleMon bm in cbParams.battle.GetAllActiveMons()) {
-					if (bm.Side == cbParams.bm.Side) {
+			// Technically, this should only run if the mon that inflicted the Imprisoned status is active.
+			if (args.bm.HasStatus(Status.IMPRISON)) {
+				foreach (BattleMon bm in args.battle.GetAllActiveMons()) {
+					if (bm.Side == args.bm.Side) {
 						continue;
 					}
 
 					for (u8 i = 0; i < Pokemon.MAX_MOVES; i++) {
-						if (cbParams.bm.KnowsMove(bm.moves[i])) {
-							if (cbParams.print) {
-								MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANT_USE_SEALED_MOVE, cbParams.bm.GetName(), Lang.GetMoveName(cbParams.bm.moves[cbParams.moveSlot])));
+						if (args.bm.KnowsMove(bm.moves[i])) {
+							if (args.print) {
+								MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANT_USE_SEALED_MOVE, args.bm.GetName(), Lang.GetMoveName(args.bm.moves[args.moveSlot])));
 							}
 							return false;
 						}

@@ -22,9 +22,9 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Weather_ExtremeSunlight_OnTryMove(object p) {
-			OnTryMoveParams cbParams = ValidateParams<OnTryMoveParams>(p);
+			OnTryMoveParams args = ValidateParams<OnTryMoveParams>(p);
 
-			BattleMove move = gBattleMoves(cbParams.moveID);
+			BattleMove move = gBattleMoves(args.moveID);
 
 			if (move.moveType == Type.WATER && move.moveCat != MoveCategory.STATUS) {
 				MessageBox(Lang.GetBattleMessage(BattleMessage.WATER_ATTACK_EVAPORATED));
@@ -34,9 +34,9 @@ namespace PkmnEngine {
 			return true;
 		}
 		public static object Weather_HeavyRain_OnTryMove(object p) {
-			OnTryMoveParams cbParams = ValidateParams<OnTryMoveParams>(p);
+			OnTryMoveParams args = ValidateParams<OnTryMoveParams>(p);
 
-			BattleMove move = gBattleMoves(cbParams.moveID);
+			BattleMove move = gBattleMoves(args.moveID);
 
 			if (move.moveType == Type.FIRE && move.moveCat != MoveCategory.STATUS) {
 				MessageBox(Lang.GetBattleMessage(BattleMessage.FIRE_ATTACK_FIZZLED_OUT));

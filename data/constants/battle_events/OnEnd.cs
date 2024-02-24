@@ -18,25 +18,25 @@ namespace PkmnEngine {
 	
 	internal static partial class BattleEvents {
 		public static object Status_PerishSong_OnEnd(object p) {
-			OnEndParams cbParams = ValidateParams<OnEndParams>(p);
+			OnEndParams args = ValidateParams<OnEndParams>(p);
 
-			u8 count = (u8)cbParams.bm.GetStatusParam(StatusParam.PERISH_COUNT);
-			MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_PERISH_COUNT_FELL_TO_N, cbParams.bm.GetName(), count.ToString()));
+			u8 count = (u8)args.bm.GetStatusParam(StatusParam.PERISH_COUNT);
+			MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_PERISH_COUNT_FELL_TO_N, args.bm.GetName(), count.ToString()));
 			if (count == 0) {
-				u16 damage = cbParams.bm.EffMaxHp(cbParams.state);
-				cbParams.bm.DamageMon(ref damage, true, false);
+				u16 damage = args.bm.EffMaxHp(args.state);
+				args.bm.DamageMon(ref damage, true, false);
 				return null;
 			}
-			cbParams.bm.DecrementStatusParam(StatusParam.PERISH_COUNT);
+			args.bm.DecrementStatusParam(StatusParam.PERISH_COUNT);
 			return null;
 		}
 		public static object Status_LaserFocus_OnEnd(object p) {
-			OnEndParams cbParams = ValidateParams<OnEndParams>(p);
+			OnEndParams args = ValidateParams<OnEndParams>(p);
 
-			if (cbParams.bm.GetStatusParam(StatusParam.LASER_FOCUS) == 0) {
-				cbParams.bm.RemoveStatus(Status.LASER_FOCUS);
+			if (args.bm.GetStatusParam(StatusParam.LASER_FOCUS) == 0) {
+				args.bm.RemoveStatus(Status.LASER_FOCUS);
 			}
-			cbParams.bm.DecrementStatusParam(StatusParam.LASER_FOCUS);
+			args.bm.DecrementStatusParam(StatusParam.LASER_FOCUS);
 
 			return null;
 		}

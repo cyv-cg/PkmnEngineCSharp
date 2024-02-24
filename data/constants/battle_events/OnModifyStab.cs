@@ -15,9 +15,9 @@ namespace PkmnEngine {
 
 	internal static partial class BattleEvents {
 		public static object Ability_Adaptability_OnModifyStab(object p) {
-			OnModifyStabParams cbParams = ValidateParams<OnModifyStabParams>(p);
+			OnModifyStabParams args = ValidateParams<OnModifyStabParams>(p);
 
-			if (cbParams.bm.HasType(cbParams.moveType)) {
+			if (args.bm.HasType(args.moveType)) {
 				return 2.0f;
 			}
 			return DamageCalc.SAME_TYPE_ATTACK_BONUS;
