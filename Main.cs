@@ -12,6 +12,10 @@ using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public static class Main {
+		private static async void AbilityPopup(BattleMon bm, Ability a) {
+			await MessageBox($"{bm.GetName()} | {Strings.Lang.GetAbilityName(a)}");	
+		}
+
 		private static void Setup() {
 			Inputs.gInputFunc = Test;
 
@@ -19,9 +23,9 @@ namespace PkmnEngine {
 			Inputs.gMenuFuncs[MenuCode.SWITCH_TO_MON]	= MonSwitchMenu.Select;
 			Inputs.gMenuFuncs[MenuCode.USE_MOVE]		= MoveSelectMenu.Select;
 
-			Global.MessageBox = GodotV.MessageBox.Push;
+			Global.MessageBox = GodotV.MessageBox.Display;
 			// TODO: this kinda temporary.
-			Global.AbilityPopup = (BattleMon bm, Ability a) => { MessageBox($"{bm.GetName()} | {Strings.Lang.GetAbilityName(a)}"); };
+			Global.AbilityPopup = AbilityPopup;
 		}
 
 		public static void Start() {

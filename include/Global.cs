@@ -11,6 +11,13 @@ using static PkmnEngine.Global;
 using System.Threading.Tasks;
 
 namespace PkmnEngine {
+	public class U16 {
+		public U16(u16 value) {
+			this.Value = value;
+		}
+		public u16 Value { get; set;}
+	}
+
 	public static class Global {
 		public const u16 WAIT_DELAY = 100;
 
