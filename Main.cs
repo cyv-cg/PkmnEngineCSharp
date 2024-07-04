@@ -30,9 +30,7 @@ namespace PkmnEngine {
 
 		public static void Start() {
 			Setup();
-			//Console.WriteLine("Hi mom!");
-			MessageBox("Hi mom!");
-
+			
 			gSaveBlock = new SaveBlock {
 				trainerID = Random32(),
 				language = Language.ENG,
