@@ -52,7 +52,9 @@ offset_left = 56.0
 offset_top = 8.97511
 offset_right = 104.0
 offset_bottom = 10.9751
-value = 25.0
+max_value = 1.0
+step = 0.01
+value = 0.25
 texture_progress = SubResource("AtlasTexture_p1euk")
 
 [node name="BarYellow" type="TextureProgressBar" parent="HealthBar"]
@@ -62,7 +64,9 @@ offset_left = 56.0
 offset_top = 8.97511
 offset_right = 104.0
 offset_bottom = 10.9751
-value = 50.0
+max_value = 1.0
+step = 0.01
+value = 0.5
 texture_progress = SubResource("AtlasTexture_tgd37")
 
 [node name="BarRed" type="TextureProgressBar" parent="HealthBar"]
@@ -71,7 +75,9 @@ offset_left = 56.0
 offset_top = 8.97511
 offset_right = 104.0
 offset_bottom = 10.9751
-value = 75.0
+max_value = 1.0
+step = 0.01
+value = 0.75
 texture_progress = SubResource("AtlasTexture_bed21")
 
 [node name="ExpBar" type="TextureProgressBar" parent="HealthBar"]

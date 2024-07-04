@@ -3,14 +3,14 @@ using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
 
+using System.Threading.Tasks;
+
 using static PkmnEngine.Global;
 using static PkmnEngine.Strings.Lang;
 using static PkmnEngine.StatusEffects;
 using static PkmnEngine.DamageCalc;
 
 using PkmnEngine.Strings;
-
-using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public static partial class MoveEffects {
@@ -28,74 +28,74 @@ namespace PkmnEngine {
 		#region effects
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 		public static async Task<u32> Effect_Hit(MoveEffectParams p) {
-			return Attack(p);
+			return await Attack(p);
 		}
 		#region non_volatile_effects
 		public static async Task<u32> Effect_Burn(MoveEffectParams p) {
-			return GiveMonNonVolatileStatus(p.state, p.attacker, Status.BURN, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
+			return await GiveMonNonVolatileStatus(p.state, p.attacker, Status.BURN, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
 		}
 		public static async Task<u32> Effect_BurnHit(MoveEffectParams p) {
-			return GiveMonNonVolatileStatus(p.state, p.target, Status.BURN, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
+			return await GiveMonNonVolatileStatus(p.state, p.target, Status.BURN, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
 		}
 		public static async Task<u32> Effect_CureBurn(MoveEffectParams p) {
-			return CureBurn(p.attacker);
+			return await CureBurn(p.attacker);
 		}
 		public static async Task<u32> Effect_CureBurnHit(MoveEffectParams p) {
-			return CureBurn(p.target);
+			return await CureBurn(p.target);
 		}
 		public static async Task<u32> Effect_Freeze(MoveEffectParams p) {
-			return GiveMonNonVolatileStatus(p.state, p.attacker, Status.FREEZE, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
+			return await GiveMonNonVolatileStatus(p.state, p.attacker, Status.FREEZE, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
 		}
 		public static async Task<u32> Effect_FreezeHit(MoveEffectParams p) {
-			return GiveMonNonVolatileStatus(p.state, p.target, Status.FREEZE, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));	
+			return await GiveMonNonVolatileStatus(p.state, p.target, Status.FREEZE, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));	
 		}
 		public static async Task<u32> Effect_Thaw(MoveEffectParams p) {
-			return ThawMon(p.attacker);
+			return await ThawMon(p.attacker);
 		}
 		public static async Task<u32> Effect_ThawHit(MoveEffectParams p) {
-			return ThawMon(p.target);
+			return await ThawMon(p.target);
 		}
 		public static async Task<u32> Effect_Paralyze(MoveEffectParams p) {
-			return GiveMonNonVolatileStatus(p.state, p.attacker, Status.PARALYSIS, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
+			return await GiveMonNonVolatileStatus(p.state, p.attacker, Status.PARALYSIS, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
 		}
 		public static async Task<u32> Effect_ParalyzeHit(MoveEffectParams p) {
-			return GiveMonNonVolatileStatus(p.state, p.target, Status.PARALYSIS, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
+			return await GiveMonNonVolatileStatus(p.state, p.target, Status.PARALYSIS, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
 		}
 		public static async Task<u32> Effect_CureParalysis(MoveEffectParams p) {
-			return CureParalysis(p.attacker);
+			return await CureParalysis(p.attacker);
 		}
 		public static async Task<u32> Effect_CureParalysisHit(MoveEffectParams p) {
-			return CureParalysis(p.target);
+			return await CureParalysis(p.target);
 		}
 		public static async Task<u32> Effect_Poison(MoveEffectParams p) {
-			return GiveMonNonVolatileStatus(p.state, p.attacker, Status.POISON, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
+			return await GiveMonNonVolatileStatus(p.state, p.attacker, Status.POISON, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
 		}
 		public static async Task<u32> Effect_PoisonHit(MoveEffectParams p) {
-			return GiveMonNonVolatileStatus(p.state, p.target, Status.POISON, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
+			return await GiveMonNonVolatileStatus(p.state, p.target, Status.POISON, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
 		}
 		public static async Task<u32> Effect_Toxic(MoveEffectParams p) {
-			return GiveMonNonVolatileStatus(p.state, p.attacker, Status.TOXIC, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
+			return await GiveMonNonVolatileStatus(p.state, p.attacker, Status.TOXIC, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
 		}
 		public static async Task<u32> Effect_ToxicHit(MoveEffectParams p) {
-			return GiveMonNonVolatileStatus(p.state, p.target, Status.TOXIC, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
+			return await GiveMonNonVolatileStatus(p.state, p.target, Status.TOXIC, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? u8.MaxValue : p.i_flags & 0xFF));
 		}
 		public static async Task<u32> Effect_CurePoison(MoveEffectParams p) {
-			return CurePoison(p.attacker);
+			return await CurePoison(p.attacker);
 		}
 		public static async Task<u32> Effect_CurePoisonHit(MoveEffectParams p) {
-			return CurePoison(p.target);
+			return await CurePoison(p.target);
 		}
 		public static async Task<u32> Effect_Sleep(MoveEffectParams p) {
-			return GiveMonNonVolatileStatus(p.state, p.attacker, Status.SLEEP, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? GetRandSleepTurns() : p.i_flags & 0xFF));
+			return await GiveMonNonVolatileStatus(p.state, p.attacker, Status.SLEEP, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? GetRandSleepTurns() : p.i_flags & 0xFF));
 		}
 		public static async Task<u32> Effect_SleepHit(MoveEffectParams p) {
-			return GiveMonNonVolatileStatus(p.state, p.target, Status.SLEEP, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? GetRandSleepTurns() : p.i_flags & 0xFF));
+			return await GiveMonNonVolatileStatus(p.state, p.target, Status.SLEEP, p.isPrimaryEffect, (u8)(p.i_flags == 0 ? GetRandSleepTurns() : p.i_flags & 0xFF));
 		}
 		public static async Task<u32> Effect_WakeUp(MoveEffectParams p) {
-			return WakeUpMon(p.attacker);
+			return await WakeUpMon(p.attacker);
 		}
 		public static async Task<u32> Effect_WakeUpHit(MoveEffectParams p) {
-			return WakeUpMon(p.target);
+			return await WakeUpMon(p.target);
 		}
 		public static async Task<u32> Effect_Confuse(MoveEffectParams p) {
 			if (p.attacker.HasStatus(Status.CONFUSION)) {
@@ -368,8 +368,8 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 
-			u16 damage = (u16)(p.target.EffMaxHp(p.state) / 2);
-			p.target.DamageMon(ref damage, true, false);
+			U16 damage = new((u16)(p.target.EffMaxHp(p.state) / 2));
+			await p.target.DamageMon(damage, true, false);
 
 			p.target.SetStatStage(Stat.ATTACK, MAX_STAT_STAGE);
 			MessageBox(Lang.GetBattleMessage(BattleMessage.BELLY_DRUM, p.target.GetName()));
@@ -399,67 +399,67 @@ namespace PkmnEngine {
 		#endregion
 		#region recoil
 		public static async Task<u32> Effect_RecoilHalfMaxHp(MoveEffectParams p) {
-			u16 recoil = (u16)(p.attacker.EffMaxHp(p.state) / 2);
-			return DoRecoilDamage(p, ref recoil);
+			U16 recoil = new((u16)(p.attacker.EffMaxHp(p.state) / 2));
+			return await DoRecoilDamage(p, recoil);
 		}
 		public static async Task<u32> Effect_RecoilThirdMaxHp(MoveEffectParams p) {
-			u16 recoil = (u16)(p.attacker.EffMaxHp(p.state) / 3);
-			return DoRecoilDamage(p, ref recoil);
+			U16 recoil = new((u16)(p.attacker.EffMaxHp(p.state) / 3));
+			return await DoRecoilDamage(p, recoil);
 		}
 		public static async Task<u32> Effect_RecoilQuarterMaxHp(MoveEffectParams p) {
-			u16 recoil = (u16)(p.attacker.EffMaxHp(p.state) / 4);
-			return DoRecoilDamage(p, ref recoil);
+			U16 recoil = new((u16)(p.attacker.EffMaxHp(p.state) / 4));
+			return await DoRecoilDamage(p, recoil);
 		}
 		public static async Task<u32> Effect_RecoilHalfDealt(MoveEffectParams p) {
-			u16 recoil = (u16)((Attack(p) & 0xFFFF) / 2);
-			return DoRecoilDamage(p, ref recoil);
+			U16 recoil = new((u16)((await Attack(p) & 0xFFFF) / 2));
+			return await DoRecoilDamage(p, recoil);
 		}
 		public static async Task<u32> Effect_RecoilThirdDealt(MoveEffectParams p) {
-			u16 recoil = (u16)((Attack(p) & 0xFFFF) / 3);
-			return DoRecoilDamage(p, ref recoil);
+			U16 recoil = new((u16)((await Attack(p) & 0xFFFF) / 3));
+			return await DoRecoilDamage(p, recoil);
 		}
 		public static async Task<u32> Effect_RecoilQuarterDealt(MoveEffectParams p) {
-			u16 recoil = (u16)((Attack(p) & 0xFFFF) / 4);
-			return DoRecoilDamage(p, ref recoil);
+			U16 recoil = new((u16)((await Attack(p) & 0xFFFF) / 4));
+			return await DoRecoilDamage(p, recoil);
 		}
 		#endregion
 		#region healing
 		public static async Task<u32> Effect_Absorb75Percent(MoveEffectParams p) {
-			u32 flags = Attack(p);
-			u16 healAmount = (u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.75f);
-			p.attacker.HealMon(ref healAmount, false);
+			u32 flags = await Attack(p);
+			U16 healAmount = new((u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.75f));
+			await p.attacker.HealMon(healAmount, false);
 			return flags;
 		}
 		public static async Task<u32> Effect_Absorb50Percent(MoveEffectParams p) {
-			u32 flags = Attack(p);
-			u16 healAmount = (u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.5f);
-			p.attacker.HealMon(ref healAmount, false);
+			u32 flags = await Attack(p);
+			U16 healAmount = new((u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.5f));
+			await p.attacker.HealMon(healAmount, false);
 			return flags;
 		}
 		public static async Task<u32> Effect_Abosrb25Percent(MoveEffectParams p) {
-			u32 flags = Attack(p);
-			u16 healAmount = (u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.25f);
-			p.attacker.HealMon(ref healAmount, false);
+			u32 flags = await Attack(p);
+			U16 healAmount = new((u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.25f));
+			await p.attacker.HealMon(healAmount, false);
 			return flags;
 		}
 		public static async Task<u32> Effect_HealHalfHit(MoveEffectParams p) {
-			u16 healAmount = (u16)(p.target.EffMaxHp(p.state) / 2);
-			p.target.HealMon(ref healAmount, false);
+			U16 healAmount = new((u16)(p.target.EffMaxHp(p.state) / 2));
+			await p.target.HealMon(healAmount, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_HealQuarterHit(MoveEffectParams p) {
-			u16 healAmount = (u16)(p.target.EffMaxHp(p.state) / 4);
-			p.target.HealMon(ref healAmount, false);
+			U16 healAmount = new((u16)(p.target.EffMaxHp(p.state) / 4));
+			await p.target.HealMon(healAmount, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_HealQuarter(MoveEffectParams p) {
-			u16 healAmount = (u16)(p.attacker.EffMaxHp(p.state) / 4);
-			p.attacker.HealMon(ref healAmount, false);
+			U16 healAmount = new((u16)(p.attacker.EffMaxHp(p.state) / 4));
+			await p.attacker.HealMon(healAmount, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_HealHalf(MoveEffectParams p) {
-			u16 healAmount = (u16)(p.attacker.EffMaxHp(p.state) / 2);
-			p.attacker.HealMon(ref healAmount, false);
+			U16 healAmount = new((u16)(p.attacker.EffMaxHp(p.state) / 2));
+			await p.attacker.HealMon(healAmount, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_HealingWish(MoveEffectParams p) {
@@ -467,8 +467,8 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_JungleHealing(MoveEffectParams p) {
-			u16 healAmount = p.target.GetPercentOfMaxHp(0.25f);
-			p.target.HealMon(ref healAmount, false);
+			U16 healAmount = new(p.target.GetPercentOfMaxHp(0.25f));
+			await p.target.HealMon(healAmount, false);
 			return await Effect_CureNonVolatileStatusHit(p);
 		}
 		public static async Task<u32> Effect_DreamEater(MoveEffectParams p) {
@@ -484,9 +484,9 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 
-			u16 healAmount = p.target.EffAtk(p.state);
+			U16 healAmount = new(p.target.EffAtk(p.state));
 			await Effect_AttackDownHit(p);
-			p.attacker.HealMon(ref healAmount, false);
+			await p.attacker.HealMon(healAmount, false);
 
 			return 0;
 		}
@@ -497,8 +497,8 @@ namespace PkmnEngine {
 
 			await Effect_CureNonVolatileStatusHit(p);
 
-			u16 healAmount = (u16)(p.attacker.EffMaxHp(p.state) / 2);
-			p.target.HealMon(ref healAmount, false);
+			U16 healAmount = new((u16)(p.attacker.EffMaxHp(p.state) / 2));
+			await p.target.HealMon(healAmount, false);
 
 			return 0;
 		}
@@ -523,8 +523,8 @@ namespace PkmnEngine {
 			await Effect_Sleep(p);
 
 			// Rest heals to full HP.
-			u16 healAmount = p.target.EffMaxHp(p.state);
-			p.target.HealMon(ref healAmount, false);
+			U16 healAmount = new(p.target.EffMaxHp(p.state));
+			await p.target.HealMon(healAmount, false);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.REST, p.target.GetName()));
 
@@ -537,20 +537,20 @@ namespace PkmnEngine {
 
 			if (prob < 0.1) {
 				// 120 base power attack
-				OverridePower(p, 120);
+				await OverridePower(p, 120);
 			}
 			else if (0.1 <= prob && prob < 0.3) {
 				// Heal 1/4 p.target's max HP
-				u16 healAmount = (u16)(p.target.EffMaxHp(p.state) * 0.25f);
-				p.target.HealMon(ref healAmount, false);
+				U16 healAmount = new((u16)(p.target.EffMaxHp(p.state) * 0.25f));
+				await p.target.HealMon(healAmount, false);
 			}
 			else if (0.3 <= prob && prob < 0.6) {
 				// 80 base power attack
-				OverridePower(p, 80);
+				await OverridePower(p, 80);
 			}
 			else if (0.6 <= prob) {
 				// 40 base power attack
-				OverridePower(p, 40);
+				await OverridePower(p, 40);
 			}
 
 			return 0;
@@ -711,10 +711,10 @@ namespace PkmnEngine {
 			}
 
 			// Attack.
-			u32 flags = Attack(p);
+			u32 flags = await Attack(p);
 			// Mon faints after.
-			u16 damage = p.attacker.EffHp(p.state);
-			p.attacker.DamageMon(ref damage, true, false);
+			U16 damage = new(p.attacker.EffHp(p.state));
+			await p.attacker.DamageMon(damage, true, false);
 
 			return flags;
 		}
@@ -726,10 +726,10 @@ namespace PkmnEngine {
 			}
 
 			// Attack.
-			u32 flags = Attack(p);
+			u32 flags = await Attack(p);
 			// Mon then loses 50% of its HP.
-			u16 damage = p.attacker.GetPercentOfMaxHp(0.5f);
-			p.attacker.DamageMon(ref damage, true, false);
+			U16 damage = new(p.attacker.GetPercentOfMaxHp(0.5f));
+			await p.attacker.DamageMon(damage, true, false);
 
 			return flags;
 		}
@@ -740,9 +740,9 @@ namespace PkmnEngine {
 			}
 
 			if (p.attacker.IsGrounded(p.state) && (p.state.Terrain.Condition == Condition.TERRAIN_MISTY)) {
-				return OverridePower(p, (u16)(p.move.power * 1.5f));
+				return await OverridePower(p, (u16)(p.move.power * 1.5f));
 			}
-			return Attack(p);
+			return await Attack(p);
 		}
 		public static async Task<u32> Effect_MirrorMove(MoveEffectParams p) {
 			u8 moveSlot = (u8)p.target.GetStatusParam(StatusParam.LAST_USED_MOVE);
@@ -782,7 +782,7 @@ namespace PkmnEngine {
 				damage *= 2;
 				p.attacker.RemoveStatus(Status.CHARGING_TURN);
 				p.attacker.RemoveStatus(Status.BIDE);
-				return Attack(p, damage);
+				return await Attack(p, damage);
 			}
 			else if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
 				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_STORING_ENERGY, p.attacker.GetName()));
@@ -859,15 +859,15 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_OHKO(MoveEffectParams p) {
-			u32 flags = Attack(p, p.target.EffMaxHp(p.state));
+			u32 flags = await Attack(p, p.target.EffMaxHp(p.state));
 			MessageBox(Lang.GetBattleMessage(BattleMessage.OHKO));
 			return flags;
 		}
 		public static async Task<u32> Effect_SuperFang(MoveEffectParams p) {
-			return Attack(p, p.target.GetPercentOfCurrHp(0.5f));
+			return await Attack(p, p.target.GetPercentOfCurrHp(0.5f));
 		}
 		public static async Task<u32> Effect_DragonRage(MoveEffectParams p) {
-			return Attack(p, 40);
+			return await Attack(p, 40);
 		}
 		public static async Task<u32> Effect_Trap(MoveEffectParams p) {
 			p.target.GiveStatus(Status.CANT_ESCAPE);
@@ -957,12 +957,12 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_LevelDamage(MoveEffectParams p) {
-			return Attack(p, p.attacker.Mon.level);
+			return await Attack(p, p.attacker.Mon.level);
 		}
 		public static async Task<u32> Effect_Psywave(MoveEffectParams p) {
 			// https://bulbapedia.bulbagarden.net/wiki/Psywave_(p.move)#Generation_V
 			u16 damage = (u16)(p.attacker.Mon.level * (p.battle.Random16() % 101 + 50) / 100);
-			return Attack(p, damage);
+			return await Attack(p, damage);
 		}
 		public static async Task<u32> Effect_Counter(MoveEffectParams p) {
 			u16 damage = (u16)(p.attacker.GetStatusParam(StatusParam.PHYS_DAMAGE_THIS_TURN) * 2);
@@ -971,7 +971,7 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 
-			return Attack(
+			return await Attack(
 				new MoveEffectParams(
 					p.battle,
 					p.state,
@@ -1027,23 +1027,24 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_PainSplit(MoveEffectParams p) {
 			u16 avgHp = (u16)((p.attacker.EffHp(p.state) + p.target.EffHp(p.state)) * 0.5f);
+			U16 diff;
 			
 			if (p.attacker.EffHp(p.state) > avgHp) {
-				u16 diff = (u16)(p.attacker.EffHp(p.state) - avgHp);
-				p.attacker.DamageMon(ref diff, true, false);
+				diff = new((u16)(p.attacker.EffHp(p.state) - avgHp));
+				await p.attacker.DamageMon(diff, true, false);
 			}
 			else {
-				u16 diff = (u16)(avgHp - p.attacker.EffHp(p.state));
-				p.attacker.HealMon(ref diff, true);
+				diff = new((u16)(avgHp - p.attacker.EffHp(p.state)));
+				await p.attacker.HealMon(diff, true);
 			}
 
 			if (p.target.EffHp(p.state) > avgHp) {
-				u16 diff = (u16)(p.target.EffHp(p.state) - avgHp);
-				p.target.DamageMon(ref diff, true, false);
+				diff = new((u16)(p.target.EffHp(p.state) - avgHp));
+				await p.target.DamageMon(diff, true, false);
 			}
 			else {
-				u16 diff = (u16)(avgHp - p.target.EffHp(p.state));
-				p.target.HealMon(ref diff, true);
+				diff = new((u16)(avgHp - p.target.EffHp(p.state)));
+				await p.target.HealMon(diff, true);
 			}
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.PAIN_SPLIT));
@@ -1167,7 +1168,7 @@ namespace PkmnEngine {
 				power = 200;
 			}
 
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_Spite(MoveEffectParams p) {
 			u8 moveSlot = (u8)p.target.GetStatusParam(StatusParam.LAST_USED_MOVE);
@@ -1186,11 +1187,11 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_FalseSwipe(MoveEffectParams p) {
 			u16 damage = CalcDamage(p, new Mods(p, CritRate(p)));
 			damage = (u16)System.MathF.Min(damage, p.target.EffHp(p.state) - 1);
-			DoSetDamage(p, damage);
+			await DoSetDamage(p, damage);
 			if (damage == 0) {
 				return 0;
 			}
-			return Attack(p, damage);
+			return await Attack(p, damage);
 		}
 		public static async Task<u32> Effect_HealBell(MoveEffectParams p) {
 			// TODO:
@@ -1206,7 +1207,7 @@ namespace PkmnEngine {
 					}
 				}
 				u16 damage = CalcDamage(p, new Mods(p, CritRate(p)), new Overrides(0, 0, (u16)(p.move.power + (10 * i)), 0));
-				DoSetDamage(p, damage);
+				await DoSetDamage(p, damage);
 				numHits++;
 			}
 			MessageBox(Lang.GetBattleMessage(BattleMessage.HIT_N_TIMES, numHits.ToString()));
@@ -1240,8 +1241,8 @@ namespace PkmnEngine {
 			}
 
 			// Otherwise, cut HP in half and curse the p.target.
-			u16 selfDamage = p.attacker.GetPercentOfMaxHp(0.5f);
-			p.attacker.DamageMon(ref selfDamage, true, false);
+			U16 selfDamage = new(p.attacker.GetPercentOfMaxHp(0.5f));
+			await p.attacker.DamageMon(selfDamage, true, false);
 			p.target.GiveStatus(Status.CURSE);
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_PUT_A_CURSE_ON_MON, p.attacker.GetName(), p.target.GetName()));
@@ -1297,7 +1298,7 @@ namespace PkmnEngine {
 			// Double power for each successive use.
 			u8 power = (u8)(p.move.power * System.MathF.Pow(2, System.MathF.Min(p.attacker.GetStatusParam(StatusParam.SUCCESSIVE_MOVE_USES) - 1, 2)));
 			power = (u8)System.Math.Clamp((int)power, (int)p.move.power, 160);
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_Attract(MoveEffectParams p) {
 			// TODO:
@@ -1359,7 +1360,7 @@ namespace PkmnEngine {
 				power /= 2;
 			}
 
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_BatonPass(MoveEffectParams p) {
 			// TODO:
@@ -1374,23 +1375,23 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Sonicboom(MoveEffectParams p) {
-			return Attack(p, 20);
+			return await Attack(p, 20);
 		}
 		public static async Task<u32> Effect_Synthesis(MoveEffectParams p) {
-			u16 healAmount = p.target.GetPercentOfMaxHp(0.25f);
+			U16 healAmount = new(p.target.GetPercentOfMaxHp(0.25f));
 
 			if ((p.state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT) || (p.state.Weather.Condition == Condition.WEATHER_EXTREME_SUNLIGHT)) {
-				healAmount = p.target.GetPercentOfMaxHp(0.67f);
+				healAmount = new(p.target.GetPercentOfMaxHp(0.67f));
 			}
 			else if (p.state.Weather.Condition == Condition.WEATHER_NONE || (p.state.Weather.Condition == Condition.WEATHER_STRONG_WIND)) {
-				healAmount = p.target.GetPercentOfMaxHp(0.5f);
+				healAmount = new(p.target.GetPercentOfMaxHp(0.5f));
 			}
 
-			p.target.HealMon(ref healAmount, false);
+			await p.target.HealMon(healAmount, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_HiddenPower(MoveEffectParams p) {
-			return OverrideType(p, p.attacker.Mon.HiddenPowerType);
+			return await OverrideType(p, p.attacker.Mon.HiddenPowerType);
 		}
 		public static async Task<u32> Effect_PsychUp(MoveEffectParams p) {
 			p.attacker.SetStatStage(Stat.ATTACK, p.target.AttackStages);
@@ -1423,14 +1424,14 @@ namespace PkmnEngine {
 				power /= 2;
 			}
 
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_FutureSight(MoveEffectParams p) {
 			// TODO:
 			return 0;
 		}
 		public static async Task<u32> Effect_Gust(MoveEffectParams p) {
-			return DoublePowerIf(p, p.target.HasStatus(Status.SEMI_INVULNERABLE_TURN));
+			return await DoublePowerIf(p, p.target.HasStatus(Status.SEMI_INVULNERABLE_TURN));
 		}
 		public static async Task<u32> Effect_FlinchMinimizeHit(MoveEffectParams p) {
 			// TODO:
@@ -1453,7 +1454,7 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 
-			return Attack(p);
+			return await Attack(p);
 		}
 		public static async Task<u32> Effect_Uproar(MoveEffectParams p) {
 			// TODO:
@@ -1488,12 +1489,12 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_Memento(MoveEffectParams p) {
 			await Effect_AttackDownHit2(p);
 			await Effect_SpecialAttackDownHit2(p);
-			u16 damage = p.attacker.EffMaxHp(p.state);
-			p.attacker.DamageMon(ref damage, true, false);
+			U16 damage = new(p.attacker.EffMaxHp(p.state));
+			await p.attacker.DamageMon(damage, true, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_Facade(MoveEffectParams p) {
-			return DoublePowerIf(p, (p.attacker.HasStatus(Status.BURN, Status.PARALYSIS, Status.POISON, Status.TOXIC)));
+			return await DoublePowerIf(p, (p.attacker.HasStatus(Status.BURN, Status.PARALYSIS, Status.POISON, Status.TOXIC)));
 		}
 		public static async Task<u32> Effect_FocusPunch(MoveEffectParams p) {
 			// TODO:
@@ -1501,9 +1502,9 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_SmellingSalts(MoveEffectParams p) {
 			bool doublePower = p.target.HasStatus(Status.PARALYSIS);
-			u32 retVal = DoublePowerIf(p, doublePower);
+			u32 retVal = await DoublePowerIf(p, doublePower);
 			if (doublePower) {
-				CureParalysis(p.target);
+				await CureParalysis(p.target);
 			}
 			return retVal;
 		}
@@ -1530,7 +1531,7 @@ namespace PkmnEngine {
 				Condition.WEATHER_FOG => Type.GHOST,// ???? idk i'm just throwing stuff at the wall here
 				_ => Type.NORMAL,
 			};
-			return OverrideType(p, type);
+			return await OverrideType(p, type);
 		}
 		public static async Task<u32> Effect_Charge(MoveEffectParams p) {
 			p.target.GiveStatus(Status.CHARGED);
@@ -1603,12 +1604,12 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 			u16 damage = (u16)(p.target.EffHp(p.state) - p.attacker.EffHp(p.state));
-			return Attack(p, damage);
+			return await Attack(p, damage);
 		}
 		public static async Task<u32> Effect_Eruption(MoveEffectParams p) {
 			// https://bulbapedia.bulbagarden.net/wiki/Eruption_(p.move)
 			u8 power = (u8)System.Math.Clamp((150.0f * p.attacker.EffHp(p.state)) / p.attacker.EffMaxHp(p.state), 1, 150);
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_SkillSwap(MoveEffectParams p) {
 			// TODO:
@@ -1621,15 +1622,15 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Refresh(MoveEffectParams p) {
 			if (p.target.HasStatus(Status.BURN)) {
-				CureBurn(p.target);
+				await CureBurn(p.target);
 				return 0;
 			}
 			else if (p.target.HasStatus(Status.PARALYSIS)) {
-				CureParalysis(p.target);
+				await CureParalysis(p.target);
 				return 0;
 			}
 			else if (p.target.IsPoisoned()) {
-				CurePoison(p.target);
+				await CurePoison(p.target);
 				return 0;
 			}
 			else {
@@ -1666,7 +1667,7 @@ namespace PkmnEngine {
 				power = 120;
 			}
 
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_SecretPower(MoveEffectParams p) {
 			// I mostly just made stuff up for this since I don't have the infrastructure to do
@@ -1722,7 +1723,7 @@ namespace PkmnEngine {
 					break;
 			}
 
-			return OverrideType(p, type);
+			return await OverrideType(p, type);
 		}
 		public static async Task<u32> Effect_Tickle(MoveEffectParams p) {
 			await Effect_AttackDownHit(p);
@@ -1781,7 +1782,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Assurance(MoveEffectParams p) {
-			return DoublePowerIf(p, p.target.HasFlag(BattleMon.Flag.RECEIVED_DAMAGE_THIS_TURN));
+			return await DoublePowerIf(p, p.target.HasFlag(BattleMon.Flag.RECEIVED_DAMAGE_THIS_TURN));
 		}
 		public static async Task<u32> Effect_Autotomize(MoveEffectParams p) {
 			if (await Effect_SpeedUp2(p) != 0) {
@@ -1793,7 +1794,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Avalanche(MoveEffectParams p) {
 			// Technically, this should only double power if the user has been damaged specifically by the p.target this turn.
-			return DoublePowerIf(p, p.attacker.HasFlag(BattleMon.Flag.RECEIVED_DAMAGE_THIS_TURN));
+			return await DoublePowerIf(p, p.attacker.HasFlag(BattleMon.Flag.RECEIVED_DAMAGE_THIS_TURN));
 		}
 		public static async Task<u32> Effect_BanefulBunker(MoveEffectParams p) {
 			if (await Effect_Protect(p) == FLAG_MOVE_FAILED) {
@@ -1805,7 +1806,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_BarbBarrage(MoveEffectParams p) {
-			return DoublePowerIf(p, p.target.HasStatus(STATUS_MASK_NON_VOLATILE));
+			return await DoublePowerIf(p, p.target.HasStatus(STATUS_MASK_NON_VOLATILE));
 		}
 		public static async Task<u32> Effect_BeakBlast(MoveEffectParams p) {
 			// TODO:
@@ -1828,27 +1829,27 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_FloralHealing(MoveEffectParams p) {
-			u16 healAmount = 0;
+			U16 healAmount = new(0);
 			if (p.target.IsGrounded(p.state) && (p.state.Terrain.Condition == Condition.TERRAIN_GRASSY)) {
-				healAmount = p.target.GetPercentOfMaxHp(0.67f);
+				healAmount = new(p.target.GetPercentOfMaxHp(0.67f));
 			}
 			else {
-				healAmount = p.target.GetPercentOfMaxHp(0.5f);
+				healAmount = new(p.target.GetPercentOfMaxHp(0.5f));
 			}
-			p.target.HealMon(ref healAmount, false);
+			await p.target.HealMon(healAmount, false);
 			return 0;
 		}
 		public static async Task<u32> Effect_BodyPress(MoveEffectParams p) {
 			u16 def = p.attacker.EffDef(p.state);
 			u16 damage = CalcDamage(p, new Mods(p, CritRate(p)), new Overrides(def, 0, 0, 0));
-			return DoSetDamage(p, damage);
+			return await DoSetDamage(p, damage);
 		}
 		public static async Task<u32> Effect_BoltBeak(MoveEffectParams p) {
 			// TODO:
 			return 0;
 		}
 		public static async Task<u32> Effect_Brine(MoveEffectParams p) {
-			return DoublePowerIf(p, p.target.EffHp(p.state) <= (p.target.EffMaxHp(p.state) / 2));
+			return await DoublePowerIf(p, p.target.EffHp(p.state) <= (p.target.EffMaxHp(p.state) / 2));
 		}
 		public static async Task<u32> Effect_BugBite(MoveEffectParams p) {
 			// TODO:
@@ -1886,7 +1887,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_ChipAway(MoveEffectParams p) {
 			u16 damage = CalcDamage(p, new Mods(p, CritRate(p)), new Overrides(0, p.target.Def, 0, 0));
-			return DoSetDamage(p, damage);
+			return await DoSetDamage(p, damage);
 		}
 		public static async Task<u32> Effect_SwitchToNextHit(MoveEffectParams p) {
 			// TODO:
@@ -1928,7 +1929,7 @@ namespace PkmnEngine {
 				damage = (u16)(damage * 1.33f);
 			}
 
-			return Attack(p, damage);
+			return await Attack(p, damage);
 		}
 		public static async Task<u32> Effect_Comeuppance(MoveEffectParams p) {
 			// TODO:
@@ -1952,7 +1953,7 @@ namespace PkmnEngine {
 			Mods damageMods = new Mods(p, CritRate(p));
 			Overrides damageOverrides = new Overrides(0, 0, power, 0);
 			u16 damage = CalcDamage(p, damageMods, damageOverrides);
-			return Attack(p, damage);
+			return await Attack(p, damage);
 		}
 		public static async Task<u32> Effect_DireClaw(MoveEffectParams p) {
 			float prob = p.battle.Random01();
@@ -2010,7 +2011,7 @@ namespace PkmnEngine {
 				power = 150;
 			}
 
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_Embargo(MoveEffectParams p) {
 			// TODO:
@@ -2018,9 +2019,9 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_ExpandingForce(MoveEffectParams p) {
 			if (p.attacker.IsGrounded(p.state)) {
-				return OverridePower(p, (u16)(p.move.power * 1.5f));
+				return await OverridePower(p, (u16)(p.move.power * 1.5f));
 			}
-			return Attack(p);
+			return await Attack(p);
 		}
 		public static async Task<u32> Effect_FairyLock(MoveEffectParams p) {
 			// TODO:
@@ -2033,7 +2034,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_FellStinger(MoveEffectParams p) {
-			u32 flags = Attack(p);
+			u32 flags = await Attack(p);
 			if ((flags & FLAG_TARGET_FAINTED) != 0) {
 				flags |= ChangeStat(p.state, p.attacker, 3, Stat.ATTACK);
 			}
@@ -2044,8 +2045,8 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 
-			u16 damage = (u16)(p.target.EffMaxHp(p.state) / 2);
-			p.target.DamageMon(ref damage, true, false);
+			U16 damage = new((u16)(p.target.EffMaxHp(p.state) / 2));
+			await p.target.DamageMon(damage, true, false);
 			ChangeStat(p.state, p.target, 2, Stat.ATTACK);
 			ChangeStat(p.state, p.target, 2, Stat.SPECIAL_ATTACK);
 			ChangeStat(p.state, p.target, 2, Stat.SPEED);
@@ -2053,13 +2054,13 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_FinalGambit(MoveEffectParams p) {
-			u16 damage = p.attacker.EffHp(p.state);
-			p.attacker.DamageMon(ref damage, true, false);
-			p.target.DamageMon(ref damage, false, true);
+			U16 damage = new(p.attacker.EffHp(p.state));
+			await p.attacker.DamageMon(damage, true, false);
+			await p.target.DamageMon(damage, false, true);
 			return 0;
 		}
 		public static async Task<u32> Effect_Bite(MoveEffectParams p) {
-			u32 flags = Attack(p);
+			u32 flags = await Attack(p);
 			if (p.battle.Random01() < 0.1) {
 				flags |= await Effect_FlinchHit(p);
 			}
@@ -2104,7 +2105,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_FoulPlay(MoveEffectParams p) {
-			return Attack(p, 0, -1, 1, p.target.EffAtk(p.state));
+			return await Attack(p, 0, -1, 1, p.target.EffAtk(p.state));
 		}
 		public static async Task<u32> Effect_FusionBolt(MoveEffectParams p) {
 			// TODO:
@@ -2150,7 +2151,7 @@ namespace PkmnEngine {
 				power = 120;
 			}
 
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_GravApple(MoveEffectParams p) {
 			// TODO:
@@ -2204,7 +2205,7 @@ namespace PkmnEngine {
 			else {
 				power = (u16)System.MathF.Min(150.0f, 25.0f * p.target.GetEffectiveSpd(p.state) / p.attacker.GetEffectiveSpd(p.state) + 1);
 			}
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_HappyHour(MoveEffectParams p) {
 			// TODO:
@@ -2248,7 +2249,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Hex(MoveEffectParams p) {
-			return DoublePowerIf(p, p.target.HasStatus(STATUS_MASK_NON_VOLATILE));
+			return await DoublePowerIf(p, p.target.HasStatus(STATUS_MASK_NON_VOLATILE));
 		}
 		public static async Task<u32> Effect_HydroSteam(MoveEffectParams p) {
 			// TODO:
@@ -2262,7 +2263,7 @@ namespace PkmnEngine {
 			await Effect_DefenseDownHit(p);
 			p.target.RemoveStatus(Status.PROTECTION);
 
-			return Attack(p);
+			return await Attack(p);
 		}
 		public static async Task<u32> Effect_Incinerate(MoveEffectParams p) {
 			// TODO:
@@ -2270,7 +2271,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_InfernalParade(MoveEffectParams p) {
 			// According to Bulbapedia, power doubles if the p.target has a status condition;
-			return DoublePowerIf(p, 
+			return await DoublePowerIf(p, 
 				p.target.HasStatus(Status.BURN) ||
 				p.target.HasStatus(Status.FREEZE) ||
 				p.target.HasStatus(Status.PARALYSIS) ||
@@ -2369,7 +2370,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_MysticalPower(MoveEffectParams p) {
-			u32 flags = Attack(p);
+			u32 flags = await Attack(p);
 
 			u16 atk = (u16)(p.attacker.EffAtk(p.state) + p.attacker.EffSpAtk(p.state));
 			u16 def = (u16)(p.attacker.EffDef(p.state) + p.attacker.EffSpDef(p.state));
@@ -2391,7 +2392,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_NaturesMadness(MoveEffectParams p) {
 			u16 damage = (u16)System.MathF.Max(1, p.target.EffHp(p.state) / 2);
-			return DoSetDamage(p, damage);
+			return await DoSetDamage(p, damage);
 		}
 		public static async Task<u32> Effect_NoRetreat(MoveEffectParams p) {
 			if (p.attacker.HasStatus(Status.NO_RETREAT)) {
@@ -2457,7 +2458,7 @@ namespace PkmnEngine {
 				}
 			}
 			// Double move power if the target moves before the attacker.
-			return DoublePowerIf(p, orderTarget < orderAttacker);
+			return await DoublePowerIf(p, orderTarget < orderAttacker);
 		}
 		public static async Task<u32> Effect_PhotonGeyser(MoveEffectParams p) {
 			// Ignore abilities for the duration of the move.
@@ -2477,7 +2478,7 @@ namespace PkmnEngine {
 				p.attacker.EffAtk(p.state) >= p.attacker.EffSpAtk(p.state) ? MoveCategory.PHYSICAL : MoveCategory.SPECIAL,
 				p.move.flags
 			);
-			u32 flags = Attack(
+			u32 flags = await Attack(
 				new MoveEffectParams(
 					p.battle,
 					p.state,
@@ -2509,12 +2510,12 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_PollenPuff(MoveEffectParams p) {
 			if (p.target.Side == p.attacker.Side) {
-				u16 healAmount = p.target.GetPercentOfMaxHp(0.5f);
-				p.target.HealMon(ref healAmount, false);
+				U16 healAmount = new(p.target.GetPercentOfMaxHp(0.5f));
+				await p.target.HealMon(healAmount, false);
 				return 0;
 			}
 			else {
-				return Attack(p);
+				return await Attack(p);
 			}
 		}
 		public static async Task<u32> Effect_Poltergeist(MoveEffectParams p) {
@@ -2535,7 +2536,7 @@ namespace PkmnEngine {
 				}
 
 				actualHits++;
-				Attack(p);
+				await Attack(p);
 			}
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.HIT_N_TIMES, actualHits.ToString()));
@@ -2594,9 +2595,9 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Psyblade(MoveEffectParams p) {
 			if (p.attacker.IsGrounded(p.state) && (p.state.Terrain.Condition == Condition.TERRAIN_ELECTRIC)) {
-				return OverridePower(p, 120);
+				return await OverridePower(p, 120);
 			}
-			return Attack(p);
+			return await Attack(p);
 		}
 		public static async Task<u32> Effect_PsychicFangs(MoveEffectParams p) {
 			// TODO:
@@ -2630,7 +2631,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Psyshock(MoveEffectParams p) {
-			return Attack(p, 0, -1, 0, p.target.EffDef(p.state));
+			return await Attack(p, 0, -1, 0, p.target.EffDef(p.state));
 		}
 		public static async Task<u32> Effect_Punishment(MoveEffectParams p) {
 			u16 stages = 0;
@@ -2644,7 +2645,7 @@ namespace PkmnEngine {
 			stages += (u16)System.MathF.Max(0, p.target.EvasivenessStages);
 
 			u16 power = (u16)(p.move.power + 20 * stages);
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_Quash(MoveEffectParams p) {
 			// TODO:
@@ -2671,14 +2672,14 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_RevelationDance(MoveEffectParams p) {
-			return OverrideType(p, p.attacker.types[0]);
+			return await OverrideType(p, p.attacker.types[0]);
 		}
 		public static async Task<u32> Effect_RevivalBlessing(MoveEffectParams p) {
 			// TODO:
 			return 0;
 		}
 		public static async Task<u32> Effect_RisingVoltage(MoveEffectParams p) {
-			return DoublePowerIf(p, p.attacker.IsGrounded(p.state) && (p.state.Terrain.Condition == Condition.TERRAIN_ELECTRIC));
+			return await DoublePowerIf(p, p.attacker.IsGrounded(p.state) && (p.state.Terrain.Condition == Condition.TERRAIN_ELECTRIC));
 		}
 		public static async Task<u32> Effect_Rototiller(MoveEffectParams p) {
 			// TODO:
@@ -2689,7 +2690,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_AttackAndThawHit(MoveEffectParams p) {
-			u32 flags = Attack(p);
+			u32 flags = await Attack(p);
 			flags |= await Effect_ThawHit(p);
 			return flags;
 		}
@@ -2704,19 +2705,19 @@ namespace PkmnEngine {
 			return flags;
 		}
 		public static async Task<u32> Effect_ScorchingSands(MoveEffectParams p) {
-			u32 flags = Attack(p);
+			u32 flags = await Attack(p);
 			flags |= await Effect_ThawHit(p);
 			return flags;
 		}
 		public static async Task<u32> Effect_SecretSword(MoveEffectParams p) {
-			return Attack(p, 0, -1, 0, p.target.EffDef(p.state));
+			return await Attack(p, 0, -1, 0, p.target.EffDef(p.state));
 		}
 		public static async Task<u32> Effect_ShellSideArm(MoveEffectParams p) {
 			Mods damageMods = new Mods(p, CritRate(p));
 			u16 physDamage = CalcDamage(p, damageMods, new Overrides(p.attacker.EffAtk(p.state), p.target.EffDef(p.state), 0, 0));
 			u16 specDamage = CalcDamage(p, damageMods, new Overrides(p.attacker.EffSpAtk(p.state), p.target.EffSpDef(p.state), 0, 0));
 
-			return DoSetDamage(p, (u16)System.MathF.Max(physDamage, specDamage));
+			return await DoSetDamage(p, (u16)System.MathF.Max(physDamage, specDamage));
 		}
 		public static async Task<u32> Effect_ShellSmash(MoveEffectParams p) {
 			return 
@@ -2818,7 +2819,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_SteamEruption(MoveEffectParams p) {
-			return Attack(p) | await Effect_ThawHit(p);
+			return await Attack(p) | await Effect_ThawHit(p);
 		}
 		public static async Task<u32> Effect_Steamroller(MoveEffectParams p) {
 			// TODO:
@@ -2838,11 +2839,11 @@ namespace PkmnEngine {
 			u8 eva = (u8)System.MathF.Max(0, p.target.EvasivenessStages);
 
 			u16 power = (u16)(20 + 20 * (atk + def + spAtk + spDef + spd + acc + eva));
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_Struggle(MoveEffectParams p) {
 			// TODO: struggle's recoil damages through wonder guard.
-			return Attack(p) |
+			return await Attack(p) |
 				await Effect_RecoilQuarterMaxHp(p);
 		}
 		public static async Task<u32> Effect_StuffCheeks(MoveEffectParams p) {
@@ -2858,7 +2859,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Surf(MoveEffectParams p) {
-			return DoublePowerIf(p, p.target.HasStatus(Status.SEMI_INVULNERABLE_TURN));
+			return await DoublePowerIf(p, p.target.HasStatus(Status.SEMI_INVULNERABLE_TURN));
 		}
 		public static async Task<u32> Effect_SurgingStrikes(MoveEffectParams p) {
 			u8 numHits = 3;
@@ -2886,7 +2887,7 @@ namespace PkmnEngine {
 				}
 			}
 			if (targetSharesType) {
-				return Attack(p);
+				return await Attack(p);
 			}
 			return 0;
 		}
@@ -2974,7 +2975,7 @@ namespace PkmnEngine {
 				p.isPrimaryEffect,
 				p.i_flags 
 			);
-			return DoublePowerIf(p, p.state.Terrain.Condition != Condition.TERRAIN_NONE);
+			return await DoublePowerIf(p, p.state.Terrain.Condition != Condition.TERRAIN_NONE);
 			
 		}
 		public static async Task<u32> Effect_ThousandArrows(MoveEffectParams p) {
@@ -2982,7 +2983,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_ThousandWaves(MoveEffectParams p) {
-			u32 flags = Attack(p);
+			u32 flags = await Attack(p);
 			p.target.GiveStatus(Status.CANT_ESCAPE);
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TRAPPED_MON, p.attacker.GetName(), p.target.GetName()));
 			return flags;
@@ -3062,7 +3063,7 @@ namespace PkmnEngine {
 				}
 
 				actualHits++;
-				OverridePower(p, (u16)(p.move.power + (20 * i)));
+				await OverridePower(p, (u16)(p.move.power + (20 * i)));
 			}
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.HIT_N_TIMES, actualHits.ToString()));
@@ -3071,7 +3072,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_TripleDive(MoveEffectParams p) {
 			for (u8 i = 0; i < 3; i++) {
-				Attack(p);
+				await Attack(p);
 			}
 
 			MessageBox(Lang.GetBattleMessage(BattleMessage.HIT_N_TIMES, "3"));
@@ -3099,7 +3100,7 @@ namespace PkmnEngine {
 				power = 200;
 			}
 
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_UTurn(MoveEffectParams p) {
 			if (p.battle.isReplay) {
@@ -3142,10 +3143,10 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Venoshock(MoveEffectParams p) {
-			return DoublePowerIf(p, p.target.IsPoisoned());
+			return await DoublePowerIf(p, p.target.IsPoisoned());
 		}
 		public static async Task<u32> Effect_WakeUpSlap(MoveEffectParams p) {
-			return DoublePowerIf(p, p.target.IsAsleep());
+			return await DoublePowerIf(p, p.target.IsAsleep());
 		}
 		public static async Task<u32> Effect_WideGuard(MoveEffectParams p) {
 			// TODO:
@@ -3163,7 +3164,7 @@ namespace PkmnEngine {
 			// https://bulbapedia.bulbagarden.net/wiki/Wring_Out_(p.move)
 			// *Slightly* different from Eruption.
 			u16 power = (u16)System.Math.Clamp(120.0f * p.attacker.EffHp(p.state) / p.attacker.EffMaxHp(p.state), 1, 120);
-			return OverridePower(p, power);
+			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_AllySwitch(MoveEffectParams p) {
 			// TODO:
@@ -3247,7 +3248,7 @@ namespace PkmnEngine {
 			}
 			return 0;
 		}
-		#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 		#endregion
 	}
 }

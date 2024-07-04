@@ -15,6 +15,9 @@ using static PkmnEngine.Natures;
 
 using PkmnEngine.Strings;
 using Godot;
+using System.Threading.Tasks;
+using System.Threading;
+using System;
 
 namespace PkmnEngine {
 	public class BoxMon : ISerializable<BoxMon> {
@@ -857,6 +860,19 @@ namespace PkmnEngine {
 		public u16 SpDef { get; set; }
 		public u16 Spd { get; set; }
 
+		private double _healthPercent = -1;
+		public double HealthPercent { 
+			get {
+				if (_healthPercent < 0) {
+					_healthPercent = (float)HP / MaxHP;
+				}
+				return _healthPercent;
+			} 
+			private set {
+				_healthPercent = value;
+			} 
+		}
+
 		public List<Type> types;
 		public Ability ability;
 		public float weight;
@@ -976,8 +992,8 @@ namespace PkmnEngine {
 		/// <param name="force">If force, all checks will be bypassed and HP will be set indiscriminantly.</param>
 		/// <param name="direct">Whether or not the damage is direct.</param>
 		/// <returns>True if the mon's HP > 0 after the damage, and false if not.</returns>
-		public bool DamageMon(ref u16 damage, bool force, bool direct) {			
-			damage = (u16)Mathf.Min(HP, damage);
+		public async Task<bool> DamageMon(U16 damage, bool force, bool direct) {			
+			damage.Value = (u16)Mathf.Min(HP, damage.Value);
 
 			if (!force) {
 				// Magic Guard prevents indirect damage.
@@ -987,28 +1003,37 @@ namespace PkmnEngine {
 
 				// A bracing (endure) mon cannot lose its last hit point.
 				if (HasStatus(Status.BRACING)) {
-					damage = (u16)Mathf.Min((u16)(HP - 1), damage);
+					damage.Value = (u16)Mathf.Min((u16)(HP - 1), damage.Value);
 				}
 			}
 
-			//MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_DAMAGE, GetName(), damage.ToString()));
-			HP = (u16)(HP - damage);
+			// Immediately set the HP value.
+			HP = (u16)(HP - damage.Value);
+			// Set up stuff for constant linear interpolation and ONLY interpolate the percent.
+			// This is only for display purposes so the healthbar updates smoothly.
+			float t = 0;
+			float startVal = (float)HealthPercent;
+			float finalVal = (float)HP / MaxHP;
+			// Do the actual interpolation
+			while (Math.Abs(HealthPercent - finalVal) >= EPSILON) {
+				HealthPercent = startVal + t * (finalVal - startVal);
+				t += 0.005f;
+				await Task.Delay(10);
+			}
 
 			// Mark that the mon has received damage this turn.
 			SetFlag(Flag.RECEIVED_DAMAGE_THIS_TURN);
-
-			System.Console.WriteLine(this.GetName() + " | " + HP + "/" + MaxHP);
-
 
 			bool fainted = HP == 0;
 
 			if (fainted) {
 				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_FAINTED, GetName()));
 				GiveStatus(Status.FAINTED);
-				// TODO: stuff when a mon faints.
+				// TODO: stuff when a mon faints. This also should occur after messages like "it's super effective!"
+				throw new BattleOverException();
 			}
 			else {
-				Battle.RunEvent(Callback.OnDamage, this, new OnDamageParams(this, damage, force, direct));
+				Battle.RunEvent(Callback.OnDamage, this, new OnDamageParams(this, damage.Value, force, direct));
 			}
 			return !fainted;
 		}
@@ -1020,13 +1045,25 @@ namespace PkmnEngine {
 		/// <param name="amount">The amount of HP to restore.</param>
 		/// <param name="force">If force, all checks will be bypassed and HP will be set indiscriminantly.</param>
 		/// <returns>True if HP is successfully restored.</returns>
-		public bool HealMon(ref u16 amount, bool force) {
+		public async Task<bool> HealMon(U16 amount, bool force) {
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_RESTORED_HP, GetName()));
 
 			u16 oldHp = HP;
 
-			amount = (u16)Mathf.Min(amount, MaxHP - HP);
-			HP = (u16)(HP + amount);
+			amount.Value = (u16)Mathf.Min(amount.Value, MaxHP - HP);
+			HP = (u16)(HP + amount.Value);
+
+			// Set up stuff for constant linear interpolation and ONLY interpolate the percent.
+			// This is only for display purposes so the healthbar updates smoothly.
+			float t = 0;
+			float startVal = (float)HealthPercent;
+			float finalVal = (float)HP / MaxHP;
+			// Do the actual interpolation
+			while (Math.Abs(HealthPercent - finalVal) >= EPSILON) {
+				HealthPercent = startVal + t * (finalVal - startVal);
+				t += 0.005f;
+				await Task.Delay(10);
+			}
 
 			return HP > oldHp;
 		}
@@ -1378,9 +1415,6 @@ namespace PkmnEngine {
 			return Battle.RunEventCheck(Callback.OnTrySelectMove, this, new OnTrySelectMoveParams(battle, state, this, moves[moveSlot], moveSlot, print));
 		}
 
-		public float GetHpPercent() {
-			return (float)HP / MaxHP;
-		}
 		public u16 GetPercentOfMaxHp(float percent) {
 			return (u16)(MaxHP * percent);
 		}

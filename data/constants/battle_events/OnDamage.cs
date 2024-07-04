@@ -3,6 +3,8 @@ using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
 
+using System.Threading.Tasks;
+
 namespace PkmnEngine {
 	public struct OnDamageParams {
 		public OnDamageParams(BattleMon bm, u16 damage, bool force, bool direct) {
@@ -26,12 +28,12 @@ namespace PkmnEngine {
 			}
 			return args.damage;
 		}
-		public static object Ability_PoisonHeal_OnDamage(object p) {
+		public static async Task<object> Ability_PoisonHeal_OnDamage(object p) {
 			OnDamageParams args = ValidateParams<OnDamageParams>(p);
 
-			u16 healAmount = args.bm.GetPercentOfMaxHp(StatusEffects.POISON_CHIP_DAMAGE);
+			U16 healAmount = new(args.bm.GetPercentOfMaxHp(StatusEffects.POISON_CHIP_DAMAGE));
 			if (args.bm.HasStatus(Status.POISON, Status.TOXIC)) {
-				args.bm.HealMon(ref healAmount, false);
+				await args.bm.HealMon(healAmount, false);
 			}
 			return 1;
 		}

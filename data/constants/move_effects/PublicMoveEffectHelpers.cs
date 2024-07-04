@@ -5,9 +5,11 @@ using u64 = System.UInt64;
 
 using static PkmnEngine.Global;
 using PkmnEngine.Strings;
+using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public static partial class MoveEffects {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 		public static u32 ChangeStat(BattleState state, BattleMon bm, sbyte n, Stat effID) {
 			if (!Battle.RunEventCheck(Callback.OnTryChangeStat, state, new OnTryChangeStatParams(state, bm, n))) {
 				return 0;
@@ -241,21 +243,20 @@ namespace PkmnEngine {
 			}
 		}
 	
-		public static u32 BurnMon(BattleState state, BattleMon bm, u8 duration) {
-			return GiveMonNonVolatileStatus(state, bm, Status.BURN, true, duration);
+		public static async Task<u32> BurnMon(BattleState state, BattleMon bm, u8 duration) {
+			return await GiveMonNonVolatileStatus(state, bm, Status.BURN, true, duration);
 		}
-		public static u32 SleepMon(BattleState state, BattleMon bm, u8 duration) {
+		public static async Task<u32> SleepMon(BattleState state, BattleMon bm, u8 duration) {
 			bm.SetStatusParam(StatusParam.SLEEPING_TURNS, 0);
-			return GiveMonNonVolatileStatus(state, bm, Status.SLEEP, true, duration);
+			return await GiveMonNonVolatileStatus(state, bm, Status.SLEEP, true, duration);
 		}
-		public static u32 PoisonMon(BattleState state, BattleMon bm, u8 duration) {
-			return GiveMonNonVolatileStatus(state, bm, Status.POISON, true, duration);
+		public static async Task<u32> PoisonMon(BattleState state, BattleMon bm, u8 duration) {
+			return await GiveMonNonVolatileStatus(state, bm, Status.POISON, true, duration);
 		}
-		public static u32 ToxicMon(BattleState state, BattleMon bm, u8 duration) {
-			return GiveMonNonVolatileStatus(state, bm, Status.TOXIC, true, duration);
+		public static async Task<u32> ToxicMon(BattleState state, BattleMon bm, u8 duration) {
+			return await GiveMonNonVolatileStatus(state, bm, Status.TOXIC, true, duration);
 		}
-		
-		public static u32 CureBurn(BattleMon bm) {
+		public static async Task<u32> CureBurn(BattleMon bm) {
 			if (!bm.HasStatus(Status.BURN)) {
 				return 0;
 			}
@@ -265,7 +266,7 @@ namespace PkmnEngine {
 
 			return 0;
 		}
-		static u32 CureParalysis(BattleMon bm) {
+		static async Task<u32> CureParalysis(BattleMon bm) {
 			if (!bm.HasStatus(Status.PARALYSIS)) {
 				return 0;
 			}
@@ -275,7 +276,7 @@ namespace PkmnEngine {
 
 			return 0;
 		}
-		public static u32 CurePoison(BattleMon bm) {
+		public static async Task<u32> CurePoison(BattleMon bm) {
 			if (!bm.HasStatus(Status.POISON) && !bm.HasStatus(Status.TOXIC)) {
 				return 0;
 			}
@@ -286,7 +287,7 @@ namespace PkmnEngine {
 
 			return 0;
 		}
-		public static u32 ThawMon(BattleMon bm) {
+		public static async Task<u32> ThawMon(BattleMon bm) {
 			if (!bm.HasStatus(Status.FREEZE)) {
 				return 0;
 			}
@@ -296,7 +297,7 @@ namespace PkmnEngine {
 
 			return 0;
 		}
-		public static u32 WakeUpMon(BattleMon bm) {
+		public static async Task<u32> WakeUpMon(BattleMon bm) {
 			if (!bm.HasStatus(Status.SLEEP)) {
 				return 0;
 			}
@@ -307,4 +308,5 @@ namespace PkmnEngine {
 			return 0;
 		}
 	}
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 }

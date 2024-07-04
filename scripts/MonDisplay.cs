@@ -28,6 +28,8 @@ namespace PkmnEngine.GodotV {
 
 		private TextureProgressBar expBar;
 
+		private double healthPercent;
+
 		// Called when the node enters the scene tree for the first time.
 		public override void _Ready() {
 			monNameLabel = GetNode<RichTextLabel>("HealthBar/TextContainer/MonNameLabel");
@@ -54,31 +56,9 @@ namespace PkmnEngine.GodotV {
 			monNameLabel.Text = target.GetName();
 			monLevelLabel.Text = target.Mon.level.ToString();
 
-			float healthPercent = target.GetHpPercent();
-			if (healthPercent >= HP_YELLOW_THRESHOLD) {
-				healthBarGreen.Visible = true;
-				healthBarYellow.Visible = false;
-				healthBarRed.Visible = false;
-
-				healthBarGreen.Value = target.HP;
-				healthBarGreen.MaxValue = target.MaxHP;
-			}
-			else if (healthPercent >= HP_RED_THRESHOLD && healthPercent < HP_YELLOW_THRESHOLD) {
-				healthBarGreen.Visible = false;
-				healthBarYellow.Visible = true;
-				healthBarRed.Visible = false;
-
-				healthBarYellow.Value = target.HP;
-				healthBarYellow.MaxValue = target.MaxHP;
-			}
-			else {
-				healthBarGreen.Visible = false;
-				healthBarYellow.Visible = false;
-				healthBarRed.Visible = true;
-
-				healthBarRed.Value = target.HP;
-				healthBarRed.MaxValue = target.MaxHP;
-			}
+			healthPercent = Math.Abs(target.HealthPercent) > Global.EPSILON ? Math.Max(target.HealthPercent, 0.01f) : target.HealthPercent;
+			SetActiveBar();
+			GetActiveBar().Value = healthPercent;
 
 			if (GetParent().Name == "ContainerClient") {
 				monCurrHPLabel.Text = $"[right]{target.HP}[/right]";
@@ -89,6 +69,35 @@ namespace PkmnEngine.GodotV {
 			}
 
 			monSprite.Texture = Sprites.MonSprites.GetSprite(target.Species);
+		}
+
+		private TextureProgressBar GetActiveBar() {
+			if (healthPercent >= HP_YELLOW_THRESHOLD) {
+				return healthBarGreen;
+			}
+			else if (healthPercent >= HP_RED_THRESHOLD && healthPercent < HP_YELLOW_THRESHOLD) {
+				return healthBarYellow;
+			}
+			else {
+				return healthBarRed;
+			}
+		}
+		private void SetActiveBar() {
+			if (healthPercent >= HP_YELLOW_THRESHOLD) {
+				healthBarGreen.Visible = true;
+				healthBarYellow.Visible = false;
+				healthBarRed.Visible = false;
+			}
+			else if (healthPercent >= HP_RED_THRESHOLD && healthPercent < HP_YELLOW_THRESHOLD) {
+				healthBarGreen.Visible = false;
+				healthBarYellow.Visible = true;
+				healthBarRed.Visible = false;
+			}
+			else {
+				healthBarGreen.Visible = false;
+				healthBarYellow.Visible = false;
+				healthBarRed.Visible = true;
+			}
 		}
 	}
 }

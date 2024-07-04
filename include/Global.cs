@@ -13,6 +13,8 @@ namespace PkmnEngine {
 	public static class Global {
 		public const u16 WAIT_DELAY = 100;
 
+		public const double EPSILON = 0.0001d;
+
 		public static Action<string> MessageBox;
 		public static Action<BattleMon, Ability> AbilityPopup;
 

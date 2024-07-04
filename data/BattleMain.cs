@@ -12,8 +12,12 @@ using PkmnEngine.Strings;
 
 // TODO: Get this shit out of here!
 using PkmnEngine.GodotV;
+using System;
 
 namespace PkmnEngine {
+	public class BattleOverException : Exception {
+		public BattleOverException() {}
+	}
 	public class Battle {
 		public const u8 SIDE_CLIENT = 0;
 		public const u8 SIDE_REMOTE = 1;
@@ -420,26 +424,34 @@ namespace PkmnEngine {
 			u8 winningSide;
 
 			while (!IsOver(out winningSide)) {
-				// Get the new state.
-				CurrentState = CurrentState.Next();
+				try {
+					// Get the new state.
+					CurrentState = CurrentState.Next();
 
-				for (u8 i = 0; i < format.numSlots; i++) {
-					BattleMon bm = GetMonInSlot(CurrentState, i);
-					if (bm == null) {
-						continue;
+					for (u8 i = 0; i < format.numSlots; i++) {
+						BattleMon bm = GetMonInSlot(CurrentState, i);
+						if (bm == null) {
+							continue;
+						}
+						Battle.RunEvent(Callback.OnStart, bm, new OnStartParams(CurrentState, bm));
 					}
-					Battle.RunEvent(Callback.OnStart, bm, new OnStartParams(CurrentState, bm));
-				}
 
-				await ChooseActions(CurrentState);
-				DoBattleActions(CurrentState);
+					await ChooseActions(CurrentState);
+					await DoBattleActions(CurrentState);
+				}
+				catch (BattleOverException) {
+					Console.WriteLine("battle end");
+					goto BattleEnd;
+				}
 			}
+
+			BattleEnd:
 
 			// TODO: do some actual battle-end routine.
 			MessageBox($"{players[winningSide].profile.Name} won!");
 		}
 
-		private async void DoBattleActions(BattleState state) {
+		private async Task DoBattleActions(BattleState state) {
 			// TODO: sort actions by move order.
 			for (u8 i = 0; i < state.ActionCount; i++) {
 				u64 action	= state.Actions[i];

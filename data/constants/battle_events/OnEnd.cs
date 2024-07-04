@@ -5,6 +5,7 @@ using u64 = System.UInt64;
 
 using static PkmnEngine.Global;
 using PkmnEngine.Strings;
+using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public struct OnEndParams {
@@ -17,14 +18,14 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
-		public static object Status_PerishSong_OnEnd(object p) {
+		public static async Task<object> Status_PerishSong_OnEnd(object p) {
 			OnEndParams args = ValidateParams<OnEndParams>(p);
 
 			u8 count = (u8)args.bm.GetStatusParam(StatusParam.PERISH_COUNT);
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_PERISH_COUNT_FELL_TO_N, args.bm.GetName(), count.ToString()));
 			if (count == 0) {
-				u16 damage = args.bm.EffMaxHp(args.state);
-				args.bm.DamageMon(ref damage, true, false);
+				U16 damage = new(args.bm.EffMaxHp(args.state));
+				await args.bm.DamageMon(damage, true, false);
 				return null;
 			}
 			args.bm.DecrementStatusParam(StatusParam.PERISH_COUNT);

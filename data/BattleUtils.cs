@@ -25,7 +25,7 @@ namespace PkmnEngine {
 		/// <param name="attacker">The attacking BattleMon.</param>
 		/// <param name="moveID">ID of the move being used.</param>
 		/// <returns>True if the mon can act, false otherwise.</returns>
-		private static bool MoveStatusBlockers(Battle battle, BattleState state, BattleMon attacker, BattleMoveID moveID) {
+		private static async Task<bool> MoveStatusBlockers(Battle battle, BattleState state, BattleMon attacker, BattleMoveID moveID) {
 			// Paralyzed mons have a chance to not be able to move.
 			if (attacker.HasStatus(Status.PARALYSIS) && battle.rand.NextDouble() < StatusEffects.PARALYSIS_PROC_CHANCE) {
 				// No need to set BM_PARAMS[0] since it's already set above.
@@ -36,7 +36,7 @@ namespace PkmnEngine {
 			else if (attacker.HasStatus(Status.FREEZE) && (gBattleMoves(moveID).flags & Flag.THAWS_USER) == 0) {
 				// A frozen mon has a set chance of thawing out every turn.
 				if (battle.Random01() < StatusEffects.FREEZE_THAW_CHANCE) {
-					ThawMon(attacker);
+					await ThawMon(attacker);
 				}
 				else {
 					MessageBox(GetBattleMessage(BattleMessage.MON_IS_FROZEN_SOLID, attacker.GetName()));
@@ -49,7 +49,7 @@ namespace PkmnEngine {
 				attacker.IncrementStatusParam(StatusParam.SLEEPING_TURNS);
 				// Sleeping mons will wake up after a certain number of turns.
 				if (sleepingTurns >= attacker.GetStatusParam(StatusParam.NV_STATUS_DURATION)) {
-					WakeUpMon(attacker);
+					await WakeUpMon(attacker);
 				}
 				else {
 					// Display that the mon is sleeping.
@@ -72,11 +72,11 @@ namespace PkmnEngine {
 					attacker.RemoveStatus(Status.CONFUSION);
 				}
 				// Confused mons have a 33% chance to hurt themselves instead of using their move.
-				else if (battle.Random01() < 0.33) {
+				else if (battle.Random01() < 0.33f) {
 					// Confusion acts as a physical move with 40 power and no type.
 					// This same effect can be achieved by using tackle and overriding the type effectiveness and power :p
-					u16 damage = CalcDamage(battle, state, attacker, attacker, BattleMoveID.TACKLE, 1, new Mods(), new Overrides(0, 0, 40, 0));
-					attacker.DamageMon(ref damage, false, true);
+					U16 damage = new(CalcDamage(battle, state, attacker, attacker, BattleMoveID.TACKLE, 1, new Mods(), new Overrides(0, 0, 40, 0)));
+					await attacker.DamageMon(damage, false, true);
 					MessageBox(GetBattleMessage(BattleMessage.IT_HURT_ITSELF_IN_ITS_CONFUSION));
 					return false;
 				}
@@ -115,7 +115,7 @@ namespace PkmnEngine {
 			u8[] targets = Battle.SplitTargets(slotsTarget);
 
 			// Check for statuses.
-			if (!MoveStatusBlockers(battle, state, attacker, moveID)) {
+			if (!await MoveStatusBlockers(battle, state, attacker, moveID)) {
 				return;
 			}
 			// Clear successive protect counter if applicable.

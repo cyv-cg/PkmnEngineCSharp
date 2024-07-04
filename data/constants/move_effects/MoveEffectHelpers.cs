@@ -3,6 +3,8 @@ using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
 
+using System.Threading.Tasks;
+
 using static PkmnEngine.Global;
 using static PkmnEngine.StatusEffects;
 using static PkmnEngine.DamageCalc;
@@ -11,7 +13,8 @@ using PkmnEngine.Strings;
 
 namespace PkmnEngine {
 	public static partial class MoveEffects {
-		private static u32 Attack(MoveEffectParams p, u16 setDamage = 0, float critChance = -1, u16 atkOverride = 0, u16 defOverride = 0, u16 powerOverride = 0) {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+		private static async Task<u32> Attack(MoveEffectParams p, u16 setDamage = 0, float critChance = -1, u16 atkOverride = 0, u16 defOverride = 0, u16 powerOverride = 0) {
 			if (critChance < 0) {
 				critChance = CritRate(p);
 			}
@@ -31,17 +34,17 @@ namespace PkmnEngine {
 			}
 
 			DamageCalc.Overrides overrides = new Overrides(atkOverride, defOverride, powerOverride, setDamage);
-			u16 damage = setDamage == 0 ? CalcDamage(p.battle, p.state, p.attacker, p.target, p.moveID, p.numTargets, mods, overrides) : setDamage;
+			U16 damage = new(setDamage == 0 ? CalcDamage(p.battle, p.state, p.attacker, p.target, p.moveID, p.numTargets, mods, overrides) : setDamage);
 
 			if (p.move.moveCat == MoveCategory.PHYSICAL) {
-				p.target.SetStatusParam(StatusParam.PHYS_DAMAGE_THIS_TURN, damage);
+				p.target.SetStatusParam(StatusParam.PHYS_DAMAGE_THIS_TURN, damage.Value);
 			}
 			else if (p.move.moveCat == MoveCategory.SPECIAL) {
-				p.target.SetStatusParam(StatusParam.SPEC_DAMAGE_THIS_TURN, damage);
+				p.target.SetStatusParam(StatusParam.SPEC_DAMAGE_THIS_TURN, damage.Value);
 			}
 
 			// Deal damage to mon.
-			bool fainted = !p.target.DamageMon(ref damage, false, true);
+			bool fainted = !await p.target.DamageMon(damage, false, true);
 
 			if (mods.isCrit) {
 				MessageBox(Lang.GetBattleMessage(BattleMessage.CRITICAL_HIT));
@@ -62,26 +65,26 @@ namespace PkmnEngine {
 				// ...cause the attacker to faint.
 				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_ITS_ATTACKER_DOWN_WITH_IT, p.target.GetName())); 
 				u16 DBdamage = p.target.EffMaxHp(p.state);
-				p.attacker.DamageMon(ref damage, true, false);
+				await p.attacker.DamageMon(damage, true, false);
 			}
 
-			return damage 
+			return damage.Value 
 					| FLAG_DAMAGE
 					| (FLAG_SPE_DAMAGE * (u32)((mods.typeEff > 1) ? 1 : 0))
 					| (FLAG_NVE_DAMAGE * (u32)((mods.typeEff < 1) ? 1 : 0))
 					| (FLAG_TARGET_FAINTED * (u32)(fainted ? 1 : 0))
 					| (FLAG_CRIT_DAMAGE * (u32)(mods.isCrit ? 1 : 0));
 		}
-		private static u32 DoSetDamage(MoveEffectParams p, u16 damage) {
-			return Attack(p, damage, 0);
+		private static async Task<u32> DoSetDamage(MoveEffectParams p, u16 damage) {
+			return await Attack(p, damage, 0);
 		}
-		private static u32 OverridePower(MoveEffectParams p, u16 power) {
-			return Attack(p, 0, -1, 0, 0, power);
+		private static async Task<u32> OverridePower(MoveEffectParams p, u16 power) {
+			return await Attack(p, 0, -1, 0, 0, power);
 		}
-		private static u32 DoublePowerIf(MoveEffectParams p, bool condition) {
-			return OverridePower(p, (u16)(p.move.power * 2));
+		private static async Task<u32> DoublePowerIf(MoveEffectParams p, bool condition) {
+			return await OverridePower(p, (u16)(p.move.power * 2));
 		}
-		private static u32 OverrideType(MoveEffectParams p, Type type) {
+		private static async Task<u32> OverrideType(MoveEffectParams p, Type type) {
 			BattleMove newMove = new BattleMove(
 				p.move.primaryEffect,
 				p.move.secondaryEffect,
@@ -95,7 +98,7 @@ namespace PkmnEngine {
 				p.move.moveCat,
 				p.move.flags
 			);
-			return Attack(
+			return await Attack(
 				new MoveEffectParams(
 					p.battle,
 					p.state,
@@ -136,7 +139,7 @@ namespace PkmnEngine {
 			return GetEffectiveCritRate(stages);
 		}
 
-		private static u32 GiveMonNonVolatileStatus(BattleState state, BattleMon bm, Status effID, bool isPrimaryEffect, u8 duration) {
+		private static async Task<u32> GiveMonNonVolatileStatus(BattleState state, BattleMon bm, Status effID, bool isPrimaryEffect, u8 duration) {
 			// Mon already has a non-volatile status and we cannot add another.
 			if (bm.HasStatus(STATUS_MASK_NON_VOLATILE)) {
 				// We only send the message if the move being used is a status move.
@@ -222,11 +225,11 @@ namespace PkmnEngine {
 			}
 		}
 	
-		private static u32 DoRecoilDamage(MoveEffectParams p, ref u16 recoil) {
-			p.attacker.DamageMon(ref recoil, true, false);
+		private static async Task<u32> DoRecoilDamage(MoveEffectParams p, U16 recoil) {
+			await p.attacker.DamageMon(recoil, true, false);
 			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_DAMAGED_BY_RECOIL, p.attacker.GetName()));
-			return recoil;
+			return recoil.Value;
 		}
-	
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	}
 }

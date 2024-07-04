@@ -3,6 +3,8 @@ using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
 
+using System.Threading.Tasks;
+
 using static PkmnEngine.Global;
 using PkmnEngine.Strings;
 
@@ -77,7 +79,7 @@ namespace PkmnEngine {
 
 			return null;
 		}
-		public static object Weather_Sandstorm_OnFieldResidual(object p) {
+		public static async Task<object> Weather_Sandstorm_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Weather.DecrementDuration();
@@ -94,15 +96,15 @@ namespace PkmnEngine {
 			// Damage mons.
 			foreach (BattleMon bm in args.battle.GetAllActiveMons()) {
 				if (bm.DamagedBySandstorm()) {
-					u16 damage = bm.GetPercentOfMaxHp(FieldConditions.SANDSTORM_CHIP_DAMAGE);
-					bm.DamageMon(ref damage, true, false);
+					U16 damage = new(bm.GetPercentOfMaxHp(FieldConditions.SANDSTORM_CHIP_DAMAGE));
+					await bm.DamageMon(damage, true, false);
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_SANDSTORM, bm.GetName()));
 				}
 			}
 
 			return null;
 		}
-		public static object Weather_Hail_OnFieldResidual(object p) {
+		public static async Task<object> Weather_Hail_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Weather.DecrementDuration();
@@ -119,8 +121,8 @@ namespace PkmnEngine {
 			// Damage mons.
 			foreach (BattleMon bm in args.battle.GetAllActiveMons()) {
 				if (bm.DamagedByHail()) {
-					u16 damage = bm.GetPercentOfMaxHp(FieldConditions.HAIL_CHIP_DAMAGE);
-					bm.DamageMon(ref damage, true, false);
+					U16 damage = new(bm.GetPercentOfMaxHp(FieldConditions.HAIL_CHIP_DAMAGE));
+					await bm.DamageMon(damage, true, false);
 					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_HAIL, bm.GetName()));
 				}
 			}
@@ -210,7 +212,7 @@ namespace PkmnEngine {
 
 			return null;
 		}
-		public static object Terrain_Grassy_OnFieldResidual(object p) {
+		public static async Task<object> Terrain_Grassy_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Terrain.DecrementDuration();
@@ -230,8 +232,8 @@ namespace PkmnEngine {
 				}
 			
 				if (args.state.Terrain.Condition == Condition.TERRAIN_GRASSY) {
-					u16 healAmount = bm.GetPercentOfMaxHp(FieldConditions.GRASSY_TERRAIN_HEAL_AMOUNT);
-					bm.HealMon(ref healAmount, false);
+					U16 healAmount = new(bm.GetPercentOfMaxHp(FieldConditions.GRASSY_TERRAIN_HEAL_AMOUNT));
+					await bm.HealMon(healAmount, false);
 				}
 			}
 
