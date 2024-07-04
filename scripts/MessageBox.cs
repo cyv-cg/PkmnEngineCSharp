@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PkmnEngine.GodotV {
 	public partial class MessageBox : NinePatchRect {
@@ -11,6 +12,7 @@ namespace PkmnEngine.GodotV {
 
 		private static string currentMessage;
 		private static byte currentCrawlLen;
+		private static bool finishedDisplaying;
 		
 		public override void _Ready() {
 			label = GetNode<RichTextLabel>("MessageBox");
@@ -20,6 +22,7 @@ namespace PkmnEngine.GodotV {
 			messageQueue = new Queue<string>();
 
 			displayTimer.Timeout += UpdateMessage;
+			displayTimer.Timeout += () => { finishedDisplaying = true; };
 			displayTimer.WaitTime = Global.TEXT_DISPLAY_SECONDS;
 
 			crawlTimer.Timeout += Crawl;
@@ -32,6 +35,7 @@ namespace PkmnEngine.GodotV {
 			displayTimer.Stop();
 			label.Text = "";
 			currentMessage = null;
+			finishedDisplaying = false;
 
 			// If there is another message in the queue, start showing it.
 			if (messageQueue.Count > 0) {
@@ -67,6 +71,19 @@ namespace PkmnEngine.GodotV {
 			messageQueue.Enqueue(s);
 			if (currentMessage == null) {
 				UpdateMessage();
+			}
+		}
+
+		/// <summary>
+		/// Add a message to the queue and wait for it to finish displaying.
+		/// </summary>
+		/// <param name="s"></param>
+		public static async Task Display(string s) {
+			messageQueue.Enqueue(s);
+			UpdateMessage();
+
+			while (!finishedDisplaying) {
+				await Task.Delay(10);
 			}
 		}
 	}

@@ -376,7 +376,7 @@ namespace PkmnEngine {
 			//	case ABILITY_COMATOSE:
 			//		AbilityPopup(GetMonName(mon->mon), mon->ability);
 			//		BM_PARAMS[0] = GetMonName(mon->mon);
-			//		MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_DROWSING));
+			//		await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_DROWSING));
 			//		break;
 			//}
 		}
@@ -448,7 +448,7 @@ namespace PkmnEngine {
 			BattleEnd:
 
 			// TODO: do some actual battle-end routine.
-			MessageBox($"{players[winningSide].profile.Name} won!");
+			await MessageBox($"{players[winningSide].profile.Name} won!");
 		}
 
 		private async Task DoBattleActions(BattleState state) {

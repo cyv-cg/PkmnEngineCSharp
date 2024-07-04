@@ -38,12 +38,12 @@ namespace PkmnEngine {
 			return 1;
 		}
 
-		public static object Status_Rage_OnDamage(object p) {
+		public static async Task<object> Status_Rage_OnDamage(object p) {
 			OnDamageParams args = ValidateParams<OnDamageParams>(p);
 
 			// If the last move the mon used was Rage, increase it's attack by 1 stage.
 			if (args.bm.HasStatus(Status.RAGE) && args.direct) {
-				MoveEffects.ChangeStat(null, args.bm, 1, Stat.ATTACK);
+				await MoveEffects.ChangeStat(null, args.bm, 1, Stat.ATTACK);
 			}
 
 			return 1;

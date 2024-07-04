@@ -16,7 +16,6 @@ using static PkmnEngine.Natures;
 using PkmnEngine.Strings;
 using Godot;
 using System.Threading.Tasks;
-using System.Threading;
 using System;
 
 namespace PkmnEngine {
@@ -1027,7 +1026,7 @@ namespace PkmnEngine {
 			bool fainted = HP == 0;
 
 			if (fainted) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_FAINTED, GetName()));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_FAINTED, GetName()));
 				GiveStatus(Status.FAINTED);
 				// TODO: stuff when a mon faints. This also should occur after messages like "it's super effective!"
 				throw new BattleOverException();
@@ -1046,8 +1045,6 @@ namespace PkmnEngine {
 		/// <param name="force">If force, all checks will be bypassed and HP will be set indiscriminantly.</param>
 		/// <returns>True if HP is successfully restored.</returns>
 		public async Task<bool> HealMon(U16 amount, bool force) {
-			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_RESTORED_HP, GetName()));
-
 			u16 oldHp = HP;
 
 			amount.Value = (u16)Mathf.Min(amount.Value, MaxHP - HP);
@@ -1065,6 +1062,7 @@ namespace PkmnEngine {
 				await Task.Delay(10);
 			}
 
+			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_RESTORED_HP, GetName()));
 			return HP > oldHp;
 		}
 

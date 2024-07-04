@@ -29,7 +29,7 @@ namespace PkmnEngine {
 			// Paralyzed mons have a chance to not be able to move.
 			if (attacker.HasStatus(Status.PARALYSIS) && battle.rand.NextDouble() < StatusEffects.PARALYSIS_PROC_CHANCE) {
 				// No need to set BM_PARAMS[0] since it's already set above.
-				MessageBox(GetBattleMessage(BattleMessage.MON_IS_PARALYZED_AND_CANT_MOVE, attacker.GetName()));
+				await MessageBox(GetBattleMessage(BattleMessage.MON_IS_PARALYZED_AND_CANT_MOVE, attacker.GetName()));
 				return false;
 			}
 			// Frozen mons cannot move.
@@ -39,7 +39,7 @@ namespace PkmnEngine {
 					await ThawMon(attacker);
 				}
 				else {
-					MessageBox(GetBattleMessage(BattleMessage.MON_IS_FROZEN_SOLID, attacker.GetName()));
+					await MessageBox(GetBattleMessage(BattleMessage.MON_IS_FROZEN_SOLID, attacker.GetName()));
 					return false;
 				}
 			}
@@ -53,7 +53,7 @@ namespace PkmnEngine {
 				}
 				else {
 					// Display that the mon is sleeping.
-					MessageBox(GetBattleMessage(BattleMessage.MON_IS_FAST_ASLEEP, attacker.GetName()));
+					await MessageBox(GetBattleMessage(BattleMessage.MON_IS_FAST_ASLEEP, attacker.GetName()));
 					// If the mon cannot use this move while asleep, exit.
 					if ((gBattleMoves(moveID).flags & Flag.USABLE_WHILE_ASLEEP) == 0) {
 						return false;
@@ -62,12 +62,12 @@ namespace PkmnEngine {
 			}
 			// Confused mons have a chance to hurt themselves instead of acting.
 			if (attacker.HasStatus(Status.CONFUSION)) {
-				MessageBox(GetBattleMessage(BattleMessage.MON_IS_CONFUSED, attacker.GetName()));
+				await MessageBox(GetBattleMessage(BattleMessage.MON_IS_CONFUSED, attacker.GetName()));
 				u8 confusedTurns = (u8)attacker.GetStatusParam(StatusParam.CONFUSED_TURNS);
 				attacker.IncrementStatusParam(StatusParam.CONFUSED_TURNS);
 				// Mons will remain confused for up to 4 turns and have a 25% chance to snap out every turn.
 				if ((confusedTurns >= 4) || (battle.rand.NextDouble() < 0.25)) {
-					MessageBox(GetBattleMessage(BattleMessage.MON_SNAPPED_OUT_OF_CONFUSION, attacker.GetName()));
+					await MessageBox(GetBattleMessage(BattleMessage.MON_SNAPPED_OUT_OF_CONFUSION, attacker.GetName()));
 					attacker.SetStatusParam(StatusParam.CONFUSED_TURNS, 0);
 					attacker.RemoveStatus(Status.CONFUSION);
 				}
@@ -77,7 +77,7 @@ namespace PkmnEngine {
 					// This same effect can be achieved by using tackle and overriding the type effectiveness and power :p
 					U16 damage = new(CalcDamage(battle, state, attacker, attacker, BattleMoveID.TACKLE, 1, new Mods(), new Overrides(0, 0, 40, 0)));
 					await attacker.DamageMon(damage, false, true);
-					MessageBox(GetBattleMessage(BattleMessage.IT_HURT_ITSELF_IN_ITS_CONFUSION));
+					await MessageBox(GetBattleMessage(BattleMessage.IT_HURT_ITSELF_IN_ITS_CONFUSION));
 					return false;
 				}
 			}
@@ -139,7 +139,7 @@ namespace PkmnEngine {
 
 				// BUG: this causes the "but it missed" line to print *before* saying that the attacker even used a move.
 				if (!MoveHit(battle, state, attacker, defender, moveID)) {
-					MessageBox(GetBattleMessage(BattleMessage.MON_AVOIDED_ATTACK, defender.GetName()));
+					await MessageBox(GetBattleMessage(BattleMessage.MON_AVOIDED_ATTACK, defender.GetName()));
 					continue;
 				}
 
@@ -164,7 +164,7 @@ namespace PkmnEngine {
 		/// <returns>Move effect flags.</returns>
 		public static async Task<u32> DoMove(Battle battle, BattleState state, BattleMon attacker, BattleMon defender, BattleMoveID moveID, u8 slotUser, u8 slotTarget, u8 numTargets, u8 index, bool print = true) {
 			if (print) {
-				MessageBox(GetBattleMessage(BattleMessage.MON_USED_MOVE, attacker.GetName(), GetMoveName(moveID)));
+				await MessageBox(GetBattleMessage(BattleMessage.MON_USED_MOVE, attacker.GetName(), GetMoveName(moveID)));
 			}
 
 			// Record the slot of the user as the last mon that attacked the target.
@@ -172,7 +172,7 @@ namespace PkmnEngine {
 
 			// If the move is ineffective and the move does not ignore the type chart, then stop here.
 			if (MonIsImmune(state, defender, moveID)) {
-				MessageBox(GetBattleMessage(BattleMessage.IMMUNE, defender.GetName()));
+				await MessageBox(GetBattleMessage(BattleMessage.IMMUNE, defender.GetName()));
 				// Do Contact events.
 				if ((gBattleMoves(moveID).flags & BattleMoves.Flag.MAKES_CONTACT) != 0) {
 					//TODO: OnContactMade(state, attacker, defender);
@@ -182,7 +182,7 @@ namespace PkmnEngine {
 
 			// Check for protect.
 			if ((gBattleMoves(moveID).flags & BattleMoves.Flag.PROTECT_AFFECTED) != 0 && defender.HasStatus(Status.PROTECTION)) {
-				MessageBox(GetBattleMessage(BattleMessage.MON_PROTECTED_ITSELF, defender.GetName()));
+				await MessageBox(GetBattleMessage(BattleMessage.MON_PROTECTED_ITSELF, defender.GetName()));
 				// Do contact events.
 				if ((gBattleMoves(moveID).flags & BattleMoves.Flag.MAKES_CONTACT) != 0) {
 			//		// TODO: OnContactMade(state, attacker, defender);
@@ -213,7 +213,7 @@ namespace PkmnEngine {
 			u32 flags = await gMoveEffectMap(gBattleMoves(moveID).primaryEffect)(data);
 			
 			if ((flags & FLAG_MOVE_FAILED) != 0) {
-				MessageBox(GetBattleMessage(BattleMessage.MOVE_FAILED));
+				await MessageBox(GetBattleMessage(BattleMessage.MOVE_FAILED));
 				return flags;
 			}
 
@@ -222,7 +222,7 @@ namespace PkmnEngine {
 			//if (GetEffectiveHP(state, defender) == 0) {
 			//	flags |= FLAG_TARGET_FAINTED;
 			//	//BM_PARAMS[0] = GetMonName(defender.mon);
-			//	//MessageBox(GetBattleMessage(BattleMessage.MON_FAINTED));
+			//	//await MessageBox(GetBattleMessage(BattleMessage.MON_FAINTED));
 			//	// TODO: remove all the target's actions from the action list, among other things.
 			//	return flags;
 			//}

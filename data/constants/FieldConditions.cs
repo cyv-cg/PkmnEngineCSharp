@@ -8,6 +8,7 @@ using static PkmnEngine.BattleEvents;
 using PkmnEngine.Strings;
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public static class FieldConditions {
@@ -60,11 +61,11 @@ namespace PkmnEngine {
 			}
 		}
 
-		private static void ResolveCondition(BattleState state, Condition condition, BattleMessage message) {
+		private static async Task ResolveCondition(BattleState state, Condition condition, BattleMessage message) {
 			if (state.FieldHasCondition(condition, out FieldCondition c)) {
 				if (c.DurationRemaining == 0) {
 					state.RemoveCondition(c);
-					MessageBox(Lang.GetBattleMessage(message));
+					await MessageBox(Lang.GetBattleMessage(message));
 				}
 				c.DecrementDuration();
 			}
@@ -112,10 +113,7 @@ namespace PkmnEngine {
 				},
 				{
 					Callback.OnTrySetWeather,
-					((object p) => {
-						MessageBox(Lang.GetBattleMessage(BattleMessage.EXTREME_SUNLIGHT_NOT_LESSENED));
-						return false;
-					}, 0)
+					(Weather_ExtremeSunlight_OnTrySetWeather, 0)
 				},
 				{
 					Callback.OnWeatherModifyDamage,
@@ -176,10 +174,7 @@ namespace PkmnEngine {
 				},
 				{
 					Callback.OnTrySetWeather,
-					((object p) => {
-						MessageBox(Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_NOT_LESSENED));
-						return false;
-					}, 0)
+					(Weather_HeavyRain_OnTrySetWeather, 0)
 				},
 				{
 					Callback.OnWeatherModifyDamage,
@@ -305,10 +300,7 @@ namespace PkmnEngine {
 				},
 				{
 					Callback.OnTrySetWeather,
-					((object p) => {
-						MessageBox(Lang.GetBattleMessage(BattleMessage.STRONG_WINDS_NOT_LESSENED));
-						return false;
-					}, 0)
+					(Weather_StrongWind_OnTrySetWeather, 0)
 				},
 				{
 					Callback.OnFieldResidual,
@@ -470,10 +462,7 @@ namespace PkmnEngine {
 				},
 				{
 					Callback.OnFieldResidual,
-					((object p) => {
-						ResolveCondition(((OnFieldResidualParams)p).state, Condition.WATER_SPORT, BattleMessage.WATER_SPORT_END);
-						return null;
-					}, 27)
+					(Condition_WaterSport_OnFieldResidual, 27)
 				}
 			}
 		},
@@ -490,10 +479,7 @@ namespace PkmnEngine {
 				},
 				{
 					Callback.OnFieldResidual,
-					((object p) => {
-						ResolveCondition(((OnFieldResidualParams)p).state, Condition.MUD_SPORT, BattleMessage.WATER_SPORT_END);
-						return null;
-					}, 27)
+					(Condition_MudSport_OnFieldResidual, 27)
 				}
 			}
 		},

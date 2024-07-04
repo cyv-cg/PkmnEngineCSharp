@@ -47,23 +47,23 @@ namespace PkmnEngine {
 			bool fainted = !await p.target.DamageMon(damage, false, true);
 
 			if (mods.isCrit) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.CRITICAL_HIT));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.CRITICAL_HIT));
 			}
 			if (type > 1) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.SUPER_EFFECTIVE));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.SUPER_EFFECTIVE));
 			}
 			else if (type > 0 && type < 1) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.NOT_VERY_EFFECTIVE));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.NOT_VERY_EFFECTIVE));
 			}
 			else if (type == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.IMMUNE));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.IMMUNE));
 			}
 
 			// Check for Destiny Bond.
 			// If the target has the Destiny Bond status, and fainted when attacked...
 			if (p.target.HasStatus(Status.DESTINY_BOND) && fainted) {
 				// ...cause the attacker to faint.
-				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_ITS_ATTACKER_DOWN_WITH_IT, p.target.GetName())); 
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_ITS_ATTACKER_DOWN_WITH_IT, p.target.GetName())); 
 				u16 DBdamage = p.target.EffMaxHp(p.state);
 				await p.attacker.DamageMon(damage, true, false);
 			}
@@ -146,19 +146,19 @@ namespace PkmnEngine {
 				// This way, we avoid sending the message for secondary effects.
 				if (isPrimaryEffect) {
 					if (bm.HasStatus(Status.BURN)) {
-						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_BURNED, bm.GetName()));
+						await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_BURNED, bm.GetName()));
 					}
 					else if (bm.HasStatus(Status.FREEZE)) {
-						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_FROZEN, bm.GetName()));
+						await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_FROZEN, bm.GetName()));
 					}
 					else if (bm.HasStatus(Status.PARALYSIS)) {
-						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_PARALYZED, bm.GetName()));
+						await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_PARALYZED, bm.GetName()));
 					}
 					else if (bm.HasStatus(Status.POISON, Status.TOXIC)) {
-						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_POISONED, bm.GetName()));
+						await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_POISONED, bm.GetName()));
 					}
 					else if (bm.HasStatus(Status.SLEEP, Status.DROWSY)) {
-						MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_ASLEEP, bm.GetName()));
+						await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_ASLEEP, bm.GetName()));
 					}
 				}
 				return 1;
@@ -169,7 +169,7 @@ namespace PkmnEngine {
 				switch (effID) {
 					case Status.BURN:
 						if (!bm.CanBeBurned(state)) {
-							MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_BURNED, bm.GetName()));
+							await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_BURNED, bm.GetName()));
 							return 1;
 						}
 						status = Status.BURN;
@@ -177,7 +177,7 @@ namespace PkmnEngine {
 						break;
 					case Status.FREEZE:
 						if (!bm.CanBeFrozen(state)) {
-							MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_FROZEN, bm.GetName()));
+							await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_FROZEN, bm.GetName()));
 							return 1;
 						}
 						status = Status.FREEZE;
@@ -185,7 +185,7 @@ namespace PkmnEngine {
 						break;
 					case Status.PARALYSIS:
 						if (!bm.CanBeParalyzed(state)) {
-							MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_PARALYZED, bm.GetName()));
+							await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_PARALYZED, bm.GetName()));
 							return 1;
 						}
 						status = Status.PARALYSIS;
@@ -193,7 +193,7 @@ namespace PkmnEngine {
 						break;
 					case Status.POISON:
 						if (!bm.CanBePoisoned(state)) {
-							MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_POISONED, bm.GetName()));
+							await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_POISONED, bm.GetName()));
 							return 1;
 						}
 						status = Status.POISON;
@@ -201,7 +201,7 @@ namespace PkmnEngine {
 						break;
 					case Status.TOXIC:
 						if (!bm.CanBePoisoned(state)) {
-							MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_POISONED, bm.GetName()));
+							await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_POISONED, bm.GetName()));
 							return 1;
 						}
 						status = Status.TOXIC;
@@ -209,7 +209,7 @@ namespace PkmnEngine {
 						break;
 					case Status.SLEEP:
 						if (!bm.CanFallAsleep(state)) {
-							MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_FALL_ASLEEP, bm.GetName()));
+							await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_FALL_ASLEEP, bm.GetName()));
 							return 1;
 						}
 						status = Status.SLEEP;
@@ -220,14 +220,14 @@ namespace PkmnEngine {
 				}
 				bm.GiveStatus(status);
 				bm.SetStatusParam(StatusParam.NV_STATUS_DURATION, duration);
-				MessageBox(msg);
+				await MessageBox(msg);
 				return 0;
 			}
 		}
 	
 		private static async Task<u32> DoRecoilDamage(MoveEffectParams p, U16 recoil) {
 			await p.attacker.DamageMon(recoil, true, false);
-			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_DAMAGED_BY_RECOIL, p.attacker.GetName()));
+			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_DAMAGED_BY_RECOIL, p.attacker.GetName()));
 			return recoil.Value;
 		}
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously

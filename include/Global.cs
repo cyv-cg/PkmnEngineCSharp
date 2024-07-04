@@ -8,6 +8,7 @@ using System.Text;
 using System;
 
 using static PkmnEngine.Global;
+using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public static class Global {
@@ -15,7 +16,7 @@ namespace PkmnEngine {
 
 		public const double EPSILON = 0.0001d;
 
-		public static Action<string> MessageBox;
+		public static Func<string, Task> MessageBox;
 		public static Action<BattleMon, Ability> AbilityPopup;
 
 		public const float TEXT_DISPLAY_SECONDS = 1f;

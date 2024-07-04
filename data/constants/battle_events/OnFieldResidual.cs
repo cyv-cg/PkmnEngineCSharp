@@ -19,62 +19,75 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
-		public static object Weather_HarshSunlight_OnFieldResidual(object p) {
+		public static async Task<object> Condition_WaterSport_OnFieldResidual(object p) {
+			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
+
+			await ResolveCondition(args.state, Condition.WATER_SPORT, BattleMessage.WATER_SPORT_END);
+			return null;
+		}
+		public static async Task<object> Condition_MudSport_OnFieldResidual(object p) {
+			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
+
+			await ResolveCondition(args.state, Condition.MUD_SPORT, BattleMessage.WATER_SPORT_END);
+			return null;
+		}
+
+		public static async Task<object> Weather_HarshSunlight_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Weather.DecrementDuration();
 
 			if (args.state.Weather.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.SUNLIGHT_FADED));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.SUNLIGHT_FADED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.SUNLIGHT_IS_HARSH));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.SUNLIGHT_IS_HARSH));
 			}
 
 			return null;
 		}
-		public static object Weather_ExtremeSunlight_OnFieldResidual(object p) {
+		public static async Task<object> Weather_ExtremeSunlight_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.EXTREME_SUNLIGHT_FADED));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.EXTREME_SUNLIGHT_FADED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.SUNLIGHT_IS_HARSH));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.SUNLIGHT_IS_HARSH));
 			}
 
 			return null;
 		}
-		public static object Weather_Rain_OnFieldResidual(object p) {
+		public static async Task<object> Weather_Rain_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.RAIN_STOPPED));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.RAIN_STOPPED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.ITS_RAINING));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.ITS_RAINING));
 			}
 
 			return null;
 		}
-		public static object Weather_HeavyRain_OnFieldResidual(object p) {
+		public static async Task<object> Weather_HeavyRain_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_STOPPED));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_STOPPED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.ITS_RAINING));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.ITS_RAINING));
 			}
 
 			return null;
@@ -85,12 +98,12 @@ namespace PkmnEngine {
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.SANDSTORM_SUBSIDED));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.SANDSTORM_SUBSIDED));
 				args.state.Weather.ClearWeatherTerrain();
 				return null;
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.SANDSTORM_IS_RAGING));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.SANDSTORM_IS_RAGING));
 			}
 
 			// Damage mons.
@@ -98,7 +111,7 @@ namespace PkmnEngine {
 				if (bm.DamagedBySandstorm()) {
 					U16 damage = new(bm.GetPercentOfMaxHp(FieldConditions.SANDSTORM_CHIP_DAMAGE));
 					await bm.DamageMon(damage, true, false);
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_SANDSTORM, bm.GetName()));
+					await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_SANDSTORM, bm.GetName()));
 				}
 			}
 
@@ -110,12 +123,12 @@ namespace PkmnEngine {
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.HAIL_STOPPED));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.HAIL_STOPPED));
 				args.state.Weather.ClearWeatherTerrain();
 				return null;
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.ITS_HAILING));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.ITS_HAILING));
 			}
 
 			// Damage mons.
@@ -123,68 +136,68 @@ namespace PkmnEngine {
 				if (bm.DamagedByHail()) {
 					U16 damage = new(bm.GetPercentOfMaxHp(FieldConditions.HAIL_CHIP_DAMAGE));
 					await bm.DamageMon(damage, true, false);
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_HAIL, bm.GetName()));
+					await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_HAIL, bm.GetName()));
 				}
 			}
 
 			return null;
 		}
-		public static object Weather_Snow_OnFieldResidual(object p) {
+		public static async Task<object> Weather_Snow_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.SNOW_STOPPED));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.SNOW_STOPPED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.ITS_SNOWING));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.ITS_SNOWING));
 			}
 
 			return null;
 		}
-		public static object Weather_Fog_OnFieldResidual(object p) {
+		public static async Task<object> Weather_Fog_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.FOG_LIFTED));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.FOG_LIFTED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.FOG_CREPT_UP));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.FOG_CREPT_UP));
 			}
 
 			return null;
 		}
-		public static object Weather_StrongWind_OnFieldResidual(object p) {
+		public static async Task<object> Weather_StrongWind_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.MYSTERIOUS_WIND_DISAPPEARED));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.MYSTERIOUS_WIND_DISAPPEARED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.MYSTERIOUS_WIND_BLOWS_ON));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.MYSTERIOUS_WIND_BLOWS_ON));
 			}
 
 			return null;
 		}
-		public static object Weather_ShadowyAura_OnFieldResidual(object p) {
+		public static async Task<object> Weather_ShadowyAura_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.SHADOWY_AURA_DISAPPEARED));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.SHADOWY_AURA_DISAPPEARED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.LIGHT_SHOWERED_FROM_SHADOWY_AURA));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.LIGHT_SHOWERED_FROM_SHADOWY_AURA));
 			}
 
 			/*
@@ -197,17 +210,17 @@ namespace PkmnEngine {
 			return null;
 		}
 
-		public static object Terrain_Electric_OnFieldResidual(object p) {
+		public static async Task<object> Terrain_Electric_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Terrain.DecrementDuration();
 
 			if (args.state.Terrain.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_END));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_END));
 				args.state.Terrain.ClearWeatherTerrain();
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_ACTIVE));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_ACTIVE));
 			}
 
 			return null;
@@ -218,11 +231,11 @@ namespace PkmnEngine {
 			args.state.Terrain.DecrementDuration();
 
 			if (args.state.Terrain.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_END));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_END));
 				args.state.Terrain.ClearWeatherTerrain();
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_ACTIVE));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_ACTIVE));
 			}
 
 			// Heal mons.
@@ -239,32 +252,32 @@ namespace PkmnEngine {
 
 			return null;
 		}
-		public static object Terrain_Misty_OnFieldResidual(object p) {
+		public static async Task<object> Terrain_Misty_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Terrain.DecrementDuration();
 
 			if (args.state.Terrain.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_END));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_END));
 				args.state.Terrain.ClearWeatherTerrain();
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_ACTIVE));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_ACTIVE));
 			}
 
 			return null;
 		}
-		public static object Terrain_Psychic_OnFieldResidual(object p) {
+		public static async Task<object> Terrain_Psychic_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
 			args.state.Terrain.DecrementDuration();
 
 			if (args.state.Terrain.DurationRemaining == 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_END));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_END));
 				args.state.Terrain.ClearWeatherTerrain();
 			}
 			else {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_ACTIVE));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_ACTIVE));
 			}
 
 			return null;

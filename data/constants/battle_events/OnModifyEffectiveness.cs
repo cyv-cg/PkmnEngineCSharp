@@ -22,7 +22,7 @@ namespace PkmnEngine {
 			OnModifyEffectivenessParams args = ValidateParams<OnModifyEffectivenessParams>(p);
 
 			if ((args.state.Weather.Condition == Condition.WEATHER_STRONG_WIND) && args.typeEff >= Types.EFF_NORMAL && args.defender.HasType(Type.FLYING)) {
-				//MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_WIND_WEAKENED_ATTACK));
+				//await MessageBox(lang::GetBattleMessage(BATTLE_MESSAGE_WIND_WEAKENED_ATTACK));
 				return Types.EFF_NORMAL / args.typeEff;
 			}
 

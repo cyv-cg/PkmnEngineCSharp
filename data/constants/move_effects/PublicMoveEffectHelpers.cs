@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace PkmnEngine {
 	public static partial class MoveEffects {
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-		public static u32 ChangeStat(BattleState state, BattleMon bm, sbyte n, Stat effID) {
+		public static async Task<u32> ChangeStat(BattleState state, BattleMon bm, sbyte n, Stat effID) {
 			if (!Battle.RunEventCheck(Callback.OnTryChangeStat, state, new OnTryChangeStatParams(state, bm, n))) {
 				return 0;
 			}
@@ -226,7 +226,7 @@ namespace PkmnEngine {
 			}
 
 			if (atLimitMsg != "") {
-				MessageBox(atLimitMsg);
+				await MessageBox(atLimitMsg);
 				return FLAG_STAT_DID_NOT_CHANGE;
 			}
 			else {
@@ -238,7 +238,7 @@ namespace PkmnEngine {
 					bm.SetFlag(BattleMon.Flag.STAT_INCREASED_THIS_TURN);
 				}
 
-				MessageBox(changeMsg);
+				await MessageBox(changeMsg);
 				return 0;
 			}
 		}
@@ -262,7 +262,7 @@ namespace PkmnEngine {
 			}
 
 			bm.RemoveStatus(Status.BURN);
-			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CURED_OF_BURN, bm.GetName()));
+			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CURED_OF_BURN, bm.GetName()));
 
 			return 0;
 		}
@@ -272,7 +272,7 @@ namespace PkmnEngine {
 			}
 
 			bm.RemoveStatus(Status.PARALYSIS);
-			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CURED_OF_PARALYSIS, bm.GetName()));
+			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CURED_OF_PARALYSIS, bm.GetName()));
 
 			return 0;
 		}
@@ -283,7 +283,7 @@ namespace PkmnEngine {
 
 			bm.RemoveStatus(Status.POISON);
 			bm.RemoveStatus(Status.TOXIC);
-			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CURED_OF_POISON, bm.GetName()));
+			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CURED_OF_POISON, bm.GetName()));
 
 			return 0;
 		}
@@ -293,7 +293,7 @@ namespace PkmnEngine {
 			}
 
 			bm.RemoveStatus(Status.FREEZE);
-			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_THAWED_OUT, bm.GetName()));
+			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_THAWED_OUT, bm.GetName()));
 
 			return 0;
 		}
@@ -303,7 +303,7 @@ namespace PkmnEngine {
 			}
 
 			bm.RemoveStatus(Status.SLEEP);
-			MessageBox(Lang.GetBattleMessage(BattleMessage.MON_WOKE_UP, bm.GetName()));
+			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_WOKE_UP, bm.GetName()));
 
 			return 0;
 		}

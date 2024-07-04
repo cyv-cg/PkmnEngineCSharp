@@ -6,6 +6,7 @@ using u64 = System.UInt64;
 using static PkmnEngine.Global;
 using static PkmnEngine.BattleMoves;
 using PkmnEngine.Strings;
+using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public struct OnTryChangeStatParams {
@@ -20,11 +21,11 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
-		public static object Condition_Mist_OnTryChangeStat(object p) {
+		public static async Task<object> Condition_Mist_OnTryChangeStat(object p) {
 			OnTryChangeStatParams args = ValidateParams<OnTryChangeStatParams>(p);
 
 			if (args.state.SideHasCondition(args.bm.Side, Condition.MIST) && args.delta < 0) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_PROTECTED_BY_THE_MIST, args.bm.GetName()));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_PROTECTED_BY_THE_MIST, args.bm.GetName()));
 				return false;
 			}
 

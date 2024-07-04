@@ -3,6 +3,8 @@ using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
 
+using System.Threading.Tasks;
+
 using static PkmnEngine.Global;
 using static PkmnEngine.BattleMoves;
 using PkmnEngine.Strings;
@@ -26,71 +28,71 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
-		public static object Status_ThroatChop_OnTryUseMove(object p) {
+		public static async Task<object> Status_ThroatChop_OnTryUseMove(object p) {
 			OnTrySelectMoveParams args = ValidateParams<OnTrySelectMoveParams>(p);
 
 			BattleMove move = gBattleMoves(args.MoveID);
 			if ((move.flags & Flag.SOUND_MOVE) != 0) {
 				if (args.print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES, args.bm.GetName()));
+					await MessageBox(Lang.GetBattleMessage(BattleMessage.THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES, args.bm.GetName()));
 				}
 				return false;
 			}
 
 			return true;
 		}
-		public static object Status_Taunt_OnTryUseMove(object p) {
+		public static async Task<object> Status_Taunt_OnTryUseMove(object p) {
 			OnTrySelectMoveParams args = ValidateParams<OnTrySelectMoveParams>(p);
 
 			BattleMove move = gBattleMoves(args.MoveID);
 			if (move.moveCat == MoveCategory.STATUS) {
 				if (args.print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_MOVE_AFTER_THE_TAUNT, args.bm.GetName(), Lang.GetMoveName(args.MoveID)));
+					await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_MOVE_AFTER_THE_TAUNT, args.bm.GetName(), Lang.GetMoveName(args.MoveID)));
 				}
 				return false;
 			}
 
 			return true;
 		}
-		public static object Status_Encore_OnTryUseMove(object p) {
+		public static async Task<object> Status_Encore_OnTryUseMove(object p) {
 			OnTrySelectMoveParams args = ValidateParams<OnTrySelectMoveParams>(p);
 
 			BattleMove move = gBattleMoves(args.MoveID);
 			if (args.MoveID != args.bm.moves[args.bm.GetStatusParam(StatusParam.ENCORE)]) {
 				if (args.print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_MUST_DO_AN_ENCORE, args.bm.GetName()));
+					await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_MUST_DO_AN_ENCORE, args.bm.GetName()));
 				}
 				return false;
 			}
 
 			return true;
 		}
-		public static object Status_Disable_OnTryUseMove(object p) {
+		public static async Task<object> Status_Disable_OnTryUseMove(object p) {
 			OnTrySelectMoveParams args = ValidateParams<OnTrySelectMoveParams>(p);
 
 			if (args.bm.HasStatus(Status.DISABLE) && args.bm.GetStatusParam(StatusParam.DISABLED_SLOT) == args.moveSlot) {
 				if (args.print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_MOVE_WAS_DISABLED, args.bm.GetName(), Lang.GetMoveName(args.MoveID)));
+					await MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_MOVE_WAS_DISABLED, args.bm.GetName(), Lang.GetMoveName(args.MoveID)));
 				}
 				return false;
 			}
 
 			return true;
 		}
-		public static object Status_Torment_OnTryUseMove(object p) {
+		public static async Task<object> Status_Torment_OnTryUseMove(object p) {
 			OnTrySelectMoveParams args = ValidateParams<OnTrySelectMoveParams>(p);
 
 			// Tormented mons cannot use the same move twice in a row.
 			if (args.bm.HasStatus(Status.TORMENT) && args.bm.GetStatusParam(StatusParam.LAST_USED_MOVE) == args.moveSlot) {
 				if (args.print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_THE_SAME_MOVE_TWICE_DUE_TO_TORMENT, args.bm.GetName()));
+					await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_THE_SAME_MOVE_TWICE_DUE_TO_TORMENT, args.bm.GetName()));
 				}
 				return false;
 			}
 
 			return true;
 		}
-		public static object Status_Imprison_OnTryUseMove(object p) {
+		public static async Task<object> Status_Imprison_OnTryUseMove(object p) {
 			OnTrySelectMoveParams args = ValidateParams<OnTrySelectMoveParams>(p);
 
 			// Imprison
@@ -104,7 +106,7 @@ namespace PkmnEngine {
 					for (u8 i = 0; i < Pokemon.MAX_MOVES; i++) {
 						if (args.bm.KnowsMove(bm.moves[i])) {
 							if (args.print) {
-								MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANT_USE_SEALED_MOVE, args.bm.GetName(), Lang.GetMoveName(args.bm.moves[args.moveSlot])));
+								await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANT_USE_SEALED_MOVE, args.bm.GetName(), Lang.GetMoveName(args.bm.moves[args.moveSlot])));
 							}
 							return false;
 						}

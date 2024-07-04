@@ -3,6 +3,8 @@ using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
 
+using System.Threading.Tasks;
+
 using static PkmnEngine.Global;
 using PkmnEngine.Strings;
 
@@ -19,74 +21,74 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
-		private static void ResolveCondition(BattleState state, Condition condition, BattleMessage message) {
+		private static async Task ResolveCondition(BattleState state, Condition condition, BattleMessage message) {
 			if (state.FieldHasCondition(condition, out FieldCondition c)) {
 				if (c.DurationRemaining == 0) {
 					state.RemoveCondition(c);
-					MessageBox(Lang.GetBattleMessage(message));
+					await MessageBox(Lang.GetBattleMessage(message));
 				}
 				c.DecrementDuration();
 			}
 		}
-		private static void ResolveCondition(BattleState state, u8 side, Condition condition, BattleMessage clientMessage, BattleMessage remoteMessage) {
+		private static async Task ResolveCondition(BattleState state, u8 side, Condition condition, BattleMessage clientMessage, BattleMessage remoteMessage) {
 			if (state.SideHasCondition(side, condition, out FieldCondition c)) {
 				if (c.DurationRemaining == 0) {
 					state.RemoveCondition(c);
 					if (side == Battle.SIDE_CLIENT) {
-						MessageBox(Lang.GetBattleMessage(clientMessage));
+						await MessageBox(Lang.GetBattleMessage(clientMessage));
 					}
 					else {
-						MessageBox(Lang.GetBattleMessage(remoteMessage));
+						await MessageBox(Lang.GetBattleMessage(remoteMessage));
 					}
 				}
 				c.DecrementDuration();
 			}
 		}
 
-		public static object Condition_Reflect_OnSideResidual(object p) {
+		public static async Task<object> Condition_Reflect_OnSideResidual(object p) {
 			OnSideResidualParams args = ValidateParams<OnSideResidualParams>(p);
-			ResolveCondition(args.state, args.side, Condition.REFLECT,
+			await ResolveCondition(args.state, args.side, Condition.REFLECT,
 				BattleMessage.ALLY_REFLECT_WORE_OFF,
 				BattleMessage.OPPONENT_REFLECT_WORE_OFF
 			);
 			return null;
 		}
-		public static object Condition_LightScreen_OnSideResidual(object p) {
+		public static async Task<object> Condition_LightScreen_OnSideResidual(object p) {
 			OnSideResidualParams args = ValidateParams<OnSideResidualParams>(p);
-			ResolveCondition(args.state, args.side, Condition.LIGHT_SCREEN,
+			await ResolveCondition(args.state, args.side, Condition.LIGHT_SCREEN,
 				BattleMessage.ALLY_LIGHT_SCREEN_WORE_OFF,
 				BattleMessage.OPPONENT_LIGHT_SCREEN_WORE_OFF
 			);
 			return null;
 		}
-		public static object Condition_AuroraVeil_OnSideResidual(object p) {
+		public static async Task<object> Condition_AuroraVeil_OnSideResidual(object p) {
 			OnSideResidualParams args = ValidateParams<OnSideResidualParams>(p);
-			ResolveCondition(args.state, args.side, Condition.AURORA_VEIL,
+			await ResolveCondition(args.state, args.side, Condition.AURORA_VEIL,
 				BattleMessage.ALLY_AURORA_VEIL_WORE_OFF,
 				BattleMessage.OPPONENT_AURORA_VEIL_WORE_OFF	
 			);
 			return null;
 		}
-		public static object Condition_Tailwind_OnSideResidual(object p) {
+		public static async Task<object> Condition_Tailwind_OnSideResidual(object p) {
 			OnSideResidualParams args = ValidateParams<OnSideResidualParams>(p);
-			ResolveCondition(args.state, args.side, Condition.TAILWIND,
+			await ResolveCondition(args.state, args.side, Condition.TAILWIND,
 				BattleMessage.ALLY_TAILWIND_END,
 				BattleMessage.ENEMY_TAILWIND_END
 			);
 			return null;
 		}
 
-		public static object Condition_SafeGuard_OnSideResidual(object p) {
+		public static async Task<object> Condition_SafeGuard_OnSideResidual(object p) {
 			OnSideResidualParams args = ValidateParams<OnSideResidualParams>(p);
-			ResolveCondition(args.state, args.side, Condition.SAFEGUARD,
+			await ResolveCondition(args.state, args.side, Condition.SAFEGUARD,
 				BattleMessage.PLAYER_NO_LONGER_PROTECTED_BY_SAFEGUARD,
 				BattleMessage.OPPONENT_NO_LONGER_PROTECTED_BY_SAFEGUARD
 			);
 			return null;
 		}
-		public static object Condition_Mist_OnSideResidual(object p) {
+		public static async Task<object> Condition_Mist_OnSideResidual(object p) {
 			OnSideResidualParams args = ValidateParams<OnSideResidualParams>(p);
-			ResolveCondition(args.state, args.side, Condition.MIST, 
+			await ResolveCondition(args.state, args.side, Condition.MIST, 
 				BattleMessage.YOUR_TEAM_NO_LONGER_PROTECTED_BY_MIST, 
 				BattleMessage.OPPOSING_TEAM_NO_LONGER_PROTECTED_BY_MIST
 			);

@@ -3,6 +3,8 @@ using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
 
+using System.Threading.Tasks;
+
 using static PkmnEngine.Global;
 using static PkmnEngine.BattleMoves;
 
@@ -21,25 +23,25 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
-		public static object Weather_ExtremeSunlight_OnTryMove(object p) {
+		public static async Task<object> Weather_ExtremeSunlight_OnTryMove(object p) {
 			OnTryMoveParams args = ValidateParams<OnTryMoveParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
 
 			if (move.moveType == Type.WATER && move.moveCat != MoveCategory.STATUS) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.WATER_ATTACK_EVAPORATED));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.WATER_ATTACK_EVAPORATED));
 				return false;
 			}
 
 			return true;
 		}
-		public static object Weather_HeavyRain_OnTryMove(object p) {
+		public static async Task<object> Weather_HeavyRain_OnTryMove(object p) {
 			OnTryMoveParams args = ValidateParams<OnTryMoveParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
 
 			if (move.moveType == Type.FIRE && move.moveCat != MoveCategory.STATUS) {
-				MessageBox(Lang.GetBattleMessage(BattleMessage.FIRE_ATTACK_FIZZLED_OUT));
+				await MessageBox(Lang.GetBattleMessage(BattleMessage.FIRE_ATTACK_FIZZLED_OUT));
 				return false;
 			}
 
