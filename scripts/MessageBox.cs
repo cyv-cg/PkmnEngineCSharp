@@ -33,8 +33,6 @@ namespace PkmnEngine.GodotV {
 		private static void UpdateMessage() {
 			// Clear the current message.
 			displayTimer.Stop();
-			label.Text = "";
-			currentMessage = null;
 			finishedDisplaying = false;
 
 			// If there is another message in the queue, start showing it.

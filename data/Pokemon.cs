@@ -1014,9 +1014,12 @@ namespace PkmnEngine {
 			float startVal = (float)HealthPercent;
 			float finalVal = (float)HP / MaxHP;
 			// Do the actual interpolation
-			while (Math.Abs(HealthPercent - finalVal) >= EPSILON) {
+			while (Math.Abs(HealthPercent - finalVal) > EPSILON) {
 				HealthPercent = startVal + t * (finalVal - startVal);
-				t += 0.005f;
+				t += HP_CHANGE_SPEED;
+				if (t > 1) {
+					t = 1;
+				}
 				await Task.Delay(10);
 			}
 
@@ -1058,7 +1061,10 @@ namespace PkmnEngine {
 			// Do the actual interpolation
 			while (Math.Abs(HealthPercent - finalVal) >= EPSILON) {
 				HealthPercent = startVal + t * (finalVal - startVal);
-				t += 0.005f;
+				t += HP_CHANGE_SPEED;
+				if (t > 1) {
+					t = 1;
+				}
 				await Task.Delay(10);
 			}
 

@@ -23,11 +23,13 @@ namespace PkmnEngine {
 
 		public const double EPSILON = 0.0001d;
 
-		public static Func<string, Task> MessageBox;
-		public static Action<BattleMon, Ability> AbilityPopup;
-
 		public const float TEXT_DISPLAY_SECONDS = 1f;
 		public const float TEXT_SPEED = 0.025f;
+
+		public const float HP_CHANGE_SPEED = 0.01f;
+
+		public static Func<string, Task> MessageBox;
+		public static Action<BattleMon, Ability> AbilityPopup;
 
 		public static u16 HIHALF32(u32 n) { return (u16)((n & 0xFFFF0000) >> 16); }
 		public static u16 LOHALF32(u32 n) { return (u16)(n & 0xFFFF); }

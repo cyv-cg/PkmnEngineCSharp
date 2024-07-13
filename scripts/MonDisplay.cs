@@ -56,12 +56,13 @@ namespace PkmnEngine.GodotV {
 			monNameLabel.Text = target.GetName();
 			monLevelLabel.Text = target.Mon.level.ToString();
 
-			healthPercent = Math.Abs(target.HealthPercent) > Global.EPSILON ? Math.Max(target.HealthPercent, 0.01f) : target.HealthPercent;
+			// Always show at least a small amount if the mon isn't at 0 HP.
+			healthPercent = target.HealthPercent > Global.EPSILON ? Math.Max(target.HealthPercent, 0.01f) : target.HealthPercent;
 			SetActiveBar();
 			GetActiveBar().Value = healthPercent;
 
 			if (GetParent().Name == "ContainerClient") {
-				monCurrHPLabel.Text = $"[right]{target.HP}[/right]";
+				monCurrHPLabel.Text = $"[right]{(u16)(target.MaxHP * healthPercent)}[/right]";
 				monMaxHPLabel.Text = target.MaxHP.ToString();
 
 				expBar.Value = target.Mon.exp - ExpGroups.gExperienceTables(BaseStats.gBaseStats(target.Mon.Box.Species).growth, target.Mon.level);
