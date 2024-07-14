@@ -73,10 +73,10 @@ namespace PkmnEngine {
 
 			U16 healAmount = new(args.bm.GetPercentOfMaxHp(StatusEffects.LEECH_SEED_DRAIN_AMOUNT));
 			await args.bm.DamageMon(healAmount, true, false);
+			await MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_HP_WAS_SAPPED_BY_LEECH_SEED, args.bm.GetName()));
 			BattleMon monSeededBy = args.battle.GetMonInSlot(args.state, (u8)args.bm.GetStatusParam(StatusParam.SLOT_SEEDED_BY));
 			if (monSeededBy != null) {
 				await monSeededBy.HealMon(healAmount, false);
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_HP_WAS_SAPPED_BY_LEECH_SEED, args.bm.GetName()));
 			}
 
 			return null;

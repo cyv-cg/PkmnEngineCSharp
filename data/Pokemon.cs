@@ -883,6 +883,9 @@ namespace PkmnEngine {
 		public u8[] maxPP;
 		
 		private Flag flags;
+
+		public delegate Task BattleMonEventHandler(BattleMon bm);
+		public BattleMonEventHandler OnMonFainted { get; set; }
 		
 		private Dictionary<Status, bool> status;
 		public Dictionary<StatusParam, u16> statusParams;
@@ -1035,14 +1038,13 @@ namespace PkmnEngine {
 			bool fainted = HP == 0;
 
 			if (fainted) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_FAINTED, GetName()));
 				GiveStatus(Status.FAINTED);
-				// TODO: stuff when a mon faints. This also should occur after messages like "it's super effective!"
-				throw new MonFaintedException(Side);
+				await OnMonFainted?.Invoke(this);
 			}
 			
 			return !fainted;
 		}
+
 		/// <summary>
 		/// Restores mon's HP. 
 		/// Note: 'amount' will be changed to the amount of HP restored, even if the passed value is different.
@@ -1097,7 +1099,7 @@ namespace PkmnEngine {
 
 		public bool IsActive(Battle battle) {
 			foreach (BattleMon bm in battle.GetAllActiveMons()) {
-				if (bm.Equals(this)) {
+				if (bm != null && bm.Equals(this)) {
 					return true;
 				}
 			}

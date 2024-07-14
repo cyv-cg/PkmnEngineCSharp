@@ -710,11 +710,11 @@ namespace PkmnEngine {
 				return 0;
 			}
 
-			// Attack.
-			u32 flags = await Attack(p);
-			// Mon faints after.
+			// Attacker faints first.
 			U16 damage = new(p.attacker.EffHp(p.state));
 			await p.attacker.DamageMon(damage, true, false);
+			// Attack.
+			u32 flags = await Attack(p);
 
 			return flags;
 		}
@@ -725,11 +725,11 @@ namespace PkmnEngine {
 				return 0;
 			}
 
-			// Attack.
-			u32 flags = await Attack(p);
-			// Mon then loses 50% of its HP.
+			// Mon loses 50% of its HP.
 			U16 damage = new(p.attacker.GetPercentOfMaxHp(0.5f));
 			await p.attacker.DamageMon(damage, true, false);
+			// Attack.
+			u32 flags = await Attack(p);
 
 			return flags;
 		}
@@ -1487,10 +1487,10 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Memento(MoveEffectParams p) {
-			await Effect_AttackDownHit2(p);
-			await Effect_SpecialAttackDownHit2(p);
 			U16 damage = new(p.attacker.EffMaxHp(p.state));
 			await p.attacker.DamageMon(damage, true, false);
+			await Effect_AttackDownHit2(p);
+			await Effect_SpecialAttackDownHit2(p);
 			return 0;
 		}
 		public static async Task<u32> Effect_Facade(MoveEffectParams p) {

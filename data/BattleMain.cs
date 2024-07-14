@@ -15,13 +15,10 @@ using PkmnEngine.GodotV;
 using System;
 
 namespace PkmnEngine {
-	public class MonFaintedException : Exception {
-		public MonFaintedException(u8 side) {
-			this.side = side;
-		}
-
-		public readonly u8 side;
+	public class BattleOverException : Exception {
+		public BattleOverException() {}
 	}
+
 	public class Battle {
 		public const u8 SIDE_CLIENT = 0;
 		public const u8 SIDE_REMOTE = 1;
@@ -58,6 +55,8 @@ namespace PkmnEngine {
 		private BattleState[] History { get; set; }
 		public BattleState CurrentState { get; private set; }
 		public u8 TurnCount { get { return (u8)History.Length; } }
+
+		private u8 WinningSide { get; set; }
 
 		public float Random01() {
 			return (float)rand.NextDouble();
@@ -346,7 +345,7 @@ namespace PkmnEngine {
 			int shift = BattleState.BITS_PER_MON_INDEX * slot;
 			// This gives us a number in the form 1111....0000....1111
 			// where the 0's are in the segment corresponding to this team index.
-			u32 mask = u32.MaxValue - (u32)(((1 << BattleState.BITS_PER_MON_INDEX) - 1) << shift);
+			u32 mask = u32.MaxValue - (u32)(BattleState.SLOT_EMPTY << shift);
 			// Bitwise and will zero out the segment in which this index will be stored.
 			state.FieldMons &= mask;
 			// Finally, we store this index in the appropriate slot.
@@ -358,6 +357,8 @@ namespace PkmnEngine {
 
 			// TODO: :)
 			BattleMon bm = player.team[monIndex];
+			// Subscribe our OnMonFainted event to the new mon's listener. When it faints, we go through relevant processing.
+			bm.OnMonFainted += OnMonFainted;
 
 			// Mark the the mon has just switched in.
 			bm.SetFlag(BattleMon.Flag.JUST_SWITCHED_IN);
@@ -377,6 +378,26 @@ namespace PkmnEngine {
 			//		await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_DROWSING));
 			//		break;
 			//}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="state"></param>
+		/// <param name="slot"></param>
+		/// <returns></returns>
+		public async Task TakeOutMon(BattleState state, u8 slot) {
+			// Perform a left shift by this value to get the correct segment for this slot's index.
+			int shift = BattleState.BITS_PER_MON_INDEX * slot;
+			// This gives us a number in the form 1111....0000....1111
+			// where the 0's are in the segment corresponding to this slot's index.
+			u32 mask = u32.MaxValue - (u32)(BattleState.SLOT_EMPTY << shift);
+			// Bitwise and will zero out the segment which will be cleared.
+			state.FieldMons &= mask;
+			// Finally, we store empty slot constant in the appropriate slot.
+			state.FieldMons |= (u32)(BattleState.SLOT_EMPTY << shift);
+
+			// TODO: idk
+			await Task.Delay(Global.WAIT_DELAY);
 		}
 
 		/// <summary>
@@ -412,13 +433,26 @@ namespace PkmnEngine {
 			}
 			throw new System.Exception();
 		}
+
+		/// <summary>
+		/// Tasks to run when a mon faints.
+		/// Interrupts to end the battle if needed.
+		/// </summary>
+		/// <param name="bm">The mon that fainted</param>
+		private async Task OnMonFainted(BattleMon bm) {
+			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_FAINTED, bm.GetName()));
+			await TakeOutMon(CurrentState, bm.Side);
+			// If this mon was the last one on a side, then interrupt flow to go to the battle end routine.
+			if (IsOver()) {
+				throw new BattleOverException();
+			}
+		}
 	
 		/// <summary>
 		/// 
 		/// </summary>
 		public async Task Start() {
 			Global.BattleSceneSetup(this, this.players);
-			u8 winningSide;
 
 			// Send out initial mons.
 			foreach (TrainerBattleContext player in this.players) {
@@ -430,29 +464,18 @@ namespace PkmnEngine {
 				}
 			}
 
-			BattleStart:
-
-			while (!IsOver(out winningSide)) {
+			while (!IsOver()) {
 				try {
 					// Get the new state.
 					CurrentState = CurrentState.Next();
 
-					for (u8 i = 0; i < format.numSlots; i++) {
-						BattleMon bm = GetMonInSlot(CurrentState, i);
-						if (bm == null) {
-							continue;
-						}
-						await Battle.RunEvent(Callback.OnStart, bm, new OnStartParams(CurrentState, bm));
-					}
-
-					await ChooseActions(CurrentState);
-					await DoBattleActions(CurrentState);
-				}
-				catch (MonFaintedException) {
 					// Check for players that need to send out a new mon.
 					foreach (TrainerBattleContext context in players) {
 						foreach (u8 s in context.slots) {
-							if (GetMonInSlot(CurrentState, s).HasStatus(Status.FAINTED)) {
+							BattleMon monInSlot = GetMonInSlot(CurrentState, s);
+							// Check if the mon in this slot exists or is fainted AND the player controlling
+							// the slot has another mon to send out.
+							if ((monInSlot == null || monInSlot.HasStatus(Status.FAINTED)) && PlayerControllingSlot(s).NumAvailableMons() > 0) {
 								// Check if there is another available mon.
 								sbyte firstIndex = context.GetFirstAvailableMonIndex();
 								// If the index is positive, then there are more available mons.
@@ -470,18 +493,27 @@ namespace PkmnEngine {
 						}
 					}
 
-					goto BattleEnd;
+					for (u8 i = 0; i < format.numSlots; i++) {
+						BattleMon bm = GetMonInSlot(CurrentState, i);
+						if (bm == null) {
+							continue;
+						}
+						await Battle.RunEvent(Callback.OnStart, bm, new OnStartParams(CurrentState, bm));
+					}
+
+					await ChooseActions(CurrentState);
+					await DoBattleActions(CurrentState);
+				}
+				catch (BattleOverException) {
+					await BattleEnd();
 				}
 			}
+		}
 
-			BattleEnd:
-			if (!IsOver(out winningSide)) {
-				goto BattleStart;
-			}
-			Console.WriteLine("battle end");
-
+		private async Task BattleEnd() {
 			// TODO: do some actual battle-end routine.
-			await MessageBox($"{players[winningSide].profile.Name} won!");
+			Console.WriteLine("battle end");
+			await MessageBox($"{players[WinningSide].profile.Name} won!");
 		}
 
 		private async Task DoBattleActions(BattleState state) {
@@ -499,6 +531,10 @@ namespace PkmnEngine {
 
 				TrainerBattleContext user = PlayerControllingSlot(slot);
 				BattleMon actor = GetMonInSlot(state, slot);
+
+				if (actor == null) {
+					continue;
+				}
 
 				// Destiny Bond effect ends when a mon takes an action,
 				// even if it is blocked due to sleep, paralysis, etc.
@@ -521,9 +557,7 @@ namespace PkmnEngine {
 				switch (code) {
 					case ActionCode.USE_MOVE: 
 					case ActionCode.DO_MOVE: {
-						if (!await UseOrDoMove(state, slot, code, args, flags, actor, i)) {
-							return;
-						}
+						await UseOrDoMove(state, slot, code, args, flags, actor, i);
 						break;
 					}
 					case ActionCode.SWITCH:
@@ -571,20 +605,8 @@ namespace PkmnEngine {
 				bm.SetStatusParam(StatusParam.SPEC_DAMAGE_THIS_TURN, 0);
 			}
 
-			// TODO_: determine battle winner.
-			//if (b_IsBattleOver(battle, state)) {
-			//	return;
-			//}
-
-
-			////DrawField();
-
-
-			//state->turnNo = battle->turnCount;
-
 			// Cache the state.
 			AddToHistory(CurrentState);
-			//CurrentState = CurrentState.Next();
 		}
 
 		/// <summary>
@@ -597,8 +619,7 @@ namespace PkmnEngine {
 		/// <param name="targets">Flags retrieved from GetBattleActionFlags().</param>
 		/// <param name="actor">BattleMon using the move.</param>
 		/// <param name="index">The index of the action in the state's action array.</param>
-		/// <returns>True if the battle is not over.</returns>
-		private async Task<bool> UseOrDoMove(BattleState state, u8 slot, ActionCode code, u32 move, u32 targets, BattleMon actor, u8 index) {
+		private async Task UseOrDoMove(BattleState state, u8 slot, ActionCode code, u32 move, u32 targets, BattleMon actor, u8 index) {
 			u8 moveSlot = (u8)((move & 0x00030000) >> 16);
 
 			// Store the last targeted mon.
@@ -630,13 +651,6 @@ namespace PkmnEngine {
 				actor.SetStatusParam(StatusParam.SUCCESSIVE_MOVE_USES, 1);
 			}
 			actor.SetStatusParam(StatusParam.LAST_TARGETED_MON, targetsArr[0]);
-			
-			if (IsOver(out u8 winningSide)) {
-				// TODO: Enter some battle end routine.
-				return false;
-			}
-
-			return true;
 		}
 
 		/// <summary>
@@ -644,7 +658,7 @@ namespace PkmnEngine {
 		/// TODO: differentiate between player win/loss.
 		/// </summary>
 		/// <returns>True if all Pokemon on one side are fainted.</returns>
-		private bool IsOver(out u8 winningSide) {
+		private bool IsOver() {
 			// Check if all opposing Pokemon are fainted or if all player/ally Pokemon are fainted.
 			
 			List<u8> availableSides = new List<u8>();
@@ -675,12 +689,12 @@ namespace PkmnEngine {
 
 			// If there is only 1 side that can still fight, then that side is the winner.
 			if (availableSides.Count == 1) {
-				winningSide = availableSides[0];
+				WinningSide = availableSides[0];
 				return true;
 			}
 
 			// If there is more than 1 side that can still fight, then the battle is not over yet.
-			winningSide = 0;
+			WinningSide = 0;
 			return false;
 		}
 	}
