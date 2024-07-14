@@ -156,6 +156,11 @@ namespace PkmnEngine {
 		public u16 Size { get { return (u16)buffer.Length; } }
 		public u16 Cursor { get; private set; }
 
+		public bool Equals(Buffer obj)
+		{
+			return buffer.ToString().Equals(obj.buffer.ToString());
+		}
+
 		/// <summary>
 		/// Sets the buffer.Cursor to a given position.
 		/// </summary>

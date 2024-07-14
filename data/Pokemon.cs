@@ -1032,7 +1032,7 @@ namespace PkmnEngine {
 				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_FAINTED, GetName()));
 				GiveStatus(Status.FAINTED);
 				// TODO: stuff when a mon faints. This also should occur after messages like "it's super effective!"
-				throw new BattleOverException();
+				throw new MonFaintedException(Side);
 			}
 			else {
 				Battle.RunEvent(Callback.OnDamage, this, new OnDamageParams(this, damage.Value, force, direct));
@@ -1428,7 +1428,7 @@ namespace PkmnEngine {
 
 		#region overrides
 		public bool Equals(BattleMon obj) {
-			return this.Write().ToString() == obj.Write().ToString();
+			return this.Write().Equals(obj.Write());
 		}
 		public override string ToString() {
 			return GetName();
