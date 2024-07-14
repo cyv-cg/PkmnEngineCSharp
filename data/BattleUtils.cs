@@ -136,8 +136,8 @@ namespace PkmnEngine {
 			for (u8 i = 0; i < targets.Length; i++) {
 				defender = battle.GetMonInSlot(state, targets[i]);
 
-				// BUG: this causes the "but it missed" line to print *before* saying that the attacker even used a move.
 				if (!MoveHit(battle, state, attacker, defender, moveID)) {
+					await MessageBox(GetBattleMessage(BattleMessage.MON_USED_MOVE, attacker.GetName(), GetMoveName(moveID)));
 					await MessageBox(GetBattleMessage(BattleMessage.MON_AVOIDED_ATTACK, defender.GetName()));
 					continue;
 				}
