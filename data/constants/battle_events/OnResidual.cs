@@ -21,6 +21,7 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 		public static async Task<object> Status_Burn_OnResidual(object p) {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
@@ -98,7 +99,7 @@ namespace PkmnEngine {
 
 			return null;
 		}
-		public static object Status_ThroatChop_OnResidual(object p) {
+		public static async Task<object> Status_ThroatChop_OnResidual(object p) {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
 			u8 count = (u8)args.bm.GetStatusParam(StatusParam.THROAT_CHOP);
@@ -143,5 +144,6 @@ namespace PkmnEngine {
 
 			return null;
 		}
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	} 
 }

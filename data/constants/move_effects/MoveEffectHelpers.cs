@@ -129,10 +129,10 @@ namespace PkmnEngine {
 				stages += 6;
 			}
 
-			foreach (sbyte v in Battle.RunEvent<sbyte>(Callback.OnModifyCritRatio, p.attacker, new OnModifyCritRatioParams())) {
+			foreach (sbyte v in Battle.RunEvent<sbyte>(Callback.OnModifyCritRatio, p.attacker, new OnModifyCritRatioParams()).Result) {
 				stages += v;
 			}
-			foreach (sbyte v in Battle.RunEvent<sbyte>(Callback.OnSourceModifyCritRatio, p.target, new OnSourceModifyCritRatioParams())) {
+			foreach (sbyte v in Battle.RunEvent<sbyte>(Callback.OnSourceModifyCritRatio, p.target, new OnSourceModifyCritRatioParams()).Result) {
 				stages += v;
 			}
 

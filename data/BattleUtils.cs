@@ -122,7 +122,7 @@ namespace PkmnEngine {
 			CheckSuccessiveProtects(attacker, moveID);
 
 			// Weird weather conditions:
-			if (!Battle.RunEventCheck(Callback.OnTryMove, battle, new OnTryMoveParams(state, attacker, moveID))) {
+			if (!await Battle.RunEventCheck(Callback.OnTryMove, battle, new OnTryMoveParams(state, attacker, moveID))) {
 				return;
 			}
 
@@ -329,7 +329,7 @@ namespace PkmnEngine {
 
 			float roll = battle.Random01();
 
-			roll *= Battle.RunEventChain(Callback.OnFieldModifyAcc, battle, null);
+			roll *= Battle.RunEventChain(Callback.OnFieldModifyAcc, battle, null).Result;
 
 			float hitChance = DamageCalc.CalculateHitChance(state, attacker, defender, moveID);
 			bool hit = roll <= hitChance;

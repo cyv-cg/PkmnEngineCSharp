@@ -306,7 +306,9 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => { return (u8)4; }, 0)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+					(async (object p) => { return (u8)4; }, 0)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 				},
 				{
 					Callback.OnResidual,

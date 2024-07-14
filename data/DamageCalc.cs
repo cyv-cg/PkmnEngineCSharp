@@ -13,7 +13,7 @@ namespace PkmnEngine {
 			public Mods(MoveEffectParams p, float critChance) {
 				isCrit = p.battle.rand.NextDouble() < critChance;
 				typeEff = TypeEffectiveness(p.target, p.move.moveType);
-				typeEff *= Battle.RunEventChain(Callback.OnModifyEffectiveness, p.battle, new OnModifyEffectivenessParams(p.state, p.target, p.moveID, typeEff));
+				typeEff *= Battle.RunEventChain(Callback.OnModifyEffectiveness, p.battle, new OnModifyEffectivenessParams(p.state, p.target, p.moveID, typeEff)).Result;
 				stab = STAB(p.attacker, p.move.moveType);
 			}
 			public Mods() {
@@ -78,8 +78,8 @@ namespace PkmnEngine {
 			u16 effPower = (overrides == null || overrides.power == 0) ? move.power : overrides.power;
 
 			u16 statAtk = move.moveCat switch {
-				MoveCategory.PHYSICAL => (u16)(attacker.EffAtk(state) * Battle.RunEventChain(Callback.OnSourceModifyAtk, defender, new OnSourceModifyAtkParams(move))),
-				MoveCategory.SPECIAL => (u16)(attacker.EffSpAtk(state) * Battle.RunEventChain(Callback.OnSourceModifySpAtk, defender, new OnSourceModifySpAtkParams(move))),
+				MoveCategory.PHYSICAL => (u16)(attacker.EffAtk(state) * Battle.RunEventChain(Callback.OnSourceModifyAtk, defender, new OnSourceModifyAtkParams(move)).Result),
+				MoveCategory.SPECIAL => (u16)(attacker.EffSpAtk(state) * Battle.RunEventChain(Callback.OnSourceModifySpAtk, defender, new OnSourceModifySpAtkParams(move)).Result),
 				_ => 0
 			};
 			u16 statDef = move.moveCat switch {
@@ -132,8 +132,8 @@ namespace PkmnEngine {
 			}
 
 			// Weather & Terrain
-			damage = (u16)(damage * Battle.RunEventChain(Callback.OnWeatherModifyDamage, state, new OnWeatherModifyDamageParams(state, moveID, attacker, defender)));
-			damage = (u16)(damage * Battle.RunEventChain(Callback.OnModifyDamage, state, new OnModifyDamageParams(battle, state, defender.Side, attacker, defender, moveID, mods), defender.Side));
+			damage = (u16)(damage * Battle.RunEventChain(Callback.OnWeatherModifyDamage, state, new OnWeatherModifyDamageParams(state, moveID, attacker, defender)).Result);
+			damage = (u16)(damage * Battle.RunEventChain(Callback.OnModifyDamage, state, new OnModifyDamageParams(battle, state, defender.Side, attacker, defender, moveID, mods), defender.Side).Result);
 
 			return damage;
 		}
@@ -218,7 +218,7 @@ namespace PkmnEngine {
 			if (attacker.HasType(moveType)) {
 				stab = SAME_TYPE_ATTACK_BONUS;
 			}
-			stab *= Battle.RunEventChain(Callback.OnModifyStab, attacker, new OnModifyStabParams(attacker, moveType));
+			stab *= Battle.RunEventChain(Callback.OnModifyStab, attacker, new OnModifyStabParams(attacker, moveType)).Result;
 			return stab;
 		}
 		/// <summary>

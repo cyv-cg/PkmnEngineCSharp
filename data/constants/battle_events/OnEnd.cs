@@ -18,6 +18,7 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 		public static async Task<object> Status_PerishSong_OnEnd(object p) {
 			OnEndParams args = ValidateParams<OnEndParams>(p);
 
@@ -31,7 +32,7 @@ namespace PkmnEngine {
 			args.bm.DecrementStatusParam(StatusParam.PERISH_COUNT);
 			return null;
 		}
-		public static object Status_LaserFocus_OnEnd(object p) {
+		public static async Task<object> Status_LaserFocus_OnEnd(object p) {
 			OnEndParams args = ValidateParams<OnEndParams>(p);
 
 			if (args.bm.GetStatusParam(StatusParam.LASER_FOCUS) == 0) {
@@ -41,5 +42,6 @@ namespace PkmnEngine {
 
 			return null;
 		}
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	}
 }

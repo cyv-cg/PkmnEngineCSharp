@@ -87,17 +87,28 @@ namespace PkmnEngine {
 			}}
 		},
 		{
+			Ability.MAGIC_GUARD,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnDamage,
+				(Ability_MagicGuard_OnDamage, 0)
+			}}
+		},
+		{
 			Ability.PURIFYING_SALT,
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
 				Callback.OnTryAddNonVolatile,
-				((object p) => { return false; }, 0)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+				(async (object p) => { return false; }, 0)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 			}}
 		},
 		{
 			Ability.COMATOSE,
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
 				Callback.OnTryAddNonVolatile,
-				((object p) => { return false; /*idfk*/ }, 0)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+				(async (object p) => { return false; /*idfk*/ }, 0)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 			}}
 		},
 		{

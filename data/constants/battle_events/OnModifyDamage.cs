@@ -6,6 +6,7 @@ using u64 = System.UInt64;
 using static PkmnEngine.Global;
 using static PkmnEngine.BattleMoves;
 using PkmnEngine.Strings;
+using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public struct OnModifyDamageParams {
@@ -28,7 +29,8 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
-		public static object Condition_Reflect_OnModifyDamage(object p) {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+		public static async Task<object> Condition_Reflect_OnModifyDamage(object p) {
 			OnModifyDamageParams args = ValidateParams<OnModifyDamageParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
@@ -38,7 +40,7 @@ namespace PkmnEngine {
 
 			return 1f;
 		}
-		public static object Condition_LightScreen_OnModifyDamage(object p) {
+		public static async Task<object> Condition_LightScreen_OnModifyDamage(object p) {
 			OnModifyDamageParams args = ValidateParams<OnModifyDamageParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
@@ -48,7 +50,7 @@ namespace PkmnEngine {
 
 			return 1f;
 		}
-		public static object Condition_AuroraVeil_OnModifyDamage(object p) {
+		public static async Task<object> Condition_AuroraVeil_OnModifyDamage(object p) {
 			OnModifyDamageParams args = ValidateParams<OnModifyDamageParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
@@ -65,5 +67,6 @@ namespace PkmnEngine {
 
 			return 1f;
 		}
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	} 
 }

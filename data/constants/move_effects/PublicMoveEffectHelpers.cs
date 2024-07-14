@@ -11,7 +11,7 @@ namespace PkmnEngine {
 	public static partial class MoveEffects {
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 		public static async Task<u32> ChangeStat(BattleState state, BattleMon bm, sbyte n, Stat effID) {
-			if (!Battle.RunEventCheck(Callback.OnTryChangeStat, state, new OnTryChangeStatParams(state, bm, n))) {
+			if (!Battle.RunEventCheck(Callback.OnTryChangeStat, state, new OnTryChangeStatParams(state, bm, n)).Result) {
 				return 0;
 			}
 

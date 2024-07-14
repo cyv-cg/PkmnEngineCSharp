@@ -2,6 +2,7 @@ using u8  = System.Byte;
 using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
+using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public struct OnModifyEffectivenessParams {
@@ -18,7 +19,8 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
-		public static object Weather_StrongWind_OnModifyEffectiveness(object p) {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+		public static async Task<object> Weather_StrongWind_OnModifyEffectiveness(object p) {
 			OnModifyEffectivenessParams args = ValidateParams<OnModifyEffectivenessParams>(p);
 
 			if ((args.state.Weather.Condition == Condition.WEATHER_STRONG_WIND) && args.typeEff >= Types.EFF_NORMAL && args.defender.HasType(Type.FLYING)) {
@@ -28,5 +30,6 @@ namespace PkmnEngine {
 
 			return 1f;
 		}
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	}
 }

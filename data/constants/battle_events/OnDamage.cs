@@ -7,26 +7,27 @@ using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public struct OnDamageParams {
-		public OnDamageParams(BattleMon bm, u16 damage, bool force, bool direct) {
+		public OnDamageParams(BattleMon bm, U16 damage, bool force, bool direct) {
 			this.bm = bm;
 			this.damage = damage;
 			this.force = force;
 			this.direct = direct;
 		}
 		public BattleMon bm;
-		public u16 damage;
+		public U16 damage;
 		public bool force;
 		public bool direct;
 	}
 	
 	internal static partial class BattleEvents {
-		public static object Ability_Heatproof_OnDamage(object p) {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+		public static async Task<object> Ability_Heatproof_OnDamage(object p) {
 			OnDamageParams args = ValidateParams<OnDamageParams>(p);
 
 			if (args.bm.HasStatus(Status.BURN)) {
-				return args.damage / 2;
+				return args.damage.Value /= 2;;
 			}
-			return args.damage;
+			return true;
 		}
 		public static async Task<object> Ability_PoisonHeal_OnDamage(object p) {
 			OnDamageParams args = ValidateParams<OnDamageParams>(p);
@@ -35,7 +36,16 @@ namespace PkmnEngine {
 			if (args.bm.HasStatus(Status.POISON, Status.TOXIC)) {
 				await args.bm.HealMon(healAmount, false);
 			}
-			return 1;
+			return false;
+		}
+		public static async Task<object> Ability_MagicGuard_OnDamage(object p) {
+			OnDamageParams args = ValidateParams<OnDamageParams>(p);
+
+			if (!args.direct) {
+				return false;
+			}
+
+			return true;
 		}
 
 		public static async Task<object> Status_Rage_OnDamage(object p) {
@@ -46,7 +56,8 @@ namespace PkmnEngine {
 				await MoveEffects.ChangeStat(null, args.bm, 1, Stat.ATTACK);
 			}
 
-			return 1;
+			return true;
 		}
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	}
 }

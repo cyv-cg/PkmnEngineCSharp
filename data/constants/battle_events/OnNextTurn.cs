@@ -19,6 +19,7 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 		public static async Task<object> Status_Drowsy_OnNextTurn(object p) {
 			OnNextTurnParams args = ValidateParams<OnNextTurnParams>(p);
 			// The turn after a mon is inflicted with drowsy, it falls asleep.
@@ -26,10 +27,11 @@ namespace PkmnEngine {
 			await MoveEffects.SleepMon(args.state, args.bm, StatusEffects.GetRandSleepTurns());
 			return null;
 		}
-		public static object Status_TakingAim_OnNextTurn(object p) {
+		public static async Task<object> Status_TakingAim_OnNextTurn(object p) {
 			OnNextTurnParams args = ValidateParams<OnNextTurnParams>(p);
 			args.bm.RemoveStatus(Status.TAKING_AIM);
 			return null;
 		}
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	}
 }

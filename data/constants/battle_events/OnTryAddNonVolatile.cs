@@ -6,6 +6,7 @@ using u64 = System.UInt64;
 using static PkmnEngine.Global;
 using static PkmnEngine.BattleMoves;
 using PkmnEngine.Strings;
+using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public struct OnTryAddNonVolatileParams {
@@ -20,7 +21,8 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
-		public static object Ability_LeafGuard_OnTryAddNonVolatile(object p) {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+		public static async Task<object> Ability_LeafGuard_OnTryAddNonVolatile(object p) {
 			OnTryAddNonVolatileParams args = ValidateParams<OnTryAddNonVolatileParams>(p);
 
 			if (args.state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT || args.state.Weather.Condition == Condition.WEATHER_EXTREME_SUNLIGHT) {
@@ -29,7 +31,7 @@ namespace PkmnEngine {
 
 			return true;
 		}
-		public static object Ability_Immunity_OnTryAddNonVolatile(object p) {
+		public static async Task<object> Ability_Immunity_OnTryAddNonVolatile(object p) {
 			OnTryAddNonVolatileParams args = ValidateParams<OnTryAddNonVolatileParams>(p);
 
 			if (args.status == Status.POISON || args.status == Status.TOXIC) {
@@ -39,7 +41,7 @@ namespace PkmnEngine {
 			return true;
 		}
 
-		public static object Terrain_Electric_OnTryAddNonVolatile(object p) {
+		public static async Task<object> Terrain_Electric_OnTryAddNonVolatile(object p) {
 			OnTryAddNonVolatileParams args = ValidateParams<OnTryAddNonVolatileParams>(p);
 
 			if (args.status == Status.SLEEP || args.status == Status.DROWSY) {
@@ -48,11 +50,11 @@ namespace PkmnEngine {
 
 			return true;
 		}
-		public static object Terrain_Misty_OnTryAddNonVolatile(object p) {
+		public static async Task<object> Terrain_Misty_OnTryAddNonVolatile(object p) {
 			return false;
 		}
 		
-		public static object Condition_Safeguard_OnTryAddNonVolatile(object p) {
+		public static async Task<object> Condition_Safeguard_OnTryAddNonVolatile(object p) {
 			OnTryAddNonVolatileParams args = ValidateParams<OnTryAddNonVolatileParams>(p);
 
 			if (args.state.SideHasCondition(args.bm.Side, Condition.SAFEGUARD)) {
@@ -61,5 +63,6 @@ namespace PkmnEngine {
 
 			return true;
 		}
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	}
 }

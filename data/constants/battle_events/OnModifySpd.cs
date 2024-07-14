@@ -2,6 +2,7 @@ using u8  = System.Byte;
 using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
+using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public struct OnModifySpdParams {
@@ -14,7 +15,8 @@ namespace PkmnEngine {
 	}
 
 	internal static partial class BattleEvents {
-		public static object Ability_QuickFeet_OnModifySpd(object p) {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+		public static async Task<object> Ability_QuickFeet_OnModifySpd(object p) {
 			OnModifySpdParams args = ValidateParams<OnModifySpdParams>(p);
 
 			if (args.bm.HasStatus(StatusEffects.STATUS_MASK_NON_VOLATILE)) {
@@ -24,7 +26,7 @@ namespace PkmnEngine {
 			return 1f;
 		}
 
-		public static object Condition_Tailwind_OnModifySpd(object p) {
+		public static async Task<object> Condition_Tailwind_OnModifySpd(object p) {
 			OnModifySpdParams args = ValidateParams<OnModifySpdParams>(p);
 
 			if (args.state.SideHasCondition(args.bm.Side, Condition.TAILWIND)) {
@@ -33,7 +35,7 @@ namespace PkmnEngine {
 			return 1f;
 		}
 
-		public static object Status_Paralysis_OnModifySpd(object p) {
+		public static async Task<object> Status_Paralysis_OnModifySpd(object p) {
 			OnModifySpdParams args = ValidateParams<OnModifySpdParams>(p);
 
 			if (args.bm.ability != Ability.QUICK_FEET) {
@@ -42,5 +44,6 @@ namespace PkmnEngine {
 
 			return 1f;
 		}
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	}
 }

@@ -72,12 +72,13 @@ namespace PkmnEngine {
 		}
 
 		private static readonly Dictionary<Condition, Dictionary<Callback, (BattleEvent callback, sbyte priority)>> ConditionEvents = new() { {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 		
 			Condition.WEATHER_HARSH_SUNLIGHT,
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						if (((DurationCallbackParams)p).source.HeldItem == Item.HEAT_ROCK) {
 							return (u8)8;
 						}
@@ -107,7 +108,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						return u8.MaxValue;
 					}, 0)
 				},
@@ -142,7 +143,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						if (((DurationCallbackParams)p).source.HeldItem == Item.DAMP_ROCK) {
 							return (u8)8;
 						}
@@ -168,7 +169,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						return u8.MaxValue;
 					}, 0)
 				},
@@ -199,7 +200,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						if (((DurationCallbackParams)p).source.HeldItem == Item.SMOOTH_ROCK) {
 							return (u8)8;
 						}
@@ -225,7 +226,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						if (((DurationCallbackParams)p).source.HeldItem == Item.ICY_ROCK) {
 							return (u8)8;
 						}
@@ -247,7 +248,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						if (((DurationCallbackParams)p).source.HeldItem == Item.ICY_ROCK) {
 							return (u8)8;
 						}
@@ -269,7 +270,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						return u8.MaxValue;
 					}, 0)
 				},
@@ -279,7 +280,7 @@ namespace PkmnEngine {
 				},
 				{
 					Callback.OnFieldModifyAcc,
-					((object p) => {
+					(async (object p) => {
 						return FieldConditions.FOG_ACCURACY_REDUCTION;
 					}, 0)
 				},
@@ -294,7 +295,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						return u8.MaxValue;
 					}, 0)
 				},
@@ -321,7 +322,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						return (u8)5;
 					}, 0)
 				},
@@ -341,7 +342,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						if (((DurationCallbackParams)p).source.HeldItem == Item.TERRAIN_EXTENDER) {
 							return (u8)8;
 						}
@@ -371,7 +372,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						if (((DurationCallbackParams)p).source.HeldItem == Item.TERRAIN_EXTENDER) {
 							return (u8)8;
 						}
@@ -397,7 +398,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						if (((DurationCallbackParams)p).source.HeldItem == Item.TERRAIN_EXTENDER) {
 							return (u8)8;
 						}
@@ -427,7 +428,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						if (((DurationCallbackParams)p).source.HeldItem == Item.TERRAIN_EXTENDER) {
 							return (u8)8;
 						}
@@ -454,7 +455,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => { return (u8)5; }, 0)
+					(async (object p) => { return (u8)5; }, 0)
 				},
 				{
 					Callback.OnWeatherModifyDamage,
@@ -471,7 +472,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => { return (u8)5; }, 0)
+					(async (object p) => { return (u8)5; }, 0)
 				},
 				{
 					Callback.OnWeatherModifyDamage,
@@ -489,7 +490,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						if (((DurationCallbackParams)p).source.HeldItem == Item.LIGHT_CLAY) {
 							return (u8)8;
 						}
@@ -511,7 +512,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						if (((DurationCallbackParams)p).source.HeldItem == Item.LIGHT_CLAY) {
 							return (u8)8;
 						}
@@ -533,7 +534,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => {
+					(async (object p) => {
 						if (((DurationCallbackParams)p).source.HeldItem == Item.LIGHT_CLAY) {
 							return (u8)8;
 						}
@@ -556,7 +557,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => { return (u8)5; }, 0)
+					(async (object p) => { return (u8)5; }, 0)
 				},
 				{
 					Callback.OnModifySpd,
@@ -573,7 +574,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => { return (u8)5; }, 0)
+					(async (object p) => { return (u8)5; }, 0)
 				},
 				{
 					Callback.OnTryAddNonVolatile,
@@ -590,7 +591,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-					((object p) => { return (u8)5; }, 0)
+					(async (object p) => { return (u8)5; }, 0)
 				},
 				{
 					Callback.OnTryChangeStat,
@@ -603,6 +604,7 @@ namespace PkmnEngine {
 			}
 		}
 		
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 		};
 	}
 

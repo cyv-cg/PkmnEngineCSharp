@@ -7,6 +7,7 @@ using static PkmnEngine.Global;
 using static PkmnEngine.BattleMoves;
 
 using PkmnEngine.Strings;
+using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	public struct OnWeatherModifyDamageParams {
@@ -23,7 +24,8 @@ namespace PkmnEngine {
 	}
 	
 	internal static partial class BattleEvents {
-		public static object Weather_HarshSunlight_OnWeatherModifyDamage(object p) {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+		public static async Task<object> Weather_HarshSunlight_OnWeatherModifyDamage(object p) {
 			OnWeatherModifyDamageParams args = ValidateParams<OnWeatherModifyDamageParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
@@ -45,7 +47,7 @@ namespace PkmnEngine {
 
 			return 1;
 		}
-		public static object Weather_Rain_OnWeatherModifyDamage(object p) {
+		public static async Task<object> Weather_Rain_OnWeatherModifyDamage(object p) {
 			OnWeatherModifyDamageParams args = ValidateParams<OnWeatherModifyDamageParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
@@ -65,7 +67,7 @@ namespace PkmnEngine {
 			return 1;
 		}
 
-		public static object Terrain_Electric_OnWeatherModifyDamage(object p) {
+		public static async Task<object> Terrain_Electric_OnWeatherModifyDamage(object p) {
 			OnWeatherModifyDamageParams args = ValidateParams<OnWeatherModifyDamageParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
@@ -77,7 +79,7 @@ namespace PkmnEngine {
 
 			return 1f;
 		}
-		public static object Terrain_Grassy_OnWeatherModifyDamage(object p) {
+		public static async Task<object> Terrain_Grassy_OnWeatherModifyDamage(object p) {
 			OnWeatherModifyDamageParams args = ValidateParams<OnWeatherModifyDamageParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
@@ -95,7 +97,7 @@ namespace PkmnEngine {
 
 			return multiplier;
 		}
-		public static object Terrain_Misty_OnWeatherModifyDamage(object p) {
+		public static async Task<object> Terrain_Misty_OnWeatherModifyDamage(object p) {
 			OnWeatherModifyDamageParams args = ValidateParams<OnWeatherModifyDamageParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
@@ -107,7 +109,7 @@ namespace PkmnEngine {
 
 			return 1f;
 		}
-		public static object Terrain_Psychic_OnWeatherModifyDamage(object p) {
+		public static async Task<object> Terrain_Psychic_OnWeatherModifyDamage(object p) {
 			OnWeatherModifyDamageParams args = ValidateParams<OnWeatherModifyDamageParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
@@ -120,7 +122,7 @@ namespace PkmnEngine {
 			return 1f;
 		}		
 
-		public static object Condition_WaterSport_OnWeatherModifyDamage(object p) {
+		public static async Task<object> Condition_WaterSport_OnWeatherModifyDamage(object p) {
 			OnWeatherModifyDamageParams args = ValidateParams<OnWeatherModifyDamageParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
@@ -129,7 +131,7 @@ namespace PkmnEngine {
 			}
 			return 1f;
 		}
-		public static object Condition_MudSport_OnWeatherModifyDamage(object p) {
+		public static async Task<object> Condition_MudSport_OnWeatherModifyDamage(object p) {
 			OnWeatherModifyDamageParams args = ValidateParams<OnWeatherModifyDamageParams>(p);
 
 			BattleMove move = gBattleMoves(args.moveID);
@@ -138,5 +140,6 @@ namespace PkmnEngine {
 			}
 			return 1f;
 		}
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	}
 }

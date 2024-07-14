@@ -4,6 +4,7 @@ using u32 = System.UInt32;
 using u64 = System.UInt64;
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PkmnEngine {
 	internal static partial class BattleEvents {
@@ -14,15 +15,15 @@ namespace PkmnEngine {
 			return (T)p;
 		}
 
-		public static u8 EventDuration(BattleMon source, Status status) {
-			return (u8)StatusEffects.gStatusEvents(status, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+		public static async Task<u8> EventDuration(BattleMon source, Status status) {
+			return (u8)await StatusEffects.gStatusEvents(status, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
 		}
-		public static u8 EventDuration(BattleMon source, Condition condition) {
-			return (u8)FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+		public static async Task<u8> EventDuration(BattleMon source, Condition condition) {
+			return (u8)await FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
 		}
 	}
 
-	public delegate object BattleEvent(object callbackParams);
+	public delegate Task<object> BattleEvent(object callbackParams);
 
 	public readonly struct EventHandler {
 		public EventHandler(BattleEvent callback, EffectType effect, sbyte priority) {

@@ -930,7 +930,7 @@ namespace PkmnEngine {
 		}
 		public u16 EffAtk(BattleState state) {
 			u16 atk = (u16)(Atk * DamageCalc.GetEffectiveStatMultiplier(AttackStages, Stat.ATTACK));
-			atk = (u16)(atk * Battle.RunEventChain(Callback.OnModifyAtk, this, new OnModifySpdParams(state, this)));
+			atk = (u16)(atk * Battle.RunEventChain(Callback.OnModifyAtk, this, new OnModifySpdParams(state, this)).Result);
 			return atk;
 		}
 		public u16 EffDef(BattleState state) {
@@ -947,7 +947,7 @@ namespace PkmnEngine {
 		public u16 GetEffectiveSpd(BattleState state) {
 			u16 spd = Spd;
 			spd = (u16)(spd * DamageCalc.GetEffectiveStatMultiplier(SpeedStages, Stat.SPEED));
-			spd = (u16)(spd * Battle.RunEventChain(Callback.OnModifySpd, this, new OnModifySpdParams(state, this)));
+			spd = (u16)(spd * Battle.RunEventChain(Callback.OnModifySpd, this, new OnModifySpdParams(state, this)).Result);
 			return spd;
 		}
 
@@ -994,11 +994,17 @@ namespace PkmnEngine {
 		public async Task<bool> DamageMon(U16 damage, bool force, bool direct) {			
 			damage.Value = (u16)Mathf.Min(HP, damage.Value);
 
+			bool doDamage = await Battle.RunEventCheck(Callback.OnDamage, this, new OnDamageParams(this, damage, force, direct));
+
+			if (!doDamage) {
+				return true;
+			}
+
 			if (!force) {
 				// Magic Guard prevents indirect damage.
-				if (!direct && AbilityProc(Ability.MAGIC_GUARD, false)) {
-					return true;
-				}
+				//if (!direct && AbilityProc(Ability.MAGIC_GUARD, false)) {
+				//	return true;
+				//}
 
 				// A bracing (endure) mon cannot lose its last hit point.
 				if (HasStatus(Status.BRACING)) {
@@ -1034,9 +1040,7 @@ namespace PkmnEngine {
 				// TODO: stuff when a mon faints. This also should occur after messages like "it's super effective!"
 				throw new MonFaintedException(Side);
 			}
-			else {
-				Battle.RunEvent(Callback.OnDamage, this, new OnDamageParams(this, damage.Value, force, direct));
-			}
+			
 			return !fainted;
 		}
 		/// <summary>
@@ -1209,7 +1213,7 @@ namespace PkmnEngine {
 		public bool CanBeInflictedWithNVStatus(BattleState state, Status status) {
 			// TODO: A Pokémon behind a substitute cannot be poisoned, except due to Synchronize or a held Toxic Orb.
 			
-			return Battle.RunEventCheck(Callback.OnTryAddNonVolatile, state, new OnTryAddNonVolatileParams(state, this, status));
+			return Battle.RunEventCheck(Callback.OnTryAddNonVolatile, state, new OnTryAddNonVolatileParams(state, this, status)).Result;
 		}
 		public bool CanBeBurned(BattleState state) {
 			if (!CanBeInflictedWithNVStatus(state, Status.BURN)) {
@@ -1416,7 +1420,7 @@ namespace PkmnEngine {
 				return false;
 			}
 
-			return Battle.RunEventCheck(Callback.OnTrySelectMove, this, new OnTrySelectMoveParams(battle, state, this, moves[moveSlot], moveSlot, print));
+			return Battle.RunEventCheck(Callback.OnTrySelectMove, this, new OnTrySelectMoveParams(battle, state, this, moves[moveSlot], moveSlot, print)).Result;
 		}
 
 		public u16 GetPercentOfMaxHp(float percent) {

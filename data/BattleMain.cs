@@ -72,25 +72,25 @@ namespace PkmnEngine {
 			return ((u64)Random32() << 32) | Random32();
 		}
 
-		public static float RunEventChain(Callback cb, BattleMon target, object args) {
+		public static async Task<float> RunEventChain(Callback cb, BattleMon target, object args) {
 			float chain = 1;
-			foreach (float x in RunEvent<float>(cb, target, args)) {
+			foreach (float x in await RunEvent<float>(cb, target, args)) {
 				chain *= x;
 			}
 			return chain;
 		}
-		public static bool RunEventCheck(Callback cb, BattleMon target, object args) {
-			foreach (bool x in RunEvent<bool>(cb, target, args)) {
+		public static async Task<bool> RunEventCheck(Callback cb, BattleMon target, object args) {
+			foreach (bool x in await RunEvent<bool>(cb, target, args)) {
 				if (!x) {
 					return false;
 				}
 			}
 			return true;
 		}
-		public static void RunEvent(Callback cb, BattleMon target, object args) {
-			RunEvent<object>(cb, target, args);
+		public static async Task RunEvent(Callback cb, BattleMon target, object args) {
+			await RunEvent<object>(cb, target, args);
 		}
-		public static T[] RunEvent<T>(Callback cb, BattleMon target, object args) {
+		public static async Task<T[]> RunEvent<T>(Callback cb, BattleMon target, object args) {
 			EventHandler[] handlers = FindEventHandler(cb, target);
 			List<T> retVal = new List<T>();
 
@@ -103,7 +103,7 @@ namespace PkmnEngine {
 				}
 
 				if (cb != Callback.OnNextTurn) {
-					retVal.Add((T)handler.callback.Invoke(args));
+					retVal.Add((T)await handler.callback.Invoke(args));
 				}
 				else {
 					// First, act on all existing next-turn events.
@@ -117,7 +117,7 @@ namespace PkmnEngine {
 							continue;
 						}
 						// Add it to the return list.
-						retVal.Add((T)@event.battleEvent.Invoke(@event.args));
+						retVal.Add((T)await @event.battleEvent.Invoke(@event.args));
 						// Remove this event from the list.
 						OnNextTurn.RemoveAt(i);
 					}
@@ -129,50 +129,50 @@ namespace PkmnEngine {
 			return retVal.ToArray();
 		}
 
-		public static void RunEvent(Callback cb, Battle target, object args) {
-			RunEvent<object>(cb, target.CurrentState, args);
+		public static async void RunEvent(Callback cb, Battle target, object args) {
+			await RunEvent<object>(cb, target.CurrentState, args);
 		}
-		public static float RunEventChain(Callback cb, Battle target, object args) {
+		public static async Task<float> RunEventChain(Callback cb, Battle target, object args) {
 			float chain = 1;
-			foreach (float x in RunEvent<float>(cb, target.CurrentState, args)) {
+			foreach (float x in await RunEvent<float>(cb, target.CurrentState, args)) {
 				chain *= x;
 			}
 			return chain;
 		}
-		public static bool RunEventCheck(Callback cb, Battle target, object args) {
-			foreach (bool x in RunEvent<bool>(cb, target.CurrentState, args)) {
+		public static async Task<bool> RunEventCheck(Callback cb, Battle target, object args) {
+			foreach (bool x in await RunEvent<bool>(cb, target.CurrentState, args)) {
 				if (!x) {
 					return false;
 				}
 			}
 			return true;
 		}
-		public static float RunEventChain(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
+		public static async Task<float> RunEventChain(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
 			float chain = 1;
-			foreach (float x in RunEvent<float>(cb, target, args, side)) {
+			foreach (float x in await RunEvent<float>(cb, target, args, side)) {
 				chain *= x;
 			}
 			return chain;
 		}
-		public static bool RunEventCheck(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
-			foreach (bool x in RunEvent<bool>(cb, target, args, side)) {
+		public static async Task<bool> RunEventCheck(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
+			foreach (bool x in await RunEvent<bool>(cb, target, args, side)) {
 				if (!x) {
 					return false;
 				}
 			}
 			return true;
 		}
-		public static void RunEvent(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
-			RunEvent<object>(cb, target, args, side);
+		public static async void RunEvent(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
+			await RunEvent<object>(cb, target, args, side);
 		}
-		public static T[] RunEvent<T>(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
+		public static async Task<T[]> RunEvent<T>(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
 			EventHandler[] handlers = FindEventHandler(cb, target, side);
 			List<T> retVal = new List<T>();
 
 			// TODO: sort handlers by priority.
 
 			foreach (EventHandler handler in handlers) {
-				retVal.Add((T)handler.callback.Invoke(args));
+				retVal.Add((T)await handler.callback.Invoke(args));
 			}
 
 			return retVal.ToArray();
@@ -442,7 +442,7 @@ namespace PkmnEngine {
 						if (bm == null) {
 							continue;
 						}
-						Battle.RunEvent(Callback.OnStart, bm, new OnStartParams(CurrentState, bm));
+						await Battle.RunEvent(Callback.OnStart, bm, new OnStartParams(CurrentState, bm));
 					}
 
 					await ChooseActions(CurrentState);
@@ -538,10 +538,10 @@ namespace PkmnEngine {
 				actor.RemoveFlag(BattleMon.Flag.JUST_SWITCHED_IN);
 			}
 
-			DoEventsAfterTurn();
+			await DoEventsAfterTurn();
 		}
 
-		private void DoEventsAfterTurn() {
+		private async Task DoEventsAfterTurn() {
 			// TODO: maybe move all this into BattleState.Next()?
 
 			RunEvent(Callback.OnFieldResidual, CurrentState, new OnFieldResidualParams(this, CurrentState));
@@ -555,9 +555,9 @@ namespace PkmnEngine {
 					continue;
 				}
 
-				Battle.RunEvent(Callback.OnResidual, bm, new OnResidualParams(this, CurrentState, bm));
-				Battle.RunEvent(Callback.OnNextTurn, bm, CurrentState);
-				Battle.RunEvent(Callback.OnEnd, bm, new OnEndParams(CurrentState, bm));
+				await Battle.RunEvent(Callback.OnResidual, bm, new OnResidualParams(this, CurrentState, bm));
+				await Battle.RunEvent(Callback.OnNextTurn, bm, CurrentState);
+				await Battle.RunEvent(Callback.OnEnd, bm, new OnEndParams(CurrentState, bm));
 				
 				// Remove transient conditions.
 				foreach (Status s in StatusEffects.STATUS_MASK_TRANSIENT) {
@@ -839,14 +839,14 @@ namespace PkmnEngine {
 		/// </summary>
 		/// <param name="weather">Weather condition to set.</param>
 		/// <param name="duration">Duration of the weather effect in turns. Set to 255 (UINT8_MAX) for (effectively) infinite duration.</param>
-		public void SetWeather(Condition weather, BattleMon source) {
+		public async void SetWeather(Condition weather, BattleMon source) {
 			if (!(weather >= Condition.WEATHER_HARSH_SUNLIGHT && weather <= Condition.WEATHER_SHADOWY_AURA)) {
 				throw new System.ArgumentException();
 			}
-			if (!Battle.RunEventCheck(Callback.OnTrySetWeather, this, null)) {
+			if (!await Battle.RunEventCheck(Callback.OnTrySetWeather, this, null)) {
 				return;
 			}
-			u8 duration = BattleEvents.EventDuration(source, weather);
+			u8 duration = await BattleEvents.EventDuration(source, weather);
 			Weather.SetWeatherTerrain(weather, duration);
 			Battle.RunEvent(Callback.OnWeatherSet, this, new OnWeatherSetParams(this, source));
 		}
@@ -864,20 +864,20 @@ namespace PkmnEngine {
 			//	return;
 			//}
 
-			u8 duration = BattleEvents.EventDuration(source, terrain);
+			u8 duration = BattleEvents.EventDuration(source, terrain).Result;
 			Terrain.SetWeatherTerrain(terrain, duration);
 			Battle.RunEvent(Callback.OnWeatherSet, this, new OnWeatherSetParams(this, source));
 		}
 
-		public void SetFieldCondition(Condition condition, BattleMon source) {
-			u8 duration = (u8)PkmnEngine.FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+		public async void SetFieldCondition(Condition condition, BattleMon source) {
+			u8 duration = (u8)await PkmnEngine.FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
 			SetFieldCondition(condition, duration);
 		}
 		private void SetFieldCondition(Condition condition, u8 duration = u8.MaxValue) {
 			Conditions.Add(new FieldCondition(condition, true, 0, false, duration));
 		}
-		public void SetSideCondition(u8 side, Condition condition, BattleMon source) {
-			u8 duration = (u8)PkmnEngine.FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+		public async void SetSideCondition(u8 side, Condition condition, BattleMon source) {
+			u8 duration = (u8)await PkmnEngine.FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
 			SetSideCondition(side, condition, duration);
 		}
 		private void SetSideCondition(u8 side, Condition condition, u8 duration = u8.MaxValue) {
