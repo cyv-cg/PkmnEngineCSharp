@@ -43,13 +43,21 @@ namespace PkmnEngine {
 		private static async void StartBattle() {
 			await Task.Delay(50);
 
-			Pokemon snom = new Pokemon(Species.SNOM, 100, false, new u8[] {}, false, 0, OtIdType.PLAYER, 0);
-			Pokemon shaymin = new Pokemon(Species.SHAYMIN_LAND_FORME, 100, false, new u8[] {}, false, 0, OtIdType.PLAYER, 0);
-			Pokemon munna = new Pokemon(Species.MUNNA, 69, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
+			Pokemon snom		= new Pokemon(Species.SNOM, 100, false, new u8[] {}, false, 0, OtIdType.PLAYER, 0);
+			Pokemon shaymin		= new Pokemon(Species.SHAYMIN_LAND_FORME, 20, false, new u8[] {}, false, 0, OtIdType.PLAYER, 0);
+
+			Pokemon munna		= new Pokemon(Species.MUNNA, 69, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
+			Pokemon spoink		= new Pokemon(Species.SPOINK, 50, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
+			Pokemon alcremie	= new Pokemon(Species.ALCREMIE, 10, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
+			Pokemon vulpix		= new Pokemon(Species.VULPIX, 10, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
+			Pokemon sandshrew	= new Pokemon(Species.SANDSHREW, 10, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
+			Pokemon chikorita	= new Pokemon(Species.CHIKORITA, 10, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
+			
 			munna.SetNickname("丸子");
+			munna.ReplaceMove(0, BattleMoveID.TACKLE);
 
 			gSaveBlock.profile = new TrainerProfile("Chris", TrainerModel.PLAYER, snom, shaymin);
-			TrainerProfile ayla = new TrainerProfile("Ayla", TrainerModel.AI_LVL_1, munna);
+			TrainerProfile ayla = new TrainerProfile("Ayla", TrainerModel.AI_LVL_1, munna, spoink, alcremie, vulpix, sandshrew, chikorita);
 
 			Battle battle = new Battle(BattleFormat.Format_Single, gSaveBlock.profile, ayla);
 			battle.Start();

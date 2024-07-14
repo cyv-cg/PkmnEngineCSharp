@@ -40,8 +40,22 @@ namespace PkmnEngine.BattleControllers {
 			return await MenuSelectUseMove(battle, state, slot);
 		}
 
+		// Switch to a random available mon.
 		public async Task<u64> MenuSelectSwitchToMon(Battle battle, BattleState state, u8 slot) {
-			throw new NotImplementedException();
+			TrainerBattleContext context = battle.PlayerControllingSlot(slot);
+
+			sbyte index = -1;
+			while (index < 0) {
+				index = (sbyte)(battle.Random16() % PARTY_SIZE);
+				BattleMon bm = context.team[index];
+				// Don't try to send out a mon that is either active already or not available.
+				if (bm == null || !bm.IsAvailable() || bm.IsActive(battle)) {
+					index = -1;
+					continue;
+				}
+			}
+
+			return BATTLE_ACTION_SWITCH(slot, (u8)index);
 		}
 
 		// Use the first available move.

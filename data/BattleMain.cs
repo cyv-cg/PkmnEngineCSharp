@@ -15,8 +15,12 @@ using PkmnEngine.GodotV;
 using System;
 
 namespace PkmnEngine {
-	public class BattleOverException : Exception {
-		public BattleOverException() {}
+	public class MonFaintedException : Exception {
+		public MonFaintedException(u8 side) {
+			this.side = side;
+		}
+
+		public readonly u8 side;
 	}
 	public class Battle {
 		public const u8 SIDE_CLIENT = 0;
@@ -423,6 +427,8 @@ namespace PkmnEngine {
 			BattleSceneDrawer.SetupScene(this, this.players);
 			u8 winningSide;
 
+			BattleStart:
+
 			while (!IsOver(out winningSide)) {
 				try {
 					// Get the new state.
@@ -439,13 +445,37 @@ namespace PkmnEngine {
 					await ChooseActions(CurrentState);
 					await DoBattleActions(CurrentState);
 				}
-				catch (BattleOverException) {
-					Console.WriteLine("battle end");
+				catch (MonFaintedException) {
+					// Check for players that need to send out a new mon.
+					foreach (TrainerBattleContext context in players) {
+						foreach (u8 s in context.slots) {
+							if (GetMonInSlot(CurrentState, s).HasStatus(Status.FAINTED)) {
+								// Check if there is another available mon.
+								sbyte firstIndex = context.GetFirstAvailableMonIndex();
+								// If the index is positive, then there are more available mons.
+								if (firstIndex > 0) {
+									// Have the player/AI choose which mon to send out next
+									u64 selection = await context.controller.MenuSelectSwitchToMon(this, CurrentState, s);
+									SendOutMon(CurrentState, context, s, (u8)GetBattleActionArgs(selection));
+								}
+								// If we get here, then a player is out of usable mons.
+								else {
+									// Check for other players.
+									continue;
+								}
+							}
+						}
+					}
+
 					goto BattleEnd;
 				}
 			}
 
 			BattleEnd:
+			if (!IsOver(out winningSide)) {
+				goto BattleStart;
+			}
+			Console.WriteLine("battle end");
 
 			// TODO: do some actual battle-end routine.
 			await MessageBox($"{players[winningSide].profile.Name} won!");
