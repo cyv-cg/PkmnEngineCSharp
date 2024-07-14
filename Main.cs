@@ -26,6 +26,8 @@ namespace PkmnEngine {
 			Global.MessageBox = GodotV.MessageBox.Display;
 			// TODO: this kinda temporary.
 			Global.AbilityPopup = AbilityPopup;
+
+			Global.BattleSceneSetup = GodotV.BattleSceneDrawer.SetupScene;
 		}
 
 		public static void Start() {
@@ -60,7 +62,7 @@ namespace PkmnEngine {
 			TrainerProfile ayla = new TrainerProfile("Ayla", TrainerModel.AI_LVL_1, munna, spoink, alcremie, vulpix, sandshrew, chikorita);
 
 			Battle battle = new Battle(BattleFormat.Format_Single, gSaveBlock.profile, ayla);
-			battle.Start();
+			await battle.Start();
 		}
 	
 		private static void Test() {

@@ -46,15 +46,6 @@ namespace PkmnEngine {
 			BattleState initialState = CreateInitialState(players);
 			this.CurrentState = initialState;
 			this.History = new BattleState[0];
-
-			foreach (TrainerBattleContext player in this.players) {
-				foreach (u8 slot in player.slots) {
-					sbyte index = player.GetFirstAvailableMonIndex();
-					if (index >= 0) {
-						SendOutMon(initialState, player, slot, (u8)index);
-					}
-				}
-			}
 		}
 
 		public readonly int seed;
@@ -343,7 +334,7 @@ namespace PkmnEngine {
 		/// <param name="player">Player whose mon to send out.</param>
 		/// <param name="slot">Slot in which to replace the mon.</param>
 		/// <param name="monIndex">Index of the mon in the player's team.</param>
-		public void SendOutMon(BattleState state, TrainerBattleContext player, u8 slot, u8 monIndex) {
+		public async Task SendOutMon(BattleState state, TrainerBattleContext player, u8 slot, u8 monIndex) {
 			if (monIndex > PARTY_SIZE) {
 				throw new System.ArgumentOutOfRangeException();
 			}
@@ -372,6 +363,9 @@ namespace PkmnEngine {
 			bm.SetFlag(BattleMon.Flag.JUST_SWITCHED_IN);
 			bm.SetStatusParam(StatusParam.TOXIC_BUILDUP, 0);
 
+			// TODO: actual message
+			await MessageBox($"{player.profile.Name} sent out {bm.GetName()}!");
+	
 			// Entry hazards.
 			//DoEntryHazards(state, mon, GetSideFromSlot(teamIndex));
 
@@ -422,10 +416,19 @@ namespace PkmnEngine {
 		/// <summary>
 		/// 
 		/// </summary>
-		public async void Start() {
-			// BUG: Why did I use this here??? Do not use this namespace here!
-			BattleSceneDrawer.SetupScene(this, this.players);
+		public async Task Start() {
+			Global.BattleSceneSetup(this, this.players);
 			u8 winningSide;
+
+			// Send out initial mons.
+			foreach (TrainerBattleContext player in this.players) {
+				foreach (u8 slot in player.slots) {
+					sbyte index = player.GetFirstAvailableMonIndex();
+					if (index >= 0) {
+						await SendOutMon(CurrentState, player, slot, (u8)index);
+					}
+				}
+			}
 
 			BattleStart:
 
@@ -456,7 +459,7 @@ namespace PkmnEngine {
 								if (firstIndex > 0) {
 									// Have the player/AI choose which mon to send out next
 									u64 selection = await context.controller.MenuSelectSwitchToMon(this, CurrentState, s);
-									SendOutMon(CurrentState, context, s, (u8)GetBattleActionArgs(selection));
+									await SendOutMon(CurrentState, context, s, (u8)GetBattleActionArgs(selection));
 								}
 								// If we get here, then a player is out of usable mons.
 								else {
@@ -524,7 +527,7 @@ namespace PkmnEngine {
 						break;
 					}
 					case ActionCode.SWITCH:
-						SendOutMon(CurrentState, user, slot, (u8)args);
+						await SendOutMon(CurrentState, user, slot, (u8)args);
 						System.Console.WriteLine($"{user.profile.Name} sent out {GetMonInSlot(CurrentState, slot).GetName()}");
 						break;
 					default:

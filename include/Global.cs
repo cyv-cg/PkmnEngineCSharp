@@ -31,6 +31,8 @@ namespace PkmnEngine {
 		public static Func<string, Task> MessageBox;
 		public static Action<BattleMon, Ability> AbilityPopup;
 
+		public static Action<Battle, TrainerBattleContext[]> BattleSceneSetup;
+
 		public static u16 HIHALF32(u32 n) { return (u16)((n & 0xFFFF0000) >> 16); }
 		public static u16 LOHALF32(u32 n) { return (u16)(n & 0xFFFF); }
 

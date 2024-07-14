@@ -14,6 +14,7 @@ namespace PkmnEngine.GodotV {
 		public Battle battle;
 		public u8 slot;
 
+		private Node2D display;
 		public TextureRect monSprite;
 
 		private RichTextLabel monNameLabel;
@@ -32,6 +33,8 @@ namespace PkmnEngine.GodotV {
 
 		// Called when the node enters the scene tree for the first time.
 		public override void _Ready() {
+			display = GetNode<Node2D>("HealthBar");
+
 			monNameLabel = GetNode<RichTextLabel>("HealthBar/TextContainer/MonNameLabel");
 			monLevelLabel = GetNode<RichTextLabel>("HealthBar/TextContainer/MonLevelLabel");
 
@@ -52,6 +55,10 @@ namespace PkmnEngine.GodotV {
 				return;
 			}
 			BattleMon target = battle.GetMonInSlot(battle.CurrentState, slot);
+			display.Visible = monSprite.Visible = target != null;
+			if (target == null) {
+				return;
+			}
 
 			monNameLabel.Text = target.GetName();
 			monLevelLabel.Text = target.Mon.level.ToString();

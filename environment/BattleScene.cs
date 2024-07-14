@@ -14,16 +14,14 @@ namespace PkmnEngine.GodotV {
 
 	public partial class BattleScene : Control {
 		private const string DISPLAY_CLIENT = "mon_display_client";
-		private const string DISPLAY_OPP = "mon_display_opp";
+		private const string DISPLAY_REMOTE = "mon_display_opp";
 
 		private const string SPRITE_CONTAINER = "mon_sprite_container";
 
 		public static BattleScene Scene { get; private set; }
 		
 		public override void _Ready() {
-			if (Scene != null) {
-				Scene.QueueFree();
-			}
+			Scene?.QueueFree();
 			Scene = this;
 		}
 
@@ -44,7 +42,7 @@ namespace PkmnEngine.GodotV {
 			}
 
 			foreach (u8 slot in battle.format.SlotsOnSide(Battle.SIDE_REMOTE)) {
-				MonDisplay display = GD.Load<PackedScene>($"res://{DISPLAY_OPP}.tscn").Instantiate() as MonDisplay;
+				MonDisplay display = GD.Load<PackedScene>($"res://{DISPLAY_REMOTE}.tscn").Instantiate() as MonDisplay;
 				Control spriteDisplay = GD.Load<PackedScene>($"res://{SPRITE_CONTAINER}.tscn").Instantiate() as Control;
 				oppContainer.AddChild(display);
 				oppSpriteContainer.AddChild(spriteDisplay);
