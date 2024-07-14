@@ -43,29 +43,23 @@ namespace PkmnEngine {
 				p.target.SetStatusParam(StatusParam.SPEC_DAMAGE_THIS_TURN, damage.Value);
 			}
 
-			// Deal damage to mon.
-			bool fainted = !await p.target.DamageMon(damage, false, true);
+			string[] damageDetails = {
+				mods.isCrit				? Lang.GetBattleMessage(BattleMessage.CRITICAL_HIT)			: null,
+				type > 1				? Lang.GetBattleMessage(BattleMessage.SUPER_EFFECTIVE)		: null,
+				type > 0 && type < 1	? Lang.GetBattleMessage(BattleMessage.NOT_VERY_EFFECTIVE)	: null,
+				type == 0				? Lang.GetBattleMessage(BattleMessage.IMMUNE)				: null
+			};
 
-			if (mods.isCrit) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.CRITICAL_HIT));
-			}
-			if (type > 1) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.SUPER_EFFECTIVE));
-			}
-			else if (type > 0 && type < 1) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.NOT_VERY_EFFECTIVE));
-			}
-			else if (type == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.IMMUNE));
-			}
+			// Deal damage to mon.
+			bool fainted = !await p.target.DamageMon(damage, false, true, damageDetails);
 
 			// Check for Destiny Bond.
 			// If the target has the Destiny Bond status, and fainted when attacked...
 			if (p.target.HasStatus(Status.DESTINY_BOND) && fainted) {
 				// ...cause the attacker to faint.
 				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_ITS_ATTACKER_DOWN_WITH_IT, p.target.GetName())); 
-				u16 DBdamage = p.target.EffMaxHp(p.state);
-				await p.attacker.DamageMon(damage, true, false);
+				U16 DBdamage = new(p.attacker.EffMaxHp(p.state));
+				await p.attacker.DamageMon(DBdamage, true, false);
 			}
 
 			return damage.Value 
@@ -226,8 +220,7 @@ namespace PkmnEngine {
 		}
 	
 		private static async Task<u32> DoRecoilDamage(MoveEffectParams p, U16 recoil) {
-			await p.attacker.DamageMon(recoil, true, false);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_DAMAGED_BY_RECOIL, p.attacker.GetName()));
+			await p.attacker.DamageMon(recoil, true, false, Lang.GetBattleMessage(BattleMessage.MON_DAMAGED_BY_RECOIL, p.attacker.GetName()));
 			return recoil.Value;
 		}
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously

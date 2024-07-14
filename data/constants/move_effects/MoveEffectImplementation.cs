@@ -1242,11 +1242,9 @@ namespace PkmnEngine {
 
 			// Otherwise, cut HP in half and curse the p.target.
 			U16 selfDamage = new(p.attacker.GetPercentOfMaxHp(0.5f));
-			await p.attacker.DamageMon(selfDamage, true, false);
 			p.target.GiveStatus(Status.CURSE);
+			await p.attacker.DamageMon(selfDamage, true, false, Lang.GetBattleMessage(BattleMessage.MON_PUT_A_CURSE_ON_MON, p.attacker.GetName(), p.target.GetName()));
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_PUT_A_CURSE_ON_MON, p.attacker.GetName(), p.target.GetName()));
-			
 			return 0;
 		}
 		public static async Task<u32> Effect_Protect(MoveEffectParams p) {

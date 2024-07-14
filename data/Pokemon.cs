@@ -994,7 +994,7 @@ namespace PkmnEngine {
 		/// <param name="force">If force, all checks will be bypassed and HP will be set indiscriminantly.</param>
 		/// <param name="direct">Whether or not the damage is direct.</param>
 		/// <returns>True if the mon's HP > 0 after the damage, and false if not.</returns>
-		public async Task<bool> DamageMon(U16 damage, bool force, bool direct) {			
+		public async Task<bool> DamageMon(U16 damage, bool force, bool direct, params string[] detailMessages) {			
 			damage.Value = (u16)Mathf.Min(HP, damage.Value);
 
 			bool doDamage = await Battle.RunEventCheck(Callback.OnDamage, this, new OnDamageParams(this, damage, force, direct));
@@ -1034,6 +1034,18 @@ namespace PkmnEngine {
 
 			// Mark that the mon has received damage this turn.
 			SetFlag(Flag.RECEIVED_DAMAGE_THIS_TURN);
+
+			// Display additional details about the damage here.
+			// For things like "It's super effective!" and such.
+			// Doing it here allows those details to display before OnMonFainted gets invoked.
+			if (detailMessages.Length > 0) {
+				foreach (string s in detailMessages) {
+					if (s == null) {
+						continue;
+					}
+					await MessageBox(s);
+				}
+			}
 
 			bool fainted = HP == 0;
 

@@ -76,8 +76,7 @@ namespace PkmnEngine {
 					// Confusion acts as a physical move with 40 power and no type.
 					// This same effect can be achieved by using tackle and overriding the type effectiveness and power :p
 					U16 damage = new(CalcDamage(battle, state, attacker, attacker, BattleMoveID.TACKLE, 1, new Mods(), new Overrides(0, 0, 40, 0)));
-					await attacker.DamageMon(damage, false, true);
-					await MessageBox(GetBattleMessage(BattleMessage.IT_HURT_ITSELF_IN_ITS_CONFUSION));
+					await attacker.DamageMon(damage, false, true, GetBattleMessage(BattleMessage.IT_HURT_ITSELF_IN_ITS_CONFUSION));
 					return false;
 				}
 			}

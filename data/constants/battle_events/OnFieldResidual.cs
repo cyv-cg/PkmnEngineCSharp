@@ -110,8 +110,7 @@ namespace PkmnEngine {
 			foreach (BattleMon bm in args.battle.GetAllActiveMons()) {
 				if (bm.DamagedBySandstorm()) {
 					U16 damage = new(bm.GetPercentOfMaxHp(FieldConditions.SANDSTORM_CHIP_DAMAGE));
-					await bm.DamageMon(damage, true, false);
-					await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_SANDSTORM, bm.GetName()));
+					await bm.DamageMon(damage, true, false, Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_SANDSTORM, bm.GetName()));
 				}
 			}
 
@@ -135,8 +134,7 @@ namespace PkmnEngine {
 			foreach (BattleMon bm in args.battle.GetAllActiveMons()) {
 				if (bm.DamagedByHail()) {
 					U16 damage = new(bm.GetPercentOfMaxHp(FieldConditions.HAIL_CHIP_DAMAGE));
-					await bm.DamageMon(damage, true, false);
-					await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_HAIL, bm.GetName()));
+					await bm.DamageMon(damage, true, false, Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_HAIL, bm.GetName()));
 				}
 			}
 

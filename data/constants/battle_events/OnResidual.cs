@@ -26,18 +26,14 @@ namespace PkmnEngine {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
 			U16 damage = new(args.bm.GetPercentOfMaxHp(StatusEffects.BURN_CHIP_DAMAGE));
-			await args.bm.DamageMon(damage, true, false);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_ITS_BURN, args.bm.GetName()));
+			await args.bm.DamageMon(damage, true, false, Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_ITS_BURN, args.bm.GetName()));
 			return null;
 		}
 		public static async Task<object> Status_Poison_OnResidual(object p) {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
 			U16 damage = new(args.bm.GetPercentOfMaxHp(StatusEffects.POISON_CHIP_DAMAGE));
-			await args.bm.DamageMon(damage, true, false);
-			if (damage.Value > 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, args.bm.GetName()));
-			}
+			await args.bm.DamageMon(damage, true, false, damage.Value > 0 ? Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, args.bm.GetName()) : null);
 			return null;
 		}
 		public static async Task<object> Status_Toxic_OnResidual(object p) {
@@ -52,10 +48,7 @@ namespace PkmnEngine {
 			}
 			// Stack additional damage by number of turns afflicted.
 			totalDamage = new((u16)(baseDamage * args.bm.GetStatusParam(StatusParam.TOXIC_BUILDUP)));
-			await args.bm.DamageMon(totalDamage, true, false);
-			if (baseDamage > 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, args.bm.GetName()));
-			}
+			await args.bm.DamageMon(totalDamage, true, false, totalDamage.Value > 0 ? Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, args.bm.GetName()) : null);
 			return null;
 		}
 
@@ -72,8 +65,7 @@ namespace PkmnEngine {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
 			U16 healAmount = new(args.bm.GetPercentOfMaxHp(StatusEffects.LEECH_SEED_DRAIN_AMOUNT));
-			await args.bm.DamageMon(healAmount, true, false);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_HP_WAS_SAPPED_BY_LEECH_SEED, args.bm.GetName()));
+			await args.bm.DamageMon(healAmount, true, false, Lang.GetBattleMessage(BattleMessage.MONS_HP_WAS_SAPPED_BY_LEECH_SEED, args.bm.GetName()));
 			BattleMon monSeededBy = args.battle.GetMonInSlot(args.state, (u8)args.bm.GetStatusParam(StatusParam.SLOT_SEEDED_BY));
 			if (monSeededBy != null) {
 				await monSeededBy.HealMon(healAmount, false);
@@ -85,8 +77,7 @@ namespace PkmnEngine {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
 			U16 damage = new((args.bm.HasType(Type.WATER) || args.bm.HasType(Type.STEEL)) ? args.bm.GetPercentOfMaxHp(0.25f) : args.bm.GetPercentOfMaxHp(0.125f));
-			await args.bm.DamageMon(damage, true, false);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_BEING_SALT_CURED, args.bm.GetName()));
+			await args.bm.DamageMon(damage, true, false, Lang.GetBattleMessage(BattleMessage.MON_IS_BEING_SALT_CURED, args.bm.GetName()));
 
 			return null;
 		}
@@ -94,8 +85,7 @@ namespace PkmnEngine {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
 			U16 damage = new(args.bm.GetPercentOfMaxHp(0.25f));
-			await args.bm.DamageMon(damage, true, false);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_AFFLICTED_BY_CURSE, args.bm.GetName()));
+			await args.bm.DamageMon(damage, true, false, Lang.GetBattleMessage(BattleMessage.MON_AFFLICTED_BY_CURSE, args.bm.GetName()));
 
 			return null;
 		}
