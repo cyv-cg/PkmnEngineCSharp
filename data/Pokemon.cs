@@ -1004,11 +1004,6 @@ namespace PkmnEngine {
 			}
 
 			if (!force) {
-				// Magic Guard prevents indirect damage.
-				//if (!direct && AbilityProc(Ability.MAGIC_GUARD, false)) {
-				//	return true;
-				//}
-
 				// A bracing (endure) mon cannot lose its last hit point.
 				if (HasStatus(Status.BRACING)) {
 					damage.Value = (u16)Mathf.Min((u16)(HP - 1), damage.Value);
@@ -1031,6 +1026,8 @@ namespace PkmnEngine {
 				}
 				await Task.Delay(10);
 			}
+			// Hard set the percent to the final value to catch any differences left by the interpolation.
+			HealthPercent = finalVal;
 
 			// Mark that the mon has received damage this turn.
 			SetFlag(Flag.RECEIVED_DAMAGE_THIS_TURN);
@@ -1069,15 +1066,16 @@ namespace PkmnEngine {
 			u16 oldHp = HP;
 
 			amount.Value = (u16)Mathf.Min(amount.Value, MaxHP - HP);
-			HP = (u16)(HP + amount.Value);
 
+			// Immediately set the HP value.
+			HP = (u16)(HP + amount.Value);
 			// Set up stuff for constant linear interpolation and ONLY interpolate the percent.
 			// This is only for display purposes so the healthbar updates smoothly.
 			float t = 0;
 			float startVal = (float)HealthPercent;
 			float finalVal = (float)HP / MaxHP;
 			// Do the actual interpolation
-			while (Math.Abs(HealthPercent - finalVal) >= EPSILON) {
+			while (Math.Abs(HealthPercent - finalVal) > EPSILON) {
 				HealthPercent = startVal + t * (finalVal - startVal);
 				t += HP_CHANGE_SPEED;
 				if (t > 1) {
@@ -1085,6 +1083,8 @@ namespace PkmnEngine {
 				}
 				await Task.Delay(10);
 			}
+			// Hard set the percent to the final value to catch any differences left by the interpolation.
+			HealthPercent = finalVal;
 
 			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_RESTORED_HP, GetName()));
 			return HP > oldHp;
