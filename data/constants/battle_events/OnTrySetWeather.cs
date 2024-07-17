@@ -20,19 +20,19 @@ namespace PkmnEngine {
 		public static async Task<object> Weather_ExtremeSunlight_OnTrySetWeather(object p) {
 			OnTrySetWeatherParams args = ValidateParams<OnTrySetWeatherParams>(p);
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.EXTREME_SUNLIGHT_NOT_LESSENED));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.EXTREME_SUNLIGHT_NOT_LESSENED));
 			return false;
 		}
 		public static async Task<object> Weather_HeavyRain_OnTrySetWeather(object p) {
 			OnTrySetWeatherParams args = ValidateParams<OnTrySetWeatherParams>(p);
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_NOT_LESSENED));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.HEAVY_RAIN_NOT_LESSENED));
 			return false;
 		}
 		public static async Task<object> Weather_StrongWind_OnTrySetWeather(object p) {
 			OnTrySetWeatherParams args = ValidateParams<OnTrySetWeatherParams>(p);
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.STRONG_WINDS_NOT_LESSENED));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.STRONG_WINDS_NOT_LESSENED));
 			return false;
 		}
 	}

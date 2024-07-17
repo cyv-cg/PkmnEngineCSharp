@@ -4,6 +4,7 @@ using u32 = System.UInt32;
 using u64 = System.UInt64;
 
 using System.Threading.Tasks;
+using System;
 
 namespace PkmnEngine {
 	public struct OnDamageParams {
@@ -48,6 +49,13 @@ namespace PkmnEngine {
 			return true;
 		}
 
+		public static async Task<object> Status_Bracing_OnDamage(object p) {
+			OnDamageParams args = ValidateParams<OnDamageParams>(p);
+
+			args.damage.Value = (u16)Math.Min(args.damage.Value, args.bm.HP - 1);
+
+			return true;
+		}
 		public static async Task<object> Status_Rage_OnDamage(object p) {
 			OnDamageParams args = ValidateParams<OnDamageParams>(p);
 

@@ -482,12 +482,13 @@ namespace PkmnEngine {
 			}
 		}
 		/// <summary>
-		/// Wrapper for Lang.GetMonName()
+		/// Gets the name of the species in this mon's language.
 		/// </summary>
 		/// <returns>Localized species name.</returns>
 		public string GetSpeciesName()
 		{
-			return Strings.Lang.GetMonName(Box.Species);
+			StringResource.Namespace strings = StringResource.Namespace.SPECIES;
+			return Lang.GetString(strings, Lang.GetStringResourceWithKey(strings, Box.Species.ToString()), Box.Language);
 		}
 		/// <summary>
 		/// Gets the name of a given Pokemon. If the mon has a nickname, gets that; otherwise returns the localized species name.
@@ -997,17 +998,10 @@ namespace PkmnEngine {
 		public async Task<bool> DamageMon(U16 damage, bool force, bool direct, params string[] detailMessages) {			
 			damage.Value = (u16)Mathf.Min(HP, damage.Value);
 
-			bool doDamage = await Battle.RunEventCheck(Callback.OnDamage, this, new OnDamageParams(this, damage, force, direct));
+			bool doDamage = force || await Battle.RunEventCheck(Callback.OnDamage, this, new OnDamageParams(this, damage, force, direct));
 
 			if (!doDamage) {
 				return true;
-			}
-
-			if (!force) {
-				// A bracing (endure) mon cannot lose its last hit point.
-				if (HasStatus(Status.BRACING)) {
-					damage.Value = (u16)Mathf.Min((u16)(HP - 1), damage.Value);
-				}
 			}
 
 			// Immediately set the HP value.
@@ -1086,7 +1080,8 @@ namespace PkmnEngine {
 			// Hard set the percent to the final value to catch any differences left by the interpolation.
 			HealthPercent = finalVal;
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_RESTORED_HP, GetName()));
+			StringResource contextString = BattleUtils.GetContextString(BATTLE_COMMON.MON_HAD_ITS_HP_RESTORED, this);
+			await MessageBox(Lang.GetString(StringResource.Namespace.BATTLE_COMMON, contextString, GetName()));
 			return HP > oldHp;
 		}
 
@@ -1429,7 +1424,7 @@ namespace PkmnEngine {
 			// Stop moves that can't be used twice in a row.
 			if ((gBattleMoves(moves[moveSlot]).flags & BattleMoves.Flag.CANNOT_USE_MOVE_TWICE) != 0 && GetStatusParam(StatusParam.LAST_USED_MOVE) == moveSlot) {
 				if (print) {
-					MessageBox(Lang.GetBattleMessage(BattleMessage.CANNOT_USE_MOVE_TWICE_IN_A_ROW, Lang.GetMoveName(moves[moveSlot])));
+					MessageBox(Lang.GetString(StringResource.Namespace.BATTLE_COMMON, BATTLE_COMMON.YOU_CANT_USE_MOVE_TWICE_IN_A_ROW, Lang.GetMoveName(moves[moveSlot])));
 				}
 				return false;
 			}

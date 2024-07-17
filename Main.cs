@@ -9,6 +9,7 @@ using static PkmnEngine.Global;
 using PkmnEngine.EnvInterface;
 
 using System.Threading.Tasks;
+using PkmnEngine.Strings;
 
 namespace PkmnEngine {
 	public static class Main {
@@ -48,7 +49,7 @@ namespace PkmnEngine {
 			Pokemon snom		= new Pokemon(Species.SNOM, 100, false, new u8[] {}, false, 0, OtIdType.PLAYER, 0);
 			Pokemon shaymin		= new Pokemon(Species.SHAYMIN_LAND_FORME, 20, false, new u8[] {}, false, 0, OtIdType.PLAYER, 0);
 
-			Pokemon munna		= new Pokemon(Species.MUNNA, 69, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
+			Pokemon munna		= new Pokemon(Species.MUNNA, 55, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
 			Pokemon spoink		= new Pokemon(Species.SPOINK, 50, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
 			Pokemon alcremie	= new Pokemon(Species.ALCREMIE, 10, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
 			Pokemon vulpix		= new Pokemon(Species.VULPIX, 10, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
@@ -56,7 +57,11 @@ namespace PkmnEngine {
 			Pokemon chikorita	= new Pokemon(Species.CHIKORITA, 10, false, new u8[] {}, false, 0, OtIdType.RANDOM_NO_SHINY, 0);
 			
 			munna.SetNickname("丸子");
-			munna.ReplaceMove(0, BattleMoveID.TACKLE);
+			munna.ReplaceMove(0, BattleMoveID.SYNTHESIS);
+
+			snom.GiveMove(BattleMoveID.SYNTHESIS);
+			shaymin.GiveMove(BattleMoveID.EXPLOSION);
+			snom.hp = 6;
 
 			gSaveBlock.profile = new TrainerProfile("Chris", TrainerModel.PLAYER, snom, shaymin);
 			TrainerProfile ayla = new TrainerProfile("Ayla", TrainerModel.AI_LVL_1, munna, spoink, alcremie, vulpix, sandshrew, chikorita);

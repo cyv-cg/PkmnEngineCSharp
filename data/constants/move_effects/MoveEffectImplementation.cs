@@ -99,23 +99,23 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Confuse(MoveEffectParams p) {
 			if (p.attacker.HasStatus(Status.CONFUSION)) {
-				await MessageBox(GetBattleMessage(BattleMessage.MON_ALREADY_CONFUSED, p.attacker.GetName()));
+				await MessageBox(GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_ALREADY_CONFUSED, p.attacker), p.attacker.GetName()));
 				return FLAG_MOVE_FAILED;
 			}
 			else {
 				p.attacker.GiveStatus(Status.CONFUSION);
-				await MessageBox(GetBattleMessage(BattleMessage.MON_WAS_CONFUSED, p.attacker.GetName()));
+				await MessageBox(GetString(STRINGS, BATTLE_COMMON.MON_BECAME_CONFUSED, p.attacker.GetName()));
 			}
 			return 0;
 		}
 		public static async Task<u32> Effect_ConfuseHit(MoveEffectParams p) {
 			if (p.target.HasStatus(Status.CONFUSION)) {
-				await MessageBox(GetBattleMessage(BattleMessage.MON_ALREADY_CONFUSED, p.target.GetName()));
+				await MessageBox(GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_ALREADY_CONFUSED, p.target), p.target.GetName()));
 				return FLAG_MOVE_FAILED;
 			}
 			else {
 				p.target.GiveStatus(Status.CONFUSION);
-				await MessageBox(GetBattleMessage(BattleMessage.MON_WAS_CONFUSED, p.target.GetName()));
+				await MessageBox(GetString(STRINGS, BATTLE_COMMON.MON_BECAME_CONFUSED, p.target.GetName()));
 			}
 			return 0;
 		}
@@ -372,7 +372,7 @@ namespace PkmnEngine {
 			await p.target.DamageMon(damage, true, false);
 
 			p.target.SetStatStage(Stat.ATTACK, MAX_STAT_STAGE);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.BELLY_DRUM, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.BELLY_DRUM, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_AtkAndDefUp(MoveEffectParams p) {
@@ -526,7 +526,7 @@ namespace PkmnEngine {
 			U16 healAmount = new(p.target.EffMaxHp(p.state));
 			await p.target.HealMon(healAmount, false);
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.REST, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.REST, p.target), p.target.GetName()));
 
 			return 0;
 		}
@@ -706,7 +706,7 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_Explosion(MoveEffectParams p) {
 			// Check for the Damp ability.
 			if (p.battle.FieldMonAbilityProc(Ability.DAMP, true)) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_MOVE, p.attacker.GetName(), Lang.GetMoveName(p.moveID)));
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CANNOT_USE_MOVE, p.attacker), p.attacker.GetName(), Lang.GetMoveName(p.moveID)));
 				return 0;
 			}
 
@@ -721,7 +721,7 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_MindBlown(MoveEffectParams p) {
 			// Check for the Damp ability.
 			if (p.battle.FieldMonAbilityProc(Ability.DAMP, true)) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_MOVE, p.attacker.GetName(), Lang.GetMoveName(p.moveID)));
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CANNOT_USE_MOVE, p.attacker), p.attacker.GetName(), Lang.GetMoveName(p.moveID)));
 				return 0;
 			}
 
@@ -735,7 +735,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_MistyExplosion(MoveEffectParams p) {
 			if (p.battle.FieldMonAbilityProc(Ability.DAMP, true)) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_MOVE, p.attacker.GetName(), Lang.GetMoveName(p.moveID)));
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CANNOT_USE_MOVE, p.attacker), p.attacker.GetName(), Lang.GetMoveName(p.moveID)));
 				return 0;
 			}
 
@@ -772,12 +772,12 @@ namespace PkmnEngine {
 			p.target.SetStatStage(Stat.SPEED, 0);
 			p.target.SetStatStage(Stat.ACCURACY, 0);
 			p.target.SetStatStage(Stat.EVASION, 0);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.STAT_CHANGES_ELIMINATED));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.STAT_CHANGES_ELIMINATED));
 			return 0;
 		}
 		public static async Task<u32> Effect_Bide(MoveEffectParams p) {
 			if (p.attacker.HasStatus(Status.CHARGING_TURN) && p.attacker.HasStatus(Status.BIDE)) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_UNLEASHED_ITS_ENERGY, p.attacker.GetName()));
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_UNLEASHED_ITS_ENERGY, p.attacker), p.attacker.GetName()));
 				u16 damage = (u16)System.MathF.Max(0, p.attacker.GetStatusParam(StatusParam.BIDE_STARTING_HP) - p.attacker.EffHp(p.state));
 				damage *= 2;
 				p.attacker.RemoveStatus(Status.CHARGING_TURN);
@@ -785,12 +785,12 @@ namespace PkmnEngine {
 				return await Attack(p, damage);
 			}
 			else if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_STORING_ENERGY, p.attacker.GetName()));
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_STORING_ENERGY, p.attacker), p.attacker.GetName()));
 				p.attacker.GiveStatus(Status.BIDE);
 				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_STORING_ENERGY, p.attacker.GetName()));
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_STORING_ENERGY, p.attacker), p.attacker.GetName()));
 				p.attacker.SetStatusParam(StatusParam.BIDE_STARTING_HP, p.attacker.EffHp(p.state));
 				p.attacker.GiveStatus(Status.CHARGING_TURN);
 				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
@@ -824,7 +824,7 @@ namespace PkmnEngine {
 					break;
 				}
 			}
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.HIT_N_TIMES, numHits.ToString()));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.HIT_N_TIMES, numHits.ToString()));
 			return 0;
 		}
 		public static async Task<u32> Effect_Conversion(MoveEffectParams p) {
@@ -860,7 +860,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_OHKO(MoveEffectParams p) {
 			u32 flags = await Attack(p, p.target.EffMaxHp(p.state));
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.OHKO));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.OHKO));
 			return flags;
 		}
 		public static async Task<u32> Effect_SuperFang(MoveEffectParams p) {
@@ -871,7 +871,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Trap(MoveEffectParams p) {
 			p.target.GiveStatus(Status.CANT_ESCAPE);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TRAPPED_MON, p.attacker.GetName(), p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, GetConjugatedString("MON_TRAPPED", p.attacker, p.target), p.attacker.GetName(), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_DoubleHit(MoveEffectParams p) {
@@ -883,7 +883,7 @@ namespace PkmnEngine {
 					break;
 				}
 			}
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.HIT_N_TIMES, numHits.ToString()));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.HIT_N_TIMES, numHits.ToString()));
 			return 0;
 		}
 		public static async Task<u32> Effect_Mist(MoveEffectParams p) {
@@ -893,10 +893,10 @@ namespace PkmnEngine {
 			p.state.SetSideCondition(p.attacker.Side, Condition.MIST, p.attacker);
 
 			if (p.attacker.Side == Battle.SIDE_CLIENT){
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.YOUR_TEAM_BECAME_SHROUDED_IN_MIST));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.YOUR_TEAM_BECAME_SHROUDED_IN_MIST));
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.OPPOSING_TEAM_BECAME_SHROUDED_IN_MIST));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.OPPOSING_TEAM_BECAME_SHROUDED_IN_MIST));
 			}
 
 			return 0;
@@ -907,7 +907,7 @@ namespace PkmnEngine {
 			}
 
 			p.target.GiveStatus(Status.GETTING_PUMPED);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_GETTING_PUMPED, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_GETTING_PUMPED, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_Substitute(MoveEffectParams p) {
@@ -926,7 +926,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_LeechSeed(MoveEffectParams p) {
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_WAS_SEEDED, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_WAS_SEEDED, p.target), p.target.GetName()));
 
 			p.target.GiveStatus(Status.SEEDED);
 			p.target.SetStatusParam(StatusParam.SLOT_SEEDED_BY, p.slotAttacker);
@@ -934,7 +934,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Splash(MoveEffectParams p) {
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.NOTHING_HAPPENED));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.NOTHING_HAPPENED));
 			return 0;
 		}
 		public static async Task<u32> Effect_Disable(MoveEffectParams p) {
@@ -948,7 +948,7 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_MOVE_WAS_DISABLED, p.target.GetName(), Lang.GetMoveName(p.target.moves[slot])));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_MOVE_WAS_DISABLED, p.target), p.target.GetName(), Lang.GetMoveName(p.target.moves[slot])));
 
 			p.target.GiveStatus(Status.DISABLE);
 			p.target.SetStatusParam(StatusParam.DISABLE, BattleEvents.EventDuration(p.attacker, Status.DISABLE).Result);
@@ -1021,7 +1021,7 @@ namespace PkmnEngine {
 			p.target.SetStatusParam(StatusParam.ENCORE_TURNS, 3);
 			p.target.SetStatusParam(StatusParam.ENCORE, lastUsedMoveSlot);
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_MUST_DO_AN_ENCORE, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_MUST_DO_AN_ENCORE, p.target), p.target.GetName()));
 
 			return 0;
 		}
@@ -1047,7 +1047,7 @@ namespace PkmnEngine {
 				await p.target.HealMon(diff, true);
 			}
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.PAIN_SPLIT));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.PAIN_SPLIT));
 
 			return 0;
 		}
@@ -1056,13 +1056,13 @@ namespace PkmnEngine {
 				await Effect_Hit(p);
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MOVE_FAILED));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MOVE_FAILED));
 				return FLAG_MOVE_FAILED;
 			}
 			return 0;
 		}
 		public static async Task<u32> Effect_LockOn(MoveEffectParams p) {
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_AIM_AT_MON, p.attacker.GetName(), p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, GetConjugatedString("MON_TOOK_AIM_AT", p.attacker, p.target), p.attacker.GetName(), p.target.GetName()));
 
 			p.attacker.GiveStatus(Status.TAKING_AIM);
 			p.attacker.SetStatusParam(StatusParam.TAKING_AIM, 1);
@@ -1104,7 +1104,7 @@ namespace PkmnEngine {
 			p.attacker.Mon.ReplaceMove(sketchSlot, idOfMoveToSketch);
 			p.attacker.ReplaceMove(sketchSlot, idOfMoveToSketch);
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_SKETCHED_MOVE, p.attacker.GetName(), Lang.GetMoveName(idOfMoveToSketch)));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_SKETCHED_MOVE, p.attacker), p.attacker.GetName(), Lang.GetMoveName(idOfMoveToSketch)));
 
 			return 0;
 		}
@@ -1141,7 +1141,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_DestinyBond(MoveEffectParams p) {
 			p.attacker.GiveStatus(Status.DESTINY_BOND);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_USED_DESTINY_BOND, p.attacker.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_USED_DESTINY_BOND, p.attacker), p.attacker.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_Flail(MoveEffectParams p) {
@@ -1180,7 +1180,7 @@ namespace PkmnEngine {
 			// Reduce the PP of the p.target's last-used p.move by 4.
 			p.target.Mon.PP[moveSlot] -= 4;
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_PP_WAS_REDUCED, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_PP_WAS_REDUCED, p.target), p.target.GetName()));
 
 			return 0;
 		}
@@ -1210,7 +1210,7 @@ namespace PkmnEngine {
 				await DoSetDamage(p, damage);
 				numHits++;
 			}
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.HIT_N_TIMES, numHits.ToString()));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.HIT_N_TIMES, numHits.ToString()));
 			return 0;
 		}
 		public static async Task<u32> Effect_Thief(MoveEffectParams p) {
@@ -1219,7 +1219,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_MeanLook(MoveEffectParams p) {
 			p.target.GiveStatus(Status.CANT_ESCAPE);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CAN_NO_LONGER_ESCAPE, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_CAN_NO_LONGER_ESCAPE, p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_Nightmare(MoveEffectParams p) {
@@ -1227,7 +1227,7 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 			p.target.GiveStatus(Status.NIGHTMARE);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HAVING_NIGHTMARE, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_HAVING_NIGHTMARE, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_Minimize(MoveEffectParams p) {
@@ -1243,27 +1243,21 @@ namespace PkmnEngine {
 			// Otherwise, cut HP in half and curse the p.target.
 			U16 selfDamage = new(p.attacker.GetPercentOfMaxHp(0.5f));
 			p.target.GiveStatus(Status.CURSE);
-			await p.attacker.DamageMon(selfDamage, true, false, Lang.GetBattleMessage(BattleMessage.MON_PUT_A_CURSE_ON_MON, p.attacker.GetName(), p.target.GetName()));
+			await p.attacker.DamageMon(selfDamage, true, false, Lang.GetString(STRINGS, GetConjugatedString("MON_PUT_A_CURSE_ON", p.attacker, p.target), p.attacker.GetName(), p.target.GetName()));
 
 			return 0;
 		}
 		public static async Task<u32> Effect_Protect(MoveEffectParams p) {
-			u8 successiveUses = (u8)p.target.GetStatusParam(StatusParam.SUCCESSIVE_PROTECTS);
+			u8 successiveUses = (u8)p.target.GetStatusParam(StatusParam.SUCCESSIVE_MOVE_USES);
 			float successRate = System.MathF.Pow(0.33f, successiveUses);
 
 			if (p.battle.Random01() >= successRate) {
-				p.target.SetStatusParam(StatusParam.SUCCESSIVE_PROTECTS, 0);
 				return FLAG_MOVE_FAILED;
 			}
 
 			p.target.GiveStatus(Status.PROTECTION);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_PROTECTED_ITSELF, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_PROTECTED_ITSELF, p.target.GetName()));
 			
-			// Increment successive uses.
-			if (successiveUses < 3) {
-				p.target.IncrementStatusParam(StatusParam.SUCCESSIVE_PROTECTS);
-			}
-
 			return 0;
 		}
 		public static async Task<u32> Effect_Foresight(MoveEffectParams p) {
@@ -1273,11 +1267,18 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_PerishSong(MoveEffectParams p) {
 			p.target.GiveStatus(Status.PERISH_SONG);
 			p.target.SetStatusParam(StatusParam.PERISH_COUNT, 3);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.PERISH_SONG));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.PERISH_SONG));
 			return 0;
 		}
 		public static async Task<u32> Effect_Endure(MoveEffectParams p) {
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_BRACED_ITSELF, p.target.GetName()));
+			u8 successiveUses = (u8)p.target.GetStatusParam(StatusParam.SUCCESSIVE_MOVE_USES);
+			float successRate = System.MathF.Pow(0.33f, successiveUses);
+
+			if (p.battle.Random01() >= successRate) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_BRACED_ITSELF, p.target), p.target.GetName()));
 			p.target.GiveStatus(Status.BRACING);
 			return 0;
 		}
@@ -1311,7 +1312,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Safeguard(MoveEffectParams p) {
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_PROTECTED_BY_SAFEGUARD, p.attacker.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_PROTECTED_BY_SAFEGUARD, p.attacker), p.attacker.GetName()));
 			p.state.SetSideCondition(p.attacker.Side, Condition.SAFEGUARD, p.attacker);
 			return 0;
 		}
@@ -1349,7 +1350,7 @@ namespace PkmnEngine {
 				power = 150;
 			}
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MAGNITUDE_N, scale));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MAGNITUDE_N, scale));
 
 			if (p.target.HasStatus(Status.SEMI_INVULNERABLE_TURN) && p.target.GetStatusParam(StatusParam.SEMI_INVULNERABLE) == SEMI_INVULNERABLE_GROUND) {
 				power *= 2;
@@ -1404,7 +1405,7 @@ namespace PkmnEngine {
 				p.attacker.GiveStatus(Status.GETTING_PUMPED);
 			}
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_COPIED_MONS_STAT_CHANGES, p.attacker.GetName(), p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, GetConjugatedString("MON_COPIED_STAT_CHANGES_OF", p.attacker, p.target), p.attacker.GetName(), p.target.GetName()));
 
 			return 0;
 		}
@@ -1472,7 +1473,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Torment(MoveEffectParams p) {
 			p.target.GiveStatus(Status.TORMENT);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_TORMENTED, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_TORMENTED, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_Flatter(MoveEffectParams p) {
@@ -1508,7 +1509,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_FollowMe(MoveEffectParams p) {
 			p.target.GiveStatus(Status.CENTER_OF_ATTENTION);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_BECAME_CENTER_OF_ATTENTION, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_BECAME_CENTER_OF_ATTENTION, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_NaturePower(MoveEffectParams p) {
@@ -1533,13 +1534,13 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Charge(MoveEffectParams p) {
 			p.target.GiveStatus(Status.CHARGED);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CHARGING_POWER, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CHARGING_POWER, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_Taunt(MoveEffectParams p) {
 			p.target.GiveStatus(Status.TAUNT);
 			p.target.SetStatusParam(StatusParam.TAUNT, 3);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_FELL_FOR_THE_TAUNT, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_FELL_FOR_THE_TAUNT, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_HelpingHand(MoveEffectParams p) {
@@ -1583,14 +1584,14 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 			if (!p.target.CanFallAsleep(p.state)) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_FALL_ASLEEP, p.target.GetName()));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_CANNOT_FALL_ASLEEP, p.target.GetName()));
 				return 0;
 			}
 
 			p.target.GiveStatus(Status.DROWSY);
 			p.target.SetStatusParam(StatusParam.DROWSING, 1);
 			
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_DROWSING, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_DROWSING, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_KnockOff(MoveEffectParams p) {
@@ -1615,7 +1616,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Imprison(MoveEffectParams p) {
 			p.target.GiveStatus(Status.IMPRISON);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_SEALED_SHARED_MOVES, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_SEALED_SHARED_MOVES, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_Refresh(MoveEffectParams p) {
@@ -1737,7 +1738,7 @@ namespace PkmnEngine {
 			u32 flags = await Effect_Gust(p);
 			// If the mon is not grounded, display that it now is.
 			if (!p.target.IsGrounded(p.state)) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_FELL_STRAIGHT_DOWN, p.target.GetName()));
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_FELL_STRAIGHT_DOWN, p.target), p.target.GetName()));
 			}
 			return flags;
 		}
@@ -1748,12 +1749,12 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_WaterSport(MoveEffectParams p) {
 			p.state.SetFieldCondition(Condition.WATER_SPORT, p.attacker);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.WATER_SPORT_START));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.WATER_SPORT_START));
 			return 0;
 		}
 		public static async Task<u32> Effect_MudSport(MoveEffectParams p) {
 			p.state.SetFieldCondition(Condition.MUD_SPORT, p.attacker);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MUD_SPORT_START));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MUD_SPORT_START));
 			return 0;
 		}
 		public static async Task<u32> Effect_CalmMind(MoveEffectParams p) {
@@ -1775,7 +1776,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_AquaRing(MoveEffectParams p) {
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER, p.target), p.target.GetName()));
 			p.target.GiveStatus(Status.AQUA_RING);
 			return 0;
 		}
@@ -1784,7 +1785,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Autotomize(MoveEffectParams p) {
 			if (await Effect_SpeedUp2(p) != 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_BECAME_NIMBLE, p.target.GetName()));
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_BECAME_NIMBLE, p.target), p.target.GetName()));
 
 				p.target.weight = System.MathF.Max(0.1f, (float)(p.target.weight - 100));
 			}
@@ -1872,12 +1873,12 @@ namespace PkmnEngine {
 			}
 
 			if (targetGender == attackerGender || targetGender == MON_GENDERLESS) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.IMMUNE, p.target.GetName()));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_IS_NOT_AFFECTED, p.target.GetName()));
 				return 0;
 			}
 
 			if (p.target.AbilityProc(Ability.OBLIVIOUS, true)) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.IMMUNE, p.target.GetName()));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_IS_NOT_AFFECTED, p.target.GetName()));
 				return 0;
 			}
 
@@ -2024,7 +2025,7 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_FairyLock(MoveEffectParams p) {
 			// TODO:
 			//p.target.GiveStatus(Status.CANT_ESCAPE;
-			//await MessageBox(Lang.GetBattleMessage(BattleMessage.NO_ONE_CAN_ESCAPE));
+			//await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.NO_ONE_CAN_ESCAPE));
 			return 0;
 		}
 		public static async Task<u32> Effect_Feint(MoveEffectParams p) {
@@ -2178,7 +2179,7 @@ namespace PkmnEngine {
 			p.attacker.SpDef = avgSpDef;
 			p.target.SpDef = avgSpDef;
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.GUARD_SPLIT, p.attacker.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_SHARED_ITS_GUARD_WITH_THE_TARGET, p.attacker), p.attacker.GetName()));
 
 			return 0;
 		}
@@ -2190,7 +2191,7 @@ namespace PkmnEngine {
 			p.attacker.Def = targetDef;
 			p.attacker.SpDef = targetSpDef;
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.GUARD_SWAP, p.attacker.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_GUARD_SWAP, p.attacker), p.attacker.GetName()));
 
 			return 0;
 		}
@@ -2238,7 +2239,7 @@ namespace PkmnEngine {
 			p.attacker.SetStatStage(Stat.ACCURACY, acc);
 			p.attacker.SetStatStage(Stat.EVASION, eva);
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_SWITCHED_STAT_CHANGES_WITH_TARGET, p.attacker.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_SWITCHED_STAT_CHANGES_WITH_TARGET, p.attacker), p.attacker.GetName()));
 			
 			return 0;
 		}
@@ -2336,7 +2337,7 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_MagnetRise(MoveEffectParams p) {
 			// TODO:
 			//p.target.GiveStatus(Status.MAGNETIC_LEVITATION;
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_BEGAN_LEVITATING, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_BEGAN_LEVITATING, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_MakeItRain(MoveEffectParams p) {
@@ -2400,7 +2401,7 @@ namespace PkmnEngine {
 			await Effect_AllStatsUp(p);
 
 			p.attacker.GiveStatus(Status.NO_RETREAT);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CAN_NO_LONGER_ESCAPE, p.attacker.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CAN_NO_LONGER_ESCAPE, p.attacker), p.attacker.GetName()));
 
 			return 0;
 		}
@@ -2537,7 +2538,7 @@ namespace PkmnEngine {
 				await Attack(p);
 			}
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.HIT_N_TIMES, actualHits.ToString()));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.HIT_N_TIMES, actualHits.ToString()));
 
 			return 0;
 		}
@@ -2554,7 +2555,7 @@ namespace PkmnEngine {
 			p.attacker.SpAtk = p.attacker.SpDef;
 			p.attacker.SpDef = temp;
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_SWITCHED_ITS_ATTACK_AND_DEFENSE, p.attacker.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_SWITCHED_STAT_CHANGES_WITH_TARGET, p.attacker), p.attacker.GetName()));
 
 			return 0;
 		}
@@ -2566,7 +2567,7 @@ namespace PkmnEngine {
 			p.attacker.SpAtk = avgSpAtk;
 			p.target.SpAtk = avgSpAtk;
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.POWER_SPLIT, p.attacker.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_SHARED_ITS_POWER_WITH_THE_TARGET, p.attacker), p.attacker.GetName()));
 
 			return 0;
 		}
@@ -2578,7 +2579,7 @@ namespace PkmnEngine {
 			p.attacker.Atk = targetAtk;
 			p.attacker.SpAtk = targetSpAtk;
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.POWER_SWAP, p.attacker.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_POWER_SWAP, p.attacker), p.attacker.GetName()));
 
 			return 0;
 		}
@@ -2587,7 +2588,7 @@ namespace PkmnEngine {
 			p.attacker.Atk = p.attacker.Def;
 			p.attacker.Def = temp;
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_SWITCHED_ITS_ATTACK_AND_DEFENSE, p.attacker.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_SWITCHED_ITS_ATTACK_AND_DEFENSE, p.attacker), p.attacker.GetName()));
 
 			return 0;
 		}
@@ -2768,7 +2769,7 @@ namespace PkmnEngine {
 			sbyte acc = p.target.AccuracyStages;
 			sbyte eva = p.target.EvasivenessStages;
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.STAT_CHANGES_REMOVED, p.attacker.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_STAT_CHANGES_REMOVED, p.attacker), p.attacker.GetName()));
 
 			if (atk > 0) {
 				await ChangeStat(p.state, p.target, (sbyte)(-atk), Stat.ATTACK);
@@ -2868,7 +2869,7 @@ namespace PkmnEngine {
 					break;
 				}
 			}
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.HIT_N_TIMES, numHits.ToString()));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.HIT_N_TIMES, numHits.ToString()));
 			return 0;
 		}
 		public static async Task<u32> Effect_Switcheroo(MoveEffectParams p) {
@@ -2892,10 +2893,10 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_Tailwind(MoveEffectParams p) {
 			p.state.SetSideCondition(p.attacker.Side, Condition.TAILWIND, p.attacker);
 			if (p.attacker.Side == Battle.SIDE_CLIENT) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.ALLY_TAILWIND_START));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ALLY_TAILWIND_START));
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.ENEMY_TAILWIND_START));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ENEMY_TAILWIND_START));
 			}
 			return 0;
 		}
@@ -2908,7 +2909,7 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_TarShot(MoveEffectParams p) {
 			await Effect_SpeedDownHit(p);
 			p.target.GiveStatus(Status.TAR_SHOT);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_BECAME_WEAKER_TO_FIRE, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_BECAME_WEAKER_TO_FIRE, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_TearfulLook(MoveEffectParams p) {
@@ -2924,7 +2925,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Telekinesis(MoveEffectParams p) {
 			// TODO:
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_HURLED_INTO_AIR, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_HURLED_INTO_AIR, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_TerrainPulse(MoveEffectParams p) {
@@ -2983,14 +2984,14 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_ThousandWaves(MoveEffectParams p) {
 			u32 flags = await Attack(p);
 			p.target.GiveStatus(Status.CANT_ESCAPE);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TRAPPED_MON, p.attacker.GetName(), p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_TRAPPED_MON, p.attacker.GetName(), p.target.GetName()));
 			return flags;
 		}
 		public static async Task<u32> Effect_ThroatChop(MoveEffectParams p) {
 			p.target.GiveStatus(Status.THROAT_CHOP);
 			p.target.SetStatusParam(StatusParam.THROAT_CHOP, 2);
 			//BM_PARAMS[0] = GetMonName(p.target.mon);
-			//await MessageBox(Lang.GetBattleMessage(BattleMessage.THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES));
+			//await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES));
 			return 0;
 		}
 		public static async Task<u32> Effect_TidyUp(MoveEffectParams p) {
@@ -3025,7 +3026,7 @@ namespace PkmnEngine {
 			p.target.SetStatStage(Stat.ACCURACY, (sbyte)-acc);
 			p.target.SetStatStage(Stat.EVASION, (sbyte)-eva);
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.STAT_CHANGES_INVERTED, p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_ALL_STAT_CHANGES_INVERTED, p.target), p.target.GetName()));
 
 			return 0;
 		}
@@ -3064,7 +3065,7 @@ namespace PkmnEngine {
 				await OverridePower(p, (u16)(p.move.power + (20 * i)));
 			}
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.HIT_N_TIMES, actualHits.ToString()));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.HIT_N_TIMES, actualHits.ToString()));
 
 			return 0;
 		}
@@ -3073,7 +3074,7 @@ namespace PkmnEngine {
 				await Attack(p);
 			}
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.HIT_N_TIMES, "3"));
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.HIT_N_TIMES, "3"));
 
 			return 0;
 		}
@@ -3135,7 +3136,7 @@ namespace PkmnEngine {
 				await Effect_SpeedDownHit(p);
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.IMMUNE, p.target.GetName()));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_IS_NOT_AFFECTED, p.target.GetName()));
 			}
 
 			return 0;
@@ -3200,7 +3201,7 @@ namespace PkmnEngine {
 			}
 
 			p.attacker.GiveStatus(Status.TRANSFORMED);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TRANSFORMED_INTO_MON, p.attacker.GetName(), p.target.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, GetConjugatedString("MON_TRANSFORMED_INTO", p.attacker, p.target), p.attacker.GetName(), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_CourtChange(MoveEffectParams p) {
@@ -3213,10 +3214,10 @@ namespace PkmnEngine {
 			}
 			p.state.SetSideCondition(p.attacker.Side, Condition.REFLECT, p.attacker);
 			if (p.attacker.Side == Battle.SIDE_CLIENT) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.ALLY_REFLECT));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ALLY_REFLECT));
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.OPPONENT_REFLECT));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.OPPONENT_REFLECT));
 			}
 			return 0;
 		}
@@ -3226,10 +3227,10 @@ namespace PkmnEngine {
 			}
 			p.state.SetSideCondition(p.attacker.Side, Condition.LIGHT_SCREEN, p.attacker);
 			if (p.attacker.Side == Battle.SIDE_CLIENT) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.ALLY_LIGHT_SCREEN));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ALLY_LIGHT_SCREEN));
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.OPPONENT_LIGHT_SCREEN));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.OPPONENT_LIGHT_SCREEN));
 			}
 			return 0;
 		}
@@ -3239,10 +3240,10 @@ namespace PkmnEngine {
 			}
 			p.state.SetSideCondition(p.attacker.Side, Condition.AURORA_VEIL, p.attacker);
 			if (p.attacker.Side == Battle.SIDE_CLIENT) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.ALLY_AURORA_VEIL));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ALLY_AURORA_VEIL));
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.OPPONENT_AURORA_VEIL));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.OPPONENT_AURORA_VEIL));
 			}
 			return 0;
 		}

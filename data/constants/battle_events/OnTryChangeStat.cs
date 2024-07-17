@@ -25,7 +25,7 @@ namespace PkmnEngine {
 			OnTryChangeStatParams args = ValidateParams<OnTryChangeStatParams>(p);
 
 			if (args.state.SideHasCondition(args.bm.Side, Condition.MIST) && args.delta < 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_IS_PROTECTED_BY_THE_MIST, args.bm.GetName()));
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_PROTECTED_BY_THE_MIST, args.bm), args.bm.GetName()));
 				return false;
 			}
 

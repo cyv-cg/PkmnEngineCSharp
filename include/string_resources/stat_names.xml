@@ -1,0 +1,122 @@
+<STAT_NAMES encoding="utf-8" t9n="official">
+	<string>
+		<key>HIT_POINTS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">HP</en>
+			<ja lang="japanese">HP</ja>
+			<de lang="german">KP</de>
+			<fr lang="french">PV</fr>
+			<it lang="italian">PS</it>
+			<es lang="spanish">PS</es>
+			<ko lang="korean">HP</ko>
+			<zh-cn lang="chinese (simplified)">HP</zh-cn>
+			<zh-tw lang="chinese (traditional)">HP</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ATTACK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Attack</en>
+			<ja lang="japanese">攻撃</ja>
+			<de lang="german">Ang.</de>
+			<fr lang="french">Attaque</fr>
+			<it lang="italian">Attacco</it>
+			<es lang="spanish">Ataque</es>
+			<ko lang="korean">공격</ko>
+			<zh-cn lang="chinese (simplified)">攻击</zh-cn>
+			<zh-tw lang="chinese (traditional)">攻擊</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DEFENSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Defense</en>
+			<ja lang="japanese">防御</ja>
+			<de lang="german">Vert.</de>
+			<fr lang="french">Défense</fr>
+			<it lang="italian">Difesa</it>
+			<es lang="spanish">Defensa</es>
+			<ko lang="korean">방어</ko>
+			<zh-cn lang="chinese (simplified)">防御</zh-cn>
+			<zh-tw lang="chinese (traditional)">防禦</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SPECIAL_ATTACK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sp. Atk</en>
+			<ja lang="japanese">特攻</ja>
+			<de lang="german">Sp.-Ang.</de>
+			<fr lang="french">Atq. Spé.</fr>
+			<it lang="italian">Att. Sp.</it>
+			<es lang="spanish">At. Esp.</es>
+			<ko lang="korean">특수공격</ko>
+			<zh-cn lang="chinese (simplified)">特攻</zh-cn>
+			<zh-tw lang="chinese (traditional)">特攻</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SPECIAL_DEFENSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sp. Def</en>
+			<ja lang="japanese">特防</ja>
+			<de lang="german">Sp.-Vert.</de>
+			<fr lang="french">Déf. Spé.</fr>
+			<it lang="italian">Dif. Sp.</it>
+			<es lang="spanish">Def. Esp.</es>
+			<ko lang="korean">특수방어</ko>
+			<zh-cn lang="chinese (simplified)">特防</zh-cn>
+			<zh-tw lang="chinese (traditional)">特防</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SPEED</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Speed</en>
+			<ja lang="japanese">素早さ</ja>
+			<de lang="german">Init.</de>
+			<fr lang="french">Vitesse</fr>
+			<it lang="italian">Velocità</it>
+			<es lang="spanish">Velocidad</es>
+			<ko lang="korean">스피드</ko>
+			<zh-cn lang="chinese (simplified)">速度</zh-cn>
+			<zh-tw lang="chinese (traditional)">速度</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ACCURACY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Accuracy</en>
+			<ja lang="japanese">命中率</ja>
+			<de lang="german">Genauigkeit</de>
+			<fr lang="french">Précision</fr>
+			<it lang="italian">Precisione</it>
+			<es lang="spanish">Precisión</es>
+			<ko lang="korean">명중</ko>
+			<zh-cn lang="chinese (simplified)">命中率</zh-cn>
+			<zh-tw lang="chinese (traditional)">命中率</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EVASION</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Evasiveness</en>
+			<ja lang="japanese">回避率</ja>
+			<de lang="german">Ausweichwert</de>
+			<fr lang="french">Esquive</fr>
+			<it lang="italian">Elusione</it>
+			<es lang="spanish">Evasión</es>
+			<ko lang="korean">회피</ko>
+			<zh-cn lang="chinese (simplified)">闪避率</zh-cn>
+			<zh-tw lang="chinese (traditional)">閃避率</zh-tw>
+		</text>
+	</string>
+</STAT_NAMES>

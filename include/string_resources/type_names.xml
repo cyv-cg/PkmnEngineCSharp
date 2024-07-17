@@ -1,0 +1,287 @@
+<TYPE_NAMES encoding="utf-8" t9n="official">
+	<string>
+		<key>NONE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">???</en>
+			<ja lang="japanese">???</ja>
+			<de lang="german">???</de>
+			<fr lang="french">???</fr>
+			<it lang="italian">???</it>
+			<es lang="spanish">???</es>
+			<ko lang="korean">???</ko>
+			<zh-cn lang="chinese (simplified)">???</zh-cn>
+			<zh-tw lang="chinese (traditional)">???</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FIGHTING</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fighting</en>
+			<ja lang="japanese">かくとう</ja>
+			<de lang="german">Kampf</de>
+			<fr lang="french">Combat</fr>
+			<it lang="italian">Lotta</it>
+			<es lang="spanish">Lucha</es>
+			<ko lang="korean">격투</ko>
+			<zh-cn lang="chinese (simplified)">格斗</zh-cn>
+			<zh-tw lang="chinese (traditional)">格鬥</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLYING</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Flying</en>
+			<ja lang="japanese">ひこう</ja>
+			<de lang="german">Flug</de>
+			<fr lang="french">Vol</fr>
+			<it lang="italian">Volante</it>
+			<es lang="spanish">Volador</es>
+			<ko lang="korean">비행</ko>
+			<zh-cn lang="chinese (simplified)">飞行</zh-cn>
+			<zh-tw lang="chinese (traditional)">飛行</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POISON</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Poison</en>
+			<ja lang="japanese">どく</ja>
+			<de lang="german">Gift</de>
+			<fr lang="french">Poison</fr>
+			<it lang="italian">Veleno</it>
+			<es lang="spanish">Veneno</es>
+			<ko lang="korean">독</ko>
+			<zh-cn lang="chinese (simplified)">毒</zh-cn>
+			<zh-tw lang="chinese (traditional)">毒</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GROUND</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ground</en>
+			<ja lang="japanese">じめん</ja>
+			<de lang="german">Boden</de>
+			<fr lang="french">Sol</fr>
+			<it lang="italian">Terra</it>
+			<es lang="spanish">Tierra</es>
+			<ko lang="korean">땅</ko>
+			<zh-cn lang="chinese (simplified)">地面</zh-cn>
+			<zh-tw lang="chinese (traditional)">地面</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROCK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rock</en>
+			<ja lang="japanese">いわ</ja>
+			<de lang="german">Gestein</de>
+			<fr lang="french">Roche</fr>
+			<it lang="italian">Roccia</it>
+			<es lang="spanish">Roca</es>
+			<ko lang="korean">바위</ko>
+			<zh-cn lang="chinese (simplified)">岩石</zh-cn>
+			<zh-tw lang="chinese (traditional)">岩石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BUG</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Bug</en>
+			<ja lang="japanese">むし</ja>
+			<de lang="german">Käfer</de>
+			<fr lang="french">Insecte</fr>
+			<it lang="italian">Coleottero</it>
+			<es lang="spanish">Bicho</es>
+			<ko lang="korean">벌레</ko>
+			<zh-cn lang="chinese (simplified)">虫</zh-cn>
+			<zh-tw lang="chinese (traditional)">蟲</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GHOST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ghost</en>
+			<ja lang="japanese">ゴースト</ja>
+			<de lang="german">Geist</de>
+			<fr lang="french">Spectre</fr>
+			<it lang="italian">Spettro</it>
+			<es lang="spanish">Fantasma</es>
+			<ko lang="korean">고스트</ko>
+			<zh-cn lang="chinese (simplified)">幽灵</zh-cn>
+			<zh-tw lang="chinese (traditional)">幽靈</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STEEL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Steel</en>
+			<ja lang="japanese">はがね</ja>
+			<de lang="german">Stahl</de>
+			<fr lang="french">Acier</fr>
+			<it lang="italian">Acciaio</it>
+			<es lang="spanish">Acero</es>
+			<ko lang="korean">강철</ko>
+			<zh-cn lang="chinese (simplified)">钢</zh-cn>
+			<zh-tw lang="chinese (traditional)">鋼</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>NORMAL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Normal</en>
+			<ja lang="japanese">ノーマル</ja>
+			<de lang="german">Normal</de>
+			<fr lang="french">Normal</fr>
+			<it lang="italian">Normale</it>
+			<es lang="spanish">Normal</es>
+			<ko lang="korean">노말</ko>
+			<zh-cn lang="chinese (simplified)">一般</zh-cn>
+			<zh-tw lang="chinese (traditional)">一般</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FIRE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fire</en>
+			<ja lang="japanese">ほのお</ja>
+			<de lang="german">Feuer</de>
+			<fr lang="french">Feu</fr>
+			<it lang="italian">Fuoco</it>
+			<es lang="spanish">Fuego</es>
+			<ko lang="korean">불꽃</ko>
+			<zh-cn lang="chinese (simplified)">火</zh-cn>
+			<zh-tw lang="chinese (traditional)">火</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WATER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Water</en>
+			<ja lang="japanese">みず</ja>
+			<de lang="german">Wasser</de>
+			<fr lang="french">Eau</fr>
+			<it lang="italian">Acqua</it>
+			<es lang="spanish">Agua</es>
+			<ko lang="korean">물</ko>
+			<zh-cn lang="chinese (simplified)">水</zh-cn>
+			<zh-tw lang="chinese (traditional)">水</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRASS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grass</en>
+			<ja lang="japanese">くさ</ja>
+			<de lang="german">Pflanze</de>
+			<fr lang="french">Plante</fr>
+			<it lang="italian">Erba</it>
+			<es lang="spanish">Planta</es>
+			<ko lang="korean">풀</ko>
+			<zh-cn lang="chinese (simplified)">草</zh-cn>
+			<zh-tw lang="chinese (traditional)">草</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ELECTRIC</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Electric</en>
+			<ja lang="japanese">でんき</ja>
+			<de lang="german">Elektro</de>
+			<fr lang="french">Électrik</fr>
+			<it lang="italian">Elettro</it>
+			<es lang="spanish">Eléctrico</es>
+			<ko lang="korean">전기</ko>
+			<zh-cn lang="chinese (simplified)">电</zh-cn>
+			<zh-tw lang="chinese (traditional)">電</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PSYCHIC</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Psychic</en>
+			<ja lang="japanese">エスパー</ja>
+			<de lang="german">Psycho</de>
+			<fr lang="french">Psy</fr>
+			<it lang="italian">Psico</it>
+			<es lang="spanish">Psíquico</es>
+			<ko lang="korean">에스퍼</ko>
+			<zh-cn lang="chinese (simplified)">超能力</zh-cn>
+			<zh-tw lang="chinese (traditional)">超能力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ICE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ice</en>
+			<ja lang="japanese">こおり</ja>
+			<de lang="german">Eis</de>
+			<fr lang="french">Glace</fr>
+			<it lang="italian">Ghiaccio</it>
+			<es lang="spanish">Hielo</es>
+			<ko lang="korean">얼음</ko>
+			<zh-cn lang="chinese (simplified)">冰</zh-cn>
+			<zh-tw lang="chinese (traditional)">冰</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DRAGON</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dragon</en>
+			<ja lang="japanese">ドラゴン</ja>
+			<de lang="german">Drache</de>
+			<fr lang="french">Dragon</fr>
+			<it lang="italian">Drago</it>
+			<es lang="spanish">Dragón</es>
+			<ko lang="korean">드래곤</ko>
+			<zh-cn lang="chinese (simplified)">龙</zh-cn>
+			<zh-tw lang="chinese (traditional)">龍</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DARK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dark</en>
+			<ja lang="japanese">あく</ja>
+			<de lang="german">Unlicht</de>
+			<fr lang="french">Ténèbres</fr>
+			<it lang="italian">Buio</it>
+			<es lang="spanish">Siniestro</es>
+			<ko lang="korean">악</ko>
+			<zh-cn lang="chinese (simplified)">恶</zh-cn>
+			<zh-tw lang="chinese (traditional)">惡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FAIRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fairy</en>
+			<ja lang="japanese">フェアリー</ja>
+			<de lang="german">Fee</de>
+			<fr lang="french">Fée</fr>
+			<it lang="italian">Folletto</it>
+			<es lang="spanish">Hada</es>
+			<ko lang="korean">페어리</ko>
+			<zh-cn lang="chinese (simplified)">妖精</zh-cn>
+			<zh-tw lang="chinese (traditional)">妖精</zh-tw>
+		</text>
+	</string>
+</TYPE_NAMES>

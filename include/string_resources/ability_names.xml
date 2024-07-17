@@ -1,0 +1,4472 @@
+<ABILITY_NAMES encoding="utf-8" t9n="official">
+	<string>
+		<key>NONE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">???</en>
+			<ja lang="japanese">???</ja>
+			<de lang="german">???</de>
+			<fr lang="french">???</fr>
+			<it lang="italian">???</it>
+			<es lang="spanish">???</es>
+			<ko lang="korean">???</ko>
+			<zh-cn lang="chinese (simplified)">???</zh-cn>
+			<zh-tw lang="chinese (traditional)">???</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ADAPTABILITY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Adaptability</en>
+			<ja lang="japanese">てきおうりょく</ja>
+			<de lang="german">Anpassung</de>
+			<fr lang="french">Adaptabilité</fr>
+			<it lang="italian">Adattabilità</it>
+			<es lang="spanish">Adaptable</es>
+			<ko lang="korean">적응력</ko>
+			<zh-cn lang="chinese (simplified)">适应力</zh-cn>
+			<zh-tw lang="chinese (traditional)">適應力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AERILATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Aerilate</en>
+			<ja lang="japanese">スカイスキン</ja>
+			<de lang="german">Zenithaut</de>
+			<fr lang="french">Peau Céleste</fr>
+			<it lang="italian">Pellecielo</it>
+			<es lang="spanish">Piel Celeste</es>
+			<ko lang="korean">스카이스킨</ko>
+			<zh-cn lang="chinese (simplified)">飞行皮肤</zh-cn>
+			<zh-tw lang="chinese (traditional)">飛行皮膚</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AFTERMATH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Aftermath</en>
+			<ja lang="japanese">ゆうばく</ja>
+			<de lang="german">Finalschlag</de>
+			<fr lang="french">Boom Final</fr>
+			<it lang="italian">Scoppio</it>
+			<es lang="spanish">Resquicio</es>
+			<ko lang="korean">유폭</ko>
+			<zh-cn lang="chinese (simplified)">诱爆</zh-cn>
+			<zh-tw lang="chinese (traditional)">引爆</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AIR_LOCK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Air Lock</en>
+			<ja lang="japanese">エアロック</ja>
+			<de lang="german">Klimaschutz</de>
+			<fr lang="french">Air Lock</fr>
+			<it lang="italian">Riparo</it>
+			<es lang="spanish">Bucle Aire</es>
+			<ko lang="korean">에어록</ko>
+			<zh-cn lang="chinese (simplified)">气闸</zh-cn>
+			<zh-tw lang="chinese (traditional)">氣閘</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ANALYTIC</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Analytic</en>
+			<ja lang="japanese">アナライズ</ja>
+			<de lang="german">Analyse</de>
+			<fr lang="french">Analyste</fr>
+			<it lang="italian">Ponderazione</it>
+			<es lang="spanish">Cálculo Final</es>
+			<ko lang="korean">애널라이즈</ko>
+			<zh-cn lang="chinese (simplified)">分析</zh-cn>
+			<zh-tw lang="chinese (traditional)">分析</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ANGER_POINT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Anger Point</en>
+			<ja lang="japanese">いかりのつぼ</ja>
+			<de lang="german">Kurzschluss</de>
+			<fr lang="french">Colérique</fr>
+			<it lang="italian">Grancollera</it>
+			<es lang="spanish">Irascible</es>
+			<ko lang="korean">분노의경혈</ko>
+			<zh-cn lang="chinese (simplified)">愤怒穴位</zh-cn>
+			<zh-tw lang="chinese (traditional)">憤怒穴位</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ANGER_SHELL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Anger Shell</en>
+			<ja lang="japanese">いかりのこうら</ja>
+			<de lang="german">Wutpanzer</de>
+			<fr lang="french">Courroupace</fr>
+			<it lang="italian">Iraguscio</it>
+			<es lang="spanish">Coraza Ira</es>
+			<ko lang="korean">분노의껍질</ko>
+			<zh-cn lang="chinese (simplified)">愤怒甲壳</zh-cn>
+			<zh-tw lang="chinese (traditional)">憤怒甲殼</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ANTICIPATION</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Anticipation</en>
+			<ja lang="japanese">きけんよち</ja>
+			<de lang="german">Vorahnung</de>
+			<fr lang="french">Anticipation</fr>
+			<it lang="italian">Presagio</it>
+			<es lang="spanish">Anticipación</es>
+			<ko lang="korean">위험예지</ko>
+			<zh-cn lang="chinese (simplified)">危险预知</zh-cn>
+			<zh-tw lang="chinese (traditional)">危險預知</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ARENA_TRAP</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Arena Trap</en>
+			<ja lang="japanese">ありじごく</ja>
+			<de lang="german">Ausweglos</de>
+			<fr lang="french">Piège Sable</fr>
+			<it lang="italian">Trappoarena</it>
+			<es lang="spanish">Trampa Arena</es>
+			<ko lang="korean">개미지옥</ko>
+			<zh-cn lang="chinese (simplified)">沙穴</zh-cn>
+			<zh-tw lang="chinese (traditional)">沙穴</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ARMOR_TAIL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Armor Tail</en>
+			<ja lang="japanese">テイルアーマー</ja>
+			<de lang="german">Schweifrüstung</de>
+			<fr lang="french">Armure Caudale</fr>
+			<it lang="italian">Codarmatura</it>
+			<es lang="spanish">Cola Armadura</es>
+			<ko lang="korean">테일아머</ko>
+			<zh-cn lang="chinese (simplified)">尾甲</zh-cn>
+			<zh-tw lang="chinese (traditional)">尾甲</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AROMA_VEIL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Aroma Veil</en>
+			<ja lang="japanese">アロマベール</ja>
+			<de lang="german">Dufthülle</de>
+			<fr lang="french">Aroma-Voile</fr>
+			<it lang="italian">Aromavelo</it>
+			<es lang="spanish">Velo Aroma</es>
+			<ko lang="korean">아로마베일</ko>
+			<zh-cn lang="chinese (simplified)">芳香幕</zh-cn>
+			<zh-tw lang="chinese (traditional)">芳香幕</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AS_ONE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">As One</en>
+			<ja lang="japanese">じんばいったい</ja>
+			<de lang="german">Reitgespann</de>
+			<fr lang="french">Osmose Équine</fr>
+			<it lang="italian">Sintonia Equina</it>
+			<es lang="spanish">Unidad Ecuestre</es>
+			<ko lang="korean">혼연일체</ko>
+			<zh-cn lang="chinese (simplified)">人马一体</zh-cn>
+			<zh-tw lang="chinese (traditional)">人馬一體</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AURA_BREAK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Aura Break</en>
+			<ja lang="japanese">オーラブレイク</ja>
+			<de lang="german">Aura-Umkehr</de>
+			<fr lang="french">Aura Inversée</fr>
+			<it lang="italian">Frangiaura</it>
+			<es lang="spanish">Rompeaura</es>
+			<ko lang="korean">오라브레이크</ko>
+			<zh-cn lang="chinese (simplified)">气场破坏</zh-cn>
+			<zh-tw lang="chinese (traditional)">氣場破壞</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BAD_DREAMS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Bad Dreams</en>
+			<ja lang="japanese">ナイトメア</ja>
+			<de lang="german">Alptraum</de>
+			<fr lang="french">Mauvais Rêve</fr>
+			<it lang="italian">Sogniamari</it>
+			<es lang="spanish">Mal Sueño</es>
+			<ko lang="korean">나이트메어</ko>
+			<zh-cn lang="chinese (simplified)">梦魇</zh-cn>
+			<zh-tw lang="chinese (traditional)">夢魘</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BALL_FETCH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ball Fetch</en>
+			<ja lang="japanese">たまひろい</ja>
+			<de lang="german">Apport</de>
+			<fr lang="french">Ramasse Ball</fr>
+			<it lang="italian">Raccattapalle</it>
+			<es lang="spanish">Recogebolas</es>
+			<ko lang="korean">볼줍기</ko>
+			<zh-cn lang="chinese (simplified)">捡球</zh-cn>
+			<zh-tw lang="chinese (traditional)">撿球</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BATTERY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Battery</en>
+			<ja lang="japanese">バッテリー</ja>
+			<de lang="german">Batterie</de>
+			<fr lang="french">Batterie</fr>
+			<it lang="italian">Batteria</it>
+			<es lang="spanish">Batería</es>
+			<ko lang="korean">배터리</ko>
+			<zh-cn lang="chinese (simplified)">蓄电池</zh-cn>
+			<zh-tw lang="chinese (traditional)">蓄電池</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BATTLE_ARMOR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Battle Armor</en>
+			<ja lang="japanese">カブトアーマー</ja>
+			<de lang="german">Kampfpanzer</de>
+			<fr lang="french">Armurbaston</fr>
+			<it lang="italian">Lottascudo</it>
+			<es lang="spanish">Armadura Batalla</es>
+			<ko lang="korean">전투무장</ko>
+			<zh-cn lang="chinese (simplified)">战斗盔甲</zh-cn>
+			<zh-tw lang="chinese (traditional)">戰鬥盔甲</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BATTLE_BOND</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Battle Bond</en>
+			<ja lang="japanese">きずなへんげ</ja>
+			<de lang="german">Freundschaftsakt</de>
+			<fr lang="french">Synergie</fr>
+			<it lang="italian">Morfosintonia</it>
+			<es lang="spanish">Fuerte Afecto</es>
+			<ko lang="korean">유대변화</ko>
+			<zh-cn lang="chinese (simplified)">牵绊变身</zh-cn>
+			<zh-tw lang="chinese (traditional)">牽絆變身</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BEADS_OF_RUIN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Beads of Ruin</en>
+			<ja lang="japanese">わざわいのたま</ja>
+			<de lang="german">Unheilsjuwelen</de>
+			<fr lang="french">Perles du Fléau</fr>
+			<it lang="italian">Monile Nefasto</it>
+			<es lang="spanish">Abalorio Debacle</es>
+			<ko lang="korean">재앙의구슬</ko>
+			<zh-cn lang="chinese (simplified)">灾祸之玉</zh-cn>
+			<zh-tw lang="chinese (traditional)">災禍之玉</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BEAST_BOOST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Beast Boost</en>
+			<ja lang="japanese">ビーストブースト</ja>
+			<de lang="german">Bestien-Boost</de>
+			<fr lang="french">Boost Chimère</fr>
+			<it lang="italian">Ultraboost</it>
+			<es lang="spanish">Ultraimpulso</es>
+			<ko lang="korean">비스트부스트</ko>
+			<zh-cn lang="chinese (simplified)">异兽提升</zh-cn>
+			<zh-tw lang="chinese (traditional)">異獸提升</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BERSERK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Berserk</en>
+			<ja lang="japanese">ぎゃくじょう</ja>
+			<de lang="german">Wutausbruch</de>
+			<fr lang="french">Dracolère</fr>
+			<it lang="italian">Furore</it>
+			<es lang="spanish">Cólera</es>
+			<ko lang="korean">발끈</ko>
+			<zh-cn lang="chinese (simplified)">怒火冲天</zh-cn>
+			<zh-tw lang="chinese (traditional)">怒火沖天</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BIG_PECKS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Big Pecks</en>
+			<ja lang="japanese">はとむね</ja>
+			<de lang="german">Brustbieter</de>
+			<fr lang="french">Cœur de Coq</fr>
+			<it lang="italian">Pettinfuori</it>
+			<es lang="spanish">Sacapecho</es>
+			<ko lang="korean">부풀린가슴</ko>
+			<zh-cn lang="chinese (simplified)">健壮胸肌</zh-cn>
+			<zh-tw lang="chinese (traditional)">健壯胸肌</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BLAZE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Blaze</en>
+			<ja lang="japanese">もうか</ja>
+			<de lang="german">Großbrand</de>
+			<fr lang="french">Brasier</fr>
+			<it lang="italian">Aiutofuoco</it>
+			<es lang="spanish">Mar Llamas</es>
+			<ko lang="korean">맹화</ko>
+			<zh-cn lang="chinese (simplified)">猛火</zh-cn>
+			<zh-tw lang="chinese (traditional)">猛火</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BULLETPROOF</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Bulletproof</en>
+			<ja lang="japanese">ぼうだん</ja>
+			<de lang="german">Kugelsicher</de>
+			<fr lang="french">Pare-Balles</fr>
+			<it lang="italian">Antiproiettile</it>
+			<es lang="spanish">Antibalas</es>
+			<ko lang="korean">방탄</ko>
+			<zh-cn lang="chinese (simplified)">防弹</zh-cn>
+			<zh-tw lang="chinese (traditional)">防彈</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHEEK_POUCH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Cheek Pouch</en>
+			<ja lang="japanese">ほおぶくろ</ja>
+			<de lang="german">Backentaschen</de>
+			<fr lang="french">Bajoues</fr>
+			<it lang="italian">Guancegonfie</it>
+			<es lang="spanish">Carrillo</es>
+			<ko lang="korean">볼주머니</ko>
+			<zh-cn lang="chinese (simplified)">颊囊</zh-cn>
+			<zh-tw lang="chinese (traditional)">頰囊</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHILLING_NEIGH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Chilling Neigh</en>
+			<ja lang="japanese">しろのいななき</ja>
+			<de lang="german">Helles Wiehern</de>
+			<fr lang="french">Blanche Ruade</fr>
+			<it lang="italian">Nitrito Bianco</it>
+			<es lang="spanish">Relincho Blanco</es>
+			<ko lang="korean">백의울음</ko>
+			<zh-cn lang="chinese (simplified)">苍白嘶鸣</zh-cn>
+			<zh-tw lang="chinese (traditional)">蒼白嘶鳴</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHLOROPHYLL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Chlorophyll</en>
+			<ja lang="japanese">ようりょくそ</ja>
+			<de lang="german">Chlorophyll</de>
+			<fr lang="french">Chlorophylle</fr>
+			<it lang="italian">Clorofilla</it>
+			<es lang="spanish">Clorofila</es>
+			<ko lang="korean">엽록소</ko>
+			<zh-cn lang="chinese (simplified)">叶绿素</zh-cn>
+			<zh-tw lang="chinese (traditional)">葉綠素</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CLEAR_BODY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Clear Body</en>
+			<ja lang="japanese">クリアボディ</ja>
+			<de lang="german">Neutraltorso</de>
+			<fr lang="french">Corps Sain</fr>
+			<it lang="italian">Corpochiaro</it>
+			<es lang="spanish">Cuerpo Puro</es>
+			<ko lang="korean">클리어바디</ko>
+			<zh-cn lang="chinese (simplified)">恒净之躯</zh-cn>
+			<zh-tw lang="chinese (traditional)">恆淨之軀</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CLOUD_NINE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Cloud Nine</en>
+			<ja lang="japanese">ノーてんき</ja>
+			<de lang="german">Wolke Sieben</de>
+			<fr lang="french">Ciel Gris</fr>
+			<it lang="italian">Antimeteo</it>
+			<es lang="spanish">Aclimatación</es>
+			<ko lang="korean">날씨부정</ko>
+			<zh-cn lang="chinese (simplified)">无关天气</zh-cn>
+			<zh-tw lang="chinese (traditional)">無關天氣</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>COLOR_CHANGE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Color Change</en>
+			<ja lang="japanese">へんしょく</ja>
+			<de lang="german">Farbwechsel</de>
+			<fr lang="french">Déguisement</fr>
+			<it lang="italian">Cambiacolore</it>
+			<es lang="spanish">Cambio Color</es>
+			<ko lang="korean">변색</ko>
+			<zh-cn lang="chinese (simplified)">变色</zh-cn>
+			<zh-tw lang="chinese (traditional)">變色</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>COMATOSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Comatose</en>
+			<ja lang="japanese">ぜったいねむり</ja>
+			<de lang="german">Dauerschlaf</de>
+			<fr lang="french">Hypersommeil</fr>
+			<it lang="italian">Sonno Assoluto</it>
+			<es lang="spanish">Letargo Perenne</es>
+			<ko lang="korean">절대안깸</ko>
+			<zh-cn lang="chinese (simplified)">绝对睡眠</zh-cn>
+			<zh-tw lang="chinese (traditional)">絕對睡眠</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>COMMANDER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Commander</en>
+			<ja lang="japanese">しれいとう</ja>
+			<de lang="german">Kommandant</de>
+			<fr lang="french">Commandant</fr>
+			<it lang="italian">Torre di Comando</it>
+			<es lang="spanish">Comandar</es>
+			<ko lang="korean">사령탑</ko>
+			<zh-cn lang="chinese (simplified)">发号施令</zh-cn>
+			<zh-tw lang="chinese (traditional)">發號施令</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>COMPETITIVE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Competitive</en>
+			<ja lang="japanese">かちき</ja>
+			<de lang="german">Unbeugsamkeit</de>
+			<fr lang="french">Battant</fr>
+			<it lang="italian">Tenacia</it>
+			<es lang="spanish">Tenacidad</es>
+			<ko lang="korean">승기</ko>
+			<zh-cn lang="chinese (simplified)">好胜</zh-cn>
+			<zh-tw lang="chinese (traditional)">好勝</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>COMPOUND_EYES</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Compound Eyes</en>
+			<ja lang="japanese">ふくがん</ja>
+			<de lang="german">Facettenauge</de>
+			<fr lang="french">Œil Composé</fr>
+			<it lang="italian">Insettocchi</it>
+			<es lang="spanish">Ojo Compuesto</es>
+			<ko lang="korean">복안</ko>
+			<zh-cn lang="chinese (simplified)">复眼</zh-cn>
+			<zh-tw lang="chinese (traditional)">複眼</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CONTRARY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Contrary</en>
+			<ja lang="japanese">あまのじゃく</ja>
+			<de lang="german">Umkehrung</de>
+			<fr lang="french">Contestation</fr>
+			<it lang="italian">Inversione</it>
+			<es lang="spanish">Respondón</es>
+			<ko lang="korean">심술꾸러기</ko>
+			<zh-cn lang="chinese (simplified)">唱反调</zh-cn>
+			<zh-tw lang="chinese (traditional)">唱反調</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CORROSION</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Corrosion</en>
+			<ja lang="japanese">ふしょく</ja>
+			<de lang="german">Korrosion</de>
+			<fr lang="french">Corrosion</fr>
+			<it lang="italian">Corrosione</it>
+			<es lang="spanish">Corrosión</es>
+			<ko lang="korean">부식</ko>
+			<zh-cn lang="chinese (simplified)">腐蚀</zh-cn>
+			<zh-tw lang="chinese (traditional)">腐蝕</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>COSTAR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Costar</en>
+			<ja lang="japanese">きょうえん</ja>
+			<de lang="german">Synchronauftritt</de>
+			<fr lang="french">Collab</fr>
+			<it lang="italian">Coprotagonismo</it>
+			<es lang="spanish">Unísono</es>
+			<ko lang="korean">협연</ko>
+			<zh-cn lang="chinese (simplified)">同台共演</zh-cn>
+			<zh-tw lang="chinese (traditional)">同台共演</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>COTTON_DOWN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Cotton Down</en>
+			<ja lang="japanese">わたげ</ja>
+			<de lang="german">Wollflaum</de>
+			<fr lang="french">Effilochage</fr>
+			<it lang="italian">Lanugine</it>
+			<es lang="spanish">Pelusa</es>
+			<ko lang="korean">솜털</ko>
+			<zh-cn lang="chinese (simplified)">棉絮</zh-cn>
+			<zh-tw lang="chinese (traditional)">棉絮</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CUD_CHEW</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Cud Chew</en>
+			<ja lang="japanese">はんすう</ja>
+			<de lang="german">Wiederkäuer</de>
+			<fr lang="french">Ruminant</fr>
+			<it lang="italian">Ruminante</it>
+			<es lang="spanish">Rumia</es>
+			<ko lang="korean">되새김질</ko>
+			<zh-cn lang="chinese (simplified)">反刍</zh-cn>
+			<zh-tw lang="chinese (traditional)">反芻</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CURIOUS_MEDICINE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Curious Medicine</en>
+			<ja lang="japanese">きみょうなくすり</ja>
+			<de lang="german">Kuriose Arznei</de>
+			<fr lang="french">Breuvage Suspect</fr>
+			<it lang="italian">Stranofarmaco</it>
+			<es lang="spanish">Medicina Extraña</es>
+			<ko lang="korean">기묘한약</ko>
+			<zh-cn lang="chinese (simplified)">怪药</zh-cn>
+			<zh-tw lang="chinese (traditional)">怪藥</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CURSED_BODY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Cursed Body</en>
+			<ja lang="japanese">のろわれボディ</ja>
+			<de lang="german">Tastfluch</de>
+			<fr lang="french">Corps Maudit</fr>
+			<it lang="italian">Corpofunesto</it>
+			<es lang="spanish">Cuerpo Maldito</es>
+			<ko lang="korean">저주받은바디</ko>
+			<zh-cn lang="chinese (simplified)">咒术之躯</zh-cn>
+			<zh-tw lang="chinese (traditional)">詛咒之軀</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CUTE_CHARM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Cute Charm</en>
+			<ja lang="japanese">メロメロボディ</ja>
+			<de lang="german">Charmebolzen</de>
+			<fr lang="french">Joli Sourire</fr>
+			<it lang="italian">Incantevole</it>
+			<es lang="spanish">Gran Encanto</es>
+			<ko lang="korean">헤롱헤롱바디</ko>
+			<zh-cn lang="chinese (simplified)">迷人之躯</zh-cn>
+			<zh-tw lang="chinese (traditional)">迷人之軀</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DAMP</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Damp</en>
+			<ja lang="japanese">しめりけ</ja>
+			<de lang="german">Feuchtigkeit</de>
+			<fr lang="french">Moiteur</fr>
+			<it lang="italian">Umidità</it>
+			<es lang="spanish">Humedad</es>
+			<ko lang="korean">습기</ko>
+			<zh-cn lang="chinese (simplified)">湿气</zh-cn>
+			<zh-tw lang="chinese (traditional)">濕氣</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DANCER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dancer</en>
+			<ja lang="japanese">おどりこ</ja>
+			<de lang="german">Tänzer</de>
+			<fr lang="french">Danseuse</fr>
+			<it lang="italian">Sincrodanza</it>
+			<es lang="spanish">Pareja de Baile</es>
+			<ko lang="korean">무희</ko>
+			<zh-cn lang="chinese (simplified)">舞者</zh-cn>
+			<zh-tw lang="chinese (traditional)">舞者</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DARK_AURA</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dark Aura</en>
+			<ja lang="japanese">ダークオーラ</ja>
+			<de lang="german">Dunkelaura</de>
+			<fr lang="french">Aura Ténébreuse</fr>
+			<it lang="italian">Auratetra</it>
+			<es lang="spanish">Aura Oscura</es>
+			<ko lang="korean">다크오라</ko>
+			<zh-cn lang="chinese (simplified)">暗黑气场</zh-cn>
+			<zh-tw lang="chinese (traditional)">暗黑氣場</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DAUNTLESS_SHIELD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dauntless Shield</en>
+			<ja lang="japanese">ふくつのたて</ja>
+			<de lang="german">Wackerer Schild</de>
+			<fr lang="french">Égide Inflexible</fr>
+			<it lang="italian">Scudo Saldo</it>
+			<es lang="spanish">Escudo Recio</es>
+			<ko lang="korean">불굴의방패</ko>
+			<zh-cn lang="chinese (simplified)">不屈之盾</zh-cn>
+			<zh-tw lang="chinese (traditional)">不屈之盾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DAZZLING</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dazzling</en>
+			<ja lang="japanese">ビビッドボディ</ja>
+			<de lang="german">Buntkörper</de>
+			<fr lang="french">Corps Coloré</fr>
+			<it lang="italian">Corposgargiante</it>
+			<es lang="spanish">Cuerpo Vívido</es>
+			<ko lang="korean">비비드바디</ko>
+			<zh-cn lang="chinese (simplified)">鲜艳之躯</zh-cn>
+			<zh-tw lang="chinese (traditional)">鮮艷之軀</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DEFEATIST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Defeatist</en>
+			<ja lang="japanese">よわき</ja>
+			<de lang="german">Schwächling</de>
+			<fr lang="french">Défaitiste</fr>
+			<it lang="italian">Sconforto</it>
+			<es lang="spanish">Flaqueza</es>
+			<ko lang="korean">무기력</ko>
+			<zh-cn lang="chinese (simplified)">软弱</zh-cn>
+			<zh-tw lang="chinese (traditional)">軟弱</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DEFIANT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Defiant</en>
+			<ja lang="japanese">まけんき</ja>
+			<de lang="german">Siegeswille</de>
+			<fr lang="french">Acharné</fr>
+			<it lang="italian">Agonismo</it>
+			<es lang="spanish">Competitivo</es>
+			<ko lang="korean">오기</ko>
+			<zh-cn lang="chinese (simplified)">不服输</zh-cn>
+			<zh-tw lang="chinese (traditional)">不服輸</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DELTA_STREAM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Delta Stream</en>
+			<ja lang="japanese">デルタストリーム</ja>
+			<de lang="german">Delta-Wind</de>
+			<fr lang="french">Souffle Delta</fr>
+			<it lang="italian">Flusso Delta</it>
+			<es lang="spanish">Ráfaga Delta</es>
+			<ko lang="korean">델타스트림</ko>
+			<zh-cn lang="chinese (simplified)">德尔塔气流</zh-cn>
+			<zh-tw lang="chinese (traditional)">德爾塔氣流</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DESOLATE_LAND</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Desolate Land</en>
+			<ja lang="japanese">おわりのだいち</ja>
+			<de lang="german">Endland</de>
+			<fr lang="french">Terre Finale</fr>
+			<it lang="italian">Terra Estrema</it>
+			<es lang="spanish">Tierra del Ocaso</es>
+			<ko lang="korean">끝의대지</ko>
+			<zh-cn lang="chinese (simplified)">终结之地</zh-cn>
+			<zh-tw lang="chinese (traditional)">終結之地</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DISGUISE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Disguise</en>
+			<ja lang="japanese">ばけのかわ</ja>
+			<de lang="german">Kostümspuk</de>
+			<fr lang="french">Fantômasque</fr>
+			<it lang="italian">Fantasmanto</it>
+			<es lang="spanish">Disfraz</es>
+			<ko lang="korean">탈</ko>
+			<zh-cn lang="chinese (simplified)">画皮</zh-cn>
+			<zh-tw lang="chinese (traditional)">畫皮</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DOWNLOAD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Download</en>
+			<ja lang="japanese">ダウンロード</ja>
+			<de lang="german">Download</de>
+			<fr lang="french">Télécharge</fr>
+			<it lang="italian">Download</it>
+			<es lang="spanish">Descarga</es>
+			<ko lang="korean">다운로드</ko>
+			<zh-cn lang="chinese (simplified)">下载</zh-cn>
+			<zh-tw lang="chinese (traditional)">下載</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DRAGON_S_MAW</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dragon's Maw</en>
+			<ja lang="japanese">りゅうのあぎと</ja>
+			<de lang="german">Drachenkiefer</de>
+			<fr lang="french">Dent de Dragon</fr>
+			<it lang="italian">Dragomascelle</it>
+			<es lang="spanish">Mandíbula Dragón</es>
+			<ko lang="korean">용의턱</ko>
+			<zh-cn lang="chinese (simplified)">龙颚</zh-cn>
+			<zh-tw lang="chinese (traditional)">龍顎</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DRIZZLE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Drizzle</en>
+			<ja lang="japanese">あめふらし</ja>
+			<de lang="german">Niesel</de>
+			<fr lang="french">Crachin</fr>
+			<it lang="italian">Piovischio</it>
+			<es lang="spanish">Llovizna</es>
+			<ko lang="korean">잔비</ko>
+			<zh-cn lang="chinese (simplified)">降雨</zh-cn>
+			<zh-tw lang="chinese (traditional)">降雨</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DROUGHT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Drought</en>
+			<ja lang="japanese">ひでり</ja>
+			<de lang="german">Dürre</de>
+			<fr lang="french">Sécheresse</fr>
+			<it lang="italian">Siccità</it>
+			<es lang="spanish">Sequía</es>
+			<ko lang="korean">가뭄</ko>
+			<zh-cn lang="chinese (simplified)">日照</zh-cn>
+			<zh-tw lang="chinese (traditional)">日照</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DRY_SKIN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dry Skin</en>
+			<ja lang="japanese">かんそうはだ</ja>
+			<de lang="german">Trockenheit</de>
+			<fr lang="french">Peau Sèche</fr>
+			<it lang="italian">Pellearsa</it>
+			<es lang="spanish">Piel Seca</es>
+			<ko lang="korean">건조피부</ko>
+			<zh-cn lang="chinese (simplified)">干燥皮肤</zh-cn>
+			<zh-tw lang="chinese (traditional)">乾燥皮膚</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EARLY_BIRD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Early Bird</en>
+			<ja lang="japanese">はやおき</ja>
+			<de lang="german">Frühwecker</de>
+			<fr lang="french">Matinal</fr>
+			<it lang="italian">Sveglialampo</it>
+			<es lang="spanish">Madrugar</es>
+			<ko lang="korean">일찍기상</ko>
+			<zh-cn lang="chinese (simplified)">早起</zh-cn>
+			<zh-tw lang="chinese (traditional)">早起</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EARTH_EATER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Earth Eater</en>
+			<ja lang="japanese">どしょく</ja>
+			<de lang="german">Bodenschmaus</de>
+			<fr lang="french">Absorbe-Terre</fr>
+			<it lang="italian">Mangiaterra</it>
+			<es lang="spanish">Geofagia</es>
+			<ko lang="korean">흙먹기</ko>
+			<zh-cn lang="chinese (simplified)">食土</zh-cn>
+			<zh-tw lang="chinese (traditional)">食土</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EFFECT_SPORE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Effect Spore</en>
+			<ja lang="japanese">ほうし</ja>
+			<de lang="german">Sporenwirt</de>
+			<fr lang="french">Pose Spore</fr>
+			<it lang="italian">Spargispora</it>
+			<es lang="spanish">Efecto Espora</es>
+			<ko lang="korean">포자</ko>
+			<zh-cn lang="chinese (simplified)">孢子</zh-cn>
+			<zh-tw lang="chinese (traditional)">孢子</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ELECTRIC_SURGE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Electric Surge</en>
+			<ja lang="japanese">エレキメイカー</ja>
+			<de lang="german">Elektro-Erzeuger</de>
+			<fr lang="french">Créa-Élec</fr>
+			<it lang="italian">Elettrogenesi</it>
+			<es lang="spanish">Electrogénesis</es>
+			<ko lang="korean">일렉트릭메이커</ko>
+			<zh-cn lang="chinese (simplified)">电气制造者</zh-cn>
+			<zh-tw lang="chinese (traditional)">電氣製造者</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ELECTROMORPHOSIS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Electromorphosis</en>
+			<ja lang="japanese">でんきにかえる</ja>
+			<de lang="german">Dynamo</de>
+			<fr lang="french">Grecharge</fr>
+			<it lang="italian">Convertivolt</it>
+			<es lang="spanish">Dinamo</es>
+			<ko lang="korean">전기로바꾸기</ko>
+			<zh-cn lang="chinese (simplified)">电力转换</zh-cn>
+			<zh-tw lang="chinese (traditional)">電力轉換</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EMERGENCY_EXIT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Emergency Exit</en>
+			<ja lang="japanese">ききかいひ</ja>
+			<de lang="german">Rückzug</de>
+			<fr lang="french">Repli Tactique</fr>
+			<it lang="italian">Passoindietro</it>
+			<es lang="spanish">Retirada</es>
+			<ko lang="korean">위기회피</ko>
+			<zh-cn lang="chinese (simplified)">危险回避</zh-cn>
+			<zh-tw lang="chinese (traditional)">危險迴避</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FAIRY_AURA</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fairy Aura</en>
+			<ja lang="japanese">フェアリーオーラ</ja>
+			<de lang="german">Feenaura</de>
+			<fr lang="french">Aura Féérique</fr>
+			<it lang="italian">Aurafolletto</it>
+			<es lang="spanish">Aura Feérica</es>
+			<ko lang="korean">페어리오라</ko>
+			<zh-cn lang="chinese (simplified)">妖精气场</zh-cn>
+			<zh-tw lang="chinese (traditional)">妖精氣場</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FILTER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Filter</en>
+			<ja lang="japanese">フィルター</ja>
+			<de lang="german">Filter</de>
+			<fr lang="french">Filtre</fr>
+			<it lang="italian">Filtro</it>
+			<es lang="spanish">Filtro</es>
+			<ko lang="korean">필터</ko>
+			<zh-cn lang="chinese (simplified)">过滤</zh-cn>
+			<zh-tw lang="chinese (traditional)">過濾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLAME_BODY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Flame Body</en>
+			<ja lang="japanese">ほのおのからだ</ja>
+			<de lang="german">Flammkörper</de>
+			<fr lang="french">Corps Ardent</fr>
+			<it lang="italian">Corpodifuoco</it>
+			<es lang="spanish">Cuerpo Llama</es>
+			<ko lang="korean">불꽃몸</ko>
+			<zh-cn lang="chinese (simplified)">火焰之躯</zh-cn>
+			<zh-tw lang="chinese (traditional)">火焰之軀</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLARE_BOOST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Flare Boost</en>
+			<ja lang="japanese">ねつぼうそう</ja>
+			<de lang="german">Hitzewahn</de>
+			<fr lang="french">Rage Brûlure</fr>
+			<it lang="italian">Bruciaimpeto</it>
+			<es lang="spanish">Ímpetu Ardiente</es>
+			<ko lang="korean">열폭주</ko>
+			<zh-cn lang="chinese (simplified)">受热激升</zh-cn>
+			<zh-tw lang="chinese (traditional)">受熱激升</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLASH_FIRE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Flash Fire</en>
+			<ja lang="japanese">もらいび</ja>
+			<de lang="german">Feuerfänger</de>
+			<fr lang="french">Torche</fr>
+			<it lang="italian">Fuocardore</it>
+			<es lang="spanish">Absorbe Fuego</es>
+			<ko lang="korean">타오르는불꽃</ko>
+			<zh-cn lang="chinese (simplified)">引火</zh-cn>
+			<zh-tw lang="chinese (traditional)">引火</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLOWER_GIFT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Flower Gift</en>
+			<ja lang="japanese">フラワーギフト</ja>
+			<de lang="german">Pflanzengabe</de>
+			<fr lang="french">Don Floral</fr>
+			<it lang="italian">Regalfiore</it>
+			<es lang="spanish">Don Floral</es>
+			<ko lang="korean">플라워기프트</ko>
+			<zh-cn lang="chinese (simplified)">花之礼</zh-cn>
+			<zh-tw lang="chinese (traditional)">花之禮</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLOWER_VEIL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Flower Veil</en>
+			<ja lang="japanese">フラワーベール</ja>
+			<de lang="german">Blütenhülle</de>
+			<fr lang="french">Flora-Voile</fr>
+			<it lang="italian">Fiorvelo</it>
+			<es lang="spanish">Velo Flor</es>
+			<ko lang="korean">플라워베일</ko>
+			<zh-cn lang="chinese (simplified)">花幕</zh-cn>
+			<zh-tw lang="chinese (traditional)">花幕</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLUFFY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fluffy</en>
+			<ja lang="japanese">もふもふ</ja>
+			<de lang="german">Flauschigkeit</de>
+			<fr lang="french">Boule de Poils</fr>
+			<it lang="italian">Morbidone</it>
+			<es lang="spanish">Peluche</es>
+			<ko lang="korean">복슬복슬</ko>
+			<zh-cn lang="chinese (simplified)">毛茸茸</zh-cn>
+			<zh-tw lang="chinese (traditional)">毛茸茸</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FORECAST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Forecast</en>
+			<ja lang="japanese">てんきや</ja>
+			<de lang="german">Prognose</de>
+			<fr lang="french">Météo</fr>
+			<it lang="italian">Previsioni</it>
+			<es lang="spanish">Predicción</es>
+			<ko lang="korean">기분파</ko>
+			<zh-cn lang="chinese (simplified)">阴晴不定</zh-cn>
+			<zh-tw lang="chinese (traditional)">陰晴不定</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FOREWARN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Forewarn</en>
+			<ja lang="japanese">よちむ</ja>
+			<de lang="german">Vorwarnung</de>
+			<fr lang="french">Prédiction</fr>
+			<it lang="italian">Premonizione</it>
+			<es lang="spanish">Alerta</es>
+			<ko lang="korean">예지몽</ko>
+			<zh-cn lang="chinese (simplified)">预知梦</zh-cn>
+			<zh-tw lang="chinese (traditional)">預知夢</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FRIEND_GUARD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Friend Guard</en>
+			<ja lang="japanese">フレンドガード</ja>
+			<de lang="german">Freundeshut</de>
+			<fr lang="french">Garde Amie</fr>
+			<it lang="italian">Amicoscudo</it>
+			<es lang="spanish">Compiescolta</es>
+			<ko lang="korean">프렌드가드</ko>
+			<zh-cn lang="chinese (simplified)">友情防守</zh-cn>
+			<zh-tw lang="chinese (traditional)">友情防守</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FRISK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Frisk</en>
+			<ja lang="japanese">おみとおし</ja>
+			<de lang="german">Schnüffler</de>
+			<fr lang="french">Fouille</fr>
+			<it lang="italian">Indagine</it>
+			<es lang="spanish">Cacheo</es>
+			<ko lang="korean">통찰</ko>
+			<zh-cn lang="chinese (simplified)">察觉</zh-cn>
+			<zh-tw lang="chinese (traditional)">察覺</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FULL_METAL_BODY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Full Metal Body</en>
+			<ja lang="japanese">メタルプロテクト</ja>
+			<de lang="german">Metallprotektor</de>
+			<fr lang="french">Métallo-Garde</fr>
+			<it lang="italian">Metalprotezione</it>
+			<es lang="spanish">Guardia Metálica</es>
+			<ko lang="korean">메탈프로텍트</ko>
+			<zh-cn lang="chinese (simplified)">金属防护</zh-cn>
+			<zh-tw lang="chinese (traditional)">金屬防護</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FUR_COAT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fur Coat</en>
+			<ja lang="japanese">ファーコート</ja>
+			<de lang="german">Fellkleid</de>
+			<fr lang="french">Toison Épaisse</fr>
+			<it lang="italian">Foltopelo</it>
+			<es lang="spanish">Pelaje Recio</es>
+			<ko lang="korean">퍼코트</ko>
+			<zh-cn lang="chinese (simplified)">毛皮大衣</zh-cn>
+			<zh-tw lang="chinese (traditional)">毛皮大衣</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GALE_WINGS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Gale Wings</en>
+			<ja lang="japanese">はやてのつばさ</ja>
+			<de lang="german">Orkanschwingen</de>
+			<fr lang="french">Ailes Bourrasque</fr>
+			<it lang="italian">Aliraffica</it>
+			<es lang="spanish">Alas Vendaval</es>
+			<ko lang="korean">질풍날개</ko>
+			<zh-cn lang="chinese (simplified)">疾风之翼</zh-cn>
+			<zh-tw lang="chinese (traditional)">疾風之翼</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GALVANIZE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Galvanize</en>
+			<ja lang="japanese">エレキスキン</ja>
+			<de lang="german">Elektrohaut</de>
+			<fr lang="french">Peau Électrique</fr>
+			<it lang="italian">Pellelettro</it>
+			<es lang="spanish">Piel Eléctrica</es>
+			<ko lang="korean">일렉트릭스킨</ko>
+			<zh-cn lang="chinese (simplified)">电气皮肤</zh-cn>
+			<zh-tw lang="chinese (traditional)">電氣皮膚</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GLUTTONY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Gluttony</en>
+			<ja lang="japanese">くいしんぼう</ja>
+			<de lang="german">Völlerei</de>
+			<fr lang="french">Gloutonnerie</fr>
+			<it lang="italian">Voracità</it>
+			<es lang="spanish">Gula</es>
+			<ko lang="korean">먹보</ko>
+			<zh-cn lang="chinese (simplified)">贪吃鬼</zh-cn>
+			<zh-tw lang="chinese (traditional)">貪吃鬼</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GOOD_AS_GOLD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Good as Gold</en>
+			<ja lang="japanese">おうごんのからだ</ja>
+			<de lang="german">Goldkörper</de>
+			<fr lang="french">Corps en Or</fr>
+			<it lang="italian">Corpo Aureo</it>
+			<es lang="spanish">Cuerpo Áureo</es>
+			<ko lang="korean">황금몸</ko>
+			<zh-cn lang="chinese (simplified)">黄金之躯</zh-cn>
+			<zh-tw lang="chinese (traditional)">黃金之軀</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GOOEY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Gooey</en>
+			<ja lang="japanese">ぬめぬめ</ja>
+			<de lang="german">Viskosität</de>
+			<fr lang="french">Poisseux</fr>
+			<it lang="italian">Viscosità</it>
+			<es lang="spanish">Baba</es>
+			<ko lang="korean">미끈미끈</ko>
+			<zh-cn lang="chinese (simplified)">黏滑</zh-cn>
+			<zh-tw lang="chinese (traditional)">黏滑</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GORILLA_TACTICS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Gorilla Tactics</en>
+			<ja lang="japanese">ごりむちゅう</ja>
+			<de lang="german">Affenfokus</de>
+			<fr lang="french">Entêtement</fr>
+			<it lang="italian">Vigorilla</it>
+			<es lang="spanish">Monotema</es>
+			<ko lang="korean">무아지경</ko>
+			<zh-cn lang="chinese (simplified)">一猩一意</zh-cn>
+			<zh-tw lang="chinese (traditional)">一猩一意</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRASS_PELT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grass Pelt</en>
+			<ja lang="japanese">くさのけがわ</ja>
+			<de lang="german">Pflanzenpelz</de>
+			<fr lang="french">Toison Herbue</fr>
+			<it lang="italian">Peloderba</it>
+			<es lang="spanish">Manto Frondoso</es>
+			<ko lang="korean">풀모피</ko>
+			<zh-cn lang="chinese (simplified)">草之毛皮</zh-cn>
+			<zh-tw lang="chinese (traditional)">草之毛皮</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRASSY_SURGE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grassy Surge</en>
+			<ja lang="japanese">グラスメイカー</ja>
+			<de lang="german">Gras-Erzeuger</de>
+			<fr lang="french">Créa-Herbe</fr>
+			<it lang="italian">Erbogenesi</it>
+			<es lang="spanish">Herbogénesis</es>
+			<ko lang="korean">그래스메이커</ko>
+			<zh-cn lang="chinese (simplified)">青草制造者</zh-cn>
+			<zh-tw lang="chinese (traditional)">青草製造者</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRIM_NEIGH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grim Neigh</en>
+			<ja lang="japanese">くろのいななき</ja>
+			<de lang="german">Dunkles Wiehern</de>
+			<fr lang="french">Sombre Ruade</fr>
+			<it lang="italian">Nitrito Nero</it>
+			<es lang="spanish">Relincho Negro</es>
+			<ko lang="korean">흑의울음</ko>
+			<zh-cn lang="chinese (simplified)">漆黑嘶鸣</zh-cn>
+			<zh-tw lang="chinese (traditional)">漆黑嘶鳴</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GUARD_DOG</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Guard Dog</en>
+			<ja lang="japanese">ばんけん</ja>
+			<de lang="german">Wachhund</de>
+			<fr lang="french">Chien de Garde</fr>
+			<it lang="italian">Cane da Guardia</it>
+			<es lang="spanish">Perro Guardián</es>
+			<ko lang="korean">파수견</ko>
+			<zh-cn lang="chinese (simplified)">看门犬</zh-cn>
+			<zh-tw lang="chinese (traditional)">看門犬</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GULP_MISSILE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Gulp Missile</en>
+			<ja lang="japanese">うのミサイル</ja>
+			<de lang="german">Würggeschoss</de>
+			<fr lang="french">Dégobage</fr>
+			<it lang="italian">Inghiottimissile</it>
+			<es lang="spanish">Tragamisil</es>
+			<ko lang="korean">그대로꿀꺽미사일</ko>
+			<zh-cn lang="chinese (simplified)">一口导弹</zh-cn>
+			<zh-tw lang="chinese (traditional)">一口飛彈</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GUTS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Guts</en>
+			<ja lang="japanese">こんじょう</ja>
+			<de lang="german">Adrenalin</de>
+			<fr lang="french">Cran</fr>
+			<it lang="italian">Dentistretti</it>
+			<es lang="spanish">Agallas</es>
+			<ko lang="korean">근성</ko>
+			<zh-cn lang="chinese (simplified)">毅力</zh-cn>
+			<zh-tw lang="chinese (traditional)">毅力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HADRON_ENGINE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Hadron Engine</en>
+			<ja lang="japanese">ハドロンエンジン</ja>
+			<de lang="german">Hadronen-Motor</de>
+			<fr lang="french">Moteur à Hadrons</fr>
+			<it lang="italian">Motore Adronico</it>
+			<es lang="spanish">Motor Hadrónico</es>
+			<ko lang="korean">하드론엔진</ko>
+			<zh-cn lang="chinese (simplified)">强子引擎</zh-cn>
+			<zh-tw lang="chinese (traditional)">強子引擎</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HARVEST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Harvest</en>
+			<ja lang="japanese">しゅうかく</ja>
+			<de lang="german">Reiche Ernte</de>
+			<fr lang="french">Récolte</fr>
+			<it lang="italian">Coglibacche</it>
+			<es lang="spanish">Cosecha</es>
+			<ko lang="korean">수확</ko>
+			<zh-cn lang="chinese (simplified)">收获</zh-cn>
+			<zh-tw lang="chinese (traditional)">收穫</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HEALER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Healer</en>
+			<ja lang="japanese">いやしのこころ</ja>
+			<de lang="german">Heilherz</de>
+			<fr lang="french">Cœur Soin</fr>
+			<it lang="italian">Curacuore</it>
+			<es lang="spanish">Alma Cura</es>
+			<ko lang="korean">치유의마음</ko>
+			<zh-cn lang="chinese (simplified)">治愈之心</zh-cn>
+			<zh-tw lang="chinese (traditional)">治癒之心</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HEATPROOF</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Heatproof</en>
+			<ja lang="japanese">たいねつ</ja>
+			<de lang="german">Hitzeschutz</de>
+			<fr lang="french">Ignifugé</fr>
+			<it lang="italian">Antifuoco</it>
+			<es lang="spanish">Ignífugo</es>
+			<ko lang="korean">내열</ko>
+			<zh-cn lang="chinese (simplified)">耐热</zh-cn>
+			<zh-tw lang="chinese (traditional)">耐熱</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HEAVY_METAL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Heavy Metal</en>
+			<ja lang="japanese">ヘヴィメタル</ja>
+			<de lang="german">Schwermetall</de>
+			<fr lang="french">Heavy Metal</fr>
+			<it lang="italian">Metalpesante</it>
+			<es lang="spanish">Metal Pesado</es>
+			<ko lang="korean">헤비메탈</ko>
+			<zh-cn lang="chinese (simplified)">重金属</zh-cn>
+			<zh-tw lang="chinese (traditional)">重金屬</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HONEY_GATHER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Honey Gather</en>
+			<ja lang="japanese">みつあつめ</ja>
+			<de lang="german">Honigmaul</de>
+			<fr lang="french">Cherche Miel</fr>
+			<it lang="italian">Mielincetta</it>
+			<es lang="spanish">Recogemiel</es>
+			<ko lang="korean">꿀모으기</ko>
+			<zh-cn lang="chinese (simplified)">采蜜</zh-cn>
+			<zh-tw lang="chinese (traditional)">採蜜</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HUGE_POWER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Huge Power</en>
+			<ja lang="japanese">ちからもち</ja>
+			<de lang="german">Kraftkoloss</de>
+			<fr lang="french">Coloforce</fr>
+			<it lang="italian">Macroforza</it>
+			<es lang="spanish">Potencia</es>
+			<ko lang="korean">천하장사</ko>
+			<zh-cn lang="chinese (simplified)">大力士</zh-cn>
+			<zh-tw lang="chinese (traditional)">大力士</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HUNGER_SWITCH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Hunger Switch</en>
+			<ja lang="japanese">はらぺこスイッチ</ja>
+			<de lang="german">Heißhunger</de>
+			<fr lang="french">Déclic Fringale</fr>
+			<it lang="italian">Pancialterna</it>
+			<es lang="spanish">Mutapetito</es>
+			<ko lang="korean">꼬르륵스위치</ko>
+			<zh-cn lang="chinese (simplified)">饱了又饿</zh-cn>
+			<zh-tw lang="chinese (traditional)">飽了又餓</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HUSTLE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Hustle</en>
+			<ja lang="japanese">はりきり</ja>
+			<de lang="german">Übereifer</de>
+			<fr lang="french">Agitation</fr>
+			<it lang="italian">Tuttafretta</it>
+			<es lang="spanish">Entusiasmo</es>
+			<ko lang="korean">의욕</ko>
+			<zh-cn lang="chinese (simplified)">活力</zh-cn>
+			<zh-tw lang="chinese (traditional)">活力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HYDRATION</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Hydration</en>
+			<ja lang="japanese">うるおいボディ</ja>
+			<de lang="german">Hydration</de>
+			<fr lang="french">Hydratation</fr>
+			<it lang="italian">Idratazione</it>
+			<es lang="spanish">Hidratación</es>
+			<ko lang="korean">촉촉바디</ko>
+			<zh-cn lang="chinese (simplified)">湿润之躯</zh-cn>
+			<zh-tw lang="chinese (traditional)">濕潤之軀</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HYPER_CUTTER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Hyper Cutter</en>
+			<ja lang="japanese">かいりきバサミ</ja>
+			<de lang="german">Scherenmacht</de>
+			<fr lang="french">Hyper Cutter</fr>
+			<it lang="italian">Ipertaglio</it>
+			<es lang="spanish">Corte Fuerte</es>
+			<ko lang="korean">괴력집게</ko>
+			<zh-cn lang="chinese (simplified)">怪力钳</zh-cn>
+			<zh-tw lang="chinese (traditional)">怪力鉗</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ICE_BODY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ice Body</en>
+			<ja lang="japanese">アイスボディ</ja>
+			<de lang="german">Eishaut</de>
+			<fr lang="french">Corps Gel</fr>
+			<it lang="italian">Corpogelo</it>
+			<es lang="spanish">Gélido</es>
+			<ko lang="korean">아이스바디</ko>
+			<zh-cn lang="chinese (simplified)">冰冻之躯</zh-cn>
+			<zh-tw lang="chinese (traditional)">冰凍之軀</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ICE_FACE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ice Face</en>
+			<ja lang="japanese">アイスフェイス</ja>
+			<de lang="german">Tiefkühlkopf</de>
+			<fr lang="french">Tête de Gel</fr>
+			<it lang="italian">Gelofaccia</it>
+			<es lang="spanish">Cara de Hielo</es>
+			<ko lang="korean">아이스페이스</ko>
+			<zh-cn lang="chinese (simplified)">结冻头</zh-cn>
+			<zh-tw lang="chinese (traditional)">結凍頭</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ICE_SCALES</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ice Scales</en>
+			<ja lang="japanese">こおりのりんぷん</ja>
+			<de lang="german">Eisflügelstaub</de>
+			<fr lang="french">Écailles Glacées</fr>
+			<it lang="italian">Geloscaglie</it>
+			<es lang="spanish">Escama de Hielo</es>
+			<ko lang="korean">얼음인분</ko>
+			<zh-cn lang="chinese (simplified)">冰鳞粉</zh-cn>
+			<zh-tw lang="chinese (traditional)">冰鱗粉</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ILLUMINATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Illuminate</en>
+			<ja lang="japanese">はっこう</ja>
+			<de lang="german">Erleuchtung</de>
+			<fr lang="french">Lumiattirance</fr>
+			<it lang="italian">Risplendi</it>
+			<es lang="spanish">Iluminación</es>
+			<ko lang="korean">발광</ko>
+			<zh-cn lang="chinese (simplified)">发光</zh-cn>
+			<zh-tw lang="chinese (traditional)">發光</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ILLUSION</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Illusion</en>
+			<ja lang="japanese">イリュージョン</ja>
+			<de lang="german">Trugbild</de>
+			<fr lang="french">Illusion</fr>
+			<it lang="italian">Illusione</it>
+			<es lang="spanish">Ilusión</es>
+			<ko lang="korean">일루전</ko>
+			<zh-cn lang="chinese (simplified)">幻觉</zh-cn>
+			<zh-tw lang="chinese (traditional)">幻覺</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>IMMUNITY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Immunity</en>
+			<ja lang="japanese">めんえき</ja>
+			<de lang="german">Immunität</de>
+			<fr lang="french">Vaccin</fr>
+			<it lang="italian">Immunità</it>
+			<es lang="spanish">Inmunidad</es>
+			<ko lang="korean">면역</ko>
+			<zh-cn lang="chinese (simplified)">免疫</zh-cn>
+			<zh-tw lang="chinese (traditional)">免疫</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>IMPOSTER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Imposter</en>
+			<ja lang="japanese">かわりもの</ja>
+			<de lang="german">Doppelgänger</de>
+			<fr lang="french">Imposteur</fr>
+			<it lang="italian">Sosia</it>
+			<es lang="spanish">Impostor</es>
+			<ko lang="korean">괴짜</ko>
+			<zh-cn lang="chinese (simplified)">变身者</zh-cn>
+			<zh-tw lang="chinese (traditional)">變身者</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>INFILTRATOR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Infiltrator</en>
+			<ja lang="japanese">すりぬけ</ja>
+			<de lang="german">Schwebedurch</de>
+			<fr lang="french">Infiltration</fr>
+			<it lang="italian">Intrapasso</it>
+			<es lang="spanish">Allanamiento</es>
+			<ko lang="korean">틈새포착</ko>
+			<zh-cn lang="chinese (simplified)">穿透</zh-cn>
+			<zh-tw lang="chinese (traditional)">穿透</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>INNARDS_OUT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Innards Out</en>
+			<ja lang="japanese">とびだすなかみ</ja>
+			<de lang="german">Magenkrempler</de>
+			<fr lang="french">Expuls'Organes</fr>
+			<it lang="italian">Espellinterno</it>
+			<es lang="spanish">Revés</es>
+			<ko lang="korean">내용물분출</ko>
+			<zh-cn lang="chinese (simplified)">飞出的内在物</zh-cn>
+			<zh-tw lang="chinese (traditional)">飛出的內在物</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>INNER_FOCUS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Inner Focus</en>
+			<ja lang="japanese">せいしんりょく</ja>
+			<de lang="german">Konzentrator</de>
+			<fr lang="french">Attention</fr>
+			<it lang="italian">Forza Interiore</it>
+			<es lang="spanish">Foco Interno</es>
+			<ko lang="korean">정신력</ko>
+			<zh-cn lang="chinese (simplified)">精神力</zh-cn>
+			<zh-tw lang="chinese (traditional)">精神力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>INSOMNIA</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Insomnia</en>
+			<ja lang="japanese">ふみん</ja>
+			<de lang="german">Insomnia</de>
+			<fr lang="french">Insomnia</fr>
+			<it lang="italian">Insonnia</it>
+			<es lang="spanish">Insomnio</es>
+			<ko lang="korean">불면</ko>
+			<zh-cn lang="chinese (simplified)">不眠</zh-cn>
+			<zh-tw lang="chinese (traditional)">不眠</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>INTIMIDATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Intimidate</en>
+			<ja lang="japanese">いかく</ja>
+			<de lang="german">Bedroher</de>
+			<fr lang="french">Intimidation</fr>
+			<it lang="italian">Prepotenza</it>
+			<es lang="spanish">Intimidación</es>
+			<ko lang="korean">위협</ko>
+			<zh-cn lang="chinese (simplified)">威吓</zh-cn>
+			<zh-tw lang="chinese (traditional)">威嚇</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>INTREPID_SWORD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Intrepid Sword</en>
+			<ja lang="japanese">ふとうのけん</ja>
+			<de lang="german">Kühnes Schwert</de>
+			<fr lang="french">Lame Indomptable</fr>
+			<it lang="italian">Spada Indomita</it>
+			<es lang="spanish">Espada Indómita</es>
+			<ko lang="korean">불요의검</ko>
+			<zh-cn lang="chinese (simplified)">不挠之剑</zh-cn>
+			<zh-tw lang="chinese (traditional)">不撓之劍</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>IRON_BARBS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Iron Barbs</en>
+			<ja lang="japanese">てつのトゲ</ja>
+			<de lang="german">Eisenstachel</de>
+			<fr lang="french">Épine de Fer</fr>
+			<it lang="italian">Spineferrate</it>
+			<es lang="spanish">Punta Acero</es>
+			<ko lang="korean">철가시</ko>
+			<zh-cn lang="chinese (simplified)">铁刺</zh-cn>
+			<zh-tw lang="chinese (traditional)">鐵刺</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>IRON_FIST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Iron Fist</en>
+			<ja lang="japanese">てつのこぶし</ja>
+			<de lang="german">Eisenfaust</de>
+			<fr lang="french">Poing de Fer</fr>
+			<it lang="italian">Ferropugno</it>
+			<es lang="spanish">Puño Férreo</es>
+			<ko lang="korean">철주먹</ko>
+			<zh-cn lang="chinese (simplified)">铁拳</zh-cn>
+			<zh-tw lang="chinese (traditional)">鐵拳</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>JUSTIFIED</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Justified</en>
+			<ja lang="japanese">せいぎのこころ</ja>
+			<de lang="german">Redlichkeit</de>
+			<fr lang="french">Cœur Noble</fr>
+			<it lang="italian">Giustizia</it>
+			<es lang="spanish">Justiciero</es>
+			<ko lang="korean">정의의마음</ko>
+			<zh-cn lang="chinese (simplified)">正义之心</zh-cn>
+			<zh-tw lang="chinese (traditional)">正義之心</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>KEEN_EYE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Keen Eye</en>
+			<ja lang="japanese">するどいめ</ja>
+			<de lang="german">Adlerauge</de>
+			<fr lang="french">Regard Vif</fr>
+			<it lang="italian">Sguardofermo</it>
+			<es lang="spanish">Vista Lince</es>
+			<ko lang="korean">날카로운눈</ko>
+			<zh-cn lang="chinese (simplified)">锐利目光</zh-cn>
+			<zh-tw lang="chinese (traditional)">銳利目光</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>KLUTZ</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Klutz</en>
+			<ja lang="japanese">ぶきよう</ja>
+			<de lang="german">Tollpatsch</de>
+			<fr lang="french">Maladresse</fr>
+			<it lang="italian">Impaccio</it>
+			<es lang="spanish">Zoquete</es>
+			<ko lang="korean">서투름</ko>
+			<zh-cn lang="chinese (simplified)">笨拙</zh-cn>
+			<zh-tw lang="chinese (traditional)">笨拙</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LEAF_GUARD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Leaf Guard</en>
+			<ja lang="japanese">リーフガード</ja>
+			<de lang="german">Floraschild</de>
+			<fr lang="french">Feuille Garde</fr>
+			<it lang="italian">Fogliamanto</it>
+			<es lang="spanish">Defensa Hoja</es>
+			<ko lang="korean">리프가드</ko>
+			<zh-cn lang="chinese (simplified)">叶子防守</zh-cn>
+			<zh-tw lang="chinese (traditional)">葉子防守</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LEVITATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Levitate</en>
+			<ja lang="japanese">ふゆう</ja>
+			<de lang="german">Schwebe</de>
+			<fr lang="french">Lévitation</fr>
+			<it lang="italian">Levitazione</it>
+			<es lang="spanish">Levitación</es>
+			<ko lang="korean">부유</ko>
+			<zh-cn lang="chinese (simplified)">飘浮</zh-cn>
+			<zh-tw lang="chinese (traditional)">飄浮</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LIBERO</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Libero</en>
+			<ja lang="japanese">リベロ</ja>
+			<de lang="german">Libero</de>
+			<fr lang="french">Libéro</fr>
+			<it lang="italian">Libero</it>
+			<es lang="spanish">Líbero</es>
+			<ko lang="korean">리베로</ko>
+			<zh-cn lang="chinese (simplified)">自由者</zh-cn>
+			<zh-tw lang="chinese (traditional)">自由者</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LIGHT_METAL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Light Metal</en>
+			<ja lang="japanese">ライトメタル</ja>
+			<de lang="german">Leichtmetall</de>
+			<fr lang="french">Light Metal</fr>
+			<it lang="italian">Metalleggero</it>
+			<es lang="spanish">Metal Liviano</es>
+			<ko lang="korean">라이트메탈</ko>
+			<zh-cn lang="chinese (simplified)">轻金属</zh-cn>
+			<zh-tw lang="chinese (traditional)">輕金屬</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LIGHTNING_ROD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lightning Rod</en>
+			<ja lang="japanese">ひらいしん</ja>
+			<de lang="german">Blitzfänger</de>
+			<fr lang="french">Paratonnerre</fr>
+			<it lang="italian">Parafulmine</it>
+			<es lang="spanish">Pararrayos</es>
+			<ko lang="korean">피뢰침</ko>
+			<zh-cn lang="chinese (simplified)">避雷针</zh-cn>
+			<zh-tw lang="chinese (traditional)">避雷針</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LIMBER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Limber</en>
+			<ja lang="japanese">じゅうなん</ja>
+			<de lang="german">Flexibilität</de>
+			<fr lang="french">Échauffement</fr>
+			<it lang="italian">Scioltezza</it>
+			<es lang="spanish">Flexibilidad</es>
+			<ko lang="korean">유연</ko>
+			<zh-cn lang="chinese (simplified)">柔软</zh-cn>
+			<zh-tw lang="chinese (traditional)">柔軟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LINGERING_AROMA</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lingering Aroma</en>
+			<ja lang="japanese">とれないにおい</ja>
+			<de lang="german">Duftschwade</de>
+			<fr lang="french">Odeur Tenace</fr>
+			<it lang="italian">Odore Tenace</it>
+			<es lang="spanish">Olor Persistente</es>
+			<ko lang="korean">가시지않는향기</ko>
+			<zh-cn lang="chinese (simplified)">甩不掉的气味</zh-cn>
+			<zh-tw lang="chinese (traditional)">甩不掉的氣味</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LIQUID_OOZE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Liquid Ooze</en>
+			<ja lang="japanese">ヘドロえき</ja>
+			<de lang="german">Kloakensoße</de>
+			<fr lang="french">Suintement</fr>
+			<it lang="italian">Melma</it>
+			<es lang="spanish">Lodo Líquido</es>
+			<ko lang="korean">해감액</ko>
+			<zh-cn lang="chinese (simplified)">污泥浆</zh-cn>
+			<zh-tw lang="chinese (traditional)">污泥漿</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LIQUID_VOICE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Liquid Voice</en>
+			<ja lang="japanese">うるおいボイス</ja>
+			<de lang="german">Plätscherstimme</de>
+			<fr lang="french">Hydrata-Son</fr>
+			<it lang="italian">Idrovoce</it>
+			<es lang="spanish">Voz Fluida</es>
+			<ko lang="korean">촉촉보이스</ko>
+			<zh-cn lang="chinese (simplified)">湿润之声</zh-cn>
+			<zh-tw lang="chinese (traditional)">濕潤之聲</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LONG_REACH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Long Reach</en>
+			<ja lang="japanese">えんかく</ja>
+			<de lang="german">Langstrecke</de>
+			<fr lang="french">Longue Portée</fr>
+			<it lang="italian">Distacco</it>
+			<es lang="spanish">Remoto</es>
+			<ko lang="korean">원격</ko>
+			<zh-cn lang="chinese (simplified)">远隔</zh-cn>
+			<zh-tw lang="chinese (traditional)">遠隔</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MAGIC_BOUNCE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Magic Bounce</en>
+			<ja lang="japanese">マジックミラー</ja>
+			<de lang="german">Magiespiegel</de>
+			<fr lang="french">Miroir Magik</fr>
+			<it lang="italian">Magispecchio</it>
+			<es lang="spanish">Espejo Mágico</es>
+			<ko lang="korean">매직미러</ko>
+			<zh-cn lang="chinese (simplified)">魔法镜</zh-cn>
+			<zh-tw lang="chinese (traditional)">魔法鏡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MAGIC_GUARD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Magic Guard</en>
+			<ja lang="japanese">マジックガード</ja>
+			<de lang="german">Magieschild</de>
+			<fr lang="french">Garde Magik</fr>
+			<it lang="italian">Magicscudo</it>
+			<es lang="spanish">Muro Mágico</es>
+			<ko lang="korean">매직가드</ko>
+			<zh-cn lang="chinese (simplified)">魔法防守</zh-cn>
+			<zh-tw lang="chinese (traditional)">魔法防守</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MAGICIAN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Magician</en>
+			<ja lang="japanese">マジシャン</ja>
+			<de lang="german">Zauberer</de>
+			<fr lang="french">Magicien</fr>
+			<it lang="italian">Prestigiatore</it>
+			<es lang="spanish">Prestidigitador</es>
+			<ko lang="korean">매지션</ko>
+			<zh-cn lang="chinese (simplified)">魔术师</zh-cn>
+			<zh-tw lang="chinese (traditional)">魔術師</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MAGMA_ARMOR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Magma Armor</en>
+			<ja lang="japanese">マグマのよろい</ja>
+			<de lang="german">Magmapanzer</de>
+			<fr lang="french">Armumagma</fr>
+			<it lang="italian">Magmascudo</it>
+			<es lang="spanish">Escudo Magma</es>
+			<ko lang="korean">마그마의무장</ko>
+			<zh-cn lang="chinese (simplified)">熔岩铠甲</zh-cn>
+			<zh-tw lang="chinese (traditional)">熔岩鎧甲</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MAGNET_PULL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Magnet Pull</en>
+			<ja lang="japanese">じりょく</ja>
+			<de lang="german">Magnetfalle</de>
+			<fr lang="french">Magnépiège</fr>
+			<it lang="italian">Magnetismo</it>
+			<es lang="spanish">Imán</es>
+			<ko lang="korean">자력</ko>
+			<zh-cn lang="chinese (simplified)">磁力</zh-cn>
+			<zh-tw lang="chinese (traditional)">磁力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MARVEL_SCALE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Marvel Scale</en>
+			<ja lang="japanese">ふしぎなうろこ</ja>
+			<de lang="german">Notschutz</de>
+			<fr lang="french">Écaille Spéciale</fr>
+			<it lang="italian">Pelledura</it>
+			<es lang="spanish">Escama Especial</es>
+			<ko lang="korean">이상한비늘</ko>
+			<zh-cn lang="chinese (simplified)">神奇鳞片</zh-cn>
+			<zh-tw lang="chinese (traditional)">神奇鱗片</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MEGA_LAUNCHER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mega Launcher</en>
+			<ja lang="japanese">メガランチャー</ja>
+			<de lang="german">Megawumme</de>
+			<fr lang="french">Méga Blaster</fr>
+			<it lang="italian">Megalancio</it>
+			<es lang="spanish">Megadisparador</es>
+			<ko lang="korean">메가런처</ko>
+			<zh-cn lang="chinese (simplified)">超级发射器</zh-cn>
+			<zh-tw lang="chinese (traditional)">超級發射器</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MERCILESS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Merciless</en>
+			<ja lang="japanese">ひとでなし</ja>
+			<de lang="german">Quälerei</de>
+			<fr lang="french">Cruauté</fr>
+			<it lang="italian">Spietatezza</it>
+			<es lang="spanish">Ensañamiento</es>
+			<ko lang="korean">무도한행동</ko>
+			<zh-cn lang="chinese (simplified)">不仁不义</zh-cn>
+			<zh-tw lang="chinese (traditional)">不仁不義</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MIMICRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mimicry</en>
+			<ja lang="japanese">ぎたい</ja>
+			<de lang="german">Mimese</de>
+			<fr lang="french">Mimétisme</fr>
+			<it lang="italian">Mimetismo</it>
+			<es lang="spanish">Mimetismo</es>
+			<ko lang="korean">의태</ko>
+			<zh-cn lang="chinese (simplified)">拟态</zh-cn>
+			<zh-tw lang="chinese (traditional)">擬態</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MINUS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Minus</en>
+			<ja lang="japanese">マイナス</ja>
+			<de lang="german">Minus</de>
+			<fr lang="french">Minus</fr>
+			<it lang="italian">Meno</it>
+			<es lang="spanish">Menos</es>
+			<ko lang="korean">마이너스</ko>
+			<zh-cn lang="chinese (simplified)">负电</zh-cn>
+			<zh-tw lang="chinese (traditional)">負電</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MIRROR_ARMOR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mirror Armor</en>
+			<ja lang="japanese">ミラーアーマー</ja>
+			<de lang="german">Spiegelrüstung</de>
+			<fr lang="french">Armure Miroir</fr>
+			<it lang="italian">Blindospecchio</it>
+			<es lang="spanish">Coraza Reflejo</es>
+			<ko lang="korean">미러아머</ko>
+			<zh-cn lang="chinese (simplified)">镜甲</zh-cn>
+			<zh-tw lang="chinese (traditional)">鏡甲</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MISTY_SURGE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Misty Surge</en>
+			<ja lang="japanese">ミストメイカー</ja>
+			<de lang="german">Nebel-Erzeuger</de>
+			<fr lang="french">Créa-Brume</fr>
+			<it lang="italian">Nebbiogenesi</it>
+			<es lang="spanish">Nebulogénesis</es>
+			<ko lang="korean">미스트메이커</ko>
+			<zh-cn lang="chinese (simplified)">薄雾制造者</zh-cn>
+			<zh-tw lang="chinese (traditional)">薄霧製造者</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MOLD_BREAKER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mold Breaker</en>
+			<ja lang="japanese">かたやぶり</ja>
+			<de lang="german">Überbrückung</de>
+			<fr lang="french">Brise Moule</fr>
+			<it lang="italian">Rompiforma</it>
+			<es lang="spanish">Rompemoldes</es>
+			<ko lang="korean">틀깨기</ko>
+			<zh-cn lang="chinese (simplified)">破格</zh-cn>
+			<zh-tw lang="chinese (traditional)">破格</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MOODY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Moody</en>
+			<ja lang="japanese">ムラっけ</ja>
+			<de lang="german">Gefühlswippe</de>
+			<fr lang="french">Lunatique</fr>
+			<it lang="italian">Altalena</it>
+			<es lang="spanish">Veleta</es>
+			<ko lang="korean">변덕쟁이</ko>
+			<zh-cn lang="chinese (simplified)">心情不定</zh-cn>
+			<zh-tw lang="chinese (traditional)">心情不定</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MOTOR_DRIVE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Motor Drive</en>
+			<ja lang="japanese">でんきエンジン</ja>
+			<de lang="german">Starthilfe</de>
+			<fr lang="french">Motorisé</fr>
+			<it lang="italian">Elettrorapid</it>
+			<es lang="spanish">Electromotor</es>
+			<ko lang="korean">전기엔진</ko>
+			<zh-cn lang="chinese (simplified)">电气引擎</zh-cn>
+			<zh-tw lang="chinese (traditional)">電氣引擎</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MOXIE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Moxie</en>
+			<ja lang="japanese">じしんかじょう</ja>
+			<de lang="german">Hochmut</de>
+			<fr lang="french">Impudence</fr>
+			<it lang="italian">Arroganza</it>
+			<es lang="spanish">Autoestima</es>
+			<ko lang="korean">자기과신</ko>
+			<zh-cn lang="chinese (simplified)">自信过度</zh-cn>
+			<zh-tw lang="chinese (traditional)">自信過度</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MULTISCALE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Multiscale</en>
+			<ja lang="japanese">マルチスケイル</ja>
+			<de lang="german">Multischuppe</de>
+			<fr lang="french">Multiécaille</fr>
+			<it lang="italian">Multisquame</it>
+			<es lang="spanish">Compensación</es>
+			<ko lang="korean">멀티스케일</ko>
+			<zh-cn lang="chinese (simplified)">多重鳞片</zh-cn>
+			<zh-tw lang="chinese (traditional)">多重鱗片</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MULTITYPE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Multitype</en>
+			<ja lang="japanese">マルチタイプ</ja>
+			<de lang="german">Variabilität</de>
+			<fr lang="french">Multitype</fr>
+			<it lang="italian">Multitipo</it>
+			<es lang="spanish">Multitipo</es>
+			<ko lang="korean">멀티타입</ko>
+			<zh-cn lang="chinese (simplified)">多属性</zh-cn>
+			<zh-tw lang="chinese (traditional)">多屬性</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MUMMY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mummy</en>
+			<ja lang="japanese">ミイラ</ja>
+			<de lang="german">Mumie</de>
+			<fr lang="french">Momie</fr>
+			<it lang="italian">Mummia</it>
+			<es lang="spanish">Momia</es>
+			<ko lang="korean">미라</ko>
+			<zh-cn lang="chinese (simplified)">木乃伊</zh-cn>
+			<zh-tw lang="chinese (traditional)">木乃伊</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MYCELIUM_MIGHT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mycelium Might</en>
+			<ja lang="japanese">きんしのちから</ja>
+			<de lang="german">Myzelienkraft</de>
+			<fr lang="french">Force Fongique</fr>
+			<it lang="italian">Micoforza</it>
+			<es lang="spanish">Poder Fúngico</es>
+			<ko lang="korean">균사의힘</ko>
+			<zh-cn lang="chinese (simplified)">菌丝之力</zh-cn>
+			<zh-tw lang="chinese (traditional)">菌絲之力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>NATURAL_CURE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Natural Cure</en>
+			<ja lang="japanese">しぜんかいふく</ja>
+			<de lang="german">Innere Kraft</de>
+			<fr lang="french">Médic Nature</fr>
+			<it lang="italian">Alternacura</it>
+			<es lang="spanish">Cura Natural</es>
+			<ko lang="korean">자연회복</ko>
+			<zh-cn lang="chinese (simplified)">自然回复</zh-cn>
+			<zh-tw lang="chinese (traditional)">自然回復</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>NEUROFORCE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Neuroforce</en>
+			<ja lang="japanese">ブレインフォース</ja>
+			<de lang="german">Zerebralmacht</de>
+			<fr lang="french">Cérébro-Force</fr>
+			<it lang="italian">Cerebroforza</it>
+			<es lang="spanish">Fuerza Cerebral</es>
+			<ko lang="korean">브레인포스</ko>
+			<zh-cn lang="chinese (simplified)">脑核之力</zh-cn>
+			<zh-tw lang="chinese (traditional)">腦核之力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>NEUTRALIZING_GAS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Neutralizing Gas</en>
+			<ja lang="japanese">かがくへんかガス</ja>
+			<de lang="german">Reaktionsgas</de>
+			<fr lang="french">Gaz Inhibiteur</fr>
+			<it lang="italian">Gas Reagente</it>
+			<es lang="spanish">Gas Reactivo</es>
+			<ko lang="korean">화학변화가스</ko>
+			<zh-cn lang="chinese (simplified)">化学变化气体</zh-cn>
+			<zh-tw lang="chinese (traditional)">化學變化氣體</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>NO_GUARD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">No Guard</en>
+			<ja lang="japanese">ノーガード</ja>
+			<de lang="german">Schildlos</de>
+			<fr lang="french">Annule Garde</fr>
+			<it lang="italian">Nullodifesa</it>
+			<es lang="spanish">Indefenso</es>
+			<ko lang="korean">노가드</ko>
+			<zh-cn lang="chinese (simplified)">无防守</zh-cn>
+			<zh-tw lang="chinese (traditional)">無防守</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>NORMALIZE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Normalize</en>
+			<ja lang="japanese">ノーマルスキン</ja>
+			<de lang="german">Regulierung</de>
+			<fr lang="french">Normalise</fr>
+			<it lang="italian">Normalità</it>
+			<es lang="spanish">Normalidad</es>
+			<ko lang="korean">노말스킨</ko>
+			<zh-cn lang="chinese (simplified)">一般皮肤</zh-cn>
+			<zh-tw lang="chinese (traditional)">一般皮膚</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OBLIVIOUS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Oblivious</en>
+			<ja lang="japanese">どんかん</ja>
+			<de lang="german">Dösigkeit</de>
+			<fr lang="french">Benêt</fr>
+			<it lang="italian">Indifferenza</it>
+			<es lang="spanish">Despiste</es>
+			<ko lang="korean">둔감</ko>
+			<zh-cn lang="chinese (simplified)">迟钝</zh-cn>
+			<zh-tw lang="chinese (traditional)">遲鈍</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPORTUNIST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Opportunist</en>
+			<ja lang="japanese">びんじょう</ja>
+			<de lang="german">Profiteur</de>
+			<fr lang="french">Opportuniste</fr>
+			<it lang="italian">Scrocco</it>
+			<es lang="spanish">Oportunista</es>
+			<ko lang="korean">편승</ko>
+			<zh-cn lang="chinese (simplified)">跟风</zh-cn>
+			<zh-tw lang="chinese (traditional)">跟風</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ORICHALCUM_PULSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Orichalcum Pulse</en>
+			<ja lang="japanese">ひひいろのこどう</ja>
+			<de lang="german">Orichalkum-Puls</de>
+			<fr lang="french">Pouls Orichalque</fr>
+			<it lang="italian">Ritmo d’Oricalco</it>
+			<es lang="spanish">Latido Oricalco</es>
+			<ko lang="korean">진홍빛고동</ko>
+			<zh-cn lang="chinese (simplified)">绯红脉动</zh-cn>
+			<zh-tw lang="chinese (traditional)">緋紅脈動</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OVERCOAT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Overcoat</en>
+			<ja lang="japanese">ぼうじん</ja>
+			<de lang="german">Wetterfest</de>
+			<fr lang="french">Envelocape</fr>
+			<it lang="italian">Copricapo</it>
+			<es lang="spanish">Funda</es>
+			<ko lang="korean">방진</ko>
+			<zh-cn lang="chinese (simplified)">防尘</zh-cn>
+			<zh-tw lang="chinese (traditional)">防塵</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OVERGROW</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Overgrow</en>
+			<ja lang="japanese">しんりょく</ja>
+			<de lang="german">Notdünger</de>
+			<fr lang="french">Engrais</fr>
+			<it lang="italian">Erbaiuto</it>
+			<es lang="spanish">Espesura</es>
+			<ko lang="korean">심록</ko>
+			<zh-cn lang="chinese (simplified)">茂盛</zh-cn>
+			<zh-tw lang="chinese (traditional)">茂盛</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OWN_TEMPO</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Own Tempo</en>
+			<ja lang="japanese">マイペース</ja>
+			<de lang="german">Tempomacher</de>
+			<fr lang="french">Tempo Perso</fr>
+			<it lang="italian">Mente Locale</it>
+			<es lang="spanish">Ritmo Propio</es>
+			<ko lang="korean">마이페이스</ko>
+			<zh-cn lang="chinese (simplified)">我行我素</zh-cn>
+			<zh-tw lang="chinese (traditional)">我行我素</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PARENTAL_BOND</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Parental Bond</en>
+			<ja lang="japanese">おやこあい</ja>
+			<de lang="german">Familienbande</de>
+			<fr lang="french">Amour Filial</fr>
+			<it lang="italian">Amorefiliale</it>
+			<es lang="spanish">Amor Filial</es>
+			<ko lang="korean">부자유친</ko>
+			<zh-cn lang="chinese (simplified)">亲子爱</zh-cn>
+			<zh-tw lang="chinese (traditional)">親子愛</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PASTEL_VEIL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pastel Veil</en>
+			<ja lang="japanese">パステルベール</ja>
+			<de lang="german">Pastellhülle</de>
+			<fr lang="french">Voile Pastel</fr>
+			<it lang="italian">Pastelvelo</it>
+			<es lang="spanish">Velo Pastel</es>
+			<ko lang="korean">파스텔베일</ko>
+			<zh-cn lang="chinese (simplified)">粉彩护幕</zh-cn>
+			<zh-tw lang="chinese (traditional)">粉彩護幕</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PERISH_BODY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Perish Body</en>
+			<ja lang="japanese">ほろびのボディ</ja>
+			<de lang="german">Unheilskörper</de>
+			<fr lang="french">Corps Condamné</fr>
+			<it lang="italian">Ultimotocco</it>
+			<es lang="spanish">Cuerpo Mortal</es>
+			<ko lang="korean">멸망의바디</ko>
+			<zh-cn lang="chinese (simplified)">灭亡之躯</zh-cn>
+			<zh-tw lang="chinese (traditional)">滅亡之軀</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PICKPOCKET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pickpocket</en>
+			<ja lang="japanese">わるいてぐせ</ja>
+			<de lang="german">Langfinger</de>
+			<fr lang="french">Pickpocket</fr>
+			<it lang="italian">Arraffalesto</it>
+			<es lang="spanish">Hurto</es>
+			<ko lang="korean">나쁜손버릇</ko>
+			<zh-cn lang="chinese (simplified)">顺手牵羊</zh-cn>
+			<zh-tw lang="chinese (traditional)">順手牽羊</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PICKUP</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pickup</en>
+			<ja lang="japanese">ものひろい</ja>
+			<de lang="german">Mitnahme</de>
+			<fr lang="french">Ramassage</fr>
+			<it lang="italian">Raccolta</it>
+			<es lang="spanish">Recogida</es>
+			<ko lang="korean">픽업</ko>
+			<zh-cn lang="chinese (simplified)">捡拾</zh-cn>
+			<zh-tw lang="chinese (traditional)">撿拾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PIXILATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pixilate</en>
+			<ja lang="japanese">フェアリースキン</ja>
+			<de lang="german">Feenschicht</de>
+			<fr lang="french">Peau Féérique</fr>
+			<it lang="italian">Pellefolletto</it>
+			<es lang="spanish">Piel Feérica</es>
+			<ko lang="korean">페어리스킨</ko>
+			<zh-cn lang="chinese (simplified)">妖精皮肤</zh-cn>
+			<zh-tw lang="chinese (traditional)">妖精皮膚</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLUS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Plus</en>
+			<ja lang="japanese">プラス</ja>
+			<de lang="german">Plus</de>
+			<fr lang="french">Plus</fr>
+			<it lang="italian">Più</it>
+			<es lang="spanish">Más</es>
+			<ko lang="korean">플러스</ko>
+			<zh-cn lang="chinese (simplified)">正电</zh-cn>
+			<zh-tw lang="chinese (traditional)">正電</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POISON_HEAL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Poison Heal</en>
+			<ja lang="japanese">ポイズンヒール</ja>
+			<de lang="german">Aufheber</de>
+			<fr lang="french">Soin Poison</fr>
+			<it lang="italian">Velencura</it>
+			<es lang="spanish">Antídoto</es>
+			<ko lang="korean">포이즌힐</ko>
+			<zh-cn lang="chinese (simplified)">毒疗</zh-cn>
+			<zh-tw lang="chinese (traditional)">毒療</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POISON_POINT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Poison Point</en>
+			<ja lang="japanese">どくのトゲ</ja>
+			<de lang="german">Giftdorn</de>
+			<fr lang="french">Point Poison</fr>
+			<it lang="italian">Velenopunto</it>
+			<es lang="spanish">Punto Tóxico</es>
+			<ko lang="korean">독가시</ko>
+			<zh-cn lang="chinese (simplified)">毒刺</zh-cn>
+			<zh-tw lang="chinese (traditional)">毒刺</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POISON_TOUCH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Poison Touch</en>
+			<ja lang="japanese">どくしゅ</ja>
+			<de lang="german">Giftgriff</de>
+			<fr lang="french">Toxitouche</fr>
+			<it lang="italian">Velentocco</it>
+			<es lang="spanish">Toque Tóxico</es>
+			<ko lang="korean">독수</ko>
+			<zh-cn lang="chinese (simplified)">毒手</zh-cn>
+			<zh-tw lang="chinese (traditional)">毒手</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POWER_CONSTRUCT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Power Construct</en>
+			<ja lang="japanese">スワームチェンジ</ja>
+			<de lang="german">Scharwandel</de>
+			<fr lang="french">Rassemblement</fr>
+			<it lang="italian">Sciamefusione</it>
+			<es lang="spanish">Agrupamiento</es>
+			<ko lang="korean">스웜체인지</ko>
+			<zh-cn lang="chinese (simplified)">群聚变形</zh-cn>
+			<zh-tw lang="chinese (traditional)">群聚變形</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POWER_OF_ALCHEMY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Power of Alchemy</en>
+			<ja lang="japanese">かがくのちから</ja>
+			<de lang="german">Chemiekraft</de>
+			<fr lang="french">Osmose</fr>
+			<it lang="italian">Forza Chimica</it>
+			<es lang="spanish">Reacción Química</es>
+			<ko lang="korean">화학의힘</ko>
+			<zh-cn lang="chinese (simplified)">化学之力</zh-cn>
+			<zh-tw lang="chinese (traditional)">化學之力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POWER_SPOT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Power Spot</en>
+			<ja lang="japanese">パワースポット</ja>
+			<de lang="german">Kraftquelle</de>
+			<fr lang="french">Cercle d’Énergie</fr>
+			<it lang="italian">Fonte Energetica</it>
+			<es lang="spanish">Fuente Energía</es>
+			<ko lang="korean">파워스폿</ko>
+			<zh-cn lang="chinese (simplified)">能量点</zh-cn>
+			<zh-tw lang="chinese (traditional)">能量點</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PRANKSTER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Prankster</en>
+			<ja lang="japanese">いたずらごころ</ja>
+			<de lang="german">Strolch</de>
+			<fr lang="french">Farceur</fr>
+			<it lang="italian">Burla</it>
+			<es lang="spanish">Bromista</es>
+			<ko lang="korean">짓궂은마음</ko>
+			<zh-cn lang="chinese (simplified)">恶作剧之心</zh-cn>
+			<zh-tw lang="chinese (traditional)">惡作劇之心</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PRESSURE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pressure</en>
+			<ja lang="japanese">プレッシャー</ja>
+			<de lang="german">Erzwinger</de>
+			<fr lang="french">Pression</fr>
+			<it lang="italian">Pressione</it>
+			<es lang="spanish">Presión</es>
+			<ko lang="korean">프레셔</ko>
+			<zh-cn lang="chinese (simplified)">压迫感</zh-cn>
+			<zh-tw lang="chinese (traditional)">壓迫感</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PRIMORDIAL_SEA</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Primordial Sea</en>
+			<ja lang="japanese">はじまりのうみ</ja>
+			<de lang="german">Urmeer</de>
+			<fr lang="french">Mer Primaire</fr>
+			<it lang="italian">Mare Primordiale</it>
+			<es lang="spanish">Mar del Albor</es>
+			<ko lang="korean">시작의바다</ko>
+			<zh-cn lang="chinese (simplified)">始源之海</zh-cn>
+			<zh-tw lang="chinese (traditional)">始源之海</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PRISM_ARMOR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Prism Armor</en>
+			<ja lang="japanese">プリズムアーマー</ja>
+			<de lang="german">Prismarüstung</de>
+			<fr lang="french">Prisme-Armure</fr>
+			<it lang="italian">Scudoprisma</it>
+			<es lang="spanish">Armadura Prisma</es>
+			<ko lang="korean">프리즘아머</ko>
+			<zh-cn lang="chinese (simplified)">棱镜装甲</zh-cn>
+			<zh-tw lang="chinese (traditional)">稜鏡裝甲</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PROPELLER_TAIL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Propeller Tail</en>
+			<ja lang="japanese">スクリューおびれ</ja>
+			<de lang="german">Schraubflosse</de>
+			<fr lang="french">Propulseur</fr>
+			<it lang="italian">Elicopinna</it>
+			<es lang="spanish">Hélice Caudal</es>
+			<ko lang="korean">스크루지느러미</ko>
+			<zh-cn lang="chinese (simplified)">螺旋尾鳍</zh-cn>
+			<zh-tw lang="chinese (traditional)">螺旋尾鰭</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PROTEAN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Protean</en>
+			<ja lang="japanese">へんげんじざい</ja>
+			<de lang="german">Wandlungskunst</de>
+			<fr lang="french">Protéen</fr>
+			<it lang="italian">Mutatipo</it>
+			<es lang="spanish">Mutatipo</es>
+			<ko lang="korean">변환자재</ko>
+			<zh-cn lang="chinese (simplified)">变幻自如</zh-cn>
+			<zh-tw lang="chinese (traditional)">變幻自如</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PROTOSYNTHESIS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Protosynthesis</en>
+			<ja lang="japanese">こだいかっせい</ja>
+			<de lang="german">Paläosynthese</de>
+			<fr lang="french">Paléosynthèse</fr>
+			<it lang="italian">Paleoattivazione</it>
+			<es lang="spanish">Paleosíntesis</es>
+			<ko lang="korean">고대활성</ko>
+			<zh-cn lang="chinese (simplified)">古代活性</zh-cn>
+			<zh-tw lang="chinese (traditional)">古代活性</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PSYCHIC_SURGE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Psychic Surge</en>
+			<ja lang="japanese">サイコメイカー</ja>
+			<de lang="german">Psycho-Erzeuger</de>
+			<fr lang="french">Créa-Psy</fr>
+			<it lang="italian">Psicogenesi</it>
+			<es lang="spanish">Psicogénesis</es>
+			<ko lang="korean">사이코메이커</ko>
+			<zh-cn lang="chinese (simplified)">精神制造者</zh-cn>
+			<zh-tw lang="chinese (traditional)">精神製造者</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PUNK_ROCK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Punk Rock</en>
+			<ja lang="japanese">パンクロック</ja>
+			<de lang="german">Punk Rock</de>
+			<fr lang="french">Punk Rock</fr>
+			<it lang="italian">Punk Rock</it>
+			<es lang="spanish">Punk Rock</es>
+			<ko lang="korean">펑크록</ko>
+			<zh-cn lang="chinese (simplified)">庞克摇滚</zh-cn>
+			<zh-tw lang="chinese (traditional)">龐克搖滾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PURE_POWER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pure Power</en>
+			<ja lang="japanese">ヨガパワー</ja>
+			<de lang="german">Mentalkraft</de>
+			<fr lang="french">Force Pure</fr>
+			<it lang="italian">Forzapura</it>
+			<es lang="spanish">Energía pura</es>
+			<ko lang="korean">순수한힘</ko>
+			<zh-cn lang="chinese (simplified)">瑜伽之力</zh-cn>
+			<zh-tw lang="chinese (traditional)">瑜伽之力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PURIFYING_SALT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Purifying Salt</en>
+			<ja lang="japanese">きよめのしお</ja>
+			<de lang="german">Läutersalz</de>
+			<fr lang="french">Sel Purificateur</fr>
+			<it lang="italian">Sale Purificante</it>
+			<es lang="spanish">Sal Purificadora</es>
+			<ko lang="korean">정화의소금</ko>
+			<zh-cn lang="chinese (simplified)">洁净之盐</zh-cn>
+			<zh-tw lang="chinese (traditional)">潔淨之鹽</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>QUARK_DRIVE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Quark Drive</en>
+			<ja lang="japanese">クォークチャージ</ja>
+			<de lang="german">Quantenantrieb</de>
+			<fr lang="french">Charge Quantique</fr>
+			<it lang="italian">Carica Quark</it>
+			<es lang="spanish">Carga Cuark</es>
+			<ko lang="korean">쿼크차지</ko>
+			<zh-cn lang="chinese (simplified)">夸克充能</zh-cn>
+			<zh-tw lang="chinese (traditional)">夸克充能</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>QUEENLY_MAJESTY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Queenly Majesty</en>
+			<ja lang="japanese">じょおうのいげん</ja>
+			<de lang="german">Majestät</de>
+			<fr lang="french">Prestance Royale</fr>
+			<it lang="italian">Regalità</it>
+			<es lang="spanish">Regia Presencia</es>
+			<ko lang="korean">여왕의위엄</ko>
+			<zh-cn lang="chinese (simplified)">女王的威严</zh-cn>
+			<zh-tw lang="chinese (traditional)">女王的威嚴</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>QUICK_DRAW</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Quick Draw</en>
+			<ja lang="japanese">クイックドロウ</ja>
+			<de lang="german">Schnellschuss</de>
+			<fr lang="french">Tir Vif</fr>
+			<it lang="italian">Colpolesto</it>
+			<es lang="spanish">Mano Rápida</es>
+			<ko lang="korean">퀵드로</ko>
+			<zh-cn lang="chinese (simplified)">速击</zh-cn>
+			<zh-tw lang="chinese (traditional)">速擊</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>QUICK_FEET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Quick Feet</en>
+			<ja lang="japanese">はやあし</ja>
+			<de lang="german">Rasanz</de>
+			<fr lang="french">Pied Véloce</fr>
+			<it lang="italian">Piedisvelti</it>
+			<es lang="spanish">Pies Rápidos</es>
+			<ko lang="korean">속보</ko>
+			<zh-cn lang="chinese (simplified)">飞毛腿</zh-cn>
+			<zh-tw lang="chinese (traditional)">飛毛腿</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RAIN_DISH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rain Dish</en>
+			<ja lang="japanese">あめうけざら</ja>
+			<de lang="german">Regengenuss</de>
+			<fr lang="french">Cuvette</fr>
+			<it lang="italian">Copripioggia</it>
+			<es lang="spanish">Cura Lluvia</es>
+			<ko lang="korean">젖은접시</ko>
+			<zh-cn lang="chinese (simplified)">雨盘</zh-cn>
+			<zh-tw lang="chinese (traditional)">雨盤</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RATTLED</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rattled</en>
+			<ja lang="japanese">びびり</ja>
+			<de lang="german">Hasenfuß</de>
+			<fr lang="french">Phobique</fr>
+			<it lang="italian">Paura</it>
+			<es lang="spanish">Cobardía</es>
+			<ko lang="korean">주눅</ko>
+			<zh-cn lang="chinese (simplified)">胆怯</zh-cn>
+			<zh-tw lang="chinese (traditional)">膽怯</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RECEIVER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Receiver</en>
+			<ja lang="japanese">レシーバー</ja>
+			<de lang="german">Receiver</de>
+			<fr lang="french">Receveur</fr>
+			<it lang="italian">Ricezione</it>
+			<es lang="spanish">Receptor</es>
+			<ko lang="korean">리시버</ko>
+			<zh-cn lang="chinese (simplified)">接球手</zh-cn>
+			<zh-tw lang="chinese (traditional)">接球手</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RECKLESS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Reckless</en>
+			<ja lang="japanese">すてみ</ja>
+			<de lang="german">Achtlos</de>
+			<fr lang="french">Téméraire</fr>
+			<it lang="italian">Temerarietà</it>
+			<es lang="spanish">Audaz</es>
+			<ko lang="korean">이판사판</ko>
+			<zh-cn lang="chinese (simplified)">舍身</zh-cn>
+			<zh-tw lang="chinese (traditional)">捨身</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>REFRIGERATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Refrigerate</en>
+			<ja lang="japanese">フリーズスキン</ja>
+			<de lang="german">Frostschicht</de>
+			<fr lang="french">Peau Gelée</fr>
+			<it lang="italian">Pellegelo</it>
+			<es lang="spanish">Piel Helada</es>
+			<ko lang="korean">프리즈스킨</ko>
+			<zh-cn lang="chinese (simplified)">冰冻皮肤</zh-cn>
+			<zh-tw lang="chinese (traditional)">冰凍皮膚</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>REGENERATOR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Regenerator</en>
+			<ja lang="japanese">さいせいりょく</ja>
+			<de lang="german">Belebekraft</de>
+			<fr lang="french">Régé-Force</fr>
+			<it lang="italian">Rigenergia</it>
+			<es lang="spanish">Regeneración</es>
+			<ko lang="korean">재생력</ko>
+			<zh-cn lang="chinese (simplified)">再生力</zh-cn>
+			<zh-tw lang="chinese (traditional)">再生力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RIPEN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ripen</en>
+			<ja lang="japanese">じゅくせい</ja>
+			<de lang="german">Heranreifen</de>
+			<fr lang="french">Mûrissement</fr>
+			<it lang="italian">Maturazione</it>
+			<es lang="spanish">Maduración</es>
+			<ko lang="korean">숙성</ko>
+			<zh-cn lang="chinese (simplified)">熟成</zh-cn>
+			<zh-tw lang="chinese (traditional)">熟成</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RIVALRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rivalry</en>
+			<ja lang="japanese">とうそうしん</ja>
+			<de lang="german">Rivalität</de>
+			<fr lang="french">Rivalité</fr>
+			<it lang="italian">Antagonismo</it>
+			<es lang="spanish">Rivalidad</es>
+			<ko lang="korean">투쟁심</ko>
+			<zh-cn lang="chinese (simplified)">斗争心</zh-cn>
+			<zh-tw lang="chinese (traditional)">鬥爭心</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RKS_SYSTEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">RKS System</en>
+			<ja lang="japanese">ＡＲシステム</ja>
+			<de lang="german">Alpha-System</de>
+			<fr lang="french">Système Alpha</fr>
+			<it lang="italian">Sistema Primevo</it>
+			<es lang="spanish">Sistema Alfa</es>
+			<ko lang="korean">AR시스템</ko>
+			<zh-cn lang="chinese (simplified)">ＡＲ系统</zh-cn>
+			<zh-tw lang="chinese (traditional)">ＡＲ系統</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROCK_HEAD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rock Head</en>
+			<ja lang="japanese">いしあたま</ja>
+			<de lang="german">Steinhaupt</de>
+			<fr lang="french">Tête de Roc</fr>
+			<it lang="italian">Testadura</it>
+			<es lang="spanish">Cabeza Roca</es>
+			<ko lang="korean">돌머리</ko>
+			<zh-cn lang="chinese (simplified)">坚硬脑袋</zh-cn>
+			<zh-tw lang="chinese (traditional)">堅硬腦袋</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROCKY_PAYLOAD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rocky Payload</en>
+			<ja lang="japanese">いわはこび</ja>
+			<de lang="german">Steinträger</de>
+			<fr lang="french">Porte-Roche</fr>
+			<it lang="italian">Portamassi</it>
+			<es lang="spanish">Transportarrocas</es>
+			<ko lang="korean">바위나르기</ko>
+			<zh-cn lang="chinese (simplified)">搬岩</zh-cn>
+			<zh-tw lang="chinese (traditional)">搬岩</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROUGH_SKIN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rough Skin</en>
+			<ja lang="japanese">さめはだ</ja>
+			<de lang="german">Rauhaut</de>
+			<fr lang="french">Peau Dure</fr>
+			<it lang="italian">Cartavetro</it>
+			<es lang="spanish">Piel Tosca</es>
+			<ko lang="korean">까칠한피부</ko>
+			<zh-cn lang="chinese (simplified)">粗糙皮肤</zh-cn>
+			<zh-tw lang="chinese (traditional)">粗糙皮膚</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RUN_AWAY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Run Away</en>
+			<ja lang="japanese">にげあし</ja>
+			<de lang="german">Angsthase</de>
+			<fr lang="french">Fuite</fr>
+			<it lang="italian">Fugafacile</it>
+			<es lang="spanish">Fuga</es>
+			<ko lang="korean">도주</ko>
+			<zh-cn lang="chinese (simplified)">逃跑</zh-cn>
+			<zh-tw lang="chinese (traditional)">逃跑</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SAND_FORCE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sand Force</en>
+			<ja lang="japanese">すなのちから</ja>
+			<de lang="german">Sandgewalt</de>
+			<fr lang="french">Force Sable</fr>
+			<it lang="italian">Silicoforza</it>
+			<es lang="spanish">Poder Arena</es>
+			<ko lang="korean">모래의힘</ko>
+			<zh-cn lang="chinese (simplified)">沙之力</zh-cn>
+			<zh-tw lang="chinese (traditional)">沙之力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SAND_RUSH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sand Rush</en>
+			<ja lang="japanese">すなかき</ja>
+			<de lang="german">Sandscharrer</de>
+			<fr lang="french">Baigne Sable</fr>
+			<it lang="italian">Remasabbia</it>
+			<es lang="spanish">Ímpetu Arena</es>
+			<ko lang="korean">모래헤치기</ko>
+			<zh-cn lang="chinese (simplified)">拨沙</zh-cn>
+			<zh-tw lang="chinese (traditional)">撥沙</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SAND_SPIT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sand Spit</en>
+			<ja lang="japanese">すなはき</ja>
+			<de lang="german">Sandspeier</de>
+			<fr lang="french">Expul’Sable</fr>
+			<it lang="italian">Sputasabbia</it>
+			<es lang="spanish">Expulsarena</es>
+			<ko lang="korean">모래뿜기</ko>
+			<zh-cn lang="chinese (simplified)">吐沙</zh-cn>
+			<zh-tw lang="chinese (traditional)">吐沙</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SAND_STREAM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sand Stream</en>
+			<ja lang="japanese">すなおこし</ja>
+			<de lang="german">Sandsturm</de>
+			<fr lang="french">Sable Volant</fr>
+			<it lang="italian">Sabbiafiume</it>
+			<es lang="spanish">Chorro Arena</es>
+			<ko lang="korean">모래날림</ko>
+			<zh-cn lang="chinese (simplified)">扬沙</zh-cn>
+			<zh-tw lang="chinese (traditional)">揚沙</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SAND_VEIL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sand Veil</en>
+			<ja lang="japanese">すながくれ</ja>
+			<de lang="german">Sandschleier</de>
+			<fr lang="french">Voile Sable</fr>
+			<it lang="italian">Sabbiavelo</it>
+			<es lang="spanish">Velo Arena</es>
+			<ko lang="korean">모래숨기</ko>
+			<zh-cn lang="chinese (simplified)">沙隐</zh-cn>
+			<zh-tw lang="chinese (traditional)">沙隱</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SAP_SIPPER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sap Sipper</en>
+			<ja lang="japanese">そうしょく</ja>
+			<de lang="german">Vegetarier</de>
+			<fr lang="french">Herbivore</fr>
+			<it lang="italian">Mangiaerba</it>
+			<es lang="spanish">Herbívoro</es>
+			<ko lang="korean">초식</ko>
+			<zh-cn lang="chinese (simplified)">食草</zh-cn>
+			<zh-tw lang="chinese (traditional)">食草</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SCHOOLING</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Schooling</en>
+			<ja lang="japanese">ぎょぐん</ja>
+			<de lang="german">Fischschwarm</de>
+			<fr lang="french">Banc</fr>
+			<it lang="italian">Banco</it>
+			<es lang="spanish">Banco</es>
+			<ko lang="korean">어군</ko>
+			<zh-cn lang="chinese (simplified)">鱼群</zh-cn>
+			<zh-tw lang="chinese (traditional)">魚群</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SCRAPPY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Scrappy</en>
+			<ja lang="japanese">きもったま</ja>
+			<de lang="german">Rauflust</de>
+			<fr lang="french">Querelleur</fr>
+			<it lang="italian">Nervisaldi</it>
+			<es lang="spanish">Intrépido</es>
+			<ko lang="korean">배짱</ko>
+			<zh-cn lang="chinese (simplified)">胆量</zh-cn>
+			<zh-tw lang="chinese (traditional)">膽量</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SCREEN_CLEANER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Screen Cleaner</en>
+			<ja lang="japanese">バリアフリー</ja>
+			<de lang="german">Hemmungslos</de>
+			<fr lang="french">Brise-Barrière</fr>
+			<it lang="italian">Annullabarriere</it>
+			<es lang="spanish">Antibarrera</es>
+			<ko lang="korean">배리어프리</ko>
+			<zh-cn lang="chinese (simplified)">除障</zh-cn>
+			<zh-tw lang="chinese (traditional)">除障</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SEED_SOWER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Seed Sower</en>
+			<ja lang="japanese">こぼれダネ</ja>
+			<de lang="german">Streusaat</de>
+			<fr lang="french">Semencier</fr>
+			<it lang="italian">Spargisemi</it>
+			<es lang="spanish">Disemillar</es>
+			<ko lang="korean">넘치는씨</ko>
+			<zh-cn lang="chinese (simplified)">掉出种子</zh-cn>
+			<zh-tw lang="chinese (traditional)">掉出種子</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SERENE_GRACE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Serene Grace</en>
+			<ja lang="japanese">てんのめぐみ</ja>
+			<de lang="german">Edelmut</de>
+			<fr lang="french">Sérénité</fr>
+			<it lang="italian">Leggiadro</it>
+			<es lang="spanish">Dicha</es>
+			<ko lang="korean">하늘의은총</ko>
+			<zh-cn lang="chinese (simplified)">天恩</zh-cn>
+			<zh-tw lang="chinese (traditional)">天恩</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHADOW_SHIELD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Shadow Shield</en>
+			<ja lang="japanese">ファントムガード</ja>
+			<de lang="german">Phantomschutz</de>
+			<fr lang="french">Spectro-Bouclier</fr>
+			<it lang="italian">Spettroguardia</it>
+			<es lang="spanish">Guardia Espectro</es>
+			<ko lang="korean">스펙터가드</ko>
+			<zh-cn lang="chinese (simplified)">幻影防守</zh-cn>
+			<zh-tw lang="chinese (traditional)">幻影防守</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHADOW_TAG</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Shadow Tag</en>
+			<ja lang="japanese">かげふみ</ja>
+			<de lang="german">Wegsperre</de>
+			<fr lang="french">Marque Ombre</fr>
+			<it lang="italian">Pedinombra</it>
+			<es lang="spanish">Sombra Trampa</es>
+			<ko lang="korean">그림자밟기</ko>
+			<zh-cn lang="chinese (simplified)">踩影</zh-cn>
+			<zh-tw lang="chinese (traditional)">踩影</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHARPNESS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sharpness</en>
+			<ja lang="japanese">きれあじ</ja>
+			<de lang="german">Scharfkantig</de>
+			<fr lang="french">Incisif</fr>
+			<it lang="italian">Affilama</it>
+			<es lang="spanish">Cortante</es>
+			<ko lang="korean">예리함</ko>
+			<zh-cn lang="chinese (simplified)">锋锐</zh-cn>
+			<zh-tw lang="chinese (traditional)">鋒銳</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHED_SKIN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Shed Skin</en>
+			<ja lang="japanese">だっぴ</ja>
+			<de lang="german">Expidermis</de>
+			<fr lang="french">Mue</fr>
+			<it lang="italian">Muta</it>
+			<es lang="spanish">Mudar</es>
+			<ko lang="korean">탈피</ko>
+			<zh-cn lang="chinese (simplified)">蜕皮</zh-cn>
+			<zh-tw lang="chinese (traditional)">蛻皮</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHEER_FORCE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sheer Force</en>
+			<ja lang="japanese">ちからずく</ja>
+			<de lang="german">Rohe Gewalt</de>
+			<fr lang="french">Sans Limite</fr>
+			<it lang="italian">Forzabruta</it>
+			<es lang="spanish">Potencia Bruta</es>
+			<ko lang="korean">우격다짐</ko>
+			<zh-cn lang="chinese (simplified)">强行</zh-cn>
+			<zh-tw lang="chinese (traditional)">強行</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHELL_ARMOR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Shell Armor</en>
+			<ja lang="japanese">シェルアーマー</ja>
+			<de lang="german">Panzerhaut</de>
+			<fr lang="french">Coque Armure</fr>
+			<it lang="italian">Guscioscudo</it>
+			<es lang="spanish">Caparazón</es>
+			<ko lang="korean">조가비갑옷</ko>
+			<zh-cn lang="chinese (simplified)">硬壳盔甲</zh-cn>
+			<zh-tw lang="chinese (traditional)">硬殼盔甲</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHIELD_DUST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Shield Dust</en>
+			<ja lang="japanese">りんぷん</ja>
+			<de lang="german">Puderabwehr</de>
+			<fr lang="french">Écran Poudre</fr>
+			<it lang="italian">Polvoscudo</it>
+			<es lang="spanish">Polvo Escudo</es>
+			<ko lang="korean">인분</ko>
+			<zh-cn lang="chinese (simplified)">鳞粉</zh-cn>
+			<zh-tw lang="chinese (traditional)">鱗粉</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHIELDS_DOWN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Shields Down</en>
+			<ja lang="japanese">リミットシールド</ja>
+			<de lang="german">Limitschild</de>
+			<fr lang="french">Bouclier-Carcan</fr>
+			<it lang="italian">Scudosoglia</it>
+			<es lang="spanish">Escudo Limitado</es>
+			<ko lang="korean">리밋실드</ko>
+			<zh-cn lang="chinese (simplified)">界限盾壳</zh-cn>
+			<zh-tw lang="chinese (traditional)">界限盾殼</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SIMPLE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Simple</en>
+			<ja lang="japanese">たんじゅん</ja>
+			<de lang="german">Wankelmut</de>
+			<fr lang="french">Simple</fr>
+			<it lang="italian">Disinvoltura</it>
+			<es lang="spanish">Simple</es>
+			<ko lang="korean">단순</ko>
+			<zh-cn lang="chinese (simplified)">单纯</zh-cn>
+			<zh-tw lang="chinese (traditional)">單純</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SKILL_LINK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Skill Link</en>
+			<ja lang="japanese">スキルリンク</ja>
+			<de lang="german">Wertelink</de>
+			<fr lang="french">Multi-Coups</fr>
+			<it lang="italian">Abillegame</it>
+			<es lang="spanish">Encadenado</es>
+			<ko lang="korean">스킬링크</ko>
+			<zh-cn lang="chinese (simplified)">连续攻击</zh-cn>
+			<zh-tw lang="chinese (traditional)">連續攻擊</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SLOW_START</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Slow Start</en>
+			<ja lang="japanese">スロースタート</ja>
+			<de lang="german">Saumselig</de>
+			<fr lang="french">Début Calme</fr>
+			<it lang="italian">Lentoinizio</it>
+			<es lang="spanish">Inicio Lento</es>
+			<ko lang="korean">슬로스타트</ko>
+			<zh-cn lang="chinese (simplified)">慢启动</zh-cn>
+			<zh-tw lang="chinese (traditional)">慢啟動</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SLUSH_RUSH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Slush Rush</en>
+			<ja lang="japanese">ゆきかき</ja>
+			<de lang="german">Schneescharrer</de>
+			<fr lang="french">Chasse-Neige</fr>
+			<it lang="italian">Spalaneve</it>
+			<es lang="spanish">Quitanieves</es>
+			<ko lang="korean">눈치우기</ko>
+			<zh-cn lang="chinese (simplified)">拨雪</zh-cn>
+			<zh-tw lang="chinese (traditional)">撥雪</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SNIPER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sniper</en>
+			<ja lang="japanese">スナイパー</ja>
+			<de lang="german">Superschütze</de>
+			<fr lang="french">Sniper</fr>
+			<it lang="italian">Cecchino</it>
+			<es lang="spanish">Francotirador</es>
+			<ko lang="korean">스나이퍼</ko>
+			<zh-cn lang="chinese (simplified)">狙击手</zh-cn>
+			<zh-tw lang="chinese (traditional)">狙擊手</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SNOW_CLOAK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Snow Cloak</en>
+			<ja lang="japanese">ゆきがくれ</ja>
+			<de lang="german">Schneemantel</de>
+			<fr lang="french">Rideau Neige</fr>
+			<it lang="italian">Mantelneve</it>
+			<es lang="spanish">Manto Níveo</es>
+			<ko lang="korean">눈숨기</ko>
+			<zh-cn lang="chinese (simplified)">雪隐</zh-cn>
+			<zh-tw lang="chinese (traditional)">雪隱</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SNOW_WARNING</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Snow Warning</en>
+			<ja lang="japanese">ゆきふらし</ja>
+			<de lang="german">Hagelalarm</de>
+			<fr lang="french">Alerte Neige</fr>
+			<it lang="italian">Scendineve</it>
+			<es lang="spanish">Nevada</es>
+			<ko lang="korean">눈퍼뜨리기</ko>
+			<zh-cn lang="chinese (simplified)">降雪</zh-cn>
+			<zh-tw lang="chinese (traditional)">降雪</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SOLAR_POWER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Solar Power</en>
+			<ja lang="japanese">サンパワー</ja>
+			<de lang="german">Solarkraft</de>
+			<fr lang="french">Force Soleil</fr>
+			<it lang="italian">Solarpotere</it>
+			<es lang="spanish">Poder Solar</es>
+			<ko lang="korean">선파워</ko>
+			<zh-cn lang="chinese (simplified)">太阳之力</zh-cn>
+			<zh-tw lang="chinese (traditional)">太陽之力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SOLID_ROCK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Solid Rock</en>
+			<ja lang="japanese">ハードロック</ja>
+			<de lang="german">Felskern</de>
+			<fr lang="french">Solide Roc</fr>
+			<it lang="italian">Solidroccia</it>
+			<es lang="spanish">Roca Sólida</es>
+			<ko lang="korean">하드록</ko>
+			<zh-cn lang="chinese (simplified)">坚硬岩石</zh-cn>
+			<zh-tw lang="chinese (traditional)">堅硬岩石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SOUL_HEART</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Soul-Heart</en>
+			<ja lang="japanese">ソウルハート</ja>
+			<de lang="german">Seelenherz</de>
+			<fr lang="french">Animacœur</fr>
+			<it lang="italian">Cuoreanima</it>
+			<es lang="spanish">Coránima</es>
+			<ko lang="korean">소울하트</ko>
+			<zh-cn lang="chinese (simplified)">魂心</zh-cn>
+			<zh-tw lang="chinese (traditional)">魂心</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SOUNDPROOF</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Soundproof</en>
+			<ja lang="japanese">ぼうおん</ja>
+			<de lang="german">Lärmschutz</de>
+			<fr lang="french">Anti-Bruit</fr>
+			<it lang="italian">Antisuono</it>
+			<es lang="spanish">Insonorizar</es>
+			<ko lang="korean">방음</ko>
+			<zh-cn lang="chinese (simplified)">隔音</zh-cn>
+			<zh-tw lang="chinese (traditional)">隔音</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SPEED_BOOST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Speed Boost</en>
+			<ja lang="japanese">かそく</ja>
+			<de lang="german">Temposchub</de>
+			<fr lang="french">Turbo</fr>
+			<it lang="italian">Acceleratore</it>
+			<es lang="spanish">Impulso</es>
+			<ko lang="korean">가속</ko>
+			<zh-cn lang="chinese (simplified)">加速</zh-cn>
+			<zh-tw lang="chinese (traditional)">加速</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STAKEOUT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Stakeout</en>
+			<ja lang="japanese">はりこみ</ja>
+			<de lang="german">Beschattung</de>
+			<fr lang="french">Filature</fr>
+			<it lang="italian">Sorveglianza</it>
+			<es lang="spanish">Vigilante</es>
+			<ko lang="korean">잠복</ko>
+			<zh-cn lang="chinese (simplified)">蹲守</zh-cn>
+			<zh-tw lang="chinese (traditional)">監視</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STALL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Stall</en>
+			<ja lang="japanese">あとだし</ja>
+			<de lang="german">Zeitspiel</de>
+			<fr lang="french">Frein</fr>
+			<it lang="italian">Rallentatore</it>
+			<es lang="spanish">Rezagado</es>
+			<ko lang="korean">시간벌기</ko>
+			<zh-cn lang="chinese (simplified)">慢出</zh-cn>
+			<zh-tw lang="chinese (traditional)">慢出</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STALWART</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Stalwart</en>
+			<ja lang="japanese">すじがねいり</ja>
+			<de lang="german">Stahlrückgrat</de>
+			<fr lang="french">Nerfs d’Acier</fr>
+			<it lang="italian">Volontà di Ferro</it>
+			<es lang="spanish">Acérrimo</es>
+			<ko lang="korean">굳건한신념</ko>
+			<zh-cn lang="chinese (simplified)">坚毅</zh-cn>
+			<zh-tw lang="chinese (traditional)">堅毅</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STAMINA</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Stamina</en>
+			<ja lang="japanese">じきゅうりょく</ja>
+			<de lang="german">Zähigkeit</de>
+			<fr lang="french">Endurance</fr>
+			<it lang="italian">Sopportazione</it>
+			<es lang="spanish">Firmeza</es>
+			<ko lang="korean">지구력</ko>
+			<zh-cn lang="chinese (simplified)">持久力</zh-cn>
+			<zh-tw lang="chinese (traditional)">持久力</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STANCE_CHANGE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Stance Change</en>
+			<ja lang="japanese">バトルスイッチ</ja>
+			<de lang="german">Taktikwechsel</de>
+			<fr lang="french">Déclic Tactique</fr>
+			<it lang="italian">Accendilotta</it>
+			<es lang="spanish">Cambio Táctico</es>
+			<ko lang="korean">배틀스위치</ko>
+			<zh-cn lang="chinese (simplified)">战斗切换</zh-cn>
+			<zh-tw lang="chinese (traditional)">戰鬥切換</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STATIC</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Static</en>
+			<ja lang="japanese">せいでんき</ja>
+			<de lang="german">Statik</de>
+			<fr lang="french">Statik</fr>
+			<it lang="italian">Statico</it>
+			<es lang="spanish">Elec. Estática</es>
+			<ko lang="korean">정전기</ko>
+			<zh-cn lang="chinese (simplified)">静电</zh-cn>
+			<zh-tw lang="chinese (traditional)">靜電</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STEADFAST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Steadfast</en>
+			<ja lang="japanese">ふくつのこころ</ja>
+			<de lang="german">Felsenfest</de>
+			<fr lang="french">Impassible</fr>
+			<it lang="italian">Cuordeciso</it>
+			<es lang="spanish">Impasible</es>
+			<ko lang="korean">불굴의마음</ko>
+			<zh-cn lang="chinese (simplified)">不屈之心</zh-cn>
+			<zh-tw lang="chinese (traditional)">不屈之心</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STEAM_ENGINE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Steam Engine</en>
+			<ja lang="japanese">じょうききかん</ja>
+			<de lang="german">Dampfantrieb</de>
+			<fr lang="french">Turbine</fr>
+			<it lang="italian">Vapormacchina</it>
+			<es lang="spanish">Combustible</es>
+			<ko lang="korean">증기기관</ko>
+			<zh-cn lang="chinese (simplified)">蒸汽机</zh-cn>
+			<zh-tw lang="chinese (traditional)">蒸汽機</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STEELWORKER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Steelworker</en>
+			<ja lang="japanese">はがねつかい</ja>
+			<de lang="german">Stahlprofi</de>
+			<fr lang="french">Expert Acier</fr>
+			<it lang="italian">Tempracciaio</it>
+			<es lang="spanish">Acero Templado</es>
+			<ko lang="korean">강철술사</ko>
+			<zh-cn lang="chinese (simplified)">钢能力者</zh-cn>
+			<zh-tw lang="chinese (traditional)">鋼能力者</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STEELY_SPIRIT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Steely Spirit</en>
+			<ja lang="japanese">はがねのせいしん</ja>
+			<de lang="german">Stählerner Wille</de>
+			<fr lang="french">Boost Acier</fr>
+			<it lang="italian">Spiritoferreo</it>
+			<es lang="spanish">Alma Acerada</es>
+			<ko lang="korean">강철정신</ko>
+			<zh-cn lang="chinese (simplified)">钢之意志</zh-cn>
+			<zh-tw lang="chinese (traditional)">鋼之意志</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STENCH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Stench</en>
+			<ja lang="japanese">あくしゅう</ja>
+			<de lang="german">Duftnote</de>
+			<fr lang="french">Puanteur</fr>
+			<it lang="italian">Tanfo</it>
+			<es lang="spanish">Hedor</es>
+			<ko lang="korean">악취</ko>
+			<zh-cn lang="chinese (simplified)">恶臭</zh-cn>
+			<zh-tw lang="chinese (traditional)">惡臭</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STICKY_HOLD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sticky Hold</en>
+			<ja lang="japanese">ねんちゃく</ja>
+			<de lang="german">Wertehalter</de>
+			<fr lang="french">Glue</fr>
+			<it lang="italian">Antifurto</it>
+			<es lang="spanish">Viscosidad</es>
+			<ko lang="korean">점착</ko>
+			<zh-cn lang="chinese (simplified)">黏着</zh-cn>
+			<zh-tw lang="chinese (traditional)">黏著</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STORM_DRAIN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Storm Drain</en>
+			<ja lang="japanese">よびみず</ja>
+			<de lang="german">Sturmsog</de>
+			<fr lang="french">Lavabo</fr>
+			<it lang="italian">Acquascolo</it>
+			<es lang="spanish">Colector</es>
+			<ko lang="korean">마중물</ko>
+			<zh-cn lang="chinese (simplified)">引水</zh-cn>
+			<zh-tw lang="chinese (traditional)">引水</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STRONG_JAW</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Strong Jaw</en>
+			<ja lang="japanese">がんじょうあご</ja>
+			<de lang="german">Titankiefer</de>
+			<fr lang="french">Prognathe</fr>
+			<it lang="italian">Ferromascella</it>
+			<es lang="spanish">Mandíbula Fuerte</es>
+			<ko lang="korean">옹골찬턱</ko>
+			<zh-cn lang="chinese (simplified)">强壮之颚</zh-cn>
+			<zh-tw lang="chinese (traditional)">強壯之顎</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STURDY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sturdy</en>
+			<ja lang="japanese">がんじょう</ja>
+			<de lang="german">Robustheit</de>
+			<fr lang="french">Fermeté</fr>
+			<it lang="italian">Vigore</it>
+			<es lang="spanish">Robustez</es>
+			<ko lang="korean">옹골참</ko>
+			<zh-cn lang="chinese (simplified)">结实</zh-cn>
+			<zh-tw lang="chinese (traditional)">結實</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SUCTION_CUPS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Suction Cups</en>
+			<ja lang="japanese">きゅうばん</ja>
+			<de lang="german">Saugnapf</de>
+			<fr lang="french">Ventouse</fr>
+			<it lang="italian">Ventose</it>
+			<es lang="spanish">Ventosas</es>
+			<ko lang="korean">흡반</ko>
+			<zh-cn lang="chinese (simplified)">吸盘</zh-cn>
+			<zh-tw lang="chinese (traditional)">吸盤</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SUPER_LUCK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Super Luck</en>
+			<ja lang="japanese">きょううん</ja>
+			<de lang="german">Glückspilz</de>
+			<fr lang="french">Chanceux</fr>
+			<it lang="italian">Supersorte</it>
+			<es lang="spanish">Afortunado</es>
+			<ko lang="korean">대운</ko>
+			<zh-cn lang="chinese (simplified)">超幸运</zh-cn>
+			<zh-tw lang="chinese (traditional)">超幸運</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SUPREME_OVERLORD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Supreme Overlord</en>
+			<ja lang="japanese">そうだいしょう</ja>
+			<de lang="german">Feldherr</de>
+			<fr lang="french">Général Suprême</fr>
+			<it lang="italian">Generale Supremo</it>
+			<es lang="spanish">General Supremo</es>
+			<ko lang="korean">총대장</ko>
+			<zh-cn lang="chinese (simplified)">大将</zh-cn>
+			<zh-tw lang="chinese (traditional)">大將</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SURGE_SURFER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Surge Surfer</en>
+			<ja lang="japanese">サーフテール</ja>
+			<de lang="german">Surf-Schweif</de>
+			<fr lang="french">Surf Caudal</fr>
+			<it lang="italian">Codasurf</it>
+			<es lang="spanish">Cola Surf</es>
+			<ko lang="korean">서핑테일</ko>
+			<zh-cn lang="chinese (simplified)">冲浪之尾</zh-cn>
+			<zh-tw lang="chinese (traditional)">衝浪之尾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SWARM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Swarm</en>
+			<ja lang="japanese">むしのしらせ</ja>
+			<de lang="german">Hexaplaga</de>
+			<fr lang="french">Essaim</fr>
+			<it lang="italian">Aiutinsetto</it>
+			<es lang="spanish">Enjambre</es>
+			<ko lang="korean">벌레의알림</ko>
+			<zh-cn lang="chinese (simplified)">虫之预感</zh-cn>
+			<zh-tw lang="chinese (traditional)">蟲之預感</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SWEET_VEIL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sweet Veil</en>
+			<ja lang="japanese">スイートベール</ja>
+			<de lang="german">Zuckerhülle</de>
+			<fr lang="french">Gluco-Voile</fr>
+			<it lang="italian">Dolcevelo</it>
+			<es lang="spanish">Velo Dulce</es>
+			<ko lang="korean">스위트베일</ko>
+			<zh-cn lang="chinese (simplified)">甜幕</zh-cn>
+			<zh-tw lang="chinese (traditional)">甜幕</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SWIFT_SWIM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Swift Swim</en>
+			<ja lang="japanese">すいすい</ja>
+			<de lang="german">Wassertempo</de>
+			<fr lang="french">Glissade</fr>
+			<it lang="italian">Nuotovelox</it>
+			<es lang="spanish">Nado Rápido</es>
+			<ko lang="korean">쓱쓱</ko>
+			<zh-cn lang="chinese (simplified)">悠游自如</zh-cn>
+			<zh-tw lang="chinese (traditional)">悠游自如</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SWORD_OF_RUIN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sword of Ruin</en>
+			<ja lang="japanese">わざわいのつるぎ</ja>
+			<de lang="german">Unheilsschwert</de>
+			<fr lang="french">Épée du Fléau</fr>
+			<it lang="italian">Spada Nefasta</it>
+			<es lang="spanish">Espada Debacle</es>
+			<ko lang="korean">재앙의검</ko>
+			<zh-cn lang="chinese (simplified)">灾祸之剑</zh-cn>
+			<zh-tw lang="chinese (traditional)">災禍之劍</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SYMBIOSIS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Symbiosis</en>
+			<ja lang="japanese">きょうせい</ja>
+			<de lang="german">Nutznießer</de>
+			<fr lang="french">Symbiose</fr>
+			<it lang="italian">Simbiosi</it>
+			<es lang="spanish">Simbiosis</es>
+			<ko lang="korean">공생</ko>
+			<zh-cn lang="chinese (simplified)">共生</zh-cn>
+			<zh-tw lang="chinese (traditional)">共生</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SYNCHRONIZE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Synchronize</en>
+			<ja lang="japanese">シンクロ</ja>
+			<de lang="german">Synchro</de>
+			<fr lang="french">Synchro</fr>
+			<it lang="italian">Sincronismo</it>
+			<es lang="spanish">Sincronía</es>
+			<ko lang="korean">싱크로</ko>
+			<zh-cn lang="chinese (simplified)">同步</zh-cn>
+			<zh-tw lang="chinese (traditional)">同步</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TABLETS_OF_RUIN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Tablets of Ruin</en>
+			<ja lang="japanese">わざわいのおふだ</ja>
+			<de lang="german">Unheilstafeln</de>
+			<fr lang="french">Bois du Fléau</fr>
+			<it lang="italian">Amuleto Nefasto</it>
+			<es lang="spanish">Tablilla Debacle</es>
+			<ko lang="korean">재앙의목간</ko>
+			<zh-cn lang="chinese (simplified)">灾祸之简</zh-cn>
+			<zh-tw lang="chinese (traditional)">災禍之簡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TANGLED_FEET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Tangled Feet</en>
+			<ja lang="japanese">ちどりあし</ja>
+			<de lang="german">Fußangel</de>
+			<fr lang="french">Pieds Confus</fr>
+			<it lang="italian">Intricopiedi</it>
+			<es lang="spanish">Tumbos</es>
+			<ko lang="korean">갈지자걸음</ko>
+			<zh-cn lang="chinese (simplified)">蹒跚</zh-cn>
+			<zh-tw lang="chinese (traditional)">蹣跚</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TANGLING_HAIR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Tangling Hair</en>
+			<ja lang="japanese">カーリーヘアー</ja>
+			<de lang="german">Lockenkopf</de>
+			<fr lang="french">Mèche Rebelle</fr>
+			<it lang="italian">Boccolidoro</it>
+			<es lang="spanish">Rizos Rebeldes</es>
+			<ko lang="korean">컬리헤어</ko>
+			<zh-cn lang="chinese (simplified)">卷发</zh-cn>
+			<zh-tw lang="chinese (traditional)">捲髮</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TECHNICIAN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Technician</en>
+			<ja lang="japanese">テクニシャン</ja>
+			<de lang="german">Techniker</de>
+			<fr lang="french">Technicien</fr>
+			<it lang="italian">Tecnico</it>
+			<es lang="spanish">Experto</es>
+			<ko lang="korean">테크니션</ko>
+			<zh-cn lang="chinese (simplified)">技术高手</zh-cn>
+			<zh-tw lang="chinese (traditional)">技術高手</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TELEPATHY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Telepathy</en>
+			<ja lang="japanese">テレパシー</ja>
+			<de lang="german">Telepathie</de>
+			<fr lang="french">Télépathe</fr>
+			<it lang="italian">Telepatia</it>
+			<es lang="spanish">Telepatía</es>
+			<ko lang="korean">텔레파시</ko>
+			<zh-cn lang="chinese (simplified)">心灵感应</zh-cn>
+			<zh-tw lang="chinese (traditional)">心靈感應</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TERAVOLT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Teravolt</en>
+			<ja lang="japanese">テラボルテージ</ja>
+			<de lang="german">Teravolt</de>
+			<fr lang="french">Téra-Voltage</fr>
+			<it lang="italian">Teravolt</it>
+			<es lang="spanish">Terravoltaje</es>
+			<ko lang="korean">테라볼티지</ko>
+			<zh-cn lang="chinese (simplified)">兆级电压</zh-cn>
+			<zh-tw lang="chinese (traditional)">兆級電壓</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>THERMAL_EXCHANGE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Thermal Exchange</en>
+			<ja lang="japanese">ねつこうかん</ja>
+			<de lang="german">Thermowandel</de>
+			<fr lang="french">Thermodynamique</fr>
+			<it lang="italian">Termoscambio</it>
+			<es lang="spanish">Termoconversión</es>
+			<ko lang="korean">열교환</ko>
+			<zh-cn lang="chinese (simplified)">热交换</zh-cn>
+			<zh-tw lang="chinese (traditional)">熱交換</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>THICK_FAT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Thick Fat</en>
+			<ja lang="japanese">あついしぼう</ja>
+			<de lang="german">Speckschicht</de>
+			<fr lang="french">Isograisse</fr>
+			<it lang="italian">Grassospesso</it>
+			<es lang="spanish">Sebo</es>
+			<ko lang="korean">두꺼운지방</ko>
+			<zh-cn lang="chinese (simplified)">厚脂肪</zh-cn>
+			<zh-tw lang="chinese (traditional)">厚脂肪</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TINTED_LENS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Tinted Lens</en>
+			<ja lang="japanese">いろめがね</ja>
+			<de lang="german">Aufwertung</de>
+			<fr lang="french">Lentiteintée</fr>
+			<it lang="italian">Lentifumé</it>
+			<es lang="spanish">Cromolente</es>
+			<ko lang="korean">색안경</ko>
+			<zh-cn lang="chinese (simplified)">有色眼镜</zh-cn>
+			<zh-tw lang="chinese (traditional)">有色眼鏡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TORRENT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Torrent</en>
+			<ja lang="japanese">げきりゅう</ja>
+			<de lang="german">Sturzbach</de>
+			<fr lang="french">Torrent</fr>
+			<it lang="italian">Acquaiuto</it>
+			<es lang="spanish">Torrente</es>
+			<ko lang="korean">급류</ko>
+			<zh-cn lang="chinese (simplified)">激流</zh-cn>
+			<zh-tw lang="chinese (traditional)">激流</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TOUGH_CLAWS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Tough Claws</en>
+			<ja lang="japanese">かたいツメ</ja>
+			<de lang="german">Krallenwucht</de>
+			<fr lang="french">Griffe Dure</fr>
+			<it lang="italian">Unghiedure</it>
+			<es lang="spanish">Garra Dura</es>
+			<ko lang="korean">단단한발톱</ko>
+			<zh-cn lang="chinese (simplified)">硬爪</zh-cn>
+			<zh-tw lang="chinese (traditional)">硬爪</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TOXIC_BOOST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Toxic Boost</en>
+			<ja lang="japanese">どくぼうそう</ja>
+			<de lang="german">Giftwahn</de>
+			<fr lang="french">Rage Poison</fr>
+			<it lang="italian">Velenimpeto</it>
+			<es lang="spanish">Ímpetu Tóxico</es>
+			<ko lang="korean">독폭주</ko>
+			<zh-cn lang="chinese (simplified)">中毒激升</zh-cn>
+			<zh-tw lang="chinese (traditional)">中毒激升</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TOXIC_DEBRIS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Toxic Debris</en>
+			<ja lang="japanese">どくげしょう</ja>
+			<de lang="german">Giftbelag</de>
+			<fr lang="french">Dépôt Toxique</fr>
+			<it lang="italian">Mantossina</it>
+			<es lang="spanish">Capa Tóxica</es>
+			<ko lang="korean">독치장</ko>
+			<zh-cn lang="chinese (simplified)">毒满地</zh-cn>
+			<zh-tw lang="chinese (traditional)">毒滿地</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TRACE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Trace</en>
+			<ja lang="japanese">トレース</ja>
+			<de lang="german">Fährte</de>
+			<fr lang="french">Calque</fr>
+			<it lang="italian">Traccia</it>
+			<es lang="spanish">Rastro</es>
+			<ko lang="korean">트레이스</ko>
+			<zh-cn lang="chinese (simplified)">复制</zh-cn>
+			<zh-tw lang="chinese (traditional)">複製</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TRANSISTOR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Transistor</en>
+			<ja lang="japanese">トランジスタ</ja>
+			<de lang="german">Transistor</de>
+			<fr lang="french">Transistor</fr>
+			<it lang="italian">Transistor</it>
+			<es lang="spanish">Transistor</es>
+			<ko lang="korean">트랜지스터</ko>
+			<zh-cn lang="chinese (simplified)">电晶体</zh-cn>
+			<zh-tw lang="chinese (traditional)">電晶體</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TRIAGE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Triage</en>
+			<ja lang="japanese">ヒーリングシフト</ja>
+			<de lang="german">Heilwandel</de>
+			<fr lang="french">Prioguérison</fr>
+			<it lang="italian">Primacura</it>
+			<es lang="spanish">Primer Auxilio</es>
+			<ko lang="korean">힐링시프트</ko>
+			<zh-cn lang="chinese (simplified)">先行治疗</zh-cn>
+			<zh-tw lang="chinese (traditional)">先行治療</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TRUANT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Truant</en>
+			<ja lang="japanese">なまけ</ja>
+			<de lang="german">Schnarchnase</de>
+			<fr lang="french">Absentéisme</fr>
+			<it lang="italian">Pigrone</it>
+			<es lang="spanish">Ausente</es>
+			<ko lang="korean">게으름</ko>
+			<zh-cn lang="chinese (simplified)">懒惰</zh-cn>
+			<zh-tw lang="chinese (traditional)">懶惰</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TURBOBLAZE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Turboblaze</en>
+			<ja lang="japanese">ターボブレイズ</ja>
+			<de lang="german">Turbobrand</de>
+			<fr lang="french">TurboBrasier</fr>
+			<it lang="italian">Piroturbina</it>
+			<es lang="spanish">Turbollama</es>
+			<ko lang="korean">터보블레이즈</ko>
+			<zh-cn lang="chinese (simplified)">涡轮火焰</zh-cn>
+			<zh-tw lang="chinese (traditional)">渦輪火焰</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>UNAWARE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Unaware</en>
+			<ja lang="japanese">てんねん</ja>
+			<de lang="german">Unkenntnis</de>
+			<fr lang="french">Inconscient</fr>
+			<it lang="italian">Imprudenza</it>
+			<es lang="spanish">Ignorante</es>
+			<ko lang="korean">천진</ko>
+			<zh-cn lang="chinese (simplified)">纯朴</zh-cn>
+			<zh-tw lang="chinese (traditional)">純樸</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>UNBURDEN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Unburden</en>
+			<ja lang="japanese">かるわざ</ja>
+			<de lang="german">Entlastung</de>
+			<fr lang="french">Délestage</fr>
+			<it lang="italian">Agiltecnica</it>
+			<es lang="spanish">Liviano</es>
+			<ko lang="korean">곡예</ko>
+			<zh-cn lang="chinese (simplified)">轻装</zh-cn>
+			<zh-tw lang="chinese (traditional)">輕裝</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>UNNERVE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Unnerve</en>
+			<ja lang="japanese">きんちょうかん</ja>
+			<de lang="german">Anspannung</de>
+			<fr lang="french">Tension</fr>
+			<it lang="italian">Agitazione</it>
+			<es lang="spanish">Nerviosismo</es>
+			<ko lang="korean">긴장감</ko>
+			<zh-cn lang="chinese (simplified)">紧张感</zh-cn>
+			<zh-tw lang="chinese (traditional)">緊張感</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>UNSEEN_FIST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Unseen Fist</en>
+			<ja lang="japanese">ふかしのこぶし</ja>
+			<de lang="german">Verborgene Faust</de>
+			<fr lang="french">Poing Invisible</fr>
+			<it lang="italian">Pugni Invisibili</it>
+			<es lang="spanish">Puño Invisible</es>
+			<ko lang="korean">보이지않는주먹</ko>
+			<zh-cn lang="chinese (simplified)">无形拳</zh-cn>
+			<zh-tw lang="chinese (traditional)">無形拳</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>VESSEL_OF_RUIN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Vessel of Ruin</en>
+			<ja lang="japanese">わざわいのうつわ</ja>
+			<de lang="german">Unheilsgefäß</de>
+			<fr lang="french">Urne du Fléau</fr>
+			<it lang="italian">Vaso Nefasto</it>
+			<es lang="spanish">Caldero Debacle</es>
+			<ko lang="korean">재앙의그릇</ko>
+			<zh-cn lang="chinese (simplified)">灾祸之鼎</zh-cn>
+			<zh-tw lang="chinese (traditional)">災禍之鼎</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>VICTORY_STAR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Victory Star</en>
+			<ja lang="japanese">しょうりのほし</ja>
+			<de lang="german">Triumphstern</de>
+			<fr lang="french">Victorieux</fr>
+			<it lang="italian">Vittorstella</it>
+			<es lang="spanish">Tinovictoria</es>
+			<ko lang="korean">승리의별</ko>
+			<zh-cn lang="chinese (simplified)">胜利之星</zh-cn>
+			<zh-tw lang="chinese (traditional)">勝利之星</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>VITAL_SPIRIT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Vital Spirit</en>
+			<ja lang="japanese">やるき</ja>
+			<de lang="german">Munterkeit</de>
+			<fr lang="french">Esprit Vital</fr>
+			<it lang="italian">Spiritovivo</it>
+			<es lang="spanish">Espíritu Vital</es>
+			<ko lang="korean">의기양양</ko>
+			<zh-cn lang="chinese (simplified)">干劲</zh-cn>
+			<zh-tw lang="chinese (traditional)">幹勁</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>VOLT_ABSORB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Volt Absorb</en>
+			<ja lang="japanese">ちくでん</ja>
+			<de lang="german">Voltabsorber</de>
+			<fr lang="french">Absorb Volt</fr>
+			<it lang="italian">Assorbivolt</it>
+			<es lang="spanish">Absorbe Elec</es>
+			<ko lang="korean">축전</ko>
+			<zh-cn lang="chinese (simplified)">蓄电</zh-cn>
+			<zh-tw lang="chinese (traditional)">蓄電</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WANDERING_SPIRIT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Wandering Spirit</en>
+			<ja lang="japanese">さまようたましい</ja>
+			<de lang="german">Rastlose Seele</de>
+			<fr lang="french">Âme Vagabonde</fr>
+			<it lang="italian">Anima Errante</it>
+			<es lang="spanish">Alma Errante</es>
+			<ko lang="korean">떠도는영혼</ko>
+			<zh-cn lang="chinese (simplified)">游魂</zh-cn>
+			<zh-tw lang="chinese (traditional)">遊魂</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WATER_ABSORB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Water Absorb</en>
+			<ja lang="japanese">ちょすい</ja>
+			<de lang="german">H2O-Absorber</de>
+			<fr lang="french">Absorb Eau</fr>
+			<it lang="italian">Assorbacqua</it>
+			<es lang="spanish">Absorbe Agua</es>
+			<ko lang="korean">저수</ko>
+			<zh-cn lang="chinese (simplified)">储水</zh-cn>
+			<zh-tw lang="chinese (traditional)">儲水</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WATER_BUBBLE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Water Bubble</en>
+			<ja lang="japanese">すいほう</ja>
+			<de lang="german">Wasserblase</de>
+			<fr lang="french">Aquabulle</fr>
+			<it lang="italian">Bolladacqua</it>
+			<es lang="spanish">Pompa</es>
+			<ko lang="korean">수포</ko>
+			<zh-cn lang="chinese (simplified)">水泡</zh-cn>
+			<zh-tw lang="chinese (traditional)">水泡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WATER_COMPACTION</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Water Compaction</en>
+			<ja lang="japanese">みずがため</ja>
+			<de lang="german">Verklumpen</de>
+			<fr lang="french">Sable Humide</fr>
+			<it lang="italian">Idrorinforzo</it>
+			<es lang="spanish">Hidrorrefuerzo</es>
+			<ko lang="korean">꾸덕꾸덕굳기</ko>
+			<zh-cn lang="chinese (simplified)">遇水凝固</zh-cn>
+			<zh-tw lang="chinese (traditional)">遇水凝固</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WATER_VEIL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Water Veil</en>
+			<ja lang="japanese">みずのベール</ja>
+			<de lang="german">Aquahülle</de>
+			<fr lang="french">Ignifu-Voile</fr>
+			<it lang="italian">Idrovelo</it>
+			<es lang="spanish">Velo Agua</es>
+			<ko lang="korean">수의베일</ko>
+			<zh-cn lang="chinese (simplified)">水幕</zh-cn>
+			<zh-tw lang="chinese (traditional)">水幕</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WEAK_ARMOR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Weak Armor</en>
+			<ja lang="japanese">くだけるよろい</ja>
+			<de lang="german">Bruchrüstung</de>
+			<fr lang="french">Armurouillée</fr>
+			<it lang="italian">Sottilguscio</it>
+			<es lang="spanish">Armadura Frágil</es>
+			<ko lang="korean">깨어진갑옷</ko>
+			<zh-cn lang="chinese (simplified)">碎裂铠甲</zh-cn>
+			<zh-tw lang="chinese (traditional)">碎裂鎧甲</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WELL_BAKED_BODY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Well-Baked Body</en>
+			<ja lang="japanese">こんがりボディ</ja>
+			<de lang="german">Knusperkruste</de>
+			<fr lang="french">Bien Cuit</fr>
+			<it lang="italian">Bentostato</it>
+			<es lang="spanish">Cuerpo Horneado</es>
+			<ko lang="korean">노릇노릇바디</ko>
+			<zh-cn lang="chinese (simplified)">焦香之躯</zh-cn>
+			<zh-tw lang="chinese (traditional)">焦香之軀</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WHITE_SMOKE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">White Smoke</en>
+			<ja lang="japanese">しろいけむり</ja>
+			<de lang="german">Pulverrauch</de>
+			<fr lang="french">Écran Fumée</fr>
+			<it lang="italian">Fumochiaro</it>
+			<es lang="spanish">Humo Blanco</es>
+			<ko lang="korean">하얀연기</ko>
+			<zh-cn lang="chinese (simplified)">白色烟雾</zh-cn>
+			<zh-tw lang="chinese (traditional)">白色煙霧</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WIMP_OUT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Wimp Out</en>
+			<ja lang="japanese">にげごし</ja>
+			<de lang="german">Reißaus</de>
+			<fr lang="french">Escampette</fr>
+			<it lang="italian">Fuggifuggi</it>
+			<es lang="spanish">Huida</es>
+			<ko lang="korean">도망태세</ko>
+			<zh-cn lang="chinese (simplified)">跃跃欲逃</zh-cn>
+			<zh-tw lang="chinese (traditional)">躍躍欲逃</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WIND_POWER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Wind Power</en>
+			<ja lang="japanese">ふうりょくでんき</ja>
+			<de lang="german">Windkraft</de>
+			<fr lang="french">Turbine Éolienne</fr>
+			<it lang="italian">Energia Eolica</it>
+			<es lang="spanish">Energía Eólica</es>
+			<ko lang="korean">풍력발전</ko>
+			<zh-cn lang="chinese (simplified)">风力发电</zh-cn>
+			<zh-tw lang="chinese (traditional)">風力發電</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WIND_RIDER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Wind Rider</en>
+			<ja lang="japanese">かぜのり</ja>
+			<de lang="german">Windreiter</de>
+			<fr lang="french">Aéroporté</fr>
+			<it lang="italian">Vento Propizio</it>
+			<es lang="spanish">Surcavientos</es>
+			<ko lang="korean">바람타기</ko>
+			<zh-cn lang="chinese (simplified)">乘风</zh-cn>
+			<zh-tw lang="chinese (traditional)">乘風</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WONDER_GUARD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Wonder Guard</en>
+			<ja lang="japanese">ふしぎなまもり</ja>
+			<de lang="german">Wunderwache</de>
+			<fr lang="french">Garde Mystik</fr>
+			<it lang="italian">Magidifesa</it>
+			<es lang="spanish">Superguarda</es>
+			<ko lang="korean">불가사의부적</ko>
+			<zh-cn lang="chinese (simplified)">神奇守护</zh-cn>
+			<zh-tw lang="chinese (traditional)">神奇守護</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WONDER_SKIN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Wonder Skin</en>
+			<ja lang="japanese">ミラクルスキン</ja>
+			<de lang="german">Wunderhaut</de>
+			<fr lang="french">Peau Miracle</fr>
+			<it lang="italian">Splendicute</it>
+			<es lang="spanish">Piel Milagro</es>
+			<ko lang="korean">미라클스킨</ko>
+			<zh-cn lang="chinese (simplified)">奇迹皮肤</zh-cn>
+			<zh-tw lang="chinese (traditional)">奇跡皮膚</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ZEN_MODE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Zen Mode</en>
+			<ja lang="japanese">ダルマモード</ja>
+			<de lang="german">Trance-Modus</de>
+			<fr lang="french">Mode Transe</fr>
+			<it lang="italian">Stato Zen</it>
+			<es lang="spanish">Modo Daruma</es>
+			<ko lang="korean">달마모드</ko>
+			<zh-cn lang="chinese (simplified)">达摩模式</zh-cn>
+			<zh-tw lang="chinese (traditional)">達摩模式</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ZERO_TO_HERO</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Zero to Hero</en>
+			<ja lang="japanese">マイティチェンジ</ja>
+			<de lang="german">Superwechsel</de>
+			<fr lang="french">Supermutation</fr>
+			<it lang="italian">Supercambio</it>
+			<es lang="spanish">Cambio Heroico</es>
+			<ko lang="korean">마이티체인지</ko>
+			<zh-cn lang="chinese (simplified)">全能变身</zh-cn>
+			<zh-tw lang="chinese (traditional)">全能變身</zh-tw>
+		</text>
+	</string>
+</ABILITY_NAMES>

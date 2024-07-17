@@ -5,9 +5,12 @@ using u64 = System.UInt64;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PkmnEngine.Strings;
 
 namespace PkmnEngine {
 	internal static partial class BattleEvents {
+		private const StringResource.Namespace STRINGS = StringResource.Namespace.BATTLE_COMMON;
+
 		private static T ValidateParams<T>(object p) {
 			if (p.GetType() != typeof(T)) {
 				throw new System.ArgumentException($"Expected {typeof(T)}, received {p.GetType()}.");

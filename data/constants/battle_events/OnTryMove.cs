@@ -29,7 +29,7 @@ namespace PkmnEngine {
 			BattleMove move = gBattleMoves(args.moveID);
 
 			if (move.moveType == Type.WATER && move.moveCat != MoveCategory.STATUS) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.WATER_ATTACK_EVAPORATED));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.WATER_ATTACK_EVAPORATED));
 				return false;
 			}
 
@@ -41,7 +41,7 @@ namespace PkmnEngine {
 			BattleMove move = gBattleMoves(args.moveID);
 
 			if (move.moveType == Type.FIRE && move.moveCat != MoveCategory.STATUS) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.FIRE_ATTACK_FIZZLED_OUT));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.FIRE_ATTACK_FIZZLED_OUT));
 				return false;
 			}
 

@@ -23,7 +23,8 @@ namespace PkmnEngine {
 			OnEndParams args = ValidateParams<OnEndParams>(p);
 
 			u8 count = (u8)args.bm.GetStatusParam(StatusParam.PERISH_COUNT);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_PERISH_COUNT_FELL_TO_N, args.bm.GetName(), count.ToString()));
+			StringResource contextString = BattleUtils.GetContextString(BATTLE_COMMON.MONS_PERISH_COUNT_FELL_TO_N, args.bm);
+			await MessageBox(Lang.GetString(STRINGS, contextString, args.bm.GetName(), count.ToString()));
 			if (count == 0) {
 				U16 damage = new(args.bm.EffMaxHp(args.state));
 				await args.bm.DamageMon(damage, true, false);

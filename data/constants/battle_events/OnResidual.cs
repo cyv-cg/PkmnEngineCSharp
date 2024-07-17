@@ -25,15 +25,22 @@ namespace PkmnEngine {
 		public static async Task<object> Status_Burn_OnResidual(object p) {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
+
 			U16 damage = new(args.bm.GetPercentOfMaxHp(StatusEffects.BURN_CHIP_DAMAGE));
-			await args.bm.DamageMon(damage, true, false, Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_ITS_BURN, args.bm.GetName()));
+
+			StringResource contextString = BattleUtils.GetContextString(BATTLE_COMMON.MON_WAS_HURT_BY_BURN, args.bm);
+			await args.bm.DamageMon(damage, true, false, Lang.GetString(STRINGS, contextString, args.bm.GetName()));
+			
 			return null;
 		}
 		public static async Task<object> Status_Poison_OnResidual(object p) {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
 			U16 damage = new(args.bm.GetPercentOfMaxHp(StatusEffects.POISON_CHIP_DAMAGE));
-			await args.bm.DamageMon(damage, true, false, damage.Value > 0 ? Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, args.bm.GetName()) : null);
+
+			StringResource contextString = BattleUtils.GetContextString(BATTLE_COMMON.MON_HURT_BY_POISON, args.bm);
+			await args.bm.DamageMon(damage, true, false, damage.Value > 0 ? Lang.GetString(STRINGS, contextString, args.bm.GetName()) : null);
+			
 			return null;
 		}
 		public static async Task<object> Status_Toxic_OnResidual(object p) {
@@ -48,14 +55,18 @@ namespace PkmnEngine {
 			}
 			// Stack additional damage by number of turns afflicted.
 			totalDamage = new((u16)(baseDamage * args.bm.GetStatusParam(StatusParam.TOXIC_BUILDUP)));
-			await args.bm.DamageMon(totalDamage, true, false, totalDamage.Value > 0 ? Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_POISON, args.bm.GetName()) : null);
+
+			StringResource contextString = BattleUtils.GetContextString(BATTLE_COMMON.MON_HURT_BY_POISON, args.bm);
+			await args.bm.DamageMon(totalDamage, true, false, totalDamage.Value > 0 ? Lang.GetString(STRINGS, contextString, args.bm.GetName()) : null);
+			
 			return null;
 		}
 
 		public static async Task<object> Status_AquaRing_OnResidual(object p) {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.A_VEIL_OF_WATER_RESTORED_MONS_HP, args.bm.GetName()));
+			StringResource contextString = BattleUtils.GetContextString(BATTLE_COMMON.A_VEIL_OF_WATER_RESTORED_MONS_HP, args.bm);
+			await MessageBox(Lang.GetString(STRINGS, contextString, args.bm.GetName()));
 			U16 healAmount = new(args.bm.GetPercentOfMaxHp(StatusEffects.AQUA_RING_HEAL_AMOUNT));
 			await args.bm.HealMon(healAmount, false);
 
@@ -65,8 +76,11 @@ namespace PkmnEngine {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
 			U16 healAmount = new(args.bm.GetPercentOfMaxHp(StatusEffects.LEECH_SEED_DRAIN_AMOUNT));
-			await args.bm.DamageMon(healAmount, true, false, Lang.GetBattleMessage(BattleMessage.MONS_HP_WAS_SAPPED_BY_LEECH_SEED, args.bm.GetName()));
+
+			StringResource contextString = BattleUtils.GetContextString(BATTLE_COMMON.MONS_HP_WAS_SAPPED_BY_LEECH_SEED, args.bm);
+			await args.bm.DamageMon(healAmount, true, false, Lang.GetString(STRINGS, contextString, args.bm.GetName()));
 			BattleMon monSeededBy = args.battle.GetMonInSlot(args.state, (u8)args.bm.GetStatusParam(StatusParam.SLOT_SEEDED_BY));
+			
 			if (monSeededBy != null) {
 				await monSeededBy.HealMon(healAmount, false);
 			}
@@ -77,7 +91,9 @@ namespace PkmnEngine {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
 			U16 damage = new((args.bm.HasType(Type.WATER) || args.bm.HasType(Type.STEEL)) ? args.bm.GetPercentOfMaxHp(0.25f) : args.bm.GetPercentOfMaxHp(0.125f));
-			await args.bm.DamageMon(damage, true, false, Lang.GetBattleMessage(BattleMessage.MON_IS_BEING_SALT_CURED, args.bm.GetName()));
+			
+			StringResource contextString = BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_BEING_SALT_CURED, args.bm);
+			await args.bm.DamageMon(damage, true, false, Lang.GetString(STRINGS, contextString, args.bm.GetName()));
 
 			return null;
 		}
@@ -85,7 +101,9 @@ namespace PkmnEngine {
 			OnResidualParams args = ValidateParams<OnResidualParams>(p);
 
 			U16 damage = new(args.bm.GetPercentOfMaxHp(0.25f));
-			await args.bm.DamageMon(damage, true, false, Lang.GetBattleMessage(BattleMessage.MON_AFFLICTED_BY_CURSE, args.bm.GetName()));
+
+			StringResource contextString = BattleUtils.GetContextString(BATTLE_COMMON.MON_AFFLICTED_BY_CURSE, args.bm);
+			await args.bm.DamageMon(damage, true, false, Lang.GetString(STRINGS, contextString, args.bm.GetName()));
 
 			return null;
 		}
@@ -106,7 +124,8 @@ namespace PkmnEngine {
 			u8 count = (u8)args.bm.GetStatusParam(StatusParam.TAUNT);
 			if (count == 0) {
 				args.bm.RemoveStatus(Status.THROAT_CHOP);
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_SHOOK_OFF_THE_TAUNT, args.bm.GetName()));
+				StringResource contextString = BattleUtils.GetContextString(BATTLE_COMMON.MON_SHOOK_OFF_THE_TAUNT, args.bm);
+				await MessageBox(Lang.GetString(STRINGS, contextString, args.bm.GetName()));
 			}
 			args.bm.DecrementStatusParam(StatusParam.TAUNT);
 
@@ -117,7 +136,8 @@ namespace PkmnEngine {
 
 			if (args.bm.GetStatusParam(StatusParam.ENCORE_TURNS) == 0) {
 				args.bm.RemoveStatus(Status.ENCORE);
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_ENCORE_ENDED, args.bm.GetName()));
+				StringResource contextString = BattleUtils.GetContextString(BATTLE_COMMON.MONS_ENCORE_ENDED, args.bm);
+				await MessageBox(Lang.GetString(STRINGS, contextString, args.bm.GetName()));
 			}
 			args.bm.DecrementStatusParam(StatusParam.ENCORE_TURNS);
 
@@ -128,7 +148,8 @@ namespace PkmnEngine {
 
 			if (args.bm.GetStatusParam(StatusParam.DISABLE) == 0) {
 				args.bm.RemoveStatus(Status.DISABLE);
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_MOVE_NO_LONGER_DISABLED, args.bm.GetName()));
+				StringResource contextString = BattleUtils.GetContextString(BATTLE_COMMON.MONS_MOVE_NO_LONGER_DISABLED, args.bm);
+				await MessageBox(Lang.GetString(STRINGS, contextString, args.bm.GetName()));
 			}
 			args.bm.DecrementStatusParam(StatusParam.DISABLE);
 

@@ -34,7 +34,7 @@ namespace PkmnEngine {
 			BattleMove move = gBattleMoves(args.MoveID);
 			if ((move.flags & Flag.SOUND_MOVE) != 0) {
 				if (args.print) {
-					await MessageBox(Lang.GetBattleMessage(BattleMessage.THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES, args.bm.GetName()));
+					await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES, args.bm.GetName()));
 				}
 				return false;
 			}
@@ -47,7 +47,7 @@ namespace PkmnEngine {
 			BattleMove move = gBattleMoves(args.MoveID);
 			if (move.moveCat == MoveCategory.STATUS) {
 				if (args.print) {
-					await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_MOVE_AFTER_THE_TAUNT, args.bm.GetName(), Lang.GetMoveName(args.MoveID)));
+					await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_CANNOT_USE_MOVE_AFTER_THE_TAUNT, args.bm.GetName(), Lang.GetMoveName(args.MoveID)));
 				}
 				return false;
 			}
@@ -60,7 +60,7 @@ namespace PkmnEngine {
 			BattleMove move = gBattleMoves(args.MoveID);
 			if (args.MoveID != args.bm.moves[args.bm.GetStatusParam(StatusParam.ENCORE)]) {
 				if (args.print) {
-					await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_MUST_DO_AN_ENCORE, args.bm.GetName()));
+					await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_MUST_DO_AN_ENCORE, args.bm.GetName()));
 				}
 				return false;
 			}
@@ -72,7 +72,7 @@ namespace PkmnEngine {
 
 			if (args.bm.HasStatus(Status.DISABLE) && args.bm.GetStatusParam(StatusParam.DISABLED_SLOT) == args.moveSlot) {
 				if (args.print) {
-					await MessageBox(Lang.GetBattleMessage(BattleMessage.MONS_MOVE_WAS_DISABLED, args.bm.GetName(), Lang.GetMoveName(args.MoveID)));
+					await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MONS_MOVE_WAS_DISABLED, args.bm.GetName(), Lang.GetMoveName(args.MoveID)));
 				}
 				return false;
 			}
@@ -85,7 +85,7 @@ namespace PkmnEngine {
 			// Tormented mons cannot use the same move twice in a row.
 			if (args.bm.HasStatus(Status.TORMENT) && args.bm.GetStatusParam(StatusParam.LAST_USED_MOVE) == args.moveSlot) {
 				if (args.print) {
-					await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_USE_THE_SAME_MOVE_TWICE_DUE_TO_TORMENT, args.bm.GetName()));
+					await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_CANNOT_USE_THE_SAME_MOVE_TWICE_DUE_TO_TORMENT, args.bm.GetName()));
 				}
 				return false;
 			}
@@ -106,7 +106,7 @@ namespace PkmnEngine {
 					for (u8 i = 0; i < Pokemon.MAX_MOVES; i++) {
 						if (args.bm.KnowsMove(bm.moves[i])) {
 							if (args.print) {
-								await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANT_USE_SEALED_MOVE, args.bm.GetName(), Lang.GetMoveName(args.bm.moves[args.moveSlot])));
+								await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_CANNOT_USE_SEALED_MOVE, args.bm.GetName(), Lang.GetMoveName(args.bm.moves[args.moveSlot])));
 							}
 							return false;
 						}

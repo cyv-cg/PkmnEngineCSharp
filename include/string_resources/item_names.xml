@@ -1,0 +1,5538 @@
+<ITEM_NAMES encoding="utf-8" t9n="official">
+	<string>
+		<key>ABILITY_CAPSULE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ability Capsule</en>
+			<ja lang="japanese">とくせいカプセル</ja>
+			<de lang="german">Fähigkeiten-Kapsel</de>
+			<fr lang="french">Pilule Talent</fr>
+			<it lang="italian">Capsula abilità</it>
+			<es lang="spanish">Cápsula Habilidad</es>
+			<ko lang="korean">특성캡슐</ko>
+			<zh-cn lang="chinese (simplified)">特性胶囊</zh-cn>
+			<zh-tw lang="chinese (traditional)">特性膠囊</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ABOMASITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Abomasite</en>
+			<ja lang="japanese">ユキノオナイト</ja>
+			<de lang="german">Rexblisarnit</de>
+			<fr lang="french">Blizzarite</fr>
+			<it lang="italian">Abomasnowite</it>
+			<es lang="spanish">Abomasnowita</es>
+			<ko lang="korean">눈설왕나이트</ko>
+			<zh-cn lang="chinese (simplified)">暴雪王进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">暴雪王進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ABSOLITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Absolite</en>
+			<ja lang="japanese">アブソルナイト</ja>
+			<de lang="german">Absolnit</de>
+			<fr lang="french">Absolite</fr>
+			<it lang="italian">Absolite</it>
+			<es lang="spanish">Absolita</es>
+			<ko lang="korean">앱솔나이트</ko>
+			<zh-cn lang="chinese (simplified)">阿勃梭鲁进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">阿勃梭魯進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ABSORB_BULB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Absorb Bulb</en>
+			<ja lang="japanese">きゅうこん</ja>
+			<de lang="german">Knolle</de>
+			<fr lang="french">Bulbe</fr>
+			<it lang="italian">Bulbo</it>
+			<es lang="spanish">Tubérculo</es>
+			<ko lang="korean">구근</ko>
+			<zh-cn lang="chinese (simplified)">球根</zh-cn>
+			<zh-tw lang="chinese (traditional)">球根</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ADAMANT_CRYSTAL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Adamant Crystal</en>
+			<ja lang="japanese">だいこんごうだま</ja>
+			<de lang="german">Adamantkristall</de>
+			<fr lang="french">Globe Adamant</fr>
+			<it lang="italian">Adamasferoide</it>
+			<es lang="spanish">Gran Diamansfera</es>
+			<ko lang="korean">큰금강옥</ko>
+			<zh-cn lang="chinese (simplified)">大金刚宝玉</zh-cn>
+			<zh-tw lang="chinese (traditional)">大金剛寶玉</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ADAMANT_ORB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Adamant Orb</en>
+			<ja lang="japanese">こんごうだま</ja>
+			<de lang="german">Adamant-Orb</de>
+			<fr lang="french">Orbe Adamant</fr>
+			<it lang="italian">Adamasfera</it>
+			<es lang="spanish">Diamansfera</es>
+			<ko lang="korean">금강옥</ko>
+			<zh-cn lang="chinese (simplified)">金刚宝珠</zh-cn>
+			<zh-tw lang="chinese (traditional)">金剛寶珠</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ADRENALINE_ORB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Adrenaline Orb</en>
+			<ja lang="japanese">ビビリだま</ja>
+			<de lang="german">Zitter-Orb</de>
+			<fr lang="french">Orbe Frousse</fr>
+			<it lang="italian">Fifasfera</it>
+			<es lang="spanish">Nerviosfera</es>
+			<ko lang="korean">주눅구슬</ko>
+			<zh-cn lang="chinese (simplified)">胆怯球</zh-cn>
+			<zh-tw lang="chinese (traditional)">膽怯球</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AERODACTYLITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Aerodactylite</en>
+			<ja lang="japanese">プテラナイト</ja>
+			<de lang="german">Aerodactylonit</de>
+			<fr lang="french">Ptéraïte</fr>
+			<it lang="italian">Aerodactylite</it>
+			<es lang="spanish">Aerodactylita</es>
+			<ko lang="korean">프테라나이트</ko>
+			<zh-cn lang="chinese (simplified)">化石翼龙进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">化石翼龍進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AGGRONITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Aggronite</en>
+			<ja lang="japanese">ボスゴドラナイト</ja>
+			<de lang="german">Stollossnit</de>
+			<fr lang="french">Galekingite</fr>
+			<it lang="italian">Aggronite</it>
+			<es lang="spanish">Aggronita</es>
+			<ko lang="korean">보스로라나이트</ko>
+			<zh-cn lang="chinese (simplified)">波士可多拉进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">波士可多拉進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AIR_BALLOON</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Air Balloon</en>
+			<ja lang="japanese">ふうせん</ja>
+			<de lang="german">Luftballon</de>
+			<fr lang="french">Ballon</fr>
+			<it lang="italian">Palloncino</it>
+			<es lang="spanish">Globo Helio</es>
+			<ko lang="korean">풍선</ko>
+			<zh-cn lang="chinese (simplified)">气球</zh-cn>
+			<zh-tw lang="chinese (traditional)">氣球</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ALAKAZITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Alakazite</en>
+			<ja lang="japanese">フーディナイト</ja>
+			<de lang="german">Simsalanit</de>
+			<fr lang="french">Alakazamite</fr>
+			<it lang="italian">Alakazamite</it>
+			<es lang="spanish">Alakazamita</es>
+			<ko lang="korean">후디나이트</ko>
+			<zh-cn lang="chinese (simplified)">胡地进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">胡地進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ALORAICHIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Aloraichium Z</en>
+			<ja lang="japanese">アロライＺ</ja>
+			<de lang="german">A-Raichunium Z</de>
+			<fr lang="french">Aloraïzélite</fr>
+			<it lang="italian">Aloraicium Z</it>
+			<es lang="spanish">Alo-Raistal Z</es>
+			<ko lang="korean">알로라이Z</ko>
+			<zh-cn lang="chinese (simplified)">阿罗雷Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">阿羅雷Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ALTARIANITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Altarianite</en>
+			<ja lang="japanese">チルタリスナイト</ja>
+			<de lang="german">Altarianit</de>
+			<fr lang="french">Altarite</fr>
+			<it lang="italian">Altarite</it>
+			<es lang="spanish">Altarianita</es>
+			<ko lang="korean">파비코리나이트</ko>
+			<zh-cn lang="chinese (simplified)">七夕青鸟进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">七夕青鳥進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AMPHAROSITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ampharosite</en>
+			<ja lang="japanese">デンリュウナイト</ja>
+			<de lang="german">Ampharosnit</de>
+			<fr lang="french">Pharampite</fr>
+			<it lang="italian">Ampharosite</it>
+			<es lang="spanish">Ampharosita</es>
+			<ko lang="korean">전룡나이트</ko>
+			<zh-cn lang="chinese (simplified)">电龙进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">電龍進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AMULET_COIN</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Amulet Coin</en>
+			<ja lang="japanese">おまもりこばん</ja>
+			<de lang="german">Münzamulett</de>
+			<fr lang="french">Pièce Rune</fr>
+			<it lang="italian">Monetamuleto</it>
+			<es lang="spanish">Moneda Amuleto</es>
+			<ko lang="korean">부적금화</ko>
+			<zh-cn lang="chinese (simplified)">护符金币</zh-cn>
+			<zh-tw lang="chinese (traditional)">護符金幣</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ASSAULT_VEST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Assault Vest</en>
+			<ja lang="japanese">とつげきチョッキ</ja>
+			<de lang="german">Offensivweste</de>
+			<fr lang="french">Veste de Combat</fr>
+			<it lang="italian">Corpetto assalto</it>
+			<es lang="spanish">Chaleco Asalto</es>
+			<ko lang="korean">돌격조끼</ko>
+			<zh-cn lang="chinese (simplified)">突击背心</zh-cn>
+			<zh-tw lang="chinese (traditional)">突擊背心</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AUDINITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Audinite</en>
+			<ja lang="japanese">タブンネナイト</ja>
+			<de lang="german">Ohrdochnit</de>
+			<fr lang="french">Nanméouïte</fr>
+			<it lang="italian">Audinite</it>
+			<es lang="spanish">Audinita</es>
+			<ko lang="korean">다부니나이트</ko>
+			<zh-cn lang="chinese (simplified)">差不多娃娃进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">差不多娃娃進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BANETTITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Banettite</en>
+			<ja lang="japanese">ジュペッタナイト</ja>
+			<de lang="german">Banetteonit</de>
+			<fr lang="french">Branettite</fr>
+			<it lang="italian">Banettite</it>
+			<es lang="spanish">Banettita</es>
+			<ko lang="korean">다크펫나이트</ko>
+			<zh-cn lang="chinese (simplified)">诅咒娃娃进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">詛咒娃娃進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BEEDRILLITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Beedrillite</en>
+			<ja lang="japanese">スピアナイト</ja>
+			<de lang="german">Bibornit</de>
+			<fr lang="french">Dardargnite</fr>
+			<it lang="italian">Beedrillite</it>
+			<es lang="spanish">Beedrillita</es>
+			<ko lang="korean">독침붕나이트</ko>
+			<zh-cn lang="chinese (simplified)">大针蜂进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">大針蜂進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BERRY_SWEET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Berry Sweet</en>
+			<ja lang="japanese">ベリーアメざいく</ja>
+			<de lang="german">Zucker-Beere</de>
+			<fr lang="french">Baie en Sucre</fr>
+			<it lang="italian">Bonbonbosco</it>
+			<es lang="spanish">Confite Fruto</es>
+			<ko lang="korean">베리사탕공예</ko>
+			<zh-cn lang="chinese (simplified)">野莓糖饰</zh-cn>
+			<zh-tw lang="chinese (traditional)">野莓糖飾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BIG_ROOT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Big Root</en>
+			<ja lang="japanese">おおきなねっこ</ja>
+			<de lang="german">Großwurzel</de>
+			<fr lang="french">Grosse Racine</fr>
+			<it lang="italian">Granradice</it>
+			<es lang="spanish">Raíz Grande</es>
+			<ko lang="korean">큰뿌리</ko>
+			<zh-cn lang="chinese (simplified)">大根茎</zh-cn>
+			<zh-tw lang="chinese (traditional)">大根莖</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BINDING_BAND</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Binding Band</en>
+			<ja lang="japanese">しめつけバンド</ja>
+			<de lang="german">Klammerband</de>
+			<fr lang="french">Bande Étreinte</fr>
+			<it lang="italian">Legafascia</it>
+			<es lang="spanish">Banda Atadura</es>
+			<ko lang="korean">조임밴드</ko>
+			<zh-cn lang="chinese (simplified)">紧绑束带</zh-cn>
+			<zh-tw lang="chinese (traditional)">緊綁束帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BLACK_BELT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Black Belt</en>
+			<ja lang="japanese">くろおび</ja>
+			<de lang="german">Schwarzgurt</de>
+			<fr lang="french">Ceinture Noire</fr>
+			<it lang="italian">Cintura nera</it>
+			<es lang="spanish">Cinturón Negro</es>
+			<ko lang="korean">검은띠</ko>
+			<zh-cn lang="chinese (simplified)">黑带</zh-cn>
+			<zh-tw lang="chinese (traditional)">黑帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BLACK_GLASSES</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Black Glasses</en>
+			<ja lang="japanese">くろいメガネ</ja>
+			<de lang="german">Schattenbrille</de>
+			<fr lang="french">Lunettes Noires</fr>
+			<it lang="italian">Occhialineri</it>
+			<es lang="spanish">Gafas de Sol</es>
+			<ko lang="korean">검은안경</ko>
+			<zh-cn lang="chinese (simplified)">黑色眼镜</zh-cn>
+			<zh-tw lang="chinese (traditional)">黑色眼鏡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BLACK_SLUDGE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Black Sludge</en>
+			<ja lang="japanese">くろいヘドロ</ja>
+			<de lang="german">Giftschleim</de>
+			<fr lang="french">Boue Noire</fr>
+			<it lang="italian">Fangopece</it>
+			<es lang="spanish">Lodo Negro</es>
+			<ko lang="korean">검은오물</ko>
+			<zh-cn lang="chinese (simplified)">黑色污泥</zh-cn>
+			<zh-tw lang="chinese (traditional)">黑色污泥</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BLANK_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Blank Plate</en>
+			<ja lang="japanese">まっさらプレート</ja>
+			<de lang="german">Neutraltafel</de>
+			<fr lang="french">Plaque Renouveau</fr>
+			<it lang="italian">Lastraripristino</it>
+			<es lang="spanish">Tabla Neutra</es>
+			<ko lang="korean">순백플레이트</ko>
+			<zh-cn lang="chinese (simplified)">净空石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">淨空石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BLASTOISINITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Blastoisinite</en>
+			<ja lang="japanese">カメックスナイト</ja>
+			<de lang="german">Turtoknit</de>
+			<fr lang="french">Tortankite</fr>
+			<it lang="italian">Blastoisite</it>
+			<es lang="spanish">Blastoisita</es>
+			<ko lang="korean">거북왕나이트</ko>
+			<zh-cn lang="chinese (simplified)">水箭龟进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">水箭龜進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BLAZIKENITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Blazikenite</en>
+			<ja lang="japanese">バシャーモナイト</ja>
+			<de lang="german">Lohgocknit</de>
+			<fr lang="french">Braségalite</fr>
+			<it lang="italian">Blazikenite</it>
+			<es lang="spanish">Blazikenita</es>
+			<ko lang="korean">번치코나이트</ko>
+			<zh-cn lang="chinese (simplified)">火焰鸡进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">火焰雞進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BLUNDER_POLICY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Blunder Policy</en>
+			<ja lang="japanese">からぶりほけん</ja>
+			<de lang="german">Fehlschlagschutz</de>
+			<fr lang="french">Assurance Échec</fr>
+			<it lang="italian">Fiascopolizza</it>
+			<es lang="spanish">Seguro Fallo</es>
+			<ko lang="korean">허탕보험</ko>
+			<zh-cn lang="chinese (simplified)">打空保险</zh-cn>
+			<zh-tw lang="chinese (traditional)">打空保險</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BRIGHT_POWDER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Bright Powder</en>
+			<ja lang="japanese">ひかりのこな</ja>
+			<de lang="german">Blendpuder</de>
+			<fr lang="french">Poudre Claire</fr>
+			<it lang="italian">Luminpolvere</it>
+			<es lang="spanish">Polvo Brillo</es>
+			<ko lang="korean">반짝가루</ko>
+			<zh-cn lang="chinese (simplified)">光粉</zh-cn>
+			<zh-tw lang="chinese (traditional)">光粉</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BUG_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Bug Gem</en>
+			<ja lang="japanese">むしのジュエル</ja>
+			<de lang="german">Käferjuwel</de>
+			<fr lang="french">Joyau Insecte</fr>
+			<it lang="italian">Bijoucoleottero</it>
+			<es lang="spanish">Gema Bicho</es>
+			<ko lang="korean">벌레주얼</ko>
+			<zh-cn lang="chinese (simplified)">虫之宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">蟲之寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BUG_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Bug Memory</en>
+			<ja lang="japanese">バグメモリ</ja>
+			<de lang="german">Käfer-Disc</de>
+			<fr lang="french">ROM Insecte</fr>
+			<it lang="italian">ROM Coleottero</it>
+			<es lang="spanish">Disco Bicho</es>
+			<ko lang="korean">버그메모리</ko>
+			<zh-cn lang="chinese (simplified)">虫子存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">蟲子記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BUGINIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Buginium Z</en>
+			<ja lang="japanese">ムシＺ</ja>
+			<de lang="german">Insectium Z</de>
+			<fr lang="french">Insectozélite</fr>
+			<it lang="italian">Insectium Z</it>
+			<es lang="spanish">Insectostal Z</es>
+			<ko lang="korean">벌레Z</ko>
+			<zh-cn lang="chinese (simplified)">虫Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">蟲Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BURN_DRIVE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Burn Drive</en>
+			<ja lang="japanese">ブレイズカセット</ja>
+			<de lang="german">Flammenmodul</de>
+			<fr lang="french">Module Pyro</fr>
+			<it lang="italian">Piromodulo</it>
+			<es lang="spanish">PiroROM</es>
+			<ko lang="korean">블레이즈카세트</ko>
+			<zh-cn lang="chinese (simplified)">火焰卡带</zh-cn>
+			<zh-tw lang="chinese (traditional)">火焰卡帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CAMERUPTITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Cameruptite</en>
+			<ja lang="japanese">バクーダナイト</ja>
+			<de lang="german">Cameruptnit</de>
+			<fr lang="french">Caméruptite</fr>
+			<it lang="italian">Cameruptite</it>
+			<es lang="spanish">Cameruptita</es>
+			<ko lang="korean">폭타나이트</ko>
+			<zh-cn lang="chinese (simplified)">喷火驼进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">噴火駝進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CELL_BATTERY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Cell Battery</en>
+			<ja lang="japanese">じゅうでんち</ja>
+			<de lang="german">Akku</de>
+			<fr lang="french">Pile</fr>
+			<it lang="italian">Ricaripila</it>
+			<es lang="spanish">Pila</es>
+			<ko lang="korean">충전지</ko>
+			<zh-cn lang="chinese (simplified)">充电电池</zh-cn>
+			<zh-tw lang="chinese (traditional)">充電電池</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHARCOAL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Charcoal</en>
+			<ja lang="japanese">もくたん</ja>
+			<de lang="german">Holzkohle</de>
+			<fr lang="french">Charbon</fr>
+			<it lang="italian">Carbonella</it>
+			<es lang="spanish">Carbón</es>
+			<ko lang="korean">목탄</ko>
+			<zh-cn lang="chinese (simplified)">木炭</zh-cn>
+			<zh-tw lang="chinese (traditional)">木炭</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHARIZARDITE_X</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Charizardite X</en>
+			<ja lang="japanese">リザードナイトＸ</ja>
+			<de lang="german">Gluraknit X</de>
+			<fr lang="french">Dracaufite X</fr>
+			<it lang="italian">Charizardite X</it>
+			<es lang="spanish">Charizardita X</es>
+			<ko lang="korean">리자몽나이트X</ko>
+			<zh-cn lang="chinese (simplified)">喷火龙进化石Ｘ</zh-cn>
+			<zh-tw lang="chinese (traditional)">噴火龍進化石Ｘ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHARIZARDITE_Y</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Charizardite Y</en>
+			<ja lang="japanese">リザードナイトＹ</ja>
+			<de lang="german">Gluraknit Y</de>
+			<fr lang="french">Dracaufite Y</fr>
+			<it lang="italian">Charizardite Y</it>
+			<es lang="spanish">Charizardita Y</es>
+			<ko lang="korean">리자몽나이트Y</ko>
+			<zh-cn lang="chinese (simplified)">喷火龙进化石Ｙ</zh-cn>
+			<zh-tw lang="chinese (traditional)">噴火龍進化石Ｙ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHILL_DRIVE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Chill Drive</en>
+			<ja lang="japanese">フリーズカセット</ja>
+			<de lang="german">Gefriermodul</de>
+			<fr lang="french">Module Cryo</fr>
+			<it lang="italian">Gelomodulo</it>
+			<es lang="spanish">CrioROM</es>
+			<ko lang="korean">프리즈카세트</ko>
+			<zh-cn lang="chinese (simplified)">冰冻卡带</zh-cn>
+			<zh-tw lang="chinese (traditional)">冰凍卡帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHIPPED_POT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Chipped Pot</en>
+			<ja lang="japanese">かけたポット</ja>
+			<de lang="german">Löchrige Kanne</de>
+			<fr lang="french">Théière Ébréchée</fr>
+			<it lang="italian">Teiera crepata</it>
+			<es lang="spanish">Tetera Rota</es>
+			<ko lang="korean">이빠진포트</ko>
+			<zh-cn lang="chinese (simplified)">缺损的茶壶</zh-cn>
+			<zh-tw lang="chinese (traditional)">缺損的茶壺</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHOICE_BAND</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Choice Band</en>
+			<ja lang="japanese">こだわりハチマキ</ja>
+			<de lang="german">Wahlband</de>
+			<fr lang="french">Bandeau Choix</fr>
+			<it lang="italian">Bendascelta</it>
+			<es lang="spanish">Cinta Elección</es>
+			<ko lang="korean">구애머리띠</ko>
+			<zh-cn lang="chinese (simplified)">讲究头带</zh-cn>
+			<zh-tw lang="chinese (traditional)">講究頭帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHOICE_SCARF</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Choice Scarf</en>
+			<ja lang="japanese">こだわりスカーフ</ja>
+			<de lang="german">Wahlschal</de>
+			<fr lang="french">Mouchoir Choix</fr>
+			<it lang="italian">Stolascelta</it>
+			<es lang="spanish">Pañuelo Elección</es>
+			<ko lang="korean">구애스카프</ko>
+			<zh-cn lang="chinese (simplified)">讲究围巾</zh-cn>
+			<zh-tw lang="chinese (traditional)">講究圍巾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHOICE_SPECS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Choice Specs</en>
+			<ja lang="japanese">こだわりメガネ</ja>
+			<de lang="german">Wahlbrille</de>
+			<fr lang="french">Lunettes Choix</fr>
+			<it lang="italian">Lentiscelta</it>
+			<es lang="spanish">Gafas Elección</es>
+			<ko lang="korean">구애안경</ko>
+			<zh-cn lang="chinese (simplified)">讲究眼镜</zh-cn>
+			<zh-tw lang="chinese (traditional)">講究眼鏡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CLEANSE_TAG</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Cleanse Tag</en>
+			<ja lang="japanese">きよめのおふだ</ja>
+			<de lang="german">Schutzsticker</de>
+			<fr lang="french">Rune Purifiante</fr>
+			<it lang="italian">Velopuro</it>
+			<es lang="spanish">Amuleto</es>
+			<ko lang="korean">순결의부적</ko>
+			<zh-cn lang="chinese (simplified)">洁净之符</zh-cn>
+			<zh-tw lang="chinese (traditional)">潔淨之符</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CLOVER_SWEET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Clover Sweet</en>
+			<ja lang="japanese">よつばアメざいく</ja>
+			<de lang="german">Zucker-Kleeblatt</de>
+			<fr lang="french">Trèfle en Sucre</fr>
+			<it lang="italian">Bonbonfoglio</it>
+			<es lang="spanish">Confite Trébol</es>
+			<ko lang="korean">네잎사탕공예</ko>
+			<zh-cn lang="chinese (simplified)">幸运草糖饰</zh-cn>
+			<zh-tw lang="chinese (traditional)">幸運草糖飾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>COVERT_CLOAK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Covert Cloak</en>
+			<ja lang="japanese">おんみつマント</ja>
+			<de lang="german">Tarnumhang</de>
+			<fr lang="french">Cape Obscure</fr>
+			<it lang="italian">Anonimanto</it>
+			<es lang="spanish">Capa Furtiva</es>
+			<ko lang="korean">은밀망토</ko>
+			<zh-cn lang="chinese (simplified)">密探斗篷</zh-cn>
+			<zh-tw lang="chinese (traditional)">密探斗篷</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CRACKED_POT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Cracked Pot</en>
+			<ja lang="japanese">われたポット</ja>
+			<de lang="german">Rissige Kanne</de>
+			<fr lang="french">Théière Fêlée</fr>
+			<it lang="italian">Teiera rotta</it>
+			<es lang="spanish">Tetera Agrietada</es>
+			<ko lang="korean">깨진포트</ko>
+			<zh-cn lang="chinese (simplified)">破裂的茶壶</zh-cn>
+			<zh-tw lang="chinese (traditional)">破裂的茶壺</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DAMP_ROCK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Damp Rock</en>
+			<ja lang="japanese">しめったいわ</ja>
+			<de lang="german">Nassbrocken</de>
+			<fr lang="french">Roche Humide</fr>
+			<it lang="italian">Rocciaumida</it>
+			<es lang="spanish">Roca Lluvia</es>
+			<ko lang="korean">축축한바위</ko>
+			<zh-cn lang="chinese (simplified)">潮湿岩石</zh-cn>
+			<zh-tw lang="chinese (traditional)">潮濕岩石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DARK_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dark Gem</en>
+			<ja lang="japanese">あくのジュエル</ja>
+			<de lang="german">Unlichtjuwel</de>
+			<fr lang="french">Joyau Ténèbres</fr>
+			<it lang="italian">Bijoubuio</it>
+			<es lang="spanish">Gema Siniestro</es>
+			<ko lang="korean">악주얼</ko>
+			<zh-cn lang="chinese (simplified)">恶之宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">惡之寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DARK_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dark Memory</en>
+			<ja lang="japanese">ダークメモリ</ja>
+			<de lang="german">Unlicht-Disc</de>
+			<fr lang="french">ROM Ténèbres</fr>
+			<it lang="italian">ROM Buio</it>
+			<es lang="spanish">Disco Siniestro</es>
+			<ko lang="korean">다크메모리</ko>
+			<zh-cn lang="chinese (simplified)">黑暗存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">黑暗記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DARKINIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Darkinium Z</en>
+			<ja lang="japanese">アクＺ</ja>
+			<de lang="german">Noctium Z</de>
+			<fr lang="french">Ténébrozélite</fr>
+			<it lang="italian">Obscurium Z</it>
+			<es lang="spanish">Nictostal Z</es>
+			<ko lang="korean">악Z</ko>
+			<zh-cn lang="chinese (simplified)">恶Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">惡Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DECIDIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Decidium Z</en>
+			<ja lang="japanese">ジュナイパーＺ</ja>
+			<de lang="german">Silvarronium Z</de>
+			<fr lang="french">Archézélite</fr>
+			<it lang="italian">Deciduenium Z</it>
+			<es lang="spanish">Dueyestal Z</es>
+			<ko lang="korean">모크나이퍼Z</ko>
+			<zh-cn lang="chinese (simplified)">狙射树枭Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">狙射樹梟Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DEEP_SEA_SCALE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Deep Sea Scale</en>
+			<ja lang="japanese">しんかいのウロコ</ja>
+			<de lang="german">Abyssschuppe</de>
+			<fr lang="french">Écaille Océan</fr>
+			<it lang="italian">Squamabissi</it>
+			<es lang="spanish">Escama Marina</es>
+			<ko lang="korean">심해의비늘</ko>
+			<zh-cn lang="chinese (simplified)">深海鳞片</zh-cn>
+			<zh-tw lang="chinese (traditional)">深海鱗片</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DEEP_SEA_TOOTH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Deep Sea Tooth</en>
+			<ja lang="japanese">しんかいのキバ</ja>
+			<de lang="german">Abysszahn</de>
+			<fr lang="french">Dent Océan</fr>
+			<it lang="italian">Dente abissi</it>
+			<es lang="spanish">Diente Marino</es>
+			<ko lang="korean">심해의이빨</ko>
+			<zh-cn lang="chinese (simplified)">深海之牙</zh-cn>
+			<zh-tw lang="chinese (traditional)">深海之牙</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DESTINY_KNOT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Destiny Knot</en>
+			<ja lang="japanese">あかいいと</ja>
+			<de lang="german">Fatumknoten</de>
+			<fr lang="french">Nœud Destin</fr>
+			<it lang="italian">Destincomune</it>
+			<es lang="spanish">Lazo Destino</es>
+			<ko lang="korean">빨간실</ko>
+			<zh-cn lang="chinese (simplified)">红线</zh-cn>
+			<zh-tw lang="chinese (traditional)">紅線</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DIANCITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Diancite</en>
+			<ja lang="japanese">ディアンシナイト</ja>
+			<de lang="german">Diancienit</de>
+			<fr lang="french">Diancite</fr>
+			<it lang="italian">Diancite</it>
+			<es lang="spanish">Diancita</es>
+			<ko lang="korean">디안시나이트</ko>
+			<zh-cn lang="chinese (simplified)">蒂安希进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">蒂安希進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DOUSE_DRIVE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Douse Drive</en>
+			<ja lang="japanese">アクアカセット</ja>
+			<de lang="german">Aquamodul</de>
+			<fr lang="french">Module Aqua</fr>
+			<it lang="italian">Idromodulo</it>
+			<es lang="spanish">HidroROM</es>
+			<ko lang="korean">아쿠아카세트</ko>
+			<zh-cn lang="chinese (simplified)">水流卡带</zh-cn>
+			<zh-tw lang="chinese (traditional)">水流卡帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DRACO_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Draco Plate</en>
+			<ja lang="japanese">りゅうのプレート</ja>
+			<de lang="german">Dracotafel</de>
+			<fr lang="french">Plaque Draco</fr>
+			<it lang="italian">Lastradrakon</it>
+			<es lang="spanish">Tabla Draco</es>
+			<ko lang="korean">용의플레이트</ko>
+			<zh-cn lang="chinese (simplified)">龙之石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">龍之石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DRAGON_FANG</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dragon Fang</en>
+			<ja lang="japanese">りゅうのキバ</ja>
+			<de lang="german">Drachenzahn</de>
+			<fr lang="french">Croc Dragon</fr>
+			<it lang="italian">Dente di drago</it>
+			<es lang="spanish">Colmillo Dragón</es>
+			<ko lang="korean">용의이빨</ko>
+			<zh-cn lang="chinese (simplified)">龙之牙</zh-cn>
+			<zh-tw lang="chinese (traditional)">龍之牙</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DRAGON_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dragon Gem</en>
+			<ja lang="japanese">ドラゴンジュエル</ja>
+			<de lang="german">Drakojuwel</de>
+			<fr lang="french">Joyau Dragon</fr>
+			<it lang="italian">Bijoudrago</it>
+			<es lang="spanish">Gema Dragón</es>
+			<ko lang="korean">드래곤주얼</ko>
+			<zh-cn lang="chinese (simplified)">龙之宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">龍之寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DRAGON_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dragon Memory</en>
+			<ja lang="japanese">ドラゴンメモリ</ja>
+			<de lang="german">Drachen-Disc</de>
+			<fr lang="french">ROM Dragon</fr>
+			<it lang="italian">ROM Drago</it>
+			<es lang="spanish">Disco Dragón</es>
+			<ko lang="korean">드래곤메모리</ko>
+			<zh-cn lang="chinese (simplified)">龙存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">龍記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DRAGONIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dragonium Z</en>
+			<ja lang="japanese">ドラゴンＺ</ja>
+			<de lang="german">Dracium Z</de>
+			<fr lang="french">Dracozélite</fr>
+			<it lang="italian">Draconium Z</it>
+			<es lang="spanish">Dracostal Z</es>
+			<ko lang="korean">드래곤Z</ko>
+			<zh-cn lang="chinese (simplified)">龙Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">龍Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DREAD_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dread Plate</en>
+			<ja lang="japanese">こわもてプレート</ja>
+			<de lang="german">Furchttafel</de>
+			<fr lang="french">Plaque Ombre</fr>
+			<it lang="italian">Lastratimore</it>
+			<es lang="spanish">Tabla Oscura</es>
+			<ko lang="korean">공포플레이트</ko>
+			<zh-cn lang="chinese (simplified)">恶颜石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">惡顏石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DROPPED_ITEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Dropped Item</en>
+			<ja lang="japanese">わすれもの</ja>
+			<de lang="german">Fundsache</de>
+			<fr lang="french">Objet Trouvé</fr>
+			<it lang="italian">Oggetto perso</it>
+			<es lang="spanish">Objeto Perdido</es>
+			<ko lang="korean">잊은물건</ko>
+			<zh-cn lang="chinese (simplified)">遗忘物</zh-cn>
+			<zh-tw lang="chinese (traditional)">遺忘物</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EARTH_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Earth Plate</en>
+			<ja lang="japanese">だいちのプレート</ja>
+			<de lang="german">Erdtafel</de>
+			<fr lang="french">Plaque Terre</fr>
+			<it lang="italian">Lastrageo</it>
+			<es lang="spanish">Tabla Terrax</es>
+			<ko lang="korean">대지플레이트</ko>
+			<zh-cn lang="chinese (simplified)">大地石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">大地石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EEVIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Eevium Z</en>
+			<ja lang="japanese">イーブイＺ</ja>
+			<de lang="german">Evolium Z</de>
+			<fr lang="french">Évolizélite</fr>
+			<it lang="italian">Eevium Z</it>
+			<es lang="spanish">Eeveestal Z</es>
+			<ko lang="korean">이브이Z</ko>
+			<zh-cn lang="chinese (simplified)">伊布Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">伊布Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EJECT_BUTTON</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Eject Button</en>
+			<ja lang="japanese">だっしゅつボタン</ja>
+			<de lang="german">Fluchtknopf</de>
+			<fr lang="french">Bouton Fuite</fr>
+			<it lang="italian">Pulsantefuga</it>
+			<es lang="spanish">Botón Escape</es>
+			<ko lang="korean">탈출버튼</ko>
+			<zh-cn lang="chinese (simplified)">逃脱按键</zh-cn>
+			<zh-tw lang="chinese (traditional)">逃脫按鍵</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EJECT_PACK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Eject Pack</en>
+			<ja lang="japanese">だっしゅつパック</ja>
+			<de lang="german">Fluchttasche</de>
+			<fr lang="french">Sac Fuite</fr>
+			<it lang="italian">Zainofuga</it>
+			<es lang="spanish">Mochila Escape</es>
+			<ko lang="korean">탈출팩</ko>
+			<zh-cn lang="chinese (simplified)">避难背包</zh-cn>
+			<zh-tw lang="chinese (traditional)">避難背包</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ELECTRIC_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Electric Gem</en>
+			<ja lang="japanese">でんきのジュエル</ja>
+			<de lang="german">Elektrojuwel</de>
+			<fr lang="french">Joyau Électrik</fr>
+			<it lang="italian">Bijouelettro</it>
+			<es lang="spanish">Gema Eléctrico</es>
+			<ko lang="korean">전기주얼</ko>
+			<zh-cn lang="chinese (simplified)">电之宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">電之寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ELECTRIC_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Electric Memory</en>
+			<ja lang="japanese">エレクトロメモリ</ja>
+			<de lang="german">Elektro-Disc</de>
+			<fr lang="french">ROM Électrik</fr>
+			<it lang="italian">ROM Elettro</it>
+			<es lang="spanish">Disco Eléctrico</es>
+			<ko lang="korean">일렉트릭메모리</ko>
+			<zh-cn lang="chinese (simplified)">电子存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">電子記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ELECTRIC_SEED</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Electric Seed</en>
+			<ja lang="japanese">エレキシード</ja>
+			<de lang="german">Elektro-Samen</de>
+			<fr lang="french">Graine Électrik</fr>
+			<it lang="italian">Elettroseme</it>
+			<es lang="spanish">Semilla Electro</es>
+			<ko lang="korean">일렉트릭시드</ko>
+			<zh-cn lang="chinese (simplified)">电气种子</zh-cn>
+			<zh-tw lang="chinese (traditional)">電氣種子</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ELECTRIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Electrium Z</en>
+			<ja lang="japanese">デンキＺ</ja>
+			<de lang="german">Voltium Z</de>
+			<fr lang="french">Voltazélite</fr>
+			<it lang="italian">Electrium Z</it>
+			<es lang="spanish">Electrostal Z</es>
+			<ko lang="korean">전기Z</ko>
+			<zh-cn lang="chinese (simplified)">电Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">電Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ELEVATOR_KEY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Elevator Key</en>
+			<ja lang="japanese">エレベータのキー</ja>
+			<de lang="german">Liftschlüssel</de>
+			<fr lang="french">Clé Ascenseur</fr>
+			<it lang="italian">Chiave ascensore</it>
+			<es lang="spanish">Llave del Ascensor</es>
+			<ko lang="korean">엘리베이터키</ko>
+			<zh-cn lang="chinese (simplified)">电梯钥匙</zh-cn>
+			<zh-tw lang="chinese (traditional)">電梯鑰匙</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EVERSTONE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Everstone</en>
+			<ja lang="japanese">かわらずのいし</ja>
+			<de lang="german">Ewigstein</de>
+			<fr lang="french">Pierre Stase</fr>
+			<it lang="italian">Pietrastante</it>
+			<es lang="spanish">Piedra Eterna</es>
+			<ko lang="korean">변함없는돌</ko>
+			<zh-cn lang="chinese (simplified)">不变之石</zh-cn>
+			<zh-tw lang="chinese (traditional)">不變之石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EVIOLITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Eviolite</en>
+			<ja lang="japanese">しんかのきせき</ja>
+			<de lang="german">Evolith</de>
+			<fr lang="french">Évoluroc</fr>
+			<it lang="italian">Evolcondensa</it>
+			<es lang="spanish">Mineral Evolutivo</es>
+			<ko lang="korean">진화의휘석</ko>
+			<zh-cn lang="chinese (simplified)">进化奇石</zh-cn>
+			<zh-tw lang="chinese (traditional)">進化奇石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EXP_SHARE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Exp. Share</en>
+			<ja lang="japanese">がくしゅうそうち</ja>
+			<de lang="german">EP-Teiler</de>
+			<fr lang="french">Multi Exp</fr>
+			<it lang="italian">Condividi esperienza</it>
+			<es lang="spanish">Repartir Experiencia</es>
+			<ko lang="korean">학습장치</ko>
+			<zh-cn lang="chinese (simplified)">学习装置</zh-cn>
+			<zh-tw lang="chinese (traditional)">學習裝置</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>EXPERT_BELT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Expert Belt</en>
+			<ja lang="japanese">たつじんのおび</ja>
+			<de lang="german">Expertengurt</de>
+			<fr lang="french">Ceinture Pro</fr>
+			<it lang="italian">Abilcintura</it>
+			<es lang="spanish">Cinta Experto</es>
+			<ko lang="korean">달인의띠</ko>
+			<zh-cn lang="chinese (simplified)">达人带</zh-cn>
+			<zh-tw lang="chinese (traditional)">達人帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FAIRIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fairium Z</en>
+			<ja lang="japanese">フェアリーＺ</ja>
+			<de lang="german">Sylphium Z</de>
+			<fr lang="french">Nymphézélite</fr>
+			<it lang="italian">Follectium Z</it>
+			<es lang="spanish">Feeristal Z</es>
+			<ko lang="korean">페어리Z</ko>
+			<zh-cn lang="chinese (simplified)">妖精Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">妖精Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FAIRY_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fairy Memory</en>
+			<ja lang="japanese">フェアリーメモリ</ja>
+			<de lang="german">Feen-Disc</de>
+			<fr lang="french">ROM Fée</fr>
+			<it lang="italian">ROM Folletto</it>
+			<es lang="spanish">Disco Hada</es>
+			<ko lang="korean">페어리메모리</ko>
+			<zh-cn lang="chinese (simplified)">妖精存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">妖精記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FIGHTING_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fighting Gem</en>
+			<ja lang="japanese">かくとうジュエル</ja>
+			<de lang="german">Kampfjuwel</de>
+			<fr lang="french">Joyau Combat</fr>
+			<it lang="italian">Bijoulotta</it>
+			<es lang="spanish">Gema Lucha</es>
+			<ko lang="korean">격투주얼</ko>
+			<zh-cn lang="chinese (simplified)">格斗宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">格鬥寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FIGHTING_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fighting Memory</en>
+			<ja lang="japanese">ファイトメモリ</ja>
+			<de lang="german">Kampf-Disc</de>
+			<fr lang="french">ROM Combat</fr>
+			<it lang="italian">ROM Lotta</it>
+			<es lang="spanish">Disco Lucha</es>
+			<ko lang="korean">파이팅메모리</ko>
+			<zh-cn lang="chinese (simplified)">战斗存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">戰鬥記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FIGHTINIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fightinium Z</en>
+			<ja lang="japanese">カクトウＺ</ja>
+			<de lang="german">Battalium Z</de>
+			<fr lang="french">Combazélite</fr>
+			<it lang="italian">Luctium Z</it>
+			<es lang="spanish">Lizastal Z</es>
+			<ko lang="korean">격투Z</ko>
+			<zh-cn lang="chinese (simplified)">格斗Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">格鬥Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FIRE_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fire Gem</en>
+			<ja lang="japanese">ほのおのジュエル</ja>
+			<de lang="german">Feuerjuwel</de>
+			<fr lang="french">Joyau Feu</fr>
+			<it lang="italian">Bijoufuoco</it>
+			<es lang="spanish">Gema Fuego</es>
+			<ko lang="korean">불꽃주얼</ko>
+			<zh-cn lang="chinese (simplified)">火之宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">火之寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FIRE_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fire Memory</en>
+			<ja lang="japanese">ファイヤーメモリ</ja>
+			<de lang="german">Feuer-Disc</de>
+			<fr lang="french">ROM Feu</fr>
+			<it lang="italian">ROM Fuoco</it>
+			<es lang="spanish">Disco Fuego</es>
+			<ko lang="korean">파이어메모리</ko>
+			<zh-cn lang="chinese (simplified)">火焰存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">火焰記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FIRIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Firium Z</en>
+			<ja lang="japanese">ホノオＺ</ja>
+			<de lang="german">Pyrium Z</de>
+			<fr lang="french">Pyrozélite</fr>
+			<it lang="italian">Pirium Z</it>
+			<es lang="spanish">Pirostal Z</es>
+			<ko lang="korean">불꽃Z</ko>
+			<zh-cn lang="chinese (simplified)">火Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">火Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FIST_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Fist Plate</en>
+			<ja lang="japanese">こぶしのプレート</ja>
+			<de lang="german">Fausttafel</de>
+			<fr lang="french">Plaque Poing</fr>
+			<it lang="italian">Lastrapugno</it>
+			<es lang="spanish">Tabla Fuerte</es>
+			<ko lang="korean">주먹플레이트</ko>
+			<zh-cn lang="chinese (simplified)">拳头石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">拳頭石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLAME_ORB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Flame Orb</en>
+			<ja lang="japanese">かえんだま</ja>
+			<de lang="german">Heiß-Orb</de>
+			<fr lang="french">Orbe Flamme</fr>
+			<it lang="italian">Fiammosfera</it>
+			<es lang="spanish">Llamasfera</es>
+			<ko lang="korean">화염구슬</ko>
+			<zh-cn lang="chinese (simplified)">火焰宝珠</zh-cn>
+			<zh-tw lang="chinese (traditional)">火焰寶珠</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLAME_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Flame Plate</en>
+			<ja lang="japanese">ひのたまプレート</ja>
+			<de lang="german">Feuertafel</de>
+			<fr lang="french">Plaque Flamme</fr>
+			<it lang="italian">Lastrarogo</it>
+			<es lang="spanish">Tabla Llama</es>
+			<ko lang="korean">불구슬플레이트</ko>
+			<zh-cn lang="chinese (simplified)">火球石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">火球石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLOAT_STONE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Float Stone</en>
+			<ja lang="japanese">かるいし</ja>
+			<de lang="german">Leichtstein</de>
+			<fr lang="french">Pierrallégée</fr>
+			<it lang="italian">Pietralieve</it>
+			<es lang="spanish">Piedra Pómez</es>
+			<ko lang="korean">가벼운돌</ko>
+			<zh-cn lang="chinese (simplified)">轻石</zh-cn>
+			<zh-tw lang="chinese (traditional)">輕石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLOWER_SWEET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Flower Sweet</en>
+			<ja lang="japanese">おはなアメざいく</ja>
+			<de lang="german">Zucker-Blume</de>
+			<fr lang="french">Fleur en Sucre</fr>
+			<it lang="italian">Bonbonfiore</it>
+			<es lang="spanish">Confite Flor</es>
+			<ko lang="korean">꽃사탕공예</ko>
+			<zh-cn lang="chinese (simplified)">花朵糖饰</zh-cn>
+			<zh-tw lang="chinese (traditional)">花朵糖飾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLYING_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Flying Gem</en>
+			<ja lang="japanese">ひこうのジュエル</ja>
+			<de lang="german">Flugjuwel</de>
+			<fr lang="french">Joyau Vol</fr>
+			<it lang="italian">Bijouvolante</it>
+			<es lang="spanish">Gema Volador</es>
+			<ko lang="korean">비행주얼</ko>
+			<zh-cn lang="chinese (simplified)">飞行宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">飛行寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLYING_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Flying Memory</en>
+			<ja lang="japanese">フライングメモリ</ja>
+			<de lang="german">Flug-Disc</de>
+			<fr lang="french">ROM Vol</fr>
+			<it lang="italian">ROM Volante</it>
+			<es lang="spanish">Disco Volador</es>
+			<ko lang="korean">플라잉메모리</ko>
+			<zh-cn lang="chinese (simplified)">飞翔存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">飛翔記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FLYINIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Flyinium Z</en>
+			<ja lang="japanese">ヒコウＺ</ja>
+			<de lang="german">Aerium Z</de>
+			<fr lang="french">Aérozélite</fr>
+			<it lang="italian">Volantium Z</it>
+			<es lang="spanish">Aerostal Z</es>
+			<ko lang="korean">비행Z</ko>
+			<zh-cn lang="chinese (simplified)">飞行Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">飛行Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FOCUS_BAND</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Focus Band</en>
+			<ja lang="japanese">きあいのハチマキ</ja>
+			<de lang="german">Fokusband</de>
+			<fr lang="french">Bandeau</fr>
+			<it lang="italian">Bandana</it>
+			<es lang="spanish">Cinta Aguante</es>
+			<ko lang="korean">기합의머리띠</ko>
+			<zh-cn lang="chinese (simplified)">气势头带</zh-cn>
+			<zh-tw lang="chinese (traditional)">氣勢頭帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FOCUS_SASH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Focus Sash</en>
+			<ja lang="japanese">きあいのタスキ</ja>
+			<de lang="german">Fokusgurt</de>
+			<fr lang="french">Ceinture Force</fr>
+			<it lang="italian">Focalnastro</it>
+			<es lang="spanish">Banda Aguante</es>
+			<ko lang="korean">기합의띠</ko>
+			<zh-cn lang="chinese (simplified)">气势披带</zh-cn>
+			<zh-tw lang="chinese (traditional)">氣勢披帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FULL_INCENSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Full Incense</en>
+			<ja lang="japanese">まんぷくおこう</ja>
+			<de lang="german">Lahmrauch</de>
+			<fr lang="french">Encens Plein</fr>
+			<it lang="italian">Gonfioaroma</it>
+			<es lang="spanish">Incienso Lento</es>
+			<ko lang="korean">만복향로</ko>
+			<zh-cn lang="chinese (simplified)">饱腹薰香</zh-cn>
+			<zh-tw lang="chinese (traditional)">飽腹薰香</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GALLADITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Galladite</en>
+			<ja lang="japanese">エルレイドナイト</ja>
+			<de lang="german">Galagladinit</de>
+			<fr lang="french">Gallamite</fr>
+			<it lang="italian">Galladite</it>
+			<es lang="spanish">Galladita</es>
+			<ko lang="korean">엘레이드나이트</ko>
+			<zh-cn lang="chinese (simplified)">艾路雷朵进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">艾路雷朵進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GARCHOMPITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Garchompite</en>
+			<ja lang="japanese">ガブリアスナイト</ja>
+			<de lang="german">Knakracknit</de>
+			<fr lang="french">Carchacrokite</fr>
+			<it lang="italian">Garchompite</it>
+			<es lang="spanish">Garchompita</es>
+			<ko lang="korean">한카리아스나이트</ko>
+			<zh-cn lang="chinese (simplified)">烈咬陆鲨进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">烈咬陸鯊進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GARDEVOIRITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Gardevoirite</en>
+			<ja lang="japanese">サーナイトナイト</ja>
+			<de lang="german">Guardevoirnit</de>
+			<fr lang="french">Gardevoirite</fr>
+			<it lang="italian">Gardevoirite</it>
+			<es lang="spanish">Gardevoirita</es>
+			<ko lang="korean">가디안나이트</ko>
+			<zh-cn lang="chinese (simplified)">沙奈朵进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">沙奈朵進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GENGARITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Gengarite</en>
+			<ja lang="japanese">ゲンガナイト</ja>
+			<de lang="german">Gengarnit</de>
+			<fr lang="french">Ectoplasmite</fr>
+			<it lang="italian">Gengarite</it>
+			<es lang="spanish">Gengarita</es>
+			<ko lang="korean">팬텀나이트</ko>
+			<zh-cn lang="chinese (simplified)">耿鬼进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">耿鬼進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GHOST_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ghost Gem</en>
+			<ja lang="japanese">ゴーストジュエル</ja>
+			<de lang="german">Geisterjuwel</de>
+			<fr lang="french">Joyau Spectre</fr>
+			<it lang="italian">Bijouspettro</it>
+			<es lang="spanish">Gema Fantasma</es>
+			<ko lang="korean">고스트주얼</ko>
+			<zh-cn lang="chinese (simplified)">幽灵宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">幽靈寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GHOST_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ghost Memory</en>
+			<ja lang="japanese">ゴーストメモリ</ja>
+			<de lang="german">Geister-Disc</de>
+			<fr lang="french">ROM Spectre</fr>
+			<it lang="italian">ROM Spettro</it>
+			<es lang="spanish">Disco Fantasma</es>
+			<ko lang="korean">고스트메모리</ko>
+			<zh-cn lang="chinese (simplified)">幽灵存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">幽靈記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GHOSTIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ghostium Z</en>
+			<ja lang="japanese">ゴーストＺ</ja>
+			<de lang="german">Phantomium Z</de>
+			<fr lang="french">Spectrozélite</fr>
+			<it lang="italian">Spectrium Z</it>
+			<es lang="spanish">Espectrostal Z</es>
+			<ko lang="korean">고스트Z</ko>
+			<zh-cn lang="chinese (simplified)">幽灵Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">幽靈Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GLALITITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Glalitite</en>
+			<ja lang="japanese">オニゴーリナイト</ja>
+			<de lang="german">Firnontornit</de>
+			<fr lang="french">Oniglalite</fr>
+			<it lang="italian">Glalite</it>
+			<es lang="spanish">Glalita</es>
+			<ko lang="korean">얼음귀신나이트</ko>
+			<zh-cn lang="chinese (simplified)">冰鬼护进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">冰鬼護進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRASS_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grass Gem</en>
+			<ja lang="japanese">くさのジュエル</ja>
+			<de lang="german">Pflanzenjuwel</de>
+			<fr lang="french">Joyau Plante</fr>
+			<it lang="italian">Bijouerba</it>
+			<es lang="spanish">Gema Planta</es>
+			<ko lang="korean">풀주얼</ko>
+			<zh-cn lang="chinese (simplified)">草之宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">草之寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRASS_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grass Memory</en>
+			<ja lang="japanese">グラスメモリ</ja>
+			<de lang="german">Pflanzen-Disc</de>
+			<fr lang="french">ROM Plante</fr>
+			<it lang="italian">ROM Erba</it>
+			<es lang="spanish">Disco Planta</es>
+			<ko lang="korean">그래스메모리</ko>
+			<zh-cn lang="chinese (simplified)">青草存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">青草記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRASSIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grassium Z</en>
+			<ja lang="japanese">クサＺ</ja>
+			<de lang="german">Botanium Z</de>
+			<fr lang="french">Florazélite</fr>
+			<it lang="italian">Herbium Z</it>
+			<es lang="spanish">Fitostal Z</es>
+			<ko lang="korean">풀Z</ko>
+			<zh-cn lang="chinese (simplified)">草Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">草Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRASSY_SEED</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grassy Seed</en>
+			<ja lang="japanese">グラスシード</ja>
+			<de lang="german">Gras-Samen</de>
+			<fr lang="french">Graine Herbe</fr>
+			<it lang="italian">Erbaseme</it>
+			<es lang="spanish">Semilla Hierba</es>
+			<ko lang="korean">그래스시드</ko>
+			<zh-cn lang="chinese (simplified)">青草种子</zh-cn>
+			<zh-tw lang="chinese (traditional)">青草種子</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRIP_CLAW</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grip Claw</en>
+			<ja lang="japanese">ねばりのかぎづめ</ja>
+			<de lang="german">Griffklaue</de>
+			<fr lang="french">Accro Griffe</fr>
+			<it lang="italian">Presartiglio</it>
+			<es lang="spanish">Garra Garfio</es>
+			<ko lang="korean">끈기갈고리손톱</ko>
+			<zh-cn lang="chinese (simplified)">紧缠钩爪</zh-cn>
+			<zh-tw lang="chinese (traditional)">緊纏鉤爪</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRISEOUS_CORE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Griseous Core</en>
+			<ja lang="japanese">だいはっきんだま</ja>
+			<de lang="german">Platinumkristall</de>
+			<fr lang="french">Globe Platiné</fr>
+			<it lang="italian">Grigiosferoide</it>
+			<es lang="spanish">Gran Griseosfera</es>
+			<ko lang="korean">큰백금옥</ko>
+			<zh-cn lang="chinese (simplified)">大白金宝玉</zh-cn>
+			<zh-tw lang="chinese (traditional)">大白金寶玉</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRISEOUS_ORB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Griseous Orb</en>
+			<ja lang="japanese">はっきんだま</ja>
+			<de lang="german">Platinum-Orb</de>
+			<fr lang="french">Orbe Platiné</fr>
+			<it lang="italian">Grigiosfera</it>
+			<es lang="spanish">Griseosfera</es>
+			<ko lang="korean">백금옥</ko>
+			<zh-cn lang="chinese (simplified)">白金宝珠</zh-cn>
+			<zh-tw lang="chinese (traditional)">白金寶珠</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRIT_DUST</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grit Dust</en>
+			<ja lang="japanese">ガンバリのすな</ja>
+			<de lang="german">Leistungssand</de>
+			<fr lang="french">Sable Effort</fr>
+			<it lang="italian">Sabbia impegno</it>
+			<es lang="spanish">Polvo Esfuerzo</es>
+			<ko lang="korean">노력의모래</ko>
+			<zh-cn lang="chinese (simplified)">奋斗沙</zh-cn>
+			<zh-tw lang="chinese (traditional)">奮鬥沙</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRIT_GRAVEL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grit Gravel</en>
+			<ja lang="japanese">ガンバリのじゃり</ja>
+			<de lang="german">Leistungskies</de>
+			<fr lang="french">Cailloux Effort</fr>
+			<it lang="italian">Ghiaia impegno</it>
+			<es lang="spanish">Grava Esfuerzo</es>
+			<ko lang="korean">노력의자갈</ko>
+			<zh-cn lang="chinese (simplified)">奋斗砾</zh-cn>
+			<zh-tw lang="chinese (traditional)">奮鬥礫</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRIT_PEBBLE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grit Pebble</en>
+			<ja lang="japanese">ガンバリのいし</ja>
+			<de lang="german">Leistungsstein</de>
+			<fr lang="french">Pierre Effort</fr>
+			<it lang="italian">Pietra impegno</it>
+			<es lang="spanish">Piedra Esfuerzo</es>
+			<ko lang="korean">노력의돌</ko>
+			<zh-cn lang="chinese (simplified)">奋斗石</zh-cn>
+			<zh-tw lang="chinese (traditional)">奮鬥石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRIT_ROCK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grit Rock</en>
+			<ja lang="japanese">ガンバリのいわ</ja>
+			<de lang="german">Leistungsfels</de>
+			<fr lang="french">Rocher Effort</fr>
+			<it lang="italian">Roccia impegno</it>
+			<es lang="spanish">Roca Esfuerzo</es>
+			<ko lang="korean">노력의바위</ko>
+			<zh-cn lang="chinese (simplified)">奋斗岩</zh-cn>
+			<zh-tw lang="chinese (traditional)">奮鬥岩</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GROUND_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ground Gem</en>
+			<ja lang="japanese">じめんのジュエル</ja>
+			<de lang="german">Bodenjuwel</de>
+			<fr lang="french">Joyau Sol</fr>
+			<it lang="italian">Bijouterra</it>
+			<es lang="spanish">Gema Tierra</es>
+			<ko lang="korean">땅주얼</ko>
+			<zh-cn lang="chinese (simplified)">地面宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">地面寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GROUND_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ground Memory</en>
+			<ja lang="japanese">グラウンドメモリ</ja>
+			<de lang="german">Boden-Disc</de>
+			<fr lang="french">ROM Sol</fr>
+			<it lang="italian">ROM Terra</it>
+			<es lang="spanish">Disco Tierra</es>
+			<ko lang="korean">그라운드메모리</ko>
+			<zh-cn lang="chinese (simplified)">大地存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">大地記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GROUNDIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Groundium Z</en>
+			<ja lang="japanese">ジメンＺ</ja>
+			<de lang="german">Terrium Z</de>
+			<fr lang="french">Terrazélite</fr>
+			<it lang="italian">Terrium Z</it>
+			<es lang="spanish">Geostal Z</es>
+			<ko lang="korean">땅Z</ko>
+			<zh-cn lang="chinese (simplified)">地面Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">地面Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GRUBBY_HANKY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grubby Hanky</en>
+			<ja lang="japanese">よごれたハンカチ</ja>
+			<de lang="german">Schnäuztuch</de>
+			<fr lang="french">Mouchoir Sale</fr>
+			<it lang="italian">Pezza sporca</it>
+			<es lang="spanish">Pañuelo Sucio</es>
+			<ko lang="korean">더러운손수건</ko>
+			<zh-cn lang="chinese (simplified)">脏手帕</zh-cn>
+			<zh-tw lang="chinese (traditional)">髒手帕</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GYARADOSITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Gyaradosite</en>
+			<ja lang="japanese">ギャラドスナイト</ja>
+			<de lang="german">Garadosnit</de>
+			<fr lang="french">Léviatorite</fr>
+			<it lang="italian">Gyaradosite</it>
+			<es lang="spanish">Gyaradosita</es>
+			<ko lang="korean">갸라도스나이트</ko>
+			<zh-cn lang="chinese (simplified)">暴鲤龙进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">暴鯉龍進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HARD_STONE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Hard Stone</en>
+			<ja lang="japanese">かたいいし</ja>
+			<de lang="german">Granitstein</de>
+			<fr lang="french">Pierre Dure</fr>
+			<it lang="italian">Pietradura</it>
+			<es lang="spanish">Piedra Dura</es>
+			<ko lang="korean">딱딱한돌</ko>
+			<zh-cn lang="chinese (simplified)">硬石头</zh-cn>
+			<zh-tw lang="chinese (traditional)">硬石頭</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HEAT_ROCK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Heat Rock</en>
+			<ja lang="japanese">あついいわ</ja>
+			<de lang="german">Heißbrocken</de>
+			<fr lang="french">Roche Chaude</fr>
+			<it lang="italian">Rocciacalda</it>
+			<es lang="spanish">Roca Calor</es>
+			<ko lang="korean">뜨거운바위</ko>
+			<zh-cn lang="chinese (simplified)">炽热岩石</zh-cn>
+			<zh-tw lang="chinese (traditional)">熾熱岩石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HEAVY_DUTY_BOOTS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Heavy-Duty Boots</en>
+			<ja lang="japanese">あつぞこブーツ</ja>
+			<de lang="german">Plateauschuhe</de>
+			<fr lang="french">Grosses Bottes</fr>
+			<it lang="italian">Scarponi robusti</it>
+			<es lang="spanish">Botas Gruesas</es>
+			<ko lang="korean">통굽부츠</ko>
+			<zh-cn lang="chinese (simplified)">厚底靴</zh-cn>
+			<zh-tw lang="chinese (traditional)">厚底靴</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HERACRONITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Heracronite</en>
+			<ja lang="japanese">ヘラクロスナイト</ja>
+			<de lang="german">Skarabornit</de>
+			<fr lang="french">Scarhinoïte</fr>
+			<it lang="italian">Heracrossite</it>
+			<es lang="spanish">Heracrossita</es>
+			<ko lang="korean">헤라크로스나이트</ko>
+			<zh-cn lang="chinese (simplified)">赫拉克罗斯进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">赫拉克羅斯進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HI_TECH_EARBUDS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Hi-tech Earbuds</en>
+			<ja lang="japanese">すごいみみせん</ja>
+			<de lang="german">Top-Ohrenstöpsel</de>
+			<fr lang="french">Bouchons Audio</fr>
+			<it lang="italian">Supertappi</it>
+			<es lang="spanish">Supertapones</es>
+			<ko lang="korean">대단한귀마개</ko>
+			<zh-cn lang="chinese (simplified)">厉害耳塞</zh-cn>
+			<zh-tw lang="chinese (traditional)">厲害耳塞</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HONOR_OF_KALOS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Honor Of Kalos</en>
+			<ja lang="japanese">カロスエンブレム</ja>
+			<de lang="german">Kalos-Emblem</de>
+			<fr lang="french">Insigne de Kalos</fr>
+			<it lang="italian">Emblema di Kalos</it>
+			<es lang="spanish">Emblema de Kalos</es>
+			<ko lang="korean">칼로스엠블럼</ko>
+			<zh-cn lang="chinese (simplified)">卡洛斯勋章</zh-cn>
+			<zh-tw lang="chinese (traditional)">卡洛斯勳章</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HOUNDOOMINITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Houndoominite</en>
+			<ja lang="japanese">ヘルガナイト</ja>
+			<de lang="german">Hundemonit</de>
+			<fr lang="french">Démolossite</fr>
+			<it lang="italian">Houndoomite</it>
+			<es lang="spanish">Houndoomita</es>
+			<ko lang="korean">헬가나이트</ko>
+			<zh-cn lang="chinese (simplified)">黑鲁加进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">黑魯加進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ICE_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ice Gem</en>
+			<ja lang="japanese">こおりのジュエル</ja>
+			<de lang="german">Eisjuwel</de>
+			<fr lang="french">Joyau Glace</fr>
+			<it lang="italian">Bijoughiaccio</it>
+			<es lang="spanish">Gema Hielo</es>
+			<ko lang="korean">얼음주얼</ko>
+			<zh-cn lang="chinese (simplified)">冰之宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">冰之寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ICE_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ice Memory</en>
+			<ja lang="japanese">アイスメモリ</ja>
+			<de lang="german">Eis-Disc</de>
+			<fr lang="french">ROM Glace</fr>
+			<it lang="italian">ROM Ghiaccio</it>
+			<es lang="spanish">Disco Hielo</es>
+			<ko lang="korean">아이스메모리</ko>
+			<zh-cn lang="chinese (simplified)">冰雪存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">冰雪記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ICICLE_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Icicle Plate</en>
+			<ja lang="japanese">つららのプレート</ja>
+			<de lang="german">Frosttafel</de>
+			<fr lang="french">Plaque Glace</fr>
+			<it lang="italian">Lastragelo</it>
+			<es lang="spanish">Tabla Helada</es>
+			<ko lang="korean">고드름플레이트</ko>
+			<zh-cn lang="chinese (simplified)">冰柱石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">冰柱石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ICIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Icium Z</en>
+			<ja lang="japanese">コオリＺ</ja>
+			<de lang="german">Glacium Z</de>
+			<fr lang="french">Cryozélite</fr>
+			<it lang="italian">Glacium Z</it>
+			<es lang="spanish">Criostal Z</es>
+			<ko lang="korean">얼음Z</ko>
+			<zh-cn lang="chinese (simplified)">冰Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">冰Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ICY_ROCK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Icy Rock</en>
+			<ja lang="japanese">つめたいいわ</ja>
+			<de lang="german">Eisbrocken</de>
+			<fr lang="french">Roche Glace</fr>
+			<it lang="italian">Rocciafredda</it>
+			<es lang="spanish">Roca Helada</es>
+			<ko lang="korean">차가운바위</ko>
+			<zh-cn lang="chinese (simplified)">冰冷岩石</zh-cn>
+			<zh-tw lang="chinese (traditional)">冰冷岩石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>INCINIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Incinium Z</en>
+			<ja lang="japanese">ガオガエンＺ</ja>
+			<de lang="german">Fuegronium Z</de>
+			<fr lang="french">Félinozélite</fr>
+			<it lang="italian">Incineronium Z</it>
+			<es lang="spanish">Incinostal Z</es>
+			<ko lang="korean">어흥염Z</ko>
+			<zh-cn lang="chinese (simplified)">炽焰咆哮虎Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">熾焰咆哮虎Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>INSECT_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Insect Plate</en>
+			<ja lang="japanese">たまむしプレート</ja>
+			<de lang="german">Käfertafel</de>
+			<fr lang="french">Plaque Insecte</fr>
+			<it lang="italian">Lastrabaco</it>
+			<es lang="spanish">Tabla Bicho</es>
+			<ko lang="korean">비단벌레플레이트</ko>
+			<zh-cn lang="chinese (simplified)">玉虫石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">玉蟲石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>INTRIGUING_STONE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Intriguing Stone</en>
+			<ja lang="japanese">すごそうないし</ja>
+			<de lang="german">Kurioser Stein</de>
+			<fr lang="french">Pierre Insolite</fr>
+			<it lang="italian">Sasso suggestivo</it>
+			<es lang="spanish">Piedra Insólita</es>
+			<ko lang="korean">대단할듯한돌</ko>
+			<zh-cn lang="chinese (simplified)">似珍石</zh-cn>
+			<zh-tw lang="chinese (traditional)">似珍石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>IRON_BALL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Iron Ball</en>
+			<ja lang="japanese">くろいてっきゅう</ja>
+			<de lang="german">Eisenkugel</de>
+			<fr lang="french">Balle Fer</fr>
+			<it lang="italian">Ferropalla</it>
+			<es lang="spanish">Bola Férrea</es>
+			<ko lang="korean">검은철구</ko>
+			<zh-cn lang="chinese (simplified)">黑色铁球</zh-cn>
+			<zh-tw lang="chinese (traditional)">黑色鐵球</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>IRON_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Iron Plate</en>
+			<ja lang="japanese">こうてつプレート</ja>
+			<de lang="german">Eisentafel</de>
+			<fr lang="french">Plaque Fer</fr>
+			<it lang="italian">Lastraferro</it>
+			<es lang="spanish">Tabla Acero</es>
+			<ko lang="korean">강철플레이트</ko>
+			<zh-cn lang="chinese (simplified)">钢铁石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">鋼鐵石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>KANGASKHANITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Kangaskhanite</en>
+			<ja lang="japanese">ガルーラナイト</ja>
+			<de lang="german">Kangamanit</de>
+			<fr lang="french">Kangourexite</fr>
+			<it lang="italian">Kangaskhanite</it>
+			<es lang="spanish">Kangaskhanita</es>
+			<ko lang="korean">캥카나이트</ko>
+			<zh-cn lang="chinese (simplified)">袋兽进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">袋獸進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>KINGS_ROCK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">King's Rock</en>
+			<ja lang="japanese">おうじゃのしるし</ja>
+			<de lang="german">King-Stein</de>
+			<fr lang="french">Roche Royale</fr>
+			<it lang="italian">Roccia di re</it>
+			<es lang="spanish">Roca del Rey</es>
+			<ko lang="korean">왕의징표석</ko>
+			<zh-cn lang="chinese (simplified)">王者之证</zh-cn>
+			<zh-tw lang="chinese (traditional)">王者之證</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>KOMMONIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Kommonium Z</en>
+			<ja lang="japanese">ジャラランガＺ</ja>
+			<de lang="german">Grandirasium Z</de>
+			<fr lang="french">Ékaïzélite</fr>
+			<it lang="italian">Kommonium Z</it>
+			<es lang="spanish">Kommostal Z</es>
+			<ko lang="korean">짜랑고우거Z</ko>
+			<zh-cn lang="chinese (simplified)">杖尾鳞甲龙Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">杖尾鱗甲龍Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LAGGING_TAIL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lagging Tail</en>
+			<ja lang="japanese">こうこうのしっぽ</ja>
+			<de lang="german">Schwerschweif</de>
+			<fr lang="french">Ralentiqueue</fr>
+			<it lang="italian">Rallentocoda</it>
+			<es lang="spanish">Cola Plúmbea</es>
+			<ko lang="korean">느림보꼬리</ko>
+			<zh-cn lang="chinese (simplified)">后攻之尾</zh-cn>
+			<zh-tw lang="chinese (traditional)">後攻之尾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LATIASITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Latiasite</en>
+			<ja lang="japanese">ラティアスナイト</ja>
+			<de lang="german">Latiasnit</de>
+			<fr lang="french">Latiasite</fr>
+			<it lang="italian">Latiasite</it>
+			<es lang="spanish">Latiasita</es>
+			<ko lang="korean">라티아스나이트</ko>
+			<zh-cn lang="chinese (simplified)">拉帝亚斯进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">拉帝亞斯進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LATIOSITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Latiosite</en>
+			<ja lang="japanese">ラティオスナイト</ja>
+			<de lang="german">Latiosnit</de>
+			<fr lang="french">Latiosite</fr>
+			<it lang="italian">Latiosite</it>
+			<es lang="spanish">Latiosita</es>
+			<ko lang="korean">라티오스나이트</ko>
+			<zh-cn lang="chinese (simplified)">拉帝欧斯进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">拉帝歐斯進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LAX_INCENSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lax Incense</en>
+			<ja lang="japanese">のんきのおこう</ja>
+			<de lang="german">Laxrauch</de>
+			<fr lang="french">Encens Doux</fr>
+			<it lang="italian">Distraroma</it>
+			<es lang="spanish">Incienso Suave</es>
+			<ko lang="korean">무사태평향로</ko>
+			<zh-cn lang="chinese (simplified)">悠闲薰香</zh-cn>
+			<zh-tw lang="chinese (traditional)">悠閒薰香</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LEEK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Leek</en>
+			<ja lang="japanese">ながねぎ</ja>
+			<de lang="german">Lauchstange</de>
+			<fr lang="french">Poireau</fr>
+			<it lang="italian">Porro</it>
+			<es lang="spanish">Puerro</es>
+			<ko lang="korean">대파</ko>
+			<zh-cn lang="chinese (simplified)">大葱</zh-cn>
+			<zh-tw lang="chinese (traditional)">大蔥</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LEFTOVERS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Leftovers</en>
+			<ja lang="japanese">たべのこし</ja>
+			<de lang="german">Überreste</de>
+			<fr lang="french">Restes</fr>
+			<it lang="italian">Avanzi</it>
+			<es lang="spanish">Restos</es>
+			<ko lang="korean">먹다남은음식</ko>
+			<zh-cn lang="chinese (simplified)">吃剩的东西</zh-cn>
+			<zh-tw lang="chinese (traditional)">吃剩的東西</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LEGEND_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Legend Plate</en>
+			<ja lang="japanese">レジェンドプレート</ja>
+			<de lang="german">Legendentafel</de>
+			<fr lang="french">Plaque Légende</fr>
+			<it lang="italian">Lastraleggenda</it>
+			<es lang="spanish">Tabla Legendaria</es>
+			<ko lang="korean">레전드플레이트</ko>
+			<zh-cn lang="chinese (simplified)">传说石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">傳說石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LIFE_ORB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Life Orb</en>
+			<ja lang="japanese">いのちのたま</ja>
+			<de lang="german">Leben-Orb</de>
+			<fr lang="french">Orbe Vie</fr>
+			<it lang="italian">Assorbisfera</it>
+			<es lang="spanish">Vidasfera</es>
+			<ko lang="korean">생명의구슬</ko>
+			<zh-cn lang="chinese (simplified)">生命宝珠</zh-cn>
+			<zh-tw lang="chinese (traditional)">生命寶珠</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LIGHT_BALL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Light Ball</en>
+			<ja lang="japanese">でんきだま</ja>
+			<de lang="german">Kugelblitz</de>
+			<fr lang="french">Balle Lumière</fr>
+			<it lang="italian">Elettropalla</it>
+			<es lang="spanish">Bola Luminosa</es>
+			<ko lang="korean">전기구슬</ko>
+			<zh-cn lang="chinese (simplified)">电气球</zh-cn>
+			<zh-tw lang="chinese (traditional)">電氣球</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LIGHT_CLAY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Light Clay</en>
+			<ja lang="japanese">ひかりのねんど</ja>
+			<de lang="german">Lichtlehm</de>
+			<fr lang="french">Lumargile</fr>
+			<it lang="italian">Creta luce</it>
+			<es lang="spanish">Refleluz</es>
+			<ko lang="korean">빛의점토</ko>
+			<zh-cn lang="chinese (simplified)">光之黏土</zh-cn>
+			<zh-tw lang="chinese (traditional)">光之黏土</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LOADED_DICE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Loaded Dice</en>
+			<ja lang="japanese">いかさまダイス</ja>
+			<de lang="german">Gezinkter Würfel</de>
+			<fr lang="french">Dé Pipé</fr>
+			<it lang="italian">Dado truccato</it>
+			<es lang="spanish">Dado Trucado</es>
+			<ko lang="korean">속임수주사위</ko>
+			<zh-cn lang="chinese (simplified)">机变骰子</zh-cn>
+			<zh-tw lang="chinese (traditional)">老千骰子</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LOOKER_TICKET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Looker Ticket</en>
+			<ja lang="japanese">ハンサムチケット</ja>
+			<de lang="german">LeBelle-Ticket</de>
+			<fr lang="french">Ticket Beladonis</fr>
+			<it lang="italian">Carta Bellocchio</it>
+			<es lang="spanish">Boleto Handsome</es>
+			<ko lang="korean">핸섬티켓</ko>
+			<zh-cn lang="chinese (simplified)">帅哥券</zh-cn>
+			<zh-tw lang="chinese (traditional)">帥哥券</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LOPUNNITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lopunnite</en>
+			<ja lang="japanese">ミミロップナイト</ja>
+			<de lang="german">Schlapornit</de>
+			<fr lang="french">Lockpinite</fr>
+			<it lang="italian">Lopunnite</it>
+			<es lang="spanish">Lopunnita</es>
+			<ko lang="korean">이어롭나이트</ko>
+			<zh-cn lang="chinese (simplified)">长耳兔进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">長耳兔進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LOVE_SWEET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Love Sweet</en>
+			<ja lang="japanese">ハートアメざいく</ja>
+			<de lang="german">Zucker-Herz</de>
+			<fr lang="french">Cœur en Sucre</fr>
+			<it lang="italian">Bonboncuore</it>
+			<es lang="spanish">Confite Corazón</es>
+			<ko lang="korean">하트사탕공예</ko>
+			<zh-cn lang="chinese (simplified)">爱心糖饰</zh-cn>
+			<zh-tw lang="chinese (traditional)">愛心糖飾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LUCARIONITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lucarionite</en>
+			<ja lang="japanese">ルカリオナイト</ja>
+			<de lang="german">Lucarionit</de>
+			<fr lang="french">Lucarite</fr>
+			<it lang="italian">Lucarite</it>
+			<es lang="spanish">Lucarita</es>
+			<ko lang="korean">루카리오나이트</ko>
+			<zh-cn lang="chinese (simplified)">路卡利欧进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">路卡利歐進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LUCK_INCENSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Luck Incense</en>
+			<ja lang="japanese">こううんのおこう</ja>
+			<de lang="german">Glücksrauch</de>
+			<fr lang="french">Encens Veine</fr>
+			<it lang="italian">Fortunaroma</it>
+			<es lang="spanish">Incienso Duplo</es>
+			<ko lang="korean">행운의향로</ko>
+			<zh-cn lang="chinese (simplified)">幸运薰香</zh-cn>
+			<zh-tw lang="chinese (traditional)">幸運薰香</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LUCKY_EGG</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lucky Egg</en>
+			<ja lang="japanese">しあわせタマゴ</ja>
+			<de lang="german">Glücks-Ei</de>
+			<fr lang="french">Œuf Chance</fr>
+			<it lang="italian">Fortunuovo</it>
+			<es lang="spanish">Huevo Suerte</es>
+			<ko lang="korean">행복의알</ko>
+			<zh-cn lang="chinese (simplified)">幸运蛋</zh-cn>
+			<zh-tw lang="chinese (traditional)">幸運蛋</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LUCKY_PUNCH</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lucky Punch</en>
+			<ja lang="japanese">ラッキーパンチ</ja>
+			<de lang="german">Lucky Punch</de>
+			<fr lang="french">Poing Chance</fr>
+			<it lang="italian">Fortunpugno</it>
+			<es lang="spanish">Puño Suerte</es>
+			<ko lang="korean">럭키펀치</ko>
+			<zh-cn lang="chinese (simplified)">吉利拳</zh-cn>
+			<zh-tw lang="chinese (traditional)">吉利拳</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LUMINOUS_MOSS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Luminous Moss</en>
+			<ja lang="japanese">ひかりごけ</ja>
+			<de lang="german">Leuchtmoos</de>
+			<fr lang="french">Lichen Lumineux</fr>
+			<it lang="italian">Muschioluce</it>
+			<es lang="spanish">Musgo Brillante</es>
+			<ko lang="korean">빛이끼</ko>
+			<zh-cn lang="chinese (simplified)">光苔</zh-cn>
+			<zh-tw lang="chinese (traditional)">光苔</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LUNALIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lunalium Z</en>
+			<ja lang="japanese">ルナアーラＺ</ja>
+			<de lang="german">Lunalium Z</de>
+			<fr lang="french">Lunazélite</fr>
+			<it lang="italian">Lunalium Z</it>
+			<es lang="spanish">Lunalastal Z</es>
+			<ko lang="korean">루나아라Z</ko>
+			<zh-cn lang="chinese (simplified)">露奈雅拉Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">露奈雅拉Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LUSTROUS_GLOBE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lustrous Globe</en>
+			<ja lang="japanese">だいしらたま</ja>
+			<de lang="german">Weißkristall</de>
+			<fr lang="french">Globe Perlé</fr>
+			<it lang="italian">Splendisferoide</it>
+			<es lang="spanish">Gran Lustresfera</es>
+			<ko lang="korean">큰백옥</ko>
+			<zh-cn lang="chinese (simplified)">大白宝玉</zh-cn>
+			<zh-tw lang="chinese (traditional)">大白寶玉</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LUSTROUS_ORB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lustrous Orb</en>
+			<ja lang="japanese">しらたま</ja>
+			<de lang="german">Weiß-Orb</de>
+			<fr lang="french">Orbe Perlé</fr>
+			<it lang="italian">Splendisfera</it>
+			<es lang="spanish">Lustresfera</es>
+			<ko lang="korean">백옥</ko>
+			<zh-cn lang="chinese (simplified)">白玉宝珠</zh-cn>
+			<zh-tw lang="chinese (traditional)">白玉寶珠</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LYCANIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lycanium Z</en>
+			<ja lang="japanese">ルガルガンＺ</ja>
+			<de lang="german">Wolwerockium Z</de>
+			<fr lang="french">Lougarozélite</fr>
+			<it lang="italian">Lycanrochium Z</it>
+			<es lang="spanish">Lycanrostal Z</es>
+			<ko lang="korean">루가루암Z</ko>
+			<zh-cn lang="chinese (simplified)">鬃岩狼人Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">鬃岩狼人Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MACHO_BRACE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Macho Brace</en>
+			<ja lang="japanese">きょうせいギプス</ja>
+			<de lang="german">Machoschiene</de>
+			<fr lang="french">Bracelet Macho</fr>
+			<it lang="italian">Crescicappa</it>
+			<es lang="spanish">Brazal Firme</es>
+			<ko lang="korean">교정깁스</ko>
+			<zh-cn lang="chinese (simplified)">强制锻炼器</zh-cn>
+			<zh-tw lang="chinese (traditional)">強制鍛鍊器</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MAGNET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Magnet</en>
+			<ja lang="japanese">じしゃく</ja>
+			<de lang="german">Magnet</de>
+			<fr lang="french">Aimant</fr>
+			<it lang="italian">Calamita</it>
+			<es lang="spanish">Imán</es>
+			<ko lang="korean">자석</ko>
+			<zh-cn lang="chinese (simplified)">磁铁</zh-cn>
+			<zh-tw lang="chinese (traditional)">磁鐵</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MANECTITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Manectite</en>
+			<ja lang="japanese">ライボルトナイト</ja>
+			<de lang="german">Voltensonit</de>
+			<fr lang="french">Élecsprintite</fr>
+			<it lang="italian">Manectricite</it>
+			<es lang="spanish">Manectricita</es>
+			<ko lang="korean">썬더볼트나이트</ko>
+			<zh-cn lang="chinese (simplified)">雷电兽进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">雷電獸進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MARSHADIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Marshadium Z</en>
+			<ja lang="japanese">マーシャドーＺ</ja>
+			<de lang="german">Marshadownium Z</de>
+			<fr lang="french">Marshadozélite</fr>
+			<it lang="italian">Marshadium Z</it>
+			<es lang="spanish">Marshastal Z</es>
+			<ko lang="korean">마샤도Z</ko>
+			<zh-cn lang="chinese (simplified)">玛夏多Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">瑪夏多Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MAWILITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mawilite</en>
+			<ja lang="japanese">クチートナイト</ja>
+			<de lang="german">Flunkifernit</de>
+			<fr lang="french">Mysdibulite</fr>
+			<it lang="italian">Mawilite</it>
+			<es lang="spanish">Mawilita</es>
+			<ko lang="korean">입치트나이트</ko>
+			<zh-cn lang="chinese (simplified)">大嘴娃进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">大嘴娃進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MEADOW_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Meadow Plate</en>
+			<ja lang="japanese">みどりのプレート</ja>
+			<de lang="german">Wiesentafel</de>
+			<fr lang="french">Plaque Herbe</fr>
+			<it lang="italian">Lastraprato</it>
+			<es lang="spanish">Tabla Pradal</es>
+			<ko lang="korean">초록플레이트</ko>
+			<zh-cn lang="chinese (simplified)">碧绿石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">碧綠石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MEDICHAMITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Medichamite</en>
+			<ja lang="japanese">チャーレムナイト</ja>
+			<de lang="german">Meditalisnit</de>
+			<fr lang="french">Charminite</fr>
+			<it lang="italian">Medichamite</it>
+			<es lang="spanish">Medichamita</es>
+			<ko lang="korean">요가램나이트</ko>
+			<zh-cn lang="chinese (simplified)">恰雷姆进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">恰雷姆進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MENTAL_HERB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mental Herb</en>
+			<ja lang="japanese">メンタルハーブ</ja>
+			<de lang="german">Mentalkraut</de>
+			<fr lang="french">Herbe Mental</fr>
+			<it lang="italian">Mentalerba</it>
+			<es lang="spanish">Hierba Mental</es>
+			<ko lang="korean">멘탈허브</ko>
+			<zh-cn lang="chinese (simplified)">心灵香草</zh-cn>
+			<zh-tw lang="chinese (traditional)">心靈香草</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>METAGROSSITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Metagrossite</en>
+			<ja lang="japanese">メタグロスナイト</ja>
+			<de lang="german">Metagrossnit</de>
+			<fr lang="french">Métalossite</fr>
+			<it lang="italian">Metagrossite</it>
+			<es lang="spanish">Metagrossita</es>
+			<ko lang="korean">메타그로스나이트</ko>
+			<zh-cn lang="chinese (simplified)">巨金怪进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">巨金怪進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>METAL_COAT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Metal Coat</en>
+			<ja lang="japanese">メタルコート</ja>
+			<de lang="german">Metallmantel</de>
+			<fr lang="french">Peau Métal</fr>
+			<it lang="italian">Metalcopertura</it>
+			<es lang="spanish">Revest. Metálico</es>
+			<ko lang="korean">금속코트</ko>
+			<zh-cn lang="chinese (simplified)">金属膜</zh-cn>
+			<zh-tw lang="chinese (traditional)">金屬膜</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>METAL_POWDER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Metal Powder</en>
+			<ja lang="japanese">メタルパウダー</ja>
+			<de lang="german">Metallstaub</de>
+			<fr lang="french">Poudre Métal</fr>
+			<it lang="italian">Metalpolvere</it>
+			<es lang="spanish">Polvo Metálico</es>
+			<ko lang="korean">금속파우더</ko>
+			<zh-cn lang="chinese (simplified)">金属粉</zh-cn>
+			<zh-tw lang="chinese (traditional)">金屬粉</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>METRONOME</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Metronome</en>
+			<ja lang="japanese">メトロノーム</ja>
+			<de lang="german">Metronom</de>
+			<fr lang="french">Métronome</fr>
+			<it lang="italian">Plessimetro</it>
+			<es lang="spanish">Metrónomo</es>
+			<ko lang="korean">메트로놈</ko>
+			<zh-cn lang="chinese (simplified)">节拍器</zh-cn>
+			<zh-tw lang="chinese (traditional)">節拍器</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MEWNIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mewnium Z</en>
+			<ja lang="japanese">ミュウＺ</ja>
+			<de lang="german">Mewnium Z</de>
+			<fr lang="french">Mewzélite</fr>
+			<it lang="italian">Mewnium Z</it>
+			<es lang="spanish">Mewstal Z</es>
+			<ko lang="korean">뮤Z</ko>
+			<zh-cn lang="chinese (simplified)">梦幻Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">夢幻Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MEWTWONITE_X</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mewtwonite X</en>
+			<ja lang="japanese">ミュウツナイトＸ</ja>
+			<de lang="german">Mewtunit X</de>
+			<fr lang="french">Mewtwoïte X</fr>
+			<it lang="italian">Mewtwoite X</it>
+			<es lang="spanish">Mewtwoita X</es>
+			<ko lang="korean">뮤츠나이트X</ko>
+			<zh-cn lang="chinese (simplified)">超梦进化石Ｘ</zh-cn>
+			<zh-tw lang="chinese (traditional)">超夢進化石Ｘ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MEWTWONITE_Y</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mewtwonite Y</en>
+			<ja lang="japanese">ミュウツナイトＹ</ja>
+			<de lang="german">Mewtunit Y</de>
+			<fr lang="french">Mewtwoïte Y</fr>
+			<it lang="italian">Mewtwoite Y</it>
+			<es lang="spanish">Mewtwoita Y</es>
+			<ko lang="korean">뮤츠나이트Y</ko>
+			<zh-cn lang="chinese (simplified)">超梦进化石Ｙ</zh-cn>
+			<zh-tw lang="chinese (traditional)">超夢進化石Ｙ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MIMIKIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mimikium Z</en>
+			<ja lang="japanese">ミミッキュＺ</ja>
+			<de lang="german">Mimigmium Z</de>
+			<fr lang="french">Mimiquizélite</fr>
+			<it lang="italian">Mimikyum Z</it>
+			<es lang="spanish">Mimikyustal Z</es>
+			<ko lang="korean">따라큐Z</ko>
+			<zh-cn lang="chinese (simplified)">谜拟ＱＺ</zh-cn>
+			<zh-tw lang="chinese (traditional)">謎擬ＱＺ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MIND_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mind Plate</en>
+			<ja lang="japanese">ふしぎのプレート</ja>
+			<de lang="german">Hirntafel</de>
+			<fr lang="french">Plaque Esprit</fr>
+			<it lang="italian">Lastramente</it>
+			<es lang="spanish">Tabla Mental</es>
+			<ko lang="korean">이상한플레이트</ko>
+			<zh-cn lang="chinese (simplified)">神奇石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">神奇石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MIRACLE_SEED</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Miracle Seed</en>
+			<ja lang="japanese">きせきのタネ</ja>
+			<de lang="german">Wundersaat</de>
+			<fr lang="french">Graine Miracle</fr>
+			<it lang="italian">Miracolseme</it>
+			<es lang="spanish">Semilla Milagro</es>
+			<ko lang="korean">기적의씨</ko>
+			<zh-cn lang="chinese (simplified)">奇迹种子</zh-cn>
+			<zh-tw lang="chinese (traditional)">奇跡種子</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MIRROR_HERB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mirror Herb</en>
+			<ja lang="japanese">ものまねハーブ</ja>
+			<de lang="german">Kopierkraut</de>
+			<fr lang="french">Feuille Copieuse</fr>
+			<it lang="italian">Foglia carbone</it>
+			<es lang="spanish">Hierba Copia</es>
+			<ko lang="korean">흉내허브</ko>
+			<zh-cn lang="chinese (simplified)">模仿香草</zh-cn>
+			<zh-tw lang="chinese (traditional)">模仿香草</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MISTY_SEED</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Misty Seed</en>
+			<ja lang="japanese">ミストシード</ja>
+			<de lang="german">Nebel-Samen</de>
+			<fr lang="french">Graine Brume</fr>
+			<it lang="italian">Nebbiaseme</it>
+			<es lang="spanish">Semilla Bruma</es>
+			<ko lang="korean">미스트시드</ko>
+			<zh-cn lang="chinese (simplified)">薄雾种子</zh-cn>
+			<zh-tw lang="chinese (traditional)">薄霧種子</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MUSCLE_BAND</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Muscle Band</en>
+			<ja lang="japanese">ちからのハチマキ</ja>
+			<de lang="german">Muskelband</de>
+			<fr lang="french">Bandeau Muscle</fr>
+			<it lang="italian">Muscolbanda</it>
+			<es lang="spanish">Cinta Fuerte</es>
+			<ko lang="korean">힘의머리띠</ko>
+			<zh-cn lang="chinese (simplified)">力量头带</zh-cn>
+			<zh-tw lang="chinese (traditional)">力量頭帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MYSTIC_WATER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mystic Water</en>
+			<ja lang="japanese">しんぴのしずく</ja>
+			<de lang="german">Zauberwasser</de>
+			<fr lang="french">Eau Mystique</fr>
+			<it lang="italian">Acqua magica</it>
+			<es lang="spanish">Agua Mística</es>
+			<ko lang="korean">신비의물방울</ko>
+			<zh-cn lang="chinese (simplified)">神秘水滴</zh-cn>
+			<zh-tw lang="chinese (traditional)">神秘水滴</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>NEVER_MELT_ICE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Never-Melt Ice</en>
+			<ja lang="japanese">とけないこおり</ja>
+			<de lang="german">Ewiges Eis</de>
+			<fr lang="french">Glace Éternelle</fr>
+			<it lang="italian">Gelomai</it>
+			<es lang="spanish">Antiderretir</es>
+			<ko lang="korean">녹지않는얼음</ko>
+			<zh-cn lang="chinese (simplified)">不融冰</zh-cn>
+			<zh-tw lang="chinese (traditional)">不融冰</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>NORMAL_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Normal Gem</en>
+			<ja lang="japanese">ノーマルジュエル</ja>
+			<de lang="german">Normaljuwel</de>
+			<fr lang="french">Joyau Normal</fr>
+			<it lang="italian">Bijounormale</it>
+			<es lang="spanish">Gema Normal</es>
+			<ko lang="korean">노말주얼</ko>
+			<zh-cn lang="chinese (simplified)">一般宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">一般寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>NORMALIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Normalium Z</en>
+			<ja lang="japanese">ノーマルＺ</ja>
+			<de lang="german">Normium Z</de>
+			<fr lang="french">Normazélite</fr>
+			<it lang="italian">Normium Z</it>
+			<es lang="spanish">Normastal Z</es>
+			<ko lang="korean">노말Z</ko>
+			<zh-cn lang="chinese (simplified)">一般Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">一般Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ODD_INCENSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Odd Incense</en>
+			<ja lang="japanese">あやしいおこう</ja>
+			<de lang="german">Schrägrauch</de>
+			<fr lang="french">Encens Bizarre</fr>
+			<it lang="italian">Bizzoaroma</it>
+			<es lang="spanish">Incienso Raro</es>
+			<ko lang="korean">괴상한향로</ko>
+			<zh-cn lang="chinese (simplified)">奇异薰香</zh-cn>
+			<zh-tw lang="chinese (traditional)">奇異薰香</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PASS_ORB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pass Orb</en>
+			<ja lang="japanese">デルダマ</ja>
+			<de lang="german">Transfer-Orb</de>
+			<fr lang="french">Offrisphère</fr>
+			<it lang="italian">Passabilia</it>
+			<es lang="spanish">Regalosfera</es>
+			<ko lang="korean">딜구슬</ko>
+			<zh-cn lang="chinese (simplified)">释出之玉</zh-cn>
+			<zh-tw lang="chinese (traditional)">釋出之玉</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PIDGEOTITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pidgeotite</en>
+			<ja lang="japanese">ピジョットナイト</ja>
+			<de lang="german">Taubossnit</de>
+			<fr lang="french">Roucarnagite</fr>
+			<it lang="italian">Pidgeotite</it>
+			<es lang="spanish">Pidgeotita</es>
+			<ko lang="korean">피죤투나이트</ko>
+			<zh-cn lang="chinese (simplified)">大比鸟进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">大比鳥進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PIKANIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pikanium Z</en>
+			<ja lang="japanese">ピカチュウＺ</ja>
+			<de lang="german">Pikachium Z</de>
+			<fr lang="french">Pikazélite</fr>
+			<it lang="italian">Pikacium Z</it>
+			<es lang="spanish">Pikastal Z</es>
+			<ko lang="korean">피카츄Z</ko>
+			<zh-cn lang="chinese (simplified)">皮卡丘Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">皮卡丘Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PIKASHUNIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pikashunium Z</en>
+			<ja lang="japanese">サトピカＺ</ja>
+			<de lang="german">Ash-Pikachium Z</de>
+			<fr lang="french">Pikachazélite</fr>
+			<it lang="italian">Ashpikacium Z</it>
+			<es lang="spanish">Ash-Pikastal Z</es>
+			<ko lang="korean">지우피카Z</ko>
+			<zh-cn lang="chinese (simplified)">智皮卡Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">智皮卡Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PINK_NECTAR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pink Nectar</en>
+			<ja lang="japanese">うすもものミツ</ja>
+			<de lang="german">Rosa Nektar</de>
+			<fr lang="french">Nectar Rose</fr>
+			<it lang="italian">Nettare rosa</it>
+			<es lang="spanish">Néctar Rosa</es>
+			<ko lang="korean">연분홍꿀</ko>
+			<zh-cn lang="chinese (simplified)">桃粉色花蜜</zh-cn>
+			<zh-tw lang="chinese (traditional)">桃粉色花蜜</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PINSIRITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pinsirite</en>
+			<ja lang="japanese">カイロスナイト</ja>
+			<de lang="german">Pinsirnit</de>
+			<fr lang="french">Scarabruite</fr>
+			<it lang="italian">Pinsirite</it>
+			<es lang="spanish">Pinsirita</es>
+			<ko lang="korean">쁘사이저나이트</ko>
+			<zh-cn lang="chinese (simplified)">凯罗斯进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">凱羅斯進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PIXIE_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pixie Plate</en>
+			<ja lang="japanese">せいれいプレート</ja>
+			<de lang="german">Feentafel</de>
+			<fr lang="french">Plaque Pixie</fr>
+			<it lang="italian">Lastraspiritello</it>
+			<es lang="spanish">Tabla Duende</es>
+			<ko lang="korean">정령플레이트</ko>
+			<zh-cn lang="chinese (simplified)">妖精石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">妖精石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLASMA_CARD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Plasma Card</en>
+			<ja lang="japanese">プラズマカード</ja>
+			<de lang="german">Plasmakarte</de>
+			<fr lang="french">Carte Plasma</fr>
+			<it lang="italian">Carta Plasma</it>
+			<es lang="spanish">Tarjeta Plasma</es>
+			<ko lang="korean">플라스마카드</ko>
+			<zh-cn lang="chinese (simplified)">等离子卡</zh-cn>
+			<zh-tw lang="chinese (traditional)">等離子卡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POISON_BARB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Poison Barb</en>
+			<ja lang="japanese">どくバリ</ja>
+			<de lang="german">Giftstich</de>
+			<fr lang="french">Pic Venin</fr>
+			<it lang="italian">Velenaculeo</it>
+			<es lang="spanish">Flecha Venenosa</es>
+			<ko lang="korean">독바늘</ko>
+			<zh-cn lang="chinese (simplified)">毒针</zh-cn>
+			<zh-tw lang="chinese (traditional)">毒針</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POISON_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Poison Gem</en>
+			<ja lang="japanese">どくのジュエル</ja>
+			<de lang="german">Giftjuwel</de>
+			<fr lang="french">Joyau Poison</fr>
+			<it lang="italian">Bijouveleno</it>
+			<es lang="spanish">Gema Veneno</es>
+			<ko lang="korean">독주얼</ko>
+			<zh-cn lang="chinese (simplified)">毒之宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">毒之寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POISON_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Poison Memory</en>
+			<ja lang="japanese">ポイズンメモリ</ja>
+			<de lang="german">Gift-Disc</de>
+			<fr lang="french">ROM Poison</fr>
+			<it lang="italian">ROM Veleno</it>
+			<es lang="spanish">Disco Veneno</es>
+			<ko lang="korean">포이즌메모리</ko>
+			<zh-cn lang="chinese (simplified)">毒存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">毒記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POISONIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Poisonium Z</en>
+			<ja lang="japanese">ドクＺ</ja>
+			<de lang="german">Toxium Z</de>
+			<fr lang="french">Toxizélite</fr>
+			<it lang="italian">Venenium Z</it>
+			<es lang="spanish">Toxistal Z</es>
+			<ko lang="korean">독Z</ko>
+			<zh-cn lang="chinese (simplified)">毒Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">毒Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POWER_ANKLET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Power Anklet</en>
+			<ja lang="japanese">パワーアンクル</ja>
+			<de lang="german">Machtkette</de>
+			<fr lang="french">Chaîne Pouvoir</fr>
+			<it lang="italian">Vigorgliera</it>
+			<es lang="spanish">Franja Recia</es>
+			<ko lang="korean">파워앵클릿</ko>
+			<zh-cn lang="chinese (simplified)">力量护踝</zh-cn>
+			<zh-tw lang="chinese (traditional)">力量護踝</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POWER_BAND</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Power Band</en>
+			<ja lang="japanese">パワーバンド</ja>
+			<de lang="german">Machtband</de>
+			<fr lang="french">Bandeau Pouvoir</fr>
+			<it lang="italian">Vigorbanda</it>
+			<es lang="spanish">Banda Recia</es>
+			<ko lang="korean">파워밴드</ko>
+			<zh-cn lang="chinese (simplified)">力量束带</zh-cn>
+			<zh-tw lang="chinese (traditional)">力量束帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POWER_BELT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Power Belt</en>
+			<ja lang="japanese">パワーベルト</ja>
+			<de lang="german">Machtgurt</de>
+			<fr lang="french">Ceinture Pouvoir</fr>
+			<it lang="italian">Vigorfascia</it>
+			<es lang="spanish">Cinto Recio</es>
+			<ko lang="korean">파워벨트</ko>
+			<zh-cn lang="chinese (simplified)">力量腰带</zh-cn>
+			<zh-tw lang="chinese (traditional)">力量腰帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POWER_BRACER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Power Bracer</en>
+			<ja lang="japanese">パワーリスト</ja>
+			<de lang="german">Machtreif</de>
+			<fr lang="french">Poignet Pouvoir</fr>
+			<it lang="italian">Vigorcerchio</it>
+			<es lang="spanish">Brazal Recio</es>
+			<ko lang="korean">파워리스트</ko>
+			<zh-cn lang="chinese (simplified)">力量护腕</zh-cn>
+			<zh-tw lang="chinese (traditional)">力量護腕</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POWER_HERB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Power Herb</en>
+			<ja lang="japanese">パワフルハーブ</ja>
+			<de lang="german">Energiekraut</de>
+			<fr lang="french">Herbe Pouvoir</fr>
+			<it lang="italian">Vigorerba</it>
+			<es lang="spanish">Hierba Única</es>
+			<ko lang="korean">파워풀허브</ko>
+			<zh-cn lang="chinese (simplified)">强力香草</zh-cn>
+			<zh-tw lang="chinese (traditional)">強力香草</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POWER_LENS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Power Lens</en>
+			<ja lang="japanese">パワーレンズ</ja>
+			<de lang="german">Machtlinse</de>
+			<fr lang="french">Lentille Pouvoir</fr>
+			<it lang="italian">Vigorlente</it>
+			<es lang="spanish">Lente Recia</es>
+			<ko lang="korean">파워렌즈</ko>
+			<zh-cn lang="chinese (simplified)">力量镜</zh-cn>
+			<zh-tw lang="chinese (traditional)">力量鏡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POWER_PLANT_PASS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Power Plant Pass</en>
+			<ja lang="japanese">はつでんしょパス</ja>
+			<de lang="german">Kraftwerks-Pass</de>
+			<fr lang="french">Passe Centrale</fr>
+			<it lang="italian">Pass centrale</it>
+			<es lang="spanish">Pase de la Central</es>
+			<ko lang="korean">발전소패스</ko>
+			<zh-cn lang="chinese (simplified)">发电厂通行证</zh-cn>
+			<zh-tw lang="chinese (traditional)">發電廠通行證</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POWER_WEIGHT</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Power Weight</en>
+			<ja lang="japanese">パワーウエイト</ja>
+			<de lang="german">Machtgewicht</de>
+			<fr lang="french">Poids Pouvoir</fr>
+			<it lang="italian">Vigorpeso</it>
+			<es lang="spanish">Pesa Recia</es>
+			<ko lang="korean">파워웨이트</ko>
+			<zh-cn lang="chinese (simplified)">力量负重</zh-cn>
+			<zh-tw lang="chinese (traditional)">力量負重</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PRIMARIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Primarium Z</en>
+			<ja lang="japanese">アシレーヌＺ</ja>
+			<de lang="german">Primarenium Z</de>
+			<fr lang="french">Oratozélite</fr>
+			<it lang="italian">Primarinium Z</it>
+			<es lang="spanish">Primastal Z</es>
+			<ko lang="korean">누리레느Z</ko>
+			<zh-cn lang="chinese (simplified)">西狮海壬Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">西獅海壬Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PRISON_BOTTLE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Prison Bottle</en>
+			<ja lang="japanese">いましめのツボ</ja>
+			<de lang="german">Banngefäß</de>
+			<fr lang="french">Vase Scellé</fr>
+			<it lang="italian">Vaso del vincolo</it>
+			<es lang="spanish">Vasija Castigo</es>
+			<ko lang="korean">굴레의항아리</ko>
+			<zh-cn lang="chinese (simplified)">惩戒之壶</zh-cn>
+			<zh-tw lang="chinese (traditional)">懲戒之壺</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PROFS_LETTER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Prof's Letter</en>
+			<ja lang="japanese">はかせのてがみ</ja>
+			<de lang="german">Brief vom Prof</de>
+			<fr lang="french">Lettre du Prof</fr>
+			<it lang="italian">Lettera del Prof</it>
+			<es lang="spanish">Carta Profesor</es>
+			<ko lang="korean">박사의편지</ko>
+			<zh-cn lang="chinese (simplified)">博士的信</zh-cn>
+			<zh-tw lang="chinese (traditional)">博士的信</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PROTECTIVE_PADS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Protective Pads</en>
+			<ja lang="japanese">ぼうごパット</ja>
+			<de lang="german">Schutzpolster</de>
+			<fr lang="french">Pare-Effet</fr>
+			<it lang="italian">Smorzaurti</it>
+			<es lang="spanish">Paracontacto</es>
+			<ko lang="korean">방호패드</ko>
+			<zh-cn lang="chinese (simplified)">部位护具</zh-cn>
+			<zh-tw lang="chinese (traditional)">部位護具</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PSYCHIC_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Psychic Gem</en>
+			<ja lang="japanese">エスパージュエル</ja>
+			<de lang="german">Psychojuwel</de>
+			<fr lang="french">Joyau Psy</fr>
+			<it lang="italian">Bijoupsico</it>
+			<es lang="spanish">Gema Psíquico</es>
+			<ko lang="korean">에스퍼주얼</ko>
+			<zh-cn lang="chinese (simplified)">超能力宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">超能力寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PSYCHIC_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Psychic Memory</en>
+			<ja lang="japanese">サイキックメモリ</ja>
+			<de lang="german">Psycho-Disc</de>
+			<fr lang="french">ROM Psy</fr>
+			<it lang="italian">ROM Psico</it>
+			<es lang="spanish">Disco Psíquico</es>
+			<ko lang="korean">사이킥메모리</ko>
+			<zh-cn lang="chinese (simplified)">精神存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">精神記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PSYCHIC_SEED</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Psychic Seed</en>
+			<ja lang="japanese">サイコシード</ja>
+			<de lang="german">Psycho-Samen</de>
+			<fr lang="french">Graine Psychique</fr>
+			<it lang="italian">Psicoseme</it>
+			<es lang="spanish">Semilla Psique</es>
+			<ko lang="korean">사이코시드</ko>
+			<zh-cn lang="chinese (simplified)">精神种子</zh-cn>
+			<zh-tw lang="chinese (traditional)">精神種子</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PSYCHIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Psychium Z</en>
+			<ja lang="japanese">エスパーＺ</ja>
+			<de lang="german">Psium Z</de>
+			<fr lang="french">Psychézélite</fr>
+			<it lang="italian">Psichium Z</it>
+			<es lang="spanish">Psicostal Z</es>
+			<ko lang="korean">에스퍼Z</ko>
+			<zh-cn lang="chinese (simplified)">超能力Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">超能力Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PURE_INCENSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pure Incense</en>
+			<ja lang="japanese">きよめのおこう</ja>
+			<de lang="german">Scheuchrauch</de>
+			<fr lang="french">Encens Pur</fr>
+			<it lang="italian">Puroaroma</it>
+			<es lang="spanish">Incienso Puro</es>
+			<ko lang="korean">순결의향로</ko>
+			<zh-cn lang="chinese (simplified)">洁净薰香</zh-cn>
+			<zh-tw lang="chinese (traditional)">潔淨薰香</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PURPLE_NECTAR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Purple Nectar</en>
+			<ja lang="japanese">むらさきのミツ</ja>
+			<de lang="german">Purpurner Nektar</de>
+			<fr lang="french">Nectar Mauve</fr>
+			<it lang="italian">Nettare viola</it>
+			<es lang="spanish">Néctar Violeta</es>
+			<ko lang="korean">보라꿀</ko>
+			<zh-cn lang="chinese (simplified)">兰紫色花蜜</zh-cn>
+			<zh-tw lang="chinese (traditional)">蘭紫色花蜜</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>QUICK_CLAW</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Quick Claw</en>
+			<ja lang="japanese">せんせいのツメ</ja>
+			<de lang="german">Flinkklaue</de>
+			<fr lang="french">Vive Griffe</fr>
+			<it lang="italian">Rapidartiglio</it>
+			<es lang="spanish">Garra Rápida</es>
+			<ko lang="korean">선제공격손톱</ko>
+			<zh-cn lang="chinese (simplified)">先制之爪</zh-cn>
+			<zh-tw lang="chinese (traditional)">先制之爪</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>QUICK_POWDER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Quick Powder</en>
+			<ja lang="japanese">スピードパウダー</ja>
+			<de lang="german">Flottstaub</de>
+			<fr lang="french">Poudre Vite</fr>
+			<it lang="italian">Velopolvere</it>
+			<es lang="spanish">Polvo Veloz</es>
+			<ko lang="korean">스피드파우더</ko>
+			<zh-cn lang="chinese (simplified)">速度粉</zh-cn>
+			<zh-tw lang="chinese (traditional)">速度粉</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RAZOR_CLAW</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Razor Claw</en>
+			<ja lang="japanese">するどいツメ</ja>
+			<de lang="german">Scharfklaue</de>
+			<fr lang="french">Griffe Rasoir</fr>
+			<it lang="italian">Affilartiglio</it>
+			<es lang="spanish">Garra Afilada</es>
+			<ko lang="korean">예리한손톱</ko>
+			<zh-cn lang="chinese (simplified)">锐利之爪</zh-cn>
+			<zh-tw lang="chinese (traditional)">銳利之爪</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RAZOR_FANG</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Razor Fang</en>
+			<ja lang="japanese">するどいキバ</ja>
+			<de lang="german">Scharfzahn</de>
+			<fr lang="french">Croc Rasoir</fr>
+			<it lang="italian">Affilodente</it>
+			<es lang="spanish">Colmillo Agudo</es>
+			<ko lang="korean">예리한이빨</ko>
+			<zh-cn lang="chinese (simplified)">锐利之牙</zh-cn>
+			<zh-tw lang="chinese (traditional)">銳利之牙</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RED_CARD</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Red Card</en>
+			<ja lang="japanese">レッドカード</ja>
+			<de lang="german">Rote Karte</de>
+			<fr lang="french">Carton Rouge</fr>
+			<it lang="italian">Cartelrosso</it>
+			<es lang="spanish">Tarjeta Roja</es>
+			<ko lang="korean">레드카드</ko>
+			<zh-cn lang="chinese (simplified)">红牌</zh-cn>
+			<zh-tw lang="chinese (traditional)">紅牌</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RED_NECTAR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Red Nectar</en>
+			<ja lang="japanese">くれないのミツ</ja>
+			<de lang="german">Roter Nektar</de>
+			<fr lang="french">Nectar Rouge</fr>
+			<it lang="italian">Nettare rosso</it>
+			<es lang="spanish">Néctar Rojo</es>
+			<ko lang="korean">다홍꿀</ko>
+			<zh-cn lang="chinese (simplified)">朱红色花蜜</zh-cn>
+			<zh-tw lang="chinese (traditional)">朱紅色花蜜</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RIBBON_SWEET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ribbon Sweet</en>
+			<ja lang="japanese">リボンアメざいく</ja>
+			<de lang="german">Zucker-Schleife</de>
+			<fr lang="french">Ruban en Sucre</fr>
+			<it lang="italian">Bonbonfiocco</it>
+			<es lang="spanish">Confite Lazo</es>
+			<ko lang="korean">리본사탕공예</ko>
+			<zh-cn lang="chinese (simplified)">蝴蝶结糖饰</zh-cn>
+			<zh-tw lang="chinese (traditional)">蝴蝶結糖飾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RING_TARGET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ring Target</en>
+			<ja lang="japanese">ねらいのまと</ja>
+			<de lang="german">Zielscheibe</de>
+			<fr lang="french">Point de Mire</fr>
+			<it lang="italian">Facilsaglio</it>
+			<es lang="spanish">Blanco</es>
+			<ko lang="korean">겨냥표적</ko>
+			<zh-cn lang="chinese (simplified)">标靶</zh-cn>
+			<zh-tw lang="chinese (traditional)">標靶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROCK_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rock Gem</en>
+			<ja lang="japanese">いわのジュエル</ja>
+			<de lang="german">Gesteinsjuwel</de>
+			<fr lang="french">Joyau Roche</fr>
+			<it lang="italian">Bijouroccia</it>
+			<es lang="spanish">Gema Roca</es>
+			<ko lang="korean">바위주얼</ko>
+			<zh-cn lang="chinese (simplified)">岩石宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">岩石寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROCK_INCENSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rock Incense</en>
+			<ja lang="japanese">がんせきおこう</ja>
+			<de lang="german">Steinrauch</de>
+			<fr lang="french">Encens Roc</fr>
+			<it lang="italian">Roccioaroma</it>
+			<es lang="spanish">Incienso Roca</es>
+			<ko lang="korean">암석향로</ko>
+			<zh-cn lang="chinese (simplified)">岩石薰香</zh-cn>
+			<zh-tw lang="chinese (traditional)">岩石薰香</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROCK_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rock Memory</en>
+			<ja lang="japanese">ロックメモリ</ja>
+			<de lang="german">Gesteins-Disc</de>
+			<fr lang="french">ROM Roche</fr>
+			<it lang="italian">ROM Roccia</it>
+			<es lang="spanish">Disco Roca</es>
+			<ko lang="korean">록메모리</ko>
+			<zh-cn lang="chinese (simplified)">岩石存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">岩石記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROCKIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rockium Z</en>
+			<ja lang="japanese">イワＺ</ja>
+			<de lang="german">Petrium Z</de>
+			<fr lang="french">Rocazélite</fr>
+			<it lang="italian">Petrium Z</it>
+			<es lang="spanish">Litostal Z</es>
+			<ko lang="korean">바위Z</ko>
+			<zh-cn lang="chinese (simplified)">岩石Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">岩石Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROCKY_HELMET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rocky Helmet</en>
+			<ja lang="japanese">ゴツゴツメット</ja>
+			<de lang="german">Beulenhelm</de>
+			<fr lang="french">Casque Brut</fr>
+			<it lang="italian">Bitorzolelmo</it>
+			<es lang="spanish">Casco Dentado</es>
+			<ko lang="korean">울퉁불퉁멧</ko>
+			<zh-cn lang="chinese (simplified)">凸凸头盔</zh-cn>
+			<zh-tw lang="chinese (traditional)">凸凸頭盔</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROOM_SERVICE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Room Service</en>
+			<ja lang="japanese">ルームサービス</ja>
+			<de lang="german">Bizarroservice</de>
+			<fr lang="french">Chariot Distordu</fr>
+			<it lang="italian">Distorservizio</it>
+			<es lang="spanish">Servicio Raro</es>
+			<ko lang="korean">룸서비스</ko>
+			<zh-cn lang="chinese (simplified)">客房服务</zh-cn>
+			<zh-tw lang="chinese (traditional)">客房服務</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROSE_INCENSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rose Incense</en>
+			<ja lang="japanese">おはなのおこう</ja>
+			<de lang="german">Rosenrauch</de>
+			<fr lang="french">Encens Fleur</fr>
+			<it lang="italian">Rosaroma</it>
+			<es lang="spanish">Incienso Floral</es>
+			<ko lang="korean">꽃향로</ko>
+			<zh-cn lang="chinese (simplified)">花朵薰香</zh-cn>
+			<zh-tw lang="chinese (traditional)">花朵薰香</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SABLENITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sablenite</en>
+			<ja lang="japanese">ヤミラミナイト</ja>
+			<de lang="german">Zobirisnit</de>
+			<fr lang="french">Ténéfixite</fr>
+			<it lang="italian">Sableyite</it>
+			<es lang="spanish">Sableynita</es>
+			<ko lang="korean">깜까미나이트</ko>
+			<zh-cn lang="chinese (simplified)">勾魂眼进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">勾魂眼進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SAFETY_GOGGLES</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Safety Goggles</en>
+			<ja lang="japanese">ぼうじんゴーグル</ja>
+			<de lang="german">Schutzbrille</de>
+			<fr lang="french">Lunettes Filtre</fr>
+			<it lang="italian">Visierantisabbia</it>
+			<es lang="spanish">Gafa Protectora</es>
+			<ko lang="korean">방진고글</ko>
+			<zh-cn lang="chinese (simplified)">防尘护目镜</zh-cn>
+			<zh-tw lang="chinese (traditional)">防塵護目鏡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SALAMENCITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Salamencite</en>
+			<ja lang="japanese">ボーマンダナイト</ja>
+			<de lang="german">Brutalandanit</de>
+			<fr lang="french">Drattakite</fr>
+			<it lang="italian">Salamencite</it>
+			<es lang="spanish">Salamencita</es>
+			<ko lang="korean">보만다나이트</ko>
+			<zh-cn lang="chinese (simplified)">暴飞龙进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">暴飛龍進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SCEPTILITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sceptilite</en>
+			<ja lang="japanese">ジュカインナイト</ja>
+			<de lang="german">Gewaldronit</de>
+			<fr lang="french">Jungkite</fr>
+			<it lang="italian">Sceptilite</it>
+			<es lang="spanish">Sceptilita</es>
+			<ko lang="korean">나무킹나이트</ko>
+			<zh-cn lang="chinese (simplified)">蜥蜴王进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">蜥蜴王進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SCIZORITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Scizorite</en>
+			<ja lang="japanese">ハッサムナイト</ja>
+			<de lang="german">Scheroxnit</de>
+			<fr lang="french">Cizayoxite</fr>
+			<it lang="italian">Scizorite</it>
+			<es lang="spanish">Scizorita</es>
+			<ko lang="korean">핫삼나이트</ko>
+			<zh-cn lang="chinese (simplified)">巨钳螳螂进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">巨鉗螳螂進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SCOPE_LENS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Scope Lens</en>
+			<ja lang="japanese">ピントレンズ</ja>
+			<de lang="german">Scope-Linse</de>
+			<fr lang="french">Lentilscope</fr>
+			<it lang="italian">Mirino</it>
+			<es lang="spanish">Periscopio</es>
+			<ko lang="korean">초점렌즈</ko>
+			<zh-cn lang="chinese (simplified)">焦点镜</zh-cn>
+			<zh-tw lang="chinese (traditional)">焦點鏡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SEA_INCENSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sea Incense</en>
+			<ja lang="japanese">うしおのおこう</ja>
+			<de lang="german">Seerauch</de>
+			<fr lang="french">Encens Mer</fr>
+			<it lang="italian">Marearoma</it>
+			<es lang="spanish">Incienso Marino</es>
+			<ko lang="korean">바닷물향로</ko>
+			<zh-cn lang="chinese (simplified)">海潮薰香</zh-cn>
+			<zh-tw lang="chinese (traditional)">海潮薰香</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHARP_BEAK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sharp Beak</en>
+			<ja lang="japanese">するどいくちばし</ja>
+			<de lang="german">Spitzer Schnabel</de>
+			<fr lang="french">Bec Pointu</fr>
+			<it lang="italian">Beccaffilato</it>
+			<es lang="spanish">Pico Afilado</es>
+			<ko lang="korean">예리한부리</ko>
+			<zh-cn lang="chinese (simplified)">锐利鸟嘴</zh-cn>
+			<zh-tw lang="chinese (traditional)">銳利鳥嘴</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHARPEDONITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sharpedonite</en>
+			<ja lang="japanese">サメハダナイト</ja>
+			<de lang="german">Tohaidonit</de>
+			<fr lang="french">Sharpedite</fr>
+			<it lang="italian">Sharpedite</it>
+			<es lang="spanish">Sharpedonita</es>
+			<ko lang="korean">샤크니아나이트</ko>
+			<zh-cn lang="chinese (simplified)">巨牙鲨进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">巨牙鯊進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHED_SHELL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Shed Shell</en>
+			<ja lang="japanese">きれいなぬけがら</ja>
+			<de lang="german">Wechselhülle</de>
+			<fr lang="french">Carapace Mue</fr>
+			<it lang="italian">Disfoguscio</it>
+			<es lang="spanish">Muda Concha</es>
+			<ko lang="korean">아름다운허물</ko>
+			<zh-cn lang="chinese (simplified)">美丽空壳</zh-cn>
+			<zh-tw lang="chinese (traditional)">美麗空殼</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHELL_BELL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Shell Bell</en>
+			<ja lang="japanese">かいがらのすず</ja>
+			<de lang="german">Muschelglocke</de>
+			<fr lang="french">Grelot Coque</fr>
+			<it lang="italian">Conchinella</it>
+			<es lang="spanish">Cascabel Concha</es>
+			<ko lang="korean">조개껍질방울</ko>
+			<zh-cn lang="chinese (simplified)">贝壳之铃</zh-cn>
+			<zh-tw lang="chinese (traditional)">貝殼之鈴</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHOCK_DRIVE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Shock Drive</en>
+			<ja lang="japanese">イナズマカセット</ja>
+			<de lang="german">Blitzmodul</de>
+			<fr lang="french">Module Choc</fr>
+			<it lang="italian">Voltmodulo</it>
+			<es lang="spanish">FulgoROM</es>
+			<ko lang="korean">번개카세트</ko>
+			<zh-cn lang="chinese (simplified)">闪电卡带</zh-cn>
+			<zh-tw lang="chinese (traditional)">閃電卡帶</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SILK_SCARF</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Silk Scarf</en>
+			<ja lang="japanese">シルクのスカーフ</ja>
+			<de lang="german">Seidenschal</de>
+			<fr lang="french">Mouchoir Soie</fr>
+			<it lang="italian">Sciarpa seta</it>
+			<es lang="spanish">Pañuelo de Seda</es>
+			<ko lang="korean">실크스카프</ko>
+			<zh-cn lang="chinese (simplified)">丝绸围巾</zh-cn>
+			<zh-tw lang="chinese (traditional)">絲綢圍巾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SILVER_POWDER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Silver Powder</en>
+			<ja lang="japanese">ぎんのこな</ja>
+			<de lang="german">Silberstaub</de>
+			<fr lang="french">Poudre Argentée</fr>
+			<it lang="italian">Argenpolvere</it>
+			<es lang="spanish">Polvo Plata</es>
+			<ko lang="korean">은빛가루</ko>
+			<zh-cn lang="chinese (simplified)">银粉</zh-cn>
+			<zh-tw lang="chinese (traditional)">銀粉</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SKY_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sky Plate</en>
+			<ja lang="japanese">あおぞらプレート</ja>
+			<de lang="german">Wolkentafel</de>
+			<fr lang="french">Plaque Ciel</fr>
+			<it lang="italian">Lastracielo</it>
+			<es lang="spanish">Tabla Cielo</es>
+			<ko lang="korean">푸른하늘플레이트</ko>
+			<zh-cn lang="chinese (simplified)">蓝天石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">藍天石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SLOWBRONITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Slowbronite</en>
+			<ja lang="japanese">ヤドランナイト</ja>
+			<de lang="german">Lahmusnit</de>
+			<fr lang="french">Flagadossite</fr>
+			<it lang="italian">Slowbroite</it>
+			<es lang="spanish">Slowbronita</es>
+			<ko lang="korean">야도란나이트</ko>
+			<zh-cn lang="chinese (simplified)">呆壳兽进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">呆殼獸進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SMOKE_BALL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Smoke Ball</en>
+			<ja lang="japanese">けむりだま</ja>
+			<de lang="german">Rauchball</de>
+			<fr lang="french">Boule Fumée</fr>
+			<it lang="italian">Palla fumo</it>
+			<es lang="spanish">Bola de Humo</es>
+			<ko lang="korean">연막탄</ko>
+			<zh-cn lang="chinese (simplified)">烟雾球</zh-cn>
+			<zh-tw lang="chinese (traditional)">煙霧球</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SMOOTH_ROCK</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Smooth Rock</en>
+			<ja lang="japanese">さらさらいわ</ja>
+			<de lang="german">Glattbrocken</de>
+			<fr lang="french">Roche Lisse</fr>
+			<it lang="italian">Roccialiscia</it>
+			<es lang="spanish">Roca Suave</es>
+			<ko lang="korean">보송보송바위</ko>
+			<zh-cn lang="chinese (simplified)">沙沙岩石</zh-cn>
+			<zh-tw lang="chinese (traditional)">沙沙岩石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SNORLIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Snorlium Z</en>
+			<ja lang="japanese">カビゴンＺ</ja>
+			<de lang="german">Relaxonium Z</de>
+			<fr lang="french">Ronflézélite</fr>
+			<it lang="italian">Snorlactium Z</it>
+			<es lang="spanish">Snorlastal Z</es>
+			<ko lang="korean">잠만보Z</ko>
+			<zh-cn lang="chinese (simplified)">卡比兽Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">卡比獸Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SNOWBALL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Snowball</en>
+			<ja lang="japanese">ゆきだま</ja>
+			<de lang="german">Schneeball</de>
+			<fr lang="french">Boule de Neige</fr>
+			<it lang="italian">Palla di neve</it>
+			<es lang="spanish">Bola de Nieve</es>
+			<ko lang="korean">눈덩이</ko>
+			<zh-cn lang="chinese (simplified)">雪球</zh-cn>
+			<zh-tw lang="chinese (traditional)">雪球</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SOFT_SAND</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Soft Sand</en>
+			<ja lang="japanese">やわらかいすな</ja>
+			<de lang="german">Pudersand</de>
+			<fr lang="french">Sable Doux</fr>
+			<it lang="italian">Sabbia soffice</it>
+			<es lang="spanish">Arena Fina</es>
+			<ko lang="korean">부드러운모래</ko>
+			<zh-cn lang="chinese (simplified)">柔软沙子</zh-cn>
+			<zh-tw lang="chinese (traditional)">柔軟沙子</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SOLGANIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Solganium Z</en>
+			<ja lang="japanese">ソルガレオＺ</ja>
+			<de lang="german">Solgalium Z</de>
+			<fr lang="french">Solgazélite</fr>
+			<it lang="italian">Solgaleium Z</it>
+			<es lang="spanish">Solgaleostal Z</es>
+			<ko lang="korean">솔가레오Z</ko>
+			<zh-cn lang="chinese (simplified)">索尔迦雷欧Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">索爾迦雷歐Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SOOTHE_BELL</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Soothe Bell</en>
+			<ja lang="japanese">やすらぎのすず</ja>
+			<de lang="german">Sanftglocke</de>
+			<fr lang="french">Grelot Zen</fr>
+			<it lang="italian">Calmanella</it>
+			<es lang="spanish">Cascabel Alivio</es>
+			<ko lang="korean">평온의방울</ko>
+			<zh-cn lang="chinese (simplified)">安抚之铃</zh-cn>
+			<zh-tw lang="chinese (traditional)">安撫之鈴</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SOUL_DEW</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Soul Dew</en>
+			<ja lang="japanese">こころのしずく</ja>
+			<de lang="german">Seelentau</de>
+			<fr lang="french">Rosée Âme</fr>
+			<it lang="italian">Cuorugiada</it>
+			<es lang="spanish">Rocío Bondad</es>
+			<ko lang="korean">마음의물방울</ko>
+			<zh-cn lang="chinese (simplified)">心之水滴</zh-cn>
+			<zh-tw lang="chinese (traditional)">心之水滴</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SPELL_TAG</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Spell Tag</en>
+			<ja lang="japanese">のろいのおふだ</ja>
+			<de lang="german">Bannsticker</de>
+			<fr lang="french">Rune Sort</fr>
+			<it lang="italian">Spettrotarga</it>
+			<es lang="spanish">Hechizo</es>
+			<ko lang="korean">저주의부적</ko>
+			<zh-cn lang="chinese (simplified)">咒术之符</zh-cn>
+			<zh-tw lang="chinese (traditional)">詛咒之符</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SPLASH_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Splash Plate</en>
+			<ja lang="japanese">しずくプレート</ja>
+			<de lang="german">Wassertafel</de>
+			<fr lang="french">Plaque Hydro</fr>
+			<it lang="italian">Lastraidro</it>
+			<es lang="spanish">Tabla Linfa</es>
+			<ko lang="korean">물방울플레이트</ko>
+			<zh-cn lang="chinese (simplified)">水滴石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">水滴石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SPOOKY_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Spooky Plate</en>
+			<ja lang="japanese">もののけプレート</ja>
+			<de lang="german">Spuktafel</de>
+			<fr lang="french">Plaque Fantôme</fr>
+			<it lang="italian">Lastratetra</it>
+			<es lang="spanish">Tabla Terror</es>
+			<ko lang="korean">원령플레이트</ko>
+			<zh-cn lang="chinese (simplified)">妖怪石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">妖怪石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STAR_SWEET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Star Sweet</en>
+			<ja lang="japanese">スターアメざいく</ja>
+			<de lang="german">Zucker-Stern</de>
+			<fr lang="french">Étoile en Sucre</fr>
+			<it lang="italian">Bonbonstella</it>
+			<es lang="spanish">Confite Estrella</es>
+			<ko lang="korean">스타사탕공예</ko>
+			<zh-cn lang="chinese (simplified)">星星糖饰</zh-cn>
+			<zh-tw lang="chinese (traditional)">星星糖飾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STEEL_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Steel Gem</en>
+			<ja lang="japanese">はがねのジュエル</ja>
+			<de lang="german">Stahljuwel</de>
+			<fr lang="french">Joyau Acier</fr>
+			<it lang="italian">Bijouacciaio</it>
+			<es lang="spanish">Gema Acero</es>
+			<ko lang="korean">강철주얼</ko>
+			<zh-cn lang="chinese (simplified)">钢之宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">鋼之寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STEEL_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Steel Memory</en>
+			<ja lang="japanese">スチールメモリ</ja>
+			<de lang="german">Stahl-Disc</de>
+			<fr lang="french">ROM Acier</fr>
+			<it lang="italian">ROM Acciaio</it>
+			<es lang="spanish">Disco Acero</es>
+			<ko lang="korean">스틸메모리</ko>
+			<zh-cn lang="chinese (simplified)">钢铁存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">鋼鐵記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STEELIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Steelium Z</en>
+			<ja lang="japanese">ハガネＺ</ja>
+			<de lang="german">Metallium Z</de>
+			<fr lang="french">Métallozélite</fr>
+			<it lang="italian">Metallium Z</it>
+			<es lang="spanish">Metalostal Z</es>
+			<ko lang="korean">강철Z</ko>
+			<zh-cn lang="chinese (simplified)">钢Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">鋼Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STEELIXITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Steelixite</en>
+			<ja lang="japanese">ハガネールナイト</ja>
+			<de lang="german">Stahlosnit</de>
+			<fr lang="french">Steelixite</fr>
+			<it lang="italian">Steelixite</it>
+			<es lang="spanish">Steelixita</es>
+			<ko lang="korean">강철톤나이트</ko>
+			<zh-cn lang="chinese (simplified)">大钢蛇进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">大鋼蛇進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STICKY_BARB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sticky Barb</en>
+			<ja lang="japanese">くっつきバリ</ja>
+			<de lang="german">Klettdorn</de>
+			<fr lang="french">Piquants</fr>
+			<it lang="italian">Vischiopunta</it>
+			<es lang="spanish">Toxiestrella</es>
+			<ko lang="korean">끈적끈적바늘</ko>
+			<zh-cn lang="chinese (simplified)">附着针</zh-cn>
+			<zh-tw lang="chinese (traditional)">附著針</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STONE_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Stone Plate</en>
+			<ja lang="japanese">がんせきプレート</ja>
+			<de lang="german">Steintafel</de>
+			<fr lang="french">Plaque Roc</fr>
+			<it lang="italian">Lastrapietra</it>
+			<es lang="spanish">Tabla Pétrea</es>
+			<ko lang="korean">암석플레이트</ko>
+			<zh-cn lang="chinese (simplified)">岩石石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">岩石石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STRAWBERRY_SWEET</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Strawberry Sweet</en>
+			<ja lang="japanese">いちごアメざいく</ja>
+			<de lang="german">Zucker-Erdbeere</de>
+			<fr lang="french">Fraise en Sucre</fr>
+			<it lang="italian">Bonbonfragola</it>
+			<es lang="spanish">Confite Fresa</es>
+			<ko lang="korean">딸기사탕공예</ko>
+			<zh-cn lang="chinese (simplified)">草莓糖饰</zh-cn>
+			<zh-tw lang="chinese (traditional)">草莓糖飾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SWAMPERTITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Swampertite</en>
+			<ja lang="japanese">ラグラージナイト</ja>
+			<de lang="german">Sumpexnit</de>
+			<fr lang="french">Laggronite</fr>
+			<it lang="italian">Swampertite</it>
+			<es lang="spanish">Swampertita</es>
+			<ko lang="korean">대짱이나이트</ko>
+			<zh-cn lang="chinese (simplified)">巨沼怪进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">巨沼怪進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SWEET_APPLE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sweet Apple</en>
+			<ja lang="japanese">あまーいりんご</ja>
+			<de lang="german">Süßer Apfel</de>
+			<fr lang="french">Pomme Sucrée</fr>
+			<it lang="italian">Dolcepomo</it>
+			<es lang="spanish">Manzana Dulce</es>
+			<ko lang="korean">달콤한사과</ko>
+			<zh-cn lang="chinese (simplified)">甜甜苹果</zh-cn>
+			<zh-tw lang="chinese (traditional)">甜甜蘋果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SYRUPY_APPLE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Syrupy Apple</en>
+			<ja lang="japanese">みついりりんご</ja>
+			<de lang="german">Saftiger Apfel</de>
+			<fr lang="french">Pomme Nectar</fr>
+			<it lang="italian">Sciroppomo</it>
+			<es lang="spanish">Manzana Melosa</es>
+			<ko lang="korean">꿀맛사과</ko>
+			<zh-cn lang="chinese (simplified)">蜜汁蘋果</zh-cn>
+			<zh-tw lang="chinese (traditional)">蜜汁蘋果</zh-tw>
+
+		</text>
+	</string>
+	<string>
+		<key>TAPUNIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Tapunium Z</en>
+			<ja lang="japanese">カプＺ</ja>
+			<de lang="german">Kapium Z</de>
+			<fr lang="french">Tokozélite</fr>
+			<it lang="italian">Tapium Z</it>
+			<es lang="spanish">Tapistal Z</es>
+			<ko lang="korean">카푸Z</ko>
+			<zh-cn lang="chinese (simplified)">卡璞Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">卡璞Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TART_APPLE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Tart Apple</en>
+			<ja lang="japanese">すっぱいりんご</ja>
+			<de lang="german">Saurer Apfel</de>
+			<fr lang="french">Pomme Acidulée</fr>
+			<it lang="italian">Aspropomo</it>
+			<es lang="spanish">Manzana Ácida</es>
+			<ko lang="korean">새콤한사과</ko>
+			<zh-cn lang="chinese (simplified)">酸酸苹果</zh-cn>
+			<zh-tw lang="chinese (traditional)">酸酸蘋果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TERRAIN_EXTENDER</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Terrain Extender</en>
+			<ja lang="japanese">グランドコート</ja>
+			<de lang="german">Feldbeschichtung</de>
+			<fr lang="french">Champ’Duit</fr>
+			<it lang="italian">Fissacampo</it>
+			<es lang="spanish">Cubresuelos</es>
+			<ko lang="korean">그라운드코트</ko>
+			<zh-cn lang="chinese (simplified)">大地膜</zh-cn>
+			<zh-tw lang="chinese (traditional)">大地膜</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>THICK_CLUB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Thick Club</en>
+			<ja lang="japanese">ふといホネ</ja>
+			<de lang="german">Kampfknochen</de>
+			<fr lang="french">Masse Os</fr>
+			<it lang="italian">Osso spesso</it>
+			<es lang="spanish">Hueso Grueso</es>
+			<ko lang="korean">굵은뼈</ko>
+			<zh-cn lang="chinese (simplified)">粗骨头</zh-cn>
+			<zh-tw lang="chinese (traditional)">粗骨頭</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>THROAT_SPRAY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Throat Spray</en>
+			<ja lang="japanese">のどスプレー</ja>
+			<de lang="german">Halsspray</de>
+			<fr lang="french">Spray Gorge</fr>
+			<it lang="italian">Spray gola</it>
+			<es lang="spanish">Espray Bucal</es>
+			<ko lang="korean">목스프레이</ko>
+			<zh-cn lang="chinese (simplified)">爽喉喷雾</zh-cn>
+			<zh-tw lang="chinese (traditional)">爽喉噴霧</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TOXIC_ORB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Toxic Orb</en>
+			<ja lang="japanese">どくどくだま</ja>
+			<de lang="german">Toxik-Orb</de>
+			<fr lang="french">Orbe Toxique</fr>
+			<it lang="italian">Tossicsfera</it>
+			<es lang="spanish">Toxisfera</es>
+			<ko lang="korean">맹독구슬</ko>
+			<zh-cn lang="chinese (simplified)">剧毒宝珠</zh-cn>
+			<zh-tw lang="chinese (traditional)">劇毒寶珠</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TOXIC_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Toxic Plate</en>
+			<ja lang="japanese">もうどくプレート</ja>
+			<de lang="german">Gifttafel</de>
+			<fr lang="french">Plaque Toxicité</fr>
+			<it lang="italian">Lastrafiele</it>
+			<es lang="spanish">Tabla Tóxica</es>
+			<ko lang="korean">맹독플레이트</ko>
+			<zh-cn lang="chinese (simplified)">剧毒石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">劇毒石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TWISTED_SPOON</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Twisted Spoon</en>
+			<ja lang="japanese">まがったスプーン</ja>
+			<de lang="german">Krummlöffel</de>
+			<fr lang="french">Cuillère Tordue</fr>
+			<it lang="italian">Cucchiaio torto</it>
+			<es lang="spanish">Cuchara Torcida</es>
+			<ko lang="korean">휘어진스푼</ko>
+			<zh-cn lang="chinese (simplified)">弯曲的汤匙</zh-cn>
+			<zh-tw lang="chinese (traditional)">彎曲的湯匙</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TYRANITARITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Tyranitarite</en>
+			<ja lang="japanese">バンギラスナイト</ja>
+			<de lang="german">Despotarnit</de>
+			<fr lang="french">Tyranocivite</fr>
+			<it lang="italian">Tyranitarite</it>
+			<es lang="spanish">Tyranitarita</es>
+			<ko lang="korean">마기라스나이트</ko>
+			<zh-cn lang="chinese (simplified)">班基拉斯进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">班基拉斯進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ULTRANECROZIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ultranecrozium Z</en>
+			<ja lang="japanese">ウルトラネクロＺ</ja>
+			<de lang="german">Ultranecronium Z</de>
+			<fr lang="french">Ultranécrozélite</fr>
+			<it lang="italian">Ultranecrozium Z</it>
+			<es lang="spanish">Ultranecrostal Z</es>
+			<ko lang="korean">울트라네크로Z</ko>
+			<zh-cn lang="chinese (simplified)">究极奈克洛Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">究極奈克洛Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>UTILITY_UMBRELLA</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Utility Umbrella</en>
+			<ja lang="japanese">ばんのうがさ</ja>
+			<de lang="german">Allzweckschirm</de>
+			<fr lang="french">Parapluie Solide</fr>
+			<it lang="italian">Superombrello</it>
+			<es lang="spanish">Parasol Multiuso</es>
+			<ko lang="korean">만능우산</ko>
+			<zh-cn lang="chinese (simplified)">万能伞</zh-cn>
+			<zh-tw lang="chinese (traditional)">萬能傘</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>VENUSAURITE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Venusaurite</en>
+			<ja lang="japanese">フシギバナイト</ja>
+			<de lang="german">Bisaflornit</de>
+			<fr lang="french">Florizarrite</fr>
+			<it lang="italian">Venusaurite</it>
+			<es lang="spanish">Venusaurita</es>
+			<ko lang="korean">이상해꽃나이트</ko>
+			<zh-cn lang="chinese (simplified)">妙蛙花进化石</zh-cn>
+			<zh-tw lang="chinese (traditional)">妙蛙花進化石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WATER_GEM</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Water Gem</en>
+			<ja lang="japanese">みずのジュエル</ja>
+			<de lang="german">Wasserjuwel</de>
+			<fr lang="french">Joyau Eau</fr>
+			<it lang="italian">Bijouacqua</it>
+			<es lang="spanish">Gema Agua</es>
+			<ko lang="korean">물주얼</ko>
+			<zh-cn lang="chinese (simplified)">水之宝石</zh-cn>
+			<zh-tw lang="chinese (traditional)">水之寶石</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WATER_MEMORY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Water Memory</en>
+			<ja lang="japanese">ウオーターメモリ</ja>
+			<de lang="german">Wasser-Disc</de>
+			<fr lang="french">ROM Eau</fr>
+			<it lang="italian">ROM Acqua</it>
+			<es lang="spanish">Disco Agua</es>
+			<ko lang="korean">워터메모리</ko>
+			<zh-cn lang="chinese (simplified)">清水存储碟</zh-cn>
+			<zh-tw lang="chinese (traditional)">清水記憶碟</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WATERIUM_Z</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Waterium Z</en>
+			<ja lang="japanese">ミズＺ</ja>
+			<de lang="german">Aquium Z</de>
+			<fr lang="french">Aquazélite</fr>
+			<it lang="italian">Idrium Z</it>
+			<es lang="spanish">Hidrostal Z</es>
+			<ko lang="korean">물Z</ko>
+			<zh-cn lang="chinese (simplified)">水Ｚ</zh-cn>
+			<zh-tw lang="chinese (traditional)">水Ｚ</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WAVE_INCENSE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Wave Incense</en>
+			<ja lang="japanese">さざなみのおこう</ja>
+			<de lang="german">Wellenrauch</de>
+			<fr lang="french">Encens Vague</fr>
+			<it lang="italian">Ondaroma</it>
+			<es lang="spanish">Incienso Acua</es>
+			<ko lang="korean">잔물결향로</ko>
+			<zh-cn lang="chinese (simplified)">涟漪薰香</zh-cn>
+			<zh-tw lang="chinese (traditional)">漣漪薰香</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WEAKNESS_POLICY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Weakness Policy</en>
+			<ja lang="japanese">じゃくてんほけん</ja>
+			<de lang="german">Schwächenschutz</de>
+			<fr lang="french">Vulné-Assurance</fr>
+			<it lang="italian">Vulneropolizza</it>
+			<es lang="spanish">Seguro Debilidad</es>
+			<ko lang="korean">약점보험</ko>
+			<zh-cn lang="chinese (simplified)">弱点保险</zh-cn>
+			<zh-tw lang="chinese (traditional)">弱點保險</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WHITE_HERB</key>
+		<params>0</params>
+		<text>
+			<en lang="english">White Herb</en>
+			<ja lang="japanese">しろいハーブ</ja>
+			<de lang="german">Schlohkraut</de>
+			<fr lang="french">Herbe Blanche</fr>
+			<it lang="italian">Erbachiara</it>
+			<es lang="spanish">Hierba Blanca</es>
+			<ko lang="korean">하양허브</ko>
+			<zh-cn lang="chinese (simplified)">白色香草</zh-cn>
+			<zh-tw lang="chinese (traditional)">白色香草</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WIDE_LENS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Wide Lens</en>
+			<ja lang="japanese">こうかくレンズ</ja>
+			<de lang="german">Großlinse</de>
+			<fr lang="french">Loupe</fr>
+			<it lang="italian">Grandelente</it>
+			<es lang="spanish">Lupa</es>
+			<ko lang="korean">광각렌즈</ko>
+			<zh-cn lang="chinese (simplified)">广角镜</zh-cn>
+			<zh-tw lang="chinese (traditional)">廣角鏡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WISE_GLASSES</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Wise Glasses</en>
+			<ja lang="japanese">ものしりメガネ</ja>
+			<de lang="german">Schlaubrille</de>
+			<fr lang="french">Lunettes Sages</fr>
+			<it lang="italian">Saviocchiali</it>
+			<es lang="spanish">Gafas Especiales</es>
+			<ko lang="korean">박식안경</ko>
+			<zh-cn lang="chinese (simplified)">博识眼镜</zh-cn>
+			<zh-tw lang="chinese (traditional)">博識眼鏡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>YELLOW_NECTAR</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Yellow Nectar</en>
+			<ja lang="japanese">やまぶきのミツ</ja>
+			<de lang="german">Gelber Nektar</de>
+			<fr lang="french">Nectar Jaune</fr>
+			<it lang="italian">Nettare giallo</it>
+			<es lang="spanish">Néctar Amarillo</es>
+			<ko lang="korean">진노랑꿀</ko>
+			<zh-cn lang="chinese (simplified)">金黄色花蜜</zh-cn>
+			<zh-tw lang="chinese (traditional)">金黃色花蜜</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ZAP_PLATE</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Zap Plate</en>
+			<ja lang="japanese">いかずちプレート</ja>
+			<de lang="german">Blitztafel</de>
+			<fr lang="french">Plaque Volt</fr>
+			<it lang="italian">Lastrasaetta</it>
+			<es lang="spanish">Tabla Trueno</es>
+			<ko lang="korean">우레플레이트</ko>
+			<zh-cn lang="chinese (simplified)">雷电石板</zh-cn>
+			<zh-tw lang="chinese (traditional)">雷電石板</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ZOOM_LENS</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Zoom Lens</en>
+			<ja lang="japanese">フォーカスレンズ</ja>
+			<de lang="german">Zoomlinse</de>
+			<fr lang="french">Lentille Zoom</fr>
+			<it lang="italian">Zoomlente</it>
+			<es lang="spanish">Telescopio</es>
+			<ko lang="korean">포커스렌즈</ko>
+			<zh-cn lang="chinese (simplified)">对焦镜</zh-cn>
+			<zh-tw lang="chinese (traditional)">對焦鏡</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>AGUAV_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Aguav Berry</en>
+			<ja lang="japanese">バンジのみ</ja>
+			<de lang="german">Gauvebeere</de>
+			<fr lang="french">Baie Gowav</fr>
+			<it lang="italian">Baccaguava</it>
+			<es lang="spanish">Baya Guaya</es>
+			<ko lang="korean">아바열매</ko>
+			<zh-cn lang="chinese (simplified)">乐芭果</zh-cn>
+			<zh-tw lang="chinese (traditional)">樂芭果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>APICOT_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Apicot Berry</en>
+			<ja lang="japanese">ズアのみ</ja>
+			<de lang="german">Apikobeere</de>
+			<fr lang="french">Baie Abriko</fr>
+			<it lang="italian">Baccacocca</it>
+			<es lang="spanish">Baya Aricoc</es>
+			<ko lang="korean">규살열매</ko>
+			<zh-cn lang="chinese (simplified)">杏仔果</zh-cn>
+			<zh-tw lang="chinese (traditional)">杏仔果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ASPEAR_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Aspear Berry</en>
+			<ja lang="japanese">ナナシのみ</ja>
+			<de lang="german">Wilbirbeere</de>
+			<fr lang="french">Baie Willia</fr>
+			<it lang="italian">Baccaperina</it>
+			<es lang="spanish">Baya Perasi</es>
+			<ko lang="korean">배리열매</ko>
+			<zh-cn lang="chinese (simplified)">利木果</zh-cn>
+			<zh-tw lang="chinese (traditional)">利木果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BABIRI_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Babiri Berry</en>
+			<ja lang="japanese">リリバのみ</ja>
+			<de lang="german">Babiribeere</de>
+			<fr lang="french">Baie Babiri</fr>
+			<it lang="italian">Baccababiri</it>
+			<es lang="spanish">Baya Baribá</es>
+			<ko lang="korean">바리비열매</ko>
+			<zh-cn lang="chinese (simplified)">霹霹果</zh-cn>
+			<zh-tw lang="chinese (traditional)">霹霹果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BELUE_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Belue Berry</en>
+			<ja lang="japanese">ベリブのみ</ja>
+			<de lang="german">Myrtilbeere</de>
+			<fr lang="french">Baie Myrte</fr>
+			<it lang="italian">Baccartillo</it>
+			<es lang="spanish">Baya Andano</es>
+			<ko lang="korean">루베열매</ko>
+			<zh-cn lang="chinese (simplified)">靛莓果</zh-cn>
+			<zh-tw lang="chinese (traditional)">靛莓果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BLUK_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Bluk Berry</en>
+			<ja lang="japanese">ブリーのみ</ja>
+			<de lang="german">Morbbeere</de>
+			<fr lang="french">Baie Remu</fr>
+			<it lang="italian">Baccamora</it>
+			<es lang="spanish">Baya Oram</es>
+			<ko lang="korean">블리열매</ko>
+			<zh-cn lang="chinese (simplified)">墨莓果</zh-cn>
+			<zh-tw lang="chinese (traditional)">墨莓果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHARTI_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Charti Berry</en>
+			<ja lang="japanese">ヨロギのみ</ja>
+			<de lang="german">Chiaribeere</de>
+			<fr lang="french">Baie Charti</fr>
+			<it lang="italian">Baccaciofo</it>
+			<es lang="spanish">Baya Alcho</es>
+			<ko lang="korean">루미열매</ko>
+			<zh-cn lang="chinese (simplified)">草蚕果</zh-cn>
+			<zh-tw lang="chinese (traditional)">草蠶果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHERI_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Cheri Berry</en>
+			<ja lang="japanese">クラボのみ</ja>
+			<de lang="german">Amrenabeere</de>
+			<fr lang="french">Baie Ceriz</fr>
+			<it lang="italian">Baccaliegia</it>
+			<es lang="spanish">Baya Zreza</es>
+			<ko lang="korean">버치열매</ko>
+			<zh-cn lang="chinese (simplified)">樱子果</zh-cn>
+			<zh-tw lang="chinese (traditional)">櫻子果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHESTO_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Chesto Berry</en>
+			<ja lang="japanese">カゴのみ</ja>
+			<de lang="german">Maronbeere</de>
+			<fr lang="french">Baie Maron</fr>
+			<it lang="italian">Baccastagna</it>
+			<es lang="spanish">Baya Atania</es>
+			<ko lang="korean">유루열매</ko>
+			<zh-cn lang="chinese (simplified)">零余果</zh-cn>
+			<zh-tw lang="chinese (traditional)">零餘果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHILAN_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Chilan Berry</en>
+			<ja lang="japanese">ホズのみ</ja>
+			<de lang="german">Latchibeere</de>
+			<fr lang="french">Baie Zalis</fr>
+			<it lang="italian">Baccacinlan</it>
+			<es lang="spanish">Baya Chilan</es>
+			<ko lang="korean">카리열매</ko>
+			<zh-cn lang="chinese (simplified)">灯浆果</zh-cn>
+			<zh-tw lang="chinese (traditional)">燈漿果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CHOPLE_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Chople Berry</en>
+			<ja lang="japanese">ヨプのみ</ja>
+			<de lang="german">Rospelbeere</de>
+			<fr lang="french">Baie Pomroz</fr>
+			<it lang="italian">Baccarosmel</it>
+			<es lang="spanish">Baya Pomaro</es>
+			<ko lang="korean">로플열매</ko>
+			<zh-cn lang="chinese (simplified)">莲蒲果</zh-cn>
+			<zh-tw lang="chinese (traditional)">蓮蒲果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>COBA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Coba Berry</en>
+			<ja lang="japanese">バコウのみ</ja>
+			<de lang="german">Kobabeere</de>
+			<fr lang="french">Baie Cobaba</fr>
+			<it lang="italian">Baccababa</it>
+			<es lang="spanish">Baya Kouba</es>
+			<ko lang="korean">바코열매</ko>
+			<zh-cn lang="chinese (simplified)">棱瓜果</zh-cn>
+			<zh-tw lang="chinese (traditional)">稜瓜果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>COLBUR_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Colbur Berry</en>
+			<ja lang="japanese">ナモのみ</ja>
+			<de lang="german">Burleobeere</de>
+			<fr lang="french">Baie Lampou</fr>
+			<it lang="italian">Baccaxan</it>
+			<es lang="spanish">Baya Dillo</es>
+			<ko lang="korean">마코열매</ko>
+			<zh-cn lang="chinese (simplified)">刺耳果</zh-cn>
+			<zh-tw lang="chinese (traditional)">刺耳果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CORNN_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Cornn Berry</en>
+			<ja lang="japanese">モコシのみ</ja>
+			<de lang="german">Saimbeere</de>
+			<fr lang="french">Baie Siam</fr>
+			<it lang="italian">Baccavena</it>
+			<es lang="spanish">Baya Mais</es>
+			<ko lang="korean">수숙열매</ko>
+			<zh-cn lang="chinese (simplified)">玉黍果</zh-cn>
+			<zh-tw lang="chinese (traditional)">玉黍果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>CUSTAP_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Custap Berry</en>
+			<ja lang="japanese">イバンのみ</ja>
+			<de lang="german">Eipfelbeere</de>
+			<fr lang="french">Baie Chérim</fr>
+			<it lang="italian">Baccacrela</it>
+			<es lang="spanish">Baya Chiri</es>
+			<ko lang="korean">애슈열매</ko>
+			<zh-cn lang="chinese (simplified)">释陀果</zh-cn>
+			<zh-tw lang="chinese (traditional)">釋陀果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>DURIN_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Durin Berry</en>
+			<ja lang="japanese">ドリのみ</ja>
+			<de lang="german">Durinbeere</de>
+			<fr lang="french">Baie Durin</fr>
+			<it lang="italian">Baccadurian</it>
+			<es lang="spanish">Baya Rudion</es>
+			<ko lang="korean">두리열매</ko>
+			<zh-cn lang="chinese (simplified)">金枕果</zh-cn>
+			<zh-tw lang="chinese (traditional)">金枕果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ENIGMA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Enigma Berry</en>
+			<ja lang="japanese">ナゾのみ</ja>
+			<de lang="german">Enigmabeere</de>
+			<fr lang="french">Baie Enigma</fr>
+			<it lang="italian">Baccaenigma</it>
+			<es lang="spanish">Baya Enigma</es>
+			<ko lang="korean">의문열매</ko>
+			<zh-cn lang="chinese (simplified)">谜芝果</zh-cn>
+			<zh-tw lang="chinese (traditional)">謎芝果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>FIGY_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Figy Berry</en>
+			<ja lang="japanese">フィラのみ</ja>
+			<de lang="german">Giefebeere</de>
+			<fr lang="french">Baie Figuy</fr>
+			<it lang="italian">Baccafico</it>
+			<es lang="spanish">Baya Higog</es>
+			<ko lang="korean">무화열매</ko>
+			<zh-cn lang="chinese (simplified)">勿花果</zh-cn>
+			<zh-tw lang="chinese (traditional)">勿花果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GANLON_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Ganlon Berry</en>
+			<ja lang="japanese">リュガのみ</ja>
+			<de lang="german">Linganbeere</de>
+			<fr lang="french">Baie Lingan</fr>
+			<it lang="italian">Baccalongan</it>
+			<es lang="spanish">Baya Gonlan</es>
+			<ko lang="korean">용아열매</ko>
+			<zh-cn lang="chinese (simplified)">龙睛果</zh-cn>
+			<zh-tw lang="chinese (traditional)">龍睛果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GOLDEN_NANAB_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Golden Nanab Berry</en>
+			<ja lang="japanese">きんのナナのみ</ja>
+			<de lang="german">Goldene Nanabbeere</de>
+			<fr lang="french">Baie Nanab dorée</fr>
+			<it lang="italian">Baccabana dorata</it>
+			<es lang="spanish">Baya Latano Dorada</es>
+			<ko lang="korean">황금 나나열매</ko>
+			<zh-cn lang="chinese (simplified)">金色蕉香果</zh-cn>
+			<zh-tw lang="chinese (traditional)">金色蕉香果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GOLDEN_PINAP_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Golden Pinap Berry</en>
+			<ja lang="japanese">きんのパイルのみ</ja>
+			<de lang="german">Goldene Sananabeere</de>
+			<fr lang="french">Baie Nanana dorée</fr>
+			<it lang="italian">Baccananas dorata</it>
+			<es lang="spanish">Baya Pinia Dorada</es>
+			<ko lang="korean">황금 파인열매</ko>
+			<zh-cn lang="chinese (simplified)">金色凰梨果</zh-cn>
+			<zh-tw lang="chinese (traditional)">金色凰梨果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GOLDEN_RAZZ_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Golden Razz Berry</en>
+			<ja lang="japanese">きんのズリのみ</ja>
+			<de lang="german">Goldene Himmihbeere</de>
+			<fr lang="french">Baie Framby dorée</fr>
+			<it lang="italian">Baccalampon dorata</it>
+			<es lang="spanish">Baya Frambu Dorada</es>
+			<ko lang="korean">황금 라즈열매</ko>
+			<zh-cn lang="chinese (simplified)">金色蔓莓果</zh-cn>
+			<zh-tw lang="chinese (traditional)">金色蔓莓果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>GREPA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Grepa Berry</en>
+			<ja lang="japanese">ウブのみ</ja>
+			<de lang="german">Labrusbeere</de>
+			<fr lang="french">Baie Résin</fr>
+			<it lang="italian">Baccauva</it>
+			<es lang="spanish">Baya Uvav</es>
+			<ko lang="korean">또뽀열매</ko>
+			<zh-cn lang="chinese (simplified)">萄葡果</zh-cn>
+			<zh-tw lang="chinese (traditional)">萄葡果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HABAN_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Haban Berry</en>
+			<ja lang="japanese">ハバンのみ</ja>
+			<de lang="german">Terirobeere</de>
+			<fr lang="french">Baie Fraigo</fr>
+			<it lang="italian">Baccahaban</it>
+			<es lang="spanish">Baya Anjiro</es>
+			<ko lang="korean">하반열매</ko>
+			<zh-cn lang="chinese (simplified)">莓榴果</zh-cn>
+			<zh-tw lang="chinese (traditional)">莓榴果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>HONDEW_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Hondew Berry</en>
+			<ja lang="japanese">ロメのみ</ja>
+			<de lang="german">Honmelbeere</de>
+			<fr lang="french">Baie Lonme</fr>
+			<it lang="italian">Baccamelon</it>
+			<es lang="spanish">Baya Meluce</es>
+			<ko lang="korean">로매열매</ko>
+			<zh-cn lang="chinese (simplified)">哈密果</zh-cn>
+			<zh-tw lang="chinese (traditional)">哈密果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>IAPAPA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Iapapa Berry</en>
+			<ja lang="japanese">イアのみ</ja>
+			<de lang="german">Yapabeere</de>
+			<fr lang="french">Baie Papaya</fr>
+			<it lang="italian">Baccapaia</it>
+			<es lang="spanish">Baya Pabaya</es>
+			<ko lang="korean">파야열매</ko>
+			<zh-cn lang="chinese (simplified)">芭亚果</zh-cn>
+			<zh-tw lang="chinese (traditional)">芭亞果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>JABOCA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Jaboca Berry</en>
+			<ja lang="japanese">ジャポのみ</ja>
+			<de lang="german">Jabocabeere</de>
+			<fr lang="french">Baie Jaboca</fr>
+			<it lang="italian">Baccajaba</it>
+			<es lang="spanish">Baya Jaboca</es>
+			<ko lang="korean">자보열매</ko>
+			<zh-cn lang="chinese (simplified)">嘉珍果</zh-cn>
+			<zh-tw lang="chinese (traditional)">嘉珍果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>KASIB_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Kasib Berry</en>
+			<ja lang="japanese">カシブのみ</ja>
+			<de lang="german">Zitarzbeere</de>
+			<fr lang="french">Baie Sédra</fr>
+			<it lang="italian">Baccacitrus</it>
+			<es lang="spanish">Baya Drasi</es>
+			<ko lang="korean">수불열매</ko>
+			<zh-cn lang="chinese (simplified)">佛柑果</zh-cn>
+			<zh-tw lang="chinese (traditional)">佛柑果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>KEBIA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Kebia Berry</en>
+			<ja lang="japanese">ビアーのみ</ja>
+			<de lang="german">Grarzbeere</de>
+			<fr lang="french">Baie Kébia</fr>
+			<it lang="italian">Baccakebia</it>
+			<es lang="spanish">Baya Kebia</es>
+			<ko lang="korean">으름열매</ko>
+			<zh-cn lang="chinese (simplified)">通通果</zh-cn>
+			<zh-tw lang="chinese (traditional)">通通果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>KEE_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Kee Berry</en>
+			<ja lang="japanese">アッキのみ</ja>
+			<de lang="german">Akibeere</de>
+			<fr lang="french">Baie Éka</fr>
+			<it lang="italian">Baccalighia</it>
+			<es lang="spanish">Baya Biglia</es>
+			<ko lang="korean">악키열매</ko>
+			<zh-cn lang="chinese (simplified)">亚开果</zh-cn>
+			<zh-tw lang="chinese (traditional)">亞開果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>KELPSY_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Kelpsy Berry</en>
+			<ja lang="japanese">ネコブのみ</ja>
+			<de lang="german">Setangbeere</de>
+			<fr lang="french">Baie Alga</fr>
+			<it lang="italian">Baccalga</it>
+			<es lang="spanish">Baya Algama</es>
+			<ko lang="korean">시마열매</ko>
+			<zh-cn lang="chinese (simplified)">藻根果</zh-cn>
+			<zh-tw lang="chinese (traditional)">藻根果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LANSAT_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lansat Berry</en>
+			<ja lang="japanese">サンのみ</ja>
+			<de lang="german">Lansatbeere</de>
+			<fr lang="french">Baie Lansat</fr>
+			<it lang="italian">Baccalangsa</it>
+			<es lang="spanish">Baya Zonlan</es>
+			<ko lang="korean">랑사열매</ko>
+			<zh-cn lang="chinese (simplified)">兰萨果</zh-cn>
+			<zh-tw lang="chinese (traditional)">蘭薩果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LEPPA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Leppa Berry</en>
+			<ja lang="japanese">ヒメリのみ</ja>
+			<de lang="german">Jonagobeere</de>
+			<fr lang="french">Baie Mepo</fr>
+			<it lang="italian">Baccamela</it>
+			<es lang="spanish">Baya Zanama</es>
+			<ko lang="korean">과사열매</ko>
+			<zh-cn lang="chinese (simplified)">苹野果</zh-cn>
+			<zh-tw lang="chinese (traditional)">蘋野果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LIECHI_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Liechi Berry</en>
+			<ja lang="japanese">チイラのみ</ja>
+			<de lang="german">Lydzibeere</de>
+			<fr lang="french">Baie Lichii</fr>
+			<it lang="italian">Baccalici</it>
+			<es lang="spanish">Baya Lichi</es>
+			<ko lang="korean">치리열매</ko>
+			<zh-cn lang="chinese (simplified)">枝荔果</zh-cn>
+			<zh-tw lang="chinese (traditional)">枝荔果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>LUM_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Lum Berry</en>
+			<ja lang="japanese">ラムのみ</ja>
+			<de lang="german">Prunusbeere</de>
+			<fr lang="french">Baie Prine</fr>
+			<it lang="italian">Baccaprugna</it>
+			<es lang="spanish">Baya Ziuela</es>
+			<ko lang="korean">리샘열매</ko>
+			<zh-cn lang="chinese (simplified)">木子果</zh-cn>
+			<zh-tw lang="chinese (traditional)">木子果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MAGO_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Mago Berry</en>
+			<ja lang="japanese">マゴのみ</ja>
+			<de lang="german">Magobeere</de>
+			<fr lang="french">Baie Mago</fr>
+			<it lang="italian">Baccamango</it>
+			<es lang="spanish">Baya Ango</es>
+			<ko lang="korean">마고열매</ko>
+			<zh-cn lang="chinese (simplified)">芒芒果</zh-cn>
+			<zh-tw lang="chinese (traditional)">芒芒果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MAGOST_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Magost Berry</en>
+			<ja lang="japanese">ゴスのみ</ja>
+			<de lang="german">Magostbeere</de>
+			<fr lang="french">Baie Mangou</fr>
+			<it lang="italian">Baccagostan</it>
+			<es lang="spanish">Baya Aostan</es>
+			<ko lang="korean">고스티열매</ko>
+			<zh-cn lang="chinese (simplified)">岳竹果</zh-cn>
+			<zh-tw lang="chinese (traditional)">岳竹果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MARANGA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Maranga Berry</en>
+			<ja lang="japanese">タラプのみ</ja>
+			<de lang="german">Tarabeere</de>
+			<fr lang="french">Baie Rangma</fr>
+			<it lang="italian">Baccapane</it>
+			<es lang="spanish">Baya Maranga</es>
+			<ko lang="korean">타라프열매</ko>
+			<zh-cn lang="chinese (simplified)">香罗果</zh-cn>
+			<zh-tw lang="chinese (traditional)">香羅果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MICLE_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Micle Berry</en>
+			<ja lang="japanese">ミクルのみ</ja>
+			<de lang="german">Wunfrubeere</de>
+			<fr lang="french">Baie Micle</fr>
+			<it lang="italian">Baccaracolo</it>
+			<es lang="spanish">Baya Lagro</es>
+			<ko lang="korean">미클열매</ko>
+			<zh-cn lang="chinese (simplified)">奇秘果</zh-cn>
+			<zh-tw lang="chinese (traditional)">奇秘果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>NANAB_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Nanab Berry</en>
+			<ja lang="japanese">ナナのみ</ja>
+			<de lang="german">Nanabbeere</de>
+			<fr lang="french">Baie Nanab</fr>
+			<it lang="italian">Baccabana</it>
+			<es lang="spanish">Baya Latano</es>
+			<ko lang="korean">나나열매</ko>
+			<zh-cn lang="chinese (simplified)">蕉香果</zh-cn>
+			<zh-tw lang="chinese (traditional)">蕉香果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>NOMEL_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Nomel Berry</en>
+			<ja lang="japanese">ノメルのみ</ja>
+			<de lang="german">Tronzibeere</de>
+			<fr lang="french">Baie Tronci</fr>
+			<it lang="italian">Baccalemon</it>
+			<es lang="spanish">Baya Monli</es>
+			<ko lang="korean">노멜열매</ko>
+			<zh-cn lang="chinese (simplified)">檬柠果</zh-cn>
+			<zh-tw lang="chinese (traditional)">檬檸果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OCCA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Occa Berry</en>
+			<ja lang="japanese">オッカのみ</ja>
+			<de lang="german">Koakobeere</de>
+			<fr lang="french">Baie Chocco</fr>
+			<it lang="italian">Baccacao</it>
+			<es lang="spanish">Baya Caoca</es>
+			<ko lang="korean">오카열매</ko>
+			<zh-cn lang="chinese (simplified)">巧可果</zh-cn>
+			<zh-tw lang="chinese (traditional)">巧可果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ORAN_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Oran Berry</en>
+			<ja lang="japanese">オレンのみ</ja>
+			<de lang="german">Sinelbeere</de>
+			<fr lang="french">Baie Oran</fr>
+			<it lang="italian">Baccarancia</it>
+			<es lang="spanish">Baya Aranja</es>
+			<ko lang="korean">오랭열매</ko>
+			<zh-cn lang="chinese (simplified)">橙橙果</zh-cn>
+			<zh-tw lang="chinese (traditional)">橙橙果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PAMTRE_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pamtre Berry</en>
+			<ja lang="japanese">シーヤのみ</ja>
+			<de lang="german">Pallmbeere</de>
+			<fr lang="french">Baie Palma</fr>
+			<it lang="italian">Baccapalma</it>
+			<es lang="spanish">Baya Plama</es>
+			<ko lang="korean">자야열매</ko>
+			<zh-cn lang="chinese (simplified)">椰木果</zh-cn>
+			<zh-tw lang="chinese (traditional)">椰木果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PASSHO_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Passho Berry</en>
+			<ja lang="japanese">イトケのみ</ja>
+			<de lang="german">Foepasbeere</de>
+			<fr lang="french">Baie Pocpoc</fr>
+			<it lang="italian">Baccapasflo</it>
+			<es lang="spanish">Baya Pasio</es>
+			<ko lang="korean">꼬시개열매</ko>
+			<zh-cn lang="chinese (simplified)">千香果</zh-cn>
+			<zh-tw lang="chinese (traditional)">千香果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PAYAPA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Payapa Berry</en>
+			<ja lang="japanese">ウタンのみ</ja>
+			<de lang="german">Pyapabeere</de>
+			<fr lang="french">Baie Yapap</fr>
+			<it lang="italian">Baccapayapa</it>
+			<es lang="spanish">Baya Payapa</es>
+			<ko lang="korean">야파열매</ko>
+			<zh-cn lang="chinese (simplified)">福禄果</zh-cn>
+			<zh-tw lang="chinese (traditional)">福祿果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PECHA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pecha Berry</en>
+			<ja lang="japanese">モモンのみ</ja>
+			<de lang="german">Pirsifbeere</de>
+			<fr lang="french">Baie Pêcha</fr>
+			<it lang="italian">Baccapesca</it>
+			<es lang="spanish">Baya Meloc</es>
+			<ko lang="korean">복슝열매</ko>
+			<zh-cn lang="chinese (simplified)">桃桃果</zh-cn>
+			<zh-tw lang="chinese (traditional)">桃桃果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PERSIM_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Persim Berry</en>
+			<ja lang="japanese">キーのみ</ja>
+			<de lang="german">Persimbeere</de>
+			<fr lang="french">Baie Kika</fr>
+			<it lang="italian">Baccaki</it>
+			<es lang="spanish">Baya Caquic</es>
+			<ko lang="korean">시몬열매</ko>
+			<zh-cn lang="chinese (simplified)">柿仔果</zh-cn>
+			<zh-tw lang="chinese (traditional)">柿仔果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PETAYA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Petaya Berry</en>
+			<ja lang="japanese">ヤタピのみ</ja>
+			<de lang="german">Tahaybeere</de>
+			<fr lang="french">Baie Pitaye</fr>
+			<it lang="italian">Baccapitaya</it>
+			<es lang="spanish">Baya Yapati</es>
+			<ko lang="korean">야타비열매</ko>
+			<zh-cn lang="chinese (simplified)">龙火果</zh-cn>
+			<zh-tw lang="chinese (traditional)">龍火果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PINAP_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pinap Berry</en>
+			<ja lang="japanese">パイルのみ</ja>
+			<de lang="german">Sananabeere</de>
+			<fr lang="french">Baie Nanana</fr>
+			<it lang="italian">Baccananas</it>
+			<es lang="spanish">Baya Pinia</es>
+			<ko lang="korean">파인열매</ko>
+			<zh-cn lang="chinese (simplified)">凰梨果</zh-cn>
+			<zh-tw lang="chinese (traditional)">凰梨果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>POMEG_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Pomeg Berry</en>
+			<ja lang="japanese">ザロクのみ</ja>
+			<de lang="german">Granabeere</de>
+			<fr lang="french">Baie Grena</fr>
+			<it lang="italian">Baccagrana</it>
+			<es lang="spanish">Baya Grana</es>
+			<ko lang="korean">유석열매</ko>
+			<zh-cn lang="chinese (simplified)">榴石果</zh-cn>
+			<zh-tw lang="chinese (traditional)">榴石果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>QUALOT_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Qualot Berry</en>
+			<ja lang="japanese">タポルのみ</ja>
+			<de lang="german">Qualotbeere</de>
+			<fr lang="french">Baie Qualot</fr>
+			<it lang="italian">Baccaloquat</it>
+			<es lang="spanish">Baya Ispero</es>
+			<ko lang="korean">파비열매</ko>
+			<zh-cn lang="chinese (simplified)">比巴果</zh-cn>
+			<zh-tw lang="chinese (traditional)">比巴果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RABUTA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rabuta Berry</en>
+			<ja lang="japanese">ラブタのみ</ja>
+			<de lang="german">Rabutabeere</de>
+			<fr lang="french">Baie Rabuta</fr>
+			<it lang="italian">Baccambutan</it>
+			<es lang="spanish">Baya Rautan</es>
+			<ko lang="korean">라부탐열매</ko>
+			<zh-cn lang="chinese (simplified)">茸丹果</zh-cn>
+			<zh-tw lang="chinese (traditional)">茸丹果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RAWST_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rawst Berry</en>
+			<ja lang="japanese">チーゴのみ</ja>
+			<de lang="german">Fragiabeere</de>
+			<fr lang="french">Baie Fraive</fr>
+			<it lang="italian">Baccafrago</it>
+			<es lang="spanish">Baya Safre</es>
+			<ko lang="korean">복분열매</ko>
+			<zh-cn lang="chinese (simplified)">莓莓果</zh-cn>
+			<zh-tw lang="chinese (traditional)">莓莓果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RAZZ_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Razz Berry</en>
+			<ja lang="japanese">ズリのみ</ja>
+			<de lang="german">Himmihbeere</de>
+			<fr lang="french">Baie Framby</fr>
+			<it lang="italian">Baccalampon</it>
+			<es lang="spanish">Baya Frambu</es>
+			<ko lang="korean">라즈열매</ko>
+			<zh-cn lang="chinese (simplified)">蔓莓果</zh-cn>
+			<zh-tw lang="chinese (traditional)">蔓莓果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RINDO_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rindo Berry</en>
+			<ja lang="japanese">リンドのみ</ja>
+			<de lang="german">Grindobeere</de>
+			<fr lang="french">Baie Ratam</fr>
+			<it lang="italian">Baccarindo</it>
+			<es lang="spanish">Baya Tamar</es>
+			<ko lang="korean">린드열매</ko>
+			<zh-cn lang="chinese (simplified)">罗子果</zh-cn>
+			<zh-tw lang="chinese (traditional)">羅子果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROSELI_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Roseli Berry</en>
+			<ja lang="japanese">ロゼルのみ</ja>
+			<de lang="german">Hibisbeere</de>
+			<fr lang="french">Baie Selro</fr>
+			<it lang="italian">Baccarcadè</it>
+			<es lang="spanish">Baya Hibis</es>
+			<ko lang="korean">로셀열매</ko>
+			<zh-cn lang="chinese (simplified)">洛玫果</zh-cn>
+			<zh-tw lang="chinese (traditional)">洛玫果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>ROWAP_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Rowap Berry</en>
+			<ja lang="japanese">レンブのみ</ja>
+			<de lang="german">Roselbeere</de>
+			<fr lang="french">Baie Pommo</fr>
+			<it lang="italian">Baccaroam</it>
+			<es lang="spanish">Baya Magua</es>
+			<ko lang="korean">애터열매</ko>
+			<zh-cn lang="chinese (simplified)">雾莲果</zh-cn>
+			<zh-tw lang="chinese (traditional)">霧蓮果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SALAC_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Salac Berry</en>
+			<ja lang="japanese">カムラのみ</ja>
+			<de lang="german">Salkabeere</de>
+			<fr lang="french">Baie Sailak</fr>
+			<it lang="italian">Baccasalak</it>
+			<es lang="spanish">Baya Aslac</es>
+			<ko lang="korean">캄라열매</ko>
+			<zh-cn lang="chinese (simplified)">沙鳞果</zh-cn>
+			<zh-tw lang="chinese (traditional)">沙鱗果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SHUCA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Shuca Berry</en>
+			<ja lang="japanese">シュカのみ</ja>
+			<de lang="german">Schukebeere</de>
+			<fr lang="french">Baie Jouca</fr>
+			<it lang="italian">Baccanaca</it>
+			<es lang="spanish">Baya Acardo</es>
+			<ko lang="korean">슈캐열매</ko>
+			<zh-cn lang="chinese (simplified)">腰木果</zh-cn>
+			<zh-tw lang="chinese (traditional)">腰木果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SILVER_NANAB_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Silver Nanab Berry</en>
+			<ja lang="japanese">ぎんのナナのみ</ja>
+			<de lang="german">Silberne Nanabbeere</de>
+			<fr lang="french">Baie Nanab argentée</fr>
+			<it lang="italian">Baccabana argentata</it>
+			<es lang="spanish">Baya Latano Plateada</es>
+			<ko lang="korean">은 나나열매</ko>
+			<zh-cn lang="chinese (simplified)">银色蕉香果</zh-cn>
+			<zh-tw lang="chinese (traditional)">銀色蕉香果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SILVER_PINAP_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Silver Pinap Berry</en>
+			<ja lang="japanese">ぎんのパイルのみ</ja>
+			<de lang="german">Silberne Sananabeere</de>
+			<fr lang="french">Baie Nanana argentée</fr>
+			<it lang="italian">Baccananas argentata</it>
+			<es lang="spanish">Baya Pinia Plateada</es>
+			<ko lang="korean">은 파인열매</ko>
+			<zh-cn lang="chinese (simplified)">银色凰梨果</zh-cn>
+			<zh-tw lang="chinese (traditional)">銀色凰梨果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SILVER_RAZZ_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Silver Razz Berry</en>
+			<ja lang="japanese">ぎんのズリのみ</ja>
+			<de lang="german">Silberne Himmihbeere</de>
+			<fr lang="french">Baie Framby argentée</fr>
+			<it lang="italian">Baccalampon argentata</it>
+			<es lang="spanish">Baya Frambu Plateada</es>
+			<ko lang="korean">은 라즈열매</ko>
+			<zh-cn lang="chinese (simplified)">银色蔓莓果</zh-cn>
+			<zh-tw lang="chinese (traditional)">銀色蔓莓果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SITRUS_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Sitrus Berry</en>
+			<ja lang="japanese">オボンのみ</ja>
+			<de lang="german">Tsitrubeere</de>
+			<fr lang="french">Baie Sitrus</fr>
+			<it lang="italian">Baccacedro</it>
+			<es lang="spanish">Baya Zidra</es>
+			<ko lang="korean">자뭉열매</ko>
+			<zh-cn lang="chinese (simplified)">文柚果</zh-cn>
+			<zh-tw lang="chinese (traditional)">文柚果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>SPELON_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Spelon Berry</en>
+			<ja lang="japanese">ノワキのみ</ja>
+			<de lang="german">Kiwanbeere</de>
+			<fr lang="french">Baie Kiwan</fr>
+			<it lang="italian">Baccamelos</it>
+			<es lang="spanish">Baya Wikano</es>
+			<ko lang="korean">메호키열매</ko>
+			<zh-cn lang="chinese (simplified)">刺角果</zh-cn>
+			<zh-tw lang="chinese (traditional)">刺角果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>STARF_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Starf Berry</en>
+			<ja lang="japanese">スターのみ</ja>
+			<de lang="german">Krambobeere</de>
+			<fr lang="french">Baie Frista</fr>
+			<it lang="italian">Baccambola</it>
+			<es lang="spanish">Baya Arabol</es>
+			<ko lang="korean">스타열매</ko>
+			<zh-cn lang="chinese (simplified)">星桃果</zh-cn>
+			<zh-tw lang="chinese (traditional)">星桃果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TAMATO_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Tamato Berry</en>
+			<ja lang="japanese">マトマのみ</ja>
+			<de lang="german">Tamotbeere</de>
+			<fr lang="french">Baie Tamato</fr>
+			<it lang="italian">Baccamodoro</it>
+			<es lang="spanish">Baya Tamate</es>
+			<ko lang="korean">토망열매</ko>
+			<zh-cn lang="chinese (simplified)">茄番果</zh-cn>
+			<zh-tw lang="chinese (traditional)">茄番果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>TANGA_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Tanga Berry</en>
+			<ja lang="japanese">タンガのみ</ja>
+			<de lang="german">Tanigabeere</de>
+			<fr lang="french">Baie Panga</fr>
+			<it lang="italian">Baccaitan</it>
+			<es lang="spanish">Baya Yecana</es>
+			<ko lang="korean">리체열매</ko>
+			<zh-cn lang="chinese (simplified)">扁樱果</zh-cn>
+			<zh-tw lang="chinese (traditional)">扁櫻果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WACAN_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Wacan Berry</en>
+			<ja lang="japanese">ソクノのみ</ja>
+			<de lang="german">Kerzalbeere</de>
+			<fr lang="french">Baie Parma</fr>
+			<it lang="italian">Baccaparmen</it>
+			<es lang="spanish">Baya Gualot</es>
+			<ko lang="korean">초나열매</ko>
+			<zh-cn lang="chinese (simplified)">烛木果</zh-cn>
+			<zh-tw lang="chinese (traditional)">燭木果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WATMEL_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Watmel Berry</en>
+			<ja lang="japanese">カイスのみ</ja>
+			<de lang="german">Wasmelbeere</de>
+			<fr lang="french">Baie Stekpa</fr>
+			<it lang="italian">Baccacomero</it>
+			<es lang="spanish">Baya Sambia</es>
+			<ko lang="korean">슈박열매</ko>
+			<zh-cn lang="chinese (simplified)">瓜西果</zh-cn>
+			<zh-tw lang="chinese (traditional)">瓜西果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WEPEAR_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Wepear Berry</en>
+			<ja lang="japanese">セシナのみ</ja>
+			<de lang="german">Nirbebeere</de>
+			<fr lang="french">Baie Repoi</fr>
+			<it lang="italian">Baccapera</it>
+			<es lang="spanish">Baya Peragu</es>
+			<ko lang="korean">서배열매</ko>
+			<zh-cn lang="chinese (simplified)">西梨果</zh-cn>
+			<zh-tw lang="chinese (traditional)">西梨果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WIKI_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Wiki Berry</en>
+			<ja lang="japanese">ウイのみ</ja>
+			<de lang="german">Wikibeere</de>
+			<fr lang="french">Baie Wiki</fr>
+			<it lang="italian">Baccakiwi</it>
+			<es lang="spanish">Baya Wiki</es>
+			<ko lang="korean">위키열매</ko>
+			<zh-cn lang="chinese (simplified)">异奇果</zh-cn>
+			<zh-tw lang="chinese (traditional)">異奇果</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>YACHE_BERRY</key>
+		<params>0</params>
+		<text>
+			<en lang="english">Yache Berry</en>
+			<ja lang="japanese">ヤチェのみ</ja>
+			<de lang="german">Kiroyabeere</de>
+			<fr lang="french">Baie Nanone</fr>
+			<it lang="italian">Baccamoya</it>
+			<es lang="spanish">Baya Rimoya</es>
+			<ko lang="korean">플카열매</ko>
+			<zh-cn lang="chinese (simplified)">番荔果</zh-cn>
+			<zh-tw lang="chinese (traditional)">番荔果</zh-tw>
+		</text>
+	</string>
+</ITEM_NAMES>

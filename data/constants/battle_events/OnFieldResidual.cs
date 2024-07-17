@@ -22,13 +22,13 @@ namespace PkmnEngine {
 		public static async Task<object> Condition_WaterSport_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
-			await ResolveCondition(args.state, Condition.WATER_SPORT, BattleMessage.WATER_SPORT_END);
+			await ResolveCondition(args.state, Condition.WATER_SPORT, BATTLE_COMMON.WATER_SPORT_END);
 			return null;
 		}
 		public static async Task<object> Condition_MudSport_OnFieldResidual(object p) {
 			OnFieldResidualParams args = ValidateParams<OnFieldResidualParams>(p);
 
-			await ResolveCondition(args.state, Condition.MUD_SPORT, BattleMessage.WATER_SPORT_END);
+			await ResolveCondition(args.state, Condition.MUD_SPORT, BATTLE_COMMON.WATER_SPORT_END);
 			return null;
 		}
 
@@ -38,11 +38,11 @@ namespace PkmnEngine {
 			args.state.Weather.DecrementDuration();
 
 			if (args.state.Weather.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.SUNLIGHT_FADED));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.SUNLIGHT_FADED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.SUNLIGHT_IS_HARSH));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.SUNLIGHT_IS_HARSH));
 			}
 
 			return null;
@@ -53,11 +53,11 @@ namespace PkmnEngine {
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.EXTREME_SUNLIGHT_FADED));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.EXTREME_SUNLIGHT_FADED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.SUNLIGHT_IS_HARSH));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.SUNLIGHT_IS_EXTREMELY_HARSH));
 			}
 
 			return null;
@@ -68,11 +68,11 @@ namespace PkmnEngine {
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.RAIN_STOPPED));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.RAIN_STOPPED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.ITS_RAINING));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ITS_RAINING));
 			}
 
 			return null;
@@ -83,11 +83,11 @@ namespace PkmnEngine {
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.HEAVY_RAIN_STOPPED));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.HEAVY_RAIN_STOPPED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.ITS_RAINING));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.RAIN_IS_POURING_DOWN));
 			}
 
 			return null;
@@ -98,19 +98,19 @@ namespace PkmnEngine {
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.SANDSTORM_SUBSIDED));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.SANDSTORM_SUBSIDED));
 				args.state.Weather.ClearWeatherTerrain();
 				return null;
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.SANDSTORM_IS_RAGING));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.SANDSTORM_IS_RAGING));
 			}
 
 			// Damage mons.
 			foreach (BattleMon bm in args.battle.GetAllActiveMons()) {
 				if (bm.DamagedBySandstorm()) {
 					U16 damage = new(bm.GetPercentOfMaxHp(FieldConditions.SANDSTORM_CHIP_DAMAGE));
-					await bm.DamageMon(damage, true, false, Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_SANDSTORM, bm.GetName()));
+					await bm.DamageMon(damage, true, false, Lang.GetString(STRINGS, BATTLE_COMMON.MON_HURT_BY_SANDSTORM, bm.GetName()));
 				}
 			}
 
@@ -122,19 +122,19 @@ namespace PkmnEngine {
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.HAIL_STOPPED));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.HAIL_STOPPED));
 				args.state.Weather.ClearWeatherTerrain();
 				return null;
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.ITS_HAILING));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ITS_HAILING));
 			}
 
 			// Damage mons.
 			foreach (BattleMon bm in args.battle.GetAllActiveMons()) {
 				if (bm.DamagedByHail()) {
 					U16 damage = new(bm.GetPercentOfMaxHp(FieldConditions.HAIL_CHIP_DAMAGE));
-					await bm.DamageMon(damage, true, false, Lang.GetBattleMessage(BattleMessage.MON_HURT_BY_HAIL, bm.GetName()));
+					await bm.DamageMon(damage, true, false, Lang.GetString(STRINGS, BATTLE_COMMON.MON_HURT_BY_HAIL, bm.GetName()));
 				}
 			}
 
@@ -146,11 +146,11 @@ namespace PkmnEngine {
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.SNOW_STOPPED));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.SNOW_STOPPED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.ITS_SNOWING));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ITS_SNOWING));
 			}
 
 			return null;
@@ -161,11 +161,11 @@ namespace PkmnEngine {
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.FOG_LIFTED));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.FOG_LIFTED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.FOG_CREPT_UP));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.FOG_CREPT_UP));
 			}
 
 			return null;
@@ -176,11 +176,11 @@ namespace PkmnEngine {
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MYSTERIOUS_WIND_DISAPPEARED));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MYSTERIOUS_WINDS_STOPPED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MYSTERIOUS_WIND_BLOWS_ON));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MYSTERIOUS_WIND_BLOWS_ON));
 			}
 
 			return null;
@@ -191,11 +191,11 @@ namespace PkmnEngine {
 			args.state.Weather.DecrementDuration();
 			
 			if (args.state.Weather.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.SHADOWY_AURA_DISAPPEARED));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.SHADOWY_AURA_FADED));
 				args.state.Weather.ClearWeatherTerrain();
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.LIGHT_SHOWERED_FROM_SHADOWY_AURA));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.LIGHT_SHOWERED_FROM_SHADOWY_AURA));
 			}
 
 			/*
@@ -214,11 +214,11 @@ namespace PkmnEngine {
 			args.state.Terrain.DecrementDuration();
 
 			if (args.state.Terrain.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_END));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ELECTRIC_TERRAIN_END));
 				args.state.Terrain.ClearWeatherTerrain();
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.ELECTRIC_TERRAIN_ACTIVE));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ELECTRIC_TERRAIN_ACTIVE));
 			}
 
 			return null;
@@ -229,11 +229,11 @@ namespace PkmnEngine {
 			args.state.Terrain.DecrementDuration();
 
 			if (args.state.Terrain.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_END));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.GRASSY_TERRAIN_END));
 				args.state.Terrain.ClearWeatherTerrain();
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.GRASSY_TERRAIN_ACTIVE));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.GRASSY_TERRAIN_ACTIVE));
 			}
 
 			// Heal mons.
@@ -256,11 +256,11 @@ namespace PkmnEngine {
 			args.state.Terrain.DecrementDuration();
 
 			if (args.state.Terrain.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_END));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MISTY_TERRAIN_END));
 				args.state.Terrain.ClearWeatherTerrain();
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MISTY_TERRAIN_ACTIVE));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MISTY_TERRAIN_ACTIVE));
 			}
 
 			return null;
@@ -271,11 +271,11 @@ namespace PkmnEngine {
 			args.state.Terrain.DecrementDuration();
 
 			if (args.state.Terrain.DurationRemaining == 0) {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_END));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.PSYCHIC_TERRAIN_END));
 				args.state.Terrain.ClearWeatherTerrain();
 			}
 			else {
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.PSYCHIC_TERRAIN_ACTIVE));
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.PSYCHIC_TERRAIN_ACTIVE));
 			}
 
 			return null;

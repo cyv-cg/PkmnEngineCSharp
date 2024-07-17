@@ -333,6 +333,13 @@ namespace PkmnEngine {
 				Callback.OnTrySelectMove,
 				(Status_Imprison_OnTryUseMove, 0)
 			}}
+		},
+		{
+			Status.BRACING,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnDamage,
+				(Status_Bracing_OnDamage, 0)
+			}}
 		}
 
 
@@ -360,7 +367,6 @@ namespace PkmnEngine {
 		STOCKPILE_COUNT,		// Stockpile count.
 		SLEEPING_TURNS,			// Number of turns the mon has been asleep.
 		CONFUSED_TURNS,			// Number of turns the mon has been confused.
-		SUCCESSIVE_PROTECTS,	// Counts how many times a protecting move has been used consecutively.
 		LAST_USED_MOVE,			// Stores the slot of the last used move.
 		SUCCESSIVE_MOVE_USES,	// Counts the number of times the same move has been used consecutively.
 		LAST_TARGETED_MON,		// Stores the slot of the last targeted mon.

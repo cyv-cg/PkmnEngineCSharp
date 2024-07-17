@@ -13,6 +13,8 @@ using PkmnEngine.Strings;
 
 namespace PkmnEngine {
 	public static partial class MoveEffects {
+		private const StringResource.Namespace STRINGS = StringResource.Namespace.BATTLE_COMMON;
+
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 		private static async Task<u32> Attack(MoveEffectParams p, u16 setDamage = 0, float critChance = -1, u16 atkOverride = 0, u16 defOverride = 0, u16 powerOverride = 0) {
 			if (critChance < 0) {
@@ -44,10 +46,10 @@ namespace PkmnEngine {
 			}
 
 			string[] damageDetails = {
-				mods.isCrit				? Lang.GetBattleMessage(BattleMessage.CRITICAL_HIT)			: null,
-				type > 1				? Lang.GetBattleMessage(BattleMessage.SUPER_EFFECTIVE)		: null,
-				type > 0 && type < 1	? Lang.GetBattleMessage(BattleMessage.NOT_VERY_EFFECTIVE)	: null,
-				type == 0				? Lang.GetBattleMessage(BattleMessage.IMMUNE)				: null
+				mods.isCrit				? Lang.GetString(STRINGS, BATTLE_COMMON.A_CRITICAL_HIT)			: null,
+				type > 1				? Lang.GetString(STRINGS, BATTLE_COMMON.ITS_SUPER_EFFECTIVE)	: null,
+				type > 0 && type < 1	? Lang.GetString(STRINGS, BATTLE_COMMON.ITS_NOT_VERY_EFFECTIVE)	: null,
+				type == 0				? Lang.GetString(STRINGS, BATTLE_COMMON.MON_IS_NOT_AFFECTED, p.target.GetName()) : null
 			};
 
 			// Deal damage to mon.
@@ -57,7 +59,7 @@ namespace PkmnEngine {
 			// If the target has the Destiny Bond status, and fainted when attacked...
 			if (p.target.HasStatus(Status.DESTINY_BOND) && fainted) {
 				// ...cause the attacker to faint.
-				await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_TOOK_ITS_ATTACKER_DOWN_WITH_IT, p.target.GetName())); 
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_TOOK_ITS_ATTACKER_DOWN_WITH_IT, p.target), p.target.GetName())); 
 				U16 DBdamage = new(p.attacker.EffMaxHp(p.state));
 				await p.attacker.DamageMon(DBdamage, true, false);
 			}
@@ -140,19 +142,19 @@ namespace PkmnEngine {
 				// This way, we avoid sending the message for secondary effects.
 				if (isPrimaryEffect) {
 					if (bm.HasStatus(Status.BURN)) {
-						await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_BURNED, bm.GetName()));
+						await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_ALREADY_BURNED, bm), bm.GetName()));
 					}
 					else if (bm.HasStatus(Status.FREEZE)) {
-						await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_FROZEN, bm.GetName()));
+						await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_ALREADY_FROZEN, bm), bm.GetName()));
 					}
 					else if (bm.HasStatus(Status.PARALYSIS)) {
-						await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_PARALYZED, bm.GetName()));
+						await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_ALREADY_PARALYZED, bm), bm.GetName()));
 					}
 					else if (bm.HasStatus(Status.POISON, Status.TOXIC)) {
-						await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_POISONED, bm.GetName()));
+						await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_ALREADY_POISONED, bm), bm.GetName()));
 					}
 					else if (bm.HasStatus(Status.SLEEP, Status.DROWSY)) {
-						await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_ALREADY_ASLEEP, bm.GetName()));
+						await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_ALREADY_ASLEEP, bm), bm.GetName()));
 					}
 				}
 				return 1;
@@ -163,51 +165,51 @@ namespace PkmnEngine {
 				switch (effID) {
 					case Status.BURN:
 						if (!bm.CanBeBurned(state)) {
-							await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_BURNED, bm.GetName()));
+							await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CANNOT_BE_BURNED, bm), bm.GetName()));
 							return 1;
 						}
 						status = Status.BURN;
-						msg = Lang.GetBattleMessage(BattleMessage.MON_WAS_BURNED, bm.GetName());
+						msg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_WAS_BURNED, bm), bm.GetName());
 						break;
 					case Status.FREEZE:
 						if (!bm.CanBeFrozen(state)) {
-							await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_FROZEN, bm.GetName()));
+							await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CANNOT_BE_FROZEN, bm), bm.GetName()));
 							return 1;
 						}
 						status = Status.FREEZE;
-						msg = Lang.GetBattleMessage(BattleMessage.MON_WAS_FROZEN, bm.GetName());
+						msg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_BECAME_FROZEN, bm), bm.GetName());
 						break;
 					case Status.PARALYSIS:
 						if (!bm.CanBeParalyzed(state)) {
-							await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_PARALYZED, bm.GetName()));
+							await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CANNOT_BE_PARALYZED, bm), bm.GetName()));
 							return 1;
 						}
 						status = Status.PARALYSIS;
-						msg = Lang.GetBattleMessage(BattleMessage.MON_WAS_PARALYZED, bm.GetName());
+						msg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_BECAME_PARALYZED, bm), bm.GetName());
 						break;
 					case Status.POISON:
 						if (!bm.CanBePoisoned(state)) {
-							await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_POISONED, bm.GetName()));
+							await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CANNOT_BE_POISONED, bm), bm.GetName()));
 							return 1;
 						}
 						status = Status.POISON;
-						msg = Lang.GetBattleMessage(BattleMessage.MON_WAS_POISONED, bm.GetName());
+						msg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_WAS_POISONED, bm), bm.GetName());
 						break;
 					case Status.TOXIC:
 						if (!bm.CanBePoisoned(state)) {
-							await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_BE_POISONED, bm.GetName()));
+							await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CANNOT_BE_POISONED, bm), bm.GetName()));
 							return 1;
 						}
 						status = Status.TOXIC;
-						msg = Lang.GetBattleMessage(BattleMessage.MON_WAS_BADLY_POISONED, bm.GetName());
+						msg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_WAS_BADLY_POISONED, bm), bm.GetName());
 						break;
 					case Status.SLEEP:
 						if (!bm.CanFallAsleep(state)) {
-							await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CANNOT_FALL_ASLEEP, bm.GetName()));
+							await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CANNOT_FALL_ASLEEP, bm), bm.GetName()));
 							return 1;
 						}
 						status = Status.SLEEP;
-						msg = Lang.GetBattleMessage(BattleMessage.MON_FELL_ASLEEP, bm.GetName());
+						msg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_FELL_ASLEEP, bm), bm.GetName());
 						break;
 					default:
 						return 1;
@@ -220,9 +222,47 @@ namespace PkmnEngine {
 		}
 	
 		private static async Task<u32> DoRecoilDamage(MoveEffectParams p, U16 recoil) {
-			await p.attacker.DamageMon(recoil, true, false, Lang.GetBattleMessage(BattleMessage.MON_DAMAGED_BY_RECOIL, p.attacker.GetName()));
+			await p.attacker.DamageMon(recoil, true, false, Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_DAMAGED_BY_RECOIL, p.attacker), p.attacker.GetName()));
 			return recoil.Value;
 		}
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+
+		/// <summary>
+		/// Similar to BattleUtil.GetContextString, but for when a string resource involves 2 different mons.
+		/// </summary>
+		/// <param name="baseKey">ex: "MON_ATTACKED"</param>
+		/// <param name="attacker">BattleMon that is doing the thing.</param>
+		/// <param name="target">BattleMon that is the target of said thing.</param>
+		/// <param name="attackerPlayerName">Name of the acting BattleMon's trainer. Optional.</param>
+		/// <param name="targetPlayerName">Name of the targeted BattleMon's trainer. Optional.</param>
+		/// <returns>StringResource conjugated for 2 mons.</returns>
+		private static StringResource GetConjugatedString(string baseKey, BattleMon attacker, BattleMon target, string attackerPlayerName = null, string targetPlayerName = null) {
+			string key = baseKey;
+
+			if (attackerPlayerName != null) {
+				key = "PLAYER_" + key;
+			}
+			else if (attacker.Mon.Box.IsWild) {
+				key = "WILD_" + key;
+			}
+			else if (attacker.Side == Battle.SIDE_REMOTE) {
+				key = "OPPOSING_" + key;
+			}
+
+			if (targetPlayerName != null) {
+				key = key + "_PLAYER_MON";
+			}
+			else if (target.Mon.Box.IsWild) {
+				key = key + "_WILD_MON";
+			}
+			else if (target.Side == Battle.SIDE_REMOTE) {
+				key = key + "_OPPOSING_MON";
+			}
+			else {
+				key = key + "_MON";
+			}
+
+			return Lang.GetStringResourceWithKey(StringResource.Namespace.BATTLE_COMMON, key);
+		}
 	}
 }

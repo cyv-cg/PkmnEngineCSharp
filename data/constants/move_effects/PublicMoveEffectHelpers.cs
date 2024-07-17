@@ -3,6 +3,8 @@ using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
 
+using System;
+
 using static PkmnEngine.Global;
 using PkmnEngine.Strings;
 using System.Threading.Tasks;
@@ -19,214 +21,54 @@ namespace PkmnEngine {
 				return 0;
 			}
 
-			sbyte newStage = 0;
 			string atLimitMsg = "";
 			string changeMsg = "";
-			
-			switch (effID) {
-				case Stat.ATTACK: {
-					newStage = bm.AttackStages;
-					if (newStage <= MIN_STAT_STAGE && n < 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.ATTACK_AT_MIN, bm.GetName());
-					}
-					else if (newStage >= MAX_STAT_STAGE && n > 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.ATTACK_AT_MAX, bm.GetName());
-					}
-					else {
-						switch (n) {
-							case -6:
-							case -5:
-							case -4:
-							case -3: changeMsg = Lang.GetBattleMessage(BattleMessage.ATTACK_DECREASED_DRASTICALLY, bm.GetName()); break;
-							case -2: changeMsg = Lang.GetBattleMessage(BattleMessage.ATTACK_DECREASED_SHARPLY, bm.GetName()); break;
-							case -1: changeMsg = Lang.GetBattleMessage(BattleMessage.ATTACK_DECREASED, bm.GetName()); break;
-							case 1:  changeMsg = Lang.GetBattleMessage(BattleMessage.ATTACK_INCREASED, bm.GetName()); break;
-							case 2:  changeMsg = Lang.GetBattleMessage(BattleMessage.ATTACK_INCREASED_SHARPLY, bm.GetName()); break;
-							case 3:
-							case 4:
-							case 5:
-							case 6:  changeMsg = Lang.GetBattleMessage(BattleMessage.ATTACK_INCREASED_DRASTICALLY, bm.GetName()); break;
-							default:
-								changeMsg = Lang.GetBattleMessage(BattleMessage.NOTHING_HAPPENED); // this should never happen
-								break;
-						}
-					}
+
+
+			sbyte stages = effID switch {
+				Stat.ATTACK => bm.AttackStages,
+				Stat.DEFENSE => bm.DefenseStages,
+				Stat.SPECIAL_ATTACK => bm.SpecialAttackStages,
+				Stat.SPECIAL_DEFENSE => bm.SpecialDefenseStages,
+				Stat.SPEED => bm.SpeedStages,
+				Stat.ACCURACY => bm.AccuracyStages,
+				Stat.EVASION => bm.EvasivenessStages,
+				_ => throw new ArgumentException()
+			};
+			StringResource statString = effID switch {
+				Stat.ATTACK => STAT_NAMES.ATTACK,
+				Stat.DEFENSE => STAT_NAMES.DEFENSE,
+				Stat.SPECIAL_ATTACK => STAT_NAMES.SPECIAL_ATTACK,
+				Stat.SPECIAL_DEFENSE => STAT_NAMES.SPECIAL_DEFENSE,
+				Stat.SPEED => STAT_NAMES.SPEED,
+				Stat.ACCURACY => STAT_NAMES.ACCURACY,
+				Stat.EVASION => STAT_NAMES.EVASION,
+				_ => throw new ArgumentException()
+			};
+
+			switch (n) {
+				case -6:
+				case -5:
+				case -4:
+				case -3: changeMsg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_STAT_DECREASED_DRASTICALLY,	bm), bm.GetName(), Lang.GetString(StringResource.Namespace.STAT, statString)); break;
+				case -2: changeMsg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_STAT_DECREASED_SHARPLY, 		bm), bm.GetName(), Lang.GetString(StringResource.Namespace.STAT, statString)); break;
+				case -1: changeMsg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_STAT_DECREASED,				bm), bm.GetName(), Lang.GetString(StringResource.Namespace.STAT, statString)); break;
+				case 1:  changeMsg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_STAT_INCREASED,				bm), bm.GetName(), Lang.GetString(StringResource.Namespace.STAT, statString)); break;
+				case 2:  changeMsg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_STAT_INCREASED_SHARPLY,		bm), bm.GetName(), Lang.GetString(StringResource.Namespace.STAT, statString)); break;
+				case 3:
+				case 4:
+				case 5:
+				case 6:  changeMsg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_STAT_INCREASED_DRASTICALLY,	bm), bm.GetName(), Lang.GetString(StringResource.Namespace.STAT, statString)); break;
+				default:
+					changeMsg = Lang.GetString(STRINGS, BATTLE_COMMON.NOTHING_HAPPENED); // this should never happen
 					break;
-				}
-				case Stat.DEFENSE: {
-					newStage = bm.DefenseStages;
-					if (newStage <= MIN_STAT_STAGE && n < 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.DEFENSE_AT_MIN, bm.GetName());
-					}
-					else if (newStage >= MAX_STAT_STAGE && n > 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.DEFENSE_AT_MAX, bm.GetName());
-					}
-					else {
-						switch (n) {
-							case -6:
-							case -5:
-							case -4:
-							case -3: changeMsg = Lang.GetBattleMessage(BattleMessage.DEFENSE_DECREASED_DRASTICALLY, bm.GetName()); break;
-							case -2: changeMsg = Lang.GetBattleMessage(BattleMessage.DEFENSE_DECREASED_SHARPLY, bm.GetName()); break;
-							case -1: changeMsg = Lang.GetBattleMessage(BattleMessage.DEFENSE_DECREASED, bm.GetName()); break;
-							case 1:  changeMsg = Lang.GetBattleMessage(BattleMessage.DEFENSE_INCREASED, bm.GetName()); break;
-							case 2:  changeMsg = Lang.GetBattleMessage(BattleMessage.DEFENSE_INCREASED_SHARPLY, bm.GetName()); break;
-							case 3:
-							case 4:
-							case 5:
-							case 6:  changeMsg = Lang.GetBattleMessage(BattleMessage.DEFENSE_INCREASED_DRASTICALLY, bm.GetName()); break;
-							default:
-								changeMsg = Lang.GetBattleMessage(BattleMessage.NOTHING_HAPPENED); // this should never happen
-								break;
-						}
-					}
-					break;
-				}
-				case Stat.SPECIAL_ATTACK: {
-					newStage = bm.SpecialAttackStages;
-					if (newStage <= MIN_STAT_STAGE && n < 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_ATTACK_AT_MIN, bm.GetName());
-					}
-					else if (newStage >= MAX_STAT_STAGE && n > 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_ATTACK_AT_MAX, bm.GetName());
-					}
-					else {
-						switch (n) {
-							case -6:
-							case -5:
-							case -4:
-							case -3: changeMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_ATTACK_DECREASED_DRASTICALLY, bm.GetName()); break;
-							case -2: changeMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_ATTACK_DECREASED_SHARPLY, bm.GetName()); break;
-							case -1: changeMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_ATTACK_DECREASED, bm.GetName()); break;
-							case 1:  changeMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_ATTACK_INCREASED, bm.GetName()); break;
-							case 2:  changeMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_ATTACK_INCREASED_SHARPLY, bm.GetName()); break;
-							case 3:
-							case 4:
-							case 5:
-							case 6:  changeMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_ATTACK_INCREASED_DRASTICALLY); break;
-							default:
-								changeMsg = Lang.GetBattleMessage(BattleMessage.NOTHING_HAPPENED); // this should never happen
-								break;
-						}
-					}
-					break;
-				}
-				case Stat.SPECIAL_DEFENSE: {
-					newStage = bm.SpecialDefenseStages;
-					if (newStage <= MIN_STAT_STAGE && n < 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_DEFENSE_AT_MIN, bm.GetName());
-					}
-					else if (newStage >= MAX_STAT_STAGE && n > 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_DEFENSE_AT_MAX, bm.GetName());
-					}
-					else {
-						switch (n) {
-							case -6:
-							case -5:
-							case -4:
-							case -3: changeMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_DEFENSE_DECREASED_DRASTICALLY, bm.GetName()); break;
-							case -2: changeMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_DEFENSE_DECREASED_SHARPLY, bm.GetName()); break;
-							case -1: changeMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_DEFENSE_DECREASED, bm.GetName()); break;
-							case 1:  changeMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_DEFENSE_INCREASED, bm.GetName()); break;
-							case 2:  changeMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_DEFENSE_INCREASED_SHARPLY, bm.GetName()); break;
-							case 3:
-							case 4:
-							case 5:
-							case 6:  changeMsg = Lang.GetBattleMessage(BattleMessage.SPECIAL_DEFENSE_INCREASED_DRASTICALLY, bm.GetName()); break;
-							default:
-								changeMsg = Lang.GetBattleMessage(BattleMessage.NOTHING_HAPPENED); // this should never happen
-								break;
-						}
-					}
-					break;
-				}
-				case Stat.SPEED: {
-					newStage = bm.SpeedStages;
-					if (newStage <= MIN_STAT_STAGE && n < 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.SPEED_AT_MIN, bm.GetName());
-					}
-					else if (newStage >= MAX_STAT_STAGE && n > 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.SPEED_AT_MAX, bm.GetName());
-					}
-					else {
-						switch (n) {
-							case -6:
-							case -5:
-							case -4:
-							case -3: changeMsg = Lang.GetBattleMessage(BattleMessage.SPEED_DECREASED_DRASTICALLY, bm.GetName()); break;
-							case -2: changeMsg = Lang.GetBattleMessage(BattleMessage.SPEED_DECREASED_SHARPLY, bm.GetName()); break;
-							case -1: changeMsg = Lang.GetBattleMessage(BattleMessage.SPEED_DECREASED, bm.GetName()); break;
-							case 1:  changeMsg = Lang.GetBattleMessage(BattleMessage.SPEED_INCREASED, bm.GetName()); break;
-							case 2:  changeMsg = Lang.GetBattleMessage(BattleMessage.SPEED_INCREASED_SHARPLY, bm.GetName()); break;
-							case 3:
-							case 4:
-							case 5:
-							case 6:  changeMsg = Lang.GetBattleMessage(BattleMessage.SPEED_INCREASED_DRASTICALLY, bm.GetName()); break;
-							default:
-								changeMsg = Lang.GetBattleMessage(BattleMessage.NOTHING_HAPPENED); // this should never happen
-								break;
-						}
-					}
-					break;
-				}
-				case Stat.ACCURACY: {
-					newStage = bm.AccuracyStages;
-					if (newStage <= MIN_STAT_STAGE && n < 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.ACCURACY_AT_MIN, bm.GetName());
-					}
-					else if (newStage >= MAX_STAT_STAGE && n > 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.ACCURACY_AT_MAX, bm.GetName());
-					}
-					else {
-						switch (n) {
-							case -6:
-							case -5:
-							case -4:
-							case -3: changeMsg = Lang.GetBattleMessage(BattleMessage.ACCURACY_DECREASED_DRASTICALLY, bm.GetName()); break;
-							case -2: changeMsg = Lang.GetBattleMessage(BattleMessage.ACCURACY_DECREASED_SHARPLY, bm.GetName()); break;
-							case -1: changeMsg = Lang.GetBattleMessage(BattleMessage.ACCURACY_DECREASED, bm.GetName()); break;
-							case 1:  changeMsg = Lang.GetBattleMessage(BattleMessage.ACCURACY_INCREASED, bm.GetName()); break;
-							case 2:  changeMsg = Lang.GetBattleMessage(BattleMessage.ACCURACY_INCREASED_SHARPLY, bm.GetName()); break;
-							case 3:
-							case 4:
-							case 5:
-							case 6:  changeMsg = Lang.GetBattleMessage(BattleMessage.ACCURACY_INCREASED_DRASTICALLY, bm.GetName()); break;
-							default:
-								changeMsg = Lang.GetBattleMessage(BattleMessage.NOTHING_HAPPENED); // this should never happen
-								break;
-						}
-					}
-					break;
-				}
-				case Stat.EVASION: {
-					newStage = bm.EvasivenessStages;
-					if (newStage <= MIN_STAT_STAGE && n < 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.EVASION_AT_MIN, bm.GetName());
-					}
-					else if (newStage >= MAX_STAT_STAGE && n > 0) {
-						atLimitMsg = Lang.GetBattleMessage(BattleMessage.EVASION_AT_MAX, bm.GetName());
-					}
-					else {
-						switch (n) {
-							case -6:
-							case -5:
-							case -4:
-							case -3: changeMsg = Lang.GetBattleMessage(BattleMessage.EVASION_DECREASED_DRASTICALLY, bm.GetName()); break;
-							case -2: changeMsg = Lang.GetBattleMessage(BattleMessage.EVASION_DECREASED_SHARPLY, bm.GetName()); break;
-							case -1: changeMsg = Lang.GetBattleMessage(BattleMessage.EVASION_DECREASED, bm.GetName()); break;
-							case 1:  changeMsg = Lang.GetBattleMessage(BattleMessage.EVASION_INCREASED, bm.GetName()); break;
-							case 2:  changeMsg = Lang.GetBattleMessage(BattleMessage.EVASION_INCREASED_SHARPLY, bm.GetName()); break;
-							case 3:
-							case 4:
-							case 5:
-							case 6:  changeMsg = Lang.GetBattleMessage(BattleMessage.EVASION_INCREASED_DRASTICALLY, bm.GetName()); break;
-							default:
-								changeMsg = Lang.GetBattleMessage(BattleMessage.NOTHING_HAPPENED); // this should never happen
-								break;
-						}
-					}
-					break;
-				}
+			}
+
+			if (stages <= MIN_STAT_STAGE && n < 0) {
+				atLimitMsg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_STAT_WONT_GO_LOWER, bm), bm.GetName(), Lang.GetString(StringResource.Namespace.STAT, statString));
+			}
+			else if (stages >= MIN_STAT_STAGE && n > 0) {
+				atLimitMsg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_STAT_WONT_GO_HIGHER, bm), bm.GetName(), Lang.GetString(StringResource.Namespace.STAT, statString));
 			}
 
 			if (atLimitMsg != "") {
@@ -235,7 +77,7 @@ namespace PkmnEngine {
 			}
 			else {
 				// Add n stages to the current stage and clamp the new value between the extremes.
-				bm.SetStatStage(effID, (sbyte)(newStage + n));
+				bm.SetStatStage(effID, (sbyte)(stages + n));
 				
 				// Mark that the mon had a stat increase this turn.
 				if (n > 0) {
@@ -266,7 +108,7 @@ namespace PkmnEngine {
 			}
 
 			bm.RemoveStatus(Status.BURN);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CURED_OF_BURN, bm.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CURED_OF_BURN, bm), bm.GetName()));
 
 			return 0;
 		}
@@ -276,7 +118,7 @@ namespace PkmnEngine {
 			}
 
 			bm.RemoveStatus(Status.PARALYSIS);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CURED_OF_PARALYSIS, bm.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CURED_OF_PARALYSIS, bm), bm.GetName()));
 
 			return 0;
 		}
@@ -287,7 +129,7 @@ namespace PkmnEngine {
 
 			bm.RemoveStatus(Status.POISON);
 			bm.RemoveStatus(Status.TOXIC);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_CURED_OF_POISON, bm.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CURED_OF_POISON, bm), bm.GetName()));
 
 			return 0;
 		}
@@ -297,7 +139,7 @@ namespace PkmnEngine {
 			}
 
 			bm.RemoveStatus(Status.FREEZE);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_THAWED_OUT, bm.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_THAWED_OUT, bm), bm.GetName()));
 
 			return 0;
 		}
@@ -307,7 +149,7 @@ namespace PkmnEngine {
 			}
 
 			bm.RemoveStatus(Status.SLEEP);
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_WOKE_UP, bm.GetName()));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_WOKE_UP, bm), bm.GetName()));
 
 			return 0;
 		}

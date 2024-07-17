@@ -23,6 +23,8 @@ namespace PkmnEngine {
 		public const u8 SIDE_CLIENT = 0;
 		public const u8 SIDE_REMOTE = 1;
 
+		private const StringResource.Namespace STRINGS = StringResource.Namespace.BATTLE_COMMON;
+
 		private static List<NextTurnEvent> OnNextTurn = new List<NextTurnEvent>();
 
 		public Battle() {
@@ -440,7 +442,9 @@ namespace PkmnEngine {
 		/// </summary>
 		/// <param name="bm">The mon that fainted</param>
 		private async Task OnMonFainted(BattleMon bm) {
-			await MessageBox(Lang.GetBattleMessage(BattleMessage.MON_FAINTED, bm.GetName()));
+			string faintedString = Lang.GetString(STRINGS, bm.Side == SIDE_REMOTE ? BATTLE_COMMON.OPPOSING_MON_FAINTED : BATTLE_COMMON.MON_FAINTED, bm.GetName());
+			await MessageBox(faintedString);
+			
 			await TakeOutMon(CurrentState, bm.Side);
 			// If this mon was the last one on a side, then interrupt flow to go to the battle end routine.
 			if (IsOver()) {

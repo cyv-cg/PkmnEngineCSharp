@@ -61,11 +61,11 @@ namespace PkmnEngine {
 			}
 		}
 
-		private static async Task ResolveCondition(BattleState state, Condition condition, BattleMessage message) {
+		private static async Task ResolveCondition(BattleState state, Condition condition, StringResource message) {
 			if (state.FieldHasCondition(condition, out FieldCondition c)) {
 				if (c.DurationRemaining == 0) {
 					state.RemoveCondition(c);
-					await MessageBox(Lang.GetBattleMessage(message));
+					await MessageBox(Lang.GetString(StringResource.Namespace.BATTLE_COMMON, message));
 				}
 				c.DecrementDuration();
 			}
