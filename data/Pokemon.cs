@@ -363,7 +363,7 @@ namespace PkmnEngine {
 		/// </summary>
 		public Nature Nature { 
 			get { 
-				return (Nature)(Box.Personality % NUM_NATURES);
+				return (Nature)(((Box.Personality & 0x000FF000) >> 4) % NUM_NATURES);
 			}
 		}
 		/// <summary>
@@ -381,7 +381,8 @@ namespace PkmnEngine {
 						return MON_FEMALE;
 				}
 
-				u8 val = (u8)(Box.Personality & 0xFF);
+				// Grab an arbitrary byte from the personality and determine gender based on that.
+				u8 val = (u8)(Box.Personality & 0xFF000000 >> 6);
 				if (val <= gBaseStats(Box.Species).genderRatio) {
 					return MON_FEMALE;
 				}
