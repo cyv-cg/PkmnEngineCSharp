@@ -706,6 +706,86 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_PROTECTED_ITSELF = new("PLAYER_MON_PROTECTED_ITSELF", 2);
 		/// <summary>
+		/// {1} flew up high!
+		/// </summary>
+		public static readonly StringResource MON_FLEW_UP_HIGH = new("MON_FLEW_UP_HIGH", 1);
+		/// <summary>
+		/// The wild {1} flew up high!
+		/// </summary>
+		public static readonly StringResource WILD_MON_FLEW_UP_HIGH = new("WILD_MON_FLEW_UP_HIGH", 1);
+		/// <summary>
+		/// The opposing {1} flew up high!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_FLEW_UP_HIGH = new("OPPOSING_MON_FLEW_UP_HIGH", 1);
+		/// <summary>
+		/// {1}’s {2} flew up high!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_FLEW_UP_HIGH = new("PLAYER_MON_FLEW_UP_HIGH", 2);
+		/// <summary>
+		/// {1} hid underwater!
+		/// </summary>
+		public static readonly StringResource MON_HID_UNDERWATER = new("MON_HID_UNDERWATER", 1);
+		/// <summary>
+		/// The wild {1} hid underwater!
+		/// </summary>
+		public static readonly StringResource WILD_MON_HID_UNDERWATER = new("WILD_MON_HID_UNDERWATER", 1);
+		/// <summary>
+		/// The opposing {1} hid underwater!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_HID_UNDERWATER = new("OPPOSING_MON_HID_UNDERWATER", 1);
+		/// <summary>
+		/// {1}’s {2} hid underwater!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_HID_UNDERWATER = new("PLAYER_MON_HID_UNDERWATER", 2);
+		/// <summary>
+		/// {1} burrowed its way under the ground!
+		/// </summary>
+		public static readonly StringResource MON_BURROWED_UNDER_THE_GROUND = new("MON_BURROWED_UNDER_THE_GROUND", 1);
+		/// <summary>
+		/// The wild {1} burrowed its wayunder the ground!
+		/// </summary>
+		public static readonly StringResource WILD_MON_BURROWED_UNDER_THE_GROUND = new("WILD_MON_BURROWED_UNDER_THE_GROUND", 1);
+		/// <summary>
+		/// The opposing {1} burrowed its wayunder the ground!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_BURROWED_UNDER_THE_GROUND = new("OPPOSING_MON_BURROWED_UNDER_THE_GROUND", 1);
+		/// <summary>
+		/// {1}’s {2} burrowed its way underthe ground!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_BURROWED_UNDER_THE_GROUND = new("PLAYER_MON_BURROWED_UNDER_THE_GROUND", 2);
+		/// <summary>
+		/// {1} vanished instantly!
+		/// </summary>
+		public static readonly StringResource MON_VANISHED_INSTANTLY = new("MON_VANISHED_INSTANTLY", 1);
+		/// <summary>
+		/// The wild {1} vanished instantly!
+		/// </summary>
+		public static readonly StringResource WILD_MON_VANISHED_INSTANTLY = new("WILD_MON_VANISHED_INSTANTLY", 1);
+		/// <summary>
+		/// The opposing {1} vanished instantly!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_VANISHED_INSTANTLY = new("OPPOSING_MON_VANISHED_INSTANTLY", 1);
+		/// <summary>
+		/// {1}’s {2} vanished instantly!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_VANISHED_INSTANTLY = new("PLAYER_MON_VANISHED_INSTANTLY", 2);
+		/// <summary>
+		/// {1} sprang up!
+		/// </summary>
+		public static readonly StringResource MON_SPRANG_UP = new("MON_SPRANG_UP", 1);
+		/// <summary>
+		/// The wild {1} sprang up!
+		/// </summary>
+		public static readonly StringResource WILD_MON_SPRANG_UP = new("WILD_MON_SPRANG_UP", 1);
+		/// <summary>
+		/// The opposing {1} sprang up!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_SPRANG_UP = new("OPPOSING_MON_SPRANG_UP", 1);
+		/// <summary>
+		/// {1}’s {2} sprang up!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_SPRANG_UP = new("PLAYER_MON_SPRANG_UP", 2);
+		/// <summary>
 		/// {1} must do an encore!
 		/// </summary>
 		public static readonly StringResource MON_MUST_DO_AN_ENCORE = new("MON_MUST_DO_AN_ENCORE", 1);
@@ -1258,6 +1338,22 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_CAN_NO_LONGER_ESCAPE = new("PLAYER_MON_CAN_NO_LONGER_ESCAPE", 2);
 		/// <summary>
+		/// {1} type was added to {2}!
+		/// </summary>
+		public static readonly StringResource MON_TYPE_WAS_ADDED = new("MON_TYPE_WAS_ADDED", 2);
+		/// <summary>
+		/// {1} type was added to the wild {2}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TYPE_WAS_ADDED = new("WILD_MON_TYPE_WAS_ADDED", 2);
+		/// <summary>
+		/// {1} type was added to the opposing {2}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TYPE_WAS_ADDED = new("OPPOSING_MON_TYPE_WAS_ADDED", 2);
+		/// <summary>
+		/// {1} type was added to {2}’s {3}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TYPE_WAS_ADDED = new("PLAYER_MON_TYPE_WAS_ADDED", 3);
+		/// <summary>
 		/// {1} cannot use {2}!
 		/// </summary>
 		public static readonly StringResource MON_CANNOT_USE_MOVE = new("MON_CANNOT_USE_MOVE", 2);
@@ -1482,6 +1578,86 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_BECAME_NIMBLE = new("PLAYER_MON_BECAME_NIMBLE", 2);
 		/// <summary>
+		/// {1} took {2} into the sky!
+		/// </summary>
+		public static readonly StringResource MON_TOOK_INTO_SKY_MON = new("MON_TOOK_INTO_SKY_MON", 2);
+		/// <summary>
+		/// {1} took the wild {2} into the sky!
+		/// </summary>
+		public static readonly StringResource MON_TOOK_INTO_SKY_WILD_MON = new("MON_TOOK_INTO_SKY_WILD_MON", 2);
+		/// <summary>
+		/// {1} took the opposing {2} into the sky!
+		/// </summary>
+		public static readonly StringResource MON_TOOK_INTO_SKY_OPPOSING_MON = new("MON_TOOK_INTO_SKY_OPPOSING_MON", 2);
+		/// <summary>
+		/// {1} took {2}'s {3} into the sky!
+		/// </summary>
+		public static readonly StringResource MON_TOOK_INTO_SKY_PLAYER_MON = new("MON_TOOK_INTO_SKY_PLAYER_MON", 3);
+		/// <summary>
+		/// The wild {1} took {2} into the sky!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TOOK_INTO_SKY_MON = new("WILD_MON_TOOK_INTO_SKY_MON", 2);
+		/// <summary>
+		/// The wild {1} took the wild {2} into the sky!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TOOK_INTO_SKY_WILD_MON = new("WILD_MON_TOOK_INTO_SKY_WILD_MON", 2);
+		/// <summary>
+		/// The wild {1} took the opposing {2} into the sky!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TOOK_INTO_SKY_OPPOSING_MON = new("WILD_MON_TOOK_INTO_SKY_OPPOSING_MON", 2);
+		/// <summary>
+		/// The wild {1} took {2}'s {3} into the sky!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TOOK_INTO_SKY_PLAYER_MON = new("WILD_MON_TOOK_INTO_SKY_PLAYER_MON", 3);
+		/// <summary>
+		/// The opposing {1} took {2} into the sky!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TOOK_INTO_SKY_MON = new("OPPOSING_MON_TOOK_INTO_SKY_MON", 2);
+		/// <summary>
+		/// The opposing {1} took the wild {2} into the sky!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TOOK_INTO_SKY_WILD_MON = new("OPPOSING_MON_TOOK_INTO_SKY_WILD_MON", 2);
+		/// <summary>
+		/// The opposing {1} took the opposing {2} into the sky!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TOOK_INTO_SKY_OPPOSING_MON = new("OPPOSING_MON_TOOK_INTO_SKY_OPPOSING_MON", 2);
+		/// <summary>
+		/// The opposing {1} took {2}'s {3} into the sky!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TOOK_INTO_SKY_PLAYER_MON = new("OPPOSING_MON_TOOK_INTO_SKY_PLAYER_MON", 3);
+		/// <summary>
+		/// {1}'s {2} took {3} into the sky!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TOOK_INTO_SKY_MON = new("PLAYER_MON_TOOK_INTO_SKY_MON", 3);
+		/// <summary>
+		/// {1}'s {2} took the wild {3} into the sky!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TOOK_INTO_SKY_WILD_MON = new("PLAYER_MON_TOOK_INTO_SKY_WILD_MON", 3);
+		/// <summary>
+		/// {1}'s {2} took the opposing {3} into the sky!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TOOK_INTO_SKY_OPPOSING_MON = new("PLAYER_MON_TOOK_INTO_SKY_OPPOSING_MON", 3);
+		/// <summary>
+		/// {1}'s {2} took {3}'s {4} into the sky!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TOOK_INTO_SKY_PLAYER_MON = new("PLAYER_MON_TOOK_INTO_SKY_PLAYER_MON", 4);
+		/// <summary>
+		/// {1} was freed from the Sky Drop!
+		/// </summary>
+		public static readonly StringResource MON_FREED_FROM_SKY_DROP = new("MON_FREED_FROM_SKY_DROP", 1);
+		/// <summary>
+		/// The wild {1} was freed from the Sky Drop!
+		/// </summary>
+		public static readonly StringResource WILD_MON_FREED_FROM_SKY_DROP = new("WILD_MON_FREED_FROM_SKY_DROP", 1);
+		/// <summary>
+		/// The opposing {1} was freed fromthe Sky Drop!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_FREED_FROM_SKY_DROP = new("OPPOSING_MON_FREED_FROM_SKY_DROP", 2);
+		/// <summary>
+		/// {1}’s {2} was freedfrom the Sky Drop!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_FREED_FROM_SKY_DROP = new("PLAYER_MON_FREED_FROM_SKY_DROP", 3);
+		/// <summary>
 		/// {1} fell straight down!
 		/// </summary>
 		public static readonly StringResource MON_FELL_STRAIGHT_DOWN = new("MON_FELL_STRAIGHT_DOWN", 1);
@@ -1530,6 +1706,22 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_ALL_STAT_CHANGES_INVERTED = new("PLAYER_MON_ALL_STAT_CHANGES_INVERTED", 2);
 		/// <summary>
+		/// {1} switched Speed with its target!
+		/// </summary>
+		public static readonly StringResource MON_SWITCHED_SPEED_WITH_TARGET = new("MON_SWITCHED_SPEED_WITH_TARGET", 1);
+		/// <summary>
+		/// The wild {1} switched Speed with its target!
+		/// </summary>
+		public static readonly StringResource WILD_MON_SWITCHED_SPEED_WITH_TARGET = new("WILD_MON_SWITCHED_SPEED_WITH_TARGET", 1);
+		/// <summary>
+		/// The opposing {1} switched Speed with its target!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_SWITCHED_SPEED_WITH_TARGET = new("OPPOSING_MON_SWITCHED_SPEED_WITH_TARGET", 1);
+		/// <summary>
+		/// {1}’s {2} switched Speed with its target!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_SWITCHED_SPEED_WITH_TARGET = new("PLAYER_MON_SWITCHED_SPEED_WITH_TARGET", 2);
+		/// <summary>
 		/// The effects of Throat Chop prevent {1} from using certain moves!
 		/// </summary>
 		public static readonly StringResource THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES = new("THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES", 1);
@@ -1566,6 +1758,22 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_BECAME_WEAKER_TO_FIRE = new("PLAYER_MON_BECAME_WEAKER_TO_FIRE", 2);
 		/// <summary>
+		/// {1} swapped the battle effects affecting each side of the field!
+		/// </summary>
+		public static readonly StringResource MON_USED_COURT_CHANGE = new("MON_USED_COURT_CHANGE", 1);
+		/// <summary>
+		/// The wild {1} swapped the battle effects affecting each side of the field!
+		/// </summary>
+		public static readonly StringResource WILD_MON_USED_COURT_CHANGE = new("WILD_MON_USED_COURT_CHANGE", 1);
+		/// <summary>
+		/// The opposing {1} swapped the battle effects affecting each side of the field!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_USED_COURT_CHANGE = new("OPPOSING_MON_USED_COURT_CHANGE", 1);
+		/// <summary>
+		/// {1}’s {2} swapped the battle effects affecting each side of the field!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_USED_COURT_CHANGE = new("PLAYER_MON_USED_COURT_CHANGE", 2);
+		/// <summary>
 		/// {1}’s PP was reduced!
 		/// </summary>
 		public static readonly StringResource MONS_PP_WAS_REDUCED = new("MONS_PP_WAS_REDUCED", 1);
@@ -1589,6 +1797,18 @@ namespace PkmnEngine.Strings {
 		/// {1} used {2}.
 		/// </summary>
 		public static readonly StringResource MON_USED_MOVE = new("MON_USED_MOVE", 2);
+		/// <summary>
+		/// The wild {1} used {2}
+		/// </summary>
+		public static readonly StringResource WILD_MON_USED_MOVE = new("WILD_MON_USED_MOVE", 2);
+		/// <summary>
+		/// The opposing {1} used {2}
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_USED_MOVE = new("OPPOSING_MON_USED_MOVE", 2);
+		/// <summary>
+		/// {1}'s {2} used {3}
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_USED_MOVE = new("PLAYER_MON_USED_MOVE", 3);
 		/// <summary>
 		/// But it failed!
 		/// </summary>
@@ -2360,6 +2580,26 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_PROTECTED_ITSELF, new() {{Language.ENG, "The wild {1} protected itself!"}, {Language.JPN, "野生の {1} が身を守りました!"}, {Language.GER, "Die Wildnis {1} hat sich geschützt!"}, {Language.FRE, "Le sauvage {1} s'est protégé !"}, {Language.SPN, "¡El salvaje {1} se protegió!"}, {Language.ITA, "Il {1} ​​selvaggio si è protetto!"}, {Language.KOR, "야생 {1}이(가) 스스로를 보호했습니다!"}, {Language.CHN_SIM, "野生{1}保护自己！"}, {Language.CHN_TRA, "野生{1}保護自己！"}, }},
 			{OPPOSING_MON_PROTECTED_ITSELF, new() {{Language.ENG, "The opposing {1} protected itself!"}, {Language.JPN, "相手の {1} が自分自身を守りました!"}, {Language.GER, "Der Gegner {1} hat sich geschützt!"}, {Language.FRE, "Le {1} adverse s'est protégé !"}, {Language.SPN, "¡El {1} ​​contrario se protegió!"}, {Language.ITA, "Il {1} ​​avversario si è protetto!"}, {Language.KOR, "상대 {1}이(가) 스스로를 보호했습니다!"}, {Language.CHN_SIM, "对方{1}保护了自己！"}, {Language.CHN_TRA, "對方{1}保護自己了！"}, }},
 			{PLAYER_MON_PROTECTED_ITSELF, new() {{Language.ENG, "{1}’s {2} protected itself!"}, {Language.JPN, "{1} の {2} が自分自身を保護しました。"}, {Language.GER, "{1}s {2} hat sich selbst geschützt!"}, {Language.FRE, "Le {2} de {1} s'est protégé !"}, {Language.SPN, "¡El {2} de {1} se protegió a sí mismo!"}, {Language.ITA, "{2} di {1} si è protetto!"}, {Language.KOR, "{1}의 {2}이(가) 스스로를 보호했습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 保护了自己！"}, {Language.CHN_TRA, "{1} 的 {2} 保護了自己！"}, }},
+			{MON_FLEW_UP_HIGH, new() {{Language.ENG, "{1} flew up high!"}, {Language.JPN, "{1} は高く飛び上がりました！"}, {Language.GER, "{1} flog hoch!"}, {Language.FRE, "{1} a volé très haut !"}, {Language.SPN, "¡{1} voló muy alto!"}, {Language.ITA, "{1} è volato in alto!"}, {Language.KOR, "{1}이(가) 높이 날아갔습니다!"}, {Language.CHN_SIM, "{1}飞得很高了！"}, {Language.CHN_TRA, "{1}飛得很高了！"}, }},
+			{WILD_MON_FLEW_UP_HIGH, new() {{Language.ENG, "The wild {1} flew up high!"}, {Language.JPN, "野生の {1} が高く飛び上がったのです！"}, {Language.GER, "Die wilde {1} flog hoch!"}, {Language.FRE, "Le {1} sauvage a volé haut !"}, {Language.SPN, "¡El salvaje {1} voló alto!"}, {Language.ITA, "Il {1} ​​selvaggio è volato in alto!"}, {Language.KOR, "야생 {1}이(가) 높이 날아갔습니다!"}, {Language.CHN_SIM, "野生的{1}飞得很高！"}, {Language.CHN_TRA, "野生的{1}飛得很高！"}, }},
+			{OPPOSING_MON_FLEW_UP_HIGH, new() {{Language.ENG, "The opposing {1} flew up high!"}, {Language.JPN, "相手の {1} が高く飛び上がりました！"}, {Language.GER, "Die gegnerische {1} flog hoch!"}, {Language.FRE, "Le {1} adverse s'est envolé haut !"}, {Language.SPN, "¡El {1} ​​contrario voló alto!"}, {Language.ITA, "Il {1} ​​avversario è volato in alto!"}, {Language.KOR, "상대 {1}이(가) 높이 날아갔습니다!"}, {Language.CHN_SIM, "对方的{1}飞得很高！"}, {Language.CHN_TRA, "對方的{1}飛得很高！"}, }},
+			{PLAYER_MON_FLEW_UP_HIGH, new() {{Language.ENG, "{1}’s {2} flew up high!"}, {Language.JPN, "{1}の{2}が高く飛びました！"}, {Language.GER, "{1}s {2} flogen hoch!"}, {Language.FRE, "Les {2} de {1} ont volé très haut !"}, {Language.SPN, "¡El {2} de {1} voló muy alto!"}, {Language.ITA, "Il {2} di {1} è volato in alto!"}, {Language.KOR, "{1}의 {2}이(가) 높이 날아갔습니다!"}, {Language.CHN_SIM, "{1}的{2}飞得很高了！"}, {Language.CHN_TRA, "{1}的{2}飛得很高了！"}, }},
+			{MON_HID_UNDERWATER, new() {{Language.ENG, "{1} hid underwater!"}, {Language.JPN, "{1} が水中に隠れました!"}, {Language.GER, "{1} hat sich unter Wasser versteckt!"}, {Language.FRE, "{1} s'est caché sous l'eau !"}, {Language.SPN, "¡{1} se escondió bajo el agua!"}, {Language.ITA, "{1} si è nascosto sott'acqua!"}, {Language.KOR, "{1}이 물속에 숨었습니다!"}, {Language.CHN_SIM, "{1}藏在水下！"}, {Language.CHN_TRA, "{1}藏在水下！"}, }},
+			{WILD_MON_HID_UNDERWATER, new() {{Language.ENG, "The wild {1} hid underwater!"}, {Language.JPN, "野生の {1} が水中に隠れました!"}, {Language.GER, "Der wilde {1} versteckte sich unter Wasser!"}, {Language.FRE, "Le {1} sauvage s'est caché sous l'eau !"}, {Language.SPN, "¡El salvaje {1} se escondió bajo el agua!"}, {Language.ITA, "I {1} selvatici si sono nascosti sott'acqua!"}, {Language.KOR, "야생 {1} 수중에 숨겨져 있습니다!"}, {Language.CHN_SIM, "野生{1}躲在水下！"}, {Language.CHN_TRA, "野生{1}躲在水下！"}, }},
+			{OPPOSING_MON_HID_UNDERWATER, new() {{Language.ENG, "The opposing {1} hid underwater!"}, {Language.JPN, "敵対する {1} は水中に隠れました!"}, {Language.GER, "Der gegnerische {1} versteckte sich unter Wasser!"}, {Language.FRE, "Le {1} adverse s'est caché sous l'eau !"}, {Language.SPN, "¡El oponente {1} se escondió bajo el agua!"}, {Language.ITA, "Il {1} ​​avversario si è nascosto sott'acqua!"}, {Language.KOR, "상대 {1}은 수중에 숨겨져 있습니다!"}, {Language.CHN_SIM, "对方{1}躲在水下！"}, {Language.CHN_TRA, "對方{1}躲在水下！"}, }},
+			{PLAYER_MON_HID_UNDERWATER, new() {{Language.ENG, "{1}’s {2} hid underwater!"}, {Language.JPN, "{1}の{2}は水中に隠れました！"}, {Language.GER, "{1}s {2} hat sich unter Wasser versteckt!"}, {Language.FRE, "Le {2} de {1} s'est caché sous l'eau !"}, {Language.SPN, "¡El {2} de {1} se escondió bajo el agua!"}, {Language.ITA, "I {2} di {1} si sono nascosti sott'acqua!"}, {Language.KOR, "{1} 's {2} 수중 HID!"}, {Language.CHN_SIM, "{1}的{2}藏在水下！"}, {Language.CHN_TRA, "{1}的{2}藏在水底！"}, }},
+			{MON_BURROWED_UNDER_THE_GROUND, new() {{Language.ENG, "{1} burrowed its way under the ground!"}, {Language.JPN, "{1} が地面の下に潜っていきました！"}, {Language.GER, "{1} hat sich unter die Erde gegraben!"}, {Language.FRE, "{1} s'est frayé un chemin sous terre !"}, {Language.SPN, "¡{1} se abrió camino bajo tierra!"}, {Language.ITA, "{1} si è fatto strada sotto terra!"}, {Language.KOR, "{1} 땅 아래로 길을 가졌습니다!"}, {Language.CHN_SIM, "{1}在地下挖洞！"}, {Language.CHN_TRA, "{1}在地下挖洞！"}, }},
+			{WILD_MON_BURROWED_UNDER_THE_GROUND, new() {{Language.ENG, "The wild {1} burrowed its wayunder the ground!"}, {Language.JPN, "野生の{1}が地面に穴を掘っていきました！"}, {Language.GER, "Die Wildnis {1} hat sich ihren Wegunter die Erde gegraben!"}, {Language.FRE, "Le sauvage {1} s'est frayé un cheminsous le sol !"}, {Language.SPN, "¡Lo salvaje {1} se abrió caminobajo tierra!"}, {Language.ITA, "La natura {1} si è fatta stradasotto terra!"}, {Language.KOR, " 야생 {1}는 땅 아래에서 그 길을 버렸습니다!"}, {Language.CHN_SIM, "野生动物{1}在地下挖洞！"}, {Language.CHN_TRA, "野生動物{1}在地下挖洞！"}, }},
+			{OPPOSING_MON_BURROWED_UNDER_THE_GROUND, new() {{Language.ENG, "The opposing {1} burrowed its wayunder the ground!"}, {Language.JPN, "相手の {1} が地面の下に潜っていきました!"}, {Language.GER, "Der Gegner {1} hat sichunter die Erde gegraben!"}, {Language.FRE, "Le {1} adverse s'est frayé un cheminsous le sol !"}, {Language.SPN, "¡El oponente {1} se abrió caminobajo el suelo!"}, {Language.ITA, "L'avversario {1} si è fatto stradasottoterra!"}, {Language.KOR, "상대 {1}가 땅속으로 파고들었습니다!"}, {Language.CHN_SIM, "对方的{1}在地下挖路！"}, {Language.CHN_TRA, "對方的{1}在地下挖路！"}, }},
+			{PLAYER_MON_BURROWED_UNDER_THE_GROUND, new() {{Language.ENG, "{1}’s {2} burrowed its way underthe ground!"}, {Language.JPN, "{1} の {2} が地面の下に潜っていきました！"}, {Language.GER, "{1}s {2} hat sich unterdie Erde eingegraben!"}, {Language.FRE, "Le {2} de {1} s'est frayé un chemin sous le sol !"}, {Language.SPN, "¡El {2} de {1} se abrió camino bajola tierra!"}, {Language.ITA, "Il {2} di {1} si è fatto strada sottoterra!"}, {Language.KOR, "{1}의 {2}이(가) 땅속으로 파고들었습니다!"}, {Language.CHN_SIM, "{1}的{2}在地下挖了路！"}, {Language.CHN_TRA, "{1}的{2}在地下挖了路！"}, }},
+			{MON_VANISHED_INSTANTLY, new() {{Language.ENG, "{1} vanished instantly!"}, {Language.JPN, "{1} は即座に消えました!"}, {Language.GER, "{1} verschwand sofort!"}, {Language.FRE, "{1} a disparu instantanément !"}, {Language.SPN, "¡{1} desapareció al instante!"}, {Language.ITA, "{1} è scomparso all'istante!"}, {Language.KOR, "{1}이(가) 즉시 사라졌습니다!"}, {Language.CHN_SIM, "{1}瞬间消失！"}, {Language.CHN_TRA, "{1}瞬間消失！"}, }},
+			{WILD_MON_VANISHED_INSTANTLY, new() {{Language.ENG, "The wild {1} vanished instantly!"}, {Language.JPN, "野生の {1} は即座に消えてしまいました。"}, {Language.GER, "Der wilde {1} verschwand sofort!"}, {Language.FRE, "Le {1} sauvage a disparu instantanément !"}, {Language.SPN, "¡El salvaje {1} desapareció instantáneamente!"}, {Language.ITA, "I {1} selvatici sono scomparsi all'istante!"}, {Language.KOR, "야생 {1}이(가) 즉시 사라졌습니다!"}, {Language.CHN_SIM, "野生的{1}瞬间消失了！"}, {Language.CHN_TRA, "野生的{1}瞬間消失了！"}, }},
+			{OPPOSING_MON_VANISHED_INSTANTLY, new() {{Language.ENG, "The opposing {1} vanished instantly!"}, {Language.JPN, "敵対する {1} は即座に消滅しました。"}, {Language.GER, "Der gegnerische {1} verschwand sofort!"}, {Language.FRE, "Le {1} adverse a disparu instantanément !"}, {Language.SPN, "¡El {1} ​​contrario desapareció instantáneamente!"}, {Language.ITA, "Il {1} ​​avversario è svanito all'istante!"}, {Language.KOR, "상대 {1}이(가) 즉시 사라졌습니다!"}, {Language.CHN_SIM, "对方的{1}瞬间消失！"}, {Language.CHN_TRA, "對方的{1}瞬間消失！"}, }},
+			{PLAYER_MON_VANISHED_INSTANTLY, new() {{Language.ENG, "{1}’s {2} vanished instantly!"}, {Language.JPN, "{1} の {2} は即座に消えました。"}, {Language.GER, "{1}s {2} verschwand sofort!"}, {Language.FRE, "Le {2} de {1} a disparu instantanément !"}, {Language.SPN, "¡El {2} de {1} desapareció instantáneamente!"}, {Language.ITA, "I {2} di {1} sono scomparsi all'istante!"}, {Language.KOR, "{1}의 {2}이(가) 즉시 사라졌습니다!"}, {Language.CHN_SIM, "{1}的{2}瞬间消失了！"}, {Language.CHN_TRA, "{1}的{2}瞬間消失了！"}, }},
+			{MON_SPRANG_UP, new() {{Language.ENG, "{1} sprang up!"}, {Language.JPN, "{1}が湧き出た！"}, {Language.GER, "{1} ist aufgetaucht!"}, {Language.FRE, "{1} a surgi !"}, {Language.SPN, "¡{1} surgió!"}, {Language.ITA, "{1} è spuntato!"}, {Language.KOR, "{1}이(가) 나타났습니다!"}, {Language.CHN_SIM, "{1} 出现了！"}, {Language.CHN_TRA, "{1} 出現了！"}, }},
+			{WILD_MON_SPRANG_UP, new() {{Language.ENG, "The wild {1} sprang up!"}, {Language.JPN, "野生の{1}が湧き出ました！"}, {Language.GER, "Das wilde {1} entstand!"}, {Language.FRE, "Le {1} sauvage a surgi !"}, {Language.SPN, "¡El salvaje {1} surgió!"}, {Language.ITA, "Sono comparsi i {1} selvaggi!"}, {Language.KOR, "야생 {1}이(가) 나타났습니다!"}, {Language.CHN_SIM, "野生的{1}出现了！"}, {Language.CHN_TRA, "野生的{1}出現了！"}, }},
+			{OPPOSING_MON_SPRANG_UP, new() {{Language.ENG, "The opposing {1} sprang up!"}, {Language.JPN, "相手の{1}が飛び出しました！"}, {Language.GER, "Die gegnerische {1} sprang auf!"}, {Language.FRE, "Le {1} adverse surgit !"}, {Language.SPN, "¡El {1} ​​contrario surgió!"}, {Language.ITA, "Il {1} ​​avversario è balzato in piedi!"}, {Language.KOR, "상대 {1}이(가) 나타났습니다!"}, {Language.CHN_SIM, "对方的{1}出现了！"}, {Language.CHN_TRA, "對方的{1}出現了！"}, }},
+			{PLAYER_MON_SPRANG_UP, new() {{Language.ENG, "{1}’s {2} sprang up!"}, {Language.JPN, "{1}の{2}が飛び出しました！"}, {Language.GER, "{1}s {2} ist aufgetaucht!"}, {Language.FRE, "Le {2} de {1} est apparu !"}, {Language.SPN, "¡El {2} de {1} surgió!"}, {Language.ITA, "I {2} di {1} sono spuntati!"}, {Language.KOR, "{1}의 {2}이(가) 나타났습니다!"}, {Language.CHN_SIM, "{1}的{2}出现了！"}, {Language.CHN_TRA, "{1}的{2}出現了！"}, }},
 			{MON_MUST_DO_AN_ENCORE, new() {{Language.ENG, "{1} must do an encore!"}, {Language.JPN, "{1} はアンコールをしなければなりません!"}, {Language.GER, "{1} muss eine Zugabe machen!"}, {Language.FRE, "{1} doit faire un rappel !"}, {Language.SPN, "¡{1} debe hacer un bis!"}, {Language.ITA, "{1} deve fare il bis!"}, {Language.KOR, "{1}은(는) 앙코르를 해야 합니다!"}, {Language.CHN_SIM, "{1}必须再来一次！"}, {Language.CHN_TRA, "{1}必須再來一次！"}, }},
 			{WILD_MON_MUST_DO_AN_ENCORE, new() {{Language.ENG, "The wild {1} must do an encore!"}, {Language.JPN, "野生の {1} はアンコールをしなければなりません!"}, {Language.GER, "Der wilde {1} muss eine Zugabe machen!"}, {Language.FRE, "Le sauvage {1} doit faire un rappel !"}, {Language.SPN, "¡El salvaje {1} debe hacer un bis!"}, {Language.ITA, "I {1} selvaggi devono fare il bis!"}, {Language.KOR, "야생의 {1}이(가) 앙코르를 해야 합니다!"}, {Language.CHN_SIM, "狂野的{1}必须再来一次！"}, {Language.CHN_TRA, "狂野的{1}一定再來一次！"}, }},
 			{OPPOSING_MON_MUST_DO_AN_ENCORE, new() {{Language.ENG, "The opposing {1} must do an encore!"}, {Language.JPN, "相手の {1} はアンコールをしなければなりません!"}, {Language.GER, "Der gegnerische {1} muss eine Zugabe machen!"}, {Language.FRE, "Le {1} adverse doit faire un rappel !"}, {Language.SPN, "¡El oponente {1} debe hacer un bis!"}, {Language.ITA, "Il {1} ​​avversario deve fare il bis!"}, {Language.KOR, "상대 {1}이(가) 앙코르를 해야 합니다!"}, {Language.CHN_SIM, "对方的{1}必须再来一次！"}, {Language.CHN_TRA, "對方的{1}一定再來一次！"}, }},
@@ -2498,6 +2738,10 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_CAN_NO_LONGER_ESCAPE, new() {{Language.ENG, "The wild {1} can no longer escape!"}, {Language.JPN, "野生の {1} はもう逃げられません!"}, {Language.GER, "Der Wilde {1} kann nicht mehr entkommen!"}, {Language.FRE, "Le sauvage {1} ne peut plus s'échapper !"}, {Language.SPN, "¡El salvaje {1} ya no puede escapar!"}, {Language.ITA, "I {1} selvaggi non possono più scappare!"}, {Language.KOR, "야생 {1}은(는) 더 이상 탈출할 수 없습니다!"}, {Language.CHN_SIM, "野生的{1}再也无法逃脱了！"}, {Language.CHN_TRA, "野生的{1}再也無法逃脫了！"}, }},
 			{OPPOSING_MON_CAN_NO_LONGER_ESCAPE, new() {{Language.ENG, "The opposing {1} can no longer escape!"}, {Language.JPN, "相手の {1} はもう逃げることはできません!"}, {Language.GER, "Der gegnerische {1} kann nicht mehr entkommen!"}, {Language.FRE, "Le {1} adverse ne peut plus s'échapper !"}, {Language.SPN, "¡El oponente {1} ya no puede escapar!"}, {Language.ITA, "Il {1} ​​avversario non può più scappare!"}, {Language.KOR, "상대 {1}은(는) 더 이상 탈출할 수 없습니다!"}, {Language.CHN_SIM, "对方的{1}再也无法逃脱了！"}, {Language.CHN_TRA, "對方的{1}再也無法逃脫了！"}, }},
 			{PLAYER_MON_CAN_NO_LONGER_ESCAPE, new() {{Language.ENG, "{1}’s {2} can no longer escape!"}, {Language.JPN, "{1} の {2} はもう逃げられません!"}, {Language.GER, "{2} von {1} kann nicht mehr entkommen!"}, {Language.FRE, "Les {2} de {1} ne peuvent plus s'échapper !"}, {Language.SPN, "¡El {2} de {1} ya no puede escapar!"}, {Language.ITA, "Il {2} di {1} non può più scappare!"}, {Language.KOR, "{1}의 {2}은(는) 더 이상 이스케이프할 수 없습니다!"}, {Language.CHN_SIM, "{1}的{2}再也无法逃脱了！"}, {Language.CHN_TRA, "{1}的{2}再也無法逃脫了！"}, }},
+			{MON_TYPE_WAS_ADDED, new() {{Language.ENG, "{1} type was added to {2}!"}, {Language.JPN, "{1} タイプが {2} に追加されました。"}, {Language.GER, "Typ {1} wurde zu {2} hinzugefügt!"}, {Language.FRE, "Le type {1} a été ajouté à {2} !"}, {Language.SPN, "¡Se agregó {1} tipo a {2}!"}, {Language.ITA, "Il tipo {1} è stato aggiunto a {2}!"}, {Language.KOR, "{1} 유형이 {2}에 추가되었습니다!"}, {Language.CHN_SIM, "{1} 类型已添加到 {2}！"}, {Language.CHN_TRA, "{1} 類型已新增至 {2}！"}, }},
+			{WILD_MON_TYPE_WAS_ADDED, new() {{Language.ENG, "{1} type was added to the wild {2}!"}, {Language.JPN, "{1} タイプが野生の {2} に追加されました!"}, {Language.GER, "Der Typ {1} wurde zu the wild {2} hinzugefügt!"}, {Language.FRE, "Le type {1} a été ajouté au joker {2} !"}, {Language.SPN, "¡Se agregó {1} tipo al salvaje {2}!"}, {Language.ITA, "Il tipo {1} è stato aggiunto alselvaggio {2}!"}, {Language.KOR, "{1} 유형이 the wild {2}에 추가되었습니다!"}, {Language.CHN_SIM, "{1} 类型已添加到野生{2}！"}, {Language.CHN_TRA, "{1} 類型已新增至野生{2}！"}, }},
+			{OPPOSING_MON_TYPE_WAS_ADDED, new() {{Language.ENG, "{1} type was added to the opposing {2}!"}, {Language.JPN, "{1} タイプが敵の {2} に追加されました!"}, {Language.GER, "Der Typ {1} wurde zum gegnerischen {2} hinzugefügt!"}, {Language.FRE, "Le type {1} a été ajouté au {2} adverse !"}, {Language.SPN, "¡Se agregó {1} tipo al {2} opuesto!"}, {Language.ITA, "Il tipo {1} è stato aggiunto al{2} avversario!"}, {Language.KOR, "{1} 유형이 상대 {2}에 추가되었습니다!"}, {Language.CHN_SIM, "{1} 类型已添加到相反的 {2}！"}, {Language.CHN_TRA, "{1} 類型已添加到相反的 {2}！"}, }},
+			{PLAYER_MON_TYPE_WAS_ADDED, new() {{Language.ENG, "{1} type was added to {2}’s {3}!"}, {Language.JPN, "{1} タイプが {2} の {3} に追加されました。"}, {Language.GER, "Der Typ {1} wurde zu {3} von {2} hinzugefügt!"}, {Language.FRE, "Le type {1} a été ajouté au {3} de {2} !"}, {Language.SPN, "¡Se agregó {1} tipo al {3} de {2}!"}, {Language.ITA, "Il tipo {1} è stato aggiunto al {3} di {2}!"}, {Language.KOR, "{1} 유형이 {2}의 {3}에 추가되었습니다!"}, {Language.CHN_SIM, "{1} 类型已添加到 {2} 的 {3}！"}, {Language.CHN_TRA, "{1} 類型已加入 {2} 的 {3}！"}, }},
 			{MON_CANNOT_USE_MOVE, new() {{Language.ENG, "{1} cannot use {2}!"}, {Language.JPN, "{1} は {2} を使用できません。"}, {Language.GER, "{1} kann {2} nicht verwenden!"}, {Language.FRE, "{1} ne peut pas utiliser {2} !"}, {Language.SPN, "¡{1} no puede usar {2}!"}, {Language.ITA, "{1} non può utilizzare {2}!"}, {Language.KOR, "{1}은(는) {2}을(를) 사용할 수 없습니다!"}, {Language.CHN_SIM, "{1}无法使用{2}！"}, {Language.CHN_TRA, "{1}無法使用{2}！"}, }},
 			{WILD_MON_CANNOT_USE_MOVE, new() {{Language.ENG, "The wild {1} cannot use {2}!"}, {Language.JPN, "野生の {1} は  {2} を使用できません!"}, {Language.GER, "Die Wildnis {1} kann {2} nicht verwenden!"}, {Language.FRE, "Le {1} sauvage ne peut pas utiliser {2} !"}, {Language.SPN, "¡El salvaje {1} no puede usar {2}!"}, {Language.ITA, "Il selvaggio {1} non puòusare {2}!"}, {Language.KOR, "야생 {1}는 {2}을(를) 사용할 수 없습니다!"}, {Language.CHN_SIM, "野生的{1}无法 使用{2}！"}, {Language.CHN_TRA, "野生的{1}無法 使用{2}！"}, }},
 			{OPPOSING_MON_CANNOT_USE_MOVE, new() {{Language.ENG, "The opposing {1} cannot use {2}!"}, {Language.JPN, "相手の {1} は  {2} を使用できません!"}, {Language.GER, "Der Gegner {1} kann {2} nicht verwenden!"}, {Language.FRE, "Les {1} adverses ne peuvent pas utiliser {2} !"}, {Language.SPN, "¡El oponente {1} no puede usar {2}!"}, {Language.ITA, "L'avversario {1} non puòusare {2}!"}, {Language.KOR, "상대 {1}는 {2}을(를) 사용할 수 없습니다!"}, {Language.CHN_SIM, "对方的{1}不能 使用{2}！"}, {Language.CHN_TRA, "對方的{1}不能 用{2}！"}, }},
@@ -2554,6 +2798,26 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_BECAME_NIMBLE, new() {{Language.ENG, "The wild {1} became nimble!"}, {Language.JPN, "野生の {1} が敏捷になりました!"}, {Language.GER, "Der wilde {1} wurde flink!"}, {Language.FRE, "Le sauvage {1} est devenu agile !"}, {Language.SPN, "¡El salvaje {1} se volvió ágil!"}, {Language.ITA, "Il {1} ​​selvaggio è diventato agile!"}, {Language.KOR, "야생의 {1}이(가) 민첩해졌습니다!"}, {Language.CHN_SIM, "狂野的{1}变得敏捷了！"}, {Language.CHN_TRA, "狂野的{1}變得敏捷了！"}, }},
 			{OPPOSING_MON_BECAME_NIMBLE, new() {{Language.ENG, "The opposing {1} became nimble!"}, {Language.JPN, "相手の {1} が機敏になりました!"}, {Language.GER, "Die gegnerische {1} wurde flink!"}, {Language.FRE, "Le {1} adverse est devenu agile !"}, {Language.SPN, "¡El oponente {1} se volvió ágil!"}, {Language.ITA, "Il {1} ​​avversario è diventato agile!"}, {Language.KOR, "상대 {1}이(가) 민첩해졌습니다!"}, {Language.CHN_SIM, "对方的{1}变得敏捷了！"}, {Language.CHN_TRA, "對方的{1}變得敏捷了！"}, }},
 			{PLAYER_MON_BECAME_NIMBLE, new() {{Language.ENG, "{1}’s {2} became nimble!"}, {Language.JPN, "{1} の {2} が機敏になりました!"}, {Language.GER, "{1}s {2} wurde flink!"}, {Language.FRE, "Les {2} de {1} sont devenus agiles !"}, {Language.SPN, "¡El {2} de {1} se volvió ágil!"}, {Language.ITA, "Il {2} di {1} è diventato agile!"}, {Language.KOR, "{1}의 {2}이(가) 민첩해졌습니다!"}, {Language.CHN_SIM, "{1}的{2}变得灵活了！"}, {Language.CHN_TRA, "{1}的{2}變得靈活了！"}, }},
+			{MON_TOOK_INTO_SKY_MON, new() {{Language.ENG, "{1} took {2} into the sky!"}, {Language.JPN, "{1} が {2} を空に連れて行きました!"}, {Language.GER, "{1} brachte {2} in den Himmel!"}, {Language.FRE, "{1} a emmené {2} dans le ciel !"}, {Language.SPN, "¡{1} llevó a {2} al cielo!"}, {Language.ITA, "{1} ha portato {2} in cielo!"}, {Language.KOR, "{1}이(가) {2}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "{1}带着{2}飞上了天空！"}, {Language.CHN_TRA, "{1}帶著{2}飛上天空了！"}, }},
+			{MON_TOOK_INTO_SKY_WILD_MON, new() {{Language.ENG, "{1} took the wild {2} into the sky!"}, {Language.JPN, "{1} は野生の {2} を空へ連れて行きました！"}, {Language.GER, "{1} brachte die Wildnis {2} in den Himmel!"}, {Language.FRE, "{1} a emmené le sauvage {2} dans le ciel !"}, {Language.SPN, "¡{1} llevó al salvaje {2} al cielo!"}, {Language.ITA, "{1} ha portato i {2} selvaggi in cielo!"}, {Language.KOR, "{1}이(가) 야생 {2}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "{1}把野生的{2}带上了天空！"}, {Language.CHN_TRA, "{1}把野生的{2}帶上了天空！"}, }},
+			{MON_TOOK_INTO_SKY_OPPOSING_MON, new() {{Language.ENG, "{1} took the opposing {2} into the sky!"}, {Language.JPN, "{1} は相手の {2} を空に連れて行きました！"}, {Language.GER, "{1} brachte den gegnerischen {2} in den Himmel!"}, {Language.FRE, "{1} a emmené le {2} adverse dans le ciel !"}, {Language.SPN, "¡{1} llevó al oponente {2} al cielo!"}, {Language.ITA, "{1} ha portato in cielo i {2} avversari!"}, {Language.KOR, "{1}이(가) 상대 {2}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "{1}将对方的{2}带上了天空！"}, {Language.CHN_TRA, "{1}將對方的{2}帶上了天空！"}, }},
+			{MON_TOOK_INTO_SKY_PLAYER_MON, new() {{Language.ENG, "{1} took {2}'s {3} into the sky!"}, {Language.JPN, "{1} が {2} の {3} を空に連れて行きました！"}, {Language.GER, "{1} brachte {2}s {3} in den Himmel!"}, {Language.FRE, "{1} a emmené le {3} de {2} dans le ciel !"}, {Language.SPN, "¡{1} llevó el {3} de {2} al cielo!"}, {Language.ITA, "{1} ha portato in cielo il {3} di {2}!"}, {Language.KOR, "{1}이(가) {2}의 {3}을(를) 하늘로 가져갔습니다!"}, {Language.CHN_SIM, "{1}将{2}的{3}带到了天空！"}, {Language.CHN_TRA, "{1}將{2}的{3}帶到了天空！"}, }},
+			{WILD_MON_TOOK_INTO_SKY_MON, new() {{Language.ENG, "The wild {1} took {2} into the sky!"}, {Language.JPN, "野生の {1} が {2} を空へ連れて行きました!"}, {Language.GER, "Der wilde {1} brachte {2} in den Himmel!"}, {Language.FRE, "Le sauvage {1} a emmené {2} dans le ciel !"}, {Language.SPN, "¡El salvaje {1} llevó a {2} al cielo!"}, {Language.ITA, "Il selvaggio {1} ha portato {2} in cielo!"}, {Language.KOR, "야생 {1}가 {2}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "狂野的{1}把{2}带上了天空！"}, {Language.CHN_TRA, "狂野的{1}把{2}帶上了天空！"}, }},
+			{WILD_MON_TOOK_INTO_SKY_WILD_MON, new() {{Language.ENG, "The wild {1} took the wild {2} into the sky!"}, {Language.JPN, "野生の {1} が野生の {2} を空へ連れて行きました。"}, {Language.GER, "Die Wildnis {1} brachte die Wildnis {2} in den Himmel!"}, {Language.FRE, "Le sauvage {1} a emmené le sauvage {2} dans le ciel !"}, {Language.SPN, "¡El salvaje {1} llevó al salvaje {2} al cielo!"}, {Language.ITA, "Il {1} ​​selvaggio ha portato il {2} selvaggio in cielo!"}, {Language.KOR, "야생 {1}이(가) 야생 {2}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "狂野{1}将狂野{2}带上了天空！"}, {Language.CHN_TRA, "狂野{1}將狂野{2}帶上了天空！"}, }},
+			{WILD_MON_TOOK_INTO_SKY_OPPOSING_MON, new() {{Language.ENG, "The wild {1} took the opposing {2} into the sky!"}, {Language.JPN, "野生の {1} が敵の {2} を空に連れて行きました！"}, {Language.GER, "Der wilde {1} brachte den gegnerischen {2} in den Himmel!"}, {Language.FRE, "Le {1} sauvage a emmené le {2} adverse dans le ciel !"}, {Language.SPN, "¡El {1} ​​salvaje llevó al {2} contrario al cielo!"}, {Language.ITA, "Il {1} ​​selvaggio ha portato in cielo il {2} avversario!"}, {Language.KOR, "야생의 {1}이(가) 상대 {2}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "狂野的{1}将对方的{2}带上了天空！"}, {Language.CHN_TRA, "狂野的{1}將對方的{2}帶上了天空！"}, }},
+			{WILD_MON_TOOK_INTO_SKY_PLAYER_MON, new() {{Language.ENG, "The wild {1} took {2}'s {3} into the sky!"}, {Language.JPN, "野生の {1} が {2} の {3} を空に連れて行きました！"}, {Language.GER, "Der wilde {1} brachte {2}s {3} in den Himmel!"}, {Language.FRE, "Le {1} sauvage a emmené le {3} de {2} dans le ciel !"}, {Language.SPN, "¡El salvaje {1} llevó el {3} de {2} al cielo!"}, {Language.ITA, "Il {1} ​​selvaggio ha portato i {3} di {2} in cielo!"}, {Language.KOR, "야생 {1}이 {2}의 {3}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "狂野的{1}将{2}的{3}带上了天空！"}, {Language.CHN_TRA, "狂野的{1}將{2}的{3}帶上了天空！"}, }},
+			{OPPOSING_MON_TOOK_INTO_SKY_MON, new() {{Language.ENG, "The opposing {1} took {2} into the sky!"}, {Language.JPN, "相手の {1} が {2} を空に飛ばしました!"}, {Language.GER, "Der gegnerische {1} schoss {2} in den Himmel!"}, {Language.FRE, "Le {1} adverse a emmené {2} dans le ciel !"}, {Language.SPN, "¡El {1} ​​contrario llevó a {2} al cielo!"}, {Language.ITA, "Il {1} ​​avversario ha portato {2} in cielo!"}, {Language.KOR, "상대 {1}이(가) {2}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "对方的{1}将{2}带上了天空！"}, {Language.CHN_TRA, "對方的{1}將{2}帶上了天空！"}, }},
+			{OPPOSING_MON_TOOK_INTO_SKY_WILD_MON, new() {{Language.ENG, "The opposing {1} took the wild {2} into the sky!"}, {Language.JPN, "敵対する {1} が野生の {2} を空に飛ばしました。"}, {Language.GER, "Der gegnerische {1} brachte den wilden {2} in den Himmel!"}, {Language.FRE, "Le {1} adverse a emmené le {2} sauvage dans le ciel !"}, {Language.SPN, "¡El {1} ​​contrario llevó al salvaje {2} al cielo!"}, {Language.ITA, "Il {1} ​​avversario ha portato il {2} selvaggio in cielo!"}, {Language.KOR, "상대 {1}이(가) 야생 {2}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "对方的{1}将狂野的{2}带上了天空！"}, {Language.CHN_TRA, "對方的{1}將狂野的{2}帶上了天空！"}, }},
+			{OPPOSING_MON_TOOK_INTO_SKY_OPPOSING_MON, new() {{Language.ENG, "The opposing {1} took the opposing {2} into the sky!"}, {Language.JPN, "相手の {1} が相手の {2} を空に連れて行きました。"}, {Language.GER, "Der gegnerische {1} brachte den gegnerischen {2} in den Himmel!"}, {Language.FRE, "Le {1} adverse a emmené le {2} adverse dans le ciel !"}, {Language.SPN, "¡El {1} ​​contrario llevó al {2} contrario al cielo!"}, {Language.ITA, "Il {1} ​​avversario ha portato in cielo il {2} avversario!"}, {Language.KOR, "상대 {1}이 상대 {2}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "对方的{1}将对方的{2}带上了天空！"}, {Language.CHN_TRA, "對方的{1}將對方的{2}帶上了天空！"}, }},
+			{OPPOSING_MON_TOOK_INTO_SKY_PLAYER_MON, new() {{Language.ENG, "The opposing {1} took {2}'s {3} into the sky!"}, {Language.JPN, "相手の {1} が {2} の {3} を空に飛ばしました！"}, {Language.GER, "Der gegnerische {1} brachte {2}s {3} in die Luft!"}, {Language.FRE, "Le {1} adverse a emmené le {3} de {2} dans le ciel !"}, {Language.SPN, "¡El {1} ​​contrario llevó el {3} de {2} al cielo!"}, {Language.ITA, "Il {1} ​​avversario ha portato in cielo il {3} di {2}!"}, {Language.KOR, "상대 {1}이(가) {2}의 {3}을(를) 하늘로 가져갔습니다!"}, {Language.CHN_SIM, "对方的{1}将{2}的{3}带上了天空！"}, {Language.CHN_TRA, "對方的{1}將{2}的{3}帶上了天空！"}, }},
+			{PLAYER_MON_TOOK_INTO_SKY_MON, new() {{Language.ENG, "{1}'s {2} took {3} into the sky!"}, {Language.JPN, "{1} の {2} が {3} を空に連れて行きました。"}, {Language.GER, "{1}s {2} brachte {3} in den Himmel!"}, {Language.FRE, "Les {2} de {1} ont emmené {3} dans le ciel !"}, {Language.SPN, "¡El {2} de {1} llevó a {3} al cielo!"}, {Language.ITA, "I {2} di {1} hanno portato {3} in cielo!"}, {Language.KOR, "{1}의 {2}가 {3}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "{1}的{2}将{3}带到了天空！"}, {Language.CHN_TRA, "{1}的{2}將{3}帶到了天空！"}, }},
+			{PLAYER_MON_TOOK_INTO_SKY_WILD_MON, new() {{Language.ENG, "{1}'s {2} took the wild {3} into the sky!"}, {Language.JPN, "{1} の {2} が野生の {3} を空に連れて行きました！"}, {Language.GER, "{1}s {2} brachten die Wildnis {3} in den Himmel!"}, {Language.FRE, "Le {2} de {1} a emmené le {3} sauvage dans le ciel !"}, {Language.SPN, "¡El {2} de {1} llevó al salvaje {3} al cielo!"}, {Language.ITA, "I {2} di {1} hanno portato i {3} selvaggi in cielo!"}, {Language.KOR, "{1}의 {2}가 야생 {3}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "{1}的{2}将狂野的{3}带上了天空！"}, {Language.CHN_TRA, "{1}的{2}將狂野的{3}帶上了天空！"}, }},
+			{PLAYER_MON_TOOK_INTO_SKY_OPPOSING_MON, new() {{Language.ENG, "{1}'s {2} took the opposing {3} into the sky!"}, {Language.JPN, "{1} の {2} が相手の {3} を空に飛ばしました！"}, {Language.GER, "{1}s {2} brachte den gegnerischen {3} in die Luft!"}, {Language.FRE, "Le {2} de {1} a emmené le {3} adverse dans le ciel !"}, {Language.SPN, "¡El {2} de {1} llevó al {3} contrario al cielo!"}, {Language.ITA, "Il {2} di {1} ha portato in cielo il {3} avversario!"}, {Language.KOR, "{1}의 {2}가 상대 {3}을(를) 하늘로 데려갔습니다!"}, {Language.CHN_SIM, "{1}的{2}将对方的{3}带上了天空！"}, {Language.CHN_TRA, "{1}的{2}將對方的{3}帶上了天空！"}, }},
+			{PLAYER_MON_TOOK_INTO_SKY_PLAYER_MON, new() {{Language.ENG, "{1}'s {2} took {3}'s {4} into the sky!"}, {Language.JPN, "{1} の {2} が {3} の {4} を空に運びました。"}, {Language.GER, "{1}s {2} brachten {3}s {4} in den Himmel!"}, {Language.FRE, "Les {2} de {1} ont emmené les {4} de {3} dans le ciel !"}, {Language.SPN, "¡El {2} de {1} llevó al {4} de {3} al cielo!"}, {Language.ITA, "Il {2} di {1} ha portato il {4} di {3} in cielo!"}, {Language.KOR, "{1}의 {2}가 {3}의 {4}를 하늘로 가져갔습니다!"}, {Language.CHN_SIM, "{1}的{2}将{3}的{4}带到了天空！"}, {Language.CHN_TRA, "{1}的{2}將{3}的{4}帶到了天空！"}, }},
+			{MON_FREED_FROM_SKY_DROP, new() {{Language.ENG, "{1} was freed from the Sky Drop!"}, {Language.JPN, "{1} はスカイドロップから解放されました!"}, {Language.GER, "{1} wurde aus dem Sky Drop befreit!"}, {Language.FRE, "{1} a été libéré du Sky Drop !"}, {Language.SPN, "¡{1} fue liberado del Sky Drop!"}, {Language.ITA, "{1} è stato liberato dallo Sky Drop!"}, {Language.KOR, "{1}이(가) Sky Drop에서 풀려났습니다!"}, {Language.CHN_SIM, "{1}已从Sky Drop中解救出来！"}, {Language.CHN_TRA, "{1}已從Sky Drop中解救出來！"}, }},
+			{WILD_MON_FREED_FROM_SKY_DROP, new() {{Language.ENG, "The wild {1} was freed from the Sky Drop!"}, {Language.JPN, "野生の {1} がスカイドロップから解放されました!"}, {Language.GER, "Der wilde {1} wurde aus dem Sky Drop befreit!"}, {Language.FRE, "Le sauvage {1} a été libéré du Sky Drop !"}, {Language.SPN, "¡El salvaje {1} fue liberado del Sky Drop!"}, {Language.ITA, "Il {1} ​​selvaggio è stato liberato dallo Sky Drop!"}, {Language.KOR, "야생 {1}이(가) Sky Drop에서 풀려났습니다!"}, {Language.CHN_SIM, "野生{1}已从Sky Drop中解放出来！"}, {Language.CHN_TRA, "野生{1}已從Sky Drop中解放！"}, }},
+			{OPPOSING_MON_FREED_FROM_SKY_DROP, new() {{Language.ENG, "The opposing {1} was freed fromthe Sky Drop!"}, {Language.JPN, "相手の {1} はthe Sky Drop から解放されました!"}, {Language.GER, "Der Gegner {1} wurde vom Sky Drop befreit!"}, {Language.FRE, "Le {1} adverse a été libéré du Sky Drop !"}, {Language.SPN, "¡El oponente {1} fue liberado del Sky Drop!"}, {Language.ITA, "L'avversario {1} è stato liberato dalloSky Drop!"}, {Language.KOR, "상대 {1}이(가) Sky Drop에서 해방되었습니다!"}, {Language.CHN_SIM, "对方的{1}已从Sky Drop中解放出来！"}, {Language.CHN_TRA, "對方的{1}已從Sky Drop中解放！"}, }},
+			{PLAYER_MON_FREED_FROM_SKY_DROP, new() {{Language.ENG, "{1}’s {2} was freedfrom the Sky Drop!"}, {Language.JPN, "{1} の {2} がスカイ ドロップから解放されました。"}, {Language.GER, "{1}s {2} wurde aus dem Sky Drop befreit!"}, {Language.FRE, "Le {2} de {1} a été libérédu Sky Drop !"}, {Language.SPN, "¡El {2} de {1} fue liberado del Sky Drop!"}, {Language.ITA, "Il {2} di {1} è stato liberatodallo Sky Drop!"}, {Language.KOR, "{1}의 {2}이(가) Sky Drop에서 해방되었습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 已从 Sky Drop 中解救出来！"}, {Language.CHN_TRA, "{1} 的 {2} 已從 Sky Drop 中解救出來！"}, }},
 			{MON_FELL_STRAIGHT_DOWN, new() {{Language.ENG, "{1} fell straight down!"}, {Language.JPN, "{1} は真っ直ぐに落ちました!"}, {Language.GER, "{1} fiel direkt nach unten!"}, {Language.FRE, "{1} est tombé tout droit !"}, {Language.SPN, "¡{1} cayó hacia abajo!"}, {Language.ITA, "{1} è caduto a terra!"}, {Language.KOR, "{1}이(가) 똑바로 떨어졌습니다!"}, {Language.CHN_SIM, "{1}直接掉了下来！"}, {Language.CHN_TRA, "{1}直接掉下來了！"}, }},
 			{WILD_MON_FELL_STRAIGHT_DOWN, new() {{Language.ENG, "The wild {1} fell straight down!"}, {Language.JPN, "野生の {1} が真っ直ぐ落ちました!"}, {Language.GER, "Der wilde {1} fiel direkt nach unten!"}, {Language.FRE, "Le {1} sauvage est tombé tout droit !"}, {Language.SPN, "¡El salvaje {1} cayó hacia abajo!"}, {Language.ITA, "Il {1} ​​selvaggio è caduto a terra!"}, {Language.KOR, "야생 {1}이(가) 똑바로 떨어졌습니다!"}, {Language.CHN_SIM, "狂野的{1}直接掉了下来！"}, {Language.CHN_TRA, "狂野的{1}直接掉了下來！"}, }},
 			{OPPOSING_MON_FELL_STRAIGHT_DOWN, new() {{Language.ENG, "The opposing {1} fell straight down!"}, {Language.JPN, "相手の{1}は真っ直ぐに落ちました！"}, {Language.GER, "Der gegnerische {1} fiel direkt nach unten!"}, {Language.FRE, "Le {1} adverse est tombé d'un coup !"}, {Language.SPN, "¡El oponente {1} cayó hacia abajo!"}, {Language.ITA, "Il {1} ​​avversario è caduto a terra!"}, {Language.KOR, "상대 {1}이(가) 똑바로 쓰러졌습니다!"}, {Language.CHN_SIM, "对方的{1}直接摔倒了！"}, {Language.CHN_TRA, "對方的{1}直接跌倒了！"}, }},
@@ -2566,6 +2830,10 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_ALL_STAT_CHANGES_INVERTED, new() {{Language.ENG, "All stat changes on the wild {1} were inverted!"}, {Language.JPN, "野生の {1} のすべてのステータス変更が反転されました。"}, {Language.GER, "Alle Statusänderungen der Wildnis {1} wurden rückgängig gemacht!"}, {Language.FRE, "Tous les changements de statistiques sur le wild {1} ont été inversés !"}, {Language.SPN, "¡Todos los cambios de estadísticas en el comodín {1} fueron invertidos!"}, {Language.ITA, "Tutte le modifiche alle statistiche sul {1} ​​selvaggio sono state invertite!"}, {Language.KOR, "야생 {1}의 모든 통계 변경 사항이 반전되었습니다!"}, {Language.CHN_SIM, "狂野 {1} 上的所有统计数据更改均已反转！"}, {Language.CHN_TRA, "狂野 {1} 上的所有統計數據更改均已反轉！"}, }},
 			{OPPOSING_MON_ALL_STAT_CHANGES_INVERTED, new() {{Language.ENG, "All stat changes on the opposing {1} were inverted!"}, {Language.JPN, "相手の{1}のステータス変更はすべて反転されました!"}, {Language.GER, "Alle Statistikänderungen des gegnerischen {1} wurden rückgängig gemacht!"}, {Language.FRE, "Tous les changements de statistiques sur le {1} adverse ont été inversés !"}, {Language.SPN, "¡Todos los cambios de estadísticas del {1} ​​contrario fueron invertidos!"}, {Language.ITA, "Tutti i cambiamenti alle statistiche sul {1} ​​avversario sono stati invertiti!"}, {Language.KOR, "상대 {1}의 모든 능력치 변경 사항이 반전되었습니다!"}, {Language.CHN_SIM, "对方 {1} 上的所有统计数据更改均已反转！"}, {Language.CHN_TRA, "對方 {1} 上的所有統計數據變更已反轉！"}, }},
 			{PLAYER_MON_ALL_STAT_CHANGES_INVERTED, new() {{Language.ENG, "All stat changes on {1}’s {2} were inverted!"}, {Language.JPN, "{1}の{2}のステータス変更はすべて反転されました。"}, {Language.GER, "Alle Statistikänderungen an {2} von {1} wurden rückgängig gemacht!"}, {Language.FRE, "Tous les changements de statistiques sur {2} de {1} ont été inversés !"}, {Language.SPN, "¡Todos los cambios de estadísticas en {2} de {1} fueron invertidos!"}, {Language.ITA, "Tutte le modifiche alle statistiche su {2} di {1} sono state invertite!"}, {Language.KOR, "{1}의 {2}에 대한 모든 통계 변경 사항이 반전되었습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 上的所有统计数据更改均已反转！"}, {Language.CHN_TRA, "{1} 的 {2} 上的所有統計數據變更均已反轉！"}, }},
+			{MON_SWITCHED_SPEED_WITH_TARGET, new() {{Language.ENG, "{1} switched Speed with its target!"}, {Language.JPN, "{1} はターゲットの速度を切り替えました!"}, {Language.GER, "{1} hat die Geschwindigkeit mit seinem Ziel vertauscht!"}, {Language.FRE, "{1} a changé de vitesse avec sa cible !"}, {Language.SPN, "¡{1} cambió la velocidad con su objetivo!"}, {Language.ITA, "{1} ha scambiato la velocità con il suo bersaglio!"}, {Language.KOR, "{1}이(가) 목표와 속도를 바꿨습니다!"}, {Language.CHN_SIM, "{1} 改变了目标的速度！"}, {Language.CHN_TRA, "{1} 改變了目標的速度！"}, }},
+			{WILD_MON_SWITCHED_SPEED_WITH_TARGET, new() {{Language.ENG, "The wild {1} switched Speed with its target!"}, {Language.JPN, "野生の {1} がターゲットと速度を切り替えました!"}, {Language.GER, "Der wilde {1} vertauschte die Geschwindigkeit mit seinem Ziel!"}, {Language.FRE, "Le sauvage {1} a changé de vitesse avec sa cible !"}, {Language.SPN, "¡El salvaje {1} cambió la velocidad con su objetivo!"}, {Language.ITA, "Il {1} ​​selvaggio ha scambiato la Velocità con il suo bersaglio!"}, {Language.KOR, "야생 {1}이(가) 대상과 속도를 바꿨습니다!"}, {Language.CHN_SIM, "狂野的{1}改变了目标的速度！"}, {Language.CHN_TRA, "狂野的{1}改變了目標的速度！"}, }},
+			{OPPOSING_MON_SWITCHED_SPEED_WITH_TARGET, new() {{Language.ENG, "The opposing {1} switched Speed with its target!"}, {Language.JPN, "相手の {1} はターゲットとの速度を 切り替えました!"}, {Language.GER, "Der Gegner {1} wechselte die Geschwindigkeit mit seinem Ziel!"}, {Language.FRE, "Les {1} adversaires ont changé de vitesse avec its leur cible !"}, {Language.SPN, "¡El oponente {1} cambió la velocidad con su objetivo!"}, {Language.ITA, "L'avversario {1} ha cambiato Velocità con il suo bersaglio!"}, {Language.KOR, "상대 {1}의 속도가 목표와 전환되었습니다!"}, {Language.CHN_SIM, "对方{1}改变了 目标的速度！"}, {Language.CHN_TRA, "對方{1}改變了 目標的速度！"}, }},
+			{PLAYER_MON_SWITCHED_SPEED_WITH_TARGET, new() {{Language.ENG, "{1}’s {2} switched Speed with its target!"}, {Language.JPN, "{1} の {2} が its目標の速度に切り替わりました!"}, {Language.GER, "{1}s {2} hat die Geschwindigkeit mit einem Ziel vertauscht!"}, {Language.FRE, "La vitesse de {2} de {1} a changé avec  sa cible !"}, {Language.SPN, "¡El {2} de {1} cambió su velocidad con su objetivo!"}, {Language.ITA, "{2} di {1} ha cambiato Velocità con il suo bersaglio!"}, {Language.KOR, "{1}의 {2} 속도가 목표로 전환되었습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 已 切换了目标速度！"}, {Language.CHN_TRA, "{1} 的 {2} 已 切換了目標速度！"}, }},
 			{THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES, new() {{Language.ENG, "The effects of Throat Chop prevent {1} from using certain moves!"}, {Language.JPN, "スロートチョップの効果により、{1} は特定の動きを使用できなくなります!"}, {Language.GER, "Die Effekte von Throat Chop verhindern, dass {1} bestimmte Bewegungen ausführt!"}, {Language.FRE, "Les effets de Throat Chop empêchent {1} d'utiliser certains mouvements !"}, {Language.SPN, "¡Los efectos de Throat Chop impiden que {1} use ciertos movimientos!"}, {Language.ITA, "Gli effetti di Throat Chop impediscono a {1} di utilizzare determinate mosse!"}, {Language.KOR, "Throat Chop의 효과로 인해 {1}이(가) 특정 동작을 사용하는 것을 방지합니다!"}, {Language.CHN_SIM, "斩喉的效果会阻止{1}使用某些动作！"}, {Language.CHN_TRA, "斬喉的效果會阻止{1}使用某些動作！"}, }},
 			{MON_IS_DROWSING, new() {{Language.ENG, "{1} is drowsing!"}, {Language.JPN, "{1} は眠っています!"}, {Language.GER, "{1} schläft!"}, {Language.FRE, "{1} somnole !"}, {Language.SPN, "¡{1} está durmiendo!"}, {Language.ITA, "{1} sta dormendo!"}, {Language.KOR, "{1}이(가) 졸고 있습니다!"}, {Language.CHN_SIM, "{1}正在打瞌睡！"}, {Language.CHN_TRA, "{1}正在打瞌睡！"}, }},
 			{WILD_MON_IS_DROWSING, new() {{Language.ENG, "The wild {1} is drowsing!"}, {Language.JPN, "野生の {1} が眠っています!"}, {Language.GER, "Der wilde {1} schläft!"}, {Language.FRE, "Le sauvage {1} somnole !"}, {Language.SPN, "¡El salvaje {1} está durmiendo!"}, {Language.ITA, "Il {1} ​​selvatico sta dormendo!"}, {Language.KOR, "야생 {1}이(가) 졸고 있습니다!"}, {Language.CHN_SIM, "野生{1}正在打瞌睡！"}, {Language.CHN_TRA, "野生{1}正在打瞌睡！"}, }},
@@ -2575,12 +2843,19 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_BECAME_WEAKER_TO_FIRE, new() {{Language.ENG, "The wild {1} became weaker to fire!"}, {Language.JPN, "野生の {1} は火に弱くなりました!"}, {Language.GER, "Das wilde {1} wurde schwächer gegen Feuer!"}, {Language.FRE, "Le {1} sauvage est devenu plus faible face au feu !"}, {Language.SPN, "¡El salvaje {1} se volvió más débil para disparar!"}, {Language.ITA, "Il {1} ​​selvatico è diventato più debole al fuoco!"}, {Language.KOR, "야생의 {1}이(가) 불에 약해졌습니다!"}, {Language.CHN_SIM, "野生{1}的火力变得越来越弱！"}, {Language.CHN_TRA, "野生{1}的火力變得越來越弱！"}, }},
 			{OPPOSING_MON_BECAME_WEAKER_TO_FIRE, new() {{Language.ENG, "The opposing {1} became weaker to fire!"}, {Language.JPN, "相手の{1}は火に対して弱くなりました！"}, {Language.GER, "Die gegnerische {1} wurde feuerschwächer!"}, {Language.FRE, "Le {1} adverse est devenu plus faible au tir !"}, {Language.SPN, "¡El {1} ​​enemigo se volvió más débil para disparar!"}, {Language.ITA, "Il {1} ​​avversario è diventato più debole al fuoco!"}, {Language.KOR, "상대 {1}이(가) 발사에 약해졌습니다!"}, {Language.CHN_SIM, "对方的{1}的火力变得更弱了！"}, {Language.CHN_TRA, "對方的{1}的火力變得更弱了！"}, }},
 			{PLAYER_MON_BECAME_WEAKER_TO_FIRE, new() {{Language.ENG, "{1}’s {2} became weaker to fire!"}, {Language.JPN, "{1}の{2}は火に対して弱くなりました！"}, {Language.GER, "{1}s {2} wurde schwächer gegen Feuer!"}, {Language.FRE, "Les {2} de {1} sont devenus plus faibles au tir !"}, {Language.SPN, "¡El {2} de {1} se volvió más débil para disparar!"}, {Language.ITA, "Il {2} di {1} è diventato più debole al fuoco!"}, {Language.KOR, "{1}의 {2}이(가) 발사에 약해졌습니다!"}, {Language.CHN_SIM, "{1}的{2}的开火能力变弱了！"}, {Language.CHN_TRA, "{1}的{2}的開火能力變弱了！"}, }},
+			{MON_USED_COURT_CHANGE, new() {{Language.ENG, "{1} swapped the battle effects affecting each side of the field!"}, {Language.JPN, "{1} フィールドの各面に影響を与える戦闘効果を 交換しました。"}, {Language.GER, "{1} hat die Kampfeffekte, die sich auf jede Seite des Feldes auswirken, vertauscht!"}, {Language.FRE, "{1} a permuté les effets de combat affectant chaque côté du terrain !"}, {Language.SPN, "¡{1} intercambió los efectos de batalla que afectan a cada lado del campo!"}, {Language.ITA, "{1} ha scambiato gli effetti di battaglia che influenzano ogni lato del campo!"}, {Language.KOR, "{1}는 필드의 각 측면에 영향을 미치는 전투 효과를 교환했습니다!"}, {Language.CHN_SIM, "{1}交换了 影响场地两侧的战斗效果！"}, {Language.CHN_TRA, "{1}交換了 影響場地兩側的戰鬥效果！"}, }},
+			{WILD_MON_USED_COURT_CHANGE, new() {{Language.ENG, "The wild {1} swapped the battle effects affecting each side of the field!"}, {Language.JPN, "野生の {1} が戦闘効果を交換し、 フィールドの両側に影響を与えました!"}, {Language.GER, "Das Wild {1} vertauschte die Kampfeffekte, die sich auf beide Seiten des Feldes auswirkten!"}, {Language.FRE, "Le sauvage {1} a permuté les effets de combat affectant chaque côté du terrain !"}, {Language.SPN, "¡El comodín {1} intercambió los efectos de batalla que afectan a cada lado del campo!"}, {Language.ITA, "Il {1} ​​selvaggio ha scambiato gli effetti di battaglia influenzando ogni lato del campo!"}, {Language.KOR, "야생 {1}이(가) 필드 양쪽에 영향을 미치는 전투 효과를 교환했습니다!"}, {Language.CHN_SIM, "狂野的{1}交换了 影响场地两边的战斗效果！"}, {Language.CHN_TRA, "狂野的{1}交換了 影響場地兩邊的戰鬥效果！"}, }},
+			{OPPOSING_MON_USED_COURT_CHANGE, new() {{Language.ENG, "The opposing {1} swapped the battle effects affecting each side of the field!"}, {Language.JPN, "対戦相手の {1} が戦闘効果を交換し、 フィールドの両側に影響を与えました!"}, {Language.GER, "Der gegnerische {1} vertauschte die Kampfeffekte, die sich auf beide Seiten des Feldes auswirkten!"}, {Language.FRE, "Les {1} adverses ont échangé les effets de combat affectant chaque côté du terrain !"}, {Language.SPN, "¡El oponente {1} intercambió los efectos de batalla que afectan a cada lado del campo!"}, {Language.ITA, "Il {1} ​​avversario ha scambiato gli effetti di battaglia influenzando ogni lato del campo!"}, {Language.KOR, "상대 {1}은(는) 필드의 양쪽에 영향을 미치는 전투 효과를 교환했습니다!"}, {Language.CHN_SIM, "对方的{1}交换了 影响场地双方的战斗效果！"}, {Language.CHN_TRA, "對方的{1}交換了 影響場地雙方的戰鬥效果！"}, }},
+			{PLAYER_MON_USED_COURT_CHANGE, new() {{Language.ENG, "{1}’s {2} swapped the battle effects affecting each side of the field!"}, {Language.JPN, "{1} の {2} は戦闘を交換し、 フィールドの両側に影響を及ぼします!"}, {Language.GER, "{1}s {2} haben die Kampfeffekte getauscht, die sich auf beide Seiten des Feldes auswirken!"}, {Language.FRE, "Les {2} de {1} ont permuté les effets de combat affectant chaque côté du terrain !"}, {Language.SPN, "¡El {2} de {1} intercambió los efectos de batalla que afectan a cada lado del campo!"}, {Language.ITA, "I {2} di {1} hanno scambiato gli effetti della battaglia che influenzano ogni lato del campo!"}, {Language.KOR, "{1}의 {2}는 필드의 각 측면에 영향을 미치는 전투 효과를 교환했습니다!"}, {Language.CHN_SIM, "{1}的{2}交换了 影响场上双方的战斗效果！"}, {Language.CHN_TRA, "{1}的{2}交換了 影響場上雙方的戰鬥效果！"}, }},
 			{MONS_PP_WAS_REDUCED, new() {{Language.ENG, "{1}’s PP was reduced!"}, {Language.JPN, "{1}のPPが減りました！"}, {Language.GER, "Die PP von {1} wurden reduziert!"}, {Language.FRE, "Les PP de {1} ont été réduits !"}, {Language.SPN, "¡El PP de {1} se redujo!"}, {Language.ITA, "I PP di {1} sono stati ridotti!"}, {Language.KOR, "{1}의 PP가 감소했습니다!"}, {Language.CHN_SIM, "{1}的PP减少了！"}, {Language.CHN_TRA, "{1}的PP減少了！"}, }},
 			{WILD_MONS_PP_WAS_REDUCED, new() {{Language.ENG, "The wild {1}’s PP was reduced!"}, {Language.JPN, "野生の{1}のPPが減りました！"}, {Language.GER, "Die PP des wilden {1} wurden reduziert!"}, {Language.FRE, "Le PP du {1} sauvage a été réduit !"}, {Language.SPN, "¡El PP del salvaje {1} fue reducido!"}, {Language.ITA, "I PP del {1} ​​selvatico sono stati ridotti!"}, {Language.KOR, "야생 {1}의 PP가 감소했습니다!"}, {Language.CHN_SIM, "野生{1}的PP减少了！"}, {Language.CHN_TRA, "野生{1}的PP減少了！"}, }},
 			{OPPOSING_MONS_PP_WAS_REDUCED, new() {{Language.ENG, "The opposing {1}’s PP was reduced!"}, {Language.JPN, "相手の{1}のPPが減少しました!"}, {Language.GER, "Der PP des gegnerischen {1} wurde reduziert!"}, {Language.FRE, "Le PP du {1} adverse a été réduit !"}, {Language.SPN, "¡El PP del oponente {1} fue reducido!"}, {Language.ITA, "I PP dell'avversario {1} sono stati ridotti!"}, {Language.KOR, "상대 {1}의 PP가 감소했습니다!"}, {Language.CHN_SIM, "对方{1}的PP减少了！"}, {Language.CHN_TRA, "對方{1}的PP減少了！"}, }},
 			{PLAYER_MONS_PP_WAS_REDUCED, new() {{Language.ENG, "{1}’s {2}’s PP was reduced!"}, {Language.JPN, "{1}の{2}のPPが減少しました！"}, {Language.GER, "Die PP von {1} und {2} wurden reduziert!"}, {Language.FRE, "Les PP de {1} et {2} ont été réduits !"}, {Language.SPN, "¡El PP de {1} y {2} se redujo!"}, {Language.ITA, "I PP di {2} di {1} sono stati ridotti!"}, {Language.KOR, "{1}의 {2}의 PP가 감소했습니다!"}, {Language.CHN_SIM, "{1}的{2}的PP减少了！"}, {Language.CHN_TRA, "{1}的{2}的PP減少了！"}, }},
 			{HIT_N_TIMES, new() {{Language.ENG, "The Pokémon was hit {1} times!"}, {Language.JPN, "ポケモンは {1} 回ヒットしました!"}, {Language.GER, "Das Pokémon wurde {1} Mal getroffen!"}, {Language.FRE, "Le Pokémon a été touché {1} fois !"}, {Language.SPN, "¡El Pokémon recibió {1} golpes!"}, {Language.ITA, "Il Pokémon è stato colpito {1} volte!"}, {Language.KOR, "포켓몬이 {1}번 맞았습니다!"}, {Language.CHN_SIM, "神奇宝贝被击中 {1} 次！"}, {Language.CHN_TRA, "神奇寶貝被擊中 {1} 次！"}, }},
 			{MON_USED_MOVE, new() {{Language.ENG, "{1} used {2}."}, {Language.JPN, "{1} は {2} を使用しました。"}, {Language.GER, "{1} verwendet {2}."}, {Language.FRE, "{1} a utilisé {2}."}, {Language.SPN, "{1} usó {2}."}, {Language.ITA, "{1} ha utilizzato {2}."}, {Language.KOR, "{1}은(는) {2}을(를) 사용했습니다."}, {Language.CHN_SIM, "{1}使用了{2}。"}, {Language.CHN_TRA, "{1}使用了{2}。"}, }},
+			{WILD_MON_USED_MOVE, new() {{Language.ENG, "The wild {1} used {2}"}, {Language.JPN, "野生の {1} は {2} を使用しました"}, {Language.GER, "Der wilde {1} benutzte {2}"}, {Language.FRE, "Le sauvage {1} utilisé {2}"}, {Language.SPN, "El salvaje {1} usó {2}"}, {Language.ITA, "Il selvaggio {1} ha utilizzato {2}"}, {Language.KOR, "야생 {1}은(는) {2}을(를) 사용했습니다."}, {Language.CHN_SIM, "野生{1}使用{2}"}, {Language.CHN_TRA, "野生{1}使用{2}"}, }},
+			{OPPOSING_MON_USED_MOVE, new() {{Language.ENG, "The opposing {1} used {2}"}, {Language.JPN, "相手の {1} は {2} を使用しました"}, {Language.GER, "Der gegnerische {1} nutzte {2}"}, {Language.FRE, "Le {1} adverse a utilisé {2}"}, {Language.SPN, "El oponente {1} usó {2}"}, {Language.ITA, "Il {1} ​​avversario ha utilizzato {2}"}, {Language.KOR, "상대 {1}이(가) {2}을(를) 사용했습니다."}, {Language.CHN_SIM, "对方的{1}使用了{2}"}, {Language.CHN_TRA, "對方的{1}使用了{2}"}, }},
+			{PLAYER_MON_USED_MOVE, new() {{Language.ENG, "{1}'s {2} used {3}"}, {Language.JPN, "{1} の {2} は {3} を使用しました"}, {Language.GER, "{1}s {2} verwendet {3}"}, {Language.FRE, "{2} de {1} a utilisé {3}"}, {Language.SPN, "El {2} de {1} usó {3}"}, {Language.ITA, "{2} di {1} ha utilizzato {3}"}, {Language.KOR, "{1}의 {2}은(는) {3}을(를) 사용했습니다."}, {Language.CHN_SIM, "{1}的{2}使用了{3}"}, {Language.CHN_TRA, "{1}的{2}使用了{3}"}, }},
 			{MOVE_FAILED, new() {{Language.ENG, "But it failed!"}, {Language.JPN, "しかし、失敗しました！"}, {Language.GER, "Aber es ist gescheitert!"}, {Language.FRE, "Mais c'est raté !"}, {Language.SPN, "¡Pero falló!"}, {Language.ITA, "Ma non è riuscito!"}, {Language.KOR, "하지만 실패했어요!"}, {Language.CHN_SIM, "但失败了！"}, {Language.CHN_TRA, "但失敗了！"}, }},
 			{ITS_SUPER_EFFECTIVE, new() {{Language.ENG, "It’s super effective!"}, {Language.JPN, "すごく効果的ですよ！"}, {Language.GER, "Es ist sehr effektiv!"}, {Language.FRE, "C'est hyper efficace !"}, {Language.SPN, "¡Es súper efectivo!"}, {Language.ITA, "È super efficace!"}, {Language.KOR, "정말 효과적이에요!"}, {Language.CHN_SIM, "超级有效！"}, {Language.CHN_TRA, "超有效！"}, }},
 			{ITS_NOT_VERY_EFFECTIVE, new() {{Language.ENG, "It’s not very effective..."}, {Language.JPN, "あまり効果的ではないですね…"}, {Language.GER, "Es ist nicht sehr effektiv..."}, {Language.FRE, "Ce n'est pas très efficace..."}, {Language.SPN, "No es muy efectivo..."}, {Language.ITA, "Non è molto efficace..."}, {Language.KOR, "별로 효과가 없군요..."}, {Language.CHN_SIM, "这不是很有效..."}, {Language.CHN_TRA, "這不是很有效..."}, }},

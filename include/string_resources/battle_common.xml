@@ -10770,7 +10770,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5299</key>
+		<key>MON_FLEW_UP_HIGH</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} flew up high!</en>
@@ -10785,7 +10785,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5300</key>
+		<key>WILD_MON_FLEW_UP_HIGH</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} flew up high!</en>
@@ -10800,7 +10800,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5301</key>
+		<key>OPPOSING_MON_FLEW_UP_HIGH</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The opposing {1} flew up high!</en>
@@ -10815,7 +10815,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5302</key>
+		<key>PLAYER_MON_FLEW_UP_HIGH</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1}’s {2} flew up high!</en>
@@ -10890,7 +10890,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5307</key>
+		<key>MON_HID_UNDERWATER</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} hid underwater!</en>
@@ -10905,7 +10905,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5308</key>
+		<key>WILD_MON_HID_UNDERWATER</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} hid underwater!</en>
@@ -10920,7 +10920,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5309</key>
+		<key>OPPOSING_MON_HID_UNDERWATER</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The opposing {1} hid underwater!</en>
@@ -10935,7 +10935,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5310</key>
+		<key>PLAYER_MON_HID_UNDERWATER</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1}’s {2} hid underwater!</en>
@@ -10950,7 +10950,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5311</key>
+		<key>MON_BURROWED_UNDER_THE_GROUND</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} burrowed its way under the ground!</en>
@@ -10965,52 +10965,52 @@
 		</text>
 	</string>
 	<string>
-		<key>key5312</key>
+		<key>WILD_MON_BURROWED_UNDER_THE_GROUND</key>
+		<params>1</params>
+		<text>
+			<en lang="english">The wild {1} burrowed its wayunder the ground!</en>
+			<ja lang="japanese">野生の{1}が地面に穴を掘っていきました！</ja>
+			<de lang="german">Die Wildnis {1} hat sich ihren Wegunter die Erde gegraben!</de>
+			<fr lang="french">Le sauvage {1} s'est frayé un cheminsous le sol !</fr>
+			<es lang="spanish">¡Lo salvaje {1} se abrió caminobajo tierra!</es>
+			<it lang="italian">La natura {1} si è fatta stradasotto terra!</it>
+			<ko lang="korean"> 야생 {1}는 땅 아래에서 그 길을 버렸습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野生动物{1}在地下挖洞！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野生動物{1}在地下挖洞！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_BURROWED_UNDER_THE_GROUND</key>
+		<params>1</params>
+		<text>
+			<en lang="english">The opposing {1} burrowed its wayunder the ground!</en>
+			<ja lang="japanese">相手の {1} が地面の下に潜っていきました!</ja>
+			<de lang="german">Der Gegner {1} hat sichunter die Erde gegraben!</de>
+			<fr lang="french">Le {1} adverse s'est frayé un cheminsous le sol !</fr>
+			<es lang="spanish">¡El oponente {1} se abrió caminobajo el suelo!</es>
+			<it lang="italian">L'avversario {1} si è fatto stradasottoterra!</it>
+			<ko lang="korean">상대 {1}가 땅속으로 파고들었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}在地下挖路！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}在地下挖路！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_BURROWED_UNDER_THE_GROUND</key>
 		<params>2</params>
 		<text>
-			<en lang="english">{1}The wild {2} burrowed its wayunder the ground!</en>
-			<ja lang="japanese">{1}野生の{2}が地面に穴を掘っていきました！</ja>
-			<de lang="german">{1}Die Wildnis {2} hat sich ihren Wegunter die Erde gegraben!</de>
-			<fr lang="french">{1}Le sauvage {2} s'est frayé un cheminsous le sol !</fr>
-			<es lang="spanish">{1}¡Lo salvaje {2} se abrió caminobajo tierra!</es>
-			<it lang="italian">{1}La natura {2} si è fatta stradasotto terra!</it>
-			<ko lang="korean">{1} 야생 {2}는 땅 아래에서 그 길을 버렸습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}野生动物{2}在地下挖洞！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}野生動物{2}在地下挖洞！</zh-tw>
+			<en lang="english">{1}’s {2} burrowed its way underthe ground!</en>
+			<ja lang="japanese">{1} の {2} が地面の下に潜っていきました！</ja>
+			<de lang="german">{1}s {2} hat sich unterdie Erde eingegraben!</de>
+			<fr lang="french">Le {2} de {1} s'est frayé un chemin sous le sol !</fr>
+			<es lang="spanish">¡El {2} de {1} se abrió camino bajola tierra!</es>
+			<it lang="italian">Il {2} di {1} si è fatto strada sottoterra!</it>
+			<ko lang="korean">{1}의 {2}이(가) 땅속으로 파고들었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}在地下挖了路！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}在地下挖了路！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5313</key>
-		<params>2</params>
-		<text>
-			<en lang="english">{1}The opposing {2} burrowed its wayunder the ground!</en>
-			<ja lang="japanese">{1}相手の {2} が地面の下に潜っていきました!</ja>
-			<de lang="german">{1}Der Gegner {2} hat sichunter die Erde gegraben!</de>
-			<fr lang="french">{1}Le {2} adverse s'est frayé un cheminsous le sol !</fr>
-			<es lang="spanish">{1}¡El oponente {2} se abrió caminobajo el suelo!</es>
-			<it lang="italian">{1}L'avversario {2} si è fatto stradasottoterra!</it>
-			<ko lang="korean">{1}상대 {2}가 땅속으로 파고들었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方的{2}在地下挖路！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方的{2}在地下挖路！</zh-tw>
-		</text>
-	</string>
-	<string>
-		<key>key5314</key>
-		<params>3</params>
-		<text>
-			<en lang="english">{1}{2}’s {3} burrowed its way underthe ground!</en>
-			<ja lang="japanese">{1}{2} の {3} が地面の下に潜っていきました！</ja>
-			<de lang="german">{1}{2}s {3} hat sich unterdie Erde eingegraben!</de>
-			<fr lang="french">Le {3} de {1}{2} s'est frayé un chemin sous le sol !</fr>
-			<es lang="spanish">¡El {3} de {1}{2} se abrió camino bajola tierra!</es>
-			<it lang="italian">Il {3} di {1}{2} si è fatto strada sottoterra!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) 땅속으로 파고들었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}的{3}在地下挖了路！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}的{3}在地下挖了路！</zh-tw>
-		</text>
-	</string>
-	<string>
-		<key>key5315</key>
+		<key>MON_VANISHED_INSTANTLY</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} vanished instantly!</en>
@@ -11025,7 +11025,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5316</key>
+		<key>WILD_MON_VANISHED_INSTANTLY</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} vanished instantly!</en>
@@ -11040,7 +11040,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5317</key>
+		<key>OPPOSING_MON_VANISHED_INSTANTLY</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The opposing {1} vanished instantly!</en>
@@ -11055,7 +11055,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5318</key>
+		<key>PLAYER_MON_VANISHED_INSTANTLY</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1}’s {2} vanished instantly!</en>
@@ -11070,7 +11070,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5319</key>
+		<key>MON_SPRANG_UP</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} sprang up!</en>
@@ -11085,7 +11085,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5320</key>
+		<key>WILD_MON_SPRANG_UP</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} sprang up!</en>
@@ -11100,7 +11100,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5321</key>
+		<key>OPPOSING_MON_SPRANG_UP</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The opposing {1} sprang up!</en>
@@ -11115,7 +11115,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5322</key>
+		<key>PLAYER_MON_SPRANG_UP</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1}’s {2} sprang up!</en>
@@ -18390,7 +18390,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5801</key>
+		<key>MON_TYPE_WAS_ADDED</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1} type was added to {2}!</en>
@@ -18405,48 +18405,48 @@
 		</text>
 	</string>
 	<string>
-		<key>key5802</key>
-		<params>3</params>
+		<key>WILD_MON_TYPE_WAS_ADDED</key>
+		<params>2</params>
 		<text>
-			<en lang="english">{1}{2} type was added tothe wild {3}!</en>
-			<ja lang="japanese">{1}{2} タイプが野生の {3} に追加されました!</ja>
-			<de lang="german">Der Typ {1}{2} wurde zu the wild {3} hinzugefügt!</de>
-			<fr lang="french">Le type {1}{2} a été ajouté au joker {3} !</fr>
-			<es lang="spanish">¡Se agregó {1}{2} tipo al salvaje {3}!</es>
-			<it lang="italian">Il tipo {1}{2} è stato aggiunto alselvaggio {3}!</it>
-			<ko lang="korean">{1}{2} 유형이 the wild {3}에 추가되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2} 类型已添加到野生{3}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2} 類型已新增至野生{3}！</zh-tw>
+			<en lang="english">{1} type was added to the wild {2}!</en>
+			<ja lang="japanese">{1} タイプが野生の {2} に追加されました!</ja>
+			<de lang="german">Der Typ {1} wurde zu the wild {2} hinzugefügt!</de>
+			<fr lang="french">Le type {1} a été ajouté au joker {2} !</fr>
+			<es lang="spanish">¡Se agregó {1} tipo al salvaje {2}!</es>
+			<it lang="italian">Il tipo {1} è stato aggiunto alselvaggio {2}!</it>
+			<ko lang="korean">{1} 유형이 the wild {2}에 추가되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1} 类型已添加到野生{2}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1} 類型已新增至野生{2}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5803</key>
-		<params>3</params>
+		<key>OPPOSING_MON_TYPE_WAS_ADDED</key>
+		<params>2</params>
 		<text>
-			<en lang="english">{1}{2} type was added tothe opposing {3}!</en>
-			<ja lang="japanese">{1}{2} タイプが敵の {3} に追加されました!</ja>
-			<de lang="german">Der Typ {1}{2} wurde zum gegnerischen {3} hinzugefügt!</de>
-			<fr lang="french">Le type {1}{2} a été ajouté au {3} adverse !</fr>
-			<es lang="spanish">¡Se agregó {1}{2} tipo al {3} opuesto!</es>
-			<it lang="italian">Il tipo {1}{2} è stato aggiunto al{3} avversario!</it>
-			<ko lang="korean">{1}{2} 유형이 상대 {3}에 추가되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2} 类型已添加到相反的 {3}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2} 類型已添加到相反的 {3}！</zh-tw>
+			<en lang="english">{1} type was added to the opposing {2}!</en>
+			<ja lang="japanese">{1} タイプが敵の {2} に追加されました!</ja>
+			<de lang="german">Der Typ {1} wurde zum gegnerischen {2} hinzugefügt!</de>
+			<fr lang="french">Le type {1} a été ajouté au {2} adverse !</fr>
+			<es lang="spanish">¡Se agregó {1} tipo al {2} opuesto!</es>
+			<it lang="italian">Il tipo {1} è stato aggiunto al{2} avversario!</it>
+			<ko lang="korean">{1} 유형이 상대 {2}에 추가되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1} 类型已添加到相反的 {2}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1} 類型已添加到相反的 {2}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5804</key>
-		<params>4</params>
+		<key>PLAYER_MON_TYPE_WAS_ADDED</key>
+		<params>3</params>
 		<text>
-			<en lang="english">{1}{2} type was added to {3}’s {4}!</en>
-			<ja lang="japanese">{1}{2} タイプが {3} の {4} に追加されました。</ja>
-			<de lang="german">Der Typ {1}{2} wurde zu {4} von {3} hinzugefügt!</de>
-			<fr lang="french">Le type {1}{2} a été ajouté au {4} de {3} !</fr>
-			<es lang="spanish">¡Se agregó {1}{2} tipo al {4} de {3}!</es>
-			<it lang="italian">Il tipo {1}{2} è stato aggiunto al {4} di {3}!</it>
-			<ko lang="korean">{1}{2} 유형이 {3}의 {4}에 추가되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2} 类型已添加到 {3} 的 {4}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2} 類型已加入 {3} 的 {4}！</zh-tw>
+			<en lang="english">{1} type was added to {2}’s {3}!</en>
+			<ja lang="japanese">{1} タイプが {2} の {3} に追加されました。</ja>
+			<de lang="german">Der Typ {1} wurde zu {3} von {2} hinzugefügt!</de>
+			<fr lang="french">Le type {1} a été ajouté au {3} de {2} !</fr>
+			<es lang="spanish">¡Se agregó {1} tipo al {3} de {2}!</es>
+			<it lang="italian">Il tipo {1} è stato aggiunto al {3} di {2}!</it>
+			<ko lang="korean">{1} 유형이 {2}의 {3}에 추가되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1} 类型已添加到 {2} 的 {3}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1} 類型已加入 {2} 的 {3}！</zh-tw>
 		</text>
 	</string>
 	<string>
@@ -23160,7 +23160,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6101</key>
+		<key>MON_TOOK_INTO_SKY_MON</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1} took {2} into the sky!</en>
@@ -23175,142 +23175,232 @@
 		</text>
 	</string>
 	<string>
-		<key>key6102</key>
-		<params>3</params>
+		<key>MON_TOOK_INTO_SKY_WILD_MON</key>
+		<params>2</params>
 		<text>
-			<en lang="english">{1}{2} took the wild {3} intothe sky!</en>
-			<ja lang="japanese">{1}{2} は野生の {3} を空へ連れて行きました！</ja>
-			<de lang="german">{1}{2} brachte die Wildnis {3} in den Himmel!</de>
-			<fr lang="french">{1}{2} a emmené le {3} sauvage dans le ciel !</fr>
-			<es lang="spanish">¡{1}{2} llevó lo salvaje {3} al cielo!</es>
-			<it lang="italian">{1}{2} ha portato la {3} selvaggia incielo!</it>
-			<ko lang="korean">{1}{2}가 야생 {3}을(를) 하늘로 데려갔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}将狂野的{3}带入天空！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}將狂野的{3}帶入天空！</zh-tw>
+			<en lang="english">{1} took the wild {2} into the sky!</en>
+			<ja lang="japanese">{1} は野生の {2} を空へ連れて行きました！</ja>
+			<de lang="german">{1} brachte die Wildnis {2} in den Himmel!</de>
+			<fr lang="french">{1} a emmené le sauvage {2} dans le ciel !</fr>
+			<es lang="spanish">¡{1} llevó al salvaje {2} al cielo!</es>
+			<it lang="italian">{1} ha portato i {2} selvaggi in cielo!</it>
+			<ko lang="korean">{1}이(가) 야생 {2}을(를) 하늘로 데려갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}把野生的{2}带上了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}把野生的{2}帶上了天空！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key6103</key>
-		<params>3</params>
+		<key>MON_TOOK_INTO_SKY_OPPOSING_MON</key>
+		<params>2</params>
 		<text>
-			<en lang="english">{1}{2} took the opposing {3} intothe sky!</en>
-			<ja lang="japanese">{1}{2} は相手の {3} を空に飛ばしました!</ja>
-			<de lang="german">{1}{2} brachte den Gegner {3} in den Himmel!</de>
-			<fr lang="french">{1}{2} a emmené les {3} adverses dans le ciel !</fr>
-			<es lang="spanish">¡{1}{2} llevó al oponente {3} al cielo!</es>
-			<it lang="italian">{1}{2} ha portato il {3} avversario incielo!</it>
-			<ko lang="korean">{1}{2}이(가) 상대 {3}을(를) 하늘로 데려갔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2} 将对方的 {3} 带到了天空！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2} 將對方的 {3} 帶到天空了！</zh-tw>
+			<en lang="english">{1} took the opposing {2} into the sky!</en>
+			<ja lang="japanese">{1} は相手の {2} を空に連れて行きました！</ja>
+			<de lang="german">{1} brachte den gegnerischen {2} in den Himmel!</de>
+			<fr lang="french">{1} a emmené le {2} adverse dans le ciel !</fr>
+			<es lang="spanish">¡{1} llevó al oponente {2} al cielo!</es>
+			<it lang="italian">{1} ha portato in cielo i {2} avversari!</it>
+			<ko lang="korean">{1}이(가) 상대 {2}을(를) 하늘로 데려갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}将对方的{2}带上了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}將對方的{2}帶上了天空！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key6104</key>
+		<key>MON_TOOK_INTO_SKY_PLAYER_MON</key>
+		<params>3</params>
+		<text>
+			<en lang="english">{1} took {2}'s {3} into the sky!</en>
+			<ja lang="japanese">{1} が {2} の {3} を空に連れて行きました！</ja>
+			<de lang="german">{1} brachte {2}s {3} in den Himmel!</de>
+			<fr lang="french">{1} a emmené le {3} de {2} dans le ciel !</fr>
+			<es lang="spanish">¡{1} llevó el {3} de {2} al cielo!</es>
+			<it lang="italian">{1} ha portato in cielo il {3} di {2}!</it>
+			<ko lang="korean">{1}이(가) {2}의 {3}을(를) 하늘로 가져갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}将{2}的{3}带到了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}將{2}的{3}帶到了天空！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_TOOK_INTO_SKY_MON</key>
+		<params>2</params>
+		<text>
+			<en lang="english">The wild {1} took {2} into the sky!</en>
+			<ja lang="japanese">野生の {1} が {2} を空へ連れて行きました!</ja>
+			<de lang="german">Der wilde {1} brachte {2} in den Himmel!</de>
+			<fr lang="french">Le sauvage {1} a emmené {2} dans le ciel !</fr>
+			<es lang="spanish">¡El salvaje {1} llevó a {2} al cielo!</es>
+			<it lang="italian">Il selvaggio {1} ha portato {2} in cielo!</it>
+			<ko lang="korean">야생 {1}가 {2}을(를) 하늘로 데려갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">狂野的{1}把{2}带上了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">狂野的{1}把{2}帶上了天空！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_TOOK_INTO_SKY_WILD_MON</key>
+		<params>2</params>
+		<text>
+			<en lang="english">The wild {1} took the wild {2} into the sky!</en>
+			<ja lang="japanese">野生の {1} が野生の {2} を空へ連れて行きました。</ja>
+			<de lang="german">Die Wildnis {1} brachte die Wildnis {2} in den Himmel!</de>
+			<fr lang="french">Le sauvage {1} a emmené le sauvage {2} dans le ciel !</fr>
+			<es lang="spanish">¡El salvaje {1} llevó al salvaje {2} al cielo!</es>
+			<it lang="italian">Il {1} ​​selvaggio ha portato il {2} selvaggio in cielo!</it>
+			<ko lang="korean">야생 {1}이(가) 야생 {2}을(를) 하늘로 데려갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">狂野{1}将狂野{2}带上了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">狂野{1}將狂野{2}帶上了天空！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_TOOK_INTO_SKY_OPPOSING_MON</key>
+		<params>2</params>
+		<text>
+			<en lang="english">The wild {1} took the opposing {2} into the sky!</en>
+			<ja lang="japanese">野生の {1} が敵の {2} を空に連れて行きました！</ja>
+			<de lang="german">Der wilde {1} brachte den gegnerischen {2} in den Himmel!</de>
+			<fr lang="french">Le {1} sauvage a emmené le {2} adverse dans le ciel !</fr>
+			<es lang="spanish">¡El {1} ​​salvaje llevó al {2} contrario al cielo!</es>
+			<it lang="italian">Il {1} ​​selvaggio ha portato in cielo il {2} avversario!</it>
+			<ko lang="korean">야생의 {1}이(가) 상대 {2}을(를) 하늘로 데려갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">狂野的{1}将对方的{2}带上了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">狂野的{1}將對方的{2}帶上了天空！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_TOOK_INTO_SKY_PLAYER_MON</key>
+		<params>3</params>
+		<text>
+			<en lang="english">The wild {1} took {2}'s {3} into the sky!</en>
+			<ja lang="japanese">野生の {1} が {2} の {3} を空に連れて行きました！</ja>
+			<de lang="german">Der wilde {1} brachte {2}s {3} in den Himmel!</de>
+			<fr lang="french">Le {1} sauvage a emmené le {3} de {2} dans le ciel !</fr>
+			<es lang="spanish">¡El salvaje {1} llevó el {3} de {2} al cielo!</es>
+			<it lang="italian">Il {1} ​​selvaggio ha portato i {3} di {2} in cielo!</it>
+			<ko lang="korean">야생 {1}이 {2}의 {3}을(를) 하늘로 데려갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">狂野的{1}将{2}的{3}带上了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">狂野的{1}將{2}的{3}帶上了天空！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_TOOK_INTO_SKY_MON</key>
+		<params>2</params>
+		<text>
+			<en lang="english">The opposing {1} took {2} into the sky!</en>
+			<ja lang="japanese">相手の {1} が {2} を空に飛ばしました!</ja>
+			<de lang="german">Der gegnerische {1} schoss {2} in den Himmel!</de>
+			<fr lang="french">Le {1} adverse a emmené {2} dans le ciel !</fr>
+			<es lang="spanish">¡El {1} ​​contrario llevó a {2} al cielo!</es>
+			<it lang="italian">Il {1} ​​avversario ha portato {2} in cielo!</it>
+			<ko lang="korean">상대 {1}이(가) {2}을(를) 하늘로 데려갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}将{2}带上了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}將{2}帶上了天空！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_TOOK_INTO_SKY_WILD_MON</key>
+		<params>2</params>
+		<text>
+			<en lang="english">The opposing {1} took the wild {2} into the sky!</en>
+			<ja lang="japanese">敵対する {1} が野生の {2} を空に飛ばしました。</ja>
+			<de lang="german">Der gegnerische {1} brachte den wilden {2} in den Himmel!</de>
+			<fr lang="french">Le {1} adverse a emmené le {2} sauvage dans le ciel !</fr>
+			<es lang="spanish">¡El {1} ​​contrario llevó al salvaje {2} al cielo!</es>
+			<it lang="italian">Il {1} ​​avversario ha portato il {2} selvaggio in cielo!</it>
+			<ko lang="korean">상대 {1}이(가) 야생 {2}을(를) 하늘로 데려갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}将狂野的{2}带上了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}將狂野的{2}帶上了天空！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_TOOK_INTO_SKY_OPPOSING_MON</key>
+		<params>2</params>
+		<text>
+			<en lang="english">The opposing {1} took the opposing {2} into the sky!</en>
+			<ja lang="japanese">相手の {1} が相手の {2} を空に連れて行きました。</ja>
+			<de lang="german">Der gegnerische {1} brachte den gegnerischen {2} in den Himmel!</de>
+			<fr lang="french">Le {1} adverse a emmené le {2} adverse dans le ciel !</fr>
+			<es lang="spanish">¡El {1} ​​contrario llevó al {2} contrario al cielo!</es>
+			<it lang="italian">Il {1} ​​avversario ha portato in cielo il {2} avversario!</it>
+			<ko lang="korean">상대 {1}이 상대 {2}을(를) 하늘로 데려갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}将对方的{2}带上了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}將對方的{2}帶上了天空！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_TOOK_INTO_SKY_PLAYER_MON</key>
+		<params>3</params>
+		<text>
+			<en lang="english">The opposing {1} took {2}'s {3} into the sky!</en>
+			<ja lang="japanese">相手の {1} が {2} の {3} を空に飛ばしました！</ja>
+			<de lang="german">Der gegnerische {1} brachte {2}s {3} in die Luft!</de>
+			<fr lang="french">Le {1} adverse a emmené le {3} de {2} dans le ciel !</fr>
+			<es lang="spanish">¡El {1} ​​contrario llevó el {3} de {2} al cielo!</es>
+			<it lang="italian">Il {1} ​​avversario ha portato in cielo il {3} di {2}!</it>
+			<ko lang="korean">상대 {1}이(가) {2}의 {3}을(를) 하늘로 가져갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}将{2}的{3}带上了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}將{2}的{3}帶上了天空！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_TOOK_INTO_SKY_MON</key>
+		<params>3</params>
+		<text>
+			<en lang="english">{1}'s {2} took {3} into the sky!</en>
+			<ja lang="japanese">{1} の {2} が {3} を空に連れて行きました。</ja>
+			<de lang="german">{1}s {2} brachte {3} in den Himmel!</de>
+			<fr lang="french">Les {2} de {1} ont emmené {3} dans le ciel !</fr>
+			<es lang="spanish">¡El {2} de {1} llevó a {3} al cielo!</es>
+			<it lang="italian">I {2} di {1} hanno portato {3} in cielo!</it>
+			<ko lang="korean">{1}의 {2}가 {3}을(를) 하늘로 데려갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}将{3}带到了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}將{3}帶到了天空！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_TOOK_INTO_SKY_WILD_MON</key>
+		<params>3</params>
+		<text>
+			<en lang="english">{1}'s {2} took the wild {3} into the sky!</en>
+			<ja lang="japanese">{1} の {2} が野生の {3} を空に連れて行きました！</ja>
+			<de lang="german">{1}s {2} brachten die Wildnis {3} in den Himmel!</de>
+			<fr lang="french">Le {2} de {1} a emmené le {3} sauvage dans le ciel !</fr>
+			<es lang="spanish">¡El {2} de {1} llevó al salvaje {3} al cielo!</es>
+			<it lang="italian">I {2} di {1} hanno portato i {3} selvaggi in cielo!</it>
+			<ko lang="korean">{1}의 {2}가 야생 {3}을(를) 하늘로 데려갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}将狂野的{3}带上了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}將狂野的{3}帶上了天空！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_TOOK_INTO_SKY_OPPOSING_MON</key>
+		<params>3</params>
+		<text>
+			<en lang="english">{1}'s {2} took the opposing {3} into the sky!</en>
+			<ja lang="japanese">{1} の {2} が相手の {3} を空に飛ばしました！</ja>
+			<de lang="german">{1}s {2} brachte den gegnerischen {3} in die Luft!</de>
+			<fr lang="french">Le {2} de {1} a emmené le {3} adverse dans le ciel !</fr>
+			<es lang="spanish">¡El {2} de {1} llevó al {3} contrario al cielo!</es>
+			<it lang="italian">Il {2} di {1} ha portato in cielo il {3} avversario!</it>
+			<ko lang="korean">{1}의 {2}가 상대 {3}을(를) 하늘로 데려갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}将对方的{3}带上了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}將對方的{3}帶上了天空！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_TOOK_INTO_SKY_PLAYER_MON</key>
 		<params>4</params>
 		<text>
-			<en lang="english">{1}{2} took {3}’s {4} into the sky!</en>
-			<ja lang="japanese">{1}{2} は {3} の {4}  を空に連れて行きました!</ja>
-			<de lang="german">{1}{2} brachte {3}s {4} in den Himmel!</de>
-			<fr lang="french">{1}{2} a emmené le {4} in de {3} dans le ciel !</fr>
-			<es lang="spanish">¡{1}{2} llevó el {4}  de {3} al cielo!</es>
-			<it lang="italian">{1}{2} ha portato il {4} di {3} in cielo!</it>
-			<ko lang="korean">{1}{2}가 {3}의 {4}를 하늘로 데려갔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}将{3}的{4}带到了天空！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}將{3}的{4}帶到了天空！</zh-tw>
+			<en lang="english">{1}'s {2} took {3}'s {4} into the sky!</en>
+			<ja lang="japanese">{1} の {2} が {3} の {4} を空に運びました。</ja>
+			<de lang="german">{1}s {2} brachten {3}s {4} in den Himmel!</de>
+			<fr lang="french">Les {2} de {1} ont emmené les {4} de {3} dans le ciel !</fr>
+			<es lang="spanish">¡El {2} de {1} llevó al {4} de {3} al cielo!</es>
+			<it lang="italian">Il {2} di {1} ha portato il {4} di {3} in cielo!</it>
+			<ko lang="korean">{1}의 {2}가 {3}의 {4}를 하늘로 가져갔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}将{3}的{4}带到了天空！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}將{3}的{4}帶到了天空！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key6105</key>
-		<params>3</params>
-		<text>
-			<en lang="english">{1}The wild {2} took {3} intothe sky!</en>
-			<ja lang="japanese">{1}野生の {2} が {3} を空に連れて行きました!</ja>
-			<de lang="german">{1}Die Wildnis {2} brachte {3} in den Himmel!</de>
-			<fr lang="french">{1}Le sauvage {2} a emmené {3} dans le ciel !</fr>
-			<es lang="spanish">{1}¡El salvaje {2} llevó a {3} al cielo!</es>
-			<it lang="italian">{1}La natura selvaggia {2} ha portato {3} incielo!</it>
-			<ko lang="korean">{1}야생 {2}가 {3}을(를) 하늘로 데려갔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}狂野的{2}将{3}带入天空！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}狂野的{2}將{3}帶入天空！</zh-tw>
-		</text>
-	</string>
-	<string>
-		<key>key6106</key>
-		<params>3</params>
-		<text>
-			<en lang="english">{1}The wild {2} took the wild {3} into the sky!</en>
-			<ja lang="japanese">{1}野生の {2} が野生の {3}  を空に連れて行きました!</ja>
-			<de lang="german">{1}Die Wildnis {2} brachte die Wildnis {3} in den Himmel!</de>
-			<fr lang="french">{1}Le sauvage {2} a emmené le sauvage {3} dans le ciel !</fr>
-			<es lang="spanish">{1}¡Lo salvaje {2} llevó lo salvaje {3} al cielo!</es>
-			<it lang="italian">{1}La natura {2} ha portato la natura {3} il cielo!</it>
-			<ko lang="korean">{1}야생 {2}가 야생 {3}을 하늘로 데려갔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}野生动物{2}将野生动物{3} 带到了天空！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}野生動物{2}將野生動物{3} 帶到了天空！</zh-tw>
-		</text>
-	</string>
-	<string>
-		<key>key6107</key>
-		<params>3</params>
-		<text>
-			<en lang="english">{1}The opposing {2} took {3} intothe sky!</en>
-			<ja lang="japanese">{1}相手の {2} が {3} を空に飛ばしました!</ja>
-			<de lang="german">{1}Der Gegner {2} schoss {3} in den Himmel!</de>
-			<fr lang="french">{1}Les {2} adverses ont emmené {3} dans le ciel !</fr>
-			<es lang="spanish">{1}¡El oponente {2} llevó a {3} al cielo!</es>
-			<it lang="italian">{1}L'avversario {2} ha portato {3} incielo!</it>
-			<ko lang="korean">{1}상대 {2}가 {3}을(를) 하늘로 데려갔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方的{2}将{3}带入了天空！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方的{2}將{3}帶入了天空！</zh-tw>
-		</text>
-	</string>
-	<string>
-		<key>key6108</key>
-		<params>3</params>
-		<text>
-			<en lang="english">{1}The opposing {2} took the opposing {3} into the sky!</en>
-			<ja lang="japanese">{1}相手の {2} が相手を {3} 空に飛ばしました。</ja>
-			<de lang="german">{1}Der Gegner {2} brachte den Gegner {3} in den Himmel!</de>
-			<fr lang="french">{1}Les {2} adverses ont emmené les adversaires {3} dans le ciel !</fr>
-			<es lang="spanish">{1}¡El oponente {2} llevó al oponente {3} al cielo!</es>
-			<it lang="italian">{1}L'avversario {2} ha portato l'avversario {3} in cielo!</it>
-			<ko lang="korean">{1}상대 {2}가 상대 {3}를 하늘로 데려갔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方{2}将对方 {3}带上了天空！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方{2}將對方 {3}帶上了天空！</zh-tw>
-		</text>
-	</string>
-	<string>
-		<key>key6109</key>
-		<params>4</params>
-		<text>
-			<en lang="english">{1}{2}’s {3} took {4} into the sky!</en>
-			<ja lang="japanese">{1}{2} の {3} が {4}  を空に飛ばしました!</ja>
-			<de lang="german">{1}{2}s {3} flog {4} in den Himmel!</de>
-			<fr lang="french">Le {3} de {1}{2} a emmené {4} dans le ciel !</fr>
-			<es lang="spanish">¡El {3} de {1}{2} llevó a {4} al cielo!</es>
-			<it lang="italian">Il {3} di {1}{2} ha portato {4} in cielo!</it>
-			<ko lang="korean">{1}{2}의 {3}가 {4} 하늘로 날아갔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}的{3}飞向了{4} 天空！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}的{3}飛向了{4} 天空！</zh-tw>
-		</text>
-	</string>
-	<string>
-		<key>key6110</key>
-		<params>5</params>
-		<text>
-			<en lang="english">{1}{2}’s {3} took {4}’s {5} into the sky!</en>
-			<ja lang="japanese">{1}{2} の {3} が {4} の  {5} を空に飛ばしました。</ja>
-			<de lang="german">{1}{2}s {3} brachten {4}s {5} in den Himmel!</de>
-			<fr lang="french">Les {3} de {1}{2} ont emmené ceux de {4} {5} dans le ciel !</fr>
-			<es lang="spanish">¡El {3} de {1}{2} llevó al {5} de {4} al cielo!</es>
-			<it lang="italian">I {3} di {1}{2} hanno portato i {5} di {4} in cielo!</it>
-			<ko lang="korean">{1}{2}의 {3}가 {4}의 {5}를 하늘로 데려갔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}的{3}将{4}的 {5}带到了天空！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}的{3}將{4}的 {5}帶到了天空！</zh-tw>
-		</text>
-	</string>
-	<string>
-		<key>key6111</key>
+		<key>MON_FREED_FROM_SKY_DROP</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} was freed from the Sky Drop!</en>
@@ -23325,7 +23415,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6112</key>
+		<key>WILD_MON_FREED_FROM_SKY_DROP</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} was freed from the Sky Drop!</en>
@@ -23340,33 +23430,33 @@
 		</text>
 	</string>
 	<string>
-		<key>key6113</key>
+		<key>OPPOSING_MON_FREED_FROM_SKY_DROP</key>
 		<params>2</params>
 		<text>
-			<en lang="english">{1}The opposing {2} was freed fromthe Sky Drop!</en>
-			<ja lang="japanese">{1}相手の {2} はthe Sky Drop から解放されました!</ja>
-			<de lang="german">{1}Der Gegner {2} wurde vom Sky Drop befreit!</de>
-			<fr lang="french">{1}Le {2} adverse a été libéré du Sky Drop !</fr>
-			<es lang="spanish">{1}¡El oponente {2} fue liberado del Sky Drop!</es>
-			<it lang="italian">{1}L'avversario {2} è stato liberato dalloSky Drop!</it>
-			<ko lang="korean">{1}상대 {2}이(가) Sky Drop에서 해방되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方的{2}已从Sky Drop中解放出来！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方的{2}已從Sky Drop中解放！</zh-tw>
+			<en lang="english">The opposing {1} was freed fromthe Sky Drop!</en>
+			<ja lang="japanese">相手の {1} はthe Sky Drop から解放されました!</ja>
+			<de lang="german">Der Gegner {1} wurde vom Sky Drop befreit!</de>
+			<fr lang="french">Le {1} adverse a été libéré du Sky Drop !</fr>
+			<es lang="spanish">¡El oponente {1} fue liberado del Sky Drop!</es>
+			<it lang="italian">L'avversario {1} è stato liberato dalloSky Drop!</it>
+			<ko lang="korean">상대 {1}이(가) Sky Drop에서 해방되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}已从Sky Drop中解放出来！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}已從Sky Drop中解放！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key6114</key>
+		<key>PLAYER_MON_FREED_FROM_SKY_DROP</key>
 		<params>3</params>
 		<text>
-			<en lang="english">{1}{2}’s {3} was freedfrom the Sky Drop!</en>
-			<ja lang="japanese">{1}{2} の {3} がスカイ ドロップから解放されました。</ja>
-			<de lang="german">{1}{2}s {3} wurde aus dem Sky Drop befreit!</de>
-			<fr lang="french">Le {3} de {1}{2} a été libérédu Sky Drop !</fr>
-			<es lang="spanish">¡El {3} de {1}{2} fue liberado del Sky Drop!</es>
-			<it lang="italian">Il {3} di {1}{2} è stato liberatodallo Sky Drop!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) Sky Drop에서 해방되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2} 的 {3} 已从 Sky Drop 中解救出来！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2} 的 {3} 已從 Sky Drop 中解救出來！</zh-tw>
+			<en lang="english">{1}’s {2} was freedfrom the Sky Drop!</en>
+			<ja lang="japanese">{1} の {2} がスカイ ドロップから解放されました。</ja>
+			<de lang="german">{1}s {2} wurde aus dem Sky Drop befreit!</de>
+			<fr lang="french">Le {2} de {1} a été libérédu Sky Drop !</fr>
+			<es lang="spanish">¡El {2} de {1} fue liberado del Sky Drop!</es>
+			<it lang="italian">Il {2} di {1} è stato liberatodallo Sky Drop!</it>
+			<ko lang="korean">{1}의 {2}이(가) Sky Drop에서 해방되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1} 的 {2} 已从 Sky Drop 中解救出来！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1} 的 {2} 已從 Sky Drop 中解救出來！</zh-tw>
 		</text>
 	</string>
 	<string>
@@ -28260,7 +28350,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6437</key>
+		<key>MON_SWITCHED_SPEED_WITH_TARGET</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} switched Speed with its target!</en>
@@ -28275,7 +28365,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6438</key>
+		<key>WILD_MON_SWITCHED_SPEED_WITH_TARGET</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} switched Speed with its target!</en>
@@ -28290,33 +28380,33 @@
 		</text>
 	</string>
 	<string>
-		<key>key6439</key>
-		<params>2</params>
+		<key>OPPOSING_MON_SWITCHED_SPEED_WITH_TARGET</key>
+		<params>1</params>
 		<text>
-			<en lang="english">{1}The opposing {2} switched Speed with its target!</en>
-			<ja lang="japanese">{1}相手の {2} はターゲットとの速度を 切り替えました!</ja>
-			<de lang="german">{1}Der Gegner {2} wechselte die Geschwindigkeit mit seinem Ziel!</de>
-			<fr lang="french">{1}Les {2} adversaires ont changé de vitesse avec its leur cible !</fr>
-			<es lang="spanish">{1}¡El oponente {2} cambió la velocidad con su objetivo!</es>
-			<it lang="italian">{1}L'avversario {2} ha cambiato Velocità con il suo bersaglio!</it>
-			<ko lang="korean">{1}상대 {2}의 속도가 목표와 전환되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方{2}改变了 目标的速度！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方{2}改變了 目標的速度！</zh-tw>
+			<en lang="english">The opposing {1} switched Speed with its target!</en>
+			<ja lang="japanese">相手の {1} はターゲットとの速度を 切り替えました!</ja>
+			<de lang="german">Der Gegner {1} wechselte die Geschwindigkeit mit seinem Ziel!</de>
+			<fr lang="french">Les {1} adversaires ont changé de vitesse avec its leur cible !</fr>
+			<es lang="spanish">¡El oponente {1} cambió la velocidad con su objetivo!</es>
+			<it lang="italian">L'avversario {1} ha cambiato Velocità con il suo bersaglio!</it>
+			<ko lang="korean">상대 {1}의 속도가 목표와 전환되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方{1}改变了 目标的速度！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方{1}改變了 目標的速度！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key6440</key>
-		<params>3</params>
+		<key>PLAYER_MON_SWITCHED_SPEED_WITH_TARGET</key>
+		<params>2</params>
 		<text>
-			<en lang="english">{1}{2}’s {3} switched Speed with its target!</en>
-			<ja lang="japanese">{1}{2} の {3} が its目標の速度に切り替わりました!</ja>
-			<de lang="german">{1}{2}s {3} hat die Geschwindigkeit mit einem Ziel vertauscht!</de>
-			<fr lang="french">La vitesse de {3} de {1}{2} a changé avec  sa cible !</fr>
-			<es lang="spanish">¡El {3} de {1}{2} cambió su velocidad con su objetivo!</es>
-			<it lang="italian">{3} di {1}{2} ha cambiato Velocità con il suo bersaglio!</it>
-			<ko lang="korean">{1}{2}의 {3} 속도가 목표로 전환되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2} 的 {3} 已 切换了目标速度！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2} 的 {3} 已 切換了目標速度！</zh-tw>
+			<en lang="english">{1}’s {2} switched Speed with its target!</en>
+			<ja lang="japanese">{1} の {2} が its目標の速度に切り替わりました!</ja>
+			<de lang="german">{1}s {2} hat die Geschwindigkeit mit einem Ziel vertauscht!</de>
+			<fr lang="french">La vitesse de {2} de {1} a changé avec  sa cible !</fr>
+			<es lang="spanish">¡El {2} de {1} cambió su velocidad con su objetivo!</es>
+			<it lang="italian">{2} di {1} ha cambiato Velocità con il suo bersaglio!</it>
+			<ko lang="korean">{1}의 {2} 속도가 목표로 전환되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1} 的 {2} 已 切换了目标速度！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1} 的 {2} 已 切換了目標速度！</zh-tw>
 		</text>
 	</string>
 	<string>
@@ -30030,22 +30120,22 @@
 		</text>
 	</string>
 	<string>
-		<key>key6555</key>
-		<params>2</params>
+		<key>MON_USED_COURT_CHANGE</key>
+		<params>1</params>
 		<text>
-			<en lang="english">{1}{2} swapped the battle effects affecting each side of the field!</en>
-			<ja lang="japanese">{1}{2} フィールドの各面に影響を与える戦闘効果を 交換しました。</ja>
-			<de lang="german">{1}{2} hat die Kampfeffekte, die sich auf jede Seite des Feldes auswirken, vertauscht!</de>
-			<fr lang="french">{1}{2} a permuté les effets de combat affectant chaque côté du terrain !</fr>
-			<es lang="spanish">¡{1}{2} intercambió los efectos de batalla que afectan a cada lado del campo!</es>
-			<it lang="italian">{1}{2} ha scambiato gli effetti di battaglia che influenzano ogni lato del campo!</it>
-			<ko lang="korean">{1}{2}는 필드의 각 측면에 영향을 미치는 전투 효과를 교환했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}交换了 影响场地两侧的战斗效果！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}交換了 影響場地兩側的戰鬥效果！</zh-tw>
+			<en lang="english">{1} swapped the battle effects affecting each side of the field!</en>
+			<ja lang="japanese">{1} フィールドの各面に影響を与える戦闘効果を 交換しました。</ja>
+			<de lang="german">{1} hat die Kampfeffekte, die sich auf jede Seite des Feldes auswirken, vertauscht!</de>
+			<fr lang="french">{1} a permuté les effets de combat affectant chaque côté du terrain !</fr>
+			<es lang="spanish">¡{1} intercambió los efectos de batalla que afectan a cada lado del campo!</es>
+			<it lang="italian">{1} ha scambiato gli effetti di battaglia che influenzano ogni lato del campo!</it>
+			<ko lang="korean">{1}는 필드의 각 측면에 영향을 미치는 전투 효과를 교환했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}交换了 影响场地两侧的战斗效果！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}交換了 影響場地兩側的戰鬥效果！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key6556</key>
+		<key>WILD_MON_USED_COURT_CHANGE</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} swapped the battle effects affecting each side of the field!</en>
@@ -30060,7 +30150,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6557</key>
+		<key>OPPOSING_MON_USED_COURT_CHANGE</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The opposing {1} swapped the battle effects affecting each side of the field!</en>
@@ -30075,7 +30165,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6558</key>
+		<key>PLAYER_MON_USED_COURT_CHANGE</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1}’s {2} swapped the battle effects affecting each side of the field!</en>
@@ -31167,6 +31257,51 @@
 			<ko lang="korean">{1}은(는) {2}을(를) 사용했습니다.</ko>
 			<zh-cn lang="chinese (simplified)">{1}使用了{2}。</zh-cn>
 			<zh-tw lang="chinese (traditional)">{1}使用了{2}。</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_USED_MOVE</key>
+		<params>2</params>
+		<text>
+			<en lang="english">The wild {1} used {2}</en>
+			<ja lang="japanese">野生の {1} は {2} を使用しました</ja>
+			<de lang="german">Der wilde {1} benutzte {2}</de>
+			<fr lang="french">Le sauvage {1} utilisé {2}</fr>
+			<es lang="spanish">El salvaje {1} usó {2}</es>
+			<it lang="italian">Il selvaggio {1} ha utilizzato {2}</it>
+			<ko lang="korean">야생 {1}은(는) {2}을(를) 사용했습니다.</ko>
+			<zh-cn lang="chinese (simplified)">野生{1}使用{2}</zh-cn>
+			<zh-tw lang="chinese (traditional)">野生{1}使用{2}</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_USED_MOVE</key>
+		<params>2</params>
+		<text>
+			<en lang="english">The opposing {1} used {2}</en>
+			<ja lang="japanese">相手の {1} は {2} を使用しました</ja>
+			<de lang="german">Der gegnerische {1} nutzte {2}</de>
+			<fr lang="french">Le {1} adverse a utilisé {2}</fr>
+			<es lang="spanish">El oponente {1} usó {2}</es>
+			<it lang="italian">Il {1} ​​avversario ha utilizzato {2}</it>
+			<ko lang="korean">상대 {1}이(가) {2}을(를) 사용했습니다.</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}使用了{2}</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}使用了{2}</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_USED_MOVE</key>
+		<params>3</params>
+		<text>
+			<en lang="english">{1}'s {2} used {3}</en>
+			<ja lang="japanese">{1} の {2} は {3} を使用しました</ja>
+			<de lang="german">{1}s {2} verwendet {3}</de>
+			<fr lang="french">{2} de {1} a utilisé {3}</fr>
+			<es lang="spanish">El {2} de {1} usó {3}</es>
+			<it lang="italian">{2} di {1} ha utilizzato {3}</it>
+			<ko lang="korean">{1}의 {2}은(는) {3}을(를) 사용했습니다.</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}使用了{3}</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}使用了{3}</zh-tw>
 		</text>
 	</string>
 	<string>
