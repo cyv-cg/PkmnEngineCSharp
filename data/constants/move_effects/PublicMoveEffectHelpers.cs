@@ -67,7 +67,7 @@ namespace PkmnEngine {
 			if (stages <= MIN_STAT_STAGE && n < 0) {
 				atLimitMsg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_STAT_WONT_GO_LOWER, bm), bm.GetName(), Lang.GetString(StringResource.Namespace.STAT, statString));
 			}
-			else if (stages >= MIN_STAT_STAGE && n > 0) {
+			else if (stages >= MAX_STAT_STAGE && n > 0) {
 				atLimitMsg = Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_STAT_WONT_GO_HIGHER, bm), bm.GetName(), Lang.GetString(StringResource.Namespace.STAT, statString));
 			}
 

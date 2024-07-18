@@ -207,6 +207,10 @@ namespace PkmnEngine {
 				mult *= 1.3f;
 			}
 
+			if ((gBattleMoves(moveID).flags & BattleMoves.Flag.DOUBLE_DAMAGE_MINIMIZE) != 0 && target.HasStatus(Status.MINIMIZE)) {
+				mult *= 2;
+			}
+
 			// TODO: Metronome???
 
 			return mult;

@@ -65,6 +65,7 @@ namespace PkmnEngine {
 			CANNOT_BE_SKETCHED			= 1L << 36,
 			HITS_UNGROUNDED				= 1L << 37,
 			CANNOT_USE_MOVE_TWICE		= 1L << 38,
+			DOUBLE_DAMAGE_MINIMIZE		= 1L << 39,
 		}
 		#endregion
 	
@@ -12342,17 +12343,17 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_STEAMROLLER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.STEAMROLLER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
+						/*primaryEffect =*/ MoveEffectID.HIT,
+						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
 						/*moveType =*/ Type.BUG,
 						/*power =*/ 65,
 						/*accuracy =*/ 100,
 						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
+						/*secondaryEffectChance =*/ 30,
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.DOUBLE_DAMAGE_MINIMIZE
 					);
 				}
 			}
@@ -13304,7 +13305,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.HITS_UNGROUNDED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.HITS_UNGROUNDED | Flag.IGNORE_TYPE_EFF
 					);
 				}
 			}

@@ -181,7 +181,7 @@ namespace PkmnEngine {
 		/// <returns>Move effect flags.</returns>
 		public static async Task<u32> DoMove(Battle battle, BattleState state, BattleMon attacker, BattleMon defender, BattleMoveID moveID, u8 slotUser, u8 slotTarget, u8 numTargets, u8 index, bool print = true) {
 			if (print) {
-				await MessageBox(GetString(STRINGS, BATTLE_COMMON.MON_USED_MOVE, attacker.GetName(), GetMoveName(moveID)));
+				await MessageBox(GetString(STRINGS, GetContextString(BATTLE_COMMON.MON_USED_MOVE, attacker), attacker.GetName(), GetMoveName(moveID)));
 			}
 
 			// Record the slot of the user as the last mon that attacked the target.

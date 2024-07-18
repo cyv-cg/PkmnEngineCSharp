@@ -426,19 +426,19 @@ namespace PkmnEngine {
 		#region healing
 		public static async Task<u32> Effect_Absorb75Percent(MoveEffectParams p) {
 			u32 flags = await Attack(p);
-			U16 healAmount = new((u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.75f));
+			U16 healAmount = new((u16)((flags & 0xFFFF) * 0.75f));
 			await p.attacker.HealMon(healAmount, false);
 			return flags;
 		}
 		public static async Task<u32> Effect_Absorb50Percent(MoveEffectParams p) {
 			u32 flags = await Attack(p);
-			U16 healAmount = new((u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.5f));
+			U16 healAmount = new((u16)((flags & 0xFFFF) * 0.5f));
 			await p.attacker.HealMon(healAmount, false);
 			return flags;
 		}
 		public static async Task<u32> Effect_Abosrb25Percent(MoveEffectParams p) {
 			u32 flags = await Attack(p);
-			U16 healAmount = new((u16)((flags & FLAG_DAMAGE & 0xFFFF) * 0.25f));
+			U16 healAmount = new((u16)((flags & 0xFFFF) * 0.25f));
 			await p.attacker.HealMon(healAmount, false);
 			return flags;
 		}
@@ -634,28 +634,133 @@ namespace PkmnEngine {
 		#endregion
 		#region semi_invulnerable_moves
 		public static async Task<u32> Effect_SemiInvulnerable(MoveEffectParams p) {
+			p.attacker.GiveStatus(Status.SEMI_INVULNERABLE_TURN);
+			p.attacker.SetFlag(BattleMon.Flag.MON_INDUCED_SEMI_INVUL);
+		
 			return 0;
 		}
 		public static async Task<u32> Effect_Dig(MoveEffectParams p) {
-			return 0;
+			if (!p.attacker.HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_BURROWED_UNDER_THE_GROUND, p.attacker), p.attacker.GetName()));
+				
+				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_GROUND);
+				await Effect_SemiInvulnerable(p);
+				
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+			}
+			else {
+				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
+				p.attacker.RemoveFlag(BattleMon.Flag.MON_INDUCED_SEMI_INVUL);
+
+				return await Attack(p);
+			}
 		}
 		public static async Task<u32> Effect_Fly(MoveEffectParams p) {
-			return 0;
+			if (!p.attacker.HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_FLEW_UP_HIGH, p.attacker), p.attacker.GetName()));
+				
+				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_AIR);
+				await Effect_SemiInvulnerable(p);
+				
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+			}
+			else {
+				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
+				p.attacker.RemoveFlag(BattleMon.Flag.MON_INDUCED_SEMI_INVUL);
+
+				return await Attack(p);
+			}
 		}
 		public static async Task<u32> Effect_Bounce(MoveEffectParams p) {
-			return 0;
+			if (!p.attacker.HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_SPRANG_UP, p.attacker), p.attacker.GetName()));
+				
+				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_AIR);
+				await Effect_SemiInvulnerable(p);
+				
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+			}
+			else {
+				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
+				p.attacker.RemoveFlag(BattleMon.Flag.MON_INDUCED_SEMI_INVUL);
+
+				return await Attack(p);
+			}
 		}
 		public static async Task<u32> Effect_SkyDrop(MoveEffectParams p) {
-			return 0;
+			if (p.state.FieldHasCondition(Condition.GRAVITY)) {
+				return FLAG_MOVE_FAILED;
+			}
+			
+			if (!p.attacker.HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
+				await MessageBox(Lang.GetString(STRINGS, GetConjugatedString("MON_TOOK_INTO_SKY", p.attacker, p.target), p.attacker.GetName()));
+				
+				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_GROUND);
+				p.target.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_GROUND);
+				await Effect_SemiInvulnerable(p);
+				p.target.GiveStatus(Status.SEMI_INVULNERABLE_TURN);
+				
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+			}
+			else {
+				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
+				p.attacker.RemoveFlag(BattleMon.Flag.MON_INDUCED_SEMI_INVUL);
+				p.target.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
+
+				u32 flags = await Attack(p);
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_FREED_FROM_SKY_DROP, p.target), p.target.GetName()));
+				return flags;
+			}
 		}
 		public static async Task<u32> Effect_Dive(MoveEffectParams p) {
-			return 0;
+			if (!p.attacker.HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_HID_UNDERWATER, p.attacker), p.attacker.GetName()));
+				
+				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_WATER);
+				await Effect_SemiInvulnerable(p);
+				
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+			}
+			else {
+				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
+				p.attacker.RemoveFlag(BattleMon.Flag.MON_INDUCED_SEMI_INVUL);
+
+				return await Attack(p);
+			}
 		}
 		public static async Task<u32> Effect_PhantomForce(MoveEffectParams p) {
-			return 0;
+			if (!p.attacker.HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_VANISHED_INSTANTLY, p.attacker), p.attacker.GetName()));
+				
+				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_PHANTOM);
+				await Effect_SemiInvulnerable(p);
+				
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+			}
+			else {
+				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
+				p.attacker.RemoveFlag(BattleMon.Flag.MON_INDUCED_SEMI_INVUL);
+
+				p.target.RemoveStatus(Status.PROTECTION);
+				
+				return await Attack(p);
+			}
 		}
 		public static async Task<u32> Effect_ShadowForce(MoveEffectParams p) {
-			return 0;
+			if (!p.attacker.HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_VANISHED_INSTANTLY, p.attacker), p.attacker.GetName()));
+				
+				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_PHANTOM);
+				await Effect_SemiInvulnerable(p);
+				
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+			}
+			else {
+				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
+				p.attacker.RemoveFlag(BattleMon.Flag.MON_INDUCED_SEMI_INVUL);
+
+				return await Attack(p);
+			}
 		}
 		#endregion
 		#region charging_moves
@@ -1232,6 +1337,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Minimize(MoveEffectParams p) {
 			// TODO:
+			p.target.GiveStatus(Status.MINIMIZE);
 			return 0;
 		}
 		public static async Task<u32> Effect_Curse(MoveEffectParams p) {
@@ -2803,7 +2909,10 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_SpeedSwap(MoveEffectParams p) {
-			// TODO:
+			u16 temp = p.attacker.Spd;
+			p.attacker.Spd = p.target.Spd;
+			p.target.Spd = temp;
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_SWITCHED_SPEED_WITH_TARGET, p.attacker), p.attacker.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_SpicyExtract(MoveEffectParams p) {
@@ -2819,10 +2928,6 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_SteamEruption(MoveEffectParams p) {
 			return await Attack(p) | await Effect_ThawHit(p);
-		}
-		public static async Task<u32> Effect_Steamroller(MoveEffectParams p) {
-			// TODO:
-			return 0;
 		}
 		public static async Task<u32> Effect_StompingTantrum(MoveEffectParams p) {
 			// TODO:
@@ -2920,8 +3025,14 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_TechnoBlast(MoveEffectParams p) {
-			// TODO:
-			return 0;
+			Type type = p.attacker.HeldItem switch {
+				Item.BURN_DRIVE => Type.FIRE,
+				Item.DOUSE_DRIVE => Type.WATER,
+				Item.CHILL_DRIVE => Type.ICE,
+				Item.SHOCK_DRIVE => Type.ELECTRIC,
+				_ => p.move.moveType
+			};
+			return await OverrideType(p, type);
 		}
 		public static async Task<u32> Effect_Telekinesis(MoveEffectParams p) {
 			// TODO:
@@ -2978,8 +3089,8 @@ namespace PkmnEngine {
 			
 		}
 		public static async Task<u32> Effect_ThousandArrows(MoveEffectParams p) {
-			// TODO:
-			return 0;
+			await Effect_GroundHit(p);
+			return await Attack(p);
 		}
 		public static async Task<u32> Effect_ThousandWaves(MoveEffectParams p) {
 			u32 flags = await Attack(p);
@@ -2990,8 +3101,6 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_ThroatChop(MoveEffectParams p) {
 			p.target.GiveStatus(Status.THROAT_CHOP);
 			p.target.SetStatusParam(StatusParam.THROAT_CHOP, 2);
-			//BM_PARAMS[0] = GetMonName(p.target.mon);
-			//await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.THROAT_CHOP_PREVENTS_MON_FROM_USING_CERTAIN_MOVES));
 			return 0;
 		}
 		public static async Task<u32> Effect_TidyUp(MoveEffectParams p) {
@@ -3035,7 +3144,10 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_TrickOrTreat(MoveEffectParams p) {
-			// TODO:
+			if (!p.target.AddType(Type.GHOST)) {
+				return FLAG_MOVE_FAILED;
+			}
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_TYPE_WAS_ADDED, p.target), Lang.GetTypeName(Type.GHOST), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_TripleArrows(MoveEffectParams p) {
@@ -3202,7 +3314,13 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_CourtChange(MoveEffectParams p) {
-			// TODO:
+			foreach (FieldCondition condition in p.state.FieldConditions) {
+				if (condition.AffectsWholeField) {
+					continue;
+				}
+				condition.SwapSide();
+			}
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_USED_COURT_CHANGE, p.attacker), p.attacker.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_Reflect(MoveEffectParams p) {

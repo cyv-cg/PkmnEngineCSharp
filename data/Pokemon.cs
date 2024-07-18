@@ -1209,6 +1209,30 @@ namespace PkmnEngine {
 			}
 			return false;
 		}
+		/// <summary>
+		/// Adds a type to the mon.
+		/// </summary>
+		/// <param name="type"></param>
+		/// <returns>True if the type is successfully added.</returns>
+		public bool AddType(Type type) {
+			if (HasType(type)) {
+				return false;
+			}
+			types.Add(type);
+			return true;
+		}
+		/// <summary>
+		/// Removes a type from the mon.
+		/// </summary>
+		/// <param name="type"></param>
+		/// <returns>True if the type is successfully removed.</returns>
+		public bool RemoveType(Type type) {
+			if (!HasType(type)) {
+				return false;
+			}
+			types.Remove(type);
+			return true;
+		}
 
 		public void SetFlag(Flag bmFlag) {
 			this.flags |= bmFlag;

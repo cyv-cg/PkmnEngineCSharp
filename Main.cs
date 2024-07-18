@@ -58,8 +58,10 @@ namespace PkmnEngine {
 			
 			munna.SetNickname("丸子");
 			munna.ReplaceMove(0, BattleMoveID.SYNTHESIS);
+			munna.ReplaceMove(3, BattleMoveID.CALM_MIND);
 
-			snom.GiveMove(BattleMoveID.SYNTHESIS);
+			snom.GiveMove(BattleMoveID.DIG);
+			snom.GiveMove(BattleMoveID.TRANSFORM);
 			shaymin.GiveMove(BattleMoveID.EXPLOSION);
 			snom.hp = 6;
 

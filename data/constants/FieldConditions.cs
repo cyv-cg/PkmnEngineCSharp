@@ -697,6 +697,15 @@ namespace PkmnEngine {
 			}
 		}
 
+		public void SwapSide() {
+			if (AffectedSide == Battle.SIDE_CLIENT) {
+				AffectedSide = Battle.SIDE_REMOTE;
+			}
+			else if (AffectedSide == Battle.SIDE_REMOTE) {
+				AffectedSide = Battle.SIDE_CLIENT;
+			}
+		}
+
 		public bool IsActive() {
 			return Infinite || DurationRemaining > 0;
 		}

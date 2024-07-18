@@ -32,13 +32,6 @@ namespace PkmnEngine {
 			}}
 		},
 		{
-			Ability.COMATOSE,
-			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
-				Callback.OnCheckAsleep,
-				(Ability_Comatose_OnCheckAsleep, 0)
-			}}
-		},
-		{
 			Ability.ICE_BODY,
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
 				Callback.OnCheckIsDamagedByHail,
@@ -159,12 +152,18 @@ namespace PkmnEngine {
 		},
 		{
 			Ability.COMATOSE,
-			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
-				Callback.OnTryAddNonVolatile,
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-				(async (object p) => { return false; /*idfk*/ }, 0)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-			}}
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.OnTryAddNonVolatile,
+	#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+					(async (object p) => { return false; /*idfk*/ }, 0)
+	#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+				},
+				{
+					Callback.OnCheckAsleep,
+					(Ability_Comatose_OnCheckAsleep, 0)
+				}
+			}
 		},
 		{
 			Ability.LEAF_GUARD,
