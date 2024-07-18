@@ -30,7 +30,62 @@ namespace PkmnEngine {
 				Callback.OnModifyStab,
 				(Ability_Adaptability_OnModifyStab, 0)
 			}}
-		}, 
+		},
+		{
+			Ability.COMATOSE,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnCheckAsleep,
+				(Ability_Comatose_OnCheckAsleep, 0)
+			}}
+		},
+		{
+			Ability.ICE_BODY,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnCheckIsDamagedByHail,
+				(Ability_IceBody_OnCheckIsDamagedByHail, 0)
+			}}
+		},
+		{
+			Ability.SNOW_CLOAK,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnCheckIsDamagedByHail,
+				(Ability_SnowCloak_OnCheckIsDamagedByHail, 0)
+			}}
+		},
+		{
+			Ability.SAND_FORCE,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnCheckIsDamagedBySandstorm,
+				(Ability_SandForce_OnCheckIsDamagedBySandstorm, 0)
+			}}
+		},
+		{
+			Ability.SAND_RUSH,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnCheckIsDamagedBySandstorm,
+				(Ability_SandRush_OnCheckIsDamagedBySandstorm, 0)
+			}}
+		},
+		{
+			Ability.SAND_VEIL,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnCheckIsDamagedBySandstorm,
+				(Ability_SandVeil_OnCheckIsDamagedBySandstorm, 0)
+			}}
+		},
+		{
+			Ability.OVERCOAT,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.OnCheckIsDamagedByHail,
+					(Ability_Overcoat_OnCheckIsDamagedByHail, 0)
+				},
+				{
+					Callback.OnCheckIsDamagedBySandstorm,
+					(Ability_Overcoat_OnCheckIsDamagedBySandstorm, 0)
+				}
+			}
+		},
 		{
 			Ability.GUTS,
 			new Dictionary<Callback, (BattleEvent, sbyte)>() {{ 
@@ -123,6 +178,27 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
 				Callback.OnTryAddNonVolatile,
 				(Ability_Immunity_OnTryAddNonVolatile, 0)
+			}}
+		},
+		{
+			Ability.INSOMNIA,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTryAddNonVolatile,
+				(Ability_Insomnia_OnTryAddNonVolatile, 0)
+			}}
+		},
+		{
+			Ability.VITAL_SPIRIT,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTryAddNonVolatile,
+				(Ability_Insomnia_OnTryAddNonVolatile, 0)
+			}}
+		},
+		{
+			Ability.LEVITATE,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnCheckIsUngrounded,
+				(Ability_Levitate_OnCheckIsUngrounded, 0)
 			}}
 		}
 

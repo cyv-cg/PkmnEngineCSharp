@@ -340,6 +340,36 @@ namespace PkmnEngine {
 				Callback.OnDamage,
 				(Status_Bracing_OnDamage, 0)
 			}}
+		},
+		{
+			Status.SEMI_INVULNERABLE_TURN,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.OnCheckIsDamagedByHail,
+					(Status_SemiInvulnerableTurn_OnCheckIsDamagedByHail, 0)
+				}
+			}
+		},
+		{
+			Status.MAGNETIC_LEVITATION,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnCheckIsUngrounded,
+				(Status_MagneticLevitation_OnCheckIsUngrounded, 0)
+			}}
+		},
+		{
+			Status.TELEKINESIS,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnCheckIsUngrounded,
+				(Status_Telekinesis_OnCheckIsUngrounded, 0)
+			}}
+		},
+		{
+			Status.ROOTING,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnCheckIsGrounded,
+				(Status_Rooting_OnCheckIsGrounded, 0)
+			}}
 		}
 
 

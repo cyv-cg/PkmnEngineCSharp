@@ -602,6 +602,13 @@ namespace PkmnEngine {
 					(Condition_Mist_OnSideResidual, 26)
 				}
 			}
+		},
+		{
+			Condition.GRAVITY,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnCheckIsGrounded,
+				(Condition_Gravity_OnCheckIsGrounded, 0)
+			}}
 		}
 		
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously

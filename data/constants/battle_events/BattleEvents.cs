@@ -94,5 +94,10 @@ namespace PkmnEngine {
 		OnWeatherSet,
 		DurationCallback,
 		OnNextTurn,
+		OnCheckAsleep,
+		OnCheckIsDamagedByHail,
+		OnCheckIsDamagedBySandstorm,
+		OnCheckIsGrounded,
+		OnCheckIsUngrounded,
 	}
 }

@@ -503,14 +503,14 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Rest(MoveEffectParams p) {
-			// "Rest will now fail if it is used by a Pokémon with Leaf Guard during harsh sunlight".
-			if (
-				p.target.AbilityProc(Ability.LEAF_GUARD, true) && 
-				(p.state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT || p.state.Weather.Condition == Condition.WEATHER_EXTREME_SUNLIGHT)
-			) {
+			// Rest fails if the user cannot sleep.
+			if (!p.target.CanFallAsleep(p.state)) {
 				return FLAG_MOVE_FAILED;
 			}
-
+			// Rest fails if the user cannot heal.
+			if (p.target.HasStatus(Status.HEAL_BLOCK)) {
+				return FLAG_MOVE_FAILED;
+			}
 			// Rest fails if used by a mon already at max HP.
 			if (p.target.EffHp(p.state) == p.target.EffMaxHp(p.state)) {
 				return FLAG_MOVE_FAILED;
@@ -3175,9 +3175,6 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Transform(MoveEffectParams p) {
 			if (p.target.HasStatus(Status.TRANSFORMED | Status.ILLUSION)) {
-				return FLAG_MOVE_FAILED;
-			}
-			if (p.target.AbilityProc(Ability.GOOD_AS_GOLD, true)) {
 				return FLAG_MOVE_FAILED;
 			}
 

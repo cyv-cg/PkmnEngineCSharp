@@ -40,18 +40,32 @@ namespace PkmnEngine {
 
 			return true;
 		}
-
-		public static async Task<object> Terrain_Electric_OnTryAddNonVolatile(object p) {
+		public static async Task<object> Ability_Comatose_OnTryAddNonVolatile(object p) {
 			OnTryAddNonVolatileParams args = ValidateParams<OnTryAddNonVolatileParams>(p);
-
+			return false;
+		}
+		public static async Task<object> Ability_Insomnia_OnTryAddNonVolatile(object p) {
+			OnTryAddNonVolatileParams args = ValidateParams<OnTryAddNonVolatileParams>(p);
+			
 			if (args.status == Status.SLEEP || args.status == Status.DROWSY) {
 				return false;
 			}
 
 			return true;
 		}
+
+		public static async Task<object> Terrain_Electric_OnTryAddNonVolatile(object p) {
+			OnTryAddNonVolatileParams args = ValidateParams<OnTryAddNonVolatileParams>(p);
+
+			if (args.bm.IsGrounded(args.state) && (args.status == Status.SLEEP || args.status == Status.DROWSY)) {
+				return false;
+			}
+
+			return true;
+		}
 		public static async Task<object> Terrain_Misty_OnTryAddNonVolatile(object p) {
-			return false;
+			OnTryAddNonVolatileParams args = ValidateParams<OnTryAddNonVolatileParams>(p);
+			return !args.bm.IsGrounded(args.state);
 		}
 		
 		public static async Task<object> Condition_Safeguard_OnTryAddNonVolatile(object p) {

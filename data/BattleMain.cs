@@ -80,13 +80,26 @@ namespace PkmnEngine {
 			}
 			return chain;
 		}
-		public static async Task<bool> RunEventCheck(Callback cb, BattleMon target, object args) {
+		/// <summary>
+		/// Runs a series of events that return boolean values.
+		/// If any event returns false, the series as a whole returns false.
+		/// If 'invert' then return true if any single event is true.
+		/// </summary>
+		/// <param name="cb"></param>
+		/// <param name="target"></param>
+		/// <param name="args"></param>
+		/// <param name="invert"></param>
+		/// <returns></returns>
+		public static async Task<bool> RunEventCheck(Callback cb, BattleMon target, object args, bool invert = false) {
 			foreach (bool x in await RunEvent<bool>(cb, target, args)) {
-				if (!x) {
+				if (!x && !invert) {
 					return false;
 				}
+				else if (x && invert) {
+					return true;
+				}
 			}
-			return true;
+			return !invert;
 		}
 		public static async Task RunEvent(Callback cb, BattleMon target, object args) {
 			await RunEvent<object>(cb, target, args);
@@ -140,13 +153,26 @@ namespace PkmnEngine {
 			}
 			return chain;
 		}
-		public static async Task<bool> RunEventCheck(Callback cb, Battle target, object args) {
+		/// <summary>
+		/// Runs a series of events that return boolean values.
+		/// If any event returns false, the series as a whole returns false.
+		/// If 'invert' then return true if any single event is true.
+		/// </summary>
+		/// <param name="cb"></param>
+		/// <param name="target"></param>
+		/// <param name="args"></param>
+		/// <param name="invert"></param>
+		/// <returns></returns>
+		public static async Task<bool> RunEventCheck(Callback cb, Battle target, object args, bool invert = false) {
 			foreach (bool x in await RunEvent<bool>(cb, target.CurrentState, args)) {
-				if (!x) {
+				if (!x && !invert) {
 					return false;
 				}
+				else if (x && invert) {
+					return true;
+				}
 			}
-			return true;
+			return !invert;
 		}
 		public static async Task<float> RunEventChain(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
 			float chain = 1;
@@ -155,13 +181,26 @@ namespace PkmnEngine {
 			}
 			return chain;
 		}
-		public static async Task<bool> RunEventCheck(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
+		/// <summary>
+		/// Runs a series of events that return boolean values.
+		/// If any event returns false, the series as a whole returns false.
+		/// If 'invert' then return true if any single event is true.
+		/// </summary>
+		/// <param name="cb"></param>
+		/// <param name="target"></param>
+		/// <param name="args"></param>
+		/// <param name="invert"></param>
+		/// <returns></returns>
+		public static async Task<bool> RunEventCheck(Callback cb, BattleState target, object args, u8 side = u8.MaxValue, bool invert = false) {
 			foreach (bool x in await RunEvent<bool>(cb, target, args, side)) {
-				if (!x) {
+				if (!x && !invert) {
 					return false;
 				}
+				else if (x && invert) {
+					return true;
+				}
 			}
-			return true;
+			return !invert;
 		}
 		public static async void RunEvent(Callback cb, BattleState target, object args, u8 side = u8.MaxValue) {
 			await RunEvent<object>(cb, target, args, side);
@@ -192,12 +231,18 @@ namespace PkmnEngine {
 				}
 			}
 			// Ability
+			// TODO: https://bulbapedia.bulbagarden.net/wiki/Ignoring_Abilities#Ignorable_Abilities
 			Ability ability = target.ability;
 			(callback, priority) = AbilityEffects.gAbilityEvents(ability, cb);
 			if (callback != null) {
 				handlers.Add(new EventHandler(callback, EffectType.ABILITY, priority));
 			}
-			// TODO: Item
+			// Item
+			Item item = target.HeldItem;
+			(callback, priority) = ItemEffects.gItemEvents(item, cb);
+			if (callback != null) {
+				handlers.Add(new EventHandler(callback, EffectType.ITEM, priority));
+			}
 			// Species
 			Species species = target.Species;
 			(callback, priority) = SpeciesEffects.gSpeciesEvents(species, cb);

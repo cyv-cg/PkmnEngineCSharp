@@ -207,6 +207,11 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 
+			// Mons with Good as Gold as their ability are not affected by status moves
+			if (gBattleMoves(moveID).moveCat == MoveCategory.STATUS && defender.AbilityProc(Ability.GOOD_AS_GOLD, true)) {
+				return FLAG_MOVE_FAILED;
+			}
+
 			// If the used move thaws the user, then thaw the user first.
 			if ((gBattleMoves(moveID).flags & BattleMoves.Flag.THAWS_USER) != 0) {
 				//TODO: //BattleMoveEffects::sThawMon(attacker);

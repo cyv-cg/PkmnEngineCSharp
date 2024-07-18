@@ -1168,7 +1168,7 @@ namespace PkmnEngine {
 		}
 
 		public bool IsAsleep() {
-			return HasStatus(Status.SLEEP) || AbilityProc(Ability.COMATOSE, false);
+			return HasStatus(Status.SLEEP) || Battle.RunEventCheck(Callback.OnCheckAsleep, this, new OnCheckAsleepParams(this), invert: true).Result;
 		}
 		public bool IsPoisoned() {
 			return HasStatus(Status.POISON) || HasStatus(Status.TOXIC);
@@ -1293,37 +1293,7 @@ namespace PkmnEngine {
 			if (HasType(Type.ICE)) {
 				return false;
 			}
-
-			// Mons in the semi-invulnerable turn of certain moves are not damaged.
-			if (HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
-				switch (GetStatusParam(StatusParam.SEMI_INVULNERABLE)) {
-					case StatusEffects.SEMI_INVULNERABLE_GROUND:
-					case StatusEffects.SEMI_INVULNERABLE_WATER:
-					case StatusEffects.SEMI_INVULNERABLE_PHANTOM:
-						return false;
-					case StatusEffects.SEMI_INVULNERABLE_AIR:
-					default:
-						break;
-				}
-			}
-
-			// Mons with certain abilities are not damaged.
-			if (
-				AbilityProc(Ability.ICE_BODY, false) ||
-				AbilityProc(Ability.SNOW_CLOAK, false) ||
-				AbilityProc(Ability.MAGIC_GUARD, false) ||
-				AbilityProc(Ability.OVERCOAT, false)
-			) {
-				return false;
-			}
-			
-			// safety goggles prevent hail damage
-			if (HeldItem == Item.SAFETY_GOGGLES) {
-				return false;
-			}
-
-			// All other mons are damaged by hail.
-			return true;
+			return Battle.RunEventCheck(Callback.OnCheckIsDamagedByHail, this, new OnCheckIsDamagedByHailParams(this)).Result;
 		}
 		/// <summary>
 		/// Determines the mon can be damaged by a sandstorm.
@@ -1334,38 +1304,8 @@ namespace PkmnEngine {
 			if (HasType(Type.ROCK) || HasType(Type.STEEL) || HasType(Type.GROUND)) {
 				return false;
 			}
-
-			// Mons in the semi-invulnerable turn of certain moves are not damaged.
-			if (HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
-				switch (GetStatusParam(StatusParam.SEMI_INVULNERABLE)) {
-					case StatusEffects.SEMI_INVULNERABLE_GROUND:
-					case StatusEffects.SEMI_INVULNERABLE_WATER:
-					case StatusEffects.SEMI_INVULNERABLE_PHANTOM:
-						return false;
-					case StatusEffects.SEMI_INVULNERABLE_AIR:
-					default:
-						break;
-				}
-			}
-
-			// Mons with certain abilities are not damaged.
-			if (
-				AbilityProc(Ability.SAND_FORCE, false) ||
-				AbilityProc(Ability.SAND_RUSH, false) ||
-				AbilityProc(Ability.SAND_VEIL, false) ||
-				AbilityProc(Ability.MAGIC_GUARD, false) ||
-				AbilityProc(Ability.OVERCOAT, false)
-			) {
-				return false;
-			}
-			
-			// safety goggles prevent sandstorm damage
-			if (HeldItem == Item.SAFETY_GOGGLES) {
-				return false;
-			}
-
 			// All other mons are damaged by sandstorm.
-			return true;
+			return Battle.RunEventCheck(Callback.OnCheckIsDamagedBySandstorm, this, new OnCheckIsDamagedBySandstormParams(this)).Result;
 		}
 
 		public bool IsGrounded(BattleState state) {
@@ -1374,15 +1314,9 @@ namespace PkmnEngine {
 			// A Pokémon will be grounded if any of the following apply:
 
 			// It is holding an Iron Ball.
-			if (HeldItem == Item.IRON_BALL) {
-				return true;
-			}
 			// It is under the effect of Ingrain, Smack Down, or Thousand Arrows.
-			if (HasStatus(Status.ROOTING)) {
-				return true;
-			}
 			// Gravity is in effect.
-			if (state.FieldHasCondition(Condition.GRAVITY)) {
+			if (Battle.RunEventCheck(Callback.OnCheckIsGrounded, this, new OnCheckIsGroundedParams(this), invert: true).Result) {
 				return true;
 			}
 
@@ -1390,22 +1324,14 @@ namespace PkmnEngine {
 			// A Pokémon is ungrounded if any of the following apply (and there is no effect that makes it grounded):
 
 			// It has the Flying type.
-			if (HasType(Type.FLYING)) {
-				return false;
-			}
 			// It has the Ability Levitate.
-			if (AbilityProc(Ability.LEVITATE, false)) {
-				return false;
-			}
 			// It is holding an Air Balloon.
-			if (HeldItem == Item.AIR_BALLOON) {
-				return false;
-			}
 			// It is under the effect of Magnet Rise or Telekinesis.
-			if (HasStatus(Status.MAGNETIC_LEVITATION | Status.TELEKINESIS)) {
+			if (HasType(Type.FLYING) || Battle.RunEventCheck(Callback.OnCheckIsUngrounded, this, new OnCheckIsUngroundedParams(this), invert: true).Result) {
 				return false;
 			}
 
+			// All other mons are assumed to be grounded.
 			return true;
 		}
 
