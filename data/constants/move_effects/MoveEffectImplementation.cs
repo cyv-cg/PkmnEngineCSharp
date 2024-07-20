@@ -23,6 +23,7 @@ namespace PkmnEngine {
 		public const u32 FLAG_TARGET_FAINTED				= 1 << 20;
 		public const u32 FLAG_DO_NOT_DO_SECONDARY_EFFECT	= 1 << 21;
 		public const u32 FLAG_SWITCH_TO_MON					= 1 << 22;
+		public const u32 FLAG_DO_NOT_CONSUME_PP				= 1 << 23;
 		public const u32 FLAG_STAT_DID_NOT_CHANGE			= 1 << 29;
 		public const u32 FLAG_MOVE_FAILED					= 1 << 30;
 
@@ -647,7 +648,7 @@ namespace PkmnEngine {
 				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_GROUND);
 				await Effect_SemiInvulnerable(p);
 				
-				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 			}
 			else {
 				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
@@ -663,7 +664,7 @@ namespace PkmnEngine {
 				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_AIR);
 				await Effect_SemiInvulnerable(p);
 				
-				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 			}
 			else {
 				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
@@ -679,7 +680,7 @@ namespace PkmnEngine {
 				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_AIR);
 				await Effect_SemiInvulnerable(p);
 				
-				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 			}
 			else {
 				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
@@ -701,7 +702,7 @@ namespace PkmnEngine {
 				await Effect_SemiInvulnerable(p);
 				p.target.GiveStatus(Status.SEMI_INVULNERABLE_TURN);
 				
-				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 			}
 			else {
 				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
@@ -720,7 +721,7 @@ namespace PkmnEngine {
 				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_WATER);
 				await Effect_SemiInvulnerable(p);
 				
-				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 			}
 			else {
 				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
@@ -736,7 +737,7 @@ namespace PkmnEngine {
 				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_PHANTOM);
 				await Effect_SemiInvulnerable(p);
 				
-				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 			}
 			else {
 				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
@@ -754,7 +755,7 @@ namespace PkmnEngine {
 				p.attacker.SetStatusParam(StatusParam.SEMI_INVULNERABLE, SEMI_INVULNERABLE_PHANTOM);
 				await Effect_SemiInvulnerable(p);
 				
-				return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+				return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 			}
 			else {
 				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
@@ -774,7 +775,7 @@ namespace PkmnEngine {
 			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CLOAKED_IN_FREEZING_LIGHT, p.attacker), p.attacker.GetName()));
 			p.attacker.GiveStatus(Status.CHARGING_TURN);
 		}
-		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 		}
 		public static async Task<u32> Effect_IceBurn(MoveEffectParams p) {
 			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
@@ -785,7 +786,7 @@ namespace PkmnEngine {
 			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CLOAKED_IN_FREEZING_AIR, p.attacker), p.attacker.GetName()));
 			p.attacker.GiveStatus(Status.CHARGING_TURN);
 		}
-		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 		}
 		public static async Task<u32> Effect_Geomancy(MoveEffectParams p) {
 			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
@@ -796,7 +797,7 @@ namespace PkmnEngine {
 			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_ABSORBING_POWER, p.attacker), p.attacker.GetName()));
 			p.attacker.GiveStatus(Status.CHARGING_TURN);
 		}
-		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 		}
 		public static async Task<u32> Effect_MeteorBeam(MoveEffectParams p) {
 			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
@@ -808,7 +809,7 @@ namespace PkmnEngine {
 			p.attacker.GiveStatus(Status.CHARGING_TURN);
 			await Effect_SpecialAttackUp(p);
 		}
-		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 		}
 		public static async Task<u32> Effect_RazorWind(MoveEffectParams p) {
 			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
@@ -819,7 +820,7 @@ namespace PkmnEngine {
 			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_WHIPPED_UP_A_WHIRLWIND, p.attacker), p.attacker.GetName()));
 			p.attacker.GiveStatus(Status.CHARGING_TURN);
 		}
-		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 		}
 		public static async Task<u32> Effect_SkullBash(MoveEffectParams p) {
 			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
@@ -831,7 +832,7 @@ namespace PkmnEngine {
 			p.attacker.GiveStatus(Status.CHARGING_TURN);
 			await Effect_DefenseUp(p);
 		}
-		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 		}
 		public static async Task<u32> Effect_SkyAttack(MoveEffectParams p) {
 			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
@@ -842,7 +843,7 @@ namespace PkmnEngine {
 			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_BECAME_CLOAKED_IN_HARSH_LIGHT, p.attacker), p.attacker.GetName()));
 			p.attacker.GiveStatus(Status.CHARGING_TURN);
 		}
-		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT | FLAG_DO_NOT_CONSUME_PP;
 		}
 		public static async Task<u32> Effect_SolarBeam(MoveEffectParams p) {
 			// If the mon is charging or the sunlight is harsh, attack.

@@ -147,7 +147,6 @@ namespace PkmnEngine {
 				if (!attacker.CanUseMove(battle, state, moveSlot, true)) {
 					return;
 				}
-				DecreaseMovePP(attacker, moveSlot);
 			}
 
 			u32 flags = 0;
@@ -157,10 +156,14 @@ namespace PkmnEngine {
 				if (!MoveHit(battle, state, attacker, defender, moveID)) {
 					await MessageBox(GetString(STRINGS, BATTLE_COMMON.MON_USED_MOVE, attacker.GetName(), GetMoveName(moveID)));
 					await MessageBox(GetString(STRINGS, BATTLE_COMMON.MON_AVOIDED_ATTACK, defender.GetName()));
+					DecreaseMovePP(attacker, moveSlot);
 					continue;
 				}
 
 				flags = await DoMove(battle, state, attacker, defender, moveID, slotUser, targets[i], (u8)targets.Length, index, true);
+				if ((flags & FLAG_DO_NOT_CONSUME_PP) == 0) {
+					DecreaseMovePP(attacker, moveSlot);
+				}
 			}
 		}
 		/// <summary>
