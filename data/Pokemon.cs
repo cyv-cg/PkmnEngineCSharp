@@ -796,7 +796,7 @@ namespace PkmnEngine {
 				bm.status[key] = data.ReadBool();
 			}
 			u8 statusParamCount = data.Read8();
-			bm.statusParams = new Dictionary<StatusParam, u16>();
+			bm.statusParams = new Dictionary<StatusParam, u32>();
 			for (u8 i = 0; i < statusParamCount; i++) {
 				StatusParam key = (StatusParam)data.Read16();
 				bm.statusParams[key] = data.Read16();
@@ -845,7 +845,7 @@ namespace PkmnEngine {
 			this.flags = 0;
 			
 			this.status = new Dictionary<Status, bool>();
-			this.statusParams = new Dictionary<StatusParam, u16>();
+			this.statusParams = new Dictionary<StatusParam, u32>();
 		}
 		
 		public Pokemon Mon { get; private set; }
@@ -890,7 +890,7 @@ namespace PkmnEngine {
 		public BattleMonEventHandler OnMonFainted { get; set; }
 		
 		private Dictionary<Status, bool> status;
-		public Dictionary<StatusParam, u16> statusParams;
+		public Dictionary<StatusParam, u32> statusParams;
 		public Status[] Statuses { get {
 				List<Status> statuses = new List<Status>();
 				foreach (Status s in status.Keys) {
@@ -1174,10 +1174,10 @@ namespace PkmnEngine {
 			return HasStatus(Status.POISON) || HasStatus(Status.TOXIC);
 		}
 
-		public void SetStatusParam(StatusParam param, u16 value) {
+		public void SetStatusParam(StatusParam param, u32 value) {
 			statusParams[param] = value;
 		}
-		public u16 GetStatusParam(StatusParam param) {
+		public u32 GetStatusParam(StatusParam param) {
 			if (statusParams.ContainsKey(param)) {
 				return statusParams[param];
 			}
@@ -1187,12 +1187,12 @@ namespace PkmnEngine {
 		}
 		public void IncrementStatusParam(StatusParam param) {
 			if (statusParams.ContainsKey(param)) {
-				SetStatusParam(param, (u16)(GetStatusParam(param) + 1));
+				SetStatusParam(param, (u32)(GetStatusParam(param) + 1));
 			}
 		}
 		public void DecrementStatusParam(StatusParam param) {
 			if (statusParams.ContainsKey(param)) {
-				SetStatusParam(param, (u16)(GetStatusParam(param) - 1));
+				SetStatusParam(param, (u32)(GetStatusParam(param) - 1));
 			}
 		}
 

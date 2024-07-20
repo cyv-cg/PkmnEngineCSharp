@@ -364,7 +364,7 @@ namespace PkmnEngine {
 			// to store the slot of a target.
 			List<u8> targets = new List<u8>();
 			for (u8 i = 0; i < 32 / BattleState.BITS_PER_MON_INDEX; i++) {
-				u32 mask = (u32)((1 << BattleState.BITS_PER_MON_INDEX) - 1) << (i * BattleState.BITS_PER_MON_INDEX);
+				u32 mask = (u32)(BattleState.SLOT_EMPTY << (i * BattleState.BITS_PER_MON_INDEX));
 				u8 slot = (u8)((slotsTarget & mask) >> (i * BattleState.BITS_PER_MON_INDEX));
 				if (slot == BattleState.SLOT_EMPTY) {
 					break;
@@ -450,13 +450,22 @@ namespace PkmnEngine {
 		/// <summary>
 		/// Handles letting all mons on the field choose their actions for the turn. 
 		/// </summary>
-		private async Task ChooseActions(BattleState state)
-		{
+		private async Task ChooseActions(BattleState state) {
 			// Get tasks for each slot for each player.
-			Task<u64>[] tasks = new Task<u64>[format.numPlayers]; 
+			List<Task<u64>> tasks = new List<Task<u64>>();
 			for (u8 i = 0; i < format.numPlayers; i++) {
 				foreach (u8 slot in players[i].slots) {
-					tasks[i] = players[i].controller.HandleInputChooseAction(this, state, slot);
+					BattleMon bm = GetMonInSlot(state, slot);
+					u64 defaultAction = BattleUtils.MonCanAct(bm, slot);
+					if (defaultAction == ACTION_CHOOSE) {
+						tasks.Add(players[i].controller.HandleInputChooseAction(this, state, slot));
+					}
+					else if (GetBattleActionCode(defaultAction) == ActionCode.RECHARGING) {
+						await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_MUST_RECHARGE, bm), bm.GetName()));
+					}
+					else {
+						state.AddAction(defaultAction);
+					}
 				}
 			}
 
@@ -565,8 +574,54 @@ namespace PkmnEngine {
 			await MessageBox($"{players[WinningSide].profile.Name} won!");
 		}
 
+		private int GetActionPriority(BattleState state, u64 action) {
+			ActionCode code	= GetBattleActionCode(action);
+			u8 slot			= GetBattleActionSlot(action);
+			u32 args		= GetBattleActionArgs(action);
+
+			BattleMon bm = GetMonInSlot(state, slot);
+			// Get effective speed stat.
+			int effSpd = bm.GetEffectiveSpd(state);
+			
+			switch (code) {
+				case ActionCode.SWITCH: return int.MaxValue; // Switching out happens first.
+				case ActionCode.RECHARGING or ActionCode.NONE: return effSpd; // Not acting happens in an unmodified order.
+			}
+			
+			// Using a move
+			
+			// Modify by move priority.
+			BattleMove move = BattleMoves.gBattleMoves((BattleMoveID)(args & 0xFFFF));
+			effSpd += 1000 * move.priority;
+
+			return effSpd;
+ 		}
+		private void SortActions(BattleState state) {
+			for (u8 i = 0; i < state.ActionCount; i++) {
+				bool swapped = false;
+				for (u8 j = 0; j < state.ActionCount - i - 1; j++) {
+					// Get the action priority of each action.
+					int spd1 = GetActionPriority(state, state.Actions[j]);
+					int spd2 = GetActionPriority(state, state.Actions[j + 1]);
+
+					// Decide which goes first between the two.
+					// Swap if the second is faster than the first OR randomly swap if they have the same priority.
+					bool swap = (spd2 > spd1) || (spd1 == spd2 && this.Random01() < 0.5f);
+
+					if (swap) {
+						(state.Actions[j + 1], state.Actions[j]) = (state.Actions[j], state.Actions[j + 1]);
+						swapped = true;
+					}
+				}
+				if (swapped == false)
+					break;
+			}
+		}
+
 		private async Task DoBattleActions(BattleState state) {
-			// TODO: sort actions by move order.
+			// Sort actions by move order.
+			SortActions(state);
+
 			for (u8 i = 0; i < state.ActionCount; i++) {
 				u64 action	= state.Actions[i];
 				ActionCode code	= GetBattleActionCode(action);
@@ -699,7 +754,7 @@ namespace PkmnEngine {
 				// Set the counter to 1.
 				actor.SetStatusParam(StatusParam.SUCCESSIVE_MOVE_USES, 1);
 			}
-			actor.SetStatusParam(StatusParam.LAST_TARGETED_MON, targetsArr[0]);
+			actor.SetStatusParam(StatusParam.LAST_TARGETED_MON, targets);
 		}
 
 		/// <summary>

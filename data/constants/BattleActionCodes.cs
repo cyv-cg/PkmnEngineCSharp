@@ -11,6 +11,9 @@ namespace PkmnEngine {
 		public static u32 GetBattleActionArgs(u64 action) { return (u32)((action & 0x00FFFFFF00000000) >> 32); }
 		public static u32 GetBattleActionFlags(u64 action) { return (u32)((action & 0x00000000FFFFFFFF) >> 0); }
 
+		public const u64 ACTION_CHOOSE	= 0b_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000;
+		public const u64 ACTION_SKIP	= 0b_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0001;
+
 		/* 
 			Any action/event that can occur in battle will be encoded in this format.
 			4 bits for the action code, 4 for the slot of the user, 24 for args, and 32 for additional flags.
@@ -68,6 +71,7 @@ namespace PkmnEngine {
 		NONE,
 		USE_MOVE,
 		DO_MOVE,
-		SWITCH
+		SWITCH,
+		RECHARGING,
 	}
 }

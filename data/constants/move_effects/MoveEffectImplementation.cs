@@ -11,6 +11,7 @@ using static PkmnEngine.StatusEffects;
 using static PkmnEngine.DamageCalc;
 
 using PkmnEngine.Strings;
+using System.Collections.Generic;
 
 namespace PkmnEngine {
 	public static partial class MoveEffects {
@@ -765,41 +766,188 @@ namespace PkmnEngine {
 		#endregion
 		#region charging_moves
 		public static async Task<u32> Effect_FreezeShock(MoveEffectParams p) {
-			return 0;
+			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
+			p.attacker.RemoveStatus(Status.CHARGING_TURN);
+			return await Attack(p);
+		}
+		else {
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CLOAKED_IN_FREEZING_LIGHT, p.attacker), p.attacker.GetName()));
+			p.attacker.GiveStatus(Status.CHARGING_TURN);
+		}
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
 		}
 		public static async Task<u32> Effect_IceBurn(MoveEffectParams p) {
-			return 0;
+			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
+			p.attacker.RemoveStatus(Status.CHARGING_TURN);
+			return await Attack(p);
+		}
+		else {
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_CLOAKED_IN_FREEZING_AIR, p.attacker), p.attacker.GetName()));
+			p.attacker.GiveStatus(Status.CHARGING_TURN);
+		}
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
 		}
 		public static async Task<u32> Effect_Geomancy(MoveEffectParams p) {
-			return 0;
+			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
+			p.attacker.RemoveStatus(Status.CHARGING_TURN);
+			return await Effect_SpecialAttackUp2(p) | await Effect_SpecialDefenseUp2(p) | await Effect_SpeedUp2(p);
+		}
+		else {
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_ABSORBING_POWER, p.attacker), p.attacker.GetName()));
+			p.attacker.GiveStatus(Status.CHARGING_TURN);
+		}
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
 		}
 		public static async Task<u32> Effect_MeteorBeam(MoveEffectParams p) {
-			return 0;
+			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
+			p.attacker.RemoveStatus(Status.CHARGING_TURN);
+			return await Attack(p);
+		}
+		else {
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_OVERFLOWING_WITH_SPACE_POWER, p.attacker), p.attacker.GetName()));
+			p.attacker.GiveStatus(Status.CHARGING_TURN);
+			await Effect_SpecialAttackUp(p);
+		}
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
 		}
 		public static async Task<u32> Effect_RazorWind(MoveEffectParams p) {
-			return 0;
+			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
+			p.attacker.RemoveStatus(Status.CHARGING_TURN);
+			return await Attack(p);
+		}
+		else {
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_WHIPPED_UP_A_WHIRLWIND, p.attacker), p.attacker.GetName()));
+			p.attacker.GiveStatus(Status.CHARGING_TURN);
+		}
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
 		}
 		public static async Task<u32> Effect_SkullBash(MoveEffectParams p) {
-			return 0;
+			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
+			p.attacker.RemoveStatus(Status.CHARGING_TURN);
+			return await Attack(p);
+		}
+		else {
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_TUCKED_IN_ITS_HEAD, p.attacker), p.attacker.GetName()));
+			p.attacker.GiveStatus(Status.CHARGING_TURN);
+			await Effect_DefenseUp(p);
+		}
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
 		}
 		public static async Task<u32> Effect_SkyAttack(MoveEffectParams p) {
-			return 0;
+			if (p.attacker.HasStatus(Status.CHARGING_TURN)) {
+			p.attacker.RemoveStatus(Status.CHARGING_TURN);
+			return await Attack(p);
+		}
+		else {
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_BECAME_CLOAKED_IN_HARSH_LIGHT, p.attacker), p.attacker.GetName()));
+			p.attacker.GiveStatus(Status.CHARGING_TURN);
+		}
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
 		}
 		public static async Task<u32> Effect_SolarBeam(MoveEffectParams p) {
-			return 0;
+			// If the mon is charging or the sunlight is harsh, attack.
+		if (p.attacker.HasStatus(Status.CHARGING_TURN) || (p.state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT || p.state.Weather.Condition == Condition.WEATHER_EXTREME_SUNLIGHT)) {
+			u16 power = p.move.power;
+			// Power is halved during certain weather.
+			List<Condition> affectedWeather = new() { 
+				Condition.WEATHER_RAIN, 
+				Condition.WEATHER_HEAVY_RAIN, 
+				Condition.WEATHER_HAIL, 
+				Condition.WEATHER_SNOW, 
+				Condition.WEATHER_SANDSTORM
+			};
+			if (affectedWeather.Contains(p.state.Weather.Condition)) {
+				power /= 2;
+			}
+
+			p.attacker.RemoveStatus(Status.CHARGING_TURN);
+			return await OverridePower(p, power);
+		}
+		// Otherwise, charge.
+		else {
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_ABSORBED_LIGHT, p.attacker), p.attacker.GetName()));
+			p.attacker.GiveStatus(Status.CHARGING_TURN);
+		}
+
+		return FLAG_DO_NOT_DO_SECONDARY_EFFECT;
 		}
 		#endregion
 		#region entry_hazards
 		public static async Task<u32> Effect_StealthRock(MoveEffectParams p) {
+			if (p.attacker.Side == Battle.SIDE_CLIENT) {
+				p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.POINTED_STONES, p.attacker);
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.POINTED_STONES_REMOTE));
+			}
+			else if (p.attacker.Side == Battle.SIDE_REMOTE) {
+				p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.POINTED_STONES, p.attacker);
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.POINTED_STONES_CLIENT));
+			}
+
 			return 0;
 		}
 		public static async Task<u32> Effect_ToxicSpikes(MoveEffectParams p) {
+			if (p.attacker.Side == Battle.SIDE_CLIENT) {
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.POISON_SPIKES_REMOTE));
+				if (p.state.SideHasCondition(Battle.SIDE_REMOTE, Condition.POISON_SPIKES)) {
+					p.state.RemoveCondition(Condition.POISON_SPIKES, Battle.SIDE_REMOTE);
+					p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.TOXIC_SPIKES, p.attacker);
+				}
+				else if (!p.state.SideHasCondition(Battle.SIDE_REMOTE, Condition.TOXIC_SPIKES)) {
+					p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.POISON_SPIKES, p.attacker);
+				}
+			}
+			else if (p.attacker.Side == Battle.SIDE_REMOTE) {
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.POISON_SPIKES_CLIENT));
+				if (p.state.SideHasCondition(Battle.SIDE_CLIENT, Condition.POISON_SPIKES)) {
+					p.state.RemoveCondition(Condition.POISON_SPIKES, Battle.SIDE_CLIENT);
+					p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.TOXIC_SPIKES, p.attacker);
+				}
+				else if (!p.state.SideHasCondition(Battle.SIDE_CLIENT, Condition.TOXIC_SPIKES)) {
+					p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.POISON_SPIKES, p.attacker);
+				}
+			}
 			return 0;
 		}
 		public static async Task<u32> Effect_Spikes(MoveEffectParams p) {
+			if (p.attacker.Side == Battle.SIDE_CLIENT) {
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.SPIKES_REMOTE));
+				if (!p.state.SideHasCondition(Battle.SIDE_REMOTE, Condition.SPIKES1, Condition.SPIKES2, Condition.SPIKES3)) {
+					p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.SPIKES1, p.attacker);
+				}
+				else if (p.state.SideHasCondition(Battle.SIDE_REMOTE, Condition.SPIKES1)) {
+					p.state.RemoveCondition(Condition.SPIKES1, Battle.SIDE_REMOTE);
+					p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.SPIKES2, p.attacker);
+				}
+				else if (p.state.SideHasCondition(Battle.SIDE_REMOTE, Condition.SPIKES2)) {
+					p.state.RemoveCondition(Condition.SPIKES2, Battle.SIDE_REMOTE);
+					p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.SPIKES3, p.attacker);
+				}
+			}
+			else if (p.attacker.Side == Battle.SIDE_REMOTE) {
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.SPIKES_CLIENT));
+				if (!p.state.SideHasCondition(Battle.SIDE_CLIENT, Condition.SPIKES1, Condition.SPIKES2, Condition.SPIKES3)) {
+					p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.SPIKES1, p.attacker);
+				}
+				else if (p.state.SideHasCondition(Battle.SIDE_CLIENT, Condition.SPIKES1)) {
+					p.state.RemoveCondition(Condition.SPIKES1, Battle.SIDE_CLIENT);
+					p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.SPIKES2, p.attacker);
+				}
+				else if (p.state.SideHasCondition(Battle.SIDE_CLIENT, Condition.SPIKES2)) {
+					p.state.RemoveCondition(Condition.SPIKES2, Battle.SIDE_CLIENT);
+					p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.SPIKES3, p.attacker);
+				}
+			}
 			return 0;
 		}
 		public static async Task<u32> Effect_StickyWeb(MoveEffectParams p) {
+			if (p.attacker.Side == Battle.SIDE_CLIENT) {
+				p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.STICKY_WEB, p.attacker);
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.STICKY_WEB_REMOTE));
+			}
+			else if (p.attacker.Side == Battle.SIDE_REMOTE) {
+				p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.STICKY_WEB, p.attacker);
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.STICKY_WEB_CLIENT));
+			}
 			return 0;
 		}
 		#endregion

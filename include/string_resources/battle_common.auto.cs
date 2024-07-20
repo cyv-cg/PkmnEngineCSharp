@@ -786,6 +786,70 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_SPRANG_UP = new("PLAYER_MON_SPRANG_UP", 2);
 		/// <summary>
+		/// {1} whipped up a whirlwind!
+		/// </summary>
+		public static readonly StringResource MON_WHIPPED_UP_A_WHIRLWIND = new("MON_WHIPPED_UP_A_WHIRLWIND", 1);
+		/// <summary>
+		/// The wild {1} whipped up a whirlwind!
+		/// </summary>
+		public static readonly StringResource WILD_MON_WHIPPED_UP_A_WHIRLWIND = new("WILD_MON_WHIPPED_UP_A_WHIRLWIND", 1);
+		/// <summary>
+		/// The opposing {1} whipped up a whirlwind!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_WHIPPED_UP_A_WHIRLWIND = new("OPPOSING_MON_WHIPPED_UP_A_WHIRLWIND", 1);
+		/// <summary>
+		/// {1}’s {2} whipped up a whirlwind!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_WHIPPED_UP_A_WHIRLWIND = new("PLAYER_MON_WHIPPED_UP_A_WHIRLWIND", 2);
+		/// <summary>
+		/// {1} became cloaked in a harsh light!
+		/// </summary>
+		public static readonly StringResource MON_BECAME_CLOAKED_IN_HARSH_LIGHT = new("MON_BECAME_CLOAKED_IN_HARSH_LIGHT", 1);
+		/// <summary>
+		/// The wild {1} became cloaked in a harsh light!
+		/// </summary>
+		public static readonly StringResource WILD_MON_BECAME_CLOAKED_IN_HARSH_LIGHT = new("WILD_MON_BECAME_CLOAKED_IN_HARSH_LIGHT", 1);
+		/// <summary>
+		/// The opposing {1} became cloaked in a harsh light!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_BECAME_CLOAKED_IN_HARSH_LIGHT = new("OPPOSING_MON_BECAME_CLOAKED_IN_HARSH_LIGHT", 1);
+		/// <summary>
+		/// {1}’s {2} became cloaked in a harsh light!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_BECAME_CLOAKED_IN_HARSH_LIGHT = new("PLAYER_MON_BECAME_CLOAKED_IN_HARSH_LIGHT", 2);
+		/// <summary>
+		/// {1} absorbed light!
+		/// </summary>
+		public static readonly StringResource MON_ABSORBED_LIGHT = new("MON_ABSORBED_LIGHT", 1);
+		/// <summary>
+		/// The wild {1} absorbed light!
+		/// </summary>
+		public static readonly StringResource WILD_MON_ABSORBED_LIGHT = new("WILD_MON_ABSORBED_LIGHT", 1);
+		/// <summary>
+		/// The opposing {1} absorbed light!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_ABSORBED_LIGHT = new("OPPOSING_MON_ABSORBED_LIGHT", 1);
+		/// <summary>
+		/// {1}’s {2} absorbed light!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_ABSORBED_LIGHT = new("PLAYER_MON_ABSORBED_LIGHT", 2);
+		/// <summary>
+		/// {1} tucked in its head!
+		/// </summary>
+		public static readonly StringResource MON_TUCKED_IN_ITS_HEAD = new("MON_TUCKED_IN_ITS_HEAD", 1);
+		/// <summary>
+		/// The wild {1} tucked in its head!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TUCKED_IN_ITS_HEAD = new("WILD_MON_TUCKED_IN_ITS_HEAD", 1);
+		/// <summary>
+		/// The opposing {1} tucked in its head!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TUCKED_IN_ITS_HEAD = new("OPPOSING_MON_TUCKED_IN_ITS_HEAD", 1);
+		/// <summary>
+		/// {1}’s {2} tucked in its head!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TUCKED_IN_ITS_HEAD = new("PLAYER_MON_TUCKED_IN_ITS_HEAD", 2);
+		/// <summary>
 		/// {1} must do an encore!
 		/// </summary>
 		public static readonly StringResource MON_MUST_DO_AN_ENCORE = new("MON_MUST_DO_AN_ENCORE", 1);
@@ -1306,6 +1370,22 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_IS_PROTECTED_BY_THE_MIST = new("PLAYER_MON_IS_PROTECTED_BY_THE_MIST", 2);
 		/// <summary>
+		/// {1} must recharge!
+		/// </summary>
+		public static readonly StringResource MON_MUST_RECHARGE = new("MON_MUST_RECHARGE", 1);
+		/// <summary>
+		/// The wild {1} must recharge!
+		/// </summary>
+		public static readonly StringResource WILD_MON_MUST_RECHARGE = new("WILD_MON_MUST_RECHARGE", 1);
+		/// <summary>
+		/// The opposing {1} must recharge!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_MUST_RECHARGE = new("OPPOSING_MON_MUST_RECHARGE", 1);
+		/// <summary>
+		/// {1}’s {2} must recharge!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_MUST_RECHARGE = new("PLAYER_MON_MUST_RECHARGE", 2);
+		/// <summary>
 		/// {1}’s perish count fell to {2}!
 		/// </summary>
 		public static readonly StringResource MONS_PERISH_COUNT_FELL_TO_N = new("MONS_PERISH_COUNT_FELL_TO_N", 2);
@@ -1321,6 +1401,38 @@ namespace PkmnEngine.Strings {
 		/// {1}’s {2}’s perish count fell to {3}!
 		/// </summary>
 		public static readonly StringResource PLAYER_MONS_PERISH_COUNT_FELL_TO_N = new("PLAYER_MONS_PERISH_COUNT_FELL_TO_N", 3);
+		/// <summary>
+		/// {1} became cloaked in a freezing light!
+		/// </summary>
+		public static readonly StringResource MON_CLOAKED_IN_FREEZING_LIGHT = new("MON_CLOAKED_IN_FREEZING_LIGHT", 1);
+		/// <summary>
+		/// The wild {1} became cloaked in a freezing light!
+		/// </summary>
+		public static readonly StringResource WILD_MON_CLOAKED_IN_FREEZING_LIGHT = new("WILD_MON_CLOAKED_IN_FREEZING_LIGHT", 1);
+		/// <summary>
+		/// The opposing {1} became cloaked in a freezing light!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_CLOAKED_IN_FREEZING_LIGHT = new("OPPOSING_MON_CLOAKED_IN_FREEZING_LIGHT", 1);
+		/// <summary>
+		/// {1}’s {2} became cloaked in a freezing light!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_CLOAKED_IN_FREEZING_LIGHT = new("PLAYER_MON_CLOAKED_IN_FREEZING_LIGHT", 2);
+		/// <summary>
+		/// {1} became cloaked in freezing air!
+		/// </summary>
+		public static readonly StringResource MON_CLOAKED_IN_FREEZING_AIR = new("MON_CLOAKED_IN_FREEZING_AIR", 1);
+		/// <summary>
+		/// The wild {1} became cloaked in freezing air!
+		/// </summary>
+		public static readonly StringResource WILD_MON_CLOAKED_IN_FREEZING_AIR = new("WILD_MON_CLOAKED_IN_FREEZING_AIR", 1);
+		/// <summary>
+		/// The opposing {1} became cloaked in freezing air!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_CLOAKED_IN_FREEZING_AIR = new("OPPOSING_MON_CLOAKED_IN_FREEZING_AIR", 1);
+		/// <summary>
+		/// {1}’s {2} became cloaked in freezing air!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_CLOAKED_IN_FREEZING_AIR = new("PLAYER_MON_CLOAKED_IN_FREEZING_AIR", 2);
 		/// <summary>
 		/// {1} can no longer escape!
 		/// </summary>
@@ -1706,6 +1818,38 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_ALL_STAT_CHANGES_INVERTED = new("PLAYER_MON_ALL_STAT_CHANGES_INVERTED", 2);
 		/// <summary>
+		/// {1} is absorbing power!
+		/// </summary>
+		public static readonly StringResource MON_IS_ABSORBING_POWER = new("MON_IS_ABSORBING_POWER", 1);
+		/// <summary>
+		/// The wild {1} is absorbing power!
+		/// </summary>
+		public static readonly StringResource WILD_MON_IS_ABSORBING_POWER = new("WILD_MON_IS_ABSORBING_POWER", 1);
+		/// <summary>
+		/// The opposing {1} is absorbing power!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_IS_ABSORBING_POWER = new("OPPOSING_MON_IS_ABSORBING_POWER", 1);
+		/// <summary>
+		/// {1}’s {2} is absorbing power!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_IS_ABSORBING_POWER = new("PLAYER_MON_IS_ABSORBING_POWER", 2);
+		/// <summary>
+		/// {1} is overflowing with space power!
+		/// </summary>
+		public static readonly StringResource MON_IS_OVERFLOWING_WITH_SPACE_POWER = new("MON_IS_OVERFLOWING_WITH_SPACE_POWER", 1);
+		/// <summary>
+		/// The wild {1} is overflowing with space power!
+		/// </summary>
+		public static readonly StringResource WILD_MON_IS_OVERFLOWING_WITH_SPACE_POWER = new("WILD_MON_IS_OVERFLOWING_WITH_SPACE_POWER", 1);
+		/// <summary>
+		/// The opposing {1} is overflowing with space power!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_IS_OVERFLOWING_WITH_SPACE_POWER = new("OPPOSING_MON_IS_OVERFLOWING_WITH_SPACE_POWER", 1);
+		/// <summary>
+		/// {1}'s {2} is overflowing with space power!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_IS_OVERFLOWING_WITH_SPACE_POWER = new("PLAYER_MON_IS_OVERFLOWING_WITH_SPACE_POWER", 2);
+		/// <summary>
 		/// {1} switched Speed with its target!
 		/// </summary>
 		public static readonly StringResource MON_SWITCHED_SPEED_WITH_TARGET = new("MON_SWITCHED_SPEED_WITH_TARGET", 1);
@@ -2006,6 +2150,30 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource OPPONENT_TAILWIND_END = new("OPPONENT_TAILWIND_END", 0);
 		/// <summary>
+		/// Spikes were scattered on the ground all around your team!
+		/// </summary>
+		public static readonly StringResource SPIKES_CLIENT = new("SPIKES_CLIENT", 0);
+		/// <summary>
+		/// Spikes were scattered on the ground all around the opposing team!
+		/// </summary>
+		public static readonly StringResource SPIKES_REMOTE = new("SPIKES_REMOTE", 0);
+		/// <summary>
+		/// Poison spikes were scattered on the ground all around your team!
+		/// </summary>
+		public static readonly StringResource POISON_SPIKES_CLIENT = new("POISON_SPIKES_CLIENT", 0);
+		/// <summary>
+		/// Poison spikes were scattered on the ground all around the opposing team!
+		/// </summary>
+		public static readonly StringResource POISON_SPIKES_REMOTE = new("POISON_SPIKES_REMOTE", 0);
+		/// <summary>
+		/// Pointed stones float in the air around your team!
+		/// </summary>
+		public static readonly StringResource POINTED_STONES_CLIENT = new("POINTED_STONES_CLIENT", 0);
+		/// <summary>
+		/// Pointed stones float in the air around the opposing team!
+		/// </summary>
+		public static readonly StringResource POINTED_STONES_REMOTE = new("POINTED_STONES_REMOTE", 0);
+		/// <summary>
 		/// Grass grew to cover the battlefield!
 		/// </summary>
 		public static readonly StringResource GRASSY_TERRAIN_START = new("GRASSY_TERRAIN_START", 0);
@@ -2029,6 +2197,14 @@ namespace PkmnEngine.Strings {
 		/// The electricity disappeared from the battlefield.
 		/// </summary>
 		public static readonly StringResource ELECTRIC_TERRAIN_END = new("ELECTRIC_TERRAIN_END", 0);
+		/// <summary>
+		/// A sticky web has been laid out on the ground around your team!
+		/// </summary>
+		public static readonly StringResource STICKY_WEB_CLIENT = new("STICKY_WEB_CLIENT", 0);
+		/// <summary>
+		/// A sticky web has been laid out on the ground around the opposing team!
+		/// </summary>
+		public static readonly StringResource STICKY_WEB_REMOTE = new("STICKY_WEB_REMOTE", 0);
 		/// <summary>
 		/// A heavy rain began to fall!
 		/// </summary>
@@ -2600,6 +2776,22 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_SPRANG_UP, new() {{Language.ENG, "The wild {1} sprang up!"}, {Language.JPN, "野生の{1}が湧き出ました！"}, {Language.GER, "Das wilde {1} entstand!"}, {Language.FRE, "Le {1} sauvage a surgi !"}, {Language.SPN, "¡El salvaje {1} surgió!"}, {Language.ITA, "Sono comparsi i {1} selvaggi!"}, {Language.KOR, "야생 {1}이(가) 나타났습니다!"}, {Language.CHN_SIM, "野生的{1}出现了！"}, {Language.CHN_TRA, "野生的{1}出現了！"}, }},
 			{OPPOSING_MON_SPRANG_UP, new() {{Language.ENG, "The opposing {1} sprang up!"}, {Language.JPN, "相手の{1}が飛び出しました！"}, {Language.GER, "Die gegnerische {1} sprang auf!"}, {Language.FRE, "Le {1} adverse surgit !"}, {Language.SPN, "¡El {1} ​​contrario surgió!"}, {Language.ITA, "Il {1} ​​avversario è balzato in piedi!"}, {Language.KOR, "상대 {1}이(가) 나타났습니다!"}, {Language.CHN_SIM, "对方的{1}出现了！"}, {Language.CHN_TRA, "對方的{1}出現了！"}, }},
 			{PLAYER_MON_SPRANG_UP, new() {{Language.ENG, "{1}’s {2} sprang up!"}, {Language.JPN, "{1}の{2}が飛び出しました！"}, {Language.GER, "{1}s {2} ist aufgetaucht!"}, {Language.FRE, "Le {2} de {1} est apparu !"}, {Language.SPN, "¡El {2} de {1} surgió!"}, {Language.ITA, "I {2} di {1} sono spuntati!"}, {Language.KOR, "{1}의 {2}이(가) 나타났습니다!"}, {Language.CHN_SIM, "{1}的{2}出现了！"}, {Language.CHN_TRA, "{1}的{2}出現了！"}, }},
+			{MON_WHIPPED_UP_A_WHIRLWIND, new() {{Language.ENG, "{1} whipped up a whirlwind!"}, {Language.JPN, "{1} が旋風を巻き起こしました！"}, {Language.GER, "{1} hat einen Wirbelsturm ausgelöst!"}, {Language.FRE, "{1} a déclenché un tourbillon !"}, {Language.SPN, "¡{1} provocó un torbellino!"}, {Language.ITA, "{1} ha scatenato un turbine!"}, {Language.KOR, "{1}이(가) 회오리바람을 일으켰습니다!"}, {Language.CHN_SIM, "{1}掀起了一阵旋风！"}, {Language.CHN_TRA, "{1}掀起了一陣旋風！"}, }},
+			{WILD_MON_WHIPPED_UP_A_WHIRLWIND, new() {{Language.ENG, "The wild {1} whipped up a whirlwind!"}, {Language.JPN, "野生の {1} が旋風を巻き起こしました!"}, {Language.GER, "Der wilde {1} sorgte für einen Wirbelsturm!"}, {Language.FRE, "Le {1} sauvage a déclenché un tourbillon !"}, {Language.SPN, "¡El salvaje {1} provocó un torbellino!"}, {Language.ITA, "Il selvaggio {1} ha scatenato un turbine!"}, {Language.KOR, "야생의 {1}이(가) 회오리바람을 일으켰습니다!"}, {Language.CHN_SIM, "狂野的{1}掀起旋风！"}, {Language.CHN_TRA, "狂野的{1}掀起旋風！"}, }},
+			{OPPOSING_MON_WHIPPED_UP_A_WHIRLWIND, new() {{Language.ENG, "The opposing {1} whipped up a whirlwind!"}, {Language.JPN, "相手の {1} が旋風を巻き起こしました!"}, {Language.GER, "Die gegnerische {1} sorgte für einen Wirbelsturm!"}, {Language.FRE, "Le {1} adverse a déclenché un tourbillon !"}, {Language.SPN, "¡El oponente {1} provocó un torbellino!"}, {Language.ITA, "Il {1} ​​avversario ha scatenato un turbine!"}, {Language.KOR, "상대 {1}이(가) 회오리바람을 일으켰습니다!"}, {Language.CHN_SIM, "对方的{1}掀起旋风！"}, {Language.CHN_TRA, "對方的{1}掀起旋風！"}, }},
+			{PLAYER_MON_WHIPPED_UP_A_WHIRLWIND, new() {{Language.ENG, "{1}’s {2} whipped up a whirlwind!"}, {Language.JPN, "{1} の {2} が旋風を巻き起こしました!"}, {Language.GER, "{1}s {2} hat für Wirbel gesorgt!"}, {Language.FRE, "Le {2} de {1} a déclenché un tourbillon !"}, {Language.SPN, "¡El {2} de {1} provocó un torbellino!"}, {Language.ITA, "{2} di {1} ha scatenato un turbine!"}, {Language.KOR, "{1} 's {2}는 회오리 바람을 whip습니다!"}, {Language.CHN_SIM, "{1}的{2}掀起了一阵旋风！"}, {Language.CHN_TRA, "{1}的{2}掀起了一陣旋風！"}, }},
+			{MON_BECAME_CLOAKED_IN_HARSH_LIGHT, new() {{Language.ENG, "{1} became cloaked in a harsh light!"}, {Language.JPN, "{1}は厳しい光に覆われてしまったのです！"}, {Language.GER, "{1} wurde in grelles Licht gehüllt!"}, {Language.FRE, "{1} s'est enveloppé dans une lumière crue !"}, {Language.SPN, "¡{1} quedó envuelto en una luz dura!"}, {Language.ITA, "{1} si è avvolto in una luce violenta!"}, {Language.KOR, "{1}은 가혹한 빛으로 숨겨졌습니다!"}, {Language.CHN_SIM, "{1} 笼罩在刺眼的光芒中！"}, {Language.CHN_TRA, "{1} 籠罩在刺眼的光芒中！"}, }},
+			{WILD_MON_BECAME_CLOAKED_IN_HARSH_LIGHT, new() {{Language.ENG, "The wild {1} became cloaked in a harsh light!"}, {Language.JPN, "野生の {1} は厳しい光に覆われました!"}, {Language.GER, "Das wilde {1} wurde in grelles Licht gehüllt!"}, {Language.FRE, "Le {1} sauvage s'est enveloppé d'une lumière crue !"}, {Language.SPN, "¡El salvaje {1} quedó envuelto en una luz dura!"}, {Language.ITA, "Il {1} ​​selvatico si ammantava di una luce violenta!"}, {Language.KOR, "야생 {1}은 거친 빛으로 망가졌습니다!"}, {Language.CHN_SIM, "野生的{1}变得笼罩在刺眼的光芒中！"}, {Language.CHN_TRA, "野生的{1}變得籠罩在刺眼的光芒中！"}, }},
+			{OPPOSING_MON_BECAME_CLOAKED_IN_HARSH_LIGHT, new() {{Language.ENG, "The opposing {1} became cloaked in a harsh light!"}, {Language.JPN, "敵対する {1} は  厳しい光に覆われました!"}, {Language.GER, "Der Gegner {1} wurde in grelles Licht gehüllt!"}, {Language.FRE, "Les {1} adverses se sont retrouvés enveloppés dansune lumière crue !"}, {Language.SPN, "¡El oponente {1} quedó envuelto enuna luz dura!"}, {Language.ITA, "L'avversario {1} si ammantava diuna luce violenta!"}, {Language.KOR, " 반대 {1}는  na harsh light에서 숨겨져 있습니다!"}, {Language.CHN_SIM, "对方的{1}笼罩在刺眼的光线中！"}, {Language.CHN_TRA, "對方的{1}籠罩在刺眼的光線中！"}, }},
+			{PLAYER_MON_BECAME_CLOAKED_IN_HARSH_LIGHT, new() {{Language.ENG, "{1}’s {2} became cloaked in a harsh light!"}, {Language.JPN, "{1} の {2} が厳しい光に覆われてしまいました!"}, {Language.GER, "{1}s {2} wurde in ein grelles Licht gehüllt!"}, {Language.FRE, "Le {2} de {1} s'est enveloppédans une lumière crue !"}, {Language.SPN, "¡Los {2} de {1} quedaron envueltosen una luz dura!"}, {Language.ITA, "Il {2} di {1} si è ammantatodi una luce intensa!"}, {Language.KOR, "{1}의 {2}이(가) 거친 빛에 가려졌습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 被笼罩在刺眼的光线中！"}, {Language.CHN_TRA, "{1} 的 {2} 被籠罩在刺眼的光線中！"}, }},
+			{MON_ABSORBED_LIGHT, new() {{Language.ENG, "{1} absorbed light!"}, {Language.JPN, "{1} は光を吸収しました!"}, {Language.GER, "{1} absorbierte Licht!"}, {Language.FRE, "{1} lumière absorbée !"}, {Language.SPN, "¡{1} luz absorbida!"}, {Language.ITA, "{1} ha assorbito la luce!"}, {Language.KOR, "{1} 빛을 흡수했습니다!"}, {Language.CHN_SIM, "{1} 吸收光！"}, {Language.CHN_TRA, "{1} 吸收光！"}, }},
+			{WILD_MON_ABSORBED_LIGHT, new() {{Language.ENG, "The wild {1} absorbed light!"}, {Language.JPN, "野生の {1} は光を吸収しました!"}, {Language.GER, "Das wilde {1} absorbierte Licht!"}, {Language.FRE, "La lumière sauvage {1} a absorbé la lumière !"}, {Language.SPN, "¡El salvaje {1} absorbió la luz!"}, {Language.ITA, "Il selvaggio {1} ha assorbito la luce!"}, {Language.KOR, "야생의 {1}이(가) 빛을 흡수했습니다!"}, {Language.CHN_SIM, "狂野的{1}吸收了光！"}, {Language.CHN_TRA, "狂野的{1}吸收了光！"}, }},
+			{OPPOSING_MON_ABSORBED_LIGHT, new() {{Language.ENG, "The opposing {1} absorbed light!"}, {Language.JPN, "反対側の {1} が光を吸収しました!"}, {Language.GER, "Der gegnerische {1} absorbierte Licht!"}, {Language.FRE, "L'adversaire {1} a absorbé la lumière !"}, {Language.SPN, "¡El {1} ​​contrario absorbió la luz!"}, {Language.ITA, "Il {1} ​​avversario ha assorbito la luce!"}, {Language.KOR, "상대 {1}이(가) 빛을 흡수했습니다!"}, {Language.CHN_SIM, "对面的{1}吸收了光！"}, {Language.CHN_TRA, "對面的{1}吸收了光！"}, }},
+			{PLAYER_MON_ABSORBED_LIGHT, new() {{Language.ENG, "{1}’s {2} absorbed light!"}, {Language.JPN, "{1} の {2} が光を吸収しました!"}, {Language.GER, "{1}s {2} absorbierte Licht!"}, {Language.FRE, "La lumière absorbée par {1} {2} !"}, {Language.SPN, "¡La {2} luz absorbida de {1}!"}, {Language.ITA, "{2} di {1} ha assorbito la luce!"}, {Language.KOR, "{1}의 {2}가 빛을 흡수했습니다!"}, {Language.CHN_SIM, "{1}的{2}吸收了光！"}, {Language.CHN_TRA, "{1}的{2}吸收了光！"}, }},
+			{MON_TUCKED_IN_ITS_HEAD, new() {{Language.ENG, "{1} tucked in its head!"}, {Language.JPN, "{1} が頭の中に押し込まれています!"}, {Language.GER, "{1} steckt im Kopf!"}, {Language.FRE, "{1} caché dans sa tête !"}, {Language.SPN, "¡{1} escondido en su cabeza!"}, {Language.ITA, "{1} nascosto nella sua testa!"}, {Language.KOR, "{1}이(가) 머리 속에 자리잡고 있습니다!"}, {Language.CHN_SIM, "{1} 藏在它的脑袋里！"}, {Language.CHN_TRA, "{1} 藏在它的腦袋裡！"}, }},
+			{WILD_MON_TUCKED_IN_ITS_HEAD, new() {{Language.ENG, "The wild {1} tucked in its head!"}, {Language.JPN, "野生の {1} が頭の中に隠れています!"}, {Language.GER, "Das wilde {1} steckt in seinem Kopf!"}, {Language.FRE, "Le sauvage {1} caché dans sa tête !"}, {Language.SPN, "¡El salvaje {1} escondido en su cabeza!"}, {Language.ITA, "Il selvaggio {1} nascosto nella sua testa!"}, {Language.KOR, "야생 {1}이(가) 머리 속에 자리잡고 있습니다!"}, {Language.CHN_SIM, "野生的{1}藏在它的脑袋里！"}, {Language.CHN_TRA, "野生的{1}藏在它的腦袋裡！"}, }},
+			{OPPOSING_MON_TUCKED_IN_ITS_HEAD, new() {{Language.ENG, "The opposing {1} tucked in its head!"}, {Language.JPN, "相手の{1}が頭を押し込んだ！"}, {Language.GER, "Der Gegner {1} steckte den Kopf ein!"}, {Language.FRE, "Le {1} adverse rentré dans sa tête !"}, {Language.SPN, "¡El {1} ​​contrario metió la cabeza!"}, {Language.ITA, "L'{1} avversario nascosto nella sua testa!"}, {Language.KOR, "상대 {1}이(가) 머리 속에 자리잡고 있습니다!"}, {Language.CHN_SIM, "对方的{1}缩进了它的头！"}, {Language.CHN_TRA, "對方的{1}縮排了它的頭！"}, }},
+			{PLAYER_MON_TUCKED_IN_ITS_HEAD, new() {{Language.ENG, "{1}’s {2} tucked in its head!"}, {Language.JPN, "{1} の {2} が頭に挟まっています!"}, {Language.GER, "{1}s {2} steckt im Kopf!"}, {Language.FRE, "{1} a {2} caché dans sa tête !"}, {Language.SPN, "¡{1} tiene {2} escondido en su cabeza!"}, {Language.ITA, "Il {2} di {1} è nascosto nella sua testa!"}, {Language.KOR, "{1}의 {2}이(가) 머리 속에 자리잡고 있습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 藏在它的脑袋里！"}, {Language.CHN_TRA, "{1} 的 {2} 藏在它的腦袋裡！"}, }},
 			{MON_MUST_DO_AN_ENCORE, new() {{Language.ENG, "{1} must do an encore!"}, {Language.JPN, "{1} はアンコールをしなければなりません!"}, {Language.GER, "{1} muss eine Zugabe machen!"}, {Language.FRE, "{1} doit faire un rappel !"}, {Language.SPN, "¡{1} debe hacer un bis!"}, {Language.ITA, "{1} deve fare il bis!"}, {Language.KOR, "{1}은(는) 앙코르를 해야 합니다!"}, {Language.CHN_SIM, "{1}必须再来一次！"}, {Language.CHN_TRA, "{1}必須再來一次！"}, }},
 			{WILD_MON_MUST_DO_AN_ENCORE, new() {{Language.ENG, "The wild {1} must do an encore!"}, {Language.JPN, "野生の {1} はアンコールをしなければなりません!"}, {Language.GER, "Der wilde {1} muss eine Zugabe machen!"}, {Language.FRE, "Le sauvage {1} doit faire un rappel !"}, {Language.SPN, "¡El salvaje {1} debe hacer un bis!"}, {Language.ITA, "I {1} selvaggi devono fare il bis!"}, {Language.KOR, "야생의 {1}이(가) 앙코르를 해야 합니다!"}, {Language.CHN_SIM, "狂野的{1}必须再来一次！"}, {Language.CHN_TRA, "狂野的{1}一定再來一次！"}, }},
 			{OPPOSING_MON_MUST_DO_AN_ENCORE, new() {{Language.ENG, "The opposing {1} must do an encore!"}, {Language.JPN, "相手の {1} はアンコールをしなければなりません!"}, {Language.GER, "Der gegnerische {1} muss eine Zugabe machen!"}, {Language.FRE, "Le {1} adverse doit faire un rappel !"}, {Language.SPN, "¡El oponente {1} debe hacer un bis!"}, {Language.ITA, "Il {1} ​​avversario deve fare il bis!"}, {Language.KOR, "상대 {1}이(가) 앙코르를 해야 합니다!"}, {Language.CHN_SIM, "对方的{1}必须再来一次！"}, {Language.CHN_TRA, "對方的{1}一定再來一次！"}, }},
@@ -2730,10 +2922,22 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_IS_PROTECTED_BY_THE_MIST, new() {{Language.ENG, "The wild {1} is protected by the mist!"}, {Language.JPN, "野生の {1} は霧に守られています!"}, {Language.GER, "Das wilde {1} wird durch den Nebel geschützt!"}, {Language.FRE, "Le {1} sauvage est protégé par la brume !"}, {Language.SPN, "¡El salvaje {1} está protegido por la niebla!"}, {Language.ITA, "Il {1} ​​selvaggio è protetto dalla nebbia!"}, {Language.KOR, "야생 {1}이(가) 안개로 보호받고 있습니다!"}, {Language.CHN_SIM, "野生{1}受到薄雾的保护！"}, {Language.CHN_TRA, "野生{1}受到薄霧的保護！"}, }},
 			{OPPOSING_MON_IS_PROTECTED_BY_THE_MIST, new() {{Language.ENG, "The opposing {1} is protected by the mist!"}, {Language.JPN, "相手の {1} は霧で守られています!"}, {Language.GER, "Der gegnerische {1} wird durch den Nebel geschützt!"}, {Language.FRE, "Le {1} adverse est protégé par la brume !"}, {Language.SPN, "¡El oponente {1} está protegido por la niebla!"}, {Language.ITA, "Il {1} ​​avversario è protetto dalla nebbia!"}, {Language.KOR, "상대 {1}이(가) 안개로 보호받고 있습니다!"}, {Language.CHN_SIM, "对方的{1}受到雾气的保护！"}, {Language.CHN_TRA, "對方的{1}受到霧氣的保護！"}, }},
 			{PLAYER_MON_IS_PROTECTED_BY_THE_MIST, new() {{Language.ENG, "{1}’s {2} is protected by the mist!"}, {Language.JPN, "{1}の{2}は霧で守られています！"}, {Language.GER, "{2} von {1} ist durch den Nebel geschützt!"}, {Language.FRE, "Le {2} de {1} est protégé par la brume !"}, {Language.SPN, "¡El {2} de {1} está protegido por la niebla!"}, {Language.ITA, "Il {2} di {1} è protetto dalla nebbia!"}, {Language.KOR, "{1}의 {2}이(가) 안개로 보호되고 있습니다!"}, {Language.CHN_SIM, "{1}的{2}受到了雾气的保护！"}, {Language.CHN_TRA, "{1}的{2}受到霧氣的保護了！"}, }},
+			{MON_MUST_RECHARGE, new() {{Language.ENG, "{1} must recharge!"}, {Language.JPN, "{1} は充電する必要があります!"}, {Language.GER, "{1} muss aufgeladen werden!"}, {Language.FRE, "{1} doit recharger !"}, {Language.SPN, "¡{1} debe recargar!"}, {Language.ITA, "{1} deve ricaricarsi!"}, {Language.KOR, "{1}을(를) 재충전해야 합니다!"}, {Language.CHN_SIM, "{1}必须充值！"}, {Language.CHN_TRA, "{1}必須充值！"}, }},
+			{WILD_MON_MUST_RECHARGE, new() {{Language.ENG, "The wild {1} must recharge!"}, {Language.JPN, "野生の {1} は充電しなければなりません!"}, {Language.GER, "Die Wildnis {1} muss aufladen!"}, {Language.FRE, "Le {1} sauvage doit se recharger !"}, {Language.SPN, "¡El salvaje {1} debe recargarse!"}, {Language.ITA, "Il {1} ​​selvaggio deve ricaricarsi!"}, {Language.KOR, "야생 {1}을(를) 재충전해야 합니다!"}, {Language.CHN_SIM, "狂野{1}必须充电！"}, {Language.CHN_TRA, "狂野{1}必須充電！"}, }},
+			{OPPOSING_MON_MUST_RECHARGE, new() {{Language.ENG, "The opposing {1} must recharge!"}, {Language.JPN, "相手の {1} はリチャージする必要があります。"}, {Language.GER, "Die gegnerische {1} muss nachladen!"}, {Language.FRE, "Le {1} adverse doit se recharger !"}, {Language.SPN, "¡El {1} ​​contrario debe recargar!"}, {Language.ITA, "Il {1} ​​avversario deve ricaricarsi!"}, {Language.KOR, "상대 {1}을(를) 재충전해야 합니다!"}, {Language.CHN_SIM, "对方{1}必须充能！"}, {Language.CHN_TRA, "對方{1}必須充能！"}, }},
+			{PLAYER_MON_MUST_RECHARGE, new() {{Language.ENG, "{1}’s {2} must recharge!"}, {Language.JPN, "{1} の {2} はリチャージする必要があります。"}, {Language.GER, "{1}s {2} müssen aufgeladen werden!"}, {Language.FRE, "Les {2} de {1} doivent se recharger !"}, {Language.SPN, "¡El {2} de {1} debe recargarse!"}, {Language.ITA, "Il {2} di {1} deve ricaricarsi!"}, {Language.KOR, "{1}의 {2}을(를) 충전해야 합니다!"}, {Language.CHN_SIM, "{1}的{2}必须充电！"}, {Language.CHN_TRA, "{1}的{2}必須充電！"}, }},
 			{MONS_PERISH_COUNT_FELL_TO_N, new() {{Language.ENG, "{1}’s perish count fell to {2}!"}, {Language.JPN, "{1} の死亡数は {2} まで減少しました!"}, {Language.GER, "Die Todeszahl von {1} ist auf {2} gesunken!"}, {Language.FRE, "Le nombre de morts de {1} est tombé à {2} !"}, {Language.SPN, "¡El recuento de muertes de {1} cayó a {2}!"}, {Language.ITA, "Il numero delle morti di {1} è sceso a {2}!"}, {Language.KOR, "{1}의 멸망 횟수가 {2}로 떨어졌습니다!"}, {Language.CHN_SIM, "{1}的死亡人数降至{2}！"}, {Language.CHN_TRA, "{1}的死亡人數降至{2}！"}, }},
 			{WILD_MONS_PERISH_COUNT_FELL_TO_N, new() {{Language.ENG, "The wild {1}’s perish count fell to {2}!"}, {Language.JPN, "野生の {1} の死亡数は {2} に減少しました。"}, {Language.GER, "Die Todeszahl des wilden {1} ist auf {2} gesunken!"}, {Language.FRE, "Le nombre de morts du {1} sauvage est tombé à {2} !"}, {Language.SPN, "¡El recuento de muertes del salvaje {1} cayó a {2}!"}, {Language.ITA, "Il numero di morti del {1} ​​selvatico è sceso a {2}!"}, {Language.KOR, "야생 {1}의 멸망 횟수가 {2}로 떨어졌습니다!"}, {Language.CHN_SIM, "野生动物 {1} 的死亡数量下降至 {2}！"}, {Language.CHN_TRA, "野生動物 {1} 的死亡數量下降至 {2}！"}, }},
 			{OPPOSING_MONS_PERISH_COUNT_FELL_TO_N, new() {{Language.ENG, "The opposing {1}’s perish count fell to {2}!"}, {Language.JPN, "相手の {1} の消滅数は {2} に減少しました!"}, {Language.GER, "Die Todeszahl des gegnerischen {1} sank auf {2}!"}, {Language.FRE, "Le nombre de morts du {1} adverse est tombé à {2} !"}, {Language.SPN, "¡El conteo de muertes del oponente {1} cayó a {2}!"}, {Language.ITA, "Il numero di morti dell'avversario {1} è sceso a {2}!"}, {Language.KOR, "상대 {1}의 멸망 횟수가 {2}로 떨어졌습니다!"}, {Language.CHN_SIM, "对方{1}的死亡数下降到{2}！"}, {Language.CHN_TRA, "對方{1}的死亡數下降到{2}！"}, }},
 			{PLAYER_MONS_PERISH_COUNT_FELL_TO_N, new() {{Language.ENG, "{1}’s {2}’s perish count fell to {3}!"}, {Language.JPN, "{1} の {2} の死亡数は {3} まで減少しました!"}, {Language.GER, "Die Todeszahl von {1}s {2} ist auf {3} gesunken!"}, {Language.FRE, "Le nombre de morts de {1} et {2} est tombé à {3} !"}, {Language.SPN, "¡El recuento de muertes de {1}, {2} cayó a {3}!"}, {Language.ITA, "Il numero delle morti di {2} di {1} è sceso a {3}!"}, {Language.KOR, "{1}의 {2}의 멸망 횟수가 {3}으로 떨어졌습니다!"}, {Language.CHN_SIM, "{1}的{2}的死亡人数下降到了{3}！"}, {Language.CHN_TRA, "{1}的{2}的死亡人數下降到了{3}！"}, }},
+			{MON_CLOAKED_IN_FREEZING_LIGHT, new() {{Language.ENG, "{1} became cloaked in a freezing light!"}, {Language.JPN, "{1} は凍てつく光に覆われました!"}, {Language.GER, "{1} wurde in ein eiskaltes Licht gehüllt!"}, {Language.FRE, "{1} s'est enveloppé d'une lumière glaciale !"}, {Language.SPN, "¡{1} quedó envuelto en una luz helada!"}, {Language.ITA, "{1} si è avvolto in una luce gelida!"}, {Language.KOR, "{1}이(가) 얼어붙는 빛에 휩싸였습니다!"}, {Language.CHN_SIM, "{1} 被冰冷的光芒笼罩！"}, {Language.CHN_TRA, "{1} 被冰冷的光芒籠罩！"}, }},
+			{WILD_MON_CLOAKED_IN_FREEZING_LIGHT, new() {{Language.ENG, "The wild {1} became cloaked in a freezing light!"}, {Language.JPN, "野生の {1} が  凍てつく光に覆われてしまいました!"}, {Language.GER, "Die Wildnis {1} wurde in a eiskaltes Licht gehüllt!"}, {Language.FRE, "Le {1} sauvage s'est enveloppé dans a une lumière glaciale !"}, {Language.SPN, "¡El salvaje {1} quedó envuelto enuna luz helada!"}, {Language.ITA, "La natura {1} si ammantava diuna luce gelida!"}, {Language.KOR, "야생 {1}이(가) 얼어붙는 빛 속에 뒤덮였습니다!"}, {Language.CHN_SIM, "野生动物{1}被 冰冷的光芒笼罩！"}, {Language.CHN_TRA, "野生動物{1}被 冰冷的光芒籠罩！"}, }},
+			{OPPOSING_MON_CLOAKED_IN_FREEZING_LIGHT, new() {{Language.ENG, "The opposing {1} became cloaked in a freezing light!"}, {Language.JPN, "敵対する {1} は  凍てつく光に覆われました!"}, {Language.GER, "Der Gegner {1} wurde inein eiskaltes Licht gehüllt!"}, {Language.FRE, "Les {1} adverses se sont retrouvés enveloppés dans a une lumière glaciale !"}, {Language.SPN, "¡El oponente {1} quedó envuelto enuna luz helada!"}, {Language.ITA, "L'avversario {1} si è avvolto inuna luce gelida!"}, {Language.KOR, "상대 {1}이(가) 얼어붙는 빛 속에 숨겨졌습니다!"}, {Language.CHN_SIM, "对方的{1}被冰冷的光芒笼罩了！"}, {Language.CHN_TRA, "對方的{1}被冰冷的光芒籠罩了！"}, }},
+			{PLAYER_MON_CLOAKED_IN_FREEZING_LIGHT, new() {{Language.ENG, "{1}’s {2} became cloaked in a freezing light!"}, {Language.JPN, "{1} の {2} が  凍てつく光に覆われてしまいました。"}, {Language.GER, "{1}s {2} wurde inein eiskaltes Licht gehüllt!"}, {Language.FRE, "Le {2} de {1} s'est enveloppé dans a une lumière glaciale !"}, {Language.SPN, "¡El {2} de {1} quedó envuelto enuna luz helada!"}, {Language.ITA, "Il {2} di {1} si è avvolto inuna luce gelida!"}, {Language.KOR, "{1}의 {2}이(가) 얼어붙는 빛에 가려졌습니다!"}, {Language.CHN_SIM, "{1}的{2}被 冰冷的光芒笼罩了！"}, {Language.CHN_TRA, "{1}的{2}被 冰冷的光芒籠罩了！"}, }},
+			{MON_CLOAKED_IN_FREEZING_AIR, new() {{Language.ENG, "{1} became cloaked in freezing air!"}, {Language.JPN, "{1} は凍てつく空気に覆われました!"}, {Language.GER, "{1} wurde in eiskalte Luft gehüllt!"}, {Language.FRE, "{1} s'est enveloppé d'air glacial !"}, {Language.SPN, "¡{1} quedó envuelto en aire helado!"}, {Language.ITA, "{1} si è avvolto nell'aria gelida!"}, {Language.KOR, "{1}이(가) 얼어붙은 공기에 갇혔습니다!"}, {Language.CHN_SIM, "{1} 被冰冷的空气笼罩了！"}, {Language.CHN_TRA, "{1} 被冰冷的空氣籠罩了！"}, }},
+			{WILD_MON_CLOAKED_IN_FREEZING_AIR, new() {{Language.ENG, "The wild {1} became cloaked in freezing air!"}, {Language.JPN, "野生の {1} は凍てつく空気に覆われました!"}, {Language.GER, "Die Wildnis {1} wurde in eiskalte Luft gehüllt!"}, {Language.FRE, "Le {1} sauvage s'est enveloppé d'air glacial !"}, {Language.SPN, "¡El salvaje {1} quedó envuelto en aire helado!"}, {Language.ITA, "I {1} selvaggi si sono avvolti nell'aria gelida!"}, {Language.KOR, "야생의 {1}이(가) 얼어붙은 공기에 휩싸였습니다!"}, {Language.CHN_SIM, "野生{1}被冰冷的空气笼罩了！"}, {Language.CHN_TRA, "野生{1}被冰冷的空氣籠罩了！"}, }},
+			{OPPOSING_MON_CLOAKED_IN_FREEZING_AIR, new() {{Language.ENG, "The opposing {1} became cloaked in freezing air!"}, {Language.JPN, "敵対する {1} は 凍てつく空気に覆われました!"}, {Language.GER, "Der Gegner {1} wurde von eiskalter Luft eingehüllt!"}, {Language.FRE, "Les {1} adverses se sont retrouvés enveloppés dans un air glacial !"}, {Language.SPN, "¡El enemigo {1} quedó envuelto en aire helado!"}, {Language.ITA, "L'avversario {1} è rimasto avvolto nell' aria gelida!"}, {Language.KOR, "상대 {1}이(가) 얼어붙은 공기 속에 숨겨졌습니다!"}, {Language.CHN_SIM, "对方的{1}被 笼罩在冰冷的空气中！"}, {Language.CHN_TRA, "對方的{1}被 籠罩在冰冷的空氣中！"}, }},
+			{PLAYER_MON_CLOAKED_IN_FREEZING_AIR, new() {{Language.ENG, "{1}’s {2} became cloaked in freezing air!"}, {Language.JPN, "{1} の {2} は 凍てつく空気に覆われました!"}, {Language.GER, "{1}s {2} wurde in eiskalte Luft gehüllt!"}, {Language.FRE, "Le {2} de {1} est devenu masquédans l'air glacial !"}, {Language.SPN, "¡El {2} de {1} quedó envuelto en aire helado!"}, {Language.ITA, "Il {2} di {1} è rimasto avvolto ell'aria gelida!"}, {Language.KOR, "{1}의 {2}이(가) 얼어붙는 공기에  은폐되었습니다!"}, {Language.CHN_SIM, "{1}的{2}被冰冷的空气覆盖了！"}, {Language.CHN_TRA, "{1}的{2}被冰冷的空氣覆蓋了！"}, }},
 			{MON_CAN_NO_LONGER_ESCAPE, new() {{Language.ENG, "{1} can no longer escape!"}, {Language.JPN, "{1} はもう逃げられません!"}, {Language.GER, "{1} kann nicht mehr entkommen!"}, {Language.FRE, "{1} ne peut plus s'échapper !"}, {Language.SPN, "¡{1} ya no puede escapar!"}, {Language.ITA, "{1} non può più scappare!"}, {Language.KOR, "{1}은(는) 더 이상 탈출할 수 없습니다!"}, {Language.CHN_SIM, "{1}再也无法逃脱了！"}, {Language.CHN_TRA, "{1}再也無法逃脫了！"}, }},
 			{WILD_MON_CAN_NO_LONGER_ESCAPE, new() {{Language.ENG, "The wild {1} can no longer escape!"}, {Language.JPN, "野生の {1} はもう逃げられません!"}, {Language.GER, "Der Wilde {1} kann nicht mehr entkommen!"}, {Language.FRE, "Le sauvage {1} ne peut plus s'échapper !"}, {Language.SPN, "¡El salvaje {1} ya no puede escapar!"}, {Language.ITA, "I {1} selvaggi non possono più scappare!"}, {Language.KOR, "야생 {1}은(는) 더 이상 탈출할 수 없습니다!"}, {Language.CHN_SIM, "野生的{1}再也无法逃脱了！"}, {Language.CHN_TRA, "野生的{1}再也無法逃脫了！"}, }},
 			{OPPOSING_MON_CAN_NO_LONGER_ESCAPE, new() {{Language.ENG, "The opposing {1} can no longer escape!"}, {Language.JPN, "相手の {1} はもう逃げることはできません!"}, {Language.GER, "Der gegnerische {1} kann nicht mehr entkommen!"}, {Language.FRE, "Le {1} adverse ne peut plus s'échapper !"}, {Language.SPN, "¡El oponente {1} ya no puede escapar!"}, {Language.ITA, "Il {1} ​​avversario non può più scappare!"}, {Language.KOR, "상대 {1}은(는) 더 이상 탈출할 수 없습니다!"}, {Language.CHN_SIM, "对方的{1}再也无法逃脱了！"}, {Language.CHN_TRA, "對方的{1}再也無法逃脫了！"}, }},
@@ -2830,6 +3034,14 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_ALL_STAT_CHANGES_INVERTED, new() {{Language.ENG, "All stat changes on the wild {1} were inverted!"}, {Language.JPN, "野生の {1} のすべてのステータス変更が反転されました。"}, {Language.GER, "Alle Statusänderungen der Wildnis {1} wurden rückgängig gemacht!"}, {Language.FRE, "Tous les changements de statistiques sur le wild {1} ont été inversés !"}, {Language.SPN, "¡Todos los cambios de estadísticas en el comodín {1} fueron invertidos!"}, {Language.ITA, "Tutte le modifiche alle statistiche sul {1} ​​selvaggio sono state invertite!"}, {Language.KOR, "야생 {1}의 모든 통계 변경 사항이 반전되었습니다!"}, {Language.CHN_SIM, "狂野 {1} 上的所有统计数据更改均已反转！"}, {Language.CHN_TRA, "狂野 {1} 上的所有統計數據更改均已反轉！"}, }},
 			{OPPOSING_MON_ALL_STAT_CHANGES_INVERTED, new() {{Language.ENG, "All stat changes on the opposing {1} were inverted!"}, {Language.JPN, "相手の{1}のステータス変更はすべて反転されました!"}, {Language.GER, "Alle Statistikänderungen des gegnerischen {1} wurden rückgängig gemacht!"}, {Language.FRE, "Tous les changements de statistiques sur le {1} adverse ont été inversés !"}, {Language.SPN, "¡Todos los cambios de estadísticas del {1} ​​contrario fueron invertidos!"}, {Language.ITA, "Tutti i cambiamenti alle statistiche sul {1} ​​avversario sono stati invertiti!"}, {Language.KOR, "상대 {1}의 모든 능력치 변경 사항이 반전되었습니다!"}, {Language.CHN_SIM, "对方 {1} 上的所有统计数据更改均已反转！"}, {Language.CHN_TRA, "對方 {1} 上的所有統計數據變更已反轉！"}, }},
 			{PLAYER_MON_ALL_STAT_CHANGES_INVERTED, new() {{Language.ENG, "All stat changes on {1}’s {2} were inverted!"}, {Language.JPN, "{1}の{2}のステータス変更はすべて反転されました。"}, {Language.GER, "Alle Statistikänderungen an {2} von {1} wurden rückgängig gemacht!"}, {Language.FRE, "Tous les changements de statistiques sur {2} de {1} ont été inversés !"}, {Language.SPN, "¡Todos los cambios de estadísticas en {2} de {1} fueron invertidos!"}, {Language.ITA, "Tutte le modifiche alle statistiche su {2} di {1} sono state invertite!"}, {Language.KOR, "{1}의 {2}에 대한 모든 통계 변경 사항이 반전되었습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 上的所有统计数据更改均已反转！"}, {Language.CHN_TRA, "{1} 的 {2} 上的所有統計數據變更均已反轉！"}, }},
+			{MON_IS_ABSORBING_POWER, new() {{Language.ENG, "{1} is absorbing power!"}, {Language.JPN, "{1} がパワーを吸収しています!"}, {Language.GER, "{1} absorbiert Kraft!"}, {Language.FRE, "{1} absorbe le pouvoir !"}, {Language.SPN, "¡{1} está absorbiendo poder!"}, {Language.ITA, "{1} sta assorbendo energia!"}, {Language.KOR, "{1}이(가) 힘을 흡수하고 있습니다!"}, {Language.CHN_SIM, "{1}正在吸收力量！"}, {Language.CHN_TRA, "{1}正在吸收力量！"}, }},
+			{WILD_MON_IS_ABSORBING_POWER, new() {{Language.ENG, "The wild {1} is absorbing power!"}, {Language.JPN, "野生の {1} がパワーを吸収しています!"}, {Language.GER, "Das wilde {1} absorbiert Kraft!"}, {Language.FRE, "Le sauvage {1} absorbe le pouvoir !"}, {Language.SPN, "¡El salvaje {1} está absorbiendo poder!"}, {Language.ITA, "Il {1} ​​selvaggio sta assorbendo potere!"}, {Language.KOR, "야생 {1}이(가) 힘을 흡수하고 있습니다!"}, {Language.CHN_SIM, "狂野的{1}正在吸收力量！"}, {Language.CHN_TRA, "狂野的{1}正在吸收力量！"}, }},
+			{OPPOSING_MON_IS_ABSORBING_POWER, new() {{Language.ENG, "The opposing {1} is absorbing power!"}, {Language.JPN, "相手の {1} がパワーを吸収しています!"}, {Language.GER, "Die gegnerische {1} absorbiert Kraft!"}, {Language.FRE, "Le {1} adverse absorbe le pouvoir !"}, {Language.SPN, "¡El oponente {1} está absorbiendo poder!"}, {Language.ITA, "L'avversario {1} sta assorbendo potere!"}, {Language.KOR, "상대 {1}이(가) 힘을 흡수하고 있습니다!"}, {Language.CHN_SIM, "对方的{1}正在吸收力量！"}, {Language.CHN_TRA, "對方的{1}正在吸收力量！"}, }},
+			{PLAYER_MON_IS_ABSORBING_POWER, new() {{Language.ENG, "{1}’s {2} is absorbing power!"}, {Language.JPN, "{1} の {2} がパワーを吸収しています!"}, {Language.GER, "{2} von {1} absorbiert Kraft!"}, {Language.FRE, "Le {2} de {1} absorbe le pouvoir !"}, {Language.SPN, "¡El {2} de {1} está absorbiendo poder!"}, {Language.ITA, "Il {2} di {1} sta assorbendo energia!"}, {Language.KOR, "{1}의 {2}이(가) 힘을 흡수하고 있습니다!"}, {Language.CHN_SIM, "{1}的{2}正在吸收力量！"}, {Language.CHN_TRA, "{1}的{2}正在吸收力量！"}, }},
+			{MON_IS_OVERFLOWING_WITH_SPACE_POWER, new() {{Language.ENG, "{1} is overflowing with space power!"}, {Language.JPN, "{1}にはスペースパワーが溢れています！"}, {Language.GER, "{1} strotzt nur so vor Weltraumkraft!"}, {Language.FRE, "{1} déborde de puissance spatiale !"}, {Language.SPN, "¡{1} está repleto de poder espacial!"}, {Language.ITA, "{1} trabocca di potere spaziale!"}, {Language.KOR, "{1}에는 우주력이 넘쳐납니다!"}, {Language.CHN_SIM, "{1}空间力量满溢！"}, {Language.CHN_TRA, "{1}空間力量滿溢！"}, }},
+			{WILD_MON_IS_OVERFLOWING_WITH_SPACE_POWER, new() {{Language.ENG, "The wild {1} is overflowing with space power!"}, {Language.JPN, "野生の {1} はスペースパワーに溢れています!"}, {Language.GER, "Die Wildnis {1} strotzt nur so vor Weltraumkraft!"}, {Language.FRE, "Le sauvage {1} déborde de puissance spatiale !"}, {Language.SPN, "¡El salvaje {1} está repleto de poder espacial!"}, {Language.ITA, "Il {1} ​​selvaggio trabocca di potere spaziale!"}, {Language.KOR, "야생의 {1}에는 우주력이 넘쳐납니다!"}, {Language.CHN_SIM, "狂野的{1}充满了空间力量！"}, {Language.CHN_TRA, "狂野的{1}充滿了空間力量！"}, }},
+			{OPPOSING_MON_IS_OVERFLOWING_WITH_SPACE_POWER, new() {{Language.ENG, "The opposing {1} is overflowing with space power!"}, {Language.JPN, "相手の{1}はスペースパワーに溢れています！"}, {Language.GER, "Die gegnerische {1} strotzt nur so vor Raumkraft!"}, {Language.FRE, "Le {1} adverse déborde de puissance spatiale !"}, {Language.SPN, "¡El {1} ​​enemigo está repleto de poder espacial!"}, {Language.ITA, "L'avversario {1} trabocca di potere spaziale!"}, {Language.KOR, "상대 {1}은(는) 우주력이 넘쳐납니다!"}, {Language.CHN_SIM, "对方的{1}空间力量溢出！"}, {Language.CHN_TRA, "對方的{1}空間力量溢出！"}, }},
+			{PLAYER_MON_IS_OVERFLOWING_WITH_SPACE_POWER, new() {{Language.ENG, "{1}'s {2} is overflowing with space power!"}, {Language.JPN, "{1}の{2}はスペースパワーに溢れています！"}, {Language.GER, "{1}s {2} strotzt nur so vor Weltraumkraft!"}, {Language.FRE, "Le {2} de {1} déborde de puissance spatiale !"}, {Language.SPN, "¡El {2} de {1} está repleto de poder espacial!"}, {Language.ITA, "Il {2} di {1} trabocca di potere spaziale!"}, {Language.KOR, "{1}의 {2}에는 우주력이 넘쳐납니다!"}, {Language.CHN_SIM, "{1}的{2}充满了空间力量！"}, {Language.CHN_TRA, "{1}的{2}充滿了空間力量！"}, }},
 			{MON_SWITCHED_SPEED_WITH_TARGET, new() {{Language.ENG, "{1} switched Speed with its target!"}, {Language.JPN, "{1} はターゲットの速度を切り替えました!"}, {Language.GER, "{1} hat die Geschwindigkeit mit seinem Ziel vertauscht!"}, {Language.FRE, "{1} a changé de vitesse avec sa cible !"}, {Language.SPN, "¡{1} cambió la velocidad con su objetivo!"}, {Language.ITA, "{1} ha scambiato la velocità con il suo bersaglio!"}, {Language.KOR, "{1}이(가) 목표와 속도를 바꿨습니다!"}, {Language.CHN_SIM, "{1} 改变了目标的速度！"}, {Language.CHN_TRA, "{1} 改變了目標的速度！"}, }},
 			{WILD_MON_SWITCHED_SPEED_WITH_TARGET, new() {{Language.ENG, "The wild {1} switched Speed with its target!"}, {Language.JPN, "野生の {1} がターゲットと速度を切り替えました!"}, {Language.GER, "Der wilde {1} vertauschte die Geschwindigkeit mit seinem Ziel!"}, {Language.FRE, "Le sauvage {1} a changé de vitesse avec sa cible !"}, {Language.SPN, "¡El salvaje {1} cambió la velocidad con su objetivo!"}, {Language.ITA, "Il {1} ​​selvaggio ha scambiato la Velocità con il suo bersaglio!"}, {Language.KOR, "야생 {1}이(가) 대상과 속도를 바꿨습니다!"}, {Language.CHN_SIM, "狂野的{1}改变了目标的速度！"}, {Language.CHN_TRA, "狂野的{1}改變了目標的速度！"}, }},
 			{OPPOSING_MON_SWITCHED_SPEED_WITH_TARGET, new() {{Language.ENG, "The opposing {1} switched Speed with its target!"}, {Language.JPN, "相手の {1} はターゲットとの速度を 切り替えました!"}, {Language.GER, "Der Gegner {1} wechselte die Geschwindigkeit mit seinem Ziel!"}, {Language.FRE, "Les {1} adversaires ont changé de vitesse avec its leur cible !"}, {Language.SPN, "¡El oponente {1} cambió la velocidad con su objetivo!"}, {Language.ITA, "L'avversario {1} ha cambiato Velocità con il suo bersaglio!"}, {Language.KOR, "상대 {1}의 속도가 목표와 전환되었습니다!"}, {Language.CHN_SIM, "对方{1}改变了 目标的速度！"}, {Language.CHN_TRA, "對方{1}改變了 目標的速度！"}, }},
@@ -2905,12 +3117,20 @@ namespace PkmnEngine.Strings {
 			{ENEMY_TAILWIND_START, new() {{Language.ENG, "The Tailwind blew from behind the opposing team!"}, {Language.JPN, "相手チームの背後から追い風が吹いた！"}, {Language.GER, "Der Rückenwind wehte hinter dem gegnerischen Team!"}, {Language.FRE, "Le Tailwind a soufflé derrière l’équipe adverse !"}, {Language.SPN, "¡El viento de cola sopló detrás del equipo contrario!"}, {Language.ITA, "Il vento in coda soffiava da dietro la squadra avversaria!"}, {Language.KOR, "상대팀 뒤에서 불어오는 순풍!"}, {Language.CHN_SIM, "顺风从对方背后吹来！"}, {Language.CHN_TRA, "順風從對方背後吹來！"}, }},
 			{ALLY_TAILWIND_END, new() {{Language.ENG, "Your team’s Tailwind petered out!"}, {Language.JPN, "あなたのチームの追い風が弱まってしまいました。"}, {Language.GER, "Der Rückenwind Ihres Teams ist versiegt!"}, {Language.FRE, "Le Tailwind de votre équipe s’est essoufflé !"}, {Language.SPN, "¡El viento de cola de tu equipo se acabó!"}, {Language.ITA, "Il Vento in coda della tua squadra si è esaurito!"}, {Language.KOR, "당신 팀의 Tailwind가 사라졌습니다!"}, {Language.CHN_SIM, "你的团队的顺风逐渐消失了！"}, {Language.CHN_TRA, "你的團隊的順風逐漸消失了！"}, }},
 			{OPPONENT_TAILWIND_END, new() {{Language.ENG, "The opposing team’s Tailwind petered out!"}, {Language.JPN, "相手チームの追い風が弱まった！"}, {Language.GER, "Der Rückenwind des gegnerischen Teams ließ nach!"}, {Language.FRE, "Le Tailwind de l’équipe adverse s’est essoufflé !"}, {Language.SPN, "¡El Tailwind del equipo contrario se agotó!"}, {Language.ITA, "Il Vento in Coda della squadra avversaria si è esaurito!"}, {Language.KOR, "상대팀의 Tailwind가 약해졌습니다!"}, {Language.CHN_SIM, "对方的顺风逐渐消失！"}, {Language.CHN_TRA, "對方的順風逐漸消失！"}, }},
+			{SPIKES_CLIENT, new() {{Language.ENG, "Spikes were scattered on the ground all around your team!"}, {Language.JPN, "チームの周囲の地面にスパイクが散乱しました。"}, {Language.GER, "Überall um Ihr Team herum waren Stacheln auf dem Boden verstreut!"}, {Language.FRE, "Des piques étaient éparpillées au sol tout autour de votre équipe !"}, {Language.SPN, "¡Había púas esparcidas por el suelo alrededor de tu equipo!"}, {Language.ITA, "Le punte erano sparse sul terreno attorno alla tua squadra!"}, {Language.KOR, "팀 전체에 스파이크가 땅에 흩어져 있었습니다!"}, {Language.CHN_SIM, "你的团队周围的地面上散落着尖刺！"}, {Language.CHN_TRA, "你的團隊周圍的地面上散落著尖刺！"}, }},
+			{SPIKES_REMOTE, new() {{Language.ENG, "Spikes were scattered on the ground all around the opposing team!"}, {Language.JPN, "相手チームの周囲の地面にはスパイクが散らばっていました！"}, {Language.GER, "Rund um das gegnerische Team waren Spikes auf dem Boden verstreut!"}, {Language.FRE, "Des piques étaient éparpillées au sol tout autour de l'équipe adverse !"}, {Language.SPN, "¡Los picos estaban esparcidos por el suelo alrededor del equipo contrario!"}, {Language.ITA, "Gli spuntoni erano sparsi sul terreno tutt'intorno alla squadra avversaria!"}, {Language.KOR, "스파이크가 상대팀 곳곳에 흩뿌려져 있었습니다!"}, {Language.CHN_SIM, "对方队伍周围的地面上散落着尖刺！"}, {Language.CHN_TRA, "對方隊伍周圍的地面上散落著尖刺！"}, }},
+			{POISON_SPIKES_CLIENT, new() {{Language.ENG, "Poison spikes were scattered on the ground all around your team!"}, {Language.JPN, "チームの周りの地面に毒のスパイクがばらまかれました!"}, {Language.GER, "Überall um Ihr Team herum waren Giftstacheln auf dem Boden verstreut!"}, {Language.FRE, "Des pointes de poison étaient dispersées sur le sol tout autour de votre équipe !"}, {Language.SPN, "¡Picos de veneno estaban esparcidos por el suelo alrededor de tu equipo!"}, {Language.ITA, "Spuntoni velenosi erano sparsi sul terreno attorno alla tua squadra!"}, {Language.KOR, "팀 전체에 독 스파이크가 땅에 흩어져 있었습니다!"}, {Language.CHN_SIM, "毒刺散落在你团队周围的地面上！"}, {Language.CHN_TRA, "毒刺散落在你隊伍周圍的地面上！"}, }},
+			{POISON_SPIKES_REMOTE, new() {{Language.ENG, "Poison spikes were scattered on the ground all around the opposing team!"}, {Language.JPN, "敵チームの周囲の地面に毒スパイクがばらまかれました！"}, {Language.GER, "Überall um das gegnerische Team herum waren Giftspitzen auf dem Boden verstreut!"}, {Language.FRE, "Des pointes de poison étaient éparpillées sur le sol tout autour de l'équipe adverse !"}, {Language.SPN, "¡Picos de veneno estaban esparcidos por el suelo alrededor del equipo contrario!"}, {Language.ITA, "Spuntoni velenosi erano sparsi sul terreno attorno alla squadra avversaria!"}, {Language.KOR, "상대 팀 곳곳에 독 스파이크가 흩뿌려져 있었습니다!"}, {Language.CHN_SIM, "敌方周围的地面上散落着毒刺！"}, {Language.CHN_TRA, "敵方周圍的地面上散落著毒刺！"}, }},
+			{POINTED_STONES_CLIENT, new() {{Language.ENG, "Pointed stones float in the air around your team!"}, {Language.JPN, "尖った石がチームの周りの空中に浮かんでいます!"}, {Language.GER, "Spitze Steine ​​schweben in der Luft um Ihr Team herum!"}, {Language.FRE, "Des pierres pointues flottent dans les airs autour de votre équipe !"}, {Language.SPN, "¡Piedras puntiagudas flotan en el aire alrededor de tu equipo!"}, {Language.ITA, "Le pietre appuntite fluttuano nell'aria attorno alla tua squadra!"}, {Language.KOR, "팀 주위에 뾰족한 돌이 공중에 떠 있습니다!"}, {Language.CHN_SIM, "尖头的石头漂浮在你的团队周围的空中！"}, {Language.CHN_TRA, "尖頭的石頭漂浮在你的團隊周圍的空中！"}, }},
+			{POINTED_STONES_REMOTE, new() {{Language.ENG, "Pointed stones float in the air around the opposing team!"}, {Language.JPN, "相手チームの周囲に尖った石が空中に浮いています！"}, {Language.GER, "Spitze Steine ​​schweben in der Luft um das gegnerische Team herum!"}, {Language.FRE, "Des pierres pointues flottent dans les airs autour de l'équipe adverse !"}, {Language.SPN, "¡Piedras puntiagudas flotan en el aire alrededor del equipo contrario!"}, {Language.ITA, "Le pietre appuntite fluttuano nell'aria attorno alla squadra avversaria!"}, {Language.KOR, "뾰족한 돌이 상대 팀 주위에 공중에 떠 있습니다!"}, {Language.CHN_SIM, "尖头的石头漂浮在对方队伍周围的空中！"}, {Language.CHN_TRA, "尖頭的石頭漂浮在對方隊伍周圍的空中！"}, }},
 			{GRASSY_TERRAIN_START, new() {{Language.ENG, "Grass grew to cover the battlefield!"}, {Language.JPN, "戦場を覆うほど草が生えてきた！"}, {Language.GER, "Gras wuchs und bedeckte das Schlachtfeld!"}, {Language.FRE, "L'herbe a poussé pour couvrir le champ de bataille !"}, {Language.SPN, "¡La hierba creció hasta cubrir el campo de batalla!"}, {Language.ITA, "L'erba è cresciuta fino a coprire il campo di battaglia!"}, {Language.KOR, "잔디가 전장을 덮을 만큼 자랐습니다!"}, {Language.CHN_SIM, "战场上长满了青草！"}, {Language.CHN_TRA, "戰場上長滿了青草！"}, }},
 			{GRASSY_TERRAIN_END, new() {{Language.ENG, "The grass disappeared from the battlefield."}, {Language.JPN, "戦場から草が消えた。"}, {Language.GER, "Das Gras verschwand vom Schlachtfeld."}, {Language.FRE, "L'herbe a disparu du champ de bataille."}, {Language.SPN, "La hierba desapareció del campo de batalla."}, {Language.ITA, "L'erba scomparve dal campo di battaglia."}, {Language.KOR, "전장에서 풀이 사라졌습니다."}, {Language.CHN_SIM, "草地从战场上消失了。"}, {Language.CHN_TRA, "草地從戰場上消失了。"}, }},
 			{MISTY_TERRAIN_START, new() {{Language.ENG, "Mist swirled around the battlefield!"}, {Language.JPN, "戦場に霧が渦巻いた！"}, {Language.GER, "Nebel wirbelte über das Schlachtfeld!"}, {Language.FRE, "La brume tourbillonnait autour du champ de bataille !"}, {Language.SPN, "¡La niebla se arremolinaba en el campo de batalla!"}, {Language.ITA, "La nebbia vorticava sul campo di battaglia!"}, {Language.KOR, "전장에 안개가 휘몰아쳤습니다!"}, {Language.CHN_SIM, "战场上雾气缭绕！"}, {Language.CHN_TRA, "戰場上霧氣繚繞！"}, }},
 			{MISTY_TERRAIN_END, new() {{Language.ENG, "The mist disappeared from the battlefield."}, {Language.JPN, "戦場から霧が消えた。"}, {Language.GER, "Der Nebel verschwand vom Schlachtfeld."}, {Language.FRE, "La brume disparut du champ de bataille."}, {Language.SPN, "La niebla desapareció del campo de batalla."}, {Language.ITA, "La nebbia scomparve dal campo di battaglia."}, {Language.KOR, "전장에서 안개가 사라졌습니다."}, {Language.CHN_SIM, "战场上的迷雾消失了。"}, {Language.CHN_TRA, "戰場上的迷霧消失了。"}, }},
 			{ELECTRIC_TERRAIN_START, new() {{Language.ENG, "An electric current ran across the battlefield!"}, {Language.JPN, "戦場に電流が走った！"}, {Language.GER, "Ein elektrischer Strom floss über das Schlachtfeld!"}, {Language.FRE, "Un courant électrique a traversé le champ de bataille !"}, {Language.SPN, "¡Una corriente eléctrica recorrió el campo de batalla!"}, {Language.ITA, "Una corrente elettrica attraversava il campo di battaglia!"}, {Language.KOR, "전장에 전류가 흐르고 있었습니다!"}, {Language.CHN_SIM, "战场上，一股电流流过！"}, {Language.CHN_TRA, "戰場上，一股電流流過！"}, }},
 			{ELECTRIC_TERRAIN_END, new() {{Language.ENG, "The electricity disappeared from the battlefield."}, {Language.JPN, "戦場から電気が消えた。"}, {Language.GER, "Der Strom verschwand vom Schlachtfeld."}, {Language.FRE, "L'électricité a disparu du champ de bataille."}, {Language.SPN, "La electricidad desapareció del campo de batalla."}, {Language.ITA, "L'elettricità scomparve dal campo di battaglia."}, {Language.KOR, "전장에서 전기가 사라졌습니다."}, {Language.CHN_SIM, "战场上的电流消失了。"}, {Language.CHN_TRA, "戰場上的電流消失了。"}, }},
+			{STICKY_WEB_CLIENT, new() {{Language.ENG, "A sticky web has been laid out on the ground around your team!"}, {Language.JPN, "あなたのチームの周りの地面に粘着性の巣が張られました!"}, {Language.GER, "Auf dem Boden um Ihr Team herum hat sich ein klebriges Netz ausgebreitet!"}, {Language.FRE, "Une toile collante a été disposée au sol autour de votre équipe !"}, {Language.SPN, "¡Se ha tendido una red pegajosa en el suelo alrededor de tu equipo!"}, {Language.ITA, "Una rete appiccicosa è stata stesa sul terreno attorno alla tua squadra!"}, {Language.KOR, "팀 주변 바닥에 끈끈한 거미줄이 깔려 있습니다!"}, {Language.CHN_SIM, "你的团队周围的地面上已经布满了一张粘性网！"}, {Language.CHN_TRA, "你的團隊周圍的地面上已經佈滿了一張黏性網！"}, }},
+			{STICKY_WEB_REMOTE, new() {{Language.ENG, "A sticky web has been laid out on the ground around the opposing team!"}, {Language.JPN, "相手チームの周囲の地面に粘着性の蜘蛛の巣が張られました!"}, {Language.GER, "Auf dem Boden um die gegnerische Mannschaft herum hat sich ein klebriges Netz ausgebreitet!"}, {Language.FRE, "Une toile collante a été disposée au sol autour de l'équipe adverse !"}, {Language.SPN, "¡Se ha tendido una red pegajosa en el suelo alrededor del equipo contrario!"}, {Language.ITA, "Una ragnatela appiccicosa è stata stesa sul terreno attorno alla squadra avversaria!"}, {Language.KOR, "상대팀 주변 땅에 끈끈한 거미줄이 깔려있습니다!"}, {Language.CHN_SIM, "对方队伍周围的地面上布满了一张粘网！"}, {Language.CHN_TRA, "對方隊伍周圍的地面上佈滿了一張黏網！"}, }},
 			{HEAVY_RAIN_STARTED, new() {{Language.ENG, "A heavy rain began to fall!"}, {Language.JPN, "激しい雨が降り始めました！"}, {Language.GER, "Es begann heftig zu regnen!"}, {Language.FRE, "Une forte pluie a commencé à tomber !"}, {Language.SPN, "¡Comenzó a caer una fuerte lluvia!"}, {Language.ITA, "Cominciò a cadere una forte pioggia!"}, {Language.KOR, "큰비가 내리기 시작했어요!"}, {Language.CHN_SIM, "一场大雨开始下起来了！"}, {Language.CHN_TRA, "一場大雨開始下起來了！"}, }},
 			{HEAVY_RAIN_STOPPED, new() {{Language.ENG, "The heavy rain has lifted!"}, {Language.JPN, "大雨も上がりました！"}, {Language.GER, "Der starke Regen hat nachgelassen!"}, {Language.FRE, "Les fortes pluies se sont levées !"}, {Language.SPN, "¡La fuerte lluvia ha cesado!"}, {Language.ITA, "La forte pioggia si è calmata!"}, {Language.KOR, "폭우가 그쳤습니다!"}, {Language.CHN_SIM, "大雨停了！"}, {Language.CHN_TRA, "大雨停了！"}, }},
 			{SUNLIGHT_TURNED_EXTREMELY_HARSH, new() {{Language.ENG, "The sunlight turned extremely harsh!"}, {Language.JPN, "日差しがとても厳しくなりました！"}, {Language.GER, "Das Sonnenlicht wurde extrem grell!"}, {Language.FRE, "La lumière du soleil est devenue extrêmement dure !"}, {Language.SPN, "¡La luz del sol se volvió extremadamente dura!"}, {Language.ITA, "La luce del sole è diventata estremamente dura!"}, {Language.KOR, "햇빛이 매우 강렬해졌습니다!"}, {Language.CHN_SIM, "阳光变得异常刺眼！"}, {Language.CHN_TRA, "陽光變得異常刺眼！"}, }},

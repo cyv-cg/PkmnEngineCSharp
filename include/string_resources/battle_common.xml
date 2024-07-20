@@ -11130,7 +11130,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5323</key>
+		<key>MON_WHIPPED_UP_A_WHIRLWIND</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} whipped up a whirlwind!</en>
@@ -11145,7 +11145,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5324</key>
+		<key>WILD_MON_WHIPPED_UP_A_WHIRLWIND</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} whipped up a whirlwind!</en>
@@ -11160,7 +11160,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5325</key>
+		<key>OPPOSING_MON_WHIPPED_UP_A_WHIRLWIND</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The opposing {1} whipped up a whirlwind!</en>
@@ -11175,7 +11175,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5326</key>
+		<key>PLAYER_MON_WHIPPED_UP_A_WHIRLWIND</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1}’s {2} whipped up a whirlwind!</en>
@@ -11190,7 +11190,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5327</key>
+		<key>MON_BECAME_CLOAKED_IN_HARSH_LIGHT</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} became cloaked in a harsh light!</en>
@@ -11205,7 +11205,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5328</key>
+		<key>WILD_MON_BECAME_CLOAKED_IN_HARSH_LIGHT</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} became cloaked in a harsh light!</en>
@@ -11220,37 +11220,37 @@
 		</text>
 	</string>
 	<string>
-		<key>key5329</key>
+		<key>OPPOSING_MON_BECAME_CLOAKED_IN_HARSH_LIGHT</key>
+		<params>1</params>
+		<text>
+			<en lang="english">The opposing {1} became cloaked in a harsh light!</en>
+			<ja lang="japanese">敵対する {1} は  厳しい光に覆われました!</ja>
+			<de lang="german">Der Gegner {1} wurde in grelles Licht gehüllt!</de>
+			<fr lang="french">Les {1} adverses se sont retrouvés enveloppés dansune lumière crue !</fr>
+			<es lang="spanish">¡El oponente {1} quedó envuelto enuna luz dura!</es>
+			<it lang="italian">L'avversario {1} si ammantava diuna luce violenta!</it>
+			<ko lang="korean"> 반대 {1}는  na harsh light에서 숨겨져 있습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}笼罩在刺眼的光线中！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}籠罩在刺眼的光線中！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_BECAME_CLOAKED_IN_HARSH_LIGHT</key>
 		<params>2</params>
 		<text>
-			<en lang="english">{1}The opposing {2} became cloaked in a harsh light!</en>
-			<ja lang="japanese">{1}敵対する {2} は  厳しい光に覆われました!</ja>
-			<de lang="german">{1}Der Gegner {2} wurde in grelles Licht gehüllt!</de>
-			<fr lang="french">{1}Les {2} adverses se sont retrouvés enveloppés dansune lumière crue !</fr>
-			<es lang="spanish">{1}¡El oponente {2} quedó envuelto enuna luz dura!</es>
-			<it lang="italian">{1}L'avversario {2} si ammantava diuna luce violenta!</it>
-			<ko lang="korean">{1} 반대 {2}는  na harsh light에서 숨겨져 있습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方的{2}笼罩在刺眼的光线中！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方的{2}籠罩在刺眼的光線中！</zh-tw>
+			<en lang="english">{1}’s {2} became cloaked in a harsh light!</en>
+			<ja lang="japanese">{1} の {2} が厳しい光に覆われてしまいました!</ja>
+			<de lang="german">{1}s {2} wurde in ein grelles Licht gehüllt!</de>
+			<fr lang="french">Le {2} de {1} s'est enveloppédans une lumière crue !</fr>
+			<es lang="spanish">¡Los {2} de {1} quedaron envueltosen una luz dura!</es>
+			<it lang="italian">Il {2} di {1} si è ammantatodi una luce intensa!</it>
+			<ko lang="korean">{1}의 {2}이(가) 거친 빛에 가려졌습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1} 的 {2} 被笼罩在刺眼的光线中！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1} 的 {2} 被籠罩在刺眼的光線中！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5330</key>
-		<params>3</params>
-		<text>
-			<en lang="english">{1}{2}’s {3} became cloakedin a harsh light!</en>
-			<ja lang="japanese">{1}{2} の {3} が厳しい光に覆われてしまいました!</ja>
-			<de lang="german">{1}{2}s {3} wurde in ein grelles Licht gehüllt!</de>
-			<fr lang="french">Le {3} de {1}{2} s'est enveloppédans une lumière crue !</fr>
-			<es lang="spanish">¡Los {3} de {1}{2} quedaron envueltosen una luz dura!</es>
-			<it lang="italian">Il {3} di {1}{2} si è ammantatodi una luce intensa!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) 거친 빛에 가려졌습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2} 的 {3} 被笼罩在刺眼的光线中！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2} 的 {3} 被籠罩在刺眼的光線中！</zh-tw>
-		</text>
-	</string>
-	<string>
-		<key>key5331</key>
+		<key>MON_ABSORBED_LIGHT</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} absorbed light!</en>
@@ -11265,7 +11265,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5332</key>
+		<key>WILD_MON_ABSORBED_LIGHT</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} absorbed light!</en>
@@ -11280,7 +11280,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5333</key>
+		<key>OPPOSING_MON_ABSORBED_LIGHT</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The opposing {1} absorbed light!</en>
@@ -11295,7 +11295,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5334</key>
+		<key>PLAYER_MON_ABSORBED_LIGHT</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1}’s {2} absorbed light!</en>
@@ -11310,7 +11310,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5335</key>
+		<key>MON_TUCKED_IN_ITS_HEAD</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} tucked in its head!</en>
@@ -11325,7 +11325,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5336</key>
+		<key>WILD_MON_TUCKED_IN_ITS_HEAD</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} tucked in its head!</en>
@@ -11340,7 +11340,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5337</key>
+		<key>OPPOSING_MON_TUCKED_IN_ITS_HEAD</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The opposing {1} tucked in its head!</en>
@@ -11355,7 +11355,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5338</key>
+		<key>PLAYER_MON_TUCKED_IN_ITS_HEAD</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1}’s {2} tucked in its head!</en>
@@ -17370,7 +17370,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5733</key>
+		<key>MON_MUST_RECHARGE</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} must recharge!</en>
@@ -17385,7 +17385,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5734</key>
+		<key>WILD_MON_MUST_RECHARGE</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} must recharge!</en>
@@ -17400,7 +17400,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5735</key>
+		<key>OPPOSING_MON_MUST_RECHARGE</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The opposing {1} must recharge!</en>
@@ -17415,7 +17415,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5736</key>
+		<key>PLAYER_MON_MUST_RECHARGE</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1}’s {2} must recharge!</en>
@@ -17670,7 +17670,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5753</key>
+		<key>MON_CLOAKED_IN_FREEZING_LIGHT</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} became cloaked in a freezing light!</en>
@@ -17685,52 +17685,52 @@
 		</text>
 	</string>
 	<string>
-		<key>key5754</key>
+		<key>WILD_MON_CLOAKED_IN_FREEZING_LIGHT</key>
+		<params>1</params>
+		<text>
+			<en lang="english">The wild {1} became cloaked in a freezing light!</en>
+			<ja lang="japanese">野生の {1} が  凍てつく光に覆われてしまいました!</ja>
+			<de lang="german">Die Wildnis {1} wurde in a eiskaltes Licht gehüllt!</de>
+			<fr lang="french">Le {1} sauvage s'est enveloppé dans a une lumière glaciale !</fr>
+			<es lang="spanish">¡El salvaje {1} quedó envuelto enuna luz helada!</es>
+			<it lang="italian">La natura {1} si ammantava diuna luce gelida!</it>
+			<ko lang="korean">야생 {1}이(가) 얼어붙는 빛 속에 뒤덮였습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野生动物{1}被 冰冷的光芒笼罩！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野生動物{1}被 冰冷的光芒籠罩！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_CLOAKED_IN_FREEZING_LIGHT</key>
+		<params>1</params>
+		<text>
+			<en lang="english">The opposing {1} became cloaked in a freezing light!</en>
+			<ja lang="japanese">敵対する {1} は  凍てつく光に覆われました!</ja>
+			<de lang="german">Der Gegner {1} wurde inein eiskaltes Licht gehüllt!</de>
+			<fr lang="french">Les {1} adverses se sont retrouvés enveloppés dans a une lumière glaciale !</fr>
+			<es lang="spanish">¡El oponente {1} quedó envuelto enuna luz helada!</es>
+			<it lang="italian">L'avversario {1} si è avvolto inuna luce gelida!</it>
+			<ko lang="korean">상대 {1}이(가) 얼어붙는 빛 속에 숨겨졌습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}被冰冷的光芒笼罩了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}被冰冷的光芒籠罩了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_CLOAKED_IN_FREEZING_LIGHT</key>
 		<params>2</params>
 		<text>
-			<en lang="english">{1}The wild {2} became cloaked in a freezing light!</en>
-			<ja lang="japanese">{1}野生の {2} が  凍てつく光に覆われてしまいました!</ja>
-			<de lang="german">{1}Die Wildnis {2} wurde in a eiskaltes Licht gehüllt!</de>
-			<fr lang="french">{1}Le {2} sauvage s'est enveloppé dans a une lumière glaciale !</fr>
-			<es lang="spanish">{1}¡El salvaje {2} quedó envuelto enuna luz helada!</es>
-			<it lang="italian">{1}La natura {2} si ammantava diuna luce gelida!</it>
-			<ko lang="korean">{1}야생 {2}이(가) 얼어붙는 빛 속에 뒤덮였습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}野生动物{2}被 冰冷的光芒笼罩！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}野生動物{2}被 冰冷的光芒籠罩！</zh-tw>
+			<en lang="english">{1}’s {2} became cloaked in a freezing light!</en>
+			<ja lang="japanese">{1} の {2} が  凍てつく光に覆われてしまいました。</ja>
+			<de lang="german">{1}s {2} wurde inein eiskaltes Licht gehüllt!</de>
+			<fr lang="french">Le {2} de {1} s'est enveloppé dans a une lumière glaciale !</fr>
+			<es lang="spanish">¡El {2} de {1} quedó envuelto enuna luz helada!</es>
+			<it lang="italian">Il {2} di {1} si è avvolto inuna luce gelida!</it>
+			<ko lang="korean">{1}의 {2}이(가) 얼어붙는 빛에 가려졌습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}被 冰冷的光芒笼罩了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}被 冰冷的光芒籠罩了！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5755</key>
-		<params>2</params>
-		<text>
-			<en lang="english">{1}The opposing {2} became cloaked in a freezing light!</en>
-			<ja lang="japanese">{1}敵対する {2} は  凍てつく光に覆われました!</ja>
-			<de lang="german">{1}Der Gegner {2} wurde inein eiskaltes Licht gehüllt!</de>
-			<fr lang="french">{1}Les {2} adverses se sont retrouvés enveloppés dans a une lumière glaciale !</fr>
-			<es lang="spanish">{1}¡El oponente {2} quedó envuelto enuna luz helada!</es>
-			<it lang="italian">{1}L'avversario {2} si è avvolto inuna luce gelida!</it>
-			<ko lang="korean">{1}상대 {2}이(가) 얼어붙는 빛 속에 숨겨졌습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方的{2}被冰冷的光芒笼罩了！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方的{2}被冰冷的光芒籠罩了！</zh-tw>
-		</text>
-	</string>
-	<string>
-		<key>key5756</key>
-		<params>3</params>
-		<text>
-			<en lang="english">{1}{2}’s {3} became cloaked in a freezing light!</en>
-			<ja lang="japanese">{1}{2} の {3} が  凍てつく光に覆われてしまいました。</ja>
-			<de lang="german">{1}{2}s {3} wurde inein eiskaltes Licht gehüllt!</de>
-			<fr lang="french">Le {3} de {1}{2} s'est enveloppé dans a une lumière glaciale !</fr>
-			<es lang="spanish">¡El {3} de {1}{2} quedó envuelto enuna luz helada!</es>
-			<it lang="italian">Il {3} di {1}{2} si è avvolto inuna luce gelida!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) 얼어붙는 빛에 가려졌습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}的{3}被 冰冷的光芒笼罩了！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}的{3}被 冰冷的光芒籠罩了！</zh-tw>
-		</text>
-	</string>
-	<string>
-		<key>key5757</key>
+		<key>MON_CLOAKED_IN_FREEZING_AIR</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} became cloaked in freezing air!</en>
@@ -17745,7 +17745,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5758</key>
+		<key>WILD_MON_CLOAKED_IN_FREEZING_AIR</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} became cloaked in freezing air!</en>
@@ -17760,22 +17760,22 @@
 		</text>
 	</string>
 	<string>
-		<key>key5759</key>
-		<params>2</params>
+		<key>OPPOSING_MON_CLOAKED_IN_FREEZING_AIR</key>
+		<params>1</params>
 		<text>
-			<en lang="english">{1}The opposing {2} became cloaked in freezing air!</en>
-			<ja lang="japanese">{1}敵対する {2} は 凍てつく空気に覆われました!</ja>
-			<de lang="german">{1}Der Gegner {2} wurde von eiskalter Luft eingehüllt!</de>
-			<fr lang="french">{1}Les {2} adverses se sont retrouvés enveloppés dans un air glacial !</fr>
-			<es lang="spanish">{1}¡El enemigo {2} quedó envuelto en aire helado!</es>
-			<it lang="italian">{1}L'avversario {2} è rimasto avvolto nell' aria gelida!</it>
-			<ko lang="korean">{1}상대 {2}이(가) 얼어붙은 공기 속에 숨겨졌습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方的{2}被 笼罩在冰冷的空气中！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方的{2}被 籠罩在冰冷的空氣中！</zh-tw>
+			<en lang="english">The opposing {1} became cloaked in freezing air!</en>
+			<ja lang="japanese">敵対する {1} は 凍てつく空気に覆われました!</ja>
+			<de lang="german">Der Gegner {1} wurde von eiskalter Luft eingehüllt!</de>
+			<fr lang="french">Les {1} adverses se sont retrouvés enveloppés dans un air glacial !</fr>
+			<es lang="spanish">¡El enemigo {1} quedó envuelto en aire helado!</es>
+			<it lang="italian">L'avversario {1} è rimasto avvolto nell' aria gelida!</it>
+			<ko lang="korean">상대 {1}이(가) 얼어붙은 공기 속에 숨겨졌습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}被 笼罩在冰冷的空气中！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}被 籠罩在冰冷的空氣中！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5760</key>
+		<key>PLAYER_MON_CLOAKED_IN_FREEZING_AIR</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1}’s {2} became cloaked in freezing air!</en>
@@ -25110,7 +25110,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6221</key>
+		<key>MON_IS_ABSORBING_POWER</key>
 		<params>1</params>
 		<text>
 			<en lang="english">{1} is absorbing power!</en>
@@ -25125,7 +25125,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6222</key>
+		<key>WILD_MON_IS_ABSORBING_POWER</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The wild {1} is absorbing power!</en>
@@ -25140,7 +25140,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6223</key>
+		<key>OPPOSING_MON_IS_ABSORBING_POWER</key>
 		<params>1</params>
 		<text>
 			<en lang="english">The opposing {1} is absorbing power!</en>
@@ -25155,7 +25155,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6224</key>
+		<key>PLAYER_MON_IS_ABSORBING_POWER</key>
 		<params>2</params>
 		<text>
 			<en lang="english">{1}’s {2} is absorbing power!</en>
@@ -25167,6 +25167,66 @@
 			<ko lang="korean">{1}의 {2}이(가) 힘을 흡수하고 있습니다!</ko>
 			<zh-cn lang="chinese (simplified)">{1}的{2}正在吸收力量！</zh-cn>
 			<zh-tw lang="chinese (traditional)">{1}的{2}正在吸收力量！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MON_IS_OVERFLOWING_WITH_SPACE_POWER</key>
+		<params>1</params>
+		<text>
+			<en lang="english">{1} is overflowing with space power!</en>
+			<ja lang="japanese">{1}にはスペースパワーが溢れています！</ja>
+			<de lang="german">{1} strotzt nur so vor Weltraumkraft!</de>
+			<fr lang="french">{1} déborde de puissance spatiale !</fr>
+			<es lang="spanish">¡{1} está repleto de poder espacial!</es>
+			<it lang="italian">{1} trabocca di potere spaziale!</it>
+			<ko lang="korean">{1}에는 우주력이 넘쳐납니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}空间力量满溢！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}空間力量滿溢！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_IS_OVERFLOWING_WITH_SPACE_POWER</key>
+		<params>1</params>
+		<text>
+			<en lang="english">The wild {1} is overflowing with space power!</en>
+			<ja lang="japanese">野生の {1} はスペースパワーに溢れています!</ja>
+			<de lang="german">Die Wildnis {1} strotzt nur so vor Weltraumkraft!</de>
+			<fr lang="french">Le sauvage {1} déborde de puissance spatiale !</fr>
+			<es lang="spanish">¡El salvaje {1} está repleto de poder espacial!</es>
+			<it lang="italian">Il {1} ​​selvaggio trabocca di potere spaziale!</it>
+			<ko lang="korean">야생의 {1}에는 우주력이 넘쳐납니다!</ko>
+			<zh-cn lang="chinese (simplified)">狂野的{1}充满了空间力量！</zh-cn>
+			<zh-tw lang="chinese (traditional)">狂野的{1}充滿了空間力量！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_IS_OVERFLOWING_WITH_SPACE_POWER</key>
+		<params>1</params>
+		<text>
+			<en lang="english">The opposing {1} is overflowing with space power!</en>
+			<ja lang="japanese">相手の{1}はスペースパワーに溢れています！</ja>
+			<de lang="german">Die gegnerische {1} strotzt nur so vor Raumkraft!</de>
+			<fr lang="french">Le {1} adverse déborde de puissance spatiale !</fr>
+			<es lang="spanish">¡El {1} ​​enemigo está repleto de poder espacial!</es>
+			<it lang="italian">L'avversario {1} trabocca di potere spaziale!</it>
+			<ko lang="korean">상대 {1}은(는) 우주력이 넘쳐납니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}空间力量溢出！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}空間力量溢出！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_IS_OVERFLOWING_WITH_SPACE_POWER</key>
+		<params>2</params>
+		<text>
+			<en lang="english">{1}'s {2} is overflowing with space power!</en>
+			<ja lang="japanese">{1}の{2}はスペースパワーに溢れています！</ja>
+			<de lang="german">{1}s {2} strotzt nur so vor Weltraumkraft!</de>
+			<fr lang="french">Le {2} de {1} déborde de puissance spatiale !</fr>
+			<es lang="spanish">¡El {2} de {1} está repleto de poder espacial!</es>
+			<it lang="italian">Il {2} di {1} trabocca di potere spaziale!</it>
+			<ko lang="korean">{1}의 {2}에는 우주력이 넘쳐납니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}充满了空间力量！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}充滿了空間力量！</zh-tw>
 		</text>
 	</string>
 	<string>
@@ -33225,7 +33285,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6759</key>
+		<key>SPIKES_CLIENT</key>
 		<params>0</params>
 		<text>
 			<en lang="english">Spikes were scattered on the ground all around your team!</en>
@@ -33240,7 +33300,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6760</key>
+		<key>SPIKES_REMOTE</key>
 		<params>0</params>
 		<text>
 			<en lang="english">Spikes were scattered on the ground all around the opposing team!</en>
@@ -33285,7 +33345,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6763</key>
+		<key>POISON_SPIKES_CLIENT</key>
 		<params>0</params>
 		<text>
 			<en lang="english">Poison spikes were scattered on the ground all around your team!</en>
@@ -33300,7 +33360,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6764</key>
+		<key>POISON_SPIKES_REMOTE</key>
 		<params>0</params>
 		<text>
 			<en lang="english">Poison spikes were scattered on the ground all around the opposing team!</en>
@@ -33345,7 +33405,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6767</key>
+		<key>POINTED_STONES_CLIENT</key>
 		<params>0</params>
 		<text>
 			<en lang="english">Pointed stones float in the air around your team!</en>
@@ -33360,7 +33420,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6768</key>
+		<key>POINTED_STONES_REMOTE</key>
 		<params>0</params>
 		<text>
 			<en lang="english">Pointed stones float in the air around the opposing team!</en>
@@ -34155,7 +34215,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6821</key>
+		<key>STICKY_WEB_CLIENT</key>
 		<params>0</params>
 		<text>
 			<en lang="english">A sticky web has been laid out on the ground around your team!</en>
@@ -34170,7 +34230,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6822</key>
+		<key>STICKY_WEB_REMOTE</key>
 		<params>0</params>
 		<text>
 			<en lang="english">A sticky web has been laid out on the ground around the opposing team!</en>

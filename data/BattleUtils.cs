@@ -240,16 +240,6 @@ namespace PkmnEngine {
 				return flags;
 			}
 
-			//// Determine if the target has fainted.
-			//// TODO: this should kinda be done in the DamageMon function.
-			//if (GetEffectiveHP(state, defender) == 0) {
-			//	flags |= FLAG_TARGET_FAINTED;
-			//	//BM_PARAMS[0] = GetMonName(defender.mon);
-			//	//await MessageBox(GetString(STRINGS, BATTLE_COMMON.MON_FAINTED));
-			//	// TODO: remove all the target's actions from the action list, among other things.
-			//	return flags;
-			//}
-
 			// Do the secondary effect, if there is one and the primary effect does not prefent it.
 			if (EffectHit(battle, gBattleMoves(moveID).secondaryEffectChance)) {
 				if ((flags & FLAG_DO_NOT_DO_SECONDARY_EFFECT) == 0 && gBattleMoves(moveID).secondaryEffect != MoveEffectID.NONE) {
@@ -308,10 +298,10 @@ namespace PkmnEngine {
 			BattleMove move = gBattleMoves(moveID);
 
 			// The startup of 2-turn moves like Fly or Solar Beam cannot miss, so deal with that here.
-			if ((move.flags & BattleMoves.Flag.SEMI_INVUL_TURN) != 0 && !attacker.HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
+			if ((move.flags & Flag.SEMI_INVUL_TURN) != 0 && !attacker.HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
 				return true;
 			}
-			if ((move.flags & BattleMoves.Flag.CHARGING_TURN) != 0 && !attacker.HasStatus(Status.CHARGING_TURN)) {
+			if ((move.flags & Flag.CHARGING_TURN) != 0 && !attacker.HasStatus(Status.CHARGING_TURN)) {
 				return true;
 			}
 
@@ -322,24 +312,24 @@ namespace PkmnEngine {
 
 			if (defender.HasStatus(Status.SEMI_INVULNERABLE_TURN)) {
 				switch (defender.GetStatusParam(StatusParam.SEMI_INVULNERABLE)) {
-					case StatusEffects.SEMI_INVULNERABLE_AIR:		if ((move.flags & BattleMoves.Flag.HITS_SEMI_INVUL_AIR) != 0)		{return false;} break;
-					case StatusEffects.SEMI_INVULNERABLE_GROUND:	if ((move.flags & BattleMoves.Flag.HITS_SEMI_INVUL_GROUND) != 0)	{return false;} break;
-					case StatusEffects.SEMI_INVULNERABLE_WATER:		if ((move.flags & BattleMoves.Flag.HITS_SEMI_INVUL_WATER) != 0)		{return false;} break;
-					case StatusEffects.SEMI_INVULNERABLE_PHANTOM:	return false;
+					case StatusEffects.SEMI_INVULNERABLE_AIR:		if ((move.flags & Flag.HITS_SEMI_INVUL_AIR) == 0)		{return false;} break;
+					case StatusEffects.SEMI_INVULNERABLE_GROUND:	if ((move.flags & Flag.HITS_SEMI_INVUL_GROUND) == 0)	{return false;} break;
+					case StatusEffects.SEMI_INVULNERABLE_WATER:		if ((move.flags & Flag.HITS_SEMI_INVUL_WATER) == 0)		{return false;} break;
+					case StatusEffects.SEMI_INVULNERABLE_PHANTOM:	if ((move.flags & Flag.HITS_SEMI_INVUL_PHANTOM) == 0)	{return false;} break;
 					default:
 						break;
 				}
 			}
 
-			if ((move.flags & BattleMoves.Flag.ALWAYS_HIT) != 0) {
+			if ((move.flags & Flag.ALWAYS_HIT) != 0) {
 				return true;
 			}
-			if ((move.flags & BattleMoves.Flag.ALWAYS_HIT_RAIN) != 0 && 
+			if ((move.flags & Flag.ALWAYS_HIT_RAIN) != 0 && 
 				(state.Weather.Condition == Condition.WEATHER_RAIN)
 			) {
 				return true;
 			}
-			if ((move.flags & BattleMoves.Flag.ALWAYS_HIT_HAIL) != 0 && 
+			if ((move.flags & Flag.ALWAYS_HIT_HAIL) != 0 && 
 				(state.Weather.Condition == Condition.WEATHER_HAIL || state.Weather.Condition == Condition.WEATHER_SNOW)
 			) {
 				return true;
@@ -351,7 +341,6 @@ namespace PkmnEngine {
 
 
 			float roll = battle.Random01();
-
 			roll *= Battle.RunEventChain(Callback.OnFieldModifyAcc, battle, null).Result;
 
 			float hitChance = DamageCalc.CalculateHitChance(state, attacker, defender, moveID);
@@ -430,6 +419,30 @@ namespace PkmnEngine {
 			}
 			
 			return targetSlots;
+		}
+
+		/// <summary>
+		/// Determines if a mon can choose its own action.
+		/// </summary>
+		/// <param name="bm">The BattleMon to check.</param>
+		/// <param name="slot">The slot on the field that it's in.</param>
+		/// <returns>Either the code that states it can choose its action, or a forced action if not.</returns>
+		public static u64 MonCanAct(BattleMon bm, u8 slot) {
+			// Recharging mons do not get to act.
+			if (bm.HasStatus(Status.RECHARGING)) {
+				bm.RemoveStatus(Status.RECHARGING);
+				return BattleActionCodes.BATTLE_ACTION(ActionCode.RECHARGING, slot, 0, 0);
+			}
+
+			// Mons in a semi-invunerable or charging turn do not get to choose an action.
+			if (
+				bm.HasStatus(Status.SEMI_INVULNERABLE_TURN, Status.CHARGING_TURN) && 
+				((gBattleMoves(bm.moves[bm.GetStatusParam(StatusParam.LAST_USED_MOVE)]).flags & (BattleMoves.Flag.SEMI_INVUL_TURN | BattleMoves.Flag.CHARGING_TURN)) != 0)
+			) {
+				return BattleActionCodes.BATTLE_ACTION_USE_MOVE(slot, (u8)bm.GetStatusParam(StatusParam.LAST_USED_MOVE), bm.moves[bm.GetStatusParam(StatusParam.LAST_USED_MOVE)], (u32)bm.GetStatusParam(StatusParam.LAST_TARGETED_MON));
+			}
+
+			return BattleActionCodes.ACTION_CHOOSE;
 		}
 	}
 }
