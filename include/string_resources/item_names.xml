@@ -1,7 +1,6 @@
 <ITEM_NAMES encoding="utf-8" t9n="official">
 	<string>
 		<key>ABILITY_CAPSULE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ability Capsule</en>
 			<ja lang="japanese">とくせいカプセル</ja>
@@ -16,7 +15,6 @@
 	</string>
 	<string>
 		<key>ABOMASITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Abomasite</en>
 			<ja lang="japanese">ユキノオナイト</ja>
@@ -31,7 +29,6 @@
 	</string>
 	<string>
 		<key>ABSOLITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Absolite</en>
 			<ja lang="japanese">アブソルナイト</ja>
@@ -46,7 +43,6 @@
 	</string>
 	<string>
 		<key>ABSORB_BULB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Absorb Bulb</en>
 			<ja lang="japanese">きゅうこん</ja>
@@ -61,7 +57,6 @@
 	</string>
 	<string>
 		<key>ADAMANT_CRYSTAL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Adamant Crystal</en>
 			<ja lang="japanese">だいこんごうだま</ja>
@@ -76,7 +71,6 @@
 	</string>
 	<string>
 		<key>ADAMANT_ORB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Adamant Orb</en>
 			<ja lang="japanese">こんごうだま</ja>
@@ -91,7 +85,6 @@
 	</string>
 	<string>
 		<key>ADRENALINE_ORB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Adrenaline Orb</en>
 			<ja lang="japanese">ビビリだま</ja>
@@ -106,7 +99,6 @@
 	</string>
 	<string>
 		<key>AERODACTYLITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Aerodactylite</en>
 			<ja lang="japanese">プテラナイト</ja>
@@ -121,7 +113,6 @@
 	</string>
 	<string>
 		<key>AGGRONITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Aggronite</en>
 			<ja lang="japanese">ボスゴドラナイト</ja>
@@ -136,7 +127,6 @@
 	</string>
 	<string>
 		<key>AIR_BALLOON</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Air Balloon</en>
 			<ja lang="japanese">ふうせん</ja>
@@ -151,7 +141,6 @@
 	</string>
 	<string>
 		<key>ALAKAZITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Alakazite</en>
 			<ja lang="japanese">フーディナイト</ja>
@@ -166,7 +155,6 @@
 	</string>
 	<string>
 		<key>ALORAICHIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Aloraichium Z</en>
 			<ja lang="japanese">アロライＺ</ja>
@@ -181,7 +169,6 @@
 	</string>
 	<string>
 		<key>ALTARIANITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Altarianite</en>
 			<ja lang="japanese">チルタリスナイト</ja>
@@ -196,7 +183,6 @@
 	</string>
 	<string>
 		<key>AMPHAROSITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ampharosite</en>
 			<ja lang="japanese">デンリュウナイト</ja>
@@ -211,7 +197,6 @@
 	</string>
 	<string>
 		<key>AMULET_COIN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Amulet Coin</en>
 			<ja lang="japanese">おまもりこばん</ja>
@@ -226,7 +211,6 @@
 	</string>
 	<string>
 		<key>ASSAULT_VEST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Assault Vest</en>
 			<ja lang="japanese">とつげきチョッキ</ja>
@@ -241,7 +225,6 @@
 	</string>
 	<string>
 		<key>AUDINITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Audinite</en>
 			<ja lang="japanese">タブンネナイト</ja>
@@ -256,7 +239,6 @@
 	</string>
 	<string>
 		<key>BANETTITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Banettite</en>
 			<ja lang="japanese">ジュペッタナイト</ja>
@@ -271,7 +253,6 @@
 	</string>
 	<string>
 		<key>BEEDRILLITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Beedrillite</en>
 			<ja lang="japanese">スピアナイト</ja>
@@ -286,7 +267,6 @@
 	</string>
 	<string>
 		<key>BERRY_SWEET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Berry Sweet</en>
 			<ja lang="japanese">ベリーアメざいく</ja>
@@ -301,7 +281,6 @@
 	</string>
 	<string>
 		<key>BIG_ROOT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Big Root</en>
 			<ja lang="japanese">おおきなねっこ</ja>
@@ -316,7 +295,6 @@
 	</string>
 	<string>
 		<key>BINDING_BAND</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Binding Band</en>
 			<ja lang="japanese">しめつけバンド</ja>
@@ -331,7 +309,6 @@
 	</string>
 	<string>
 		<key>BLACK_BELT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Black Belt</en>
 			<ja lang="japanese">くろおび</ja>
@@ -346,7 +323,6 @@
 	</string>
 	<string>
 		<key>BLACK_GLASSES</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Black Glasses</en>
 			<ja lang="japanese">くろいメガネ</ja>
@@ -361,7 +337,6 @@
 	</string>
 	<string>
 		<key>BLACK_SLUDGE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Black Sludge</en>
 			<ja lang="japanese">くろいヘドロ</ja>
@@ -376,7 +351,6 @@
 	</string>
 	<string>
 		<key>BLANK_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Blank Plate</en>
 			<ja lang="japanese">まっさらプレート</ja>
@@ -391,7 +365,6 @@
 	</string>
 	<string>
 		<key>BLASTOISINITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Blastoisinite</en>
 			<ja lang="japanese">カメックスナイト</ja>
@@ -406,7 +379,6 @@
 	</string>
 	<string>
 		<key>BLAZIKENITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Blazikenite</en>
 			<ja lang="japanese">バシャーモナイト</ja>
@@ -421,7 +393,6 @@
 	</string>
 	<string>
 		<key>BLUNDER_POLICY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Blunder Policy</en>
 			<ja lang="japanese">からぶりほけん</ja>
@@ -436,7 +407,6 @@
 	</string>
 	<string>
 		<key>BRIGHT_POWDER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Bright Powder</en>
 			<ja lang="japanese">ひかりのこな</ja>
@@ -451,7 +421,6 @@
 	</string>
 	<string>
 		<key>BUG_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Bug Gem</en>
 			<ja lang="japanese">むしのジュエル</ja>
@@ -466,7 +435,6 @@
 	</string>
 	<string>
 		<key>BUG_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Bug Memory</en>
 			<ja lang="japanese">バグメモリ</ja>
@@ -481,7 +449,6 @@
 	</string>
 	<string>
 		<key>BUGINIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Buginium Z</en>
 			<ja lang="japanese">ムシＺ</ja>
@@ -496,7 +463,6 @@
 	</string>
 	<string>
 		<key>BURN_DRIVE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Burn Drive</en>
 			<ja lang="japanese">ブレイズカセット</ja>
@@ -511,7 +477,6 @@
 	</string>
 	<string>
 		<key>CAMERUPTITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Cameruptite</en>
 			<ja lang="japanese">バクーダナイト</ja>
@@ -526,7 +491,6 @@
 	</string>
 	<string>
 		<key>CELL_BATTERY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Cell Battery</en>
 			<ja lang="japanese">じゅうでんち</ja>
@@ -541,7 +505,6 @@
 	</string>
 	<string>
 		<key>CHARCOAL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Charcoal</en>
 			<ja lang="japanese">もくたん</ja>
@@ -556,7 +519,6 @@
 	</string>
 	<string>
 		<key>CHARIZARDITE_X</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Charizardite X</en>
 			<ja lang="japanese">リザードナイトＸ</ja>
@@ -571,7 +533,6 @@
 	</string>
 	<string>
 		<key>CHARIZARDITE_Y</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Charizardite Y</en>
 			<ja lang="japanese">リザードナイトＹ</ja>
@@ -586,7 +547,6 @@
 	</string>
 	<string>
 		<key>CHILL_DRIVE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Chill Drive</en>
 			<ja lang="japanese">フリーズカセット</ja>
@@ -601,7 +561,6 @@
 	</string>
 	<string>
 		<key>CHIPPED_POT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Chipped Pot</en>
 			<ja lang="japanese">かけたポット</ja>
@@ -616,7 +575,6 @@
 	</string>
 	<string>
 		<key>CHOICE_BAND</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Choice Band</en>
 			<ja lang="japanese">こだわりハチマキ</ja>
@@ -631,7 +589,6 @@
 	</string>
 	<string>
 		<key>CHOICE_SCARF</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Choice Scarf</en>
 			<ja lang="japanese">こだわりスカーフ</ja>
@@ -646,7 +603,6 @@
 	</string>
 	<string>
 		<key>CHOICE_SPECS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Choice Specs</en>
 			<ja lang="japanese">こだわりメガネ</ja>
@@ -661,7 +617,6 @@
 	</string>
 	<string>
 		<key>CLEANSE_TAG</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Cleanse Tag</en>
 			<ja lang="japanese">きよめのおふだ</ja>
@@ -676,7 +631,6 @@
 	</string>
 	<string>
 		<key>CLOVER_SWEET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Clover Sweet</en>
 			<ja lang="japanese">よつばアメざいく</ja>
@@ -691,7 +645,6 @@
 	</string>
 	<string>
 		<key>COVERT_CLOAK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Covert Cloak</en>
 			<ja lang="japanese">おんみつマント</ja>
@@ -706,7 +659,6 @@
 	</string>
 	<string>
 		<key>CRACKED_POT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Cracked Pot</en>
 			<ja lang="japanese">われたポット</ja>
@@ -721,7 +673,6 @@
 	</string>
 	<string>
 		<key>DAMP_ROCK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Damp Rock</en>
 			<ja lang="japanese">しめったいわ</ja>
@@ -736,7 +687,6 @@
 	</string>
 	<string>
 		<key>DARK_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dark Gem</en>
 			<ja lang="japanese">あくのジュエル</ja>
@@ -751,7 +701,6 @@
 	</string>
 	<string>
 		<key>DARK_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dark Memory</en>
 			<ja lang="japanese">ダークメモリ</ja>
@@ -766,7 +715,6 @@
 	</string>
 	<string>
 		<key>DARKINIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Darkinium Z</en>
 			<ja lang="japanese">アクＺ</ja>
@@ -781,7 +729,6 @@
 	</string>
 	<string>
 		<key>DECIDIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Decidium Z</en>
 			<ja lang="japanese">ジュナイパーＺ</ja>
@@ -796,7 +743,6 @@
 	</string>
 	<string>
 		<key>DEEP_SEA_SCALE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Deep Sea Scale</en>
 			<ja lang="japanese">しんかいのウロコ</ja>
@@ -811,7 +757,6 @@
 	</string>
 	<string>
 		<key>DEEP_SEA_TOOTH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Deep Sea Tooth</en>
 			<ja lang="japanese">しんかいのキバ</ja>
@@ -826,7 +771,6 @@
 	</string>
 	<string>
 		<key>DESTINY_KNOT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Destiny Knot</en>
 			<ja lang="japanese">あかいいと</ja>
@@ -841,7 +785,6 @@
 	</string>
 	<string>
 		<key>DIANCITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Diancite</en>
 			<ja lang="japanese">ディアンシナイト</ja>
@@ -856,7 +799,6 @@
 	</string>
 	<string>
 		<key>DOUSE_DRIVE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Douse Drive</en>
 			<ja lang="japanese">アクアカセット</ja>
@@ -871,7 +813,6 @@
 	</string>
 	<string>
 		<key>DRACO_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Draco Plate</en>
 			<ja lang="japanese">りゅうのプレート</ja>
@@ -886,7 +827,6 @@
 	</string>
 	<string>
 		<key>DRAGON_FANG</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dragon Fang</en>
 			<ja lang="japanese">りゅうのキバ</ja>
@@ -901,7 +841,6 @@
 	</string>
 	<string>
 		<key>DRAGON_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dragon Gem</en>
 			<ja lang="japanese">ドラゴンジュエル</ja>
@@ -916,7 +855,6 @@
 	</string>
 	<string>
 		<key>DRAGON_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dragon Memory</en>
 			<ja lang="japanese">ドラゴンメモリ</ja>
@@ -931,7 +869,6 @@
 	</string>
 	<string>
 		<key>DRAGONIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dragonium Z</en>
 			<ja lang="japanese">ドラゴンＺ</ja>
@@ -946,7 +883,6 @@
 	</string>
 	<string>
 		<key>DREAD_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dread Plate</en>
 			<ja lang="japanese">こわもてプレート</ja>
@@ -961,7 +897,6 @@
 	</string>
 	<string>
 		<key>DROPPED_ITEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dropped Item</en>
 			<ja lang="japanese">わすれもの</ja>
@@ -976,7 +911,6 @@
 	</string>
 	<string>
 		<key>EARTH_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Earth Plate</en>
 			<ja lang="japanese">だいちのプレート</ja>
@@ -991,7 +925,6 @@
 	</string>
 	<string>
 		<key>EEVIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Eevium Z</en>
 			<ja lang="japanese">イーブイＺ</ja>
@@ -1006,7 +939,6 @@
 	</string>
 	<string>
 		<key>EJECT_BUTTON</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Eject Button</en>
 			<ja lang="japanese">だっしゅつボタン</ja>
@@ -1021,7 +953,6 @@
 	</string>
 	<string>
 		<key>EJECT_PACK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Eject Pack</en>
 			<ja lang="japanese">だっしゅつパック</ja>
@@ -1036,7 +967,6 @@
 	</string>
 	<string>
 		<key>ELECTRIC_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Electric Gem</en>
 			<ja lang="japanese">でんきのジュエル</ja>
@@ -1051,7 +981,6 @@
 	</string>
 	<string>
 		<key>ELECTRIC_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Electric Memory</en>
 			<ja lang="japanese">エレクトロメモリ</ja>
@@ -1066,7 +995,6 @@
 	</string>
 	<string>
 		<key>ELECTRIC_SEED</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Electric Seed</en>
 			<ja lang="japanese">エレキシード</ja>
@@ -1081,7 +1009,6 @@
 	</string>
 	<string>
 		<key>ELECTRIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Electrium Z</en>
 			<ja lang="japanese">デンキＺ</ja>
@@ -1096,7 +1023,6 @@
 	</string>
 	<string>
 		<key>ELEVATOR_KEY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Elevator Key</en>
 			<ja lang="japanese">エレベータのキー</ja>
@@ -1111,7 +1037,6 @@
 	</string>
 	<string>
 		<key>EVERSTONE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Everstone</en>
 			<ja lang="japanese">かわらずのいし</ja>
@@ -1126,7 +1051,6 @@
 	</string>
 	<string>
 		<key>EVIOLITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Eviolite</en>
 			<ja lang="japanese">しんかのきせき</ja>
@@ -1141,7 +1065,6 @@
 	</string>
 	<string>
 		<key>EXP_SHARE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Exp. Share</en>
 			<ja lang="japanese">がくしゅうそうち</ja>
@@ -1156,7 +1079,6 @@
 	</string>
 	<string>
 		<key>EXPERT_BELT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Expert Belt</en>
 			<ja lang="japanese">たつじんのおび</ja>
@@ -1171,7 +1093,6 @@
 	</string>
 	<string>
 		<key>FAIRIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fairium Z</en>
 			<ja lang="japanese">フェアリーＺ</ja>
@@ -1186,7 +1107,6 @@
 	</string>
 	<string>
 		<key>FAIRY_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fairy Memory</en>
 			<ja lang="japanese">フェアリーメモリ</ja>
@@ -1201,7 +1121,6 @@
 	</string>
 	<string>
 		<key>FIGHTING_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fighting Gem</en>
 			<ja lang="japanese">かくとうジュエル</ja>
@@ -1216,7 +1135,6 @@
 	</string>
 	<string>
 		<key>FIGHTING_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fighting Memory</en>
 			<ja lang="japanese">ファイトメモリ</ja>
@@ -1231,7 +1149,6 @@
 	</string>
 	<string>
 		<key>FIGHTINIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fightinium Z</en>
 			<ja lang="japanese">カクトウＺ</ja>
@@ -1246,7 +1163,6 @@
 	</string>
 	<string>
 		<key>FIRE_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fire Gem</en>
 			<ja lang="japanese">ほのおのジュエル</ja>
@@ -1261,7 +1177,6 @@
 	</string>
 	<string>
 		<key>FIRE_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fire Memory</en>
 			<ja lang="japanese">ファイヤーメモリ</ja>
@@ -1276,7 +1191,6 @@
 	</string>
 	<string>
 		<key>FIRIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Firium Z</en>
 			<ja lang="japanese">ホノオＺ</ja>
@@ -1291,7 +1205,6 @@
 	</string>
 	<string>
 		<key>FIST_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fist Plate</en>
 			<ja lang="japanese">こぶしのプレート</ja>
@@ -1306,7 +1219,6 @@
 	</string>
 	<string>
 		<key>FLAME_ORB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Flame Orb</en>
 			<ja lang="japanese">かえんだま</ja>
@@ -1321,7 +1233,6 @@
 	</string>
 	<string>
 		<key>FLAME_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Flame Plate</en>
 			<ja lang="japanese">ひのたまプレート</ja>
@@ -1336,7 +1247,6 @@
 	</string>
 	<string>
 		<key>FLOAT_STONE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Float Stone</en>
 			<ja lang="japanese">かるいし</ja>
@@ -1351,7 +1261,6 @@
 	</string>
 	<string>
 		<key>FLOWER_SWEET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Flower Sweet</en>
 			<ja lang="japanese">おはなアメざいく</ja>
@@ -1366,7 +1275,6 @@
 	</string>
 	<string>
 		<key>FLYING_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Flying Gem</en>
 			<ja lang="japanese">ひこうのジュエル</ja>
@@ -1381,7 +1289,6 @@
 	</string>
 	<string>
 		<key>FLYING_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Flying Memory</en>
 			<ja lang="japanese">フライングメモリ</ja>
@@ -1396,7 +1303,6 @@
 	</string>
 	<string>
 		<key>FLYINIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Flyinium Z</en>
 			<ja lang="japanese">ヒコウＺ</ja>
@@ -1411,7 +1317,6 @@
 	</string>
 	<string>
 		<key>FOCUS_BAND</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Focus Band</en>
 			<ja lang="japanese">きあいのハチマキ</ja>
@@ -1426,7 +1331,6 @@
 	</string>
 	<string>
 		<key>FOCUS_SASH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Focus Sash</en>
 			<ja lang="japanese">きあいのタスキ</ja>
@@ -1441,7 +1345,6 @@
 	</string>
 	<string>
 		<key>FULL_INCENSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Full Incense</en>
 			<ja lang="japanese">まんぷくおこう</ja>
@@ -1456,7 +1359,6 @@
 	</string>
 	<string>
 		<key>GALLADITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Galladite</en>
 			<ja lang="japanese">エルレイドナイト</ja>
@@ -1471,7 +1373,6 @@
 	</string>
 	<string>
 		<key>GARCHOMPITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Garchompite</en>
 			<ja lang="japanese">ガブリアスナイト</ja>
@@ -1486,7 +1387,6 @@
 	</string>
 	<string>
 		<key>GARDEVOIRITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Gardevoirite</en>
 			<ja lang="japanese">サーナイトナイト</ja>
@@ -1501,7 +1401,6 @@
 	</string>
 	<string>
 		<key>GENGARITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Gengarite</en>
 			<ja lang="japanese">ゲンガナイト</ja>
@@ -1516,7 +1415,6 @@
 	</string>
 	<string>
 		<key>GHOST_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ghost Gem</en>
 			<ja lang="japanese">ゴーストジュエル</ja>
@@ -1531,7 +1429,6 @@
 	</string>
 	<string>
 		<key>GHOST_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ghost Memory</en>
 			<ja lang="japanese">ゴーストメモリ</ja>
@@ -1546,7 +1443,6 @@
 	</string>
 	<string>
 		<key>GHOSTIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ghostium Z</en>
 			<ja lang="japanese">ゴーストＺ</ja>
@@ -1561,7 +1457,6 @@
 	</string>
 	<string>
 		<key>GLALITITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Glalitite</en>
 			<ja lang="japanese">オニゴーリナイト</ja>
@@ -1576,7 +1471,6 @@
 	</string>
 	<string>
 		<key>GRASS_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grass Gem</en>
 			<ja lang="japanese">くさのジュエル</ja>
@@ -1591,7 +1485,6 @@
 	</string>
 	<string>
 		<key>GRASS_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grass Memory</en>
 			<ja lang="japanese">グラスメモリ</ja>
@@ -1606,7 +1499,6 @@
 	</string>
 	<string>
 		<key>GRASSIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grassium Z</en>
 			<ja lang="japanese">クサＺ</ja>
@@ -1621,7 +1513,6 @@
 	</string>
 	<string>
 		<key>GRASSY_SEED</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grassy Seed</en>
 			<ja lang="japanese">グラスシード</ja>
@@ -1636,7 +1527,6 @@
 	</string>
 	<string>
 		<key>GRIP_CLAW</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grip Claw</en>
 			<ja lang="japanese">ねばりのかぎづめ</ja>
@@ -1651,7 +1541,6 @@
 	</string>
 	<string>
 		<key>GRISEOUS_CORE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Griseous Core</en>
 			<ja lang="japanese">だいはっきんだま</ja>
@@ -1666,7 +1555,6 @@
 	</string>
 	<string>
 		<key>GRISEOUS_ORB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Griseous Orb</en>
 			<ja lang="japanese">はっきんだま</ja>
@@ -1681,7 +1569,6 @@
 	</string>
 	<string>
 		<key>GRIT_DUST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grit Dust</en>
 			<ja lang="japanese">ガンバリのすな</ja>
@@ -1696,7 +1583,6 @@
 	</string>
 	<string>
 		<key>GRIT_GRAVEL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grit Gravel</en>
 			<ja lang="japanese">ガンバリのじゃり</ja>
@@ -1711,7 +1597,6 @@
 	</string>
 	<string>
 		<key>GRIT_PEBBLE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grit Pebble</en>
 			<ja lang="japanese">ガンバリのいし</ja>
@@ -1726,7 +1611,6 @@
 	</string>
 	<string>
 		<key>GRIT_ROCK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grit Rock</en>
 			<ja lang="japanese">ガンバリのいわ</ja>
@@ -1741,7 +1625,6 @@
 	</string>
 	<string>
 		<key>GROUND_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ground Gem</en>
 			<ja lang="japanese">じめんのジュエル</ja>
@@ -1756,7 +1639,6 @@
 	</string>
 	<string>
 		<key>GROUND_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ground Memory</en>
 			<ja lang="japanese">グラウンドメモリ</ja>
@@ -1771,7 +1653,6 @@
 	</string>
 	<string>
 		<key>GROUNDIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Groundium Z</en>
 			<ja lang="japanese">ジメンＺ</ja>
@@ -1786,7 +1667,6 @@
 	</string>
 	<string>
 		<key>GRUBBY_HANKY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grubby Hanky</en>
 			<ja lang="japanese">よごれたハンカチ</ja>
@@ -1801,7 +1681,6 @@
 	</string>
 	<string>
 		<key>GYARADOSITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Gyaradosite</en>
 			<ja lang="japanese">ギャラドスナイト</ja>
@@ -1816,7 +1695,6 @@
 	</string>
 	<string>
 		<key>HARD_STONE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Hard Stone</en>
 			<ja lang="japanese">かたいいし</ja>
@@ -1831,7 +1709,6 @@
 	</string>
 	<string>
 		<key>HEAT_ROCK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Heat Rock</en>
 			<ja lang="japanese">あついいわ</ja>
@@ -1846,7 +1723,6 @@
 	</string>
 	<string>
 		<key>HEAVY_DUTY_BOOTS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Heavy-Duty Boots</en>
 			<ja lang="japanese">あつぞこブーツ</ja>
@@ -1861,7 +1737,6 @@
 	</string>
 	<string>
 		<key>HERACRONITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Heracronite</en>
 			<ja lang="japanese">ヘラクロスナイト</ja>
@@ -1876,7 +1751,6 @@
 	</string>
 	<string>
 		<key>HI_TECH_EARBUDS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Hi-tech Earbuds</en>
 			<ja lang="japanese">すごいみみせん</ja>
@@ -1891,7 +1765,6 @@
 	</string>
 	<string>
 		<key>HONOR_OF_KALOS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Honor Of Kalos</en>
 			<ja lang="japanese">カロスエンブレム</ja>
@@ -1906,7 +1779,6 @@
 	</string>
 	<string>
 		<key>HOUNDOOMINITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Houndoominite</en>
 			<ja lang="japanese">ヘルガナイト</ja>
@@ -1921,7 +1793,6 @@
 	</string>
 	<string>
 		<key>ICE_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ice Gem</en>
 			<ja lang="japanese">こおりのジュエル</ja>
@@ -1936,7 +1807,6 @@
 	</string>
 	<string>
 		<key>ICE_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ice Memory</en>
 			<ja lang="japanese">アイスメモリ</ja>
@@ -1951,7 +1821,6 @@
 	</string>
 	<string>
 		<key>ICICLE_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Icicle Plate</en>
 			<ja lang="japanese">つららのプレート</ja>
@@ -1966,7 +1835,6 @@
 	</string>
 	<string>
 		<key>ICIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Icium Z</en>
 			<ja lang="japanese">コオリＺ</ja>
@@ -1981,7 +1849,6 @@
 	</string>
 	<string>
 		<key>ICY_ROCK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Icy Rock</en>
 			<ja lang="japanese">つめたいいわ</ja>
@@ -1996,7 +1863,6 @@
 	</string>
 	<string>
 		<key>INCINIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Incinium Z</en>
 			<ja lang="japanese">ガオガエンＺ</ja>
@@ -2011,7 +1877,6 @@
 	</string>
 	<string>
 		<key>INSECT_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Insect Plate</en>
 			<ja lang="japanese">たまむしプレート</ja>
@@ -2026,7 +1891,6 @@
 	</string>
 	<string>
 		<key>INTRIGUING_STONE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Intriguing Stone</en>
 			<ja lang="japanese">すごそうないし</ja>
@@ -2041,7 +1905,6 @@
 	</string>
 	<string>
 		<key>IRON_BALL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Iron Ball</en>
 			<ja lang="japanese">くろいてっきゅう</ja>
@@ -2056,7 +1919,6 @@
 	</string>
 	<string>
 		<key>IRON_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Iron Plate</en>
 			<ja lang="japanese">こうてつプレート</ja>
@@ -2071,7 +1933,6 @@
 	</string>
 	<string>
 		<key>KANGASKHANITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Kangaskhanite</en>
 			<ja lang="japanese">ガルーラナイト</ja>
@@ -2086,7 +1947,6 @@
 	</string>
 	<string>
 		<key>KINGS_ROCK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">King's Rock</en>
 			<ja lang="japanese">おうじゃのしるし</ja>
@@ -2101,7 +1961,6 @@
 	</string>
 	<string>
 		<key>KOMMONIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Kommonium Z</en>
 			<ja lang="japanese">ジャラランガＺ</ja>
@@ -2116,7 +1975,6 @@
 	</string>
 	<string>
 		<key>LAGGING_TAIL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lagging Tail</en>
 			<ja lang="japanese">こうこうのしっぽ</ja>
@@ -2131,7 +1989,6 @@
 	</string>
 	<string>
 		<key>LATIASITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Latiasite</en>
 			<ja lang="japanese">ラティアスナイト</ja>
@@ -2146,7 +2003,6 @@
 	</string>
 	<string>
 		<key>LATIOSITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Latiosite</en>
 			<ja lang="japanese">ラティオスナイト</ja>
@@ -2161,7 +2017,6 @@
 	</string>
 	<string>
 		<key>LAX_INCENSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lax Incense</en>
 			<ja lang="japanese">のんきのおこう</ja>
@@ -2176,7 +2031,6 @@
 	</string>
 	<string>
 		<key>LEEK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Leek</en>
 			<ja lang="japanese">ながねぎ</ja>
@@ -2191,7 +2045,6 @@
 	</string>
 	<string>
 		<key>LEFTOVERS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Leftovers</en>
 			<ja lang="japanese">たべのこし</ja>
@@ -2206,7 +2059,6 @@
 	</string>
 	<string>
 		<key>LEGEND_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Legend Plate</en>
 			<ja lang="japanese">レジェンドプレート</ja>
@@ -2221,7 +2073,6 @@
 	</string>
 	<string>
 		<key>LIFE_ORB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Life Orb</en>
 			<ja lang="japanese">いのちのたま</ja>
@@ -2236,7 +2087,6 @@
 	</string>
 	<string>
 		<key>LIGHT_BALL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Light Ball</en>
 			<ja lang="japanese">でんきだま</ja>
@@ -2251,7 +2101,6 @@
 	</string>
 	<string>
 		<key>LIGHT_CLAY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Light Clay</en>
 			<ja lang="japanese">ひかりのねんど</ja>
@@ -2266,7 +2115,6 @@
 	</string>
 	<string>
 		<key>LOADED_DICE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Loaded Dice</en>
 			<ja lang="japanese">いかさまダイス</ja>
@@ -2281,7 +2129,6 @@
 	</string>
 	<string>
 		<key>LOOKER_TICKET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Looker Ticket</en>
 			<ja lang="japanese">ハンサムチケット</ja>
@@ -2296,7 +2143,6 @@
 	</string>
 	<string>
 		<key>LOPUNNITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lopunnite</en>
 			<ja lang="japanese">ミミロップナイト</ja>
@@ -2311,7 +2157,6 @@
 	</string>
 	<string>
 		<key>LOVE_SWEET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Love Sweet</en>
 			<ja lang="japanese">ハートアメざいく</ja>
@@ -2326,7 +2171,6 @@
 	</string>
 	<string>
 		<key>LUCARIONITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lucarionite</en>
 			<ja lang="japanese">ルカリオナイト</ja>
@@ -2341,7 +2185,6 @@
 	</string>
 	<string>
 		<key>LUCK_INCENSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Luck Incense</en>
 			<ja lang="japanese">こううんのおこう</ja>
@@ -2356,7 +2199,6 @@
 	</string>
 	<string>
 		<key>LUCKY_EGG</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lucky Egg</en>
 			<ja lang="japanese">しあわせタマゴ</ja>
@@ -2371,7 +2213,6 @@
 	</string>
 	<string>
 		<key>LUCKY_PUNCH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lucky Punch</en>
 			<ja lang="japanese">ラッキーパンチ</ja>
@@ -2386,7 +2227,6 @@
 	</string>
 	<string>
 		<key>LUMINOUS_MOSS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Luminous Moss</en>
 			<ja lang="japanese">ひかりごけ</ja>
@@ -2401,7 +2241,6 @@
 	</string>
 	<string>
 		<key>LUNALIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lunalium Z</en>
 			<ja lang="japanese">ルナアーラＺ</ja>
@@ -2416,7 +2255,6 @@
 	</string>
 	<string>
 		<key>LUSTROUS_GLOBE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lustrous Globe</en>
 			<ja lang="japanese">だいしらたま</ja>
@@ -2431,7 +2269,6 @@
 	</string>
 	<string>
 		<key>LUSTROUS_ORB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lustrous Orb</en>
 			<ja lang="japanese">しらたま</ja>
@@ -2446,7 +2283,6 @@
 	</string>
 	<string>
 		<key>LYCANIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lycanium Z</en>
 			<ja lang="japanese">ルガルガンＺ</ja>
@@ -2461,7 +2297,6 @@
 	</string>
 	<string>
 		<key>MACHO_BRACE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Macho Brace</en>
 			<ja lang="japanese">きょうせいギプス</ja>
@@ -2476,7 +2311,6 @@
 	</string>
 	<string>
 		<key>MAGNET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Magnet</en>
 			<ja lang="japanese">じしゃく</ja>
@@ -2491,7 +2325,6 @@
 	</string>
 	<string>
 		<key>MANECTITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Manectite</en>
 			<ja lang="japanese">ライボルトナイト</ja>
@@ -2506,7 +2339,6 @@
 	</string>
 	<string>
 		<key>MARSHADIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Marshadium Z</en>
 			<ja lang="japanese">マーシャドーＺ</ja>
@@ -2521,7 +2353,6 @@
 	</string>
 	<string>
 		<key>MAWILITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mawilite</en>
 			<ja lang="japanese">クチートナイト</ja>
@@ -2536,7 +2367,6 @@
 	</string>
 	<string>
 		<key>MEADOW_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Meadow Plate</en>
 			<ja lang="japanese">みどりのプレート</ja>
@@ -2551,7 +2381,6 @@
 	</string>
 	<string>
 		<key>MEDICHAMITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Medichamite</en>
 			<ja lang="japanese">チャーレムナイト</ja>
@@ -2566,7 +2395,6 @@
 	</string>
 	<string>
 		<key>MENTAL_HERB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mental Herb</en>
 			<ja lang="japanese">メンタルハーブ</ja>
@@ -2581,7 +2409,6 @@
 	</string>
 	<string>
 		<key>METAGROSSITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Metagrossite</en>
 			<ja lang="japanese">メタグロスナイト</ja>
@@ -2596,7 +2423,6 @@
 	</string>
 	<string>
 		<key>METAL_COAT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Metal Coat</en>
 			<ja lang="japanese">メタルコート</ja>
@@ -2611,7 +2437,6 @@
 	</string>
 	<string>
 		<key>METAL_POWDER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Metal Powder</en>
 			<ja lang="japanese">メタルパウダー</ja>
@@ -2626,7 +2451,6 @@
 	</string>
 	<string>
 		<key>METRONOME</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Metronome</en>
 			<ja lang="japanese">メトロノーム</ja>
@@ -2641,7 +2465,6 @@
 	</string>
 	<string>
 		<key>MEWNIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mewnium Z</en>
 			<ja lang="japanese">ミュウＺ</ja>
@@ -2656,7 +2479,6 @@
 	</string>
 	<string>
 		<key>MEWTWONITE_X</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mewtwonite X</en>
 			<ja lang="japanese">ミュウツナイトＸ</ja>
@@ -2671,7 +2493,6 @@
 	</string>
 	<string>
 		<key>MEWTWONITE_Y</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mewtwonite Y</en>
 			<ja lang="japanese">ミュウツナイトＹ</ja>
@@ -2686,7 +2507,6 @@
 	</string>
 	<string>
 		<key>MIMIKIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mimikium Z</en>
 			<ja lang="japanese">ミミッキュＺ</ja>
@@ -2701,7 +2521,6 @@
 	</string>
 	<string>
 		<key>MIND_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mind Plate</en>
 			<ja lang="japanese">ふしぎのプレート</ja>
@@ -2716,7 +2535,6 @@
 	</string>
 	<string>
 		<key>MIRACLE_SEED</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Miracle Seed</en>
 			<ja lang="japanese">きせきのタネ</ja>
@@ -2731,7 +2549,6 @@
 	</string>
 	<string>
 		<key>MIRROR_HERB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mirror Herb</en>
 			<ja lang="japanese">ものまねハーブ</ja>
@@ -2746,7 +2563,6 @@
 	</string>
 	<string>
 		<key>MISTY_SEED</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Misty Seed</en>
 			<ja lang="japanese">ミストシード</ja>
@@ -2761,7 +2577,6 @@
 	</string>
 	<string>
 		<key>MUSCLE_BAND</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Muscle Band</en>
 			<ja lang="japanese">ちからのハチマキ</ja>
@@ -2776,7 +2591,6 @@
 	</string>
 	<string>
 		<key>MYSTIC_WATER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mystic Water</en>
 			<ja lang="japanese">しんぴのしずく</ja>
@@ -2791,7 +2605,6 @@
 	</string>
 	<string>
 		<key>NEVER_MELT_ICE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Never-Melt Ice</en>
 			<ja lang="japanese">とけないこおり</ja>
@@ -2806,7 +2619,6 @@
 	</string>
 	<string>
 		<key>NORMAL_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Normal Gem</en>
 			<ja lang="japanese">ノーマルジュエル</ja>
@@ -2821,7 +2633,6 @@
 	</string>
 	<string>
 		<key>NORMALIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Normalium Z</en>
 			<ja lang="japanese">ノーマルＺ</ja>
@@ -2836,7 +2647,6 @@
 	</string>
 	<string>
 		<key>ODD_INCENSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Odd Incense</en>
 			<ja lang="japanese">あやしいおこう</ja>
@@ -2851,7 +2661,6 @@
 	</string>
 	<string>
 		<key>PASS_ORB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pass Orb</en>
 			<ja lang="japanese">デルダマ</ja>
@@ -2866,7 +2675,6 @@
 	</string>
 	<string>
 		<key>PIDGEOTITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pidgeotite</en>
 			<ja lang="japanese">ピジョットナイト</ja>
@@ -2881,7 +2689,6 @@
 	</string>
 	<string>
 		<key>PIKANIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pikanium Z</en>
 			<ja lang="japanese">ピカチュウＺ</ja>
@@ -2896,7 +2703,6 @@
 	</string>
 	<string>
 		<key>PIKASHUNIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pikashunium Z</en>
 			<ja lang="japanese">サトピカＺ</ja>
@@ -2911,7 +2717,6 @@
 	</string>
 	<string>
 		<key>PINK_NECTAR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pink Nectar</en>
 			<ja lang="japanese">うすもものミツ</ja>
@@ -2926,7 +2731,6 @@
 	</string>
 	<string>
 		<key>PINSIRITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pinsirite</en>
 			<ja lang="japanese">カイロスナイト</ja>
@@ -2941,7 +2745,6 @@
 	</string>
 	<string>
 		<key>PIXIE_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pixie Plate</en>
 			<ja lang="japanese">せいれいプレート</ja>
@@ -2956,7 +2759,6 @@
 	</string>
 	<string>
 		<key>PLASMA_CARD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Plasma Card</en>
 			<ja lang="japanese">プラズマカード</ja>
@@ -2971,7 +2773,6 @@
 	</string>
 	<string>
 		<key>POISON_BARB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Poison Barb</en>
 			<ja lang="japanese">どくバリ</ja>
@@ -2986,7 +2787,6 @@
 	</string>
 	<string>
 		<key>POISON_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Poison Gem</en>
 			<ja lang="japanese">どくのジュエル</ja>
@@ -3001,7 +2801,6 @@
 	</string>
 	<string>
 		<key>POISON_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Poison Memory</en>
 			<ja lang="japanese">ポイズンメモリ</ja>
@@ -3016,7 +2815,6 @@
 	</string>
 	<string>
 		<key>POISONIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Poisonium Z</en>
 			<ja lang="japanese">ドクＺ</ja>
@@ -3031,7 +2829,6 @@
 	</string>
 	<string>
 		<key>POWER_ANKLET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Power Anklet</en>
 			<ja lang="japanese">パワーアンクル</ja>
@@ -3046,7 +2843,6 @@
 	</string>
 	<string>
 		<key>POWER_BAND</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Power Band</en>
 			<ja lang="japanese">パワーバンド</ja>
@@ -3061,7 +2857,6 @@
 	</string>
 	<string>
 		<key>POWER_BELT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Power Belt</en>
 			<ja lang="japanese">パワーベルト</ja>
@@ -3076,7 +2871,6 @@
 	</string>
 	<string>
 		<key>POWER_BRACER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Power Bracer</en>
 			<ja lang="japanese">パワーリスト</ja>
@@ -3091,7 +2885,6 @@
 	</string>
 	<string>
 		<key>POWER_HERB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Power Herb</en>
 			<ja lang="japanese">パワフルハーブ</ja>
@@ -3106,7 +2899,6 @@
 	</string>
 	<string>
 		<key>POWER_LENS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Power Lens</en>
 			<ja lang="japanese">パワーレンズ</ja>
@@ -3121,7 +2913,6 @@
 	</string>
 	<string>
 		<key>POWER_PLANT_PASS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Power Plant Pass</en>
 			<ja lang="japanese">はつでんしょパス</ja>
@@ -3136,7 +2927,6 @@
 	</string>
 	<string>
 		<key>POWER_WEIGHT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Power Weight</en>
 			<ja lang="japanese">パワーウエイト</ja>
@@ -3151,7 +2941,6 @@
 	</string>
 	<string>
 		<key>PRIMARIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Primarium Z</en>
 			<ja lang="japanese">アシレーヌＺ</ja>
@@ -3166,7 +2955,6 @@
 	</string>
 	<string>
 		<key>PRISON_BOTTLE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Prison Bottle</en>
 			<ja lang="japanese">いましめのツボ</ja>
@@ -3181,7 +2969,6 @@
 	</string>
 	<string>
 		<key>PROFS_LETTER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Prof's Letter</en>
 			<ja lang="japanese">はかせのてがみ</ja>
@@ -3196,7 +2983,6 @@
 	</string>
 	<string>
 		<key>PROTECTIVE_PADS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Protective Pads</en>
 			<ja lang="japanese">ぼうごパット</ja>
@@ -3211,7 +2997,6 @@
 	</string>
 	<string>
 		<key>PSYCHIC_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Psychic Gem</en>
 			<ja lang="japanese">エスパージュエル</ja>
@@ -3226,7 +3011,6 @@
 	</string>
 	<string>
 		<key>PSYCHIC_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Psychic Memory</en>
 			<ja lang="japanese">サイキックメモリ</ja>
@@ -3241,7 +3025,6 @@
 	</string>
 	<string>
 		<key>PSYCHIC_SEED</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Psychic Seed</en>
 			<ja lang="japanese">サイコシード</ja>
@@ -3256,7 +3039,6 @@
 	</string>
 	<string>
 		<key>PSYCHIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Psychium Z</en>
 			<ja lang="japanese">エスパーＺ</ja>
@@ -3271,7 +3053,6 @@
 	</string>
 	<string>
 		<key>PURE_INCENSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pure Incense</en>
 			<ja lang="japanese">きよめのおこう</ja>
@@ -3286,7 +3067,6 @@
 	</string>
 	<string>
 		<key>PURPLE_NECTAR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Purple Nectar</en>
 			<ja lang="japanese">むらさきのミツ</ja>
@@ -3301,7 +3081,6 @@
 	</string>
 	<string>
 		<key>QUICK_CLAW</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Quick Claw</en>
 			<ja lang="japanese">せんせいのツメ</ja>
@@ -3316,7 +3095,6 @@
 	</string>
 	<string>
 		<key>QUICK_POWDER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Quick Powder</en>
 			<ja lang="japanese">スピードパウダー</ja>
@@ -3331,7 +3109,6 @@
 	</string>
 	<string>
 		<key>RAZOR_CLAW</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Razor Claw</en>
 			<ja lang="japanese">するどいツメ</ja>
@@ -3346,7 +3123,6 @@
 	</string>
 	<string>
 		<key>RAZOR_FANG</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Razor Fang</en>
 			<ja lang="japanese">するどいキバ</ja>
@@ -3361,7 +3137,6 @@
 	</string>
 	<string>
 		<key>RED_CARD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Red Card</en>
 			<ja lang="japanese">レッドカード</ja>
@@ -3376,7 +3151,6 @@
 	</string>
 	<string>
 		<key>RED_NECTAR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Red Nectar</en>
 			<ja lang="japanese">くれないのミツ</ja>
@@ -3391,7 +3165,6 @@
 	</string>
 	<string>
 		<key>RIBBON_SWEET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ribbon Sweet</en>
 			<ja lang="japanese">リボンアメざいく</ja>
@@ -3406,7 +3179,6 @@
 	</string>
 	<string>
 		<key>RING_TARGET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ring Target</en>
 			<ja lang="japanese">ねらいのまと</ja>
@@ -3421,7 +3193,6 @@
 	</string>
 	<string>
 		<key>ROCK_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rock Gem</en>
 			<ja lang="japanese">いわのジュエル</ja>
@@ -3436,7 +3207,6 @@
 	</string>
 	<string>
 		<key>ROCK_INCENSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rock Incense</en>
 			<ja lang="japanese">がんせきおこう</ja>
@@ -3451,7 +3221,6 @@
 	</string>
 	<string>
 		<key>ROCK_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rock Memory</en>
 			<ja lang="japanese">ロックメモリ</ja>
@@ -3466,7 +3235,6 @@
 	</string>
 	<string>
 		<key>ROCKIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rockium Z</en>
 			<ja lang="japanese">イワＺ</ja>
@@ -3481,7 +3249,6 @@
 	</string>
 	<string>
 		<key>ROCKY_HELMET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rocky Helmet</en>
 			<ja lang="japanese">ゴツゴツメット</ja>
@@ -3496,7 +3263,6 @@
 	</string>
 	<string>
 		<key>ROOM_SERVICE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Room Service</en>
 			<ja lang="japanese">ルームサービス</ja>
@@ -3511,7 +3277,6 @@
 	</string>
 	<string>
 		<key>ROSE_INCENSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rose Incense</en>
 			<ja lang="japanese">おはなのおこう</ja>
@@ -3526,7 +3291,6 @@
 	</string>
 	<string>
 		<key>SABLENITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sablenite</en>
 			<ja lang="japanese">ヤミラミナイト</ja>
@@ -3541,7 +3305,6 @@
 	</string>
 	<string>
 		<key>SAFETY_GOGGLES</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Safety Goggles</en>
 			<ja lang="japanese">ぼうじんゴーグル</ja>
@@ -3556,7 +3319,6 @@
 	</string>
 	<string>
 		<key>SALAMENCITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Salamencite</en>
 			<ja lang="japanese">ボーマンダナイト</ja>
@@ -3571,7 +3333,6 @@
 	</string>
 	<string>
 		<key>SCEPTILITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sceptilite</en>
 			<ja lang="japanese">ジュカインナイト</ja>
@@ -3586,7 +3347,6 @@
 	</string>
 	<string>
 		<key>SCIZORITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Scizorite</en>
 			<ja lang="japanese">ハッサムナイト</ja>
@@ -3601,7 +3361,6 @@
 	</string>
 	<string>
 		<key>SCOPE_LENS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Scope Lens</en>
 			<ja lang="japanese">ピントレンズ</ja>
@@ -3616,7 +3375,6 @@
 	</string>
 	<string>
 		<key>SEA_INCENSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sea Incense</en>
 			<ja lang="japanese">うしおのおこう</ja>
@@ -3631,7 +3389,6 @@
 	</string>
 	<string>
 		<key>SHARP_BEAK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sharp Beak</en>
 			<ja lang="japanese">するどいくちばし</ja>
@@ -3646,7 +3403,6 @@
 	</string>
 	<string>
 		<key>SHARPEDONITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sharpedonite</en>
 			<ja lang="japanese">サメハダナイト</ja>
@@ -3661,7 +3417,6 @@
 	</string>
 	<string>
 		<key>SHED_SHELL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Shed Shell</en>
 			<ja lang="japanese">きれいなぬけがら</ja>
@@ -3676,7 +3431,6 @@
 	</string>
 	<string>
 		<key>SHELL_BELL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Shell Bell</en>
 			<ja lang="japanese">かいがらのすず</ja>
@@ -3691,7 +3445,6 @@
 	</string>
 	<string>
 		<key>SHOCK_DRIVE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Shock Drive</en>
 			<ja lang="japanese">イナズマカセット</ja>
@@ -3706,7 +3459,6 @@
 	</string>
 	<string>
 		<key>SILK_SCARF</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Silk Scarf</en>
 			<ja lang="japanese">シルクのスカーフ</ja>
@@ -3721,7 +3473,6 @@
 	</string>
 	<string>
 		<key>SILVER_POWDER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Silver Powder</en>
 			<ja lang="japanese">ぎんのこな</ja>
@@ -3736,7 +3487,6 @@
 	</string>
 	<string>
 		<key>SKY_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sky Plate</en>
 			<ja lang="japanese">あおぞらプレート</ja>
@@ -3751,7 +3501,6 @@
 	</string>
 	<string>
 		<key>SLOWBRONITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Slowbronite</en>
 			<ja lang="japanese">ヤドランナイト</ja>
@@ -3766,7 +3515,6 @@
 	</string>
 	<string>
 		<key>SMOKE_BALL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Smoke Ball</en>
 			<ja lang="japanese">けむりだま</ja>
@@ -3781,7 +3529,6 @@
 	</string>
 	<string>
 		<key>SMOOTH_ROCK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Smooth Rock</en>
 			<ja lang="japanese">さらさらいわ</ja>
@@ -3796,7 +3543,6 @@
 	</string>
 	<string>
 		<key>SNORLIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Snorlium Z</en>
 			<ja lang="japanese">カビゴンＺ</ja>
@@ -3811,7 +3557,6 @@
 	</string>
 	<string>
 		<key>SNOWBALL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Snowball</en>
 			<ja lang="japanese">ゆきだま</ja>
@@ -3826,7 +3571,6 @@
 	</string>
 	<string>
 		<key>SOFT_SAND</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Soft Sand</en>
 			<ja lang="japanese">やわらかいすな</ja>
@@ -3841,7 +3585,6 @@
 	</string>
 	<string>
 		<key>SOLGANIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Solganium Z</en>
 			<ja lang="japanese">ソルガレオＺ</ja>
@@ -3856,7 +3599,6 @@
 	</string>
 	<string>
 		<key>SOOTHE_BELL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Soothe Bell</en>
 			<ja lang="japanese">やすらぎのすず</ja>
@@ -3871,7 +3613,6 @@
 	</string>
 	<string>
 		<key>SOUL_DEW</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Soul Dew</en>
 			<ja lang="japanese">こころのしずく</ja>
@@ -3886,7 +3627,6 @@
 	</string>
 	<string>
 		<key>SPELL_TAG</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Spell Tag</en>
 			<ja lang="japanese">のろいのおふだ</ja>
@@ -3901,7 +3641,6 @@
 	</string>
 	<string>
 		<key>SPLASH_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Splash Plate</en>
 			<ja lang="japanese">しずくプレート</ja>
@@ -3916,7 +3655,6 @@
 	</string>
 	<string>
 		<key>SPOOKY_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Spooky Plate</en>
 			<ja lang="japanese">もののけプレート</ja>
@@ -3931,7 +3669,6 @@
 	</string>
 	<string>
 		<key>STAR_SWEET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Star Sweet</en>
 			<ja lang="japanese">スターアメざいく</ja>
@@ -3946,7 +3683,6 @@
 	</string>
 	<string>
 		<key>STEEL_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Steel Gem</en>
 			<ja lang="japanese">はがねのジュエル</ja>
@@ -3961,7 +3697,6 @@
 	</string>
 	<string>
 		<key>STEEL_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Steel Memory</en>
 			<ja lang="japanese">スチールメモリ</ja>
@@ -3976,7 +3711,6 @@
 	</string>
 	<string>
 		<key>STEELIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Steelium Z</en>
 			<ja lang="japanese">ハガネＺ</ja>
@@ -3991,7 +3725,6 @@
 	</string>
 	<string>
 		<key>STEELIXITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Steelixite</en>
 			<ja lang="japanese">ハガネールナイト</ja>
@@ -4006,7 +3739,6 @@
 	</string>
 	<string>
 		<key>STICKY_BARB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sticky Barb</en>
 			<ja lang="japanese">くっつきバリ</ja>
@@ -4021,7 +3753,6 @@
 	</string>
 	<string>
 		<key>STONE_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Stone Plate</en>
 			<ja lang="japanese">がんせきプレート</ja>
@@ -4036,7 +3767,6 @@
 	</string>
 	<string>
 		<key>STRAWBERRY_SWEET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Strawberry Sweet</en>
 			<ja lang="japanese">いちごアメざいく</ja>
@@ -4051,7 +3781,6 @@
 	</string>
 	<string>
 		<key>SWAMPERTITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Swampertite</en>
 			<ja lang="japanese">ラグラージナイト</ja>
@@ -4066,7 +3795,6 @@
 	</string>
 	<string>
 		<key>SWEET_APPLE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sweet Apple</en>
 			<ja lang="japanese">あまーいりんご</ja>
@@ -4081,7 +3809,6 @@
 	</string>
 	<string>
 		<key>SYRUPY_APPLE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Syrupy Apple</en>
 			<ja lang="japanese">みついりりんご</ja>
@@ -4097,7 +3824,6 @@
 	</string>
 	<string>
 		<key>TAPUNIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Tapunium Z</en>
 			<ja lang="japanese">カプＺ</ja>
@@ -4112,7 +3838,6 @@
 	</string>
 	<string>
 		<key>TART_APPLE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Tart Apple</en>
 			<ja lang="japanese">すっぱいりんご</ja>
@@ -4127,7 +3852,6 @@
 	</string>
 	<string>
 		<key>TERRAIN_EXTENDER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Terrain Extender</en>
 			<ja lang="japanese">グランドコート</ja>
@@ -4142,7 +3866,6 @@
 	</string>
 	<string>
 		<key>THICK_CLUB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Thick Club</en>
 			<ja lang="japanese">ふといホネ</ja>
@@ -4157,7 +3880,6 @@
 	</string>
 	<string>
 		<key>THROAT_SPRAY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Throat Spray</en>
 			<ja lang="japanese">のどスプレー</ja>
@@ -4172,7 +3894,6 @@
 	</string>
 	<string>
 		<key>TOXIC_ORB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Toxic Orb</en>
 			<ja lang="japanese">どくどくだま</ja>
@@ -4187,7 +3908,6 @@
 	</string>
 	<string>
 		<key>TOXIC_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Toxic Plate</en>
 			<ja lang="japanese">もうどくプレート</ja>
@@ -4202,7 +3922,6 @@
 	</string>
 	<string>
 		<key>TWISTED_SPOON</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Twisted Spoon</en>
 			<ja lang="japanese">まがったスプーン</ja>
@@ -4217,7 +3936,6 @@
 	</string>
 	<string>
 		<key>TYRANITARITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Tyranitarite</en>
 			<ja lang="japanese">バンギラスナイト</ja>
@@ -4232,7 +3950,6 @@
 	</string>
 	<string>
 		<key>ULTRANECROZIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ultranecrozium Z</en>
 			<ja lang="japanese">ウルトラネクロＺ</ja>
@@ -4247,7 +3964,6 @@
 	</string>
 	<string>
 		<key>UTILITY_UMBRELLA</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Utility Umbrella</en>
 			<ja lang="japanese">ばんのうがさ</ja>
@@ -4262,7 +3978,6 @@
 	</string>
 	<string>
 		<key>VENUSAURITE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Venusaurite</en>
 			<ja lang="japanese">フシギバナイト</ja>
@@ -4277,7 +3992,6 @@
 	</string>
 	<string>
 		<key>WATER_GEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Water Gem</en>
 			<ja lang="japanese">みずのジュエル</ja>
@@ -4292,7 +4006,6 @@
 	</string>
 	<string>
 		<key>WATER_MEMORY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Water Memory</en>
 			<ja lang="japanese">ウオーターメモリ</ja>
@@ -4307,7 +4020,6 @@
 	</string>
 	<string>
 		<key>WATERIUM_Z</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Waterium Z</en>
 			<ja lang="japanese">ミズＺ</ja>
@@ -4322,7 +4034,6 @@
 	</string>
 	<string>
 		<key>WAVE_INCENSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Wave Incense</en>
 			<ja lang="japanese">さざなみのおこう</ja>
@@ -4337,7 +4048,6 @@
 	</string>
 	<string>
 		<key>WEAKNESS_POLICY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Weakness Policy</en>
 			<ja lang="japanese">じゃくてんほけん</ja>
@@ -4352,7 +4062,6 @@
 	</string>
 	<string>
 		<key>WHITE_HERB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">White Herb</en>
 			<ja lang="japanese">しろいハーブ</ja>
@@ -4367,7 +4076,6 @@
 	</string>
 	<string>
 		<key>WIDE_LENS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Wide Lens</en>
 			<ja lang="japanese">こうかくレンズ</ja>
@@ -4382,7 +4090,6 @@
 	</string>
 	<string>
 		<key>WISE_GLASSES</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Wise Glasses</en>
 			<ja lang="japanese">ものしりメガネ</ja>
@@ -4397,7 +4104,6 @@
 	</string>
 	<string>
 		<key>YELLOW_NECTAR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Yellow Nectar</en>
 			<ja lang="japanese">やまぶきのミツ</ja>
@@ -4412,7 +4118,6 @@
 	</string>
 	<string>
 		<key>ZAP_PLATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Zap Plate</en>
 			<ja lang="japanese">いかずちプレート</ja>
@@ -4427,7 +4132,6 @@
 	</string>
 	<string>
 		<key>ZOOM_LENS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Zoom Lens</en>
 			<ja lang="japanese">フォーカスレンズ</ja>
@@ -4442,7 +4146,6 @@
 	</string>
 	<string>
 		<key>AGUAV_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Aguav Berry</en>
 			<ja lang="japanese">バンジのみ</ja>
@@ -4457,7 +4160,6 @@
 	</string>
 	<string>
 		<key>APICOT_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Apicot Berry</en>
 			<ja lang="japanese">ズアのみ</ja>
@@ -4472,7 +4174,6 @@
 	</string>
 	<string>
 		<key>ASPEAR_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Aspear Berry</en>
 			<ja lang="japanese">ナナシのみ</ja>
@@ -4487,7 +4188,6 @@
 	</string>
 	<string>
 		<key>BABIRI_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Babiri Berry</en>
 			<ja lang="japanese">リリバのみ</ja>
@@ -4502,7 +4202,6 @@
 	</string>
 	<string>
 		<key>BELUE_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Belue Berry</en>
 			<ja lang="japanese">ベリブのみ</ja>
@@ -4517,7 +4216,6 @@
 	</string>
 	<string>
 		<key>BLUK_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Bluk Berry</en>
 			<ja lang="japanese">ブリーのみ</ja>
@@ -4532,7 +4230,6 @@
 	</string>
 	<string>
 		<key>CHARTI_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Charti Berry</en>
 			<ja lang="japanese">ヨロギのみ</ja>
@@ -4547,7 +4244,6 @@
 	</string>
 	<string>
 		<key>CHERI_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Cheri Berry</en>
 			<ja lang="japanese">クラボのみ</ja>
@@ -4562,7 +4258,6 @@
 	</string>
 	<string>
 		<key>CHESTO_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Chesto Berry</en>
 			<ja lang="japanese">カゴのみ</ja>
@@ -4577,7 +4272,6 @@
 	</string>
 	<string>
 		<key>CHILAN_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Chilan Berry</en>
 			<ja lang="japanese">ホズのみ</ja>
@@ -4592,7 +4286,6 @@
 	</string>
 	<string>
 		<key>CHOPLE_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Chople Berry</en>
 			<ja lang="japanese">ヨプのみ</ja>
@@ -4607,7 +4300,6 @@
 	</string>
 	<string>
 		<key>COBA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Coba Berry</en>
 			<ja lang="japanese">バコウのみ</ja>
@@ -4622,7 +4314,6 @@
 	</string>
 	<string>
 		<key>COLBUR_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Colbur Berry</en>
 			<ja lang="japanese">ナモのみ</ja>
@@ -4637,7 +4328,6 @@
 	</string>
 	<string>
 		<key>CORNN_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Cornn Berry</en>
 			<ja lang="japanese">モコシのみ</ja>
@@ -4652,7 +4342,6 @@
 	</string>
 	<string>
 		<key>CUSTAP_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Custap Berry</en>
 			<ja lang="japanese">イバンのみ</ja>
@@ -4667,7 +4356,6 @@
 	</string>
 	<string>
 		<key>DURIN_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Durin Berry</en>
 			<ja lang="japanese">ドリのみ</ja>
@@ -4682,7 +4370,6 @@
 	</string>
 	<string>
 		<key>ENIGMA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Enigma Berry</en>
 			<ja lang="japanese">ナゾのみ</ja>
@@ -4697,7 +4384,6 @@
 	</string>
 	<string>
 		<key>FIGY_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Figy Berry</en>
 			<ja lang="japanese">フィラのみ</ja>
@@ -4712,7 +4398,6 @@
 	</string>
 	<string>
 		<key>GANLON_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ganlon Berry</en>
 			<ja lang="japanese">リュガのみ</ja>
@@ -4727,7 +4412,6 @@
 	</string>
 	<string>
 		<key>GOLDEN_NANAB_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Golden Nanab Berry</en>
 			<ja lang="japanese">きんのナナのみ</ja>
@@ -4742,7 +4426,6 @@
 	</string>
 	<string>
 		<key>GOLDEN_PINAP_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Golden Pinap Berry</en>
 			<ja lang="japanese">きんのパイルのみ</ja>
@@ -4757,7 +4440,6 @@
 	</string>
 	<string>
 		<key>GOLDEN_RAZZ_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Golden Razz Berry</en>
 			<ja lang="japanese">きんのズリのみ</ja>
@@ -4772,7 +4454,6 @@
 	</string>
 	<string>
 		<key>GREPA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grepa Berry</en>
 			<ja lang="japanese">ウブのみ</ja>
@@ -4787,7 +4468,6 @@
 	</string>
 	<string>
 		<key>HABAN_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Haban Berry</en>
 			<ja lang="japanese">ハバンのみ</ja>
@@ -4802,7 +4482,6 @@
 	</string>
 	<string>
 		<key>HONDEW_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Hondew Berry</en>
 			<ja lang="japanese">ロメのみ</ja>
@@ -4817,7 +4496,6 @@
 	</string>
 	<string>
 		<key>IAPAPA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Iapapa Berry</en>
 			<ja lang="japanese">イアのみ</ja>
@@ -4832,7 +4510,6 @@
 	</string>
 	<string>
 		<key>JABOCA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Jaboca Berry</en>
 			<ja lang="japanese">ジャポのみ</ja>
@@ -4847,7 +4524,6 @@
 	</string>
 	<string>
 		<key>KASIB_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Kasib Berry</en>
 			<ja lang="japanese">カシブのみ</ja>
@@ -4862,7 +4538,6 @@
 	</string>
 	<string>
 		<key>KEBIA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Kebia Berry</en>
 			<ja lang="japanese">ビアーのみ</ja>
@@ -4877,7 +4552,6 @@
 	</string>
 	<string>
 		<key>KEE_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Kee Berry</en>
 			<ja lang="japanese">アッキのみ</ja>
@@ -4892,7 +4566,6 @@
 	</string>
 	<string>
 		<key>KELPSY_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Kelpsy Berry</en>
 			<ja lang="japanese">ネコブのみ</ja>
@@ -4907,7 +4580,6 @@
 	</string>
 	<string>
 		<key>LANSAT_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lansat Berry</en>
 			<ja lang="japanese">サンのみ</ja>
@@ -4922,7 +4594,6 @@
 	</string>
 	<string>
 		<key>LEPPA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Leppa Berry</en>
 			<ja lang="japanese">ヒメリのみ</ja>
@@ -4937,7 +4608,6 @@
 	</string>
 	<string>
 		<key>LIECHI_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Liechi Berry</en>
 			<ja lang="japanese">チイラのみ</ja>
@@ -4952,7 +4622,6 @@
 	</string>
 	<string>
 		<key>LUM_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lum Berry</en>
 			<ja lang="japanese">ラムのみ</ja>
@@ -4967,7 +4636,6 @@
 	</string>
 	<string>
 		<key>MAGO_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mago Berry</en>
 			<ja lang="japanese">マゴのみ</ja>
@@ -4982,7 +4650,6 @@
 	</string>
 	<string>
 		<key>MAGOST_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Magost Berry</en>
 			<ja lang="japanese">ゴスのみ</ja>
@@ -4997,7 +4664,6 @@
 	</string>
 	<string>
 		<key>MARANGA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Maranga Berry</en>
 			<ja lang="japanese">タラプのみ</ja>
@@ -5012,7 +4678,6 @@
 	</string>
 	<string>
 		<key>MICLE_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Micle Berry</en>
 			<ja lang="japanese">ミクルのみ</ja>
@@ -5027,7 +4692,6 @@
 	</string>
 	<string>
 		<key>NANAB_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Nanab Berry</en>
 			<ja lang="japanese">ナナのみ</ja>
@@ -5042,7 +4706,6 @@
 	</string>
 	<string>
 		<key>NOMEL_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Nomel Berry</en>
 			<ja lang="japanese">ノメルのみ</ja>
@@ -5057,7 +4720,6 @@
 	</string>
 	<string>
 		<key>OCCA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Occa Berry</en>
 			<ja lang="japanese">オッカのみ</ja>
@@ -5072,7 +4734,6 @@
 	</string>
 	<string>
 		<key>ORAN_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Oran Berry</en>
 			<ja lang="japanese">オレンのみ</ja>
@@ -5087,7 +4748,6 @@
 	</string>
 	<string>
 		<key>PAMTRE_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pamtre Berry</en>
 			<ja lang="japanese">シーヤのみ</ja>
@@ -5102,7 +4762,6 @@
 	</string>
 	<string>
 		<key>PASSHO_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Passho Berry</en>
 			<ja lang="japanese">イトケのみ</ja>
@@ -5117,7 +4776,6 @@
 	</string>
 	<string>
 		<key>PAYAPA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Payapa Berry</en>
 			<ja lang="japanese">ウタンのみ</ja>
@@ -5132,7 +4790,6 @@
 	</string>
 	<string>
 		<key>PECHA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pecha Berry</en>
 			<ja lang="japanese">モモンのみ</ja>
@@ -5147,7 +4804,6 @@
 	</string>
 	<string>
 		<key>PERSIM_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Persim Berry</en>
 			<ja lang="japanese">キーのみ</ja>
@@ -5162,7 +4818,6 @@
 	</string>
 	<string>
 		<key>PETAYA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Petaya Berry</en>
 			<ja lang="japanese">ヤタピのみ</ja>
@@ -5177,7 +4832,6 @@
 	</string>
 	<string>
 		<key>PINAP_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pinap Berry</en>
 			<ja lang="japanese">パイルのみ</ja>
@@ -5192,7 +4846,6 @@
 	</string>
 	<string>
 		<key>POMEG_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pomeg Berry</en>
 			<ja lang="japanese">ザロクのみ</ja>
@@ -5207,7 +4860,6 @@
 	</string>
 	<string>
 		<key>QUALOT_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Qualot Berry</en>
 			<ja lang="japanese">タポルのみ</ja>
@@ -5222,7 +4874,6 @@
 	</string>
 	<string>
 		<key>RABUTA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rabuta Berry</en>
 			<ja lang="japanese">ラブタのみ</ja>
@@ -5237,7 +4888,6 @@
 	</string>
 	<string>
 		<key>RAWST_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rawst Berry</en>
 			<ja lang="japanese">チーゴのみ</ja>
@@ -5252,7 +4902,6 @@
 	</string>
 	<string>
 		<key>RAZZ_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Razz Berry</en>
 			<ja lang="japanese">ズリのみ</ja>
@@ -5267,7 +4916,6 @@
 	</string>
 	<string>
 		<key>RINDO_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rindo Berry</en>
 			<ja lang="japanese">リンドのみ</ja>
@@ -5282,7 +4930,6 @@
 	</string>
 	<string>
 		<key>ROSELI_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Roseli Berry</en>
 			<ja lang="japanese">ロゼルのみ</ja>
@@ -5297,7 +4944,6 @@
 	</string>
 	<string>
 		<key>ROWAP_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rowap Berry</en>
 			<ja lang="japanese">レンブのみ</ja>
@@ -5312,7 +4958,6 @@
 	</string>
 	<string>
 		<key>SALAC_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Salac Berry</en>
 			<ja lang="japanese">カムラのみ</ja>
@@ -5327,7 +4972,6 @@
 	</string>
 	<string>
 		<key>SHUCA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Shuca Berry</en>
 			<ja lang="japanese">シュカのみ</ja>
@@ -5342,7 +4986,6 @@
 	</string>
 	<string>
 		<key>SILVER_NANAB_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Silver Nanab Berry</en>
 			<ja lang="japanese">ぎんのナナのみ</ja>
@@ -5357,7 +5000,6 @@
 	</string>
 	<string>
 		<key>SILVER_PINAP_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Silver Pinap Berry</en>
 			<ja lang="japanese">ぎんのパイルのみ</ja>
@@ -5372,7 +5014,6 @@
 	</string>
 	<string>
 		<key>SILVER_RAZZ_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Silver Razz Berry</en>
 			<ja lang="japanese">ぎんのズリのみ</ja>
@@ -5387,7 +5028,6 @@
 	</string>
 	<string>
 		<key>SITRUS_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sitrus Berry</en>
 			<ja lang="japanese">オボンのみ</ja>
@@ -5402,7 +5042,6 @@
 	</string>
 	<string>
 		<key>SPELON_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Spelon Berry</en>
 			<ja lang="japanese">ノワキのみ</ja>
@@ -5417,7 +5056,6 @@
 	</string>
 	<string>
 		<key>STARF_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Starf Berry</en>
 			<ja lang="japanese">スターのみ</ja>
@@ -5432,7 +5070,6 @@
 	</string>
 	<string>
 		<key>TAMATO_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Tamato Berry</en>
 			<ja lang="japanese">マトマのみ</ja>
@@ -5447,7 +5084,6 @@
 	</string>
 	<string>
 		<key>TANGA_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Tanga Berry</en>
 			<ja lang="japanese">タンガのみ</ja>
@@ -5462,7 +5098,6 @@
 	</string>
 	<string>
 		<key>WACAN_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Wacan Berry</en>
 			<ja lang="japanese">ソクノのみ</ja>
@@ -5477,7 +5112,6 @@
 	</string>
 	<string>
 		<key>WATMEL_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Watmel Berry</en>
 			<ja lang="japanese">カイスのみ</ja>
@@ -5492,7 +5126,6 @@
 	</string>
 	<string>
 		<key>WEPEAR_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Wepear Berry</en>
 			<ja lang="japanese">セシナのみ</ja>
@@ -5507,7 +5140,6 @@
 	</string>
 	<string>
 		<key>WIKI_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Wiki Berry</en>
 			<ja lang="japanese">ウイのみ</ja>
@@ -5522,7 +5154,6 @@
 	</string>
 	<string>
 		<key>YACHE_BERRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Yache Berry</en>
 			<ja lang="japanese">ヤチェのみ</ja>

@@ -1,7 +1,6 @@
 <TYPE_NAMES encoding="utf-8" t9n="official">
 	<string>
 		<key>NONE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">???</en>
 			<ja lang="japanese">???</ja>
@@ -16,7 +15,6 @@
 	</string>
 	<string>
 		<key>FIGHTING</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fighting</en>
 			<ja lang="japanese">かくとう</ja>
@@ -31,7 +29,6 @@
 	</string>
 	<string>
 		<key>FLYING</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Flying</en>
 			<ja lang="japanese">ひこう</ja>
@@ -46,7 +43,6 @@
 	</string>
 	<string>
 		<key>POISON</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Poison</en>
 			<ja lang="japanese">どく</ja>
@@ -61,7 +57,6 @@
 	</string>
 	<string>
 		<key>GROUND</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ground</en>
 			<ja lang="japanese">じめん</ja>
@@ -76,7 +71,6 @@
 	</string>
 	<string>
 		<key>ROCK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rock</en>
 			<ja lang="japanese">いわ</ja>
@@ -91,7 +85,6 @@
 	</string>
 	<string>
 		<key>BUG</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Bug</en>
 			<ja lang="japanese">むし</ja>
@@ -106,7 +99,6 @@
 	</string>
 	<string>
 		<key>GHOST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ghost</en>
 			<ja lang="japanese">ゴースト</ja>
@@ -121,7 +113,6 @@
 	</string>
 	<string>
 		<key>STEEL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Steel</en>
 			<ja lang="japanese">はがね</ja>
@@ -136,7 +127,6 @@
 	</string>
 	<string>
 		<key>NORMAL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Normal</en>
 			<ja lang="japanese">ノーマル</ja>
@@ -151,7 +141,6 @@
 	</string>
 	<string>
 		<key>FIRE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fire</en>
 			<ja lang="japanese">ほのお</ja>
@@ -166,7 +155,6 @@
 	</string>
 	<string>
 		<key>WATER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Water</en>
 			<ja lang="japanese">みず</ja>
@@ -181,7 +169,6 @@
 	</string>
 	<string>
 		<key>GRASS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grass</en>
 			<ja lang="japanese">くさ</ja>
@@ -196,7 +183,6 @@
 	</string>
 	<string>
 		<key>ELECTRIC</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Electric</en>
 			<ja lang="japanese">でんき</ja>
@@ -211,7 +197,6 @@
 	</string>
 	<string>
 		<key>PSYCHIC</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Psychic</en>
 			<ja lang="japanese">エスパー</ja>
@@ -226,7 +211,6 @@
 	</string>
 	<string>
 		<key>ICE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ice</en>
 			<ja lang="japanese">こおり</ja>
@@ -241,7 +225,6 @@
 	</string>
 	<string>
 		<key>DRAGON</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dragon</en>
 			<ja lang="japanese">ドラゴン</ja>
@@ -256,7 +239,6 @@
 	</string>
 	<string>
 		<key>DARK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dark</en>
 			<ja lang="japanese">あく</ja>
@@ -271,7 +253,6 @@
 	</string>
 	<string>
 		<key>FAIRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fairy</en>
 			<ja lang="japanese">フェアリー</ja>

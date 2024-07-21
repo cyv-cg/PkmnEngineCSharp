@@ -1,7 +1,6 @@
 <STAT_NAMES encoding="utf-8" t9n="official">
 	<string>
 		<key>HIT_POINTS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">HP</en>
 			<ja lang="japanese">HP</ja>
@@ -16,7 +15,6 @@
 	</string>
 	<string>
 		<key>ATTACK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Attack</en>
 			<ja lang="japanese">攻撃</ja>
@@ -31,7 +29,6 @@
 	</string>
 	<string>
 		<key>DEFENSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Defense</en>
 			<ja lang="japanese">防御</ja>
@@ -46,7 +43,6 @@
 	</string>
 	<string>
 		<key>SPECIAL_ATTACK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sp. Atk</en>
 			<ja lang="japanese">特攻</ja>
@@ -61,7 +57,6 @@
 	</string>
 	<string>
 		<key>SPECIAL_DEFENSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sp. Def</en>
 			<ja lang="japanese">特防</ja>
@@ -76,7 +71,6 @@
 	</string>
 	<string>
 		<key>SPEED</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Speed</en>
 			<ja lang="japanese">素早さ</ja>
@@ -91,7 +85,6 @@
 	</string>
 	<string>
 		<key>ACCURACY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Accuracy</en>
 			<ja lang="japanese">命中率</ja>
@@ -106,7 +99,6 @@
 	</string>
 	<string>
 		<key>EVASION</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Evasiveness</en>
 			<ja lang="japanese">回避率</ja>

@@ -1370,6 +1370,10 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_IS_PROTECTED_BY_THE_MIST = new("PLAYER_MON_IS_PROTECTED_BY_THE_MIST", 2);
 		/// <summary>
+		/// {1} was dragged out!
+		/// </summary>
+		public static readonly StringResource MON_WAS_DRAGGED_OUT = new("MON_WAS_DRAGGED_OUT", 1);
+		/// <summary>
 		/// {1} must recharge!
 		/// </summary>
 		public static readonly StringResource MON_MUST_RECHARGE = new("MON_MUST_RECHARGE", 1);
@@ -1449,6 +1453,22 @@ namespace PkmnEngine.Strings {
 		/// {1}’s {2} can no longer escape!
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_CAN_NO_LONGER_ESCAPE = new("PLAYER_MON_CAN_NO_LONGER_ESCAPE", 2);
+		/// <summary>
+		/// {1}’s type changed to {2}!
+		/// </summary>
+		public static readonly StringResource MON_TYPE_CHANGED = new("MON_TYPE_CHANGED", 2);
+		/// <summary>
+		/// The wild {1}’s type changed to {2}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TYPE_CHANGED = new("WILD_MON_TYPE_CHANGED", 2);
+		/// <summary>
+		/// The opposing {1}’s type changed to {2}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TYPE_CHANGED = new("OPPOSING_MON_TYPE_CHANGED", 2);
+		/// <summary>
+		/// {1}’s {2} transformed into the {3} type!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TYPE_CHANGED = new("PLAYER_MON_TYPE_CHANGED", 3);
 		/// <summary>
 		/// {1} type was added to {2}!
 		/// </summary>
@@ -2158,6 +2178,14 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource SPIKES_REMOTE = new("SPIKES_REMOTE", 0);
 		/// <summary>
+		/// The spikes disappeared from the ground around your team!
+		/// </summary>
+		public static readonly StringResource ALLY_SPIKES_REMOVED = new("ALLY_SPIKES_REMOVED", 0);
+		/// <summary>
+		/// The spikes disappeared from the ground around the opposing team!
+		/// </summary>
+		public static readonly StringResource OPPONENT_SPIKES_REMOVED = new("OPPONENT_SPIKES_REMOVED", 0);
+		/// <summary>
 		/// Poison spikes were scattered on the ground all around your team!
 		/// </summary>
 		public static readonly StringResource POISON_SPIKES_CLIENT = new("POISON_SPIKES_CLIENT", 0);
@@ -2166,6 +2194,14 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource POISON_SPIKES_REMOTE = new("POISON_SPIKES_REMOTE", 0);
 		/// <summary>
+		/// The poison spikes disappeared from the ground around your team!
+		/// </summary>
+		public static readonly StringResource ALLY_POISON_SPIKES_REMOVED = new("ALLY_POISON_SPIKES_REMOVED", 0);
+		/// <summary>
+		/// The poison spikes disappeared from the ground around the opposing team!
+		/// </summary>
+		public static readonly StringResource OPPONENT_POISON_SPIKES_REMOVED = new("OPPONENT_POISON_SPIKES_REMOVED", 0);
+		/// <summary>
 		/// Pointed stones float in the air around your team!
 		/// </summary>
 		public static readonly StringResource POINTED_STONES_CLIENT = new("POINTED_STONES_CLIENT", 0);
@@ -2173,6 +2209,14 @@ namespace PkmnEngine.Strings {
 		/// Pointed stones float in the air around the opposing team!
 		/// </summary>
 		public static readonly StringResource POINTED_STONES_REMOTE = new("POINTED_STONES_REMOTE", 0);
+		/// <summary>
+		/// The pointed stones disappeared from around your team!
+		/// </summary>
+		public static readonly StringResource ALLY_POINTED_STONES_REMOVED = new("ALLY_POINTED_STONES_REMOVED", 0);
+		/// <summary>
+		/// The pointed stones disappeared from around the opposing team!
+		/// </summary>
+		public static readonly StringResource OPPONENT_POINTED_STONES_REMOVED = new("OPPONENT_POINTED_STONES_REMOVED", 0);
 		/// <summary>
 		/// Grass grew to cover the battlefield!
 		/// </summary>
@@ -2922,6 +2966,7 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_IS_PROTECTED_BY_THE_MIST, new() {{Language.ENG, "The wild {1} is protected by the mist!"}, {Language.JPN, "野生の {1} は霧に守られています!"}, {Language.GER, "Das wilde {1} wird durch den Nebel geschützt!"}, {Language.FRE, "Le {1} sauvage est protégé par la brume !"}, {Language.SPN, "¡El salvaje {1} está protegido por la niebla!"}, {Language.ITA, "Il {1} ​​selvaggio è protetto dalla nebbia!"}, {Language.KOR, "야생 {1}이(가) 안개로 보호받고 있습니다!"}, {Language.CHN_SIM, "野生{1}受到薄雾的保护！"}, {Language.CHN_TRA, "野生{1}受到薄霧的保護！"}, }},
 			{OPPOSING_MON_IS_PROTECTED_BY_THE_MIST, new() {{Language.ENG, "The opposing {1} is protected by the mist!"}, {Language.JPN, "相手の {1} は霧で守られています!"}, {Language.GER, "Der gegnerische {1} wird durch den Nebel geschützt!"}, {Language.FRE, "Le {1} adverse est protégé par la brume !"}, {Language.SPN, "¡El oponente {1} está protegido por la niebla!"}, {Language.ITA, "Il {1} ​​avversario è protetto dalla nebbia!"}, {Language.KOR, "상대 {1}이(가) 안개로 보호받고 있습니다!"}, {Language.CHN_SIM, "对方的{1}受到雾气的保护！"}, {Language.CHN_TRA, "對方的{1}受到霧氣的保護！"}, }},
 			{PLAYER_MON_IS_PROTECTED_BY_THE_MIST, new() {{Language.ENG, "{1}’s {2} is protected by the mist!"}, {Language.JPN, "{1}の{2}は霧で守られています！"}, {Language.GER, "{2} von {1} ist durch den Nebel geschützt!"}, {Language.FRE, "Le {2} de {1} est protégé par la brume !"}, {Language.SPN, "¡El {2} de {1} está protegido por la niebla!"}, {Language.ITA, "Il {2} di {1} è protetto dalla nebbia!"}, {Language.KOR, "{1}의 {2}이(가) 안개로 보호되고 있습니다!"}, {Language.CHN_SIM, "{1}的{2}受到了雾气的保护！"}, {Language.CHN_TRA, "{1}的{2}受到霧氣的保護了！"}, }},
+			{MON_WAS_DRAGGED_OUT, new() {{Language.ENG, "{1} was dragged out!"}, {Language.JPN, "{1} が引きずり出されました!"}, {Language.GER, "{1} wurde herausgezogen!"}, {Language.FRE, "{1} a été retiré !"}, {Language.SPN, "¡{1} fue arrastrado!"}, {Language.ITA, "{1} è stato trascinato fuori!"}, {Language.KOR, "{1}이(가) 끌려갔습니다!"}, {Language.CHN_SIM, "{1}被拖了出去！"}, {Language.CHN_TRA, "{1}被拖了出去！"}, }},
 			{MON_MUST_RECHARGE, new() {{Language.ENG, "{1} must recharge!"}, {Language.JPN, "{1} は充電する必要があります!"}, {Language.GER, "{1} muss aufgeladen werden!"}, {Language.FRE, "{1} doit recharger !"}, {Language.SPN, "¡{1} debe recargar!"}, {Language.ITA, "{1} deve ricaricarsi!"}, {Language.KOR, "{1}을(를) 재충전해야 합니다!"}, {Language.CHN_SIM, "{1}必须充值！"}, {Language.CHN_TRA, "{1}必須充值！"}, }},
 			{WILD_MON_MUST_RECHARGE, new() {{Language.ENG, "The wild {1} must recharge!"}, {Language.JPN, "野生の {1} は充電しなければなりません!"}, {Language.GER, "Die Wildnis {1} muss aufladen!"}, {Language.FRE, "Le {1} sauvage doit se recharger !"}, {Language.SPN, "¡El salvaje {1} debe recargarse!"}, {Language.ITA, "Il {1} ​​selvaggio deve ricaricarsi!"}, {Language.KOR, "야생 {1}을(를) 재충전해야 합니다!"}, {Language.CHN_SIM, "狂野{1}必须充电！"}, {Language.CHN_TRA, "狂野{1}必須充電！"}, }},
 			{OPPOSING_MON_MUST_RECHARGE, new() {{Language.ENG, "The opposing {1} must recharge!"}, {Language.JPN, "相手の {1} はリチャージする必要があります。"}, {Language.GER, "Die gegnerische {1} muss nachladen!"}, {Language.FRE, "Le {1} adverse doit se recharger !"}, {Language.SPN, "¡El {1} ​​contrario debe recargar!"}, {Language.ITA, "Il {1} ​​avversario deve ricaricarsi!"}, {Language.KOR, "상대 {1}을(를) 재충전해야 합니다!"}, {Language.CHN_SIM, "对方{1}必须充能！"}, {Language.CHN_TRA, "對方{1}必須充能！"}, }},
@@ -2942,6 +2987,10 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_CAN_NO_LONGER_ESCAPE, new() {{Language.ENG, "The wild {1} can no longer escape!"}, {Language.JPN, "野生の {1} はもう逃げられません!"}, {Language.GER, "Der Wilde {1} kann nicht mehr entkommen!"}, {Language.FRE, "Le sauvage {1} ne peut plus s'échapper !"}, {Language.SPN, "¡El salvaje {1} ya no puede escapar!"}, {Language.ITA, "I {1} selvaggi non possono più scappare!"}, {Language.KOR, "야생 {1}은(는) 더 이상 탈출할 수 없습니다!"}, {Language.CHN_SIM, "野生的{1}再也无法逃脱了！"}, {Language.CHN_TRA, "野生的{1}再也無法逃脫了！"}, }},
 			{OPPOSING_MON_CAN_NO_LONGER_ESCAPE, new() {{Language.ENG, "The opposing {1} can no longer escape!"}, {Language.JPN, "相手の {1} はもう逃げることはできません!"}, {Language.GER, "Der gegnerische {1} kann nicht mehr entkommen!"}, {Language.FRE, "Le {1} adverse ne peut plus s'échapper !"}, {Language.SPN, "¡El oponente {1} ya no puede escapar!"}, {Language.ITA, "Il {1} ​​avversario non può più scappare!"}, {Language.KOR, "상대 {1}은(는) 더 이상 탈출할 수 없습니다!"}, {Language.CHN_SIM, "对方的{1}再也无法逃脱了！"}, {Language.CHN_TRA, "對方的{1}再也無法逃脫了！"}, }},
 			{PLAYER_MON_CAN_NO_LONGER_ESCAPE, new() {{Language.ENG, "{1}’s {2} can no longer escape!"}, {Language.JPN, "{1} の {2} はもう逃げられません!"}, {Language.GER, "{2} von {1} kann nicht mehr entkommen!"}, {Language.FRE, "Les {2} de {1} ne peuvent plus s'échapper !"}, {Language.SPN, "¡El {2} de {1} ya no puede escapar!"}, {Language.ITA, "Il {2} di {1} non può più scappare!"}, {Language.KOR, "{1}의 {2}은(는) 더 이상 이스케이프할 수 없습니다!"}, {Language.CHN_SIM, "{1}的{2}再也无法逃脱了！"}, {Language.CHN_TRA, "{1}的{2}再也無法逃脫了！"}, }},
+			{MON_TYPE_CHANGED, new() {{Language.ENG, "{1}’s type changed to {2}!"}, {Language.JPN, "{1} のタイプが {2} に変更されました。"}, {Language.GER, "Der Typ von {1} wurde in {2} geändert!"}, {Language.FRE, "Le type de {1} est devenu {2} !"}, {Language.SPN, "¡El tipo de {1} cambió a {2}!"}, {Language.ITA, "Il tipo di {1} è cambiato in {2}!"}, {Language.KOR, "{1}의 유형이 {2}(으)로 변경되었습니다!"}, {Language.CHN_SIM, "{1} 的类型更改为 {2}！"}, {Language.CHN_TRA, "{1} 的類型改為 {2}！"}, }},
+			{WILD_MON_TYPE_CHANGED, new() {{Language.ENG, "The wild {1}’s type changed to {2}!"}, {Language.JPN, "野生の {1} のタイプが {2} に変わりました!"}, {Language.GER, "Der Typ des Wilds {1} wurde in {2} geändert!"}, {Language.FRE, "Le type du joker {1} a été modifiéen {2} !"}, {Language.SPN, "¡El tipo del comodín {1} cambióa {2}!"}, {Language.ITA, "Il tipo del selvaggio {1} è cambiatoin {2}!"}, {Language.KOR, "야생의 {1} 유형이{2}(으)로 변경되었습니다!"}, {Language.CHN_SIM, "野生{1}的类型已更改为{2}！"}, {Language.CHN_TRA, "野生{1}的類型已更改為{2}！"}, }},
+			{OPPOSING_MON_TYPE_CHANGED, new() {{Language.ENG, "The opposing {1}’s type changed to {2}!"}, {Language.JPN, "相手の {1} のタイプが {2} に変更されました!"}, {Language.GER, "Der Typ des Gegners {1} hat sich zu {2} geändert!"}, {Language.FRE, "Le type du {1} adverse a été modifiéen {2} !"}, {Language.SPN, "¡El tipo del oponente {1} cambióa {2}!"}, {Language.ITA, "Il tipo dell'avversario {1} è cambiatoin {2}!"}, {Language.KOR, "상대 {1}의 유형이{2}(으)로 변경되었습니다!"}, {Language.CHN_SIM, "对方的{1}类型已更改为{2}！"}, {Language.CHN_TRA, "對方的{1}類型已更改為{2}！"}, }},
+			{PLAYER_MON_TYPE_CHANGED, new() {{Language.ENG, "{1}’s {2} transformed into the {3} type!"}, {Language.JPN, "{1} の {2} が {3} タイプに変身しました!"}, {Language.GER, "{1}s {2} wurde in den Typ {3} umgewandelt!"}, {Language.FRE, "Le {2} de {1} transformé enle type {3} !"}, {Language.SPN, "¡El {2} de {1} se transformó enel tipo {3}!"}, {Language.ITA, "Il {2} di {1} si è trasformato neltipo {3}!"}, {Language.KOR, "{1}의 {2}이{3} 유형으로 변환되었습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 转换为{3} 类型！"}, {Language.CHN_TRA, "{1} 的 {2} 轉換成{3} 類型！"}, }},
 			{MON_TYPE_WAS_ADDED, new() {{Language.ENG, "{1} type was added to {2}!"}, {Language.JPN, "{1} タイプが {2} に追加されました。"}, {Language.GER, "Typ {1} wurde zu {2} hinzugefügt!"}, {Language.FRE, "Le type {1} a été ajouté à {2} !"}, {Language.SPN, "¡Se agregó {1} tipo a {2}!"}, {Language.ITA, "Il tipo {1} è stato aggiunto a {2}!"}, {Language.KOR, "{1} 유형이 {2}에 추가되었습니다!"}, {Language.CHN_SIM, "{1} 类型已添加到 {2}！"}, {Language.CHN_TRA, "{1} 類型已新增至 {2}！"}, }},
 			{WILD_MON_TYPE_WAS_ADDED, new() {{Language.ENG, "{1} type was added to the wild {2}!"}, {Language.JPN, "{1} タイプが野生の {2} に追加されました!"}, {Language.GER, "Der Typ {1} wurde zu the wild {2} hinzugefügt!"}, {Language.FRE, "Le type {1} a été ajouté au joker {2} !"}, {Language.SPN, "¡Se agregó {1} tipo al salvaje {2}!"}, {Language.ITA, "Il tipo {1} è stato aggiunto alselvaggio {2}!"}, {Language.KOR, "{1} 유형이 the wild {2}에 추가되었습니다!"}, {Language.CHN_SIM, "{1} 类型已添加到野生{2}！"}, {Language.CHN_TRA, "{1} 類型已新增至野生{2}！"}, }},
 			{OPPOSING_MON_TYPE_WAS_ADDED, new() {{Language.ENG, "{1} type was added to the opposing {2}!"}, {Language.JPN, "{1} タイプが敵の {2} に追加されました!"}, {Language.GER, "Der Typ {1} wurde zum gegnerischen {2} hinzugefügt!"}, {Language.FRE, "Le type {1} a été ajouté au {2} adverse !"}, {Language.SPN, "¡Se agregó {1} tipo al {2} opuesto!"}, {Language.ITA, "Il tipo {1} è stato aggiunto al{2} avversario!"}, {Language.KOR, "{1} 유형이 상대 {2}에 추가되었습니다!"}, {Language.CHN_SIM, "{1} 类型已添加到相反的 {2}！"}, {Language.CHN_TRA, "{1} 類型已添加到相反的 {2}！"}, }},
@@ -3119,10 +3168,16 @@ namespace PkmnEngine.Strings {
 			{OPPONENT_TAILWIND_END, new() {{Language.ENG, "The opposing team’s Tailwind petered out!"}, {Language.JPN, "相手チームの追い風が弱まった！"}, {Language.GER, "Der Rückenwind des gegnerischen Teams ließ nach!"}, {Language.FRE, "Le Tailwind de l’équipe adverse s’est essoufflé !"}, {Language.SPN, "¡El Tailwind del equipo contrario se agotó!"}, {Language.ITA, "Il Vento in Coda della squadra avversaria si è esaurito!"}, {Language.KOR, "상대팀의 Tailwind가 약해졌습니다!"}, {Language.CHN_SIM, "对方的顺风逐渐消失！"}, {Language.CHN_TRA, "對方的順風逐漸消失！"}, }},
 			{SPIKES_CLIENT, new() {{Language.ENG, "Spikes were scattered on the ground all around your team!"}, {Language.JPN, "チームの周囲の地面にスパイクが散乱しました。"}, {Language.GER, "Überall um Ihr Team herum waren Stacheln auf dem Boden verstreut!"}, {Language.FRE, "Des piques étaient éparpillées au sol tout autour de votre équipe !"}, {Language.SPN, "¡Había púas esparcidas por el suelo alrededor de tu equipo!"}, {Language.ITA, "Le punte erano sparse sul terreno attorno alla tua squadra!"}, {Language.KOR, "팀 전체에 스파이크가 땅에 흩어져 있었습니다!"}, {Language.CHN_SIM, "你的团队周围的地面上散落着尖刺！"}, {Language.CHN_TRA, "你的團隊周圍的地面上散落著尖刺！"}, }},
 			{SPIKES_REMOTE, new() {{Language.ENG, "Spikes were scattered on the ground all around the opposing team!"}, {Language.JPN, "相手チームの周囲の地面にはスパイクが散らばっていました！"}, {Language.GER, "Rund um das gegnerische Team waren Spikes auf dem Boden verstreut!"}, {Language.FRE, "Des piques étaient éparpillées au sol tout autour de l'équipe adverse !"}, {Language.SPN, "¡Los picos estaban esparcidos por el suelo alrededor del equipo contrario!"}, {Language.ITA, "Gli spuntoni erano sparsi sul terreno tutt'intorno alla squadra avversaria!"}, {Language.KOR, "스파이크가 상대팀 곳곳에 흩뿌려져 있었습니다!"}, {Language.CHN_SIM, "对方队伍周围的地面上散落着尖刺！"}, {Language.CHN_TRA, "對方隊伍周圍的地面上散落著尖刺！"}, }},
+			{ALLY_SPIKES_REMOVED, new() {{Language.ENG, "The spikes disappeared from the ground around your team!"}, {Language.JPN, "チームの周囲の地面からスパイクが消えました。"}, {Language.GER, "Die Stacheln um Ihr Team herum sind vom Boden verschwunden!"}, {Language.FRE, "Les piques ont disparu du sol autour de votre équipe !"}, {Language.SPN, "¡Las púas desaparecieron del suelo alrededor de tu equipo!"}, {Language.ITA, "Gli spuntoni sono scomparsi dal terreno intorno alla tua squadra!"}, {Language.KOR, "팀 주변의 땅에서 스파이크가 사라졌습니다!"}, {Language.CHN_SIM, "尖刺从你团队周围的地面消失了！"}, {Language.CHN_TRA, "尖刺從你團隊周圍的地面消失了！"}, }},
+			{OPPONENT_SPIKES_REMOVED, new() {{Language.ENG, "The spikes disappeared from the ground around the opposing team!"}, {Language.JPN, "相手チームの周囲の地面からスパイクが消えた！"}, {Language.GER, "Die Stacheln verschwanden vom Boden rund um das gegnerische Team!"}, {Language.FRE, "Les piques ont disparu du sol autour de l'équipe adverse !"}, {Language.SPN, "¡Las púas desaparecieron del suelo alrededor del equipo contrario!"}, {Language.ITA, "Gli spuntoni sono scomparsi dal terreno attorno alla squadra avversaria!"}, {Language.KOR, "상대 팀 주변의 땅에서 스파이크가 사라졌습니다!"}, {Language.CHN_SIM, "尖刺从对方队伍周围的地面消失了！"}, {Language.CHN_TRA, "尖刺從對方隊伍周圍的地面消失了！"}, }},
 			{POISON_SPIKES_CLIENT, new() {{Language.ENG, "Poison spikes were scattered on the ground all around your team!"}, {Language.JPN, "チームの周りの地面に毒のスパイクがばらまかれました!"}, {Language.GER, "Überall um Ihr Team herum waren Giftstacheln auf dem Boden verstreut!"}, {Language.FRE, "Des pointes de poison étaient dispersées sur le sol tout autour de votre équipe !"}, {Language.SPN, "¡Picos de veneno estaban esparcidos por el suelo alrededor de tu equipo!"}, {Language.ITA, "Spuntoni velenosi erano sparsi sul terreno attorno alla tua squadra!"}, {Language.KOR, "팀 전체에 독 스파이크가 땅에 흩어져 있었습니다!"}, {Language.CHN_SIM, "毒刺散落在你团队周围的地面上！"}, {Language.CHN_TRA, "毒刺散落在你隊伍周圍的地面上！"}, }},
 			{POISON_SPIKES_REMOTE, new() {{Language.ENG, "Poison spikes were scattered on the ground all around the opposing team!"}, {Language.JPN, "敵チームの周囲の地面に毒スパイクがばらまかれました！"}, {Language.GER, "Überall um das gegnerische Team herum waren Giftspitzen auf dem Boden verstreut!"}, {Language.FRE, "Des pointes de poison étaient éparpillées sur le sol tout autour de l'équipe adverse !"}, {Language.SPN, "¡Picos de veneno estaban esparcidos por el suelo alrededor del equipo contrario!"}, {Language.ITA, "Spuntoni velenosi erano sparsi sul terreno attorno alla squadra avversaria!"}, {Language.KOR, "상대 팀 곳곳에 독 스파이크가 흩뿌려져 있었습니다!"}, {Language.CHN_SIM, "敌方周围的地面上散落着毒刺！"}, {Language.CHN_TRA, "敵方周圍的地面上散落著毒刺！"}, }},
+			{ALLY_POISON_SPIKES_REMOVED, new() {{Language.ENG, "The poison spikes disappeared from the ground around your team!"}, {Language.JPN, "あなたのチームの周りの地面から毒スパイクが消えました!"}, {Language.GER, "Die Giftstacheln sind vom Boden um Ihr Team herum verschwunden!"}, {Language.FRE, "Les pointes de poison ont disparu du sol autour de votre équipe !"}, {Language.SPN, "¡Las púas de veneno desaparecieron del suelo alrededor de tu equipo!"}, {Language.ITA, "Gli aculei velenosi sono scomparsi dal terreno intorno alla tua squadra!"}, {Language.KOR, "팀 주변의 땅에서 독 스파이크가 사라졌습니다!"}, {Language.CHN_SIM, "毒刺从你团队周围的地面消失了！"}, {Language.CHN_TRA, "毒刺從你團隊周圍的地面消失了！"}, }},
+			{OPPONENT_POISON_SPIKES_REMOVED, new() {{Language.ENG, "The poison spikes disappeared from the ground around the opposing team!"}, {Language.JPN, "敵チーム周囲の地面から毒スパイクが消えた！"}, {Language.GER, "Die Giftstacheln verschwanden vom Boden rund um das gegnerische Team!"}, {Language.FRE, "Les pointes de poison ont disparu du sol autour de l'équipe adverse !"}, {Language.SPN, "¡Las púas de veneno desaparecieron del suelo alrededor del equipo contrario!"}, {Language.ITA, "Gli aculei velenosi sono scomparsi dal terreno intorno alla squadra avversaria!"}, {Language.KOR, "상대 팀 주변의 땅에서 독 스파이크가 사라졌습니다!"}, {Language.CHN_SIM, "毒刺从对方队伍周围的地面上消失了！"}, {Language.CHN_TRA, "毒刺從對方隊伍周圍的地面上消失了！"}, }},
 			{POINTED_STONES_CLIENT, new() {{Language.ENG, "Pointed stones float in the air around your team!"}, {Language.JPN, "尖った石がチームの周りの空中に浮かんでいます!"}, {Language.GER, "Spitze Steine ​​schweben in der Luft um Ihr Team herum!"}, {Language.FRE, "Des pierres pointues flottent dans les airs autour de votre équipe !"}, {Language.SPN, "¡Piedras puntiagudas flotan en el aire alrededor de tu equipo!"}, {Language.ITA, "Le pietre appuntite fluttuano nell'aria attorno alla tua squadra!"}, {Language.KOR, "팀 주위에 뾰족한 돌이 공중에 떠 있습니다!"}, {Language.CHN_SIM, "尖头的石头漂浮在你的团队周围的空中！"}, {Language.CHN_TRA, "尖頭的石頭漂浮在你的團隊周圍的空中！"}, }},
 			{POINTED_STONES_REMOTE, new() {{Language.ENG, "Pointed stones float in the air around the opposing team!"}, {Language.JPN, "相手チームの周囲に尖った石が空中に浮いています！"}, {Language.GER, "Spitze Steine ​​schweben in der Luft um das gegnerische Team herum!"}, {Language.FRE, "Des pierres pointues flottent dans les airs autour de l'équipe adverse !"}, {Language.SPN, "¡Piedras puntiagudas flotan en el aire alrededor del equipo contrario!"}, {Language.ITA, "Le pietre appuntite fluttuano nell'aria attorno alla squadra avversaria!"}, {Language.KOR, "뾰족한 돌이 상대 팀 주위에 공중에 떠 있습니다!"}, {Language.CHN_SIM, "尖头的石头漂浮在对方队伍周围的空中！"}, {Language.CHN_TRA, "尖頭的石頭漂浮在對方隊伍周圍的空中！"}, }},
+			{ALLY_POINTED_STONES_REMOVED, new() {{Language.ENG, "The pointed stones disappeared from around your team!"}, {Language.JPN, "チームの周りから尖った石が消えました！"}, {Language.GER, "Die spitzen Steine ​​sind aus der Umgebung Ihres Teams verschwunden!"}, {Language.FRE, "Les pierres pointues ont disparu autour de votre équipe !"}, {Language.SPN, "¡Las piedras puntiagudas desaparecieron de alrededor de tu equipo!"}, {Language.ITA, "Le pietre appuntite sono scomparse dalla tua squadra!"}, {Language.KOR, "팀 주변의 뾰족한 돌이 사라졌습니다!"}, {Language.CHN_SIM, "尖头的石头从你的队伍周围消失了！"}, {Language.CHN_TRA, "尖頭的石頭從你的隊伍周圍消失了！"}, }},
+			{OPPONENT_POINTED_STONES_REMOVED, new() {{Language.ENG, "The pointed stones disappeared from around the opposing team!"}, {Language.JPN, "相手チームの周囲から尖った石が消えた！"}, {Language.GER, "Die spitzen Steine ​​verschwanden rund um die gegnerische Mannschaft!"}, {Language.FRE, "Les pierres pointues ont disparu autour de l'équipe adverse !"}, {Language.SPN, "¡Las piedras puntiagudas desaparecieron alrededor del equipo contrario!"}, {Language.ITA, "Le pietre appuntite sono scomparse attorno alla squadra avversaria!"}, {Language.KOR, "상대팀 주변의 뾰족돌이 사라졌어요!"}, {Language.CHN_SIM, "对方周围的尖石消失了！"}, {Language.CHN_TRA, "對方周圍的尖石消失了！"}, }},
 			{GRASSY_TERRAIN_START, new() {{Language.ENG, "Grass grew to cover the battlefield!"}, {Language.JPN, "戦場を覆うほど草が生えてきた！"}, {Language.GER, "Gras wuchs und bedeckte das Schlachtfeld!"}, {Language.FRE, "L'herbe a poussé pour couvrir le champ de bataille !"}, {Language.SPN, "¡La hierba creció hasta cubrir el campo de batalla!"}, {Language.ITA, "L'erba è cresciuta fino a coprire il campo di battaglia!"}, {Language.KOR, "잔디가 전장을 덮을 만큼 자랐습니다!"}, {Language.CHN_SIM, "战场上长满了青草！"}, {Language.CHN_TRA, "戰場上長滿了青草！"}, }},
 			{GRASSY_TERRAIN_END, new() {{Language.ENG, "The grass disappeared from the battlefield."}, {Language.JPN, "戦場から草が消えた。"}, {Language.GER, "Das Gras verschwand vom Schlachtfeld."}, {Language.FRE, "L'herbe a disparu du champ de bataille."}, {Language.SPN, "La hierba desapareció del campo de batalla."}, {Language.ITA, "L'erba scomparve dal campo di battaglia."}, {Language.KOR, "전장에서 풀이 사라졌습니다."}, {Language.CHN_SIM, "草地从战场上消失了。"}, {Language.CHN_TRA, "草地從戰場上消失了。"}, }},
 			{MISTY_TERRAIN_START, new() {{Language.ENG, "Mist swirled around the battlefield!"}, {Language.JPN, "戦場に霧が渦巻いた！"}, {Language.GER, "Nebel wirbelte über das Schlachtfeld!"}, {Language.FRE, "La brume tourbillonnait autour du champ de bataille !"}, {Language.SPN, "¡La niebla se arremolinaba en el campo de batalla!"}, {Language.ITA, "La nebbia vorticava sul campo di battaglia!"}, {Language.KOR, "전장에 안개가 휘몰아쳤습니다!"}, {Language.CHN_SIM, "战场上雾气缭绕！"}, {Language.CHN_TRA, "戰場上霧氣繚繞！"}, }},

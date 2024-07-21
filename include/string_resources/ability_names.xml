@@ -1,7 +1,6 @@
 <ABILITY_NAMES encoding="utf-8" t9n="official">
 	<string>
 		<key>NONE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">???</en>
 			<ja lang="japanese">???</ja>
@@ -16,7 +15,6 @@
 	</string>
 	<string>
 		<key>ADAPTABILITY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Adaptability</en>
 			<ja lang="japanese">てきおうりょく</ja>
@@ -31,7 +29,6 @@
 	</string>
 	<string>
 		<key>AERILATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Aerilate</en>
 			<ja lang="japanese">スカイスキン</ja>
@@ -46,7 +43,6 @@
 	</string>
 	<string>
 		<key>AFTERMATH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Aftermath</en>
 			<ja lang="japanese">ゆうばく</ja>
@@ -61,7 +57,6 @@
 	</string>
 	<string>
 		<key>AIR_LOCK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Air Lock</en>
 			<ja lang="japanese">エアロック</ja>
@@ -76,7 +71,6 @@
 	</string>
 	<string>
 		<key>ANALYTIC</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Analytic</en>
 			<ja lang="japanese">アナライズ</ja>
@@ -91,7 +85,6 @@
 	</string>
 	<string>
 		<key>ANGER_POINT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Anger Point</en>
 			<ja lang="japanese">いかりのつぼ</ja>
@@ -106,7 +99,6 @@
 	</string>
 	<string>
 		<key>ANGER_SHELL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Anger Shell</en>
 			<ja lang="japanese">いかりのこうら</ja>
@@ -121,7 +113,6 @@
 	</string>
 	<string>
 		<key>ANTICIPATION</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Anticipation</en>
 			<ja lang="japanese">きけんよち</ja>
@@ -136,7 +127,6 @@
 	</string>
 	<string>
 		<key>ARENA_TRAP</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Arena Trap</en>
 			<ja lang="japanese">ありじごく</ja>
@@ -151,7 +141,6 @@
 	</string>
 	<string>
 		<key>ARMOR_TAIL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Armor Tail</en>
 			<ja lang="japanese">テイルアーマー</ja>
@@ -166,7 +155,6 @@
 	</string>
 	<string>
 		<key>AROMA_VEIL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Aroma Veil</en>
 			<ja lang="japanese">アロマベール</ja>
@@ -181,7 +169,6 @@
 	</string>
 	<string>
 		<key>AS_ONE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">As One</en>
 			<ja lang="japanese">じんばいったい</ja>
@@ -196,7 +183,6 @@
 	</string>
 	<string>
 		<key>AURA_BREAK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Aura Break</en>
 			<ja lang="japanese">オーラブレイク</ja>
@@ -211,7 +197,6 @@
 	</string>
 	<string>
 		<key>BAD_DREAMS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Bad Dreams</en>
 			<ja lang="japanese">ナイトメア</ja>
@@ -226,7 +211,6 @@
 	</string>
 	<string>
 		<key>BALL_FETCH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ball Fetch</en>
 			<ja lang="japanese">たまひろい</ja>
@@ -241,7 +225,6 @@
 	</string>
 	<string>
 		<key>BATTERY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Battery</en>
 			<ja lang="japanese">バッテリー</ja>
@@ -256,7 +239,6 @@
 	</string>
 	<string>
 		<key>BATTLE_ARMOR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Battle Armor</en>
 			<ja lang="japanese">カブトアーマー</ja>
@@ -271,7 +253,6 @@
 	</string>
 	<string>
 		<key>BATTLE_BOND</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Battle Bond</en>
 			<ja lang="japanese">きずなへんげ</ja>
@@ -286,7 +267,6 @@
 	</string>
 	<string>
 		<key>BEADS_OF_RUIN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Beads of Ruin</en>
 			<ja lang="japanese">わざわいのたま</ja>
@@ -301,7 +281,6 @@
 	</string>
 	<string>
 		<key>BEAST_BOOST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Beast Boost</en>
 			<ja lang="japanese">ビーストブースト</ja>
@@ -316,7 +295,6 @@
 	</string>
 	<string>
 		<key>BERSERK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Berserk</en>
 			<ja lang="japanese">ぎゃくじょう</ja>
@@ -331,7 +309,6 @@
 	</string>
 	<string>
 		<key>BIG_PECKS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Big Pecks</en>
 			<ja lang="japanese">はとむね</ja>
@@ -346,7 +323,6 @@
 	</string>
 	<string>
 		<key>BLAZE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Blaze</en>
 			<ja lang="japanese">もうか</ja>
@@ -361,7 +337,6 @@
 	</string>
 	<string>
 		<key>BULLETPROOF</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Bulletproof</en>
 			<ja lang="japanese">ぼうだん</ja>
@@ -376,7 +351,6 @@
 	</string>
 	<string>
 		<key>CHEEK_POUCH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Cheek Pouch</en>
 			<ja lang="japanese">ほおぶくろ</ja>
@@ -391,7 +365,6 @@
 	</string>
 	<string>
 		<key>CHILLING_NEIGH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Chilling Neigh</en>
 			<ja lang="japanese">しろのいななき</ja>
@@ -406,7 +379,6 @@
 	</string>
 	<string>
 		<key>CHLOROPHYLL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Chlorophyll</en>
 			<ja lang="japanese">ようりょくそ</ja>
@@ -421,7 +393,6 @@
 	</string>
 	<string>
 		<key>CLEAR_BODY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Clear Body</en>
 			<ja lang="japanese">クリアボディ</ja>
@@ -436,7 +407,6 @@
 	</string>
 	<string>
 		<key>CLOUD_NINE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Cloud Nine</en>
 			<ja lang="japanese">ノーてんき</ja>
@@ -451,7 +421,6 @@
 	</string>
 	<string>
 		<key>COLOR_CHANGE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Color Change</en>
 			<ja lang="japanese">へんしょく</ja>
@@ -466,7 +435,6 @@
 	</string>
 	<string>
 		<key>COMATOSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Comatose</en>
 			<ja lang="japanese">ぜったいねむり</ja>
@@ -481,7 +449,6 @@
 	</string>
 	<string>
 		<key>COMMANDER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Commander</en>
 			<ja lang="japanese">しれいとう</ja>
@@ -496,7 +463,6 @@
 	</string>
 	<string>
 		<key>COMPETITIVE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Competitive</en>
 			<ja lang="japanese">かちき</ja>
@@ -511,7 +477,6 @@
 	</string>
 	<string>
 		<key>COMPOUND_EYES</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Compound Eyes</en>
 			<ja lang="japanese">ふくがん</ja>
@@ -526,7 +491,6 @@
 	</string>
 	<string>
 		<key>CONTRARY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Contrary</en>
 			<ja lang="japanese">あまのじゃく</ja>
@@ -541,7 +505,6 @@
 	</string>
 	<string>
 		<key>CORROSION</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Corrosion</en>
 			<ja lang="japanese">ふしょく</ja>
@@ -556,7 +519,6 @@
 	</string>
 	<string>
 		<key>COSTAR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Costar</en>
 			<ja lang="japanese">きょうえん</ja>
@@ -571,7 +533,6 @@
 	</string>
 	<string>
 		<key>COTTON_DOWN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Cotton Down</en>
 			<ja lang="japanese">わたげ</ja>
@@ -586,7 +547,6 @@
 	</string>
 	<string>
 		<key>CUD_CHEW</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Cud Chew</en>
 			<ja lang="japanese">はんすう</ja>
@@ -601,7 +561,6 @@
 	</string>
 	<string>
 		<key>CURIOUS_MEDICINE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Curious Medicine</en>
 			<ja lang="japanese">きみょうなくすり</ja>
@@ -616,7 +575,6 @@
 	</string>
 	<string>
 		<key>CURSED_BODY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Cursed Body</en>
 			<ja lang="japanese">のろわれボディ</ja>
@@ -631,7 +589,6 @@
 	</string>
 	<string>
 		<key>CUTE_CHARM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Cute Charm</en>
 			<ja lang="japanese">メロメロボディ</ja>
@@ -646,7 +603,6 @@
 	</string>
 	<string>
 		<key>DAMP</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Damp</en>
 			<ja lang="japanese">しめりけ</ja>
@@ -661,7 +617,6 @@
 	</string>
 	<string>
 		<key>DANCER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dancer</en>
 			<ja lang="japanese">おどりこ</ja>
@@ -676,7 +631,6 @@
 	</string>
 	<string>
 		<key>DARK_AURA</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dark Aura</en>
 			<ja lang="japanese">ダークオーラ</ja>
@@ -691,7 +645,6 @@
 	</string>
 	<string>
 		<key>DAUNTLESS_SHIELD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dauntless Shield</en>
 			<ja lang="japanese">ふくつのたて</ja>
@@ -706,7 +659,6 @@
 	</string>
 	<string>
 		<key>DAZZLING</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dazzling</en>
 			<ja lang="japanese">ビビッドボディ</ja>
@@ -721,7 +673,6 @@
 	</string>
 	<string>
 		<key>DEFEATIST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Defeatist</en>
 			<ja lang="japanese">よわき</ja>
@@ -736,7 +687,6 @@
 	</string>
 	<string>
 		<key>DEFIANT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Defiant</en>
 			<ja lang="japanese">まけんき</ja>
@@ -751,7 +701,6 @@
 	</string>
 	<string>
 		<key>DELTA_STREAM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Delta Stream</en>
 			<ja lang="japanese">デルタストリーム</ja>
@@ -766,7 +715,6 @@
 	</string>
 	<string>
 		<key>DESOLATE_LAND</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Desolate Land</en>
 			<ja lang="japanese">おわりのだいち</ja>
@@ -781,7 +729,6 @@
 	</string>
 	<string>
 		<key>DISGUISE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Disguise</en>
 			<ja lang="japanese">ばけのかわ</ja>
@@ -796,7 +743,6 @@
 	</string>
 	<string>
 		<key>DOWNLOAD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Download</en>
 			<ja lang="japanese">ダウンロード</ja>
@@ -811,7 +757,6 @@
 	</string>
 	<string>
 		<key>DRAGON_S_MAW</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dragon's Maw</en>
 			<ja lang="japanese">りゅうのあぎと</ja>
@@ -826,7 +771,6 @@
 	</string>
 	<string>
 		<key>DRIZZLE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Drizzle</en>
 			<ja lang="japanese">あめふらし</ja>
@@ -841,7 +785,6 @@
 	</string>
 	<string>
 		<key>DROUGHT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Drought</en>
 			<ja lang="japanese">ひでり</ja>
@@ -856,7 +799,6 @@
 	</string>
 	<string>
 		<key>DRY_SKIN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Dry Skin</en>
 			<ja lang="japanese">かんそうはだ</ja>
@@ -871,7 +813,6 @@
 	</string>
 	<string>
 		<key>EARLY_BIRD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Early Bird</en>
 			<ja lang="japanese">はやおき</ja>
@@ -886,7 +827,6 @@
 	</string>
 	<string>
 		<key>EARTH_EATER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Earth Eater</en>
 			<ja lang="japanese">どしょく</ja>
@@ -901,7 +841,6 @@
 	</string>
 	<string>
 		<key>EFFECT_SPORE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Effect Spore</en>
 			<ja lang="japanese">ほうし</ja>
@@ -916,7 +855,6 @@
 	</string>
 	<string>
 		<key>ELECTRIC_SURGE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Electric Surge</en>
 			<ja lang="japanese">エレキメイカー</ja>
@@ -931,7 +869,6 @@
 	</string>
 	<string>
 		<key>ELECTROMORPHOSIS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Electromorphosis</en>
 			<ja lang="japanese">でんきにかえる</ja>
@@ -946,7 +883,6 @@
 	</string>
 	<string>
 		<key>EMERGENCY_EXIT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Emergency Exit</en>
 			<ja lang="japanese">ききかいひ</ja>
@@ -961,7 +897,6 @@
 	</string>
 	<string>
 		<key>FAIRY_AURA</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fairy Aura</en>
 			<ja lang="japanese">フェアリーオーラ</ja>
@@ -976,7 +911,6 @@
 	</string>
 	<string>
 		<key>FILTER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Filter</en>
 			<ja lang="japanese">フィルター</ja>
@@ -991,7 +925,6 @@
 	</string>
 	<string>
 		<key>FLAME_BODY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Flame Body</en>
 			<ja lang="japanese">ほのおのからだ</ja>
@@ -1006,7 +939,6 @@
 	</string>
 	<string>
 		<key>FLARE_BOOST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Flare Boost</en>
 			<ja lang="japanese">ねつぼうそう</ja>
@@ -1021,7 +953,6 @@
 	</string>
 	<string>
 		<key>FLASH_FIRE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Flash Fire</en>
 			<ja lang="japanese">もらいび</ja>
@@ -1036,7 +967,6 @@
 	</string>
 	<string>
 		<key>FLOWER_GIFT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Flower Gift</en>
 			<ja lang="japanese">フラワーギフト</ja>
@@ -1051,7 +981,6 @@
 	</string>
 	<string>
 		<key>FLOWER_VEIL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Flower Veil</en>
 			<ja lang="japanese">フラワーベール</ja>
@@ -1066,7 +995,6 @@
 	</string>
 	<string>
 		<key>FLUFFY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fluffy</en>
 			<ja lang="japanese">もふもふ</ja>
@@ -1081,7 +1009,6 @@
 	</string>
 	<string>
 		<key>FORECAST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Forecast</en>
 			<ja lang="japanese">てんきや</ja>
@@ -1096,7 +1023,6 @@
 	</string>
 	<string>
 		<key>FOREWARN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Forewarn</en>
 			<ja lang="japanese">よちむ</ja>
@@ -1111,7 +1037,6 @@
 	</string>
 	<string>
 		<key>FRIEND_GUARD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Friend Guard</en>
 			<ja lang="japanese">フレンドガード</ja>
@@ -1126,7 +1051,6 @@
 	</string>
 	<string>
 		<key>FRISK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Frisk</en>
 			<ja lang="japanese">おみとおし</ja>
@@ -1141,7 +1065,6 @@
 	</string>
 	<string>
 		<key>FULL_METAL_BODY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Full Metal Body</en>
 			<ja lang="japanese">メタルプロテクト</ja>
@@ -1156,7 +1079,6 @@
 	</string>
 	<string>
 		<key>FUR_COAT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Fur Coat</en>
 			<ja lang="japanese">ファーコート</ja>
@@ -1171,7 +1093,6 @@
 	</string>
 	<string>
 		<key>GALE_WINGS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Gale Wings</en>
 			<ja lang="japanese">はやてのつばさ</ja>
@@ -1186,7 +1107,6 @@
 	</string>
 	<string>
 		<key>GALVANIZE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Galvanize</en>
 			<ja lang="japanese">エレキスキン</ja>
@@ -1201,7 +1121,6 @@
 	</string>
 	<string>
 		<key>GLUTTONY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Gluttony</en>
 			<ja lang="japanese">くいしんぼう</ja>
@@ -1216,7 +1135,6 @@
 	</string>
 	<string>
 		<key>GOOD_AS_GOLD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Good as Gold</en>
 			<ja lang="japanese">おうごんのからだ</ja>
@@ -1231,7 +1149,6 @@
 	</string>
 	<string>
 		<key>GOOEY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Gooey</en>
 			<ja lang="japanese">ぬめぬめ</ja>
@@ -1246,7 +1163,6 @@
 	</string>
 	<string>
 		<key>GORILLA_TACTICS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Gorilla Tactics</en>
 			<ja lang="japanese">ごりむちゅう</ja>
@@ -1261,7 +1177,6 @@
 	</string>
 	<string>
 		<key>GRASS_PELT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grass Pelt</en>
 			<ja lang="japanese">くさのけがわ</ja>
@@ -1276,7 +1191,6 @@
 	</string>
 	<string>
 		<key>GRASSY_SURGE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grassy Surge</en>
 			<ja lang="japanese">グラスメイカー</ja>
@@ -1291,7 +1205,6 @@
 	</string>
 	<string>
 		<key>GRIM_NEIGH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Grim Neigh</en>
 			<ja lang="japanese">くろのいななき</ja>
@@ -1306,7 +1219,6 @@
 	</string>
 	<string>
 		<key>GUARD_DOG</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Guard Dog</en>
 			<ja lang="japanese">ばんけん</ja>
@@ -1321,7 +1233,6 @@
 	</string>
 	<string>
 		<key>GULP_MISSILE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Gulp Missile</en>
 			<ja lang="japanese">うのミサイル</ja>
@@ -1336,7 +1247,6 @@
 	</string>
 	<string>
 		<key>GUTS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Guts</en>
 			<ja lang="japanese">こんじょう</ja>
@@ -1351,7 +1261,6 @@
 	</string>
 	<string>
 		<key>HADRON_ENGINE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Hadron Engine</en>
 			<ja lang="japanese">ハドロンエンジン</ja>
@@ -1366,7 +1275,6 @@
 	</string>
 	<string>
 		<key>HARVEST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Harvest</en>
 			<ja lang="japanese">しゅうかく</ja>
@@ -1381,7 +1289,6 @@
 	</string>
 	<string>
 		<key>HEALER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Healer</en>
 			<ja lang="japanese">いやしのこころ</ja>
@@ -1396,7 +1303,6 @@
 	</string>
 	<string>
 		<key>HEATPROOF</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Heatproof</en>
 			<ja lang="japanese">たいねつ</ja>
@@ -1411,7 +1317,6 @@
 	</string>
 	<string>
 		<key>HEAVY_METAL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Heavy Metal</en>
 			<ja lang="japanese">ヘヴィメタル</ja>
@@ -1426,7 +1331,6 @@
 	</string>
 	<string>
 		<key>HONEY_GATHER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Honey Gather</en>
 			<ja lang="japanese">みつあつめ</ja>
@@ -1441,7 +1345,6 @@
 	</string>
 	<string>
 		<key>HUGE_POWER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Huge Power</en>
 			<ja lang="japanese">ちからもち</ja>
@@ -1456,7 +1359,6 @@
 	</string>
 	<string>
 		<key>HUNGER_SWITCH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Hunger Switch</en>
 			<ja lang="japanese">はらぺこスイッチ</ja>
@@ -1471,7 +1373,6 @@
 	</string>
 	<string>
 		<key>HUSTLE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Hustle</en>
 			<ja lang="japanese">はりきり</ja>
@@ -1486,7 +1387,6 @@
 	</string>
 	<string>
 		<key>HYDRATION</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Hydration</en>
 			<ja lang="japanese">うるおいボディ</ja>
@@ -1501,7 +1401,6 @@
 	</string>
 	<string>
 		<key>HYPER_CUTTER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Hyper Cutter</en>
 			<ja lang="japanese">かいりきバサミ</ja>
@@ -1516,7 +1415,6 @@
 	</string>
 	<string>
 		<key>ICE_BODY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ice Body</en>
 			<ja lang="japanese">アイスボディ</ja>
@@ -1531,7 +1429,6 @@
 	</string>
 	<string>
 		<key>ICE_FACE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ice Face</en>
 			<ja lang="japanese">アイスフェイス</ja>
@@ -1546,7 +1443,6 @@
 	</string>
 	<string>
 		<key>ICE_SCALES</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ice Scales</en>
 			<ja lang="japanese">こおりのりんぷん</ja>
@@ -1561,7 +1457,6 @@
 	</string>
 	<string>
 		<key>ILLUMINATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Illuminate</en>
 			<ja lang="japanese">はっこう</ja>
@@ -1576,7 +1471,6 @@
 	</string>
 	<string>
 		<key>ILLUSION</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Illusion</en>
 			<ja lang="japanese">イリュージョン</ja>
@@ -1591,7 +1485,6 @@
 	</string>
 	<string>
 		<key>IMMUNITY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Immunity</en>
 			<ja lang="japanese">めんえき</ja>
@@ -1606,7 +1499,6 @@
 	</string>
 	<string>
 		<key>IMPOSTER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Imposter</en>
 			<ja lang="japanese">かわりもの</ja>
@@ -1621,7 +1513,6 @@
 	</string>
 	<string>
 		<key>INFILTRATOR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Infiltrator</en>
 			<ja lang="japanese">すりぬけ</ja>
@@ -1636,7 +1527,6 @@
 	</string>
 	<string>
 		<key>INNARDS_OUT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Innards Out</en>
 			<ja lang="japanese">とびだすなかみ</ja>
@@ -1651,7 +1541,6 @@
 	</string>
 	<string>
 		<key>INNER_FOCUS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Inner Focus</en>
 			<ja lang="japanese">せいしんりょく</ja>
@@ -1666,7 +1555,6 @@
 	</string>
 	<string>
 		<key>INSOMNIA</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Insomnia</en>
 			<ja lang="japanese">ふみん</ja>
@@ -1681,7 +1569,6 @@
 	</string>
 	<string>
 		<key>INTIMIDATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Intimidate</en>
 			<ja lang="japanese">いかく</ja>
@@ -1696,7 +1583,6 @@
 	</string>
 	<string>
 		<key>INTREPID_SWORD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Intrepid Sword</en>
 			<ja lang="japanese">ふとうのけん</ja>
@@ -1711,7 +1597,6 @@
 	</string>
 	<string>
 		<key>IRON_BARBS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Iron Barbs</en>
 			<ja lang="japanese">てつのトゲ</ja>
@@ -1726,7 +1611,6 @@
 	</string>
 	<string>
 		<key>IRON_FIST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Iron Fist</en>
 			<ja lang="japanese">てつのこぶし</ja>
@@ -1741,7 +1625,6 @@
 	</string>
 	<string>
 		<key>JUSTIFIED</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Justified</en>
 			<ja lang="japanese">せいぎのこころ</ja>
@@ -1756,7 +1639,6 @@
 	</string>
 	<string>
 		<key>KEEN_EYE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Keen Eye</en>
 			<ja lang="japanese">するどいめ</ja>
@@ -1771,7 +1653,6 @@
 	</string>
 	<string>
 		<key>KLUTZ</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Klutz</en>
 			<ja lang="japanese">ぶきよう</ja>
@@ -1786,7 +1667,6 @@
 	</string>
 	<string>
 		<key>LEAF_GUARD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Leaf Guard</en>
 			<ja lang="japanese">リーフガード</ja>
@@ -1801,7 +1681,6 @@
 	</string>
 	<string>
 		<key>LEVITATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Levitate</en>
 			<ja lang="japanese">ふゆう</ja>
@@ -1816,7 +1695,6 @@
 	</string>
 	<string>
 		<key>LIBERO</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Libero</en>
 			<ja lang="japanese">リベロ</ja>
@@ -1831,7 +1709,6 @@
 	</string>
 	<string>
 		<key>LIGHT_METAL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Light Metal</en>
 			<ja lang="japanese">ライトメタル</ja>
@@ -1846,7 +1723,6 @@
 	</string>
 	<string>
 		<key>LIGHTNING_ROD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lightning Rod</en>
 			<ja lang="japanese">ひらいしん</ja>
@@ -1861,7 +1737,6 @@
 	</string>
 	<string>
 		<key>LIMBER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Limber</en>
 			<ja lang="japanese">じゅうなん</ja>
@@ -1876,7 +1751,6 @@
 	</string>
 	<string>
 		<key>LINGERING_AROMA</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Lingering Aroma</en>
 			<ja lang="japanese">とれないにおい</ja>
@@ -1891,7 +1765,6 @@
 	</string>
 	<string>
 		<key>LIQUID_OOZE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Liquid Ooze</en>
 			<ja lang="japanese">ヘドロえき</ja>
@@ -1906,7 +1779,6 @@
 	</string>
 	<string>
 		<key>LIQUID_VOICE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Liquid Voice</en>
 			<ja lang="japanese">うるおいボイス</ja>
@@ -1921,7 +1793,6 @@
 	</string>
 	<string>
 		<key>LONG_REACH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Long Reach</en>
 			<ja lang="japanese">えんかく</ja>
@@ -1936,7 +1807,6 @@
 	</string>
 	<string>
 		<key>MAGIC_BOUNCE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Magic Bounce</en>
 			<ja lang="japanese">マジックミラー</ja>
@@ -1951,7 +1821,6 @@
 	</string>
 	<string>
 		<key>MAGIC_GUARD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Magic Guard</en>
 			<ja lang="japanese">マジックガード</ja>
@@ -1966,7 +1835,6 @@
 	</string>
 	<string>
 		<key>MAGICIAN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Magician</en>
 			<ja lang="japanese">マジシャン</ja>
@@ -1981,7 +1849,6 @@
 	</string>
 	<string>
 		<key>MAGMA_ARMOR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Magma Armor</en>
 			<ja lang="japanese">マグマのよろい</ja>
@@ -1996,7 +1863,6 @@
 	</string>
 	<string>
 		<key>MAGNET_PULL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Magnet Pull</en>
 			<ja lang="japanese">じりょく</ja>
@@ -2011,7 +1877,6 @@
 	</string>
 	<string>
 		<key>MARVEL_SCALE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Marvel Scale</en>
 			<ja lang="japanese">ふしぎなうろこ</ja>
@@ -2026,7 +1891,6 @@
 	</string>
 	<string>
 		<key>MEGA_LAUNCHER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mega Launcher</en>
 			<ja lang="japanese">メガランチャー</ja>
@@ -2041,7 +1905,6 @@
 	</string>
 	<string>
 		<key>MERCILESS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Merciless</en>
 			<ja lang="japanese">ひとでなし</ja>
@@ -2056,7 +1919,6 @@
 	</string>
 	<string>
 		<key>MIMICRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mimicry</en>
 			<ja lang="japanese">ぎたい</ja>
@@ -2071,7 +1933,6 @@
 	</string>
 	<string>
 		<key>MINUS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Minus</en>
 			<ja lang="japanese">マイナス</ja>
@@ -2086,7 +1947,6 @@
 	</string>
 	<string>
 		<key>MIRROR_ARMOR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mirror Armor</en>
 			<ja lang="japanese">ミラーアーマー</ja>
@@ -2101,7 +1961,6 @@
 	</string>
 	<string>
 		<key>MISTY_SURGE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Misty Surge</en>
 			<ja lang="japanese">ミストメイカー</ja>
@@ -2116,7 +1975,6 @@
 	</string>
 	<string>
 		<key>MOLD_BREAKER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mold Breaker</en>
 			<ja lang="japanese">かたやぶり</ja>
@@ -2131,7 +1989,6 @@
 	</string>
 	<string>
 		<key>MOODY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Moody</en>
 			<ja lang="japanese">ムラっけ</ja>
@@ -2146,7 +2003,6 @@
 	</string>
 	<string>
 		<key>MOTOR_DRIVE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Motor Drive</en>
 			<ja lang="japanese">でんきエンジン</ja>
@@ -2161,7 +2017,6 @@
 	</string>
 	<string>
 		<key>MOXIE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Moxie</en>
 			<ja lang="japanese">じしんかじょう</ja>
@@ -2176,7 +2031,6 @@
 	</string>
 	<string>
 		<key>MULTISCALE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Multiscale</en>
 			<ja lang="japanese">マルチスケイル</ja>
@@ -2191,7 +2045,6 @@
 	</string>
 	<string>
 		<key>MULTITYPE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Multitype</en>
 			<ja lang="japanese">マルチタイプ</ja>
@@ -2206,7 +2059,6 @@
 	</string>
 	<string>
 		<key>MUMMY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mummy</en>
 			<ja lang="japanese">ミイラ</ja>
@@ -2221,7 +2073,6 @@
 	</string>
 	<string>
 		<key>MYCELIUM_MIGHT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Mycelium Might</en>
 			<ja lang="japanese">きんしのちから</ja>
@@ -2236,7 +2087,6 @@
 	</string>
 	<string>
 		<key>NATURAL_CURE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Natural Cure</en>
 			<ja lang="japanese">しぜんかいふく</ja>
@@ -2251,7 +2101,6 @@
 	</string>
 	<string>
 		<key>NEUROFORCE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Neuroforce</en>
 			<ja lang="japanese">ブレインフォース</ja>
@@ -2266,7 +2115,6 @@
 	</string>
 	<string>
 		<key>NEUTRALIZING_GAS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Neutralizing Gas</en>
 			<ja lang="japanese">かがくへんかガス</ja>
@@ -2281,7 +2129,6 @@
 	</string>
 	<string>
 		<key>NO_GUARD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">No Guard</en>
 			<ja lang="japanese">ノーガード</ja>
@@ -2296,7 +2143,6 @@
 	</string>
 	<string>
 		<key>NORMALIZE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Normalize</en>
 			<ja lang="japanese">ノーマルスキン</ja>
@@ -2311,7 +2157,6 @@
 	</string>
 	<string>
 		<key>OBLIVIOUS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Oblivious</en>
 			<ja lang="japanese">どんかん</ja>
@@ -2326,7 +2171,6 @@
 	</string>
 	<string>
 		<key>OPPORTUNIST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Opportunist</en>
 			<ja lang="japanese">びんじょう</ja>
@@ -2341,7 +2185,6 @@
 	</string>
 	<string>
 		<key>ORICHALCUM_PULSE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Orichalcum Pulse</en>
 			<ja lang="japanese">ひひいろのこどう</ja>
@@ -2356,7 +2199,6 @@
 	</string>
 	<string>
 		<key>OVERCOAT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Overcoat</en>
 			<ja lang="japanese">ぼうじん</ja>
@@ -2371,7 +2213,6 @@
 	</string>
 	<string>
 		<key>OVERGROW</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Overgrow</en>
 			<ja lang="japanese">しんりょく</ja>
@@ -2386,7 +2227,6 @@
 	</string>
 	<string>
 		<key>OWN_TEMPO</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Own Tempo</en>
 			<ja lang="japanese">マイペース</ja>
@@ -2401,7 +2241,6 @@
 	</string>
 	<string>
 		<key>PARENTAL_BOND</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Parental Bond</en>
 			<ja lang="japanese">おやこあい</ja>
@@ -2416,7 +2255,6 @@
 	</string>
 	<string>
 		<key>PASTEL_VEIL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pastel Veil</en>
 			<ja lang="japanese">パステルベール</ja>
@@ -2431,7 +2269,6 @@
 	</string>
 	<string>
 		<key>PERISH_BODY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Perish Body</en>
 			<ja lang="japanese">ほろびのボディ</ja>
@@ -2446,7 +2283,6 @@
 	</string>
 	<string>
 		<key>PICKPOCKET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pickpocket</en>
 			<ja lang="japanese">わるいてぐせ</ja>
@@ -2461,7 +2297,6 @@
 	</string>
 	<string>
 		<key>PICKUP</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pickup</en>
 			<ja lang="japanese">ものひろい</ja>
@@ -2476,7 +2311,6 @@
 	</string>
 	<string>
 		<key>PIXILATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pixilate</en>
 			<ja lang="japanese">フェアリースキン</ja>
@@ -2491,7 +2325,6 @@
 	</string>
 	<string>
 		<key>PLUS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Plus</en>
 			<ja lang="japanese">プラス</ja>
@@ -2506,7 +2339,6 @@
 	</string>
 	<string>
 		<key>POISON_HEAL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Poison Heal</en>
 			<ja lang="japanese">ポイズンヒール</ja>
@@ -2521,7 +2353,6 @@
 	</string>
 	<string>
 		<key>POISON_POINT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Poison Point</en>
 			<ja lang="japanese">どくのトゲ</ja>
@@ -2536,7 +2367,6 @@
 	</string>
 	<string>
 		<key>POISON_TOUCH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Poison Touch</en>
 			<ja lang="japanese">どくしゅ</ja>
@@ -2551,7 +2381,6 @@
 	</string>
 	<string>
 		<key>POWER_CONSTRUCT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Power Construct</en>
 			<ja lang="japanese">スワームチェンジ</ja>
@@ -2566,7 +2395,6 @@
 	</string>
 	<string>
 		<key>POWER_OF_ALCHEMY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Power of Alchemy</en>
 			<ja lang="japanese">かがくのちから</ja>
@@ -2581,7 +2409,6 @@
 	</string>
 	<string>
 		<key>POWER_SPOT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Power Spot</en>
 			<ja lang="japanese">パワースポット</ja>
@@ -2596,7 +2423,6 @@
 	</string>
 	<string>
 		<key>PRANKSTER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Prankster</en>
 			<ja lang="japanese">いたずらごころ</ja>
@@ -2611,7 +2437,6 @@
 	</string>
 	<string>
 		<key>PRESSURE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pressure</en>
 			<ja lang="japanese">プレッシャー</ja>
@@ -2626,7 +2451,6 @@
 	</string>
 	<string>
 		<key>PRIMORDIAL_SEA</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Primordial Sea</en>
 			<ja lang="japanese">はじまりのうみ</ja>
@@ -2641,7 +2465,6 @@
 	</string>
 	<string>
 		<key>PRISM_ARMOR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Prism Armor</en>
 			<ja lang="japanese">プリズムアーマー</ja>
@@ -2656,7 +2479,6 @@
 	</string>
 	<string>
 		<key>PROPELLER_TAIL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Propeller Tail</en>
 			<ja lang="japanese">スクリューおびれ</ja>
@@ -2671,7 +2493,6 @@
 	</string>
 	<string>
 		<key>PROTEAN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Protean</en>
 			<ja lang="japanese">へんげんじざい</ja>
@@ -2686,7 +2507,6 @@
 	</string>
 	<string>
 		<key>PROTOSYNTHESIS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Protosynthesis</en>
 			<ja lang="japanese">こだいかっせい</ja>
@@ -2701,7 +2521,6 @@
 	</string>
 	<string>
 		<key>PSYCHIC_SURGE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Psychic Surge</en>
 			<ja lang="japanese">サイコメイカー</ja>
@@ -2716,7 +2535,6 @@
 	</string>
 	<string>
 		<key>PUNK_ROCK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Punk Rock</en>
 			<ja lang="japanese">パンクロック</ja>
@@ -2731,7 +2549,6 @@
 	</string>
 	<string>
 		<key>PURE_POWER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Pure Power</en>
 			<ja lang="japanese">ヨガパワー</ja>
@@ -2746,7 +2563,6 @@
 	</string>
 	<string>
 		<key>PURIFYING_SALT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Purifying Salt</en>
 			<ja lang="japanese">きよめのしお</ja>
@@ -2761,7 +2577,6 @@
 	</string>
 	<string>
 		<key>QUARK_DRIVE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Quark Drive</en>
 			<ja lang="japanese">クォークチャージ</ja>
@@ -2776,7 +2591,6 @@
 	</string>
 	<string>
 		<key>QUEENLY_MAJESTY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Queenly Majesty</en>
 			<ja lang="japanese">じょおうのいげん</ja>
@@ -2791,7 +2605,6 @@
 	</string>
 	<string>
 		<key>QUICK_DRAW</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Quick Draw</en>
 			<ja lang="japanese">クイックドロウ</ja>
@@ -2806,7 +2619,6 @@
 	</string>
 	<string>
 		<key>QUICK_FEET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Quick Feet</en>
 			<ja lang="japanese">はやあし</ja>
@@ -2821,7 +2633,6 @@
 	</string>
 	<string>
 		<key>RAIN_DISH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rain Dish</en>
 			<ja lang="japanese">あめうけざら</ja>
@@ -2836,7 +2647,6 @@
 	</string>
 	<string>
 		<key>RATTLED</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rattled</en>
 			<ja lang="japanese">びびり</ja>
@@ -2851,7 +2661,6 @@
 	</string>
 	<string>
 		<key>RECEIVER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Receiver</en>
 			<ja lang="japanese">レシーバー</ja>
@@ -2866,7 +2675,6 @@
 	</string>
 	<string>
 		<key>RECKLESS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Reckless</en>
 			<ja lang="japanese">すてみ</ja>
@@ -2881,7 +2689,6 @@
 	</string>
 	<string>
 		<key>REFRIGERATE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Refrigerate</en>
 			<ja lang="japanese">フリーズスキン</ja>
@@ -2896,7 +2703,6 @@
 	</string>
 	<string>
 		<key>REGENERATOR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Regenerator</en>
 			<ja lang="japanese">さいせいりょく</ja>
@@ -2911,7 +2717,6 @@
 	</string>
 	<string>
 		<key>RIPEN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Ripen</en>
 			<ja lang="japanese">じゅくせい</ja>
@@ -2926,7 +2731,6 @@
 	</string>
 	<string>
 		<key>RIVALRY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rivalry</en>
 			<ja lang="japanese">とうそうしん</ja>
@@ -2941,7 +2745,6 @@
 	</string>
 	<string>
 		<key>RKS_SYSTEM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">RKS System</en>
 			<ja lang="japanese">ＡＲシステム</ja>
@@ -2956,7 +2759,6 @@
 	</string>
 	<string>
 		<key>ROCK_HEAD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rock Head</en>
 			<ja lang="japanese">いしあたま</ja>
@@ -2971,7 +2773,6 @@
 	</string>
 	<string>
 		<key>ROCKY_PAYLOAD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rocky Payload</en>
 			<ja lang="japanese">いわはこび</ja>
@@ -2986,7 +2787,6 @@
 	</string>
 	<string>
 		<key>ROUGH_SKIN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Rough Skin</en>
 			<ja lang="japanese">さめはだ</ja>
@@ -3001,7 +2801,6 @@
 	</string>
 	<string>
 		<key>RUN_AWAY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Run Away</en>
 			<ja lang="japanese">にげあし</ja>
@@ -3016,7 +2815,6 @@
 	</string>
 	<string>
 		<key>SAND_FORCE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sand Force</en>
 			<ja lang="japanese">すなのちから</ja>
@@ -3031,7 +2829,6 @@
 	</string>
 	<string>
 		<key>SAND_RUSH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sand Rush</en>
 			<ja lang="japanese">すなかき</ja>
@@ -3046,7 +2843,6 @@
 	</string>
 	<string>
 		<key>SAND_SPIT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sand Spit</en>
 			<ja lang="japanese">すなはき</ja>
@@ -3061,7 +2857,6 @@
 	</string>
 	<string>
 		<key>SAND_STREAM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sand Stream</en>
 			<ja lang="japanese">すなおこし</ja>
@@ -3076,7 +2871,6 @@
 	</string>
 	<string>
 		<key>SAND_VEIL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sand Veil</en>
 			<ja lang="japanese">すながくれ</ja>
@@ -3091,7 +2885,6 @@
 	</string>
 	<string>
 		<key>SAP_SIPPER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sap Sipper</en>
 			<ja lang="japanese">そうしょく</ja>
@@ -3106,7 +2899,6 @@
 	</string>
 	<string>
 		<key>SCHOOLING</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Schooling</en>
 			<ja lang="japanese">ぎょぐん</ja>
@@ -3121,7 +2913,6 @@
 	</string>
 	<string>
 		<key>SCRAPPY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Scrappy</en>
 			<ja lang="japanese">きもったま</ja>
@@ -3136,7 +2927,6 @@
 	</string>
 	<string>
 		<key>SCREEN_CLEANER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Screen Cleaner</en>
 			<ja lang="japanese">バリアフリー</ja>
@@ -3151,7 +2941,6 @@
 	</string>
 	<string>
 		<key>SEED_SOWER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Seed Sower</en>
 			<ja lang="japanese">こぼれダネ</ja>
@@ -3166,7 +2955,6 @@
 	</string>
 	<string>
 		<key>SERENE_GRACE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Serene Grace</en>
 			<ja lang="japanese">てんのめぐみ</ja>
@@ -3181,7 +2969,6 @@
 	</string>
 	<string>
 		<key>SHADOW_SHIELD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Shadow Shield</en>
 			<ja lang="japanese">ファントムガード</ja>
@@ -3196,7 +2983,6 @@
 	</string>
 	<string>
 		<key>SHADOW_TAG</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Shadow Tag</en>
 			<ja lang="japanese">かげふみ</ja>
@@ -3211,7 +2997,6 @@
 	</string>
 	<string>
 		<key>SHARPNESS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sharpness</en>
 			<ja lang="japanese">きれあじ</ja>
@@ -3226,7 +3011,6 @@
 	</string>
 	<string>
 		<key>SHED_SKIN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Shed Skin</en>
 			<ja lang="japanese">だっぴ</ja>
@@ -3241,7 +3025,6 @@
 	</string>
 	<string>
 		<key>SHEER_FORCE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sheer Force</en>
 			<ja lang="japanese">ちからずく</ja>
@@ -3256,7 +3039,6 @@
 	</string>
 	<string>
 		<key>SHELL_ARMOR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Shell Armor</en>
 			<ja lang="japanese">シェルアーマー</ja>
@@ -3271,7 +3053,6 @@
 	</string>
 	<string>
 		<key>SHIELD_DUST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Shield Dust</en>
 			<ja lang="japanese">りんぷん</ja>
@@ -3286,7 +3067,6 @@
 	</string>
 	<string>
 		<key>SHIELDS_DOWN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Shields Down</en>
 			<ja lang="japanese">リミットシールド</ja>
@@ -3301,7 +3081,6 @@
 	</string>
 	<string>
 		<key>SIMPLE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Simple</en>
 			<ja lang="japanese">たんじゅん</ja>
@@ -3316,7 +3095,6 @@
 	</string>
 	<string>
 		<key>SKILL_LINK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Skill Link</en>
 			<ja lang="japanese">スキルリンク</ja>
@@ -3331,7 +3109,6 @@
 	</string>
 	<string>
 		<key>SLOW_START</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Slow Start</en>
 			<ja lang="japanese">スロースタート</ja>
@@ -3346,7 +3123,6 @@
 	</string>
 	<string>
 		<key>SLUSH_RUSH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Slush Rush</en>
 			<ja lang="japanese">ゆきかき</ja>
@@ -3361,7 +3137,6 @@
 	</string>
 	<string>
 		<key>SNIPER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sniper</en>
 			<ja lang="japanese">スナイパー</ja>
@@ -3376,7 +3151,6 @@
 	</string>
 	<string>
 		<key>SNOW_CLOAK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Snow Cloak</en>
 			<ja lang="japanese">ゆきがくれ</ja>
@@ -3391,7 +3165,6 @@
 	</string>
 	<string>
 		<key>SNOW_WARNING</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Snow Warning</en>
 			<ja lang="japanese">ゆきふらし</ja>
@@ -3406,7 +3179,6 @@
 	</string>
 	<string>
 		<key>SOLAR_POWER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Solar Power</en>
 			<ja lang="japanese">サンパワー</ja>
@@ -3421,7 +3193,6 @@
 	</string>
 	<string>
 		<key>SOLID_ROCK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Solid Rock</en>
 			<ja lang="japanese">ハードロック</ja>
@@ -3436,7 +3207,6 @@
 	</string>
 	<string>
 		<key>SOUL_HEART</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Soul-Heart</en>
 			<ja lang="japanese">ソウルハート</ja>
@@ -3451,7 +3221,6 @@
 	</string>
 	<string>
 		<key>SOUNDPROOF</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Soundproof</en>
 			<ja lang="japanese">ぼうおん</ja>
@@ -3466,7 +3235,6 @@
 	</string>
 	<string>
 		<key>SPEED_BOOST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Speed Boost</en>
 			<ja lang="japanese">かそく</ja>
@@ -3481,7 +3249,6 @@
 	</string>
 	<string>
 		<key>STAKEOUT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Stakeout</en>
 			<ja lang="japanese">はりこみ</ja>
@@ -3496,7 +3263,6 @@
 	</string>
 	<string>
 		<key>STALL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Stall</en>
 			<ja lang="japanese">あとだし</ja>
@@ -3511,7 +3277,6 @@
 	</string>
 	<string>
 		<key>STALWART</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Stalwart</en>
 			<ja lang="japanese">すじがねいり</ja>
@@ -3526,7 +3291,6 @@
 	</string>
 	<string>
 		<key>STAMINA</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Stamina</en>
 			<ja lang="japanese">じきゅうりょく</ja>
@@ -3541,7 +3305,6 @@
 	</string>
 	<string>
 		<key>STANCE_CHANGE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Stance Change</en>
 			<ja lang="japanese">バトルスイッチ</ja>
@@ -3556,7 +3319,6 @@
 	</string>
 	<string>
 		<key>STATIC</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Static</en>
 			<ja lang="japanese">せいでんき</ja>
@@ -3571,7 +3333,6 @@
 	</string>
 	<string>
 		<key>STEADFAST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Steadfast</en>
 			<ja lang="japanese">ふくつのこころ</ja>
@@ -3586,7 +3347,6 @@
 	</string>
 	<string>
 		<key>STEAM_ENGINE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Steam Engine</en>
 			<ja lang="japanese">じょうききかん</ja>
@@ -3601,7 +3361,6 @@
 	</string>
 	<string>
 		<key>STEELWORKER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Steelworker</en>
 			<ja lang="japanese">はがねつかい</ja>
@@ -3616,7 +3375,6 @@
 	</string>
 	<string>
 		<key>STEELY_SPIRIT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Steely Spirit</en>
 			<ja lang="japanese">はがねのせいしん</ja>
@@ -3631,7 +3389,6 @@
 	</string>
 	<string>
 		<key>STENCH</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Stench</en>
 			<ja lang="japanese">あくしゅう</ja>
@@ -3646,7 +3403,6 @@
 	</string>
 	<string>
 		<key>STICKY_HOLD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sticky Hold</en>
 			<ja lang="japanese">ねんちゃく</ja>
@@ -3661,7 +3417,6 @@
 	</string>
 	<string>
 		<key>STORM_DRAIN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Storm Drain</en>
 			<ja lang="japanese">よびみず</ja>
@@ -3676,7 +3431,6 @@
 	</string>
 	<string>
 		<key>STRONG_JAW</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Strong Jaw</en>
 			<ja lang="japanese">がんじょうあご</ja>
@@ -3691,7 +3445,6 @@
 	</string>
 	<string>
 		<key>STURDY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sturdy</en>
 			<ja lang="japanese">がんじょう</ja>
@@ -3706,7 +3459,6 @@
 	</string>
 	<string>
 		<key>SUCTION_CUPS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Suction Cups</en>
 			<ja lang="japanese">きゅうばん</ja>
@@ -3721,7 +3473,6 @@
 	</string>
 	<string>
 		<key>SUPER_LUCK</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Super Luck</en>
 			<ja lang="japanese">きょううん</ja>
@@ -3736,7 +3487,6 @@
 	</string>
 	<string>
 		<key>SUPREME_OVERLORD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Supreme Overlord</en>
 			<ja lang="japanese">そうだいしょう</ja>
@@ -3751,7 +3501,6 @@
 	</string>
 	<string>
 		<key>SURGE_SURFER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Surge Surfer</en>
 			<ja lang="japanese">サーフテール</ja>
@@ -3766,7 +3515,6 @@
 	</string>
 	<string>
 		<key>SWARM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Swarm</en>
 			<ja lang="japanese">むしのしらせ</ja>
@@ -3781,7 +3529,6 @@
 	</string>
 	<string>
 		<key>SWEET_VEIL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sweet Veil</en>
 			<ja lang="japanese">スイートベール</ja>
@@ -3796,7 +3543,6 @@
 	</string>
 	<string>
 		<key>SWIFT_SWIM</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Swift Swim</en>
 			<ja lang="japanese">すいすい</ja>
@@ -3811,7 +3557,6 @@
 	</string>
 	<string>
 		<key>SWORD_OF_RUIN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Sword of Ruin</en>
 			<ja lang="japanese">わざわいのつるぎ</ja>
@@ -3826,7 +3571,6 @@
 	</string>
 	<string>
 		<key>SYMBIOSIS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Symbiosis</en>
 			<ja lang="japanese">きょうせい</ja>
@@ -3841,7 +3585,6 @@
 	</string>
 	<string>
 		<key>SYNCHRONIZE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Synchronize</en>
 			<ja lang="japanese">シンクロ</ja>
@@ -3856,7 +3599,6 @@
 	</string>
 	<string>
 		<key>TABLETS_OF_RUIN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Tablets of Ruin</en>
 			<ja lang="japanese">わざわいのおふだ</ja>
@@ -3871,7 +3613,6 @@
 	</string>
 	<string>
 		<key>TANGLED_FEET</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Tangled Feet</en>
 			<ja lang="japanese">ちどりあし</ja>
@@ -3886,7 +3627,6 @@
 	</string>
 	<string>
 		<key>TANGLING_HAIR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Tangling Hair</en>
 			<ja lang="japanese">カーリーヘアー</ja>
@@ -3901,7 +3641,6 @@
 	</string>
 	<string>
 		<key>TECHNICIAN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Technician</en>
 			<ja lang="japanese">テクニシャン</ja>
@@ -3916,7 +3655,6 @@
 	</string>
 	<string>
 		<key>TELEPATHY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Telepathy</en>
 			<ja lang="japanese">テレパシー</ja>
@@ -3931,7 +3669,6 @@
 	</string>
 	<string>
 		<key>TERAVOLT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Teravolt</en>
 			<ja lang="japanese">テラボルテージ</ja>
@@ -3946,7 +3683,6 @@
 	</string>
 	<string>
 		<key>THERMAL_EXCHANGE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Thermal Exchange</en>
 			<ja lang="japanese">ねつこうかん</ja>
@@ -3961,7 +3697,6 @@
 	</string>
 	<string>
 		<key>THICK_FAT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Thick Fat</en>
 			<ja lang="japanese">あついしぼう</ja>
@@ -3976,7 +3711,6 @@
 	</string>
 	<string>
 		<key>TINTED_LENS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Tinted Lens</en>
 			<ja lang="japanese">いろめがね</ja>
@@ -3991,7 +3725,6 @@
 	</string>
 	<string>
 		<key>TORRENT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Torrent</en>
 			<ja lang="japanese">げきりゅう</ja>
@@ -4006,7 +3739,6 @@
 	</string>
 	<string>
 		<key>TOUGH_CLAWS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Tough Claws</en>
 			<ja lang="japanese">かたいツメ</ja>
@@ -4021,7 +3753,6 @@
 	</string>
 	<string>
 		<key>TOXIC_BOOST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Toxic Boost</en>
 			<ja lang="japanese">どくぼうそう</ja>
@@ -4036,7 +3767,6 @@
 	</string>
 	<string>
 		<key>TOXIC_DEBRIS</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Toxic Debris</en>
 			<ja lang="japanese">どくげしょう</ja>
@@ -4051,7 +3781,6 @@
 	</string>
 	<string>
 		<key>TRACE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Trace</en>
 			<ja lang="japanese">トレース</ja>
@@ -4066,7 +3795,6 @@
 	</string>
 	<string>
 		<key>TRANSISTOR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Transistor</en>
 			<ja lang="japanese">トランジスタ</ja>
@@ -4081,7 +3809,6 @@
 	</string>
 	<string>
 		<key>TRIAGE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Triage</en>
 			<ja lang="japanese">ヒーリングシフト</ja>
@@ -4096,7 +3823,6 @@
 	</string>
 	<string>
 		<key>TRUANT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Truant</en>
 			<ja lang="japanese">なまけ</ja>
@@ -4111,7 +3837,6 @@
 	</string>
 	<string>
 		<key>TURBOBLAZE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Turboblaze</en>
 			<ja lang="japanese">ターボブレイズ</ja>
@@ -4126,7 +3851,6 @@
 	</string>
 	<string>
 		<key>UNAWARE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Unaware</en>
 			<ja lang="japanese">てんねん</ja>
@@ -4141,7 +3865,6 @@
 	</string>
 	<string>
 		<key>UNBURDEN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Unburden</en>
 			<ja lang="japanese">かるわざ</ja>
@@ -4156,7 +3879,6 @@
 	</string>
 	<string>
 		<key>UNNERVE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Unnerve</en>
 			<ja lang="japanese">きんちょうかん</ja>
@@ -4171,7 +3893,6 @@
 	</string>
 	<string>
 		<key>UNSEEN_FIST</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Unseen Fist</en>
 			<ja lang="japanese">ふかしのこぶし</ja>
@@ -4186,7 +3907,6 @@
 	</string>
 	<string>
 		<key>VESSEL_OF_RUIN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Vessel of Ruin</en>
 			<ja lang="japanese">わざわいのうつわ</ja>
@@ -4201,7 +3921,6 @@
 	</string>
 	<string>
 		<key>VICTORY_STAR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Victory Star</en>
 			<ja lang="japanese">しょうりのほし</ja>
@@ -4216,7 +3935,6 @@
 	</string>
 	<string>
 		<key>VITAL_SPIRIT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Vital Spirit</en>
 			<ja lang="japanese">やるき</ja>
@@ -4231,7 +3949,6 @@
 	</string>
 	<string>
 		<key>VOLT_ABSORB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Volt Absorb</en>
 			<ja lang="japanese">ちくでん</ja>
@@ -4246,7 +3963,6 @@
 	</string>
 	<string>
 		<key>WANDERING_SPIRIT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Wandering Spirit</en>
 			<ja lang="japanese">さまようたましい</ja>
@@ -4261,7 +3977,6 @@
 	</string>
 	<string>
 		<key>WATER_ABSORB</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Water Absorb</en>
 			<ja lang="japanese">ちょすい</ja>
@@ -4276,7 +3991,6 @@
 	</string>
 	<string>
 		<key>WATER_BUBBLE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Water Bubble</en>
 			<ja lang="japanese">すいほう</ja>
@@ -4291,7 +4005,6 @@
 	</string>
 	<string>
 		<key>WATER_COMPACTION</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Water Compaction</en>
 			<ja lang="japanese">みずがため</ja>
@@ -4306,7 +4019,6 @@
 	</string>
 	<string>
 		<key>WATER_VEIL</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Water Veil</en>
 			<ja lang="japanese">みずのベール</ja>
@@ -4321,7 +4033,6 @@
 	</string>
 	<string>
 		<key>WEAK_ARMOR</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Weak Armor</en>
 			<ja lang="japanese">くだけるよろい</ja>
@@ -4336,7 +4047,6 @@
 	</string>
 	<string>
 		<key>WELL_BAKED_BODY</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Well-Baked Body</en>
 			<ja lang="japanese">こんがりボディ</ja>
@@ -4351,7 +4061,6 @@
 	</string>
 	<string>
 		<key>WHITE_SMOKE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">White Smoke</en>
 			<ja lang="japanese">しろいけむり</ja>
@@ -4366,7 +4075,6 @@
 	</string>
 	<string>
 		<key>WIMP_OUT</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Wimp Out</en>
 			<ja lang="japanese">にげごし</ja>
@@ -4381,7 +4089,6 @@
 	</string>
 	<string>
 		<key>WIND_POWER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Wind Power</en>
 			<ja lang="japanese">ふうりょくでんき</ja>
@@ -4396,7 +4103,6 @@
 	</string>
 	<string>
 		<key>WIND_RIDER</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Wind Rider</en>
 			<ja lang="japanese">かぜのり</ja>
@@ -4411,7 +4117,6 @@
 	</string>
 	<string>
 		<key>WONDER_GUARD</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Wonder Guard</en>
 			<ja lang="japanese">ふしぎなまもり</ja>
@@ -4426,7 +4131,6 @@
 	</string>
 	<string>
 		<key>WONDER_SKIN</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Wonder Skin</en>
 			<ja lang="japanese">ミラクルスキン</ja>
@@ -4441,7 +4145,6 @@
 	</string>
 	<string>
 		<key>ZEN_MODE</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Zen Mode</en>
 			<ja lang="japanese">ダルマモード</ja>
@@ -4456,7 +4159,6 @@
 	</string>
 	<string>
 		<key>ZERO_TO_HERO</key>
-		<params>0</params>
 		<text>
 			<en lang="english">Zero to Hero</en>
 			<ja lang="japanese">マイティチェンジ</ja>
