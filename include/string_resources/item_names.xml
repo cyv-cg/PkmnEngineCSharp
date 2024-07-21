@@ -4145,6 +4145,90 @@
 		</text>
 	</string>
 	<string>
+		<key>RUSTED_SWORD</key>
+		<text>
+			<en lang="english">Rusted Sword</en>
+			<ja lang="japanese">くちたけん</ja>
+			<de lang="german">Rostiges Schwert</de>
+			<fr lang="french">Épée Rouillée</fr>
+			<it lang="italian">Spada rovinata</it>
+			<es lang="spanish">Espada Oxidada</es>
+			<ko lang="korean">녹슨검</ko>
+			<zh-cn lang="chinese (simplified)">腐朽的劍</zh-cn>
+			<zh-tw lang="chinese (traditional)">腐朽的劍</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RUSTED_SHIELD</key>
+		<text>
+			<en lang="english">Rusted Shield</en>
+			<ja lang="japanese">くちたたて</ja>
+			<de lang="german">Rostiger Schild</de>
+			<fr lang="french">Bouclier Rouillé</fr>
+			<it lang="italian">Scudo rovinato</it>
+			<es lang="spanish">Escudo Oxidado</es>
+			<ko lang="korean">녹슨방패</ko>
+			<zh-cn lang="chinese (simplified)">腐朽的盾</zh-cn>
+			<zh-tw lang="chinese (traditional)">腐朽的盾</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BOOSTER_ENERGY</key>
+		<text>
+			<en lang="english">Booster Energy</en>
+			<ja lang="japanese">ブーストエナジー</ja>
+			<de lang="german">Energiekapsel</de>
+			<fr lang="french">Énergie Booster</fr>
+			<it lang="italian">Capsula energetica</it>
+			<es lang="spanish">Energía Potenciadora</es>
+			<ko lang="korean">부스트에너지</ko>
+			<zh-cn lang="chinese (simplified)">驅勁能量</zh-cn>
+			<zh-tw lang="chinese (traditional)">驅勁能量</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>RED_ORB</key>
+		<text>
+			<en lang="english">Red Orb</en>
+			<ja lang="japanese">べにいろのたま</ja>
+			<de lang="german">Roter Edelstein</de>
+			<fr lang="french">Gemme Rouge</fr>
+			<it lang="italian">Gemma rossa</it>
+			<es lang="spanish">Prisma Rojo</es>
+			<ko lang="korean">주홍구슬</ko>
+			<zh-cn lang="chinese (simplified)">朱紅色寶珠</zh-cn>
+			<zh-tw lang="chinese (traditional)">朱紅色寶珠</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>BLUE_ORB</key>
+		<text>
+			<en lang="english">Blue Orb</en>
+			<ja lang="japanese">あいいろのたま</ja>
+			<de lang="german">Blauer Edelstein</de>
+			<fr lang="french">Gemme Bleue</fr>
+			<it lang="italian">Gemma blu</it>
+			<es lang="spanish">Prisma Azul</es>
+			<ko lang="korean">쪽빛구슬</ko>
+			<zh-cn lang="chinese (simplified)">靛藍色寶珠</zh-cn>
+			<zh-tw lang="chinese (traditional)">靛藍色寶珠</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>JADE_ORB</key>
+		<text>
+			<en lang="english">Jade Orb</en>
+			<ja lang="japanese">もえぎいろのたま</ja>
+			<de lang="german">Grüne Kugel</de>
+			<fr lang="french">Orbe Vert</fr>
+			<it lang="italian">Sfera Verde</it>
+			<es lang="spanish">Esfera Verde</es>
+			<ko lang="korean">연둣빛구슬</ko>
+			<zh-cn lang="chinese (simplified)">草綠色寶珠</zh-cn>
+			<zh-tw lang="chinese (traditional)">草綠色寶珠</zh-tw>
+		</text>
+	</string>
+	<string>
 		<key>AGUAV_BERRY</key>
 		<text>
 			<en lang="english">Aguav Berry</en>

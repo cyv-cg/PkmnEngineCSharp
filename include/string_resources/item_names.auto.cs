@@ -1186,6 +1186,30 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource ZOOM_LENS = new("ZOOM_LENS", 0);
 		/// <summary>
+		/// Rusted Sword
+		/// </summary>
+		public static readonly StringResource RUSTED_SWORD = new("RUSTED_SWORD", 0);
+		/// <summary>
+		/// Rusted Shield
+		/// </summary>
+		public static readonly StringResource RUSTED_SHIELD = new("RUSTED_SHIELD", 0);
+		/// <summary>
+		/// Booster Energy
+		/// </summary>
+		public static readonly StringResource BOOSTER_ENERGY = new("BOOSTER_ENERGY", 0);
+		/// <summary>
+		/// Red Orb
+		/// </summary>
+		public static readonly StringResource RED_ORB = new("RED_ORB", 0);
+		/// <summary>
+		/// Blue Orb
+		/// </summary>
+		public static readonly StringResource BLUE_ORB = new("BLUE_ORB", 0);
+		/// <summary>
+		/// Jade Orb
+		/// </summary>
+		public static readonly StringResource JADE_ORB = new("JADE_ORB", 0);
+		/// <summary>
 		/// Aguav Berry
 		/// </summary>
 		public static readonly StringResource AGUAV_BERRY = new("AGUAV_BERRY", 0);
@@ -1776,6 +1800,12 @@ namespace PkmnEngine.Strings {
 			{YELLOW_NECTAR, new() {{Language.ENG, "Yellow Nectar"}, {Language.JPN, "やまぶきのミツ"}, {Language.GER, "Gelber Nektar"}, {Language.FRE, "Nectar Jaune"}, {Language.SPN, "Néctar Amarillo"}, {Language.ITA, "Nettare giallo"}, {Language.KOR, "진노랑꿀"}, {Language.CHN_SIM, "金黄色花蜜"}, {Language.CHN_TRA, "金黃色花蜜"}, }},
 			{ZAP_PLATE, new() {{Language.ENG, "Zap Plate"}, {Language.JPN, "いかずちプレート"}, {Language.GER, "Blitztafel"}, {Language.FRE, "Plaque Volt"}, {Language.SPN, "Tabla Trueno"}, {Language.ITA, "Lastrasaetta"}, {Language.KOR, "우레플레이트"}, {Language.CHN_SIM, "雷电石板"}, {Language.CHN_TRA, "雷電石板"}, }},
 			{ZOOM_LENS, new() {{Language.ENG, "Zoom Lens"}, {Language.JPN, "フォーカスレンズ"}, {Language.GER, "Zoomlinse"}, {Language.FRE, "Lentille Zoom"}, {Language.SPN, "Telescopio"}, {Language.ITA, "Zoomlente"}, {Language.KOR, "포커스렌즈"}, {Language.CHN_SIM, "对焦镜"}, {Language.CHN_TRA, "對焦鏡"}, }},
+			{RUSTED_SWORD, new() {{Language.ENG, "Rusted Sword"}, {Language.JPN, "くちたけん"}, {Language.GER, "Rostiges Schwert"}, {Language.FRE, "Épée Rouillée"}, {Language.SPN, "Espada Oxidada"}, {Language.ITA, "Spada rovinata"}, {Language.KOR, "녹슨검"}, {Language.CHN_SIM, "腐朽的劍"}, {Language.CHN_TRA, "腐朽的劍"}, }},
+			{RUSTED_SHIELD, new() {{Language.ENG, "Rusted Shield"}, {Language.JPN, "くちたたて"}, {Language.GER, "Rostiger Schild"}, {Language.FRE, "Bouclier Rouillé"}, {Language.SPN, "Escudo Oxidado"}, {Language.ITA, "Scudo rovinato"}, {Language.KOR, "녹슨방패"}, {Language.CHN_SIM, "腐朽的盾"}, {Language.CHN_TRA, "腐朽的盾"}, }},
+			{BOOSTER_ENERGY, new() {{Language.ENG, "Booster Energy"}, {Language.JPN, "ブーストエナジー"}, {Language.GER, "Energiekapsel"}, {Language.FRE, "Énergie Booster"}, {Language.SPN, "Energía Potenciadora"}, {Language.ITA, "Capsula energetica"}, {Language.KOR, "부스트에너지"}, {Language.CHN_SIM, "驅勁能量"}, {Language.CHN_TRA, "驅勁能量"}, }},
+			{RED_ORB, new() {{Language.ENG, "Red Orb"}, {Language.JPN, "べにいろのたま"}, {Language.GER, "Roter Edelstein"}, {Language.FRE, "Gemme Rouge"}, {Language.SPN, "Prisma Rojo"}, {Language.ITA, "Gemma rossa"}, {Language.KOR, "주홍구슬"}, {Language.CHN_SIM, "朱紅色寶珠"}, {Language.CHN_TRA, "朱紅色寶珠"}, }},
+			{BLUE_ORB, new() {{Language.ENG, "Blue Orb"}, {Language.JPN, "あいいろのたま"}, {Language.GER, "Blauer Edelstein"}, {Language.FRE, "Gemme Bleue"}, {Language.SPN, "Prisma Azul"}, {Language.ITA, "Gemma blu"}, {Language.KOR, "쪽빛구슬"}, {Language.CHN_SIM, "靛藍色寶珠"}, {Language.CHN_TRA, "靛藍色寶珠"}, }},
+			{JADE_ORB, new() {{Language.ENG, "Jade Orb"}, {Language.JPN, "もえぎいろのたま"}, {Language.GER, "Grüne Kugel"}, {Language.FRE, "Orbe Vert"}, {Language.SPN, "Esfera Verde"}, {Language.ITA, "Sfera Verde"}, {Language.KOR, "연둣빛구슬"}, {Language.CHN_SIM, "草綠色寶珠"}, {Language.CHN_TRA, "草綠色寶珠"}, }},
 			{AGUAV_BERRY, new() {{Language.ENG, "Aguav Berry"}, {Language.JPN, "バンジのみ"}, {Language.GER, "Gauvebeere"}, {Language.FRE, "Baie Gowav"}, {Language.SPN, "Baya Guaya"}, {Language.ITA, "Baccaguava"}, {Language.KOR, "아바열매"}, {Language.CHN_SIM, "乐芭果"}, {Language.CHN_TRA, "樂芭果"}, }},
 			{APICOT_BERRY, new() {{Language.ENG, "Apicot Berry"}, {Language.JPN, "ズアのみ"}, {Language.GER, "Apikobeere"}, {Language.FRE, "Baie Abriko"}, {Language.SPN, "Baya Aricoc"}, {Language.ITA, "Baccacocca"}, {Language.KOR, "규살열매"}, {Language.CHN_SIM, "杏仔果"}, {Language.CHN_TRA, "杏仔果"}, }},
 			{ASPEAR_BERRY, new() {{Language.ENG, "Aspear Berry"}, {Language.JPN, "ナナシのみ"}, {Language.GER, "Wilbirbeere"}, {Language.FRE, "Baie Willia"}, {Language.SPN, "Baya Perasi"}, {Language.ITA, "Baccaperina"}, {Language.KOR, "배리열매"}, {Language.CHN_SIM, "利木果"}, {Language.CHN_TRA, "利木果"}, }},

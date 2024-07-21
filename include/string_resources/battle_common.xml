@@ -8764,7 +8764,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5207</key>
+		<key>MON_HAD_ITS_ITEM_STOLEN</key>
 		<text>
 			<en lang="english">{1} had its {2} stolen!</en>
 			<ja lang="japanese">{1} の {2} が盗まれました!</ja>
@@ -8778,45 +8778,45 @@
 		</text>
 	</string>
 	<string>
-		<key>key5208</key>
+		<key>WILD_MON_HAD_ITS_ITEM_STOLEN</key>
 		<text>
-			<en lang="english">{1}The wild {2} had its {3} stolen!</en>
-			<ja lang="japanese">{1}野生の {2} が {3} 盗まれました!</ja>
-			<de lang="german">{1}Dem Wilden {2} wurde sein {3} gestohlen!</de>
-			<fr lang="french">{1}Le sauvage {2} s'est fait voler {3} !</fr>
-			<es lang="spanish">{1}¡Al salvaje {2} le robaron su {3}!</es>
-			<it lang="italian">{1}Il {2}selvaggio è stato {3} rubato!</it>
-			<ko lang="korean">{1}야생 {2}가 {3}을 도난당했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}野生{2}的 {3}被盗了！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}野{2}的 {3}被偷了！</zh-tw>
+			<en lang="english">The wild {1} had its {2} stolen!</en>
+			<ja lang="japanese">野生の {1} が {2} 盗まれました!</ja>
+			<de lang="german">Dem Wilden {1} wurde sein {2} gestohlen!</de>
+			<fr lang="french">Le sauvage {1} s'est fait voler {2} !</fr>
+			<es lang="spanish">¡Al salvaje {1} le robaron su {2}!</es>
+			<it lang="italian">Il {1}selvaggio è stato {2} rubato!</it>
+			<ko lang="korean">야생 {1}가 {2}을 도난당했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野生{1}的 {2}被盗了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野{1}的 {2}被偷了！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5209</key>
+		<key>OPPOSING_MON_HAD_ITS_ITEM_STOLEN</key>
 		<text>
-			<en lang="english">{1}The opposing {2} had its {3} stolen!</en>
-			<ja lang="japanese">{1}相手の {2} が {3} 盗まれました!</ja>
-			<de lang="german">{1}Dem gegnerischen {2} wurde sein {3} gestohlen!</de>
-			<fr lang="french">{1}Le {2} adverse s'est fait voler son {3} !</fr>
-			<es lang="spanish">{1}¡Al oponente {2} le robaron su {3}!</es>
-			<it lang="italian">{1}L'avversario {2} è stato {3} rubato!</it>
-			<ko lang="korean">{1}상대 {2}가 {3}을 도난당했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方的{2} {3}被盗！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方的{2} {3}被偷走！</zh-tw>
+			<en lang="english">The opposing {1} had its {2} stolen!</en>
+			<ja lang="japanese">相手の {1} が {2} 盗まれました!</ja>
+			<de lang="german">Dem gegnerischen {1} wurde sein {2} gestohlen!</de>
+			<fr lang="french">Le {1} adverse s'est fait voler son {2} !</fr>
+			<es lang="spanish">¡Al oponente {1} le robaron su {2}!</es>
+			<it lang="italian">L'avversario {1} è stato {2} rubato!</it>
+			<ko lang="korean">상대 {1}가 {2}을 도난당했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1} {2}被盗！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1} {2}被偷走！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5210</key>
+		<key>PLAYER_MON_HAD_ITS_ITEM_STOLEN</key>
 		<text>
-			<en lang="english">{1}{2}’s {3} had its {4} stolen!</en>
-			<ja lang="japanese">{1}{2} の {3} が {4} 盗まれました。</ja>
-			<de lang="german">{1}{2}s {3} wurde {4} gestohlen!</de>
-			<fr lang="french">Le {3} de {1}{2} s'est fait voler {4} !</fr>
-			<es lang="spanish">¡A {1}{2} le robaron el {4} de {3}!</es>
-			<it lang="italian">Il {3} di {1}{2} è stato {4} rubato!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) {4} 도난당했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2} 的 {3} {4} 被盗了！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2} 的 {3} {4} 被偷了！</zh-tw>
+			<en lang="english">{1}’s {2} had its {3} stolen!</en>
+			<ja lang="japanese">{1} の {2} が {3} 盗まれました。</ja>
+			<de lang="german">{1}s {2} wurde {3} gestohlen!</de>
+			<fr lang="french">Le {2} de {1} s'est fait voler {3} !</fr>
+			<es lang="spanish">¡A {1} le robaron el {3} de {2}!</es>
+			<it lang="italian">Il {2} di {1} è stato {3} rubato!</it>
+			<ko lang="korean">{1}의 {2}이(가) {3} 도난당했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1} 的 {2} {3} 被盗了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1} 的 {2} {3} 被偷了！</zh-tw>
 		</text>
 	</string>
 	<string>

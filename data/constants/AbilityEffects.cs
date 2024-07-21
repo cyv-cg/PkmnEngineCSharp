@@ -199,6 +199,22 @@ namespace PkmnEngine {
 				Callback.OnCheckIsUngrounded,
 				(Ability_Levitate_OnCheckIsUngrounded, 0)
 			}}
+		},
+		{
+			Ability.STICKY_HOLD,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTryRemoveItem,
+				(Ability_StickyHold_OnTryRemoveItem, 0)
+			}}
+		},
+		{
+			Ability.MULTITYPE,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.OnTryRemoveItem,
+					(Ability_Multitype_OnTryRemoveItem, 0)
+				}
+			}
 		}
 
 		

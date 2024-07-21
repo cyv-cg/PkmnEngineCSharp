@@ -1587,10 +1587,6 @@ namespace PkmnEngine {
 			}
 			return await Attack(p, damage);
 		}
-		public static async Task<u32> Effect_HealBell(MoveEffectParams p) {
-			// TODO:
-			return 0;
-		}
 		public static async Task<u32> Effect_TripleKick(MoveEffectParams p) {
 			u8 numHits = 0;
 			for (u8 i = 0; i < 3; i++) {
@@ -1608,8 +1604,24 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Thief(MoveEffectParams p) {
-			// TODO:
-			return 0;
+			u32 flags = await Attack(p);
+
+			// Can only take the item if the user doesn't have one already.
+			if (p.attacker.HeldItem != Item.NONE) {
+				return flags;
+			}
+
+			Item item = p.target.TakeHeldItem();
+
+			// Do nothing if there is no item to be stolen.
+			if (item == Item.NONE) {
+				return flags;
+			}
+
+			p.attacker.GiveHeldItem(item);
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_HAD_ITS_ITEM_STOLEN, p.target), p.target.GetName(), Lang.GetItemName(item)));
+
+			return flags;
 		}
 		public static async Task<u32> Effect_MeanLook(MoveEffectParams p) {
 			p.target.GiveStatus(Status.CANT_ESCAPE);

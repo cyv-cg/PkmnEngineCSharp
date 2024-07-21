@@ -303,6 +303,7 @@ namespace PkmnEngine {
 						case MOVE_TARGET_USER_OR_SELECTED:
 						case MOVE_TARGET_USER_OR_ALLY:
 						case MOVE_TARGET_USER_FIELD:
+						case MOVE_TARGET_USER_FIELD_AND_PARTY:
 							targetSlots = 0b_1111_1111_1111_1111_1111_1111_1111_0000;
 							break;
 						case MOVE_TARGET_SELECTED:
@@ -328,6 +329,7 @@ namespace PkmnEngine {
 						case MOVE_TARGET_USER_OR_SELECTED:
 						case MOVE_TARGET_USER_OR_ALLY:
 						case MOVE_TARGET_USER_FIELD:
+						case MOVE_TARGET_USER_FIELD_AND_PARTY:
 							targetSlots = 0b_1111_1111_1111_1111_1111_1111_1111_0001;
 							break;
 						case MOVE_TARGET_SELECTED:

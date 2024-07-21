@@ -1,6 +1,7 @@
 namespace PkmnEngine {
 	public enum Item {
 		#region Hold items
+		NONE,
 		ABILITY_CAPSULE,
 		ABOMASITE,
 		ABSOLITE,
@@ -20,6 +21,9 @@ namespace PkmnEngine {
 		AUDINITE,
 		BANETTITE,
 		BEEDRILLITE,
+		RED_ORB,
+		BLUE_ORB,
+		JADE_ORB,
 		BERRY_SWEET,
 		BIG_ROOT,
 		BINDING_BAND,
@@ -297,6 +301,9 @@ namespace PkmnEngine {
 		YELLOW_NECTAR,
 		ZAP_PLATE,
 		ZOOM_LENS,
+		RUSTED_SWORD,
+		RUSTED_SHIELD,
+		BOOSTER_ENERGY,
 		#endregion
 		#region Berries
 		AGUAV_BERRY,

@@ -228,6 +228,8 @@ namespace PkmnEngine {
 			buffer.AddValue(spDefEV);
 			buffer.AddValue(spdEV);
 
+			buffer.AddValue((u16)HeldItem);
+
 			for (u8 i = 0; i < MAX_MOVES; i++) {
 				buffer.AddValue((u16)Moves[i]);
 				buffer.AddValue(MaxPP[i]);
@@ -263,6 +265,8 @@ namespace PkmnEngine {
 			mon.spAtkEV	= data.Read8();
 			mon.spDefEV	= data.Read8();
 			mon.spdEV	= data.Read8();
+
+			mon.HeldItem = (Item)data.Read16();
 
 			for (u8 i = 0; i < MAX_MOVES; i++) {
 				mon.Moves[i]	= (BattleMoveID)data.Read16();
@@ -390,6 +394,8 @@ namespace PkmnEngine {
 			}
 		}
 
+		public Item HeldItem { get; private set; }
+
 		/// <summary>
 		/// Uses a mon's personality to calculate its ability.
 		/// Returns hidden ability if and only if specified in the BoxMon class and the species has one.
@@ -429,8 +435,7 @@ namespace PkmnEngine {
 		/// <summary>
 		/// Give mon up to 4 moves that it can know at it's current level.
 		/// </summary>
-		private void GiveInitialMoveset()
-		{
+		private void GiveInitialMoveset() {
 			Species species = Box.Species;
 			BattleMoveID[] elligibleMoves = GetMovesUnderLevel(species, level);
 
@@ -452,9 +457,7 @@ namespace PkmnEngine {
 		/// <param name="species">Species whose levelup learnset to check.</param>
 		/// <param name="level">Level at or under which to look for.</param>
 		/// <returns>Array of move IDs.</returns>
-		public static BattleMoveID[] GetMovesUnderLevel(Species species, u8 level)
-		{
-
+		public static BattleMoveID[] GetMovesUnderLevel(Species species, u8 level) {
 			List<BattleMoveID> moves = new List<BattleMoveID>();
 
 			int n = gLevelupLearnsets(species).Length;
@@ -473,8 +476,7 @@ namespace PkmnEngine {
 		/// Sets the mon's nickname.
 		/// </summary>
 		/// <param name="nickname">Name which to set, up to Global.MAX_NAME_LENGTH chars.</param>
-		public void SetNickname(string nickname)
-		{
+		public void SetNickname(string nickname) {
 			if (nickname.Length > MAX_NAME_LENGTH) {
 				Nickname = nickname.Substring(0, MAX_NAME_LENGTH);
 			}
@@ -486,8 +488,7 @@ namespace PkmnEngine {
 		/// Gets the name of the species in this mon's language.
 		/// </summary>
 		/// <returns>Localized species name.</returns>
-		public string GetSpeciesName()
-		{
+		public string GetSpeciesName() {
 			StringResource.Namespace strings = StringResource.Namespace.SPECIES;
 			return Lang.GetString(strings, Lang.GetStringResourceWithKey(strings, Box.Species.ToString()), Box.Language);
 		}
@@ -495,8 +496,7 @@ namespace PkmnEngine {
 		/// Gets the name of a given Pokemon. If the mon has a nickname, gets that; otherwise returns the localized species name.
 		/// </summary>
 		/// <returns>Nickname if available, species name otherwise.</returns>
-		public string GetName()
-		{
+		public string GetName() {
 			if (string.IsNullOrEmpty(Nickname)) {
 				return GetSpeciesName();
 			}
@@ -631,8 +631,7 @@ namespace PkmnEngine {
 		/// </summary>
 		/// <param name="move">ID of the move to check.</param>
 		/// <returns>True if the mon knows the given move, false otherwise.</returns>
-		public bool KnowsMove(BattleMoveID move)
-		{
+		public bool KnowsMove(BattleMoveID move) {
 			for (u8 i = 0; i < MAX_MOVES; i++) {
 				if (Moves[i] == move) {
 					return true;
@@ -644,8 +643,7 @@ namespace PkmnEngine {
 		/// Puts the given move into the first available move slot a mon has. Does nothing if the mon already knows the given move.
 		/// </summary>
 		/// <param name="move">ID of the move to give.</param>
-		public void GiveMove(BattleMoveID move)
-		{
+		public void GiveMove(BattleMoveID move) {
 			if (KnowsMove(move)) {
 				return;
 			}
@@ -665,8 +663,7 @@ namespace PkmnEngine {
 		/// </summary>
 		/// <param name="moveSlot">Slot of the move to replace.</param>
 		/// <param name="newMove">ID of the new move.</param>
-		public void ReplaceMove(u8 moveSlot, BattleMoveID newMove)
-		{
+		public void ReplaceMove(u8 moveSlot, BattleMoveID newMove) {
 			if (moveSlot >= MAX_MOVES) {
 				throw new System.ArgumentOutOfRangeException();
 			}
@@ -675,9 +672,34 @@ namespace PkmnEngine {
 			MaxPP[moveSlot]	= gBattleMoves(newMove).pp;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public Item RemoveHeldItem() {
+			Item temp = HeldItem;
+			HeldItem = Item.NONE;
+			return temp;
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="item"></param>
+		/// <returns></returns>
+		public bool GiveHeldItem(Item item) {
+			if (HeldItem == Item.NONE) {
+				HeldItem = item;
+				return true;
+			}
+			return false;
+		}
+
 		#region overrides
 		public bool Equals(Pokemon obj) {
 			return this.Write().ToString() == obj.Write().ToString();
+		}
+		public override string ToString() {
+			return GetName();
 		}
 		#endregion
 	}
@@ -826,11 +848,14 @@ namespace PkmnEngine {
 			this.Spd		= src.spd;
 			this.ability	= src.Ability;
 
-			this.types = new List<Type>();
-			this.types.Add(gBaseStats(Species).type1);
-			this.types.Add(gBaseStats(Species).type2);
+			this.types = new List<Type> {
+				gBaseStats(Species).type1,
+				gBaseStats(Species).type2
+			};
 			
 			this.weight		= gBaseStats(Species).weight;
+
+			this.HeldItem	= src.HeldItem;
 
 			this.moves	= new BattleMoveID[Pokemon.MAX_MOVES];
 			this.pp		= new u8[Pokemon.MAX_MOVES];
@@ -1163,6 +1188,38 @@ namespace PkmnEngine {
 				if (this.status.ContainsKey(s) && this.status[s]) {
 					return true;
 				}
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public Item TakeHeldItem() {
+			if (HeldItem == Item.NONE) {
+				return Item.NONE;
+			}
+
+			bool canRemove = Battle.RunEventCheck(Callback.OnTryRemoveItem, this, new OnTryRemoveItemParams(this)).Result;
+			if (canRemove) {
+				Item temp = HeldItem;
+				HeldItem = Item.NONE;
+				return temp;
+			}
+			else {
+				return Item.NONE;
+			}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="item"></param>
+		/// <returns></returns>
+		public bool GiveHeldItem(Item item) {
+			if (HeldItem == Item.NONE) {
+				HeldItem = item;
+				return true;
 			}
 			return false;
 		}

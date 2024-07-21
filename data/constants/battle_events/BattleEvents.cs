@@ -99,5 +99,6 @@ namespace PkmnEngine {
 		OnCheckIsDamagedBySandstorm,
 		OnCheckIsGrounded,
 		OnCheckIsUngrounded,
+		OnTryRemoveItem,
 	}
 }

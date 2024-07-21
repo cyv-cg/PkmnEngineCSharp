@@ -626,6 +626,22 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_HURT_BY_HAIL = new("PLAYER_MON_HURT_BY_HAIL", 2);
 		/// <summary>
+		/// {1} had its {2} stolen!
+		/// </summary>
+		public static readonly StringResource MON_HAD_ITS_ITEM_STOLEN = new("MON_HAD_ITS_ITEM_STOLEN", 2);
+		/// <summary>
+		/// The wild {1} had its {2} stolen!
+		/// </summary>
+		public static readonly StringResource WILD_MON_HAD_ITS_ITEM_STOLEN = new("WILD_MON_HAD_ITS_ITEM_STOLEN", 2);
+		/// <summary>
+		/// The opposing {1} had its {2} stolen!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_HAD_ITS_ITEM_STOLEN = new("OPPOSING_MON_HAD_ITS_ITEM_STOLEN", 2);
+		/// <summary>
+		/// {1}’s {2} had its {3} stolen!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_HAD_ITS_ITEM_STOLEN = new("PLAYER_MON_HAD_ITS_ITEM_STOLEN", 3);
+		/// <summary>
 		/// {1} was poisoned!
 		/// </summary>
 		public static readonly StringResource MON_WAS_POISONED = new("MON_WAS_POISONED", 1);
@@ -2780,6 +2796,10 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_HURT_BY_HAIL, new() {{Language.ENG, "The wild {1} is buffeted by the hail!"}, {Language.JPN, "野生の {1} が雹に打たれています!"}, {Language.GER, "Der wilde {1} wird vom Hagel heimgesucht!"}, {Language.FRE, "Le {1} sauvage est secoué par la grêle !"}, {Language.SPN, "¡El salvaje {1} es azotado por el granizo!"}, {Language.ITA, "Il {1} ​​selvaggio viene colpito dalla grandine!"}, {Language.KOR, "야생 {1}이(가) 우박을 맞았습니다!"}, {Language.CHN_SIM, "野生{1}遭受冰雹袭击！"}, {Language.CHN_TRA, "野生{1}遭受冰雹襲擊！"}, }},
 			{OPPOSING_MON_HURT_BY_HAIL, new() {{Language.ENG, "The opposing {1} is buffeted by the hail!"}, {Language.JPN, "敵対する {1} は雹で打ちのめされます!"}, {Language.GER, "Die gegnerische {1} wird vom Hagel getroffen!"}, {Language.FRE, "Le {1} adverse est secoué par la grêle !"}, {Language.SPN, "¡El oponente {1} es golpeado por el granizo!"}, {Language.ITA, "Il {1} ​​avversario viene colpito dalla grandine!"}, {Language.KOR, "상대 {1}이(가) 우박을 맞았습니다!"}, {Language.CHN_SIM, "对方的{1}被冰雹袭击了！"}, {Language.CHN_TRA, "對方的{1}被冰雹襲擊了！"}, }},
 			{PLAYER_MON_HURT_BY_HAIL, new() {{Language.ENG, "{1}’s {2} is buffeted by the hail!"}, {Language.JPN, "{1} の {2} が雹に打たれています!"}, {Language.GER, "{1}s {2} wird vom Hagel getroffen!"}, {Language.FRE, "Le {2} de {1} est secoué par la grêle !"}, {Language.SPN, "¡El {2} de {1} es azotado por el granizo!"}, {Language.ITA, "Il {2} di {1} è colpito dalla grandine!"}, {Language.KOR, "{1}의 {2}이 우박을 맞았습니다!"}, {Language.CHN_SIM, "{1}的{2}被冰雹袭击了！"}, {Language.CHN_TRA, "{1}的{2}被冰雹襲擊了！"}, }},
+			{MON_HAD_ITS_ITEM_STOLEN, new() {{Language.ENG, "{1} had its {2} stolen!"}, {Language.JPN, "{1} の {2} が盗まれました!"}, {Language.GER, "{1} wurde {2} gestohlen!"}, {Language.FRE, "{1} s'est fait voler son {2} !"}, {Language.SPN, "¡A {1} le robaron su {2}!"}, {Language.ITA, "A {1} è stato rubato il suo {2}!"}, {Language.KOR, "{1}이(가) {2}을(를) 도난당했습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 被盗了！"}, {Language.CHN_TRA, "{1} 的 {2} 被偷了！"}, }},
+			{WILD_MON_HAD_ITS_ITEM_STOLEN, new() {{Language.ENG, "The wild {1} had its {2} stolen!"}, {Language.JPN, "野生の {1} が {2} 盗まれました!"}, {Language.GER, "Dem Wilden {1} wurde sein {2} gestohlen!"}, {Language.FRE, "Le sauvage {1} s'est fait voler {2} !"}, {Language.SPN, "¡Al salvaje {1} le robaron su {2}!"}, {Language.ITA, "Il {1}selvaggio è stato {2} rubato!"}, {Language.KOR, "야생 {1}가 {2}을 도난당했습니다!"}, {Language.CHN_SIM, "野生{1}的 {2}被盗了！"}, {Language.CHN_TRA, "野{1}的 {2}被偷了！"}, }},
+			{OPPOSING_MON_HAD_ITS_ITEM_STOLEN, new() {{Language.ENG, "The opposing {1} had its {2} stolen!"}, {Language.JPN, "相手の {1} が {2} 盗まれました!"}, {Language.GER, "Dem gegnerischen {1} wurde sein {2} gestohlen!"}, {Language.FRE, "Le {1} adverse s'est fait voler son {2} !"}, {Language.SPN, "¡Al oponente {1} le robaron su {2}!"}, {Language.ITA, "L'avversario {1} è stato {2} rubato!"}, {Language.KOR, "상대 {1}가 {2}을 도난당했습니다!"}, {Language.CHN_SIM, "对方的{1} {2}被盗！"}, {Language.CHN_TRA, "對方的{1} {2}被偷走！"}, }},
+			{PLAYER_MON_HAD_ITS_ITEM_STOLEN, new() {{Language.ENG, "{1}’s {2} had its {3} stolen!"}, {Language.JPN, "{1} の {2} が {3} 盗まれました。"}, {Language.GER, "{1}s {2} wurde {3} gestohlen!"}, {Language.FRE, "Le {2} de {1} s'est fait voler {3} !"}, {Language.SPN, "¡A {1} le robaron el {3} de {2}!"}, {Language.ITA, "Il {2} di {1} è stato {3} rubato!"}, {Language.KOR, "{1}의 {2}이(가) {3} 도난당했습니다!"}, {Language.CHN_SIM, "{1} 的 {2} {3} 被盗了！"}, {Language.CHN_TRA, "{1} 的 {2} {3} 被偷了！"}, }},
 			{MON_WAS_POISONED, new() {{Language.ENG, "{1} was poisoned!"}, {Language.JPN, "{1}は毒を盛られていました!"}, {Language.GER, "{1} wurde vergiftet!"}, {Language.FRE, "{1} a été empoisonné !"}, {Language.SPN, "¡{1} fue envenenado!"}, {Language.ITA, "{1} è stato avvelenato!"}, {Language.KOR, "{1}이(가) 중독되었습니다!"}, {Language.CHN_SIM, "{1}中毒了！"}, {Language.CHN_TRA, "{1}中毒了！"}, }},
 			{WILD_MON_WAS_POISONED, new() {{Language.ENG, "The wild {1} was poisoned!"}, {Language.JPN, "野生の {1} には毒が盛られていました!"}, {Language.GER, "Der wilde {1} wurde vergiftet!"}, {Language.FRE, "Le {1} sauvage a été empoisonné !"}, {Language.SPN, "¡El salvaje {1} fue envenenado!"}, {Language.ITA, "Il {1} ​​selvatico è stato avvelenato!"}, {Language.KOR, "야생 {1}이(가) 중독되었습니다!"}, {Language.CHN_SIM, "野生{1}中毒了！"}, {Language.CHN_TRA, "野生{1}中毒了！"}, }},
 			{OPPOSING_MON_WAS_POISONED, new() {{Language.ENG, "The opposing {1} was poisoned!"}, {Language.JPN, "相手の {1} は毒を受けました!"}, {Language.GER, "Der gegnerische {1} wurde vergiftet!"}, {Language.FRE, "Le {1} adverse a été empoisonné !"}, {Language.SPN, "¡El oponente {1} fue envenenado!"}, {Language.ITA, "Il {1} ​​avversario è stato avvelenato!"}, {Language.KOR, "상대 {1}이(가) 중독되었습니다!"}, {Language.CHN_SIM, "对方{1}中毒了！"}, {Language.CHN_TRA, "對方{1}中毒了！"}, }},

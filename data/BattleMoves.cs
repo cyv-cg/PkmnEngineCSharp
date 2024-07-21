@@ -8,22 +8,23 @@ namespace PkmnEngine {
 		public const u16 NUM_MOVES = (u16)BattleMoveID.MOVES_NR_ITEMS;
 
 		#region flags
-			public const u32 MOVE_TARGET_SELECTED			= 0;		// Any adjacent to the user, not user
-			public const u32 MOVE_TARGET_DEPENDS			= 1 << 0;	// 
-			public const u32 MOVE_TARGET_USER_OR_SELECTED	= 1 << 1;	// User or any adjacent
-			public const u32 MOVE_TARGET_RANDOM				= 1 << 2;	// Random opponent
-			public const u32 MOVE_TARGET_BOTH				= 1 << 3;	// 
-			public const u32 MOVE_TARGET_USER				= 1 << 4;	// User only
-			public const u32 MOVE_TARGET_FOES_AND_ALLY		= 1 << 5;	// Adjacent opponents and all allies, not self
-			public const u32 MOVE_TARGET_OPPONENTS_FIELD	= 1 << 6;	// Adjacent opponents, not allies
-			public const u32 MOVE_TARGET_SELECTED_OPPONENT	= 1 << 7;	// Selected opponent, but not ally
-			public const u32 MOVE_TARGET_USER_OR_ALLY		= 1 << 8;	// User or an ally, not opponent
-			public const u32 MOVE_TARGET_SELECTED_ALLY		= 1 << 9;	// Ally, not user or opponent
-			public const u32 MOVE_TARGET_ANY_NOT_USER		= 1 << 10;	// Any opponent or ally, not user
-			public const u32 MOVE_TARGET_USER_FIELD			= 1 << 11;	// All allies
-			public const u32 MOVE_TARGET_ALL				= 1 << 12;	// All mons on field
-			public const u32 MOVE_TARGET_ANY				= 1 << 13;	// Any one mon
-			public const u32 MOVE_TARGET_ALL_OPPONENTS		= 1 << 14;	// Every opponent, no allies
+			public const u32 MOVE_TARGET_SELECTED				= 0;		// Any adjacent to the user, not user
+			public const u32 MOVE_TARGET_DEPENDS				= 1 << 0;	// 
+			public const u32 MOVE_TARGET_USER_OR_SELECTED		= 1 << 1;	// User or any adjacent
+			public const u32 MOVE_TARGET_RANDOM					= 1 << 2;	// Random opponent
+			public const u32 MOVE_TARGET_BOTH					= 1 << 3;	// 
+			public const u32 MOVE_TARGET_USER					= 1 << 4;	// User only
+			public const u32 MOVE_TARGET_FOES_AND_ALLY			= 1 << 5;	// Adjacent opponents and all allies, not self
+			public const u32 MOVE_TARGET_OPPONENTS_FIELD		= 1 << 6;	// Adjacent opponents, not allies
+			public const u32 MOVE_TARGET_SELECTED_OPPONENT		= 1 << 7;	// Selected opponent, but not ally
+			public const u32 MOVE_TARGET_USER_OR_ALLY			= 1 << 8;	// User or an ally, not opponent
+			public const u32 MOVE_TARGET_SELECTED_ALLY			= 1 << 9;	// Ally, not user or opponent
+			public const u32 MOVE_TARGET_ANY_NOT_USER			= 1 << 10;	// Any opponent or ally, not user
+			public const u32 MOVE_TARGET_USER_FIELD				= 1 << 11;	// All allies
+			public const u32 MOVE_TARGET_ALL					= 1 << 12;	// All mons on field
+			public const u32 MOVE_TARGET_ANY					= 1 << 13;	// Any one mon
+			public const u32 MOVE_TARGET_ALL_OPPONENTS			= 1 << 14;	// Every opponent, no allies
+			public const u32 MOVE_TARGET_USER_FIELD_AND_PARTY	= 1 << 15; // All allies and all mons in the user's party
 
 		[System.Flags] public enum Flag : ulong {
 			MAKES_CONTACT				= 1L << 0,
@@ -6115,14 +6116,14 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_HEAL_BELL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEALBELL,
+						/*primaryEffect =*/ MoveEffectID.CURENONVOLATILESTATUSHIT,
 						/*secondaryEffect =*/ MoveEffectID.NONE,
 						/*moveType =*/ Type.NORMAL,
 						/*power =*/ 0,
 						/*accuracy =*/ 0,
 						/*pp =*/ 5,
 						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
+						/*target =*/ MOVE_TARGET_USER_FIELD_AND_PARTY,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
 						/*flags =*/ Flag.SNATCH_AFFECTED | Flag.SOUND_MOVE

@@ -196,7 +196,6 @@ namespace PkmnEngine {
 				MoveEffectID.FLAIL => Effect_Flail,
 				MoveEffectID.SPITE => Effect_Spite,
 				MoveEffectID.FALSESWIPE => Effect_FalseSwipe,
-				MoveEffectID.HEALBELL => Effect_HealBell,
 				MoveEffectID.TRIPLEKICK => Effect_TripleKick,
 				MoveEffectID.THIEF => Effect_Thief,
 				MoveEffectID.MEANLOOK => Effect_MeanLook,
