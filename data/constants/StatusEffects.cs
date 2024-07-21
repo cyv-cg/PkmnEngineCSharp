@@ -174,7 +174,7 @@ namespace PkmnEngine {
 				},
 				{
 					Callback.OnTryMove,
-					(Status_Paralysis_OnTryMove, 0)
+					(Status_Paralysis_OnTryMove, 9)
 				}
 			}
 		},
@@ -381,21 +381,28 @@ namespace PkmnEngine {
 			Status.FREEZE,
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
 				Callback.OnTryMove,
-				(Status_Freeze_OnTryMove, 0)
+				(Status_Freeze_OnTryMove, 9)
 			}}
 		},
 		{
 			Status.SLEEP,
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
 				Callback.OnTryMove,
-				(Status_Sleep_OnTryMove, 0)
+				(Status_Sleep_OnTryMove, 9)
 			}}
 		},
 		{
 			Status.CONFUSION,
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
 				Callback.OnTryMove,
-				(Status_Confusion_OnTryMove, 0)
+				(Status_Confusion_OnTryMove, 10)
+			}}
+		},
+		{
+			Status.INFATUATION,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTryMove,
+				(Status_Infatuation_OnTryMove, 8)
 			}}
 		}
 
@@ -435,6 +442,7 @@ namespace PkmnEngine {
 		NV_STATUS_DURATION,		// How many turns a mon will be afflicted by a non-volatile status.
 		TOXIC_BUILDUP,			// How many stacks toxic has build up for.
 		LAST_MOVE_HIT_BY,		// The ID of the last move the mon was hit with.
+		MON_INFATUATED_BY,		// The NUUID of the mon that this mon is infatuated by.
 		NR_ITEMS
 	};
 

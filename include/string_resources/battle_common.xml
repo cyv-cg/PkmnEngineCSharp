@@ -6272,7 +6272,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5029</key>
+		<key>MON_FELL_IN_LOVE</key>
 		<text>
 			<en lang="english">{1} fell in love!</en>
 			<ja lang="japanese">{1} は恋に落ちました!</ja>
@@ -6286,7 +6286,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5030</key>
+		<key>WILD_MON_FELL_IN_LOVE</key>
 		<text>
 			<en lang="english">The wild {1} fell in love!</en>
 			<ja lang="japanese">野生の {1} が恋に落ちました!</ja>
@@ -6300,7 +6300,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5031</key>
+		<key>OPPOSING_MON_FELL_IN_LOVE</key>
 		<text>
 			<en lang="english">The opposing {1} fell in love!</en>
 			<ja lang="japanese">相手の {1} が恋に落ちました!</ja>
@@ -6314,7 +6314,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5032</key>
+		<key>PLAYER_MON_FELL_IN_LOVE</key>
 		<text>
 			<en lang="english">{1}’s {2} fell in love!</en>
 			<ja lang="japanese">{1} の {2} は恋に落ちました!</ja>
@@ -6384,7 +6384,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5037</key>
+		<key>MON_IS_IN_LOVE_WITH_MON</key>
 		<text>
 			<en lang="english">{1} is in love with {2}!</en>
 			<ja lang="japanese">{1} は {2} に恋をしています!</ja>
@@ -6398,7 +6398,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5038</key>
+		<key>WILD_MON_IS_IN_LOVE_WITH_MON</key>
 		<text>
 			<en lang="english">The wild {1} is in love with {2}!</en>
 			<ja lang="japanese">野生の {1} は {2} に恋をしています!</ja>
@@ -6412,35 +6412,35 @@
 		</text>
 	</string>
 	<string>
-		<key>key5039</key>
+		<key>OPPOSING_MON_IS_IN_LOVE_WITH_MON</key>
 		<text>
-			<en lang="english">{1}The opposing {2} is in lovewith {3}!</en>
-			<ja lang="japanese">{1}相手の {2} は {3} に恋をしています!</ja>
-			<de lang="german">{1}Der Gegner {2} ist in {3} verliebt!</de>
-			<fr lang="french">{1}Le {2} adverse est amoureuxde {3} !</fr>
-			<es lang="spanish">{1}¡El oponente {2} está enamorado de {3}!</es>
-			<it lang="italian">{1}L'avversario {2} è innamoratodi {3}!</it>
-			<ko lang="korean">{1}상대 {2}이(가) {3}을(를) 사랑합니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方的{2}爱上了{3}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方的{2}愛上了{3}！</zh-tw>
+			<en lang="english">The opposing {1} is in love with {2}!</en>
+			<ja lang="japanese">相手の {1} は {2} に恋をしています!</ja>
+			<de lang="german">Der Gegner {1} ist in {2} verliebt!</de>
+			<fr lang="french">Le {1} adverse est amoureuxde {2} !</fr>
+			<es lang="spanish">¡El oponente {1} está enamorado de {2}!</es>
+			<it lang="italian">L'avversario {1} è innamoratodi {2}!</it>
+			<ko lang="korean">상대 {1}이(가) {2}을(를) 사랑합니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}爱上了{2}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}愛上了{2}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5040</key>
+		<key>PLAYER_MON_IS_IN_LOVE_WITH_MON</key>
 		<text>
-			<en lang="english">{1}{2}’s {3} is in lovewith {4}!</en>
-			<ja lang="japanese">{1}{2} の {3} は {4} に恋をしています!</ja>
-			<de lang="german">{3} von {1}{2} ist in {4} verliebt!</de>
-			<fr lang="french">{3} de {1}{2} est amoureuxde {4} !</fr>
-			<es lang="spanish">¡El {3} de {1}{2} está enamorado de {4}!</es>
-			<it lang="italian">{3} di {1}{2} è innamoratodi {4}!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) {4}을(를) 사랑합니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2} 的 {3} 爱上了{4}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2} 的 {3} 愛上了{4}！</zh-tw>
+			<en lang="english">{1}’s {2} is in love with {3}!</en>
+			<ja lang="japanese">{1} の {2} は {3} に恋をしています!</ja>
+			<de lang="german">{2} von {1} ist in {3} verliebt!</de>
+			<fr lang="french">{2} de {1} est amoureuxde {3} !</fr>
+			<es lang="spanish">¡El {2} de {1} está enamorado de {3}!</es>
+			<it lang="italian">{2} di {1} è innamoratodi {3}!</it>
+			<ko lang="korean">{1}의 {2}이(가) {3}을(를) 사랑합니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1} 的 {2} 爱上了{3}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1} 的 {2} 愛上了{3}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5041</key>
+		<key>MON_IS_IMMOBILIZED_BY_LOVE</key>
 		<text>
 			<en lang="english">{1} is immobilized by love!</en>
 			<ja lang="japanese">{1} は愛によって動けなくなりました!</ja>
@@ -6454,7 +6454,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5042</key>
+		<key>WILD_MON_IS_IMMOBILIZED_BY_LOVE</key>
 		<text>
 			<en lang="english">The wild {1} is immobilized by love!</en>
 			<ja lang="japanese">野生の {1} は愛によって動けなくなりました!</ja>
@@ -6468,7 +6468,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5043</key>
+		<key>OPPOSING_MON_IS_IMMOBILIZED_BY_LOVE</key>
 		<text>
 			<en lang="english">The opposing {1} is immobilized by love!</en>
 			<ja lang="japanese">敵対する {1} は愛によって動けなくなります!</ja>
@@ -6482,7 +6482,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5044</key>
+		<key>PLAYER_MON_IS_IMMOBILIZED_BY_LOVE</key>
 		<text>
 			<en lang="english">{1}’s {2} is immobilized by love!</en>
 			<ja lang="japanese">{1} の {2} は愛によって動けなくなりました!</ja>
@@ -6496,7 +6496,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5045</key>
+		<key>MON_RECOVERED_FROM_INFATUATION</key>
 		<text>
 			<en lang="english">{1} got over its infatuation!</en>
 			<ja lang="japanese">{1} はその夢中を克服しました!</ja>
@@ -6510,7 +6510,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5046</key>
+		<key>WILD_MON_RECOVERED_FROM_INFATUATION</key>
 		<text>
 			<en lang="english">The wild {1} got over its infatuation!</en>
 			<ja lang="japanese">野生の {1} は夢中になったのをやめました!</ja>
@@ -6524,7 +6524,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5047</key>
+		<key>OPPOSING_MON_RECOVERED_FROM_INFATUATION</key>
 		<text>
 			<en lang="english">The opposing {1} got over its infatuation!</en>
 			<ja lang="japanese">敵対する {1} はその夢中を克服しました!</ja>
@@ -6538,7 +6538,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5048</key>
+		<key>PLAYER_MON_RECOVERED_FROM_INFATUATION</key>
 		<text>
 			<en lang="english">{1}’s {2} got over its infatuation!</en>
 			<ja lang="japanese">{1} の {2} はその夢中を克服しました!</ja>

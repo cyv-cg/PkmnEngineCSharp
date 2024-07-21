@@ -3,16 +3,13 @@ using u16 = System.UInt16;
 using u32 = System.UInt32;
 using u64 = System.UInt64;
 
+using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using static PkmnEngine.Global;
 using static PkmnEngine.BattleActionCodes;
 using PkmnEngine.Strings;
-
-// TODO: Get this shit out of here!
-using PkmnEngine.GodotV;
-using System;
 
 namespace PkmnEngine {
 	public class BattleOverException : Exception {
@@ -372,6 +369,23 @@ namespace PkmnEngine {
 				targets.Add(slot);
 			}
 			return targets.ToArray();
+		}
+
+		/// <summary>
+		/// Finds the BattleMon associated with a given NUUID.
+		/// Searches all players teams, including off-field mons.
+		/// </summary>
+		/// <param name="NUUID"></param>
+		/// <returns>The BattleMon with the given NUUID. Retuns null if none are found.</returns>
+		public BattleMon GetMonFromNUUID(u32 NUUID) {
+			foreach (TrainerBattleContext context in players) {
+				foreach (BattleMon bm in context.team) {
+					if (bm.NUUID == NUUID) {
+						return bm;
+					}
+				}
+			}
+			return null;
 		}
 
 		/// <summary>

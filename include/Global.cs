@@ -98,6 +98,10 @@ namespace PkmnEngine {
 		public const u8 MON_MALE = 1;
 		public const u8 MON_FEMALE = 2;
 
+		public const u8 MON_STR8 = 0;
+		public const u8 MON_BI = 1;
+		public const u8 MON_G4Y = 2;
+
 		public const u8 MAX_NAME_LENGTH = 16;
 
 		public const u8 NUM_LANGS = (u8)Language.NR_ITEMS;

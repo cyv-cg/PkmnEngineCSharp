@@ -1464,7 +1464,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.IGNORE_TYPE_EFF
 					);
 				}
 			}
@@ -5276,7 +5276,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}

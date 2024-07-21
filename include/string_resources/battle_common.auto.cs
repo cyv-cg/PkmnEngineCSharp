@@ -498,6 +498,70 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_HAVING_NIGHTMARE = new("PLAYER_MON_HAVING_NIGHTMARE", 2);
 		/// <summary>
+		/// {1} fell in love!
+		/// </summary>
+		public static readonly StringResource MON_FELL_IN_LOVE = new("MON_FELL_IN_LOVE", 1);
+		/// <summary>
+		/// The wild {1} fell in love!
+		/// </summary>
+		public static readonly StringResource WILD_MON_FELL_IN_LOVE = new("WILD_MON_FELL_IN_LOVE", 1);
+		/// <summary>
+		/// The opposing {1} fell in love!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_FELL_IN_LOVE = new("OPPOSING_MON_FELL_IN_LOVE", 1);
+		/// <summary>
+		/// {1}’s {2} fell in love!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_FELL_IN_LOVE = new("PLAYER_MON_FELL_IN_LOVE", 2);
+		/// <summary>
+		/// {1} is in love with {2}!
+		/// </summary>
+		public static readonly StringResource MON_IS_IN_LOVE_WITH_MON = new("MON_IS_IN_LOVE_WITH_MON", 2);
+		/// <summary>
+		/// The wild {1} is in love with {2}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_IS_IN_LOVE_WITH_MON = new("WILD_MON_IS_IN_LOVE_WITH_MON", 2);
+		/// <summary>
+		/// The opposing {1} is in love with {2}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_IS_IN_LOVE_WITH_MON = new("OPPOSING_MON_IS_IN_LOVE_WITH_MON", 2);
+		/// <summary>
+		/// {1}’s {2} is in love with {3}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_IS_IN_LOVE_WITH_MON = new("PLAYER_MON_IS_IN_LOVE_WITH_MON", 3);
+		/// <summary>
+		/// {1} is immobilized by love!
+		/// </summary>
+		public static readonly StringResource MON_IS_IMMOBILIZED_BY_LOVE = new("MON_IS_IMMOBILIZED_BY_LOVE", 1);
+		/// <summary>
+		/// The wild {1} is immobilized by love!
+		/// </summary>
+		public static readonly StringResource WILD_MON_IS_IMMOBILIZED_BY_LOVE = new("WILD_MON_IS_IMMOBILIZED_BY_LOVE", 1);
+		/// <summary>
+		/// The opposing {1} is immobilized by love!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_IS_IMMOBILIZED_BY_LOVE = new("OPPOSING_MON_IS_IMMOBILIZED_BY_LOVE", 1);
+		/// <summary>
+		/// {1}’s {2} is immobilized by love!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_IS_IMMOBILIZED_BY_LOVE = new("PLAYER_MON_IS_IMMOBILIZED_BY_LOVE", 2);
+		/// <summary>
+		/// {1} got over its infatuation!
+		/// </summary>
+		public static readonly StringResource MON_RECOVERED_FROM_INFATUATION = new("MON_RECOVERED_FROM_INFATUATION", 1);
+		/// <summary>
+		/// The wild {1} got over its infatuation!
+		/// </summary>
+		public static readonly StringResource WILD_MON_RECOVERED_FROM_INFATUATION = new("WILD_MON_RECOVERED_FROM_INFATUATION", 1);
+		/// <summary>
+		/// The opposing {1} got over its infatuation!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_RECOVERED_FROM_INFATUATION = new("OPPOSING_MON_RECOVERED_FROM_INFATUATION", 1);
+		/// <summary>
+		/// {1}’s {2} got over its infatuation!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_RECOVERED_FROM_INFATUATION = new("PLAYER_MON_RECOVERED_FROM_INFATUATION", 2);
+		/// <summary>
 		/// {1} became confused!
 		/// </summary>
 		public static readonly StringResource MON_BECAME_CONFUSED = new("MON_BECAME_CONFUSED", 1);
@@ -2764,6 +2828,22 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_HAVING_NIGHTMARE, new() {{Language.ENG, "The wild {1} began having a nightmare!"}, {Language.JPN, "野生の {1} が悪夢を見始めました!"}, {Language.GER, "Die Wildnis {1} begann einen Albtraum zu haben!"}, {Language.FRE, "Le sauvage {1} a commencé à faire un cauchemar !"}, {Language.SPN, "¡El salvaje {1} comenzó a tener una pesadilla!"}, {Language.ITA, "Il {1} ​​selvatico ha iniziato ad avere un incubo!"}, {Language.KOR, "야생 {1}이(가) 악몽을 꾸기 시작했습니다!"}, {Language.CHN_SIM, "野生{1}开始做噩梦了！"}, {Language.CHN_TRA, "野生{1}開始做惡夢了！"}, }},
 			{OPPOSING_MON_HAVING_NIGHTMARE, new() {{Language.ENG, "The opposing {1} began having a nightmare!"}, {Language.JPN, "敵対する {1} が悪夢を見始めました!"}, {Language.GER, "Der gegnerische {1} hatte einen Albtraum!"}, {Language.FRE, "Le {1} adverse a commencé à faire un cauchemar !"}, {Language.SPN, "¡El {1} ​​contrario comenzó a tener una pesadilla!"}, {Language.ITA, "L'avversario {1} ha iniziato ad avere un incubo!"}, {Language.KOR, "상대 {1}이(가) 악몽을 꾸기 시작했습니다!"}, {Language.CHN_SIM, "对方的{1}开始做噩梦了！"}, {Language.CHN_TRA, "對方的{1}開始做惡夢了！"}, }},
 			{PLAYER_MON_HAVING_NIGHTMARE, new() {{Language.ENG, "{1}’s {2} began having a nightmare!"}, {Language.JPN, "{1} の {2} は  悪夢を見始めました。"}, {Language.GER, "{1}s {2} begann einen Albtraum zu haben!"}, {Language.FRE, "{2} de {1} a commencé à faireun cauchemar !"}, {Language.SPN, "¡El {2} de {1} empezó a teneruna pesadilla!"}, {Language.ITA, "{2} di {1} ha iniziato ad avereun incubo!"}, {Language.KOR, "{1}의 {2}이(가) 악몽을 꾸기 시작했습니다!"}, {Language.CHN_SIM, "{1}的{2}开始做噩梦！ "}, {Language.CHN_TRA, "{1}的{2}開始做惡夢！"}, }},
+			{MON_FELL_IN_LOVE, new() {{Language.ENG, "{1} fell in love!"}, {Language.JPN, "{1} は恋に落ちました!"}, {Language.GER, "{1} hat sich verliebt!"}, {Language.FRE, "{1} est tombé amoureux !"}, {Language.SPN, "¡{1} se enamoró!"}, {Language.ITA, "{1} si è innamorato!"}, {Language.KOR, "{1}이(가) 사랑에 빠졌습니다!"}, {Language.CHN_SIM, "{1}坠入爱河！"}, {Language.CHN_TRA, "{1}墜入愛河！"}, }},
+			{WILD_MON_FELL_IN_LOVE, new() {{Language.ENG, "The wild {1} fell in love!"}, {Language.JPN, "野生の {1} が恋に落ちました!"}, {Language.GER, "Die wilde {1} verliebte sich!"}, {Language.FRE, "Le sauvage {1} est tombé amoureux !"}, {Language.SPN, "¡El salvaje {1} se enamoró!"}, {Language.ITA, "Il selvaggio {1} si innamorò!"}, {Language.KOR, "야생 {1}이(가) 사랑에 빠졌습니다!"}, {Language.CHN_SIM, "狂野的{1}坠入爱河了！"}, {Language.CHN_TRA, "狂野的{1}墜入愛河了！"}, }},
+			{OPPOSING_MON_FELL_IN_LOVE, new() {{Language.ENG, "The opposing {1} fell in love!"}, {Language.JPN, "相手の {1} が恋に落ちました!"}, {Language.GER, "Der Gegner {1} verliebte sich!"}, {Language.FRE, "Les {1} adverses sont tombés amoureux !"}, {Language.SPN, "¡El oponente {1} se enamoró!"}, {Language.ITA, "L'avversario {1} si innamorò!"}, {Language.KOR, "상대 {1}이(가) 사랑에 빠졌습니다!"}, {Language.CHN_SIM, "对方的{1}恋爱了！"}, {Language.CHN_TRA, "對方的{1}戀愛了！"}, }},
+			{PLAYER_MON_FELL_IN_LOVE, new() {{Language.ENG, "{1}’s {2} fell in love!"}, {Language.JPN, "{1} の {2} は恋に落ちました!"}, {Language.GER, "{1}s {2} haben sich verliebt!"}, {Language.FRE, "Les {2} de {1} sont tombés amoureux !"}, {Language.SPN, "¡El {2} de {1} se enamoró!"}, {Language.ITA, "{2} di {1} si è innamorato!"}, {Language.KOR, "{1}의 {2}이(가) 사랑에 빠졌습니다!"}, {Language.CHN_SIM, "{1}的{2}坠入爱河了！"}, {Language.CHN_TRA, "{1}的{2}墜入愛河了！"}, }},
+			{MON_IS_IN_LOVE_WITH_MON, new() {{Language.ENG, "{1} is in love with {2}!"}, {Language.JPN, "{1} は {2} に恋をしています!"}, {Language.GER, "{1} ist in {2} verliebt!"}, {Language.FRE, "{1} est amoureux de {2} !"}, {Language.SPN, "¡{1} está enamorado de {2}!"}, {Language.ITA, "{1} è innamorato di {2}!"}, {Language.KOR, "{1}이(가) {2}을(를) 사랑합니다!"}, {Language.CHN_SIM, "{1}爱上了{2}！"}, {Language.CHN_TRA, "{1}愛上了{2}！"}, }},
+			{WILD_MON_IS_IN_LOVE_WITH_MON, new() {{Language.ENG, "The wild {1} is in love with {2}!"}, {Language.JPN, "野生の {1} は {2} に恋をしています!"}, {Language.GER, "Der wilde {1} ist in {2} verliebt!"}, {Language.FRE, "Le sauvage {1} est amoureux de {2} !"}, {Language.SPN, "¡El salvaje {1} está enamorado de {2}!"}, {Language.ITA, "Il selvaggio {1} è innamorato di {2}!"}, {Language.KOR, "야생 {1}이(가) {2}을(를) 사랑합니다!"}, {Language.CHN_SIM, "狂野的{1}爱上了{2}！"}, {Language.CHN_TRA, "狂野的{1}愛上了{2}！"}, }},
+			{OPPOSING_MON_IS_IN_LOVE_WITH_MON, new() {{Language.ENG, "The opposing {1} is in love with {2}!"}, {Language.JPN, "相手の {1} は {2} に恋をしています!"}, {Language.GER, "Der Gegner {1} ist in {2} verliebt!"}, {Language.FRE, "Le {1} adverse est amoureuxde {2} !"}, {Language.SPN, "¡El oponente {1} está enamorado de {2}!"}, {Language.ITA, "L'avversario {1} è innamoratodi {2}!"}, {Language.KOR, "상대 {1}이(가) {2}을(를) 사랑합니다!"}, {Language.CHN_SIM, "对方的{1}爱上了{2}！"}, {Language.CHN_TRA, "對方的{1}愛上了{2}！"}, }},
+			{PLAYER_MON_IS_IN_LOVE_WITH_MON, new() {{Language.ENG, "{1}’s {2} is in love with {3}!"}, {Language.JPN, "{1} の {2} は {3} に恋をしています!"}, {Language.GER, "{2} von {1} ist in {3} verliebt!"}, {Language.FRE, "{2} de {1} est amoureuxde {3} !"}, {Language.SPN, "¡El {2} de {1} está enamorado de {3}!"}, {Language.ITA, "{2} di {1} è innamoratodi {3}!"}, {Language.KOR, "{1}의 {2}이(가) {3}을(를) 사랑합니다!"}, {Language.CHN_SIM, "{1} 的 {2} 爱上了{3}！"}, {Language.CHN_TRA, "{1} 的 {2} 愛上了{3}！"}, }},
+			{MON_IS_IMMOBILIZED_BY_LOVE, new() {{Language.ENG, "{1} is immobilized by love!"}, {Language.JPN, "{1} は愛によって動けなくなりました!"}, {Language.GER, "{1} ist durch die Liebe bewegungsunfähig!"}, {Language.FRE, "{1} est immobilisé par l'amour !"}, {Language.SPN, "¡{1} está inmovilizado por el amor!"}, {Language.ITA, "{1} è immobilizzato dall'amore!"}, {Language.KOR, "{1}은(는) 사랑에 사로잡혀 있습니다!"}, {Language.CHN_SIM, "{1}因爱而动弹不得！"}, {Language.CHN_TRA, "{1}因愛而動彈不得！"}, }},
+			{WILD_MON_IS_IMMOBILIZED_BY_LOVE, new() {{Language.ENG, "The wild {1} is immobilized by love!"}, {Language.JPN, "野生の {1} は愛によって動けなくなりました!"}, {Language.GER, "Das Wilde {1} ist durch die Liebe bewegungsunfähig!"}, {Language.FRE, "Le sauvage {1} est immobilisé par l'amour !"}, {Language.SPN, "¡El salvaje {1} está inmovilizado por el amor!"}, {Language.ITA, "Il {1} ​​selvaggio è immobilizzato dall'amore!"}, {Language.KOR, "야생 {1}은(는) 사랑으로 움직이지 않습니다!"}, {Language.CHN_SIM, "狂野的{1}因爱而动弹不得！"}, {Language.CHN_TRA, "狂野的{1}因愛而動彈不得！"}, }},
+			{OPPOSING_MON_IS_IMMOBILIZED_BY_LOVE, new() {{Language.ENG, "The opposing {1} is immobilized by love!"}, {Language.JPN, "敵対する {1} は愛によって動けなくなります!"}, {Language.GER, "Der Gegner {1} ist durch die Liebe bewegungsunfähig!"}, {Language.FRE, "Le {1} adverse est immobilisé par l'amour !"}, {Language.SPN, "¡El oponente {1} está inmovilizado por el amor!"}, {Language.ITA, "Il {1} ​​avversario è immobilizzato dall'amore!"}, {Language.KOR, "상대 {1}은(는) 사랑으로 꼼짝 못하게 되었습니다!"}, {Language.CHN_SIM, "对方的{1}被爱动弹不得！"}, {Language.CHN_TRA, "對方的{1}被愛動彈不得！"}, }},
+			{PLAYER_MON_IS_IMMOBILIZED_BY_LOVE, new() {{Language.ENG, "{1}’s {2} is immobilized by love!"}, {Language.JPN, "{1} の {2} は愛によって動けなくなりました!"}, {Language.GER, "{1}s {2} ist vor Liebe bewegungsunfähig!"}, {Language.FRE, "Le {2} de {1} est immobilisé par l'amour !"}, {Language.SPN, "¡El {2} de {1} está inmovilizado por el amor!"}, {Language.ITA, "Il {2} di {1} è immobilizzato dall'amore!"}, {Language.KOR, "{1}의 {2}은(는) 사랑에 사로잡혀 있습니다!"}, {Language.CHN_SIM, "{1}的{2}因爱而动弹不得！"}, {Language.CHN_TRA, "{1}的{2}因愛而動彈不得！"}, }},
+			{MON_RECOVERED_FROM_INFATUATION, new() {{Language.ENG, "{1} got over its infatuation!"}, {Language.JPN, "{1} はその夢中を克服しました!"}, {Language.GER, "{1} hat seine Verliebtheit überwunden!"}, {Language.FRE, "{1} a surmonté son engouement !"}, {Language.SPN, "¡{1} superó su enamoramiento!"}, {Language.ITA, "{1} ha superato la sua infatuazione!"}, {Language.KOR, "{1} 열광을 극복했습니다!"}, {Language.CHN_SIM, "{1}已经摆脱了迷恋！"}, {Language.CHN_TRA, "{1}已經擺脫迷戀了！"}, }},
+			{WILD_MON_RECOVERED_FROM_INFATUATION, new() {{Language.ENG, "The wild {1} got over its infatuation!"}, {Language.JPN, "野生の {1} は夢中になったのをやめました!"}, {Language.GER, "Der wilde {1} hat seine Verliebtheit überwunden!"}, {Language.FRE, "Le sauvage {1} a surmonté son engouement !"}, {Language.SPN, "¡El salvaje {1} superó su enamoramiento!"}, {Language.ITA, "Il selvaggio {1} ha superato la sua infatuazione!"}, {Language.KOR, "야생 {1}이(가) 열광을 극복했습니다!"}, {Language.CHN_SIM, "狂野的{1}已经摆脱了迷恋！"}, {Language.CHN_TRA, "狂野的{1}已經擺脫迷戀了！"}, }},
+			{OPPOSING_MON_RECOVERED_FROM_INFATUATION, new() {{Language.ENG, "The opposing {1} got over its infatuation!"}, {Language.JPN, "敵対する {1} はその夢中を克服しました!"}, {Language.GER, "Der Gegner {1} hat seine Verliebtheit überwunden!"}, {Language.FRE, "Le {1} adverse a surmonté son engouement !"}, {Language.SPN, "¡El oponente {1} superó su enamoramiento!"}, {Language.ITA, "Il {1} ​​avversario ha superato la sua infatuazione!"}, {Language.KOR, "상대 {1}이(가) 열광을 극복했습니다!"}, {Language.CHN_SIM, "对方的{1}已经摆脱了迷恋！"}, {Language.CHN_TRA, "對方的{1}已經擺脫迷戀了！"}, }},
+			{PLAYER_MON_RECOVERED_FROM_INFATUATION, new() {{Language.ENG, "{1}’s {2} got over its infatuation!"}, {Language.JPN, "{1} の {2} はその夢中を克服しました!"}, {Language.GER, "{1}s {2} hat seine Verliebtheit überwunden!"}, {Language.FRE, "{2} de {1} a surmonté son engouement !"}, {Language.SPN, "¡El {2} de {1} superó su enamoramiento!"}, {Language.ITA, "{2} di {1} ha superato la sua infatuazione!"}, {Language.KOR, "{1}의 {2}이(가) 그 열광을 극복했습니다!"}, {Language.CHN_SIM, "{1}的{2}已经摆脱了迷恋！"}, {Language.CHN_TRA, "{1}的{2}已經擺脫迷戀了！"}, }},
 			{MON_BECAME_CONFUSED, new() {{Language.ENG, "{1} became confused!"}, {Language.JPN, "{1} は混乱しました!"}, {Language.GER, "{1} war verwirrt!"}, {Language.FRE, "{1} est devenu confus !"}, {Language.SPN, "¡{1} se confundió!"}, {Language.ITA, "{1} si è confuso!"}, {Language.KOR, "{1}이(가) 혼란스러워졌습니다!"}, {Language.CHN_SIM, "{1}变得困惑了！"}, {Language.CHN_TRA, "{1}變得困惑了！"}, }},
 			{WILD_MON_BECAME_CONFUSED, new() {{Language.ENG, "The wild {1} became confused!"}, {Language.JPN, "野生の {1} は混乱しました!"}, {Language.GER, "Der wilde {1} war verwirrt!"}, {Language.FRE, "Le sauvage {1} est devenu confus !"}, {Language.SPN, "¡El salvaje {1} se confundió!"}, {Language.ITA, "Il {1} ​​selvatico si è confuso!"}, {Language.KOR, "야생 {1}이(가) 혼란스러워졌습니다!"}, {Language.CHN_SIM, "野生{1}变得困惑了！"}, {Language.CHN_TRA, "野生{1}變得困惑了！"}, }},
 			{OPPOSING_MON_BECAME_CONFUSED, new() {{Language.ENG, "The opposing {1} became confused!"}, {Language.JPN, "相手の {1} は混乱しました!"}, {Language.GER, "Der gegnerische {1} war verwirrt!"}, {Language.FRE, "Les {1} adverses sont devenus confus !"}, {Language.SPN, "¡El oponente {1} se confundió!"}, {Language.ITA, "Il {1} ​​avversario si è confuso!"}, {Language.KOR, "상대 {1}이(가) 혼란스러워졌습니다!"}, {Language.CHN_SIM, "对方的{1}变得困惑了！"}, {Language.CHN_TRA, "對方的{1}變得困惑了！"}, }},

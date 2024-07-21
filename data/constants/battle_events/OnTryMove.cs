@@ -103,6 +103,26 @@ namespace PkmnEngine {
 
 			return true;
 		}
+		public static async Task<object> Status_Infatuation_OnTryMove(object p) {
+			OnTryMoveParams args = ValidateParams<OnTryMoveParams>(p);
+		
+			BattleMon monInfatuatedBy = args.battle.GetMonFromNUUID(args.bm.GetStatusParam(StatusParam.MON_INFATUATED_BY));
+			// Remove infatuation if the other mon is inactive.
+			if (monInfatuatedBy == null || !monInfatuatedBy.IsActive(args.battle)) {
+				args.bm.RemoveStatus(Status.INFATUATION);
+				args.bm.SetStatusParam(StatusParam.MON_INFATUATED_BY, 0);
+				return true;
+			}
+
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_IN_LOVE_WITH_MON, args.bm), args.bm.GetName(), monInfatuatedBy.GetName()));
+			// Infatuated mons have a 50% chance to not be able to act.
+			if (args.battle.Random01() < 0.5f) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_IS_IMMOBILIZED_BY_LOVE, args.bm), args.bm.GetName()));
+				return false;
+			}
+
+			return true;
+		}
 
 		public static async Task<object> Weather_ExtremeSunlight_OnTryMove(object p) {
 			OnTryMoveParams args = ValidateParams<OnTryMoveParams>(p);

@@ -1637,7 +1637,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Minimize(MoveEffectParams p) {
-			// TODO:
+			await Effect_EvasionUp2(p);
 			p.target.GiveStatus(Status.MINIMIZE);
 			return 0;
 		}
@@ -1707,7 +1707,36 @@ namespace PkmnEngine {
 			return await OverridePower(p, power);
 		}
 		public static async Task<u32> Effect_Attract(MoveEffectParams p) {
-			// TODO:
+			// Fail if the target is already infatuated.
+			if (p.target.HasStatus(Status.INFATUATION)) {
+				return FLAG_MOVE_FAILED;
+			}
+			// Fail if either mon is genderless.
+			if (p.attacker.Mon.Gender == MON_GENDERLESS || p.target.Mon.Gender == MON_GENDERLESS) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			// If the target and attacker are the same gender...
+			if (p.attacker.Mon.Gender == p.target.Mon.Gender) {
+				// ...and either of them are straight...
+				if (p.attacker.Mon.Orientation == MON_STR8 || p.target.Mon.Orientation == MON_STR8) {
+					// ...the move fails.
+					return FLAG_MOVE_FAILED;
+				}
+			}
+			// If the target and attacker are *different* genders...
+			if (p.attacker.Mon.Gender != p.target.Mon.Gender) {
+				// ...and either of them are gay...
+				if (p.attacker.Mon.Orientation == MON_G4Y || p.target.Mon.Orientation == MON_G4Y) {
+					// ...the move fails.
+					return FLAG_MOVE_FAILED;
+				}
+			}
+
+			p.target.GiveStatus(Status.INFATUATION);
+			p.target.SetStatusParam(StatusParam.MON_INFATUATED_BY, p.attacker.NUUID);
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_FELL_IN_LOVE, p.target), p.target.GetName()));
+			
 			return 0;
 		}
 		public static async Task<u32> Effect_Return(MoveEffectParams p) {

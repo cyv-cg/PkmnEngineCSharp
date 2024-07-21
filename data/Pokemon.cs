@@ -79,8 +79,7 @@ namespace PkmnEngine {
 			this.Checksum = 0;
 		}
 
-		public BoxMon(Species species, bool hasFixedIv, u8[] fixedIv, bool hasFixedPersonality, u32 fixedPersonality, OtIdType otIdType, u32 fixedOtId)
-		{
+		public BoxMon(Species species, bool hasFixedIv, u8[] fixedIv, bool hasFixedPersonality, u32 fixedPersonality, OtIdType otIdType, u32 fixedOtId) {
 			this.IsWild = false;
 			this.Species = species;
 
@@ -367,7 +366,7 @@ namespace PkmnEngine {
 		/// </summary>
 		public Nature Nature { 
 			get { 
-				return (Nature)(((Box.Personality & 0x000FF000) >> 4) % NUM_NATURES);
+				return (Nature)(((Box.Personality & 0x000FF000) >> 12) % NUM_NATURES);
 			}
 		}
 		/// <summary>
@@ -386,11 +385,40 @@ namespace PkmnEngine {
 				}
 
 				// Grab an arbitrary byte from the personality and determine gender based on that.
-				u8 val = (u8)(Box.Personality & 0xFF000000 >> 6);
+				u8 val = (u8)(Box.Personality & 0xFF000000 >> 24);
 				if (val <= gBaseStats(Box.Species).genderRatio) {
 					return MON_FEMALE;
 				}
 				return MON_MALE;
+			}
+		}
+
+		/// <summary>
+		/// Determines in what way a mon is vulnerable to Attract.
+		/// </summary>
+		/// <value></value>
+		public u8 Orientation { 
+			get { 
+				u8 data = (u8)(((Box.Personality & 0x00F00000) >> 20) & 0xF);
+				return data switch {
+					0b0000 => MON_STR8,
+					0b0001 => MON_STR8,
+					0b0010 => MON_STR8,
+					0b0011 => MON_STR8,
+					0b0100 => MON_STR8,
+					0b0101 => MON_STR8,
+					0b0110 => MON_STR8,
+					0b0111 => MON_STR8,
+					0b1000 => MON_STR8,
+					0b1001 => MON_STR8,
+					0b1010 => MON_STR8,
+					0b1011 => MON_G4Y,
+					0b1100 => MON_G4Y,
+					0b1101 => MON_G4Y,
+					0b1110 => MON_BI,
+					0b1111 => MON_BI,
+					_ => MON_STR8
+				};
 			}
 		}
 
@@ -719,6 +747,8 @@ namespace PkmnEngine {
 		public Buffer Write() {
 			Buffer data = new Buffer();
 
+			data.AddValue(NUUID);
+
 			data.AddValue(Mon);
 			data.AddValue((u16)Species);
 
@@ -774,6 +804,8 @@ namespace PkmnEngine {
 		}
 		public static BattleMon Load(Buffer data) {
 			BattleMon bm = new BattleMon();
+
+			bm.NUUID	= data.Read32();
 
 			bm.Mon		= Pokemon.Load(data.ReadBuffer());
 			bm.Species	= (Species)data.Read16();
@@ -837,6 +869,8 @@ namespace PkmnEngine {
 
 		private BattleMon() { }
 		public BattleMon(Pokemon src, u8 side) {
+			this.NUUID		= Random32();
+
 			this.Mon		= src;
 			this.Species	= src.Box.Species;
 			this.MaxHP		= src.maxHp;
@@ -872,6 +906,11 @@ namespace PkmnEngine {
 			this.status = new Dictionary<Status, bool>();
 			this.statusParams = new Dictionary<StatusParam, u32>();
 		}
+
+		/// <summary>
+		/// Not Universally Unique Identifier
+		/// </summary>
+		public u32 NUUID { get; private set; }
 		
 		public Pokemon Mon { get; private set; }
 		public Species Species { get; private set; }
