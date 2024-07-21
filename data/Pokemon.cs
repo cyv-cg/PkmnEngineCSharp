@@ -1359,7 +1359,7 @@ namespace PkmnEngine {
 			return true;
 		}
 
-		public bool CanUseMove(Battle battle, BattleState state, u8 moveSlot, bool print) {
+		public async Task<bool> CanUseMove(Battle battle, BattleState state, u8 moveSlot, bool print) {
 			BattleMove move = gBattleMoves(moves[moveSlot]);
 
 			// Can't use the No-No move :)
@@ -1375,12 +1375,12 @@ namespace PkmnEngine {
 			// Stop moves that can't be used twice in a row.
 			if ((gBattleMoves(moves[moveSlot]).flags & BattleMoves.Flag.CANNOT_USE_MOVE_TWICE) != 0 && GetStatusParam(StatusParam.LAST_USED_MOVE) == moveSlot) {
 				if (print) {
-					MessageBox(Lang.GetString(StringResource.Namespace.BATTLE_COMMON, BATTLE_COMMON.YOU_CANT_USE_MOVE_TWICE_IN_A_ROW, Lang.GetMoveName(moves[moveSlot])));
+					await MessageBox(Lang.GetString(StringResource.Namespace.BATTLE_COMMON, BATTLE_COMMON.YOU_CANT_USE_MOVE_TWICE_IN_A_ROW, Lang.GetMoveName(moves[moveSlot])));
 				}
 				return false;
 			}
 
-			return Battle.RunEventCheck(Callback.OnTrySelectMove, this, new OnTrySelectMoveParams(battle, state, this, moves[moveSlot], moveSlot, print)).Result;
+			return await Battle.RunEventCheck(Callback.OnTrySelectMove, this, new OnTrySelectMoveParams(battle, state, this, moves[moveSlot], moveSlot, print));
 		}
 
 		public u16 GetPercentOfMaxHp(float percent) {

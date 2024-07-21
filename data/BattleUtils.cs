@@ -45,79 +45,6 @@ namespace PkmnEngine {
 		}
 
 		/// <summary>
-		/// Determines if a mon can successfully act through paralysis, freeze, and sleep.
-		/// </summary>
-		/// <param name="battle">Battle object.</param>
-		/// <param name="state">The current BattleState.</param>
-		/// <param name="attacker">The attacking BattleMon.</param>
-		/// <param name="moveID">ID of the move being used.</param>
-		/// <returns>True if the mon can act, false otherwise.</returns>
-		private static async Task<bool> MoveStatusBlockers(Battle battle, BattleState state, BattleMon attacker, BattleMoveID moveID) {
-			StringResource contextString;
-			
-			// Paralyzed mons have a chance to not be able to move.
-			if (attacker.HasStatus(Status.PARALYSIS) && battle.rand.NextDouble() < StatusEffects.PARALYSIS_PROC_CHANCE) {
-				contextString = GetContextString(BATTLE_COMMON.MON_IS_PARALYZED_AND_CANT_MOVE, attacker);
-				await MessageBox(GetString(STRINGS, contextString, attacker.GetName()));
-				return false;
-			}
-			// Frozen mons cannot move.
-			else if (attacker.HasStatus(Status.FREEZE) && (gBattleMoves(moveID).flags & Flag.THAWS_USER) == 0) {
-				// A frozen mon has a set chance of thawing out every turn.
-				if (battle.Random01() < StatusEffects.FREEZE_THAW_CHANCE) {
-					await ThawMon(attacker);
-				}
-				else {
-					contextString = GetContextString(BATTLE_COMMON.MON_IS_FROZEN_SOLID, attacker);
-					await MessageBox(GetString(STRINGS, contextString, attacker.GetName()));
-					return false;
-				}
-			}
-			// Sleeping mons can only use certain moves.
-			else if (attacker.HasStatus(Status.SLEEP)) {
-				u8 sleepingTurns = (u8)attacker.GetStatusParam(StatusParam.SLEEPING_TURNS);
-				attacker.IncrementStatusParam(StatusParam.SLEEPING_TURNS);
-				// Sleeping mons will wake up after a certain number of turns.
-				if (sleepingTurns >= attacker.GetStatusParam(StatusParam.NV_STATUS_DURATION)) {
-					await WakeUpMon(attacker);
-				}
-				else {
-					contextString = GetContextString(BATTLE_COMMON.MON_IS_FAST_ASLEEP, attacker);
-					// Display that the mon is sleeping.
-					await MessageBox(GetString(STRINGS, contextString, attacker.GetName()));
-					// If the mon cannot use this move while asleep, exit.
-					if ((gBattleMoves(moveID).flags & Flag.USABLE_WHILE_ASLEEP) == 0) {
-						return false;
-					}
-				}
-			}
-			// Confused mons have a chance to hurt themselves instead of acting.
-			if (attacker.HasStatus(Status.CONFUSION)) {
-				contextString = GetContextString(BATTLE_COMMON.MON_IS_CONFUSED, attacker);
-				await MessageBox(GetString(STRINGS, contextString, attacker.GetName()));
-				u8 confusedTurns = (u8)attacker.GetStatusParam(StatusParam.CONFUSED_TURNS);
-				attacker.IncrementStatusParam(StatusParam.CONFUSED_TURNS);
-				// Mons will remain confused for up to 4 turns and have a 25% chance to snap out every turn.
-				if ((confusedTurns >= 4) || (battle.rand.NextDouble() < 0.25)) {
-					contextString = GetContextString(BATTLE_COMMON.MON_SNAPPED_OUT_OF_CONFUSION, attacker);
-					await MessageBox(GetString(STRINGS, contextString, attacker.GetName()));
-					attacker.SetStatusParam(StatusParam.CONFUSED_TURNS, 0);
-					attacker.RemoveStatus(Status.CONFUSION);
-				}
-				// Confused mons have a 33% chance to hurt themselves instead of using their move.
-				else if (battle.Random01() < 0.33f) {
-					// Confusion acts as a physical move with 40 power and no type.
-					// This same effect can be achieved by using tackle and overriding the type effectiveness and power :p
-					U16 damage = new(CalcDamage(battle, state, attacker, attacker, BattleMoveID.TACKLE, 1, new Mods(), new Overrides(0, 0, 40, 0)));
-					await attacker.DamageMon(damage, false, true, GetString(STRINGS, BATTLE_COMMON.IT_HURT_ITSELF_IN_CONFUSION));
-					return false;
-				}
-			}
-
-			return true;
-		}
-		
-		/// <summary>
 		/// Call this when a battle action uses a move. 
 		/// Performs checks for statuses and weather before entering other routines to use the move, and reduces PP by 1.
 		/// Also calculates hit chance before doing the move.
@@ -134,19 +61,14 @@ namespace PkmnEngine {
 			BattleMon attacker = battle.GetMonInSlot(state, slotUser), defender;
 			u8[] targets = Battle.SplitTargets(slotsTarget);
 
-			// Check for statuses.
-			if (!await MoveStatusBlockers(battle, state, attacker, moveID)) {
+			if (
+				// Check if the move can be used.
+				moveID != BattleMoveID.STRUGGLE && !await attacker.CanUseMove(battle, state, moveSlot, true) ||
+				// Other potential blockers.
+				!await Battle.RunEventCheck(Callback.OnTryMove, battle, new OnTryMoveParams(battle, state, attacker, moveID)) ||
+				!await Battle.RunEventCheck(Callback.OnTryMove, attacker, new OnTryMoveParams(battle, state, attacker, moveID))
+			) {
 				return;
-			}
-			// Weird weather conditions:
-			if (!await Battle.RunEventCheck(Callback.OnTryMove, battle, new OnTryMoveParams(state, attacker, moveID))) {
-				return;
-			}
-
-			if (moveID != BattleMoveID.STRUGGLE) {
-				if (!attacker.CanUseMove(battle, state, moveSlot, true)) {
-					return;
-				}
 			}
 
 			u32 flags = 0;
@@ -186,9 +108,6 @@ namespace PkmnEngine {
 			if (print) {
 				await MessageBox(GetString(STRINGS, GetContextString(BATTLE_COMMON.MON_USED_MOVE, attacker), attacker.GetName(), GetMoveName(moveID)));
 			}
-
-			// Record the slot of the user as the last mon that attacked the target.
-			defender.SetStatusParam(StatusParam.LAST_MON_HIT_BY, slotUser);
 
 			// If the move is ineffective and the move does not ignore the type chart, then stop here.
 			if (MonIsImmune(state, defender, moveID)) {
@@ -236,6 +155,10 @@ namespace PkmnEngine {
 				0
 			);
 			u32 flags = await gMoveEffectMap(gBattleMoves(moveID).primaryEffect)(data);
+
+			// Record the slot of the user as the last mon that attacked the target.
+			defender.SetStatusParam(StatusParam.LAST_MON_HIT_BY, slotUser);
+			defender.SetStatusParam(StatusParam.LAST_MOVE_HIT_BY, (u16)moveID);
 			
 			if ((flags & FLAG_MOVE_FAILED) != 0) {
 				await MessageBox(GetString(STRINGS, BATTLE_COMMON.MOVE_FAILED));
@@ -266,6 +189,11 @@ namespace PkmnEngine {
 		/// <param name="moveID">ID of the move being used.</param>
 		/// <returns>True if the defender is immune to the move.</returns>
 		private static bool MonIsImmune(BattleState state, BattleMon defender, BattleMoveID moveID) {
+			// All mons are vulnerable to status moves.
+			if (gBattleMoves(moveID).moveCat == MoveCategory.STATUS) {
+				return false;
+			}
+
 			// This is really only used for Thousand Arrows.
 			if ((gBattleMoves(moveID).flags & BattleMoves.Flag.HITS_UNGROUNDED) != 0 && !defender.IsGrounded(state)) {
 				return false;

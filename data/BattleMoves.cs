@@ -2908,7 +2908,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ 0,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						/*flags =*/ Flag.ALWAYS_HIT
 					);
 				}
 			}
@@ -10460,7 +10460,7 @@ namespace PkmnEngine {
 						/*target =*/ MOVE_TARGET_SELECTED,
 						/*priority =*/ -6,
 						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
+						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE | Flag.ALWAYS_HIT
 					);
 				}
 			}

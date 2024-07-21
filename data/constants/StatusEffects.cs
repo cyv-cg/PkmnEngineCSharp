@@ -167,10 +167,16 @@ namespace PkmnEngine {
 		},
 		{
 			Status.PARALYSIS,
-			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
-				Callback.OnModifySpd,
-				(Status_Paralysis_OnModifySpd, 0)
-			}}
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.OnModifySpd,
+					(Status_Paralysis_OnModifySpd, 0)
+				},
+				{
+					Callback.OnTryMove,
+					(Status_Paralysis_OnTryMove, 0)
+				}
+			}
 		},
 		{
 			Status.POISON,
@@ -370,6 +376,27 @@ namespace PkmnEngine {
 				Callback.OnCheckIsGrounded,
 				(Status_Rooting_OnCheckIsGrounded, 0)
 			}}
+		},
+		{
+			Status.FREEZE,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTryMove,
+				(Status_Freeze_OnTryMove, 0)
+			}}
+		},
+		{
+			Status.SLEEP,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTryMove,
+				(Status_Sleep_OnTryMove, 0)
+			}}
+		},
+		{
+			Status.CONFUSION,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {{
+				Callback.OnTryMove,
+				(Status_Confusion_OnTryMove, 0)
+			}}
 		}
 
 
@@ -407,6 +434,7 @@ namespace PkmnEngine {
 		LAST_MON_HIT_BY,		// Stores the slot of the last mon to attack this one.
 		NV_STATUS_DURATION,		// How many turns a mon will be afflicted by a non-volatile status.
 		TOXIC_BUILDUP,			// How many stacks toxic has build up for.
+		LAST_MOVE_HIT_BY,		// The ID of the last move the mon was hit with.
 		NR_ITEMS
 	};
 

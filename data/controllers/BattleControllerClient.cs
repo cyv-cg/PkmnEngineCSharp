@@ -60,7 +60,7 @@ namespace PkmnEngine.BattleControllers {
 			// Determine if the user has any usable moves left.
 			bool isUserStruggling = true;
 			for (u8 i = 0; i < Pokemon.MAX_MOVES; i++) {
-				if (bm.CanUseMove(battle, state, i, false)) {
+				if (await bm.CanUseMove(battle, state, i, false)) {
 					isUserStruggling = false;
 					break;
 				}
@@ -78,7 +78,7 @@ namespace PkmnEngine.BattleControllers {
 				// Convert to action.
 				action = BATTLE_ACTION_USE_MOVE(slot, (u8)option.args, bm.moves[option.args], BattleUtils.GetDefaultMoveTarget(bm.moves[option.args], bm)); // TODO: select target(s)
 			}
-			while (!bm.CanUseMove(battle, state, (u8)option.args, true));
+			while (!await bm.CanUseMove(battle, state, (u8)option.args, true));
 			return action;
 		}
 	}

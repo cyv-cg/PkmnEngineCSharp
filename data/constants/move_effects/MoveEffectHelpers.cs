@@ -225,6 +225,41 @@ namespace PkmnEngine {
 			await p.attacker.DamageMon(recoil, true, false, Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_DAMAGED_BY_RECOIL, p.attacker), p.attacker.GetName()));
 			return recoil.Value;
 		}
+
+		private static async Task<u32> ClearScreens(MoveEffectParams p, u8 side) {
+			// Clear screens.
+			if (p.state.SideHasCondition(side, Condition.LIGHT_SCREEN)) {
+				p.state.RemoveCondition(Condition.LIGHT_SCREEN, side);
+				await MessageBox(Lang.GetString(STRINGS, side == Battle.SIDE_CLIENT ? BATTLE_COMMON.ALLY_LIGHT_SCREEN_WORE_OFF : BATTLE_COMMON.OPPONENT_LIGHT_SCREEN_WORE_OFF));
+			}
+			if (p.state.SideHasCondition(side, Condition.REFLECT)) {
+				p.state.RemoveCondition(Condition.REFLECT, side);
+				await MessageBox(Lang.GetString(STRINGS, side == Battle.SIDE_CLIENT ? BATTLE_COMMON.ALLY_REFLECT_WORE_OFF : BATTLE_COMMON.OPPONENT_REFLECT_WORE_OFF));
+			}
+			if (p.state.SideHasCondition(side, Condition.AURORA_VEIL)) {
+				p.state.RemoveCondition(Condition.AURORA_VEIL, side);
+				await MessageBox(Lang.GetString(STRINGS, side == Battle.SIDE_CLIENT ? BATTLE_COMMON.ALLY_AURORA_VEIL_WORE_OFF : BATTLE_COMMON.OPPONENT_AURORA_VEIL_WORE_OFF));
+			}
+			return 0;
+		}
+		private static async Task<u32> ClearHazards(MoveEffectParams p, u8 side) {
+			if (p.state.SideHasCondition(side, Condition.SPIKES1, Condition.SPIKES2, Condition.SPIKES3)) {
+				p.state.RemoveCondition(Condition.SPIKES1);
+				p.state.RemoveCondition(Condition.SPIKES2);
+				p.state.RemoveCondition(Condition.SPIKES3);
+				await MessageBox(Lang.GetString(STRINGS, side == Battle.SIDE_CLIENT ? BATTLE_COMMON.ALLY_SPIKES_REMOVED : BATTLE_COMMON.OPPONENT_SPIKES_REMOVED));
+			}
+			if (p.state.SideHasCondition(side, Condition.POISON_SPIKES, Condition.TOXIC_SPIKES)) {
+				p.state.RemoveCondition(Condition.POISON_SPIKES);
+				p.state.RemoveCondition(Condition.TOXIC_SPIKES);
+				await MessageBox(Lang.GetString(STRINGS, side == Battle.SIDE_CLIENT ? BATTLE_COMMON.ALLY_POISON_SPIKES_REMOVED : BATTLE_COMMON.OPPONENT_POISON_SPIKES_REMOVED));
+			}
+			if (p.state.SideHasCondition(side, Condition.POINTED_STONES)) {
+				p.state.RemoveCondition(Condition.POINTED_STONES);
+				await MessageBox(Lang.GetString(STRINGS, side == Battle.SIDE_CLIENT ? BATTLE_COMMON.ALLY_POINTED_STONES_REMOVED : BATTLE_COMMON.OPPONENT_POINTED_STONES_REMOVED));
+			}
+			return 0;
+		}
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 
 		/// <summary>

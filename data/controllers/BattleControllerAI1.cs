@@ -62,7 +62,7 @@ namespace PkmnEngine.BattleControllers {
 		public async Task<u64> MenuSelectUseMove(Battle battle, BattleState state, u8 slot) {
 			BattleMon bm = battle.GetMonInSlot(state, slot);
 			for (u8 i = 0; i < Pokemon.MAX_MOVES; i++) {
-				if (bm.CanUseMove(battle, state, i, false)) {
+				if (await bm.CanUseMove(battle, state, i, false)) {
 					return BATTLE_ACTION_USE_MOVE(slot, i, bm.moves[i], BattleUtils.GetDefaultMoveTarget(bm.moves[i], bm));
 				}
 			}

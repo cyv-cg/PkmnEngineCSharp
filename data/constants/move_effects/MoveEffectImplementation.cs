@@ -12,6 +12,7 @@ using static PkmnEngine.DamageCalc;
 
 using PkmnEngine.Strings;
 using System.Collections.Generic;
+using System;
 
 namespace PkmnEngine {
 	public static partial class MoveEffects {
@@ -465,7 +466,39 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_HealingWish(MoveEffectParams p) {
-			// TODO:
+			if (p.battle.isReplay) {
+				return 0;
+			}
+
+			// Do nothing if a wild mon uses this.
+			if (p.attacker.Mon.Box.IsWild) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			TrainerBattleContext context = p.battle.PlayerControllingSlot(p.slotAttacker);
+
+			// Do nothing if the user's team only has 1 available mon.
+			if (context.NumAvailableMons() <= 1) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			u64 action = await context.controller.MenuSelectSwitchToMon(p.battle, p.state, p.slotAttacker);
+			// Do at the end of the turn.
+			p.state.AddAction(action, p.actionIndex);
+
+			// Action args are the index in the team of the mon being switched to.
+			BattleMon switchedMon = context.team[(u8)BattleActionCodes.GetBattleActionArgs(action)];
+
+			// Cure all conditions of the new mon.
+			await CureBurn(switchedMon);
+			await ThawMon(switchedMon);
+			await CureParalysis(switchedMon);
+			await CurePoison(switchedMon);
+			await WakeUpMon(switchedMon);
+			// And heal it to full health.
+			U16 healAmount = new(switchedMon.MaxHP);
+			await switchedMon.HealMon(healAmount, false);
+
 			return 0;
 		}
 		public static async Task<u32> Effect_JungleHealing(MoveEffectParams p) {
@@ -560,7 +593,28 @@ namespace PkmnEngine {
 		#endregion
 		#region weather_and_terrain
 		public static async Task<u32> Effect_Defog(MoveEffectParams p) {
-			// TODO:
+			// Lower evasiveness
+			await Effect_EvasionDownHit(p);
+			// Clear fog
+			if (p.state.Weather.Condition == Condition.WEATHER_FOG) {
+				p.state.Weather.ClearWeatherTerrain();
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.FOG_LIFTED));
+			}
+			// Clear mist
+			if (p.state.SideHasCondition(Battle.SIDE_CLIENT, Condition.MIST)) {
+				p.state.RemoveCondition(Condition.MIST, Battle.SIDE_CLIENT);
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.YOUR_TEAM_NO_LONGER_PROTECTED_BY_MIST));
+			}
+			if (p.state.SideHasCondition(Battle.SIDE_REMOTE, Condition.MIST)) {
+				p.state.RemoveCondition(Condition.MIST, Battle.SIDE_REMOTE);
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.OPPOSING_TEAM_NO_LONGER_PROTECTED_BY_MIST));
+			}
+			// Clear screens
+			await ClearScreens(p, p.attacker.Side);
+			await ClearScreens(p, p.target.Side);
+			// Clear field hazards
+			await ClearHazards(p, p.attacker.Side);
+			await ClearHazards(p, p.target.Side);
 			return 0;
 		}
 		public static async Task<u32> Effect_RainDance(MoveEffectParams p) {
@@ -602,7 +656,14 @@ namespace PkmnEngine {
 			return await Effect_Snowscape(p) | await Effect_UTurn(p);
 		}
 		public static async Task<u32> Effect_ClearTerrain(MoveEffectParams p) {
-			// TODO:
+			switch (p.state.Terrain.Condition) {
+				case Condition.TERRAIN_ELECTRIC: await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ELECTRIC_TERRAIN_END)); break;
+				case Condition.TERRAIN_GRASSY: await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.GRASSY_TERRAIN_END)); break;
+				case Condition.TERRAIN_MISTY: await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MISTY_TERRAIN_END)); break;
+				case Condition.TERRAIN_PSYCHIC: await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.PSYCHIC_TERRAIN_END)); break;
+			}
+			p.state.Terrain.ClearWeatherTerrain();
+
 			return 0;
 		}
 		public static async Task<u32> Effect_ElectricTerrain(MoveEffectParams p) {
@@ -610,6 +671,7 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 			p.state.SetTerrain(Condition.TERRAIN_ELECTRIC, p.attacker);
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ELECTRIC_TERRAIN_START));
 			return 0;
 		}
 		public static async Task<u32> Effect_GrassyTerrain(MoveEffectParams p) {
@@ -617,6 +679,7 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 			p.state.SetTerrain(Condition.TERRAIN_GRASSY, p.attacker);
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.GRASSY_TERRAIN_START));
 			return 0;
 		}
 		public static async Task<u32> Effect_MistyTerrain(MoveEffectParams p) {
@@ -624,6 +687,7 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 			p.state.SetTerrain(Condition.TERRAIN_MISTY, p.attacker);
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MISTY_TERRAIN_START));
 			return 0;
 		}
 		public static async Task<u32> Effect_PsychicTerrain(MoveEffectParams p) {
@@ -631,6 +695,7 @@ namespace PkmnEngine {
 				return FLAG_MOVE_FAILED;
 			}
 			p.state.SetTerrain(Condition.TERRAIN_PSYCHIC, p.attacker);
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.PSYCHIC_TERRAIN_START));
 			return 0;
 		}
 		#endregion
@@ -1051,7 +1116,39 @@ namespace PkmnEngine {
 			}
 		}
 		public static async Task<u32> Effect_Roar(MoveEffectParams p) {
-			// TODO:
+			// Normally, this case would just end the battle, but I can't be bothered.
+			if (p.target.Mon.Box.IsWild) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			// https://bulbapedia.bulbagarden.net/wiki/Roar_(move)#Generations_III_and_IV
+			if (p.target.Mon.level > p.attacker.Mon.level) {
+				bool failed = Math.Floor((float)((p.battle.Random16() % u8.MaxValue) * (p.target.Mon.level + p.attacker.Mon.level)) / u8.MaxValue) + 1 < p.target.Mon.level / 4;
+				if (failed) {
+					return FLAG_MOVE_FAILED;
+				}
+			}
+
+			TrainerBattleContext context = p.battle.PlayerControllingSlot(p.slotTarget);
+
+			// Do nothing if the target's team doesn't have enough available Pokemon.
+			if (context.NumAvailableMons() <= p.battle.format.SlotsOnSide(p.target.Side).Length) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			// Randomly choose a new mon to send in.
+			BattleMon switchedMon = null;
+			u8 switchedIndex = 0;
+			while (switchedMon == null || switchedMon.IsActive(p.battle) || !switchedMon.IsAvailable()) {
+				switchedIndex = (u8)(p.battle.Random16() % PARTY_SIZE);
+				switchedMon = context.team[switchedIndex];
+			}
+			
+			await p.battle.TakeOutMon(p.state, p.slotTarget, print: false);
+			await p.battle.SendOutMon(p.state, context, p.slotTarget, switchedIndex, print: false);
+			
+			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_WAS_DRAGGED_OUT, switchedMon.GetName()));
+
 			return 0;
 		}
 		public static async Task<u32> Effect_MultiHit(MoveEffectParams p) {
@@ -1082,11 +1179,54 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Conversion(MoveEffectParams p) {
-			// TODO:
+			Type newType = Type.NONE;
+			// Conversion cannot change type to one the mon already has.
+			for (u8 i = 0; i < Pokemon.MAX_MOVES; i++) {
+				Type t = BattleMoves.gBattleMoves(p.attacker.moves[i]).moveType;
+				if (!p.attacker.types.Contains(t)) {
+					newType = t;
+					break;
+				}
+			}
+			// If the type isn't changed, then fail.
+			if (newType == Type.NONE) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.attacker.types = new List<Type>() { newType };
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_TYPE_CHANGED, p.attacker), p.attacker.GetName(), Lang.GetTypeName(newType)));
 			return 0;
 		}
 		public static async Task<u32> Effect_Conversion2(MoveEffectParams p) {
-			// TODO:
+			// Randomly change the user's current type to a type that either resists 
+			// or is immune to the type of the move last used by the target, including status moves.
+
+			// Get the type of the last move that hit the target.
+			Type lastTypeHitBy = BattleMoves.gBattleMoves((BattleMoveID)p.target.GetStatusParam(StatusParam.LAST_MOVE_HIT_BY)).moveType;
+
+			// Can't set to the null type.
+			if (lastTypeHitBy == Type.NONE) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			// Find all types that resist or are immune to that type.
+			List<Type> resistantTypes = new List<Type>();
+			for (u8 i = 1; i < Types.NUM_TYPES; i++) {
+				// Effectiveness must be < normal and mon cannot already have that type.
+				if (Types.gTypeEffectivenessMult(lastTypeHitBy, (Type)i) < Types.EFF_NORMAL && !p.target.types.Contains((Type)i)) {
+					resistantTypes.Add((Type)i);
+				}
+			}
+
+			// If there are no types that fit the criteria, then fail.
+			if (resistantTypes.Count == 0) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			// Change the target's type to one of those resistant types.
+			Type newType = resistantTypes[p.battle.Random16() % resistantTypes.Count];
+			p.target.types = new List<Type>() { newType };
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_TYPE_CHANGED, p.target), p.target.GetName(), Lang.GetTypeName(newType)));
+
 			return 0;
 		}
 		public static async Task<u32> Effect_FlinchHit(MoveEffectParams p) {
@@ -2854,8 +2994,10 @@ namespace PkmnEngine {
 			return await Attack(p);
 		}
 		public static async Task<u32> Effect_PsychicFangs(MoveEffectParams p) {
-			// TODO:
-			return 0;
+			// Clear screens.
+			await ClearScreens(p, p.target.Side);
+			// Then do damage.
+			return await Attack(p);
 		}
 		public static async Task<u32> Effect_PsychoShift(MoveEffectParams p) {
 			if (p.attacker.HasStatus(Status.BURN)) {

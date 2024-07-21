@@ -380,7 +380,7 @@ namespace PkmnEngine {
 		/// <param name="player">Player whose mon to send out.</param>
 		/// <param name="slot">Slot in which to replace the mon.</param>
 		/// <param name="monIndex">Index of the mon in the player's team.</param>
-		public async Task SendOutMon(BattleState state, TrainerBattleContext player, u8 slot, u8 monIndex) {
+		public async Task SendOutMon(BattleState state, TrainerBattleContext player, u8 slot, u8 monIndex, bool print = true) {
 			if (monIndex > PARTY_SIZE) {
 				throw new System.ArgumentOutOfRangeException();
 			}
@@ -411,8 +411,12 @@ namespace PkmnEngine {
 			bm.SetFlag(BattleMon.Flag.JUST_SWITCHED_IN);
 			bm.SetStatusParam(StatusParam.TOXIC_BUILDUP, 0);
 
-			// TODO: actual message
-			await MessageBox($"{player.profile.Name} sent out {bm.GetName()}!");
+			if (print) {
+				// TODO: actual message
+				await MessageBox($"{player.profile.Name} sent out {bm.GetName()}!");
+			}
+
+			bm.SetStatusParam(StatusParam.LAST_USED_MOVE, u8.MaxValue);
 	
 			// Entry hazards.
 			//DoEntryHazards(state, mon, GetSideFromSlot(teamIndex));
@@ -432,7 +436,7 @@ namespace PkmnEngine {
 		/// <param name="state"></param>
 		/// <param name="slot"></param>
 		/// <returns></returns>
-		public async Task TakeOutMon(BattleState state, u8 slot) {
+		public async Task TakeOutMon(BattleState state, u8 slot, bool print = true) {
 			// Perform a left shift by this value to get the correct segment for this slot's index.
 			int shift = BattleState.BITS_PER_MON_INDEX * slot;
 			// This gives us a number in the form 1111....0000....1111
@@ -536,8 +540,8 @@ namespace PkmnEngine {
 							if ((monInSlot == null || monInSlot.HasStatus(Status.FAINTED)) && PlayerControllingSlot(s).NumAvailableMons() > 0) {
 								// Check if there is another available mon.
 								sbyte firstIndex = context.GetFirstAvailableMonIndex();
-								// If the index is positive, then there are more available mons.
-								if (firstIndex > 0) {
+								// If the index is nonnegative, then there are more available mons.
+								if (firstIndex >= 0) {
 									// Have the player/AI choose which mon to send out next
 									u64 selection = await context.controller.MenuSelectSwitchToMon(this, CurrentState, s);
 									await SendOutMon(CurrentState, context, s, (u8)GetBattleActionArgs(selection));
