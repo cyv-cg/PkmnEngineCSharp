@@ -8,6 +8,7 @@ using System;
 using static PkmnEngine.Global;
 using PkmnEngine.Strings;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace PkmnEngine {
 	public static partial class MoveEffects {
@@ -151,6 +152,39 @@ namespace PkmnEngine {
 			bm.RemoveStatus(Status.SLEEP);
 			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_WOKE_UP, bm), bm.GetName()));
 
+			return 0;
+		}
+
+		public static async Task<u32> CheckPursuit(Battle battle, BattleState state, u8 slot) {
+			for (u8 i = state.ActionIndex; i < state.ActionCount; i++) {
+				u64 action = state.Actions[i];
+
+				ActionCode code = BattleActionCodes.GetBattleActionCode(action);
+				// Quit early if the code isn't right.
+				if (code != ActionCode.USE_MOVE) {
+					return 0;
+				}
+
+				u32 moveData = BattleActionCodes.GetBattleActionArgs(action);
+				BattleMoveID move = (BattleMoveID)(moveData & 0xFFFF);
+				// Quit early if the move isn't Pursuit.
+				if (move != BattleMoveID.PURSUIT) {
+					return 0;
+				}
+
+				u8 userSlot			= BattleActionCodes.GetBattleActionSlot(action);
+				u32 targetsCombined	= BattleActionCodes.GetBattleActionFlags(action);
+				u8[] targets		= Battle.SplitTargets(targetsCombined);
+
+				// Check for anyone using Pursuit on this mon.
+				if (targets.Contains(slot)) {
+					// Do its action now instead of whenever it's enqueued.
+					state.MarkActionComplete(i);
+					await BattleUtils.UseMove(battle, state, userSlot, move, (u8)((moveData & 0x00030000) >> 16), BattleActionCodes.GetBattleActionFlags(action), state.ActionIndex, I_FLAG_PURSUIT_DOUBLE);
+					await Task.Delay(500);
+					return (u32)(battle.GetMonInSlot(state, slot).HasStatus(Status.FAINTED) ? 1 : 0);
+				}
+			}
 			return 0;
 		}
 	}

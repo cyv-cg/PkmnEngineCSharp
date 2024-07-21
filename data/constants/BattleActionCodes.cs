@@ -58,12 +58,14 @@ namespace PkmnEngine {
 		}
 		/// <summary>
 		/// Switch to a different mon.
+		/// Assumes the switch is "forced" i.e. not chosen during the action selection phase.
+		/// To change that behavior, set the least significant bit to 0.
 		/// </summary>
 		/// <param name="slotUser">Slot of the mon that is being switched out.</param>
 		/// <param name="partyIndex">Index in the party of the mon to switch to.</param>
 		/// <returns></returns>
 		public static u64 BATTLE_ACTION_SWITCH(u8 slotUser, u8 partyIndex) {
-			return BATTLE_ACTION(ActionCode.SWITCH, slotUser, partyIndex, 0);
+			return BATTLE_ACTION(ActionCode.SWITCH, slotUser, partyIndex, 1);
 		}
 	}
 

@@ -29176,7 +29176,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6631</key>
+		<key>PLAYER_WITHDREW_MON</key>
 		<text>
 			<en lang="english">{1} withdrew {2}!</en>
 			<ja lang="japanese">{1} は {2} を撤回しました!</ja>

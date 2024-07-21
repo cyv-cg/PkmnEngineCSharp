@@ -28,6 +28,8 @@ namespace PkmnEngine {
 		public const u32 FLAG_STAT_DID_NOT_CHANGE			= 1 << 29;
 		public const u32 FLAG_MOVE_FAILED					= 1 << 30;
 
+		public const u16 I_FLAG_PURSUIT_DOUBLE				= 1 << 0;
+
 		#region effects
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 		public static async Task<u32> Effect_Hit(MoveEffectParams p) {
@@ -1740,12 +1742,10 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Return(MoveEffectParams p) {
-			// TODO:
-			return 0;
+			return await OverridePower(p, (u16)Math.Max(p.attacker.Mon.friendship / 2.5f, 1));
 		}
 		public static async Task<u32> Effect_Frustration(MoveEffectParams p) {
-			// TODO:
-			return 0;
+			return await OverridePower(p, (u16)Math.Max((255 - p.attacker.Mon.friendship) / 2.5f, 1));
 		}
 		public static async Task<u32> Effect_Safeguard(MoveEffectParams p) {
 			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_PROTECTED_BY_SAFEGUARD, p.attacker), p.attacker.GetName()));
@@ -1802,8 +1802,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Pursuit(MoveEffectParams p) {
-			// TODO:
-			return 0;
+			return await DoublePowerIf(p, (p.i_flags & I_FLAG_PURSUIT_DOUBLE) != 0);
 		}
 		public static async Task<u32> Effect_RapidSpin(MoveEffectParams p) {
 			// TODO:

@@ -2034,6 +2034,10 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MONS_PP_WAS_REDUCED = new("PLAYER_MONS_PP_WAS_REDUCED", 2);
 		/// <summary>
+		/// {1} withdrew {2}!
+		/// </summary>
+		public static readonly StringResource PLAYER_WITHDREW_MON = new("PLAYER_WITHDREW_MON", 2);
+		/// <summary>
 		/// The Pokémon was hit {1} times!
 		/// </summary>
 		public static readonly StringResource HIT_N_TIMES = new("HIT_N_TIMES", 1);
@@ -3212,6 +3216,7 @@ namespace PkmnEngine.Strings {
 			{WILD_MONS_PP_WAS_REDUCED, new() {{Language.ENG, "The wild {1}’s PP was reduced!"}, {Language.JPN, "野生の{1}のPPが減りました！"}, {Language.GER, "Die PP des wilden {1} wurden reduziert!"}, {Language.FRE, "Le PP du {1} sauvage a été réduit !"}, {Language.SPN, "¡El PP del salvaje {1} fue reducido!"}, {Language.ITA, "I PP del {1} ​​selvatico sono stati ridotti!"}, {Language.KOR, "야생 {1}의 PP가 감소했습니다!"}, {Language.CHN_SIM, "野生{1}的PP减少了！"}, {Language.CHN_TRA, "野生{1}的PP減少了！"}, }},
 			{OPPOSING_MONS_PP_WAS_REDUCED, new() {{Language.ENG, "The opposing {1}’s PP was reduced!"}, {Language.JPN, "相手の{1}のPPが減少しました!"}, {Language.GER, "Der PP des gegnerischen {1} wurde reduziert!"}, {Language.FRE, "Le PP du {1} adverse a été réduit !"}, {Language.SPN, "¡El PP del oponente {1} fue reducido!"}, {Language.ITA, "I PP dell'avversario {1} sono stati ridotti!"}, {Language.KOR, "상대 {1}의 PP가 감소했습니다!"}, {Language.CHN_SIM, "对方{1}的PP减少了！"}, {Language.CHN_TRA, "對方{1}的PP減少了！"}, }},
 			{PLAYER_MONS_PP_WAS_REDUCED, new() {{Language.ENG, "{1}’s {2}’s PP was reduced!"}, {Language.JPN, "{1}の{2}のPPが減少しました！"}, {Language.GER, "Die PP von {1} und {2} wurden reduziert!"}, {Language.FRE, "Les PP de {1} et {2} ont été réduits !"}, {Language.SPN, "¡El PP de {1} y {2} se redujo!"}, {Language.ITA, "I PP di {2} di {1} sono stati ridotti!"}, {Language.KOR, "{1}의 {2}의 PP가 감소했습니다!"}, {Language.CHN_SIM, "{1}的{2}的PP减少了！"}, {Language.CHN_TRA, "{1}的{2}的PP減少了！"}, }},
+			{PLAYER_WITHDREW_MON, new() {{Language.ENG, "{1} withdrew {2}!"}, {Language.JPN, "{1} は {2} を撤回しました!"}, {Language.GER, "{1} hat {2} zurückgezogen!"}, {Language.FRE, "{1} s'est retiré {2} !"}, {Language.SPN, "¡{1} retiró {2}!"}, {Language.ITA, "{1} ha ritirato {2}!"}, {Language.KOR, "{1}이(가) {2}을(를) 철회했습니다!"}, {Language.CHN_SIM, "{1}撤回了{2}！"}, {Language.CHN_TRA, "{1}撤回了{2}！"}, }},
 			{HIT_N_TIMES, new() {{Language.ENG, "The Pokémon was hit {1} times!"}, {Language.JPN, "ポケモンは {1} 回ヒットしました!"}, {Language.GER, "Das Pokémon wurde {1} Mal getroffen!"}, {Language.FRE, "Le Pokémon a été touché {1} fois !"}, {Language.SPN, "¡El Pokémon recibió {1} golpes!"}, {Language.ITA, "Il Pokémon è stato colpito {1} volte!"}, {Language.KOR, "포켓몬이 {1}번 맞았습니다!"}, {Language.CHN_SIM, "神奇宝贝被击中 {1} 次！"}, {Language.CHN_TRA, "神奇寶貝被擊中 {1} 次！"}, }},
 			{MON_USED_MOVE, new() {{Language.ENG, "{1} used {2}."}, {Language.JPN, "{1} は {2} を使用しました。"}, {Language.GER, "{1} verwendet {2}."}, {Language.FRE, "{1} a utilisé {2}."}, {Language.SPN, "{1} usó {2}."}, {Language.ITA, "{1} ha utilizzato {2}."}, {Language.KOR, "{1}은(는) {2}을(를) 사용했습니다."}, {Language.CHN_SIM, "{1}使用了{2}。"}, {Language.CHN_TRA, "{1}使用了{2}。"}, }},
 			{WILD_MON_USED_MOVE, new() {{Language.ENG, "The wild {1} used {2}"}, {Language.JPN, "野生の {1} は {2} を使用しました"}, {Language.GER, "Der wilde {1} benutzte {2}"}, {Language.FRE, "Le sauvage {1} utilisé {2}"}, {Language.SPN, "El salvaje {1} usó {2}"}, {Language.ITA, "Il selvaggio {1} ha utilizzato {2}"}, {Language.KOR, "야생 {1}은(는) {2}을(를) 사용했습니다."}, {Language.CHN_SIM, "野生{1}使用{2}"}, {Language.CHN_TRA, "野生{1}使用{2}"}, }},

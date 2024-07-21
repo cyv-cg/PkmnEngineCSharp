@@ -56,8 +56,9 @@ namespace PkmnEngine {
 		/// <param name="moveSlot">The slot of the move being used in the mon's moves array.</param>
 		/// <param name="slotsTarget">The encoded slot(s) of the target mon(s).</param>
 		/// <param name="index">The index of the action in the state's action array.</param>
+		/// <param name="i_flags">Optional parameters to pass through to the effects.</param>
 		/// <returns></returns>
-		public static async Task UseMove(Battle battle, BattleState state, u8 slotUser, BattleMoveID moveID, u8 moveSlot, u32 slotsTarget, u8 index) {
+		public static async Task UseMove(Battle battle, BattleState state, u8 slotUser, BattleMoveID moveID, u8 moveSlot, u32 slotsTarget, u8 index, u16 i_flags = 0) {
 			BattleMon attacker = battle.GetMonInSlot(state, slotUser), defender;
 			u8[] targets = Battle.SplitTargets(slotsTarget);
 
@@ -82,7 +83,7 @@ namespace PkmnEngine {
 					continue;
 				}
 
-				flags = await DoMove(battle, state, attacker, defender, moveID, slotUser, targets[i], (u8)targets.Length, index, true);
+				flags = await DoMove(battle, state, attacker, defender, moveID, slotUser, targets[i], (u8)targets.Length, index, true, i_flags);
 				if ((flags & FLAG_DO_NOT_CONSUME_PP) == 0) {
 					DecreaseMovePP(attacker, moveSlot);
 				}
@@ -103,8 +104,9 @@ namespace PkmnEngine {
 		/// <param name="numTargets">The number of mons being targeted.</param>
 		/// <param name="index">The index of the action in the state's action array.</param>
 		/// <param name="print">If true, prints "[mon] used [move]!". Default: true.</param>
+		/// <param name="i_flags">Optional parameters to pass through to the effects.</param>
 		/// <returns>Move effect flags.</returns>
-		public static async Task<u32> DoMove(Battle battle, BattleState state, BattleMon attacker, BattleMon defender, BattleMoveID moveID, u8 slotUser, u8 slotTarget, u8 numTargets, u8 index, bool print = true) {
+		public static async Task<u32> DoMove(Battle battle, BattleState state, BattleMon attacker, BattleMon defender, BattleMoveID moveID, u8 slotUser, u8 slotTarget, u8 numTargets, u8 index, bool print = true, u16 i_flags = 0) {
 			if (print) {
 				await MessageBox(GetString(STRINGS, GetContextString(BATTLE_COMMON.MON_USED_MOVE, attacker), attacker.GetName(), GetMoveName(moveID)));
 			}
@@ -152,7 +154,7 @@ namespace PkmnEngine {
 				numTargets,
 				index,
 				true,
-				0
+				i_flags
 			);
 			u32 flags = await gMoveEffectMap(gBattleMoves(moveID).primaryEffect)(data);
 

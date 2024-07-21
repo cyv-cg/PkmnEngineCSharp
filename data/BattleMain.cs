@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using static PkmnEngine.Global;
 using static PkmnEngine.BattleActionCodes;
 using PkmnEngine.Strings;
+using System.Linq;
 
 namespace PkmnEngine {
 	public class BattleOverException : Exception {
@@ -394,12 +395,23 @@ namespace PkmnEngine {
 		/// <param name="player">Player whose mon to send out.</param>
 		/// <param name="slot">Slot in which to replace the mon.</param>
 		/// <param name="monIndex">Index of the mon in the player's team.</param>
-		public async Task SendOutMon(BattleState state, TrainerBattleContext player, u8 slot, u8 monIndex, bool print = true) {
+		public async Task SendOutMon(BattleState state, TrainerBattleContext player, u8 slot, u8 monIndex, bool print = true, bool checkPursuit = false) {
 			if (monIndex > PARTY_SIZE) {
 				throw new System.ArgumentOutOfRangeException();
 			}
 			if (!player.ControllsSlot(slot)) {
 				throw new System.ArgumentException($"{player} does not have access to slot {slot}.");
+			}
+
+			bool swap = true;
+
+			// First take out the mon that's already there, if applicable.
+			if (GetMonInSlot(state, slot) != null) {
+				swap = await TakeOutMon(state, slot, print, checkPursuit);
+			}
+
+			if (!swap) {
+				return;
 			}
 
 			// Perform a left shift by this value to get the correct segment for this team index.
@@ -449,8 +461,23 @@ namespace PkmnEngine {
 		/// </summary>
 		/// <param name="state"></param>
 		/// <param name="slot"></param>
-		/// <returns></returns>
-		public async Task TakeOutMon(BattleState state, u8 slot, bool print = true) {
+		/// <returns>False if the mon cannot be switched out.</returns>
+		public async Task<bool> TakeOutMon(BattleState state, u8 slot, bool print = true, bool checkPursuit = false) {
+			bool retVal = true;
+
+			BattleMon monToWithdraw = GetMonInSlot(state, slot);
+			if (print && !monToWithdraw.HasStatus(Status.FAINTED)) {
+				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.PLAYER_WITHDREW_MON, PlayerControllingSlot(slot).profile.Name, monToWithdraw.GetName()));
+
+				if (checkPursuit) {
+					// This check returns 1 if pursuit activates and faints the target.
+					// In that case, don't go forward with the switch.
+					if (await MoveEffects.CheckPursuit(this, state, slot) != 0) {
+						retVal = false;
+					}
+				}
+			}
+
 			// Perform a left shift by this value to get the correct segment for this slot's index.
 			int shift = BattleState.BITS_PER_MON_INDEX * slot;
 			// This gives us a number in the form 1111....0000....1111
@@ -461,8 +488,7 @@ namespace PkmnEngine {
 			// Finally, we store empty slot constant in the appropriate slot.
 			state.FieldMons |= (u32)(BattleState.SLOT_EMPTY << shift);
 
-			// TODO: idk
-			await Task.Delay(Global.WAIT_DELAY);
+			return retVal;
 		}
 
 		/// <summary>
@@ -489,6 +515,15 @@ namespace PkmnEngine {
 
 			// Wait for all actions to be chosen before continuing.
 			u64[] vals = await Task.WhenAll(tasks);
+
+			// Switch actions chosen here are the only time a switch is not forced.
+			for (u8 i = 0; i < vals.Length; i++) {
+				// Flag all switch actions as unforced by setting the least significant bit to zero.
+				if (GetBattleActionCode(vals[i]) == ActionCode.SWITCH) {
+					vals[i] &= ~(u64)0b1;
+				}
+			}
+
 			state.AddAction(vals);
 		}
 
@@ -641,6 +676,13 @@ namespace PkmnEngine {
 			SortActions(state);
 
 			for (u8 i = 0; i < state.ActionCount; i++) {
+				state.ActionIndex++;
+
+				// Do not perform completed actions.
+				if (state.CompletedActions.Contains(i)) {
+					continue;
+				}
+
 				u64 action	= state.Actions[i];
 				ActionCode code	= GetBattleActionCode(action);
 				u8 slot			= GetBattleActionSlot(action);
@@ -683,8 +725,7 @@ namespace PkmnEngine {
 						break;
 					}
 					case ActionCode.SWITCH:
-						await SendOutMon(CurrentState, user, slot, (u8)args);
-						System.Console.WriteLine($"{user.profile.Name} sent out {GetMonInSlot(CurrentState, slot).GetName()}");
+						await SendOutMon(CurrentState, user, slot, (u8)args, true, flags == 0);
 						break;
 					default:
 						break;
@@ -741,7 +782,8 @@ namespace PkmnEngine {
 		/// <param name="targets">Flags retrieved from GetBattleActionFlags().</param>
 		/// <param name="actor">BattleMon using the move.</param>
 		/// <param name="index">The index of the action in the state's action array.</param>
-		private async Task UseOrDoMove(BattleState state, u8 slot, ActionCode code, u32 move, u32 targets, BattleMon actor, u8 index) {
+		/// <param name="i_flags">Optional parameters to pass through to the effects.</param>
+		private async Task UseOrDoMove(BattleState state, u8 slot, ActionCode code, u32 move, u32 targets, BattleMon actor, u8 index, u16 i_flags = 0) {
 			u8 moveSlot = (u8)((move & 0x00030000) >> 16);
 
 			// Store the last targeted mon.
@@ -749,12 +791,12 @@ namespace PkmnEngine {
 
 			switch (code) {
 				case ActionCode.USE_MOVE:
-					await BattleUtils.UseMove(this, state, slot, (BattleMoveID)(move & 0xFFFF), moveSlot, targets, index);
+					await BattleUtils.UseMove(this, state, slot, (BattleMoveID)(move & 0xFFFF), moveSlot, targets, index, i_flags);
 					break;
 				case ActionCode.DO_MOVE: {
 					for (u8 i = 0; i < targetsArr.Length; i++) {
 						BattleMon target = GetMonInSlot(state, targetsArr[i]);
-						await BattleUtils.DoMove(this, state, actor, target, (BattleMoveID)(move & 0xFFFF), slot, targetsArr[i], (u8)targetsArr.Length, index, true);
+						await BattleUtils.DoMove(this, state, actor, target, (BattleMoveID)(move & 0xFFFF), slot, targetsArr[i], (u8)targetsArr.Length, index, true, i_flags);
 					}
 					break;
 				}
@@ -930,7 +972,9 @@ namespace PkmnEngine {
 		public FieldCondition Terrain { get; private set; }
 
 		public u64[] Actions { get; private set; }
+		public List<u8> CompletedActions { get; private set; } = new List<u8>();
 		public u8 ActionCount { get { return (u8)Actions.Length; } }
+		public u8 ActionIndex { get; set; }
 
 		public u8 TurnNum { get; private set; }
 
@@ -969,7 +1013,18 @@ namespace PkmnEngine {
 			// Update the state's array.
 			Actions = newActions;
 		}
-	
+
+		/// <summary>
+		/// Marks an action as already having been completed.
+		/// Completed actions will not be run (again).
+		/// </summary>
+		/// <param name="i">Index in the Actions array of the action to mark as complete.</param>
+		public void MarkActionComplete(u8 i) {
+			if (!CompletedActions.Contains(i)) {
+				CompletedActions.Add(i);
+			}
+		}
+
 		/// <summary>
 		/// Replaces active weather with new weather.
 		/// </summary>
