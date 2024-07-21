@@ -154,8 +154,16 @@ void Compile(string file) {
 		keys.push_back(key);
 
 		// Find the number of params.
-		string n_params = node->first_node("params")->value();
-		paramMap[key] = n_params;
+		paramMap[key] = "0";
+		for (uint8_t i = 1; i < 255; i++) {
+			string text = node->first_node("text")->first_node("en")->value();
+			if (text.find("{" + to_string(i) + "}") != std::string::npos) {
+				paramMap[key] = to_string(i);
+			}
+			else {
+				break;
+			}
+		}
 
 		// Find the text for each "supported" language.
 		const char *lang;

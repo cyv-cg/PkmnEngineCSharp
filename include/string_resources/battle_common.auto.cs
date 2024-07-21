@@ -604,11 +604,11 @@ namespace PkmnEngine.Strings {
 		/// <summary>
 		/// The opposing {1} is buffeted by the sandstorm!
 		/// </summary>
-		public static readonly StringResource OPPOSING_MON_HURT_BY_SANDSTORM = new("OPPOSING_MON_HURT_BY_SANDSTORM", 2);
+		public static readonly StringResource OPPOSING_MON_HURT_BY_SANDSTORM = new("OPPOSING_MON_HURT_BY_SANDSTORM", 1);
 		/// <summary>
 		/// {1}’s {2} is buffeted by the sandstorm!
 		/// </summary>
-		public static readonly StringResource PLAYER_MON_HURT_BY_SANDSTORM = new("PLAYER_MON_HURT_BY_SANDSTORM", 3);
+		public static readonly StringResource PLAYER_MON_HURT_BY_SANDSTORM = new("PLAYER_MON_HURT_BY_SANDSTORM", 2);
 		/// <summary>
 		/// {1} is buffeted by the hail!
 		/// </summary>
@@ -992,15 +992,15 @@ namespace PkmnEngine.Strings {
 		/// <summary>
 		/// The wild {1} surround itself with a veilof water!
 		/// </summary>
-		public static readonly StringResource WILD_MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER = new("WILD_MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER", 2);
+		public static readonly StringResource WILD_MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER = new("WILD_MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER", 1);
 		/// <summary>
 		/// The opposing {1} surround itself with a veilof water!
 		/// </summary>
-		public static readonly StringResource OPPOSING_MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER = new("OPPOSING_MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER", 2);
+		public static readonly StringResource OPPOSING_MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER = new("OPPOSING_MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER", 1);
 		/// <summary>
 		/// {1}’s {2} surrounded itself with a veil of water!
 		/// </summary>
-		public static readonly StringResource PLAYER_MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER = new("PLAYER_MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER", 3);
+		public static readonly StringResource PLAYER_MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER = new("PLAYER_MON_SURROUNDED_ITSELF_WITH_A_VEIL_OF_WATER", 2);
 		/// <summary>
 		/// A veil of water restored {1}’s HP!
 		/// </summary>
@@ -1480,7 +1480,7 @@ namespace PkmnEngine.Strings {
 		/// <summary>
 		/// {1}’s {2} cannot use {3}!
 		/// </summary>
-		public static readonly StringResource PLAYER_MON_CANNOT_USE_MOVE = new("PLAYER_MON_CANNOT_USE_MOVE", 4);
+		public static readonly StringResource PLAYER_MON_CANNOT_USE_MOVE = new("PLAYER_MON_CANNOT_USE_MOVE", 3);
 		/// <summary>
 		/// {1} is getting pumped!
 		/// </summary>
@@ -1762,13 +1762,13 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource WILD_MON_FREED_FROM_SKY_DROP = new("WILD_MON_FREED_FROM_SKY_DROP", 1);
 		/// <summary>
-		/// The opposing {1} was freed fromthe Sky Drop!
+		/// The opposing {1} was freed from the Sky Drop!
 		/// </summary>
-		public static readonly StringResource OPPOSING_MON_FREED_FROM_SKY_DROP = new("OPPOSING_MON_FREED_FROM_SKY_DROP", 2);
+		public static readonly StringResource OPPOSING_MON_FREED_FROM_SKY_DROP = new("OPPOSING_MON_FREED_FROM_SKY_DROP", 1);
 		/// <summary>
-		/// {1}’s {2} was freedfrom the Sky Drop!
+		/// {1}’s {2} was freed from the Sky Drop!
 		/// </summary>
-		public static readonly StringResource PLAYER_MON_FREED_FROM_SKY_DROP = new("PLAYER_MON_FREED_FROM_SKY_DROP", 3);
+		public static readonly StringResource PLAYER_MON_FREED_FROM_SKY_DROP = new("PLAYER_MON_FREED_FROM_SKY_DROP", 2);
 		/// <summary>
 		/// {1} fell straight down!
 		/// </summary>
@@ -3020,8 +3020,8 @@ namespace PkmnEngine.Strings {
 			{PLAYER_MON_TOOK_INTO_SKY_PLAYER_MON, new() {{Language.ENG, "{1}'s {2} took {3}'s {4} into the sky!"}, {Language.JPN, "{1} の {2} が {3} の {4} を空に運びました。"}, {Language.GER, "{1}s {2} brachten {3}s {4} in den Himmel!"}, {Language.FRE, "Les {2} de {1} ont emmené les {4} de {3} dans le ciel !"}, {Language.SPN, "¡El {2} de {1} llevó al {4} de {3} al cielo!"}, {Language.ITA, "Il {2} di {1} ha portato il {4} di {3} in cielo!"}, {Language.KOR, "{1}의 {2}가 {3}의 {4}를 하늘로 가져갔습니다!"}, {Language.CHN_SIM, "{1}的{2}将{3}的{4}带到了天空！"}, {Language.CHN_TRA, "{1}的{2}將{3}的{4}帶到了天空！"}, }},
 			{MON_FREED_FROM_SKY_DROP, new() {{Language.ENG, "{1} was freed from the Sky Drop!"}, {Language.JPN, "{1} はスカイドロップから解放されました!"}, {Language.GER, "{1} wurde aus dem Sky Drop befreit!"}, {Language.FRE, "{1} a été libéré du Sky Drop !"}, {Language.SPN, "¡{1} fue liberado del Sky Drop!"}, {Language.ITA, "{1} è stato liberato dallo Sky Drop!"}, {Language.KOR, "{1}이(가) Sky Drop에서 풀려났습니다!"}, {Language.CHN_SIM, "{1}已从Sky Drop中解救出来！"}, {Language.CHN_TRA, "{1}已從Sky Drop中解救出來！"}, }},
 			{WILD_MON_FREED_FROM_SKY_DROP, new() {{Language.ENG, "The wild {1} was freed from the Sky Drop!"}, {Language.JPN, "野生の {1} がスカイドロップから解放されました!"}, {Language.GER, "Der wilde {1} wurde aus dem Sky Drop befreit!"}, {Language.FRE, "Le sauvage {1} a été libéré du Sky Drop !"}, {Language.SPN, "¡El salvaje {1} fue liberado del Sky Drop!"}, {Language.ITA, "Il {1} ​​selvaggio è stato liberato dallo Sky Drop!"}, {Language.KOR, "야생 {1}이(가) Sky Drop에서 풀려났습니다!"}, {Language.CHN_SIM, "野生{1}已从Sky Drop中解放出来！"}, {Language.CHN_TRA, "野生{1}已從Sky Drop中解放！"}, }},
-			{OPPOSING_MON_FREED_FROM_SKY_DROP, new() {{Language.ENG, "The opposing {1} was freed fromthe Sky Drop!"}, {Language.JPN, "相手の {1} はthe Sky Drop から解放されました!"}, {Language.GER, "Der Gegner {1} wurde vom Sky Drop befreit!"}, {Language.FRE, "Le {1} adverse a été libéré du Sky Drop !"}, {Language.SPN, "¡El oponente {1} fue liberado del Sky Drop!"}, {Language.ITA, "L'avversario {1} è stato liberato dalloSky Drop!"}, {Language.KOR, "상대 {1}이(가) Sky Drop에서 해방되었습니다!"}, {Language.CHN_SIM, "对方的{1}已从Sky Drop中解放出来！"}, {Language.CHN_TRA, "對方的{1}已從Sky Drop中解放！"}, }},
-			{PLAYER_MON_FREED_FROM_SKY_DROP, new() {{Language.ENG, "{1}’s {2} was freedfrom the Sky Drop!"}, {Language.JPN, "{1} の {2} がスカイ ドロップから解放されました。"}, {Language.GER, "{1}s {2} wurde aus dem Sky Drop befreit!"}, {Language.FRE, "Le {2} de {1} a été libérédu Sky Drop !"}, {Language.SPN, "¡El {2} de {1} fue liberado del Sky Drop!"}, {Language.ITA, "Il {2} di {1} è stato liberatodallo Sky Drop!"}, {Language.KOR, "{1}의 {2}이(가) Sky Drop에서 해방되었습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 已从 Sky Drop 中解救出来！"}, {Language.CHN_TRA, "{1} 的 {2} 已從 Sky Drop 中解救出來！"}, }},
+			{OPPOSING_MON_FREED_FROM_SKY_DROP, new() {{Language.ENG, "The opposing {1} was freed from the Sky Drop!"}, {Language.JPN, "相手の {1} はthe Sky Drop から解放されました!"}, {Language.GER, "Der Gegner {1} wurde vom Sky Drop befreit!"}, {Language.FRE, "Le {1} adverse a été libéré du Sky Drop !"}, {Language.SPN, "¡El oponente {1} fue liberado del Sky Drop!"}, {Language.ITA, "L'avversario {1} è stato liberato dalloSky Drop!"}, {Language.KOR, "상대 {1}이(가) Sky Drop에서 해방되었습니다!"}, {Language.CHN_SIM, "对方的{1}已从Sky Drop中解放出来！"}, {Language.CHN_TRA, "對方的{1}已從Sky Drop中解放！"}, }},
+			{PLAYER_MON_FREED_FROM_SKY_DROP, new() {{Language.ENG, "{1}’s {2} was freed from the Sky Drop!"}, {Language.JPN, "{1} の {2} がスカイ ドロップから解放されました。"}, {Language.GER, "{1}s {2} wurde aus dem Sky Drop befreit!"}, {Language.FRE, "Le {2} de {1} a été libérédu Sky Drop !"}, {Language.SPN, "¡El {2} de {1} fue liberado del Sky Drop!"}, {Language.ITA, "Il {2} di {1} è stato liberatodallo Sky Drop!"}, {Language.KOR, "{1}의 {2}이(가) Sky Drop에서 해방되었습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 已从 Sky Drop 中解救出来！"}, {Language.CHN_TRA, "{1} 的 {2} 已從 Sky Drop 中解救出來！"}, }},
 			{MON_FELL_STRAIGHT_DOWN, new() {{Language.ENG, "{1} fell straight down!"}, {Language.JPN, "{1} は真っ直ぐに落ちました!"}, {Language.GER, "{1} fiel direkt nach unten!"}, {Language.FRE, "{1} est tombé tout droit !"}, {Language.SPN, "¡{1} cayó hacia abajo!"}, {Language.ITA, "{1} è caduto a terra!"}, {Language.KOR, "{1}이(가) 똑바로 떨어졌습니다!"}, {Language.CHN_SIM, "{1}直接掉了下来！"}, {Language.CHN_TRA, "{1}直接掉下來了！"}, }},
 			{WILD_MON_FELL_STRAIGHT_DOWN, new() {{Language.ENG, "The wild {1} fell straight down!"}, {Language.JPN, "野生の {1} が真っ直ぐ落ちました!"}, {Language.GER, "Der wilde {1} fiel direkt nach unten!"}, {Language.FRE, "Le {1} sauvage est tombé tout droit !"}, {Language.SPN, "¡El salvaje {1} cayó hacia abajo!"}, {Language.ITA, "Il {1} ​​selvaggio è caduto a terra!"}, {Language.KOR, "야생 {1}이(가) 똑바로 떨어졌습니다!"}, {Language.CHN_SIM, "狂野的{1}直接掉了下来！"}, {Language.CHN_TRA, "狂野的{1}直接掉了下來！"}, }},
 			{OPPOSING_MON_FELL_STRAIGHT_DOWN, new() {{Language.ENG, "The opposing {1} fell straight down!"}, {Language.JPN, "相手の{1}は真っ直ぐに落ちました！"}, {Language.GER, "Der gegnerische {1} fiel direkt nach unten!"}, {Language.FRE, "Le {1} adverse est tombé d'un coup !"}, {Language.SPN, "¡El oponente {1} cayó hacia abajo!"}, {Language.ITA, "Il {1} ​​avversario è caduto a terra!"}, {Language.KOR, "상대 {1}이(가) 똑바로 쓰러졌습니다!"}, {Language.CHN_SIM, "对方的{1}直接摔倒了！"}, {Language.CHN_TRA, "對方的{1}直接跌倒了！"}, }},

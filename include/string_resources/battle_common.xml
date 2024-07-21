@@ -23433,7 +23433,7 @@
 		<key>OPPOSING_MON_FREED_FROM_SKY_DROP</key>
 		<params>2</params>
 		<text>
-			<en lang="english">The opposing {1} was freed fromthe Sky Drop!</en>
+			<en lang="english">The opposing {1} was freed from the Sky Drop!</en>
 			<ja lang="japanese">相手の {1} はthe Sky Drop から解放されました!</ja>
 			<de lang="german">Der Gegner {1} wurde vom Sky Drop befreit!</de>
 			<fr lang="french">Le {1} adverse a été libéré du Sky Drop !</fr>
@@ -23448,7 +23448,7 @@
 		<key>PLAYER_MON_FREED_FROM_SKY_DROP</key>
 		<params>3</params>
 		<text>
-			<en lang="english">{1}’s {2} was freedfrom the Sky Drop!</en>
+			<en lang="english">{1}’s {2} was freed from the Sky Drop!</en>
 			<ja lang="japanese">{1} の {2} がスカイ ドロップから解放されました。</ja>
 			<de lang="german">{1}s {2} wurde aus dem Sky Drop befreit!</de>
 			<fr lang="french">Le {2} de {1} a été libérédu Sky Drop !</fr>
