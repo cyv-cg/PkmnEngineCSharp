@@ -1828,8 +1828,8 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_BIND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BIND,
+						/*primaryEffect =*/ MoveEffectID.BIND,
+						/*secondaryEffect =*/ MoveEffectID.NONE,
 						/*moveType =*/ Type.NORMAL,
 						/*power =*/ 15,
 						/*accuracy =*/ 85,
@@ -2644,8 +2644,8 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_CLAMP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BIND,
+						/*primaryEffect =*/ MoveEffectID.CLAMP,
+						/*secondaryEffect =*/ MoveEffectID.NONE,
 						/*moveType =*/ Type.WATER,
 						/*power =*/ 35,
 						/*accuracy =*/ 85,
@@ -7765,8 +7765,8 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_MAGMA_STORM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BIND,
+						/*primaryEffect =*/ MoveEffectID.MAGMA_STORM,
+						/*secondaryEffect =*/ MoveEffectID.NONE,
 						/*moveType =*/ Type.FIRE,
 						/*power =*/ 100,
 						/*accuracy =*/ 75,
@@ -10832,8 +10832,8 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_SAND_TOMB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BIND,
+						/*primaryEffect =*/ MoveEffectID.SAND_TOMB,
+						/*secondaryEffect =*/ MoveEffectID.NONE,
 						/*moveType =*/ Type.GROUND,
 						/*power =*/ 35,
 						/*accuracy =*/ 85,
@@ -11801,8 +11801,8 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_SNAP_TRAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BIND,
+						/*primaryEffect =*/ MoveEffectID.SNAP_TRAP,
+						/*secondaryEffect =*/ MoveEffectID.NONE,
 						/*moveType =*/ Type.GRASS,
 						/*power =*/ 35,
 						/*accuracy =*/ 100,
@@ -13382,8 +13382,8 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_THUNDER_CAGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BIND,
+						/*primaryEffect =*/ MoveEffectID.THUNDER_CAGE,
+						/*secondaryEffect =*/ MoveEffectID.NONE,
 						/*moveType =*/ Type.ELECTRIC,
 						/*power =*/ 80,
 						/*accuracy =*/ 90,
@@ -14266,8 +14266,8 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_WHIRLPOOL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SURF,
-						/*secondaryEffect =*/ MoveEffectID.BIND,
+						/*primaryEffect =*/ MoveEffectID.WHIRLPOOL,
+						/*secondaryEffect =*/ MoveEffectID.NONE,
 						/*moveType =*/ Type.WATER,
 						/*power =*/ 35,
 						/*accuracy =*/ 85,
@@ -14504,8 +14504,8 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_WRAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BIND,
+						/*primaryEffect =*/ MoveEffectID.WRAP,
+						/*secondaryEffect =*/ MoveEffectID.NONE,
 						/*moveType =*/ Type.NORMAL,
 						/*power =*/ 15,
 						/*accuracy =*/ 90,

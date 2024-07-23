@@ -25,6 +25,7 @@ namespace PkmnEngine {
 		public const u32 FLAG_DO_NOT_DO_SECONDARY_EFFECT	= 1 << 21;
 		public const u32 FLAG_SWITCH_TO_MON					= 1 << 22;
 		public const u32 FLAG_DO_NOT_CONSUME_PP				= 1 << 23;
+		public const u32 FLAG_NO_BIND						= 1 << 24;
 		public const u32 FLAG_STAT_DID_NOT_CHANGE			= 1 << 29;
 		public const u32 FLAG_MOVE_FAILED					= 1 << 30;
 
@@ -623,35 +624,35 @@ namespace PkmnEngine {
 			if (p.state.Weather.Condition == Condition.WEATHER_RAIN) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetWeather(Condition.WEATHER_RAIN, p.attacker);
+			p.state.SetWeather(p.battle, Condition.WEATHER_RAIN, p.attacker);
 			return 0;
 		}
 		public static async Task<u32> Effect_SunnyDay(MoveEffectParams p) {
 			if (p.state.Weather.Condition == Condition.WEATHER_HARSH_SUNLIGHT) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetWeather(Condition.WEATHER_HARSH_SUNLIGHT, p.attacker);
+			p.state.SetWeather(p.battle, Condition.WEATHER_HARSH_SUNLIGHT, p.attacker);
 			return 0;
 		}
 		public static async Task<u32> Effect_Hail(MoveEffectParams p) {
 			if (p.state.Weather.Condition == Condition.WEATHER_HAIL) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetWeather(Condition.WEATHER_HAIL, p.attacker);
+			p.state.SetWeather(p.battle, Condition.WEATHER_HAIL, p.attacker);
 			return 0;
 		}
 		public static async Task<u32> Effect_Sandstorm(MoveEffectParams p) {
 			if (p.state.Weather.Condition == Condition.WEATHER_SANDSTORM) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetWeather(Condition.WEATHER_SANDSTORM, p.attacker);
+			p.state.SetWeather(p.battle, Condition.WEATHER_SANDSTORM, p.attacker);
 			return 0;
 		}
 		public static async Task<u32> Effect_Snowscape(MoveEffectParams p) {
 			if (p.state.Weather.Condition == Condition.WEATHER_SNOW) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetWeather(Condition.WEATHER_SNOW, p.attacker);
+			p.state.SetWeather(p.battle, Condition.WEATHER_SNOW, p.attacker);
 			return 0;
 		}
 		public static async Task<u32> Effect_ChillyReception(MoveEffectParams p) {
@@ -672,7 +673,7 @@ namespace PkmnEngine {
 			if (p.state.Terrain.Condition == Condition.TERRAIN_ELECTRIC) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetTerrain(Condition.TERRAIN_ELECTRIC, p.attacker);
+			p.state.SetTerrain(p.battle, Condition.TERRAIN_ELECTRIC, p.attacker);
 			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ELECTRIC_TERRAIN_START));
 			return 0;
 		}
@@ -680,7 +681,7 @@ namespace PkmnEngine {
 			if (p.state.Terrain.Condition == Condition.TERRAIN_GRASSY) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetTerrain(Condition.TERRAIN_GRASSY, p.attacker);
+			p.state.SetTerrain(p.battle, Condition.TERRAIN_GRASSY, p.attacker);
 			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.GRASSY_TERRAIN_START));
 			return 0;
 		}
@@ -688,7 +689,7 @@ namespace PkmnEngine {
 			if (p.state.Terrain.Condition == Condition.TERRAIN_MISTY) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetTerrain(Condition.TERRAIN_MISTY, p.attacker);
+			p.state.SetTerrain(p.battle, Condition.TERRAIN_MISTY, p.attacker);
 			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MISTY_TERRAIN_START));
 			return 0;
 		}
@@ -696,7 +697,7 @@ namespace PkmnEngine {
 			if (p.state.Terrain.Condition == Condition.TERRAIN_PSYCHIC) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetTerrain(Condition.TERRAIN_PSYCHIC, p.attacker);
+			p.state.SetTerrain(p.battle, Condition.TERRAIN_PSYCHIC, p.attacker);
 			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.PSYCHIC_TERRAIN_START));
 			return 0;
 		}
@@ -943,11 +944,11 @@ namespace PkmnEngine {
 		#region entry_hazards
 		public static async Task<u32> Effect_StealthRock(MoveEffectParams p) {
 			if (p.attacker.Side == Battle.SIDE_CLIENT) {
-				p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.POINTED_STONES, p.attacker);
+				p.state.SetSideCondition(p.battle, Battle.SIDE_REMOTE, Condition.POINTED_STONES, p.attacker);
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.POINTED_STONES_REMOTE));
 			}
 			else if (p.attacker.Side == Battle.SIDE_REMOTE) {
-				p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.POINTED_STONES, p.attacker);
+				p.state.SetSideCondition(p.battle, Battle.SIDE_CLIENT, Condition.POINTED_STONES, p.attacker);
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.POINTED_STONES_CLIENT));
 			}
 
@@ -958,20 +959,20 @@ namespace PkmnEngine {
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.POISON_SPIKES_REMOTE));
 				if (p.state.SideHasCondition(Battle.SIDE_REMOTE, Condition.POISON_SPIKES)) {
 					p.state.RemoveCondition(Condition.POISON_SPIKES, Battle.SIDE_REMOTE);
-					p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.TOXIC_SPIKES, p.attacker);
+					p.state.SetSideCondition(p.battle, Battle.SIDE_REMOTE, Condition.TOXIC_SPIKES, p.attacker);
 				}
 				else if (!p.state.SideHasCondition(Battle.SIDE_REMOTE, Condition.TOXIC_SPIKES)) {
-					p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.POISON_SPIKES, p.attacker);
+					p.state.SetSideCondition(p.battle, Battle.SIDE_REMOTE, Condition.POISON_SPIKES, p.attacker);
 				}
 			}
 			else if (p.attacker.Side == Battle.SIDE_REMOTE) {
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.POISON_SPIKES_CLIENT));
 				if (p.state.SideHasCondition(Battle.SIDE_CLIENT, Condition.POISON_SPIKES)) {
 					p.state.RemoveCondition(Condition.POISON_SPIKES, Battle.SIDE_CLIENT);
-					p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.TOXIC_SPIKES, p.attacker);
+					p.state.SetSideCondition(p.battle, Battle.SIDE_CLIENT, Condition.TOXIC_SPIKES, p.attacker);
 				}
 				else if (!p.state.SideHasCondition(Battle.SIDE_CLIENT, Condition.TOXIC_SPIKES)) {
-					p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.POISON_SPIKES, p.attacker);
+					p.state.SetSideCondition(p.battle, Battle.SIDE_CLIENT, Condition.POISON_SPIKES, p.attacker);
 				}
 			}
 			return 0;
@@ -980,40 +981,40 @@ namespace PkmnEngine {
 			if (p.attacker.Side == Battle.SIDE_CLIENT) {
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.SPIKES_REMOTE));
 				if (!p.state.SideHasCondition(Battle.SIDE_REMOTE, Condition.SPIKES1, Condition.SPIKES2, Condition.SPIKES3)) {
-					p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.SPIKES1, p.attacker);
+					p.state.SetSideCondition(p.battle, Battle.SIDE_REMOTE, Condition.SPIKES1, p.attacker);
 				}
 				else if (p.state.SideHasCondition(Battle.SIDE_REMOTE, Condition.SPIKES1)) {
 					p.state.RemoveCondition(Condition.SPIKES1, Battle.SIDE_REMOTE);
-					p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.SPIKES2, p.attacker);
+					p.state.SetSideCondition(p.battle, Battle.SIDE_REMOTE, Condition.SPIKES2, p.attacker);
 				}
 				else if (p.state.SideHasCondition(Battle.SIDE_REMOTE, Condition.SPIKES2)) {
 					p.state.RemoveCondition(Condition.SPIKES2, Battle.SIDE_REMOTE);
-					p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.SPIKES3, p.attacker);
+					p.state.SetSideCondition(p.battle, Battle.SIDE_REMOTE, Condition.SPIKES3, p.attacker);
 				}
 			}
 			else if (p.attacker.Side == Battle.SIDE_REMOTE) {
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.SPIKES_CLIENT));
 				if (!p.state.SideHasCondition(Battle.SIDE_CLIENT, Condition.SPIKES1, Condition.SPIKES2, Condition.SPIKES3)) {
-					p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.SPIKES1, p.attacker);
+					p.state.SetSideCondition(p.battle, Battle.SIDE_CLIENT, Condition.SPIKES1, p.attacker);
 				}
 				else if (p.state.SideHasCondition(Battle.SIDE_CLIENT, Condition.SPIKES1)) {
 					p.state.RemoveCondition(Condition.SPIKES1, Battle.SIDE_CLIENT);
-					p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.SPIKES2, p.attacker);
+					p.state.SetSideCondition(p.battle, Battle.SIDE_CLIENT, Condition.SPIKES2, p.attacker);
 				}
 				else if (p.state.SideHasCondition(Battle.SIDE_CLIENT, Condition.SPIKES2)) {
 					p.state.RemoveCondition(Condition.SPIKES2, Battle.SIDE_CLIENT);
-					p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.SPIKES3, p.attacker);
+					p.state.SetSideCondition(p.battle, Battle.SIDE_CLIENT, Condition.SPIKES3, p.attacker);
 				}
 			}
 			return 0;
 		}
 		public static async Task<u32> Effect_StickyWeb(MoveEffectParams p) {
 			if (p.attacker.Side == Battle.SIDE_CLIENT) {
-				p.state.SetSideCondition(Battle.SIDE_REMOTE, Condition.STICKY_WEB, p.attacker);
+				p.state.SetSideCondition(p.battle, Battle.SIDE_REMOTE, Condition.STICKY_WEB, p.attacker);
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.STICKY_WEB_REMOTE));
 			}
 			else if (p.attacker.Side == Battle.SIDE_REMOTE) {
-				p.state.SetSideCondition(Battle.SIDE_CLIENT, Condition.STICKY_WEB, p.attacker);
+				p.state.SetSideCondition(p.battle, Battle.SIDE_CLIENT, Condition.STICKY_WEB, p.attacker);
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.STICKY_WEB_CLIENT));
 			}
 			return 0;
@@ -1286,7 +1287,7 @@ namespace PkmnEngine {
 			if (p.state.SideHasCondition(p.attacker.Side, Condition.MIST)) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetSideCondition(p.attacker.Side, Condition.MIST, p.attacker);
+			p.state.SetSideCondition(p.battle, p.attacker.Side, Condition.MIST, p.attacker);
 
 			if (p.attacker.Side == Battle.SIDE_CLIENT){
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.YOUR_TEAM_BECAME_SHROUDED_IN_MIST));
@@ -1347,7 +1348,7 @@ namespace PkmnEngine {
 			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MONS_MOVE_WAS_DISABLED, p.target), p.target.GetName(), Lang.GetMoveName(p.target.moves[slot])));
 
 			p.target.GiveStatus(Status.DISABLE);
-			p.target.SetStatusParam(StatusParam.DISABLE, BattleEvents.EventDuration(p.attacker, Status.DISABLE).Result);
+			p.target.SetStatusParam(StatusParam.DISABLE, BattleEvents.EventDuration(p.battle, p.attacker, Status.DISABLE).Result);
 			p.target.SetStatusParam(StatusParam.DISABLED_SLOT, slot);
 
 			return 0;
@@ -1749,7 +1750,7 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_Safeguard(MoveEffectParams p) {
 			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_PROTECTED_BY_SAFEGUARD, p.attacker), p.attacker.GetName()));
-			p.state.SetSideCondition(p.attacker.Side, Condition.SAFEGUARD, p.attacker);
+			p.state.SetSideCondition(p.battle, p.attacker.Side, Condition.SAFEGUARD, p.attacker);
 			return 0;
 		}
 		public static async Task<u32> Effect_Magnitude(MoveEffectParams p) {
@@ -2183,12 +2184,12 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_WaterSport(MoveEffectParams p) {
-			p.state.SetFieldCondition(Condition.WATER_SPORT, p.attacker);
+			p.state.SetFieldCondition(p.battle, Condition.WATER_SPORT, p.attacker);
 			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.WATER_SPORT_START));
 			return 0;
 		}
 		public static async Task<u32> Effect_MudSport(MoveEffectParams p) {
-			p.state.SetFieldCondition(Condition.MUD_SPORT, p.attacker);
+			p.state.SetFieldCondition(p.battle, Condition.MUD_SPORT, p.attacker);
 			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MUD_SPORT_START));
 			return 0;
 		}
@@ -2255,8 +2256,12 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Bind(MoveEffectParams p) {
-			// TODO:
-			return 0;
+			u32 flags = await BindTarget(p, BIND_BIND);
+			flags |= await Attack(p);
+			if ((flags & FLAG_NO_BIND) == 0) {
+				await MessageBox(Lang.GetString(STRINGS, GetConjugatedString("MON_TRAPPED", p.attacker, p.target), p.attacker.GetName(), p.target.GetName()));
+			}
+			return flags;
 		}
 		public static async Task<u32> Effect_Roost(MoveEffectParams p) {
 			// TODO:
@@ -2513,8 +2518,13 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_FireSpin(MoveEffectParams p) {
-			// TODO:
-			return 0;
+			u32 flags = await BindTarget(p, BIND_FIRE_SPIN);
+			flags |= await Attack(p);
+			flags |= await Effect_ThawHit(p);
+			if ((flags & FLAG_NO_BIND) == 0) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_TRAPPED_IN_FIERY_VORTEX, p.target), p.target.GetName()));
+			}
+			return flags;
 		}
 		public static async Task<u32> Effect_FishiousRend(MoveEffectParams p) {
 			// TODO:
@@ -2714,8 +2724,12 @@ namespace PkmnEngine {
 			);
 		}
 		public static async Task<u32> Effect_Infestation(MoveEffectParams p) {
-			// TODO:
-			return 0;
+			u32 flags = await BindTarget(p, BIND_INFESTATION);
+			flags |= await Attack(p);
+			if ((flags & FLAG_NO_BIND) == 0) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_AFFLICTED_WITH_INFESTATION, p.target), p.target.GetName()));
+			}
+			return flags;
 		}
 		public static async Task<u32> Effect_Instruct(MoveEffectParams p) {
 			// TODO:
@@ -3296,6 +3310,63 @@ namespace PkmnEngine {
 		public static async Task<u32> Effect_Surf(MoveEffectParams p) {
 			return await DoublePowerIf(p, p.target.HasStatus(Status.SEMI_INVULNERABLE_TURN));
 		}
+		public static async Task<u32> Effect_Whirlpool(MoveEffectParams p) {
+			u32 flags = await BindTarget(p, BIND_WHIRLPOOL);
+			flags |= await DoublePowerIf(p, p.target.HasStatus(Status.SEMI_INVULNERABLE_TURN));
+			if ((flags & FLAG_NO_BIND) == 0) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_TRAPPED_IN_WHIRLPOOL, p.target), p.target.GetName()));
+			}
+			return flags;
+		}
+		public static async Task<u32> Effect_Wrap(MoveEffectParams p) {
+			u32 flags = await BindTarget(p, BIND_WRAP);
+			flags |= await Attack(p);
+			if ((flags & FLAG_NO_BIND) == 0) {
+				await MessageBox(Lang.GetString(STRINGS, GetConjugatedString("MON_WAS_WRAPPED_BY", p.target, p.attacker), p.target.GetName(), p.attacker.GetName()));
+			}
+			return flags;
+		}
+		public static async Task<u32> Effect_SandTomb(MoveEffectParams p) {
+			u32 flags = await BindTarget(p, BIND_SAND_TOMB);
+			flags |= await Attack(p);
+			if ((flags & FLAG_NO_BIND) == 0) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_TRAPPED_BY_QUICKSAND, p.target), p.target.GetName()));
+			}
+			return flags;
+		}
+		public static async Task<u32> Effect_MagmaStorm(MoveEffectParams p) {
+			u32 flags = await BindTarget(p, BIND_SAND_TOMB);
+			flags |= await Attack(p);
+			if ((flags & FLAG_NO_BIND) == 0) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_TRAPPED_BY_MAGMA, p.target), p.target.GetName()));
+			}
+			flags |= await Effect_BurnHit(p);
+			return flags;
+		}
+		public static async Task<u32> Effect_Clamp(MoveEffectParams p) {
+			u32 flags = await BindTarget(p, BIND_CLAMP);
+			flags |= await Attack(p);
+			if ((flags & FLAG_NO_BIND) == 0) {
+				await MessageBox(Lang.GetString(STRINGS, GetConjugatedString("MON_CLAMPED_DOWN_ON", p.target, p.attacker), p.target.GetName(), p.attacker.GetName()));
+			}
+			return flags;
+		}
+		public static async Task<u32> Effect_SnapTrap(MoveEffectParams p) {
+			u32 flags = await BindTarget(p, BIND_SNAP_TRAP);
+			flags |= await Attack(p);
+			if ((flags & FLAG_NO_BIND) == 0) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_TRAPPED_BY_SNAP_TRAP, p.target), p.target.GetName()));
+			}
+			return flags;
+		}
+		public static async Task<u32> Effect_ThunderCage(MoveEffectParams p) {
+			u32 flags = await BindTarget(p, BIND_THUNDER_CAGE);
+			flags |= await Attack(p);
+			if ((flags & FLAG_NO_BIND) == 0) {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_TRAPPED_BY_LIGHTNING, p.target), p.target.GetName()));
+			}
+			return flags;
+		}
 		public static async Task<u32> Effect_SurgingStrikes(MoveEffectParams p) {
 			u8 numHits = 3;
 			for (u8 i = 0; i < numHits; i++) {
@@ -3327,7 +3398,7 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Tailwind(MoveEffectParams p) {
-			p.state.SetSideCondition(p.attacker.Side, Condition.TAILWIND, p.attacker);
+			p.state.SetSideCondition(p.battle, p.attacker.Side, Condition.TAILWIND, p.attacker);
 			if (p.attacker.Side == Battle.SIDE_CLIENT) {
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ALLY_TAILWIND_START));
 			}
@@ -3658,7 +3729,7 @@ namespace PkmnEngine {
 			if (p.state.SideHasCondition(p.attacker.Side, Condition.REFLECT)) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetSideCondition(p.attacker.Side, Condition.REFLECT, p.attacker);
+			p.state.SetSideCondition(p.battle, p.attacker.Side, Condition.REFLECT, p.attacker);
 			if (p.attacker.Side == Battle.SIDE_CLIENT) {
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ALLY_REFLECT));
 			}
@@ -3671,7 +3742,7 @@ namespace PkmnEngine {
 			if (p.state.SideHasCondition(p.attacker.Side, Condition.LIGHT_SCREEN)) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetSideCondition(p.attacker.Side, Condition.LIGHT_SCREEN, p.attacker);
+			p.state.SetSideCondition(p.battle, p.attacker.Side, Condition.LIGHT_SCREEN, p.attacker);
 			if (p.attacker.Side == Battle.SIDE_CLIENT) {
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ALLY_LIGHT_SCREEN));
 			}
@@ -3684,7 +3755,7 @@ namespace PkmnEngine {
 			if (p.state.SideHasCondition(p.attacker.Side, Condition.AURORA_VEIL)) {
 				return FLAG_MOVE_FAILED;
 			}
-			p.state.SetSideCondition(p.attacker.Side, Condition.AURORA_VEIL, p.attacker);
+			p.state.SetSideCondition(p.battle, p.attacker.Side, Condition.AURORA_VEIL, p.attacker);
 			if (p.attacker.Side == Battle.SIDE_CLIENT) {
 				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.ALLY_AURORA_VEIL));
 			}

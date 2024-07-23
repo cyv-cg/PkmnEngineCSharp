@@ -626,6 +626,38 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_IS_ALREADY_CONFUSED = new("PLAYER_MON_IS_ALREADY_CONFUSED", 2);
 		/// <summary>
+		/// {1} was trapped by {2}!
+		/// </summary>
+		public static readonly StringResource MON_WAS_TRAPPED_BY_X = new("MON_WAS_TRAPPED_BY_X", 2);
+		/// <summary>
+		/// The wild {1} was trapped by {2}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_WAS_TRAPPED_BY_X = new("WILD_MON_WAS_TRAPPED_BY_X", 2);
+		/// <summary>
+		/// The opposing {1} was trapped by {2}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_WAS_TRAPPED_BY_X = new("OPPOSING_MON_WAS_TRAPPED_BY_X", 2);
+		/// <summary>
+		/// {1}'s {2} was trapped by {3}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_WAS_TRAPPED_BY_X = new("PLAYER_MON_WAS_TRAPPED_BY_X", 3);
+		/// <summary>
+		/// {1} was freed from {2}!
+		/// </summary>
+		public static readonly StringResource MON_WAS_FREED_FROM_X = new("MON_WAS_FREED_FROM_X", 2);
+		/// <summary>
+		/// The wild {1} was freed from {2}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_WAS_FREED_FROM_X = new("WILD_MON_WAS_FREED_FROM_X", 2);
+		/// <summary>
+		/// The opposing {1} was freed from {2}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_WAS_FREED_FROM_X = new("OPPOSING_MON_WAS_FREED_FROM_X", 2);
+		/// <summary>
+		/// {1}’s {2} was freed from {3}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_WAS_FREED_FROM_X = new("PLAYER_MON_WAS_FREED_FROM_X", 3);
+		/// <summary>
 		/// {1} was damaged by the recoil!
 		/// </summary>
 		public static readonly StringResource MON_DAMAGED_BY_RECOIL = new("MON_DAMAGED_BY_RECOIL", 1);
@@ -1418,6 +1450,230 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_SWITCHED_ITS_ATTACK_AND_DEFENSE = new("PLAYER_MON_SWITCHED_ITS_ATTACK_AND_DEFENSE", 2);
 		/// <summary>
+		/// {1} was wrapped by {2}!
+		/// </summary>
+		public static readonly StringResource MON_WAS_WRAPPED_BY_MON = new("MON_WAS_WRAPPED_BY_MON", 2);
+		/// <summary>
+		/// {1} was wrapped by the wild {2}!
+		/// </summary>
+		public static readonly StringResource MON_WAS_WRAPPED_BY_WILD_MON = new("MON_WAS_WRAPPED_BY_WILD_MON", 2);
+		/// <summary>
+		/// {1} was wrapped by the opposing {2}!
+		/// </summary>
+		public static readonly StringResource MON_WAS_WRAPPED_BY_OPPOSING_MON = new("MON_WAS_WRAPPED_BY_OPPOSING_MON", 2);
+		/// <summary>
+		/// {1} was wrapped by {2}'s {3}!
+		/// </summary>
+		public static readonly StringResource MON_WAS_WRAPPED_BY_PLAYER_MON = new("MON_WAS_WRAPPED_BY_PLAYER_MON", 3);
+		/// <summary>
+		/// The wild {1} was wrapped by {2}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_WAS_WRAPPED_BY_MON = new("WILD_MON_WAS_WRAPPED_BY_MON", 2);
+		/// <summary>
+		/// The wild {1} was wrapped by the wild {2}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_WAS_WRAPPED_BY_WILD_MON = new("WILD_MON_WAS_WRAPPED_BY_WILD_MON", 2);
+		/// <summary>
+		/// The wild {1} was wrapped by the opposing {2}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_WAS_WRAPPED_BY_OPPOSING_MON = new("WILD_MON_WAS_WRAPPED_BY_OPPOSING_MON", 2);
+		/// <summary>
+		/// The wild {1} was wrapped by {2}'s {3}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_WAS_WRAPPED_BY_PLAYER_MON = new("WILD_MON_WAS_WRAPPED_BY_PLAYER_MON", 3);
+		/// <summary>
+		/// The opposing {1} was wrapped by {2}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_WAS_WRAPPED_BY_MON = new("OPPOSING_MON_WAS_WRAPPED_BY_MON", 2);
+		/// <summary>
+		/// The opposing {1} was wrapped by the wild {2}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_WAS_WRAPPED_BY_WILD_MON = new("OPPOSING_MON_WAS_WRAPPED_BY_WILD_MON", 2);
+		/// <summary>
+		/// The opposing {1} was wrapped by the opposing {2}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_WAS_WRAPPED_BY_OPPOSING_MON = new("OPPOSING_MON_WAS_WRAPPED_BY_OPPOSING_MON", 2);
+		/// <summary>
+		/// The opposing {1} was wrapped by {2}'s {3}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_WAS_WRAPPED_BY_PLAYER_MON = new("OPPOSING_MON_WAS_WRAPPED_BY_PLAYER_MON", 3);
+		/// <summary>
+		/// {1}'s {2} was wrapped by {3}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_WAS_WRAPPED_BY_MON = new("PLAYER_MON_WAS_WRAPPED_BY_MON", 3);
+		/// <summary>
+		/// {1}'s {2} was wrapped by the wild {3}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_WAS_WRAPPED_BY_WILD_MON = new("PLAYER_MON_WAS_WRAPPED_BY_WILD_MON", 3);
+		/// <summary>
+		/// {1}'s {2} was wrapped by the opposing {3}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_WAS_WRAPPED_BY_OPPOSING_MON = new("PLAYER_MON_WAS_WRAPPED_BY_OPPOSING_MON", 3);
+		/// <summary>
+		/// {1}'s {2} was wrapped by {3}'s {4}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_WAS_WRAPPED_BY_PLAYER_MON = new("PLAYER_MON_WAS_WRAPPED_BY_PLAYER_MON", 4);
+		/// <summary>
+		/// {1} clamped down on {2}!
+		/// </summary>
+		public static readonly StringResource MON_CLAMPED_DOWN_ON_MON = new("MON_CLAMPED_DOWN_ON_MON", 2);
+		/// <summary>
+		/// {1} clamped down on the wild {2}!
+		/// </summary>
+		public static readonly StringResource MON_CLAMPED_DOWN_ON_WILD_MON = new("MON_CLAMPED_DOWN_ON_WILD_MON", 2);
+		/// <summary>
+		/// {1} clamped down on the opposing {2}!
+		/// </summary>
+		public static readonly StringResource MON_CLAMPED_DOWN_ON_OPPOSING_MON = new("MON_CLAMPED_DOWN_ON_OPPOSING_MON", 2);
+		/// <summary>
+		/// {1} clamped down on {2}'s {3}!
+		/// </summary>
+		public static readonly StringResource MON_CLAMPED_DOWN_ON_PLAYER_MON = new("MON_CLAMPED_DOWN_ON_PLAYER_MON", 3);
+		/// <summary>
+		/// The wild {1} clamped down on {2}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_CLAMPED_DOWN_ON_MON = new("WILD_MON_CLAMPED_DOWN_ON_MON", 2);
+		/// <summary>
+		/// The wild {1} clamped down on the wild {2}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_CLAMPED_DOWN_ON_WILD_MON = new("WILD_MON_CLAMPED_DOWN_ON_WILD_MON", 2);
+		/// <summary>
+		/// The wild {1} clamped down on the opposing {2}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_CLAMPED_DOWN_ON_OPPOSING_MON = new("WILD_MON_CLAMPED_DOWN_ON_OPPOSING_MON", 2);
+		/// <summary>
+		/// The wild {1} clamped down on {2}'s {3}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_CLAMPED_DOWN_ON_PLAYER_MON = new("WILD_MON_CLAMPED_DOWN_ON_PLAYER_MON", 3);
+		/// <summary>
+		/// The opposing {1} clamped down on {2}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_CLAMPED_DOWN_ON_MON = new("OPPOSING_MON_CLAMPED_DOWN_ON_MON", 2);
+		/// <summary>
+		/// The opposing {1} clamped down on the wild {2}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_CLAMPED_DOWN_ON_WILD_MON = new("OPPOSING_MON_CLAMPED_DOWN_ON_WILD_MON", 2);
+		/// <summary>
+		/// The opposing {1} clamped down on the opposing {2}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_CLAMPED_DOWN_ON_OPPOSING_MON = new("OPPOSING_MON_CLAMPED_DOWN_ON_OPPOSING_MON", 2);
+		/// <summary>
+		/// The opposing {1} clamped down on {2}'s {3}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_CLAMPED_DOWN_ON_PLAYER_MON = new("OPPOSING_MON_CLAMPED_DOWN_ON_PLAYER_MON", 3);
+		/// <summary>
+		/// {1}'s {2} clamped down on {3}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_CLAMPED_DOWN_ON_MON = new("PLAYER_MON_CLAMPED_DOWN_ON_MON", 3);
+		/// <summary>
+		/// {1}'s {2} clamped down on the wild {3}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_CLAMPED_DOWN_ON_WILD_MON = new("PLAYER_MON_CLAMPED_DOWN_ON_WILD_MON", 3);
+		/// <summary>
+		/// {1}'s {2} clamped down on the opposing {3}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_CLAMPED_DOWN_ON_OPPOSING_MON = new("PLAYER_MON_CLAMPED_DOWN_ON_OPPOSING_MON", 3);
+		/// <summary>
+		/// {1}'s {2} clamped down on {3}'s {4}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_CLAMPED_DOWN_ON_PLAYER_MON = new("PLAYER_MON_CLAMPED_DOWN_ON_PLAYER_MON", 4);
+		/// <summary>
+		/// {1} has been afflicted with an infestation!
+		/// </summary>
+		public static readonly StringResource MON_AFFLICTED_WITH_INFESTATION = new("MON_AFFLICTED_WITH_INFESTATION", 1);
+		/// <summary>
+		/// The wild {1} has been afflicted with an infestation!
+		/// </summary>
+		public static readonly StringResource WILD_MON_AFFLICTED_WITH_INFESTATION = new("WILD_MON_AFFLICTED_WITH_INFESTATION", 1);
+		/// <summary>
+		/// The opposing {1} has been afflicted with an infestation!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_AFFLICTED_WITH_INFESTATION = new("OPPOSING_MON_AFFLICTED_WITH_INFESTATION", 1);
+		/// <summary>
+		/// {1}'s {2} has been afflicted with an infestation!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_AFFLICTED_WITH_INFESTATION = new("PLAYER_MON_AFFLICTED_WITH_INFESTATION", 2);
+		/// <summary>
+		/// {1} became trapped in the vortex!
+		/// </summary>
+		public static readonly StringResource MON_TRAPPED_IN_WHIRLPOOL = new("MON_TRAPPED_IN_WHIRLPOOL", 1);
+		/// <summary>
+		/// The wild {1} became trapped in the vortex!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TRAPPED_IN_WHIRLPOOL = new("WILD_MON_TRAPPED_IN_WHIRLPOOL", 1);
+		/// <summary>
+		/// The opposing {1} became trapped in the vortex!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TRAPPED_IN_WHIRLPOOL = new("OPPOSING_MON_TRAPPED_IN_WHIRLPOOL", 1);
+		/// <summary>
+		/// {1}’s {2} became trapped in the vortex!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TRAPPED_IN_WHIRLPOOL = new("PLAYER_MON_TRAPPED_IN_WHIRLPOOL", 2);
+		/// <summary>
+		/// {1} became trapped in the fiery vortex!
+		/// </summary>
+		public static readonly StringResource MON_TRAPPED_IN_FIERY_VORTEX = new("MON_TRAPPED_IN_FIERY_VORTEX", 1);
+		/// <summary>
+		/// The wild {1} became trapped in the fiery vortex!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TRAPPED_IN_FIERY_VORTEX = new("WILD_MON_TRAPPED_IN_FIERY_VORTEX", 1);
+		/// <summary>
+		/// The opposing {1} became trapped in the fiery vortex!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TRAPPED_IN_FIERY_VORTEX = new("OPPOSING_MON_TRAPPED_IN_FIERY_VORTEX", 1);
+		/// <summary>
+		/// {1}’s {2} became trapped in the fiery vortex!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TRAPPED_IN_FIERY_VORTEX = new("PLAYER_MON_TRAPPED_IN_FIERY_VORTEX", 2);
+		/// <summary>
+		/// {1} became trapped by swirling magma!
+		/// </summary>
+		public static readonly StringResource MON_TRAPPED_BY_MAGMA = new("MON_TRAPPED_BY_MAGMA", 1);
+		/// <summary>
+		/// The wild {1} became trapped by swirling magma!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TRAPPED_BY_MAGMA = new("WILD_MON_TRAPPED_BY_MAGMA", 1);
+		/// <summary>
+		/// The opposing {1} became trapped by swirling magma!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TRAPPED_BY_MAGMA = new("OPPOSING_MON_TRAPPED_BY_MAGMA", 1);
+		/// <summary>
+		/// {1}’s {2} became trapped by swirling magma!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TRAPPED_BY_MAGMA = new("PLAYER_MON_TRAPPED_BY_MAGMA", 2);
+		/// <summary>
+		/// {1} became trapped by the quicksand!
+		/// </summary>
+		public static readonly StringResource MON_TRAPPED_BY_QUICKSAND = new("MON_TRAPPED_BY_QUICKSAND", 1);
+		/// <summary>
+		/// The wild {1} became trapped by the quicksand!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TRAPPED_BY_QUICKSAND = new("WILD_MON_TRAPPED_BY_QUICKSAND", 1);
+		/// <summary>
+		/// The opposing {1} become trapped bythe quicksand!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TRAPPED_BY_QUICKSAND = new("OPPOSING_MON_TRAPPED_BY_QUICKSAND", 1);
+		/// <summary>
+		/// {1}’s {2} become trappedby the quicksand!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TRAPPED_BY_QUICKSAND = new("PLAYER_MON_TRAPPED_BY_QUICKSAND", 2);
+		/// <summary>
+		/// {1} was trapped in a cage of lightning!
+		/// </summary>
+		public static readonly StringResource MON_TRAPPED_BY_LIGHTNING = new("MON_TRAPPED_BY_LIGHTNING", 1);
+		/// <summary>
+		/// The wild {1} was trapped in a cage of lightning!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TRAPPED_BY_LIGHTNING = new("WILD_MON_TRAPPED_BY_LIGHTNING", 1);
+		/// <summary>
+		/// The opposing {1} was trapped in a cage of lightning!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TRAPPED_BY_LIGHTNING = new("OPPOSING_MON_TRAPPED_BY_LIGHTNING", 1);
+		/// <summary>
+		/// {1}'s {2} was trapped in a cage of lightning!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TRAPPED_BY_LIGHTNING = new("PLAYER_MON_TRAPPED_BY_LIGHTNING", 2);
+		/// <summary>
 		/// {1} is protected by Safeguard!
 		/// </summary>
 		public static readonly StringResource MON_PROTECTED_BY_SAFEGUARD = new("MON_PROTECTED_BY_SAFEGUARD", 1);
@@ -1534,6 +1790,22 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_CAN_NO_LONGER_ESCAPE = new("PLAYER_MON_CAN_NO_LONGER_ESCAPE", 2);
 		/// <summary>
+		/// {1} can’t escape!
+		/// </summary>
+		public static readonly StringResource MON_CANT_ESCAPE = new("MON_CANT_ESCAPE", 1);
+		/// <summary>
+		/// The wild {1} can’t escape!
+		/// </summary>
+		public static readonly StringResource WILD_MON_CANT_ESCAPE = new("WILD_MON_CANT_ESCAPE", 1);
+		/// <summary>
+		/// The opposing {1} can’t escape!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_CANT_ESCAPE = new("OPPOSING_MON_CANT_ESCAPE", 1);
+		/// <summary>
+		/// {1}’s {2} can’t escape!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_CANT_ESCAPE = new("PLAYER_MON_CANT_ESCAPE", 2);
+		/// <summary>
 		/// {1}’s type changed to {2}!
 		/// </summary>
 		public static readonly StringResource MON_TYPE_CHANGED = new("MON_TYPE_CHANGED", 2);
@@ -1581,6 +1853,22 @@ namespace PkmnEngine.Strings {
 		/// {1}’s {2} cannot use {3}!
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_CANNOT_USE_MOVE = new("PLAYER_MON_CANNOT_USE_MOVE", 3);
+		/// <summary>
+		/// {1} was hurt by {2}!
+		/// </summary>
+		public static readonly StringResource MON_WAS_HURT_BY_X = new("MON_WAS_HURT_BY_X", 2);
+		/// <summary>
+		/// The wild {1} was hurt by {2}!
+		/// </summary>
+		public static readonly StringResource WILD_MON_WAS_HURT_BY_X = new("WILD_MON_WAS_HURT_BY_X", 2);
+		/// <summary>
+		/// The opposing {1} was hurt by {2}!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_WAS_HURT_BY_X = new("OPPOSING_MON_WAS_HURT_BY_X", 2);
+		/// <summary>
+		/// {1}'s {2} was hurt by {3}!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_WAS_HURT_BY_X = new("PLAYER_MON_WAS_HURT_BY_X", 3);
 		/// <summary>
 		/// {1} is getting pumped!
 		/// </summary>
@@ -2017,6 +2305,22 @@ namespace PkmnEngine.Strings {
 		/// {1}’s {2} swapped the battle effects affecting each side of the field!
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_USED_COURT_CHANGE = new("PLAYER_MON_USED_COURT_CHANGE", 2);
+		/// <summary>
+		/// {1} got trapped by a snap trap!
+		/// </summary>
+		public static readonly StringResource MON_TRAPPED_BY_SNAP_TRAP = new("MON_TRAPPED_BY_SNAP_TRAP", 1);
+		/// <summary>
+		/// The wild {1} got trapped by a snap trap!
+		/// </summary>
+		public static readonly StringResource WILD_MON_TRAPPED_BY_SNAP_TRAP = new("WILD_MON_TRAPPED_BY_SNAP_TRAP", 1);
+		/// <summary>
+		/// The opposing {1} got trapped by a snap trap!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_TRAPPED_BY_SNAP_TRAP = new("OPPOSING_MON_TRAPPED_BY_SNAP_TRAP", 1);
+		/// <summary>
+		/// {1}’s {2} got trapped by a snap trap!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_TRAPPED_BY_SNAP_TRAP = new("PLAYER_MON_TRAPPED_BY_SNAP_TRAP", 2);
 		/// <summary>
 		/// {1}’s PP was reduced!
 		/// </summary>
@@ -2864,6 +3168,14 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_IS_ALREADY_CONFUSED, new() {{Language.ENG, "The wild {1} is already confused!"}, {Language.JPN, "野生の {1} はすでに混乱しています!"}, {Language.GER, "Der wilde {1} ist bereits verwirrt!"}, {Language.FRE, "Le sauvage {1} est déjà confus !"}, {Language.SPN, "¡El salvaje {1} ya está confundido!"}, {Language.ITA, "Il {1} ​​selvatico è già confuso!"}, {Language.KOR, "야생 {1}은(는) 이미 혼란스럽습니다!"}, {Language.CHN_SIM, "狂野的{1}已经迷茫了！"}, {Language.CHN_TRA, "狂野的{1}已經迷惘了！"}, }},
 			{OPPOSING_MON_IS_ALREADY_CONFUSED, new() {{Language.ENG, "The opposing {1} is already confused!"}, {Language.JPN, "相手の {1} はすでに混乱しています!"}, {Language.GER, "Der Gegner {1} ist bereits verwirrt!"}, {Language.FRE, "Le {1} adverse est déjà confus !"}, {Language.SPN, "¡El oponente {1} ya está confundido!"}, {Language.ITA, "Il {1} ​​avversario è già confuso!"}, {Language.KOR, "상대 {1}은(는) 이미 혼란스러워졌습니다!"}, {Language.CHN_SIM, "对方的{1}已经混乱了！"}, {Language.CHN_TRA, "對方的{1}已經混亂了！"}, }},
 			{PLAYER_MON_IS_ALREADY_CONFUSED, new() {{Language.ENG, "{1}’s {2} is already confused!"}, {Language.JPN, "{1} の {2} はすでに混乱しています。"}, {Language.GER, "{2} von {1} ist bereits verwirrt!"}, {Language.FRE, "Le {2} de {1} est déjà confus !"}, {Language.SPN, "¡El {2} de {1} ya está confundido!"}, {Language.ITA, "Il {2} di {1} è già confuso!"}, {Language.KOR, "{1}의 {2}은(는) 이미 혼란스럽습니다!"}, {Language.CHN_SIM, "{1}的{2}已经很困惑了！"}, {Language.CHN_TRA, "{1}的{2}已經很困惑了！"}, }},
+			{MON_WAS_TRAPPED_BY_X, new() {{Language.ENG, "{1} was trapped by {2}!"}, {Language.JPN, "{1} は {2} に閉じ込められました!"}, {Language.GER, "{1} wurde von {2} gefangen!"}, {Language.FRE, "{1} a été piégé par {2} !"}, {Language.SPN, "¡{1} quedó atrapado por {2}!"}, {Language.ITA, "{1} è stato intrappolato da {2}!"}, {Language.KOR, "{1}이(가) {2}에 의해 갇혔습니다!"}, {Language.CHN_SIM, "{1}被{2}困住了！"}, {Language.CHN_TRA, "{1}被{2}困住了！"}, }},
+			{WILD_MON_WAS_TRAPPED_BY_X, new() {{Language.ENG, "The wild {1} was trapped by {2}!"}, {Language.JPN, "野生の {1} が {2} に捕らえられました!"}, {Language.GER, "Der wilde {1} wurde von {2} gefangen!"}, {Language.FRE, "Le {1} sauvage a été piégé par {2} !"}, {Language.SPN, "¡El salvaje {1} quedó atrapado por {2}!"}, {Language.ITA, "Il {1} ​​selvatico è stato intrappolato da {2}!"}, {Language.KOR, "야생 {1}이(가) {2}에 의해 갇혔습니다!"}, {Language.CHN_SIM, "野生的{1}被{2}困住了！"}, {Language.CHN_TRA, "野性的{1}被{2}困住了！"}, }},
+			{OPPOSING_MON_WAS_TRAPPED_BY_X, new() {{Language.ENG, "The opposing {1} was trapped by {2}!"}, {Language.JPN, "相手の {1} が {2} に閉じ込められました!"}, {Language.GER, "Der gegnerische {1} wurde von {2} gefangen!"}, {Language.FRE, "Le {1} adverse a été piégé par {2} !"}, {Language.SPN, "¡El oponente {1} quedó atrapado por {2}!"}, {Language.ITA, "Il {1} ​​avversario è stato intrappolato da {2}!"}, {Language.KOR, "상대 {1}이(가) {2}에 의해 갇혔습니다!"}, {Language.CHN_SIM, "对方的{1}被{2}困住了！"}, {Language.CHN_TRA, "對方的{1}被{2}困住了！"}, }},
+			{PLAYER_MON_WAS_TRAPPED_BY_X, new() {{Language.ENG, "{1}'s {2} was trapped by {3}!"}, {Language.JPN, "{1} の {2} が {3} に閉じ込められました!"}, {Language.GER, "{2} von {1} wurde von {3} gefangen!"}, {Language.FRE, "Le {2} de {1} a été piégé par {3} !"}, {Language.SPN, "¡El {2} de {1} quedó atrapado por {3}!"}, {Language.ITA, "Il {2} di {1} è stato intrappolato da {3}!"}, {Language.KOR, "{1}의 {2}이(가) {3}에 의해 갇혔습니다!"}, {Language.CHN_SIM, "{1}的{2}被{3}困住了！"}, {Language.CHN_TRA, "{1}的{2}被{3}困住了！"}, }},
+			{MON_WAS_FREED_FROM_X, new() {{Language.ENG, "{1} was freed from {2}!"}, {Language.JPN, "{1} は {2} から解放されました!"}, {Language.GER, "{1} wurde von {2} befreit!"}, {Language.FRE, "{1} a été libéré de {2} !"}, {Language.SPN, "¡{1} fue liberado de {2}!"}, {Language.ITA, "{1} è stato liberato da {2}!"}, {Language.KOR, "{1}이(가) {2}에서 해제되었습니다!"}, {Language.CHN_SIM, "{1}已从{2}中释放！"}, {Language.CHN_TRA, "{1}已從{2}中釋放！"}, }},
+			{WILD_MON_WAS_FREED_FROM_X, new() {{Language.ENG, "The wild {1} was freed from {2}!"}, {Language.JPN, "野生の {1} が {2} から解放されました!"}, {Language.GER, "Die Wildnis {1} wurdevon {2} befreit!"}, {Language.FRE, "Le sauvage {1} a été libéréde {2} !"}, {Language.SPN, "¡El salvaje {1} fue liberadode {2}!"}, {Language.ITA, "Il selvaggio {1} è stato liberatoda {2}!"}, {Language.KOR, "야생 {1}이(가) {2}에서 해방되었습니다!"}, {Language.CHN_SIM, "野生{1}已从{2}手中解救出来！"}, {Language.CHN_TRA, "野生{1}已從{2}手中解救出來！"}, }},
+			{OPPOSING_MON_WAS_FREED_FROM_X, new() {{Language.ENG, "The opposing {1} was freed from {2}!"}, {Language.JPN, "敵対する {1} は {2} から解放されました!"}, {Language.GER, "Der Gegner {1} wurdevon {2} befreit!"}, {Language.FRE, "Le {1} adverse a été libéréde {2} !"}, {Language.SPN, "¡El oponente {1} fue liberadode {2}!"}, {Language.ITA, "L'avversario {1} è stato liberatoda {2}!"}, {Language.KOR, "상대 {1}이(가) {2}에서 해방되었습니다!"}, {Language.CHN_SIM, "对方的{1}已从{2}手中解救出来！"}, {Language.CHN_TRA, "對方的{1}已從{2}手中解救出來！"}, }},
+			{PLAYER_MON_WAS_FREED_FROM_X, new() {{Language.ENG, "{1}’s {2} was freed from {3}!"}, {Language.JPN, "{1} の {2} は {3} から解放されました!"}, {Language.GER, "{1}s {2} wurdevon {3} befreit!"}, {Language.FRE, "Le {2} de {1} a été libéréde {3} !"}, {Language.SPN, "¡El {2} de {1} fue liberadode {3}!"}, {Language.ITA, "Il {2} di {1} è stato liberatoda {3}!"}, {Language.KOR, "{1}의 {2}이(가) {3}에서 해제되었습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 已从 {3} 中解救出来！"}, {Language.CHN_TRA, "{1} 的 {2} 已從 {3} 解救出來！"}, }},
 			{MON_DAMAGED_BY_RECOIL, new() {{Language.ENG, "{1} was damaged by the recoil!"}, {Language.JPN, "{1}は反動で損傷しました!"}, {Language.GER, "{1} wurde durch den Rückstoß beschädigt!"}, {Language.FRE, "{1} a été endommagé par le recul !"}, {Language.SPN, "¡{1} resultó dañado por el retroceso!"}, {Language.ITA, "{1} è stato danneggiato dal rinculo!"}, {Language.KOR, "{1}이(가) 반동으로 인해 손상되었습니다!"}, {Language.CHN_SIM, "{1} 被后坐力损坏！"}, {Language.CHN_TRA, "{1} 被後座力損壞！"}, }},
 			{WILD_MON_DAMAGED_BY_RECOIL, new() {{Language.ENG, "The wild {1} was damaged by the recoil!"}, {Language.JPN, "野生の {1} は反動でダメージを受けました!"}, {Language.GER, "Der Wild {1} wurde durch den Rückstoß beschädigt!"}, {Language.FRE, "Le sauvage {1} a été endommagé par le recul !"}, {Language.SPN, "¡El comodín {1} resultó dañado por el retroceso!"}, {Language.ITA, "Il {1} ​​selvatico è stato danneggiato dal rinculo!"}, {Language.KOR, "야생 {1}이(가) 반동으로 인해 손상되었습니다!"}, {Language.CHN_SIM, "狂野的{1}被后坐力伤害了！"}, {Language.CHN_TRA, "狂野的{1}被後座力傷害了！"}, }},
 			{OPPOSING_MON_DAMAGED_BY_RECOIL, new() {{Language.ENG, "The opposing {1} was damaged by the recoil!"}, {Language.JPN, "反動で相手の {1} がダメージを受けました!"}, {Language.GER, "Der gegnerische {1} wurde durch den Rückstoß beschädigt!"}, {Language.FRE, "Le {1} adverse a été endommagé par le recul !"}, {Language.SPN, "¡El {1} ​​contrario resultó dañado por el retroceso!"}, {Language.ITA, "Il {1} ​​avversario è stato danneggiato dal rinculo!"}, {Language.KOR, "상대 {1}이(가) 반동으로 인해 손상되었습니다!"}, {Language.CHN_SIM, "对方的{1}被后坐力击伤！"}, {Language.CHN_TRA, "對方的{1}被後座力擊傷！"}, }},
@@ -3062,6 +3374,62 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_SWITCHED_ITS_ATTACK_AND_DEFENSE, new() {{Language.ENG, "The wild {1} switched its Attack and Defense!"}, {Language.JPN, "野生の {1} が攻撃と防御を切り替えました!"}, {Language.GER, "Der wilde {1} hat seinen Angriff und seine Verteidigung vertauscht!"}, {Language.FRE, "Le sauvage {1} a changé son attaque et sa défense !"}, {Language.SPN, "¡El salvaje {1} cambió su ataque y defensa!"}, {Language.ITA, "Il {1} ​​selvatico ha cambiato Attacco e Difesa!"}, {Language.KOR, "야생 {1}이(가) 공격과 방어를 바꿨습니다!"}, {Language.CHN_SIM, "狂野{1}攻防转换！"}, {Language.CHN_TRA, "狂野{1}攻防轉換！"}, }},
 			{OPPOSING_MON_SWITCHED_ITS_ATTACK_AND_DEFENSE, new() {{Language.ENG, "The opposing {1} switched its Attack and Defense!"}, {Language.JPN, "相手の {1} は攻撃と防御を切り替えました!"}, {Language.GER, "Der Gegner {1} hat seinen Angriff und seine Verteidigung vertauscht!"}, {Language.FRE, "Le {1} adverse a changé son attaqueet sa défense !"}, {Language.SPN, "¡El oponente {1} cambió su ataque y defensa!"}, {Language.ITA, "L'avversario {1} ha cambiato Attacco e Difesa!"}, {Language.KOR, "상대 {1}이(가) 공격과 방어를 전환했습니다!"}, {Language.CHN_SIM, "对方{1}改变了攻击 防御！"}, {Language.CHN_TRA, "對方{1}改變了攻擊 防禦！"}, }},
 			{PLAYER_MON_SWITCHED_ITS_ATTACK_AND_DEFENSE, new() {{Language.ENG, "{1}’s {2} switched its Attack and Defense!"}, {Language.JPN, "{1} の {2} は攻撃と防御を切り替えました!"}, {Language.GER, "{1}s {2} hat seinen Angriff und seine Verteidigung vertauscht!"}, {Language.FRE, "Le {2} de {1} a changé son attaqueet sa défense !"}, {Language.SPN, "¡El {2} de {1} cambió su ataque y defensa!"}, {Language.ITA, "Il {2} di {1} ha cambiato Attacco e Difesa!"}, {Language.KOR, "{1}의 {2}이(가) 공격과 방어를 전환했습니다!"}, {Language.CHN_SIM, "{1}的{2}切换了攻击 和防御！"}, {Language.CHN_TRA, "{1}的{2}切換了攻擊 和防禦！"}, }},
+			{MON_WAS_WRAPPED_BY_MON, new() {{Language.ENG, "{1} was wrapped by {2}!"}, {Language.JPN, "{1} は {2} によってラップされました!"}, {Language.GER, "{1} wurde von {2} umwickelt!"}, {Language.FRE, "{1} a été enveloppé par {2} !"}, {Language.SPN, "¡{1} fue envuelto por {2}!"}, {Language.ITA, "{1} è stato avvolto da {2}!"}, {Language.KOR, "{1}이(가) {2}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "{1} 被 {2} 包裹！"}, {Language.CHN_TRA, "{1} 被 {2} 包裹！"}, }},
+			{MON_WAS_WRAPPED_BY_WILD_MON, new() {{Language.ENG, "{1} was wrapped by the wild {2}!"}, {Language.JPN, "{1} は野生の {2} に包まれました!"}, {Language.GER, "{1} wurde von der Wildnis {2} umhüllt!"}, {Language.FRE, "{1} a été enveloppé par le sauvage {2} !"}, {Language.SPN, "¡{1} fue envuelto por el salvaje {2}!"}, {Language.ITA, "{1} è stato avvolto dal selvaggio {2}!"}, {Language.KOR, "{1}이(가) 야생 {2}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "{1}被狂野{2}包裹了！"}, {Language.CHN_TRA, "{1}被狂野{2}包裹了！"}, }},
+			{MON_WAS_WRAPPED_BY_OPPOSING_MON, new() {{Language.ENG, "{1} was wrapped by the opposing {2}!"}, {Language.JPN, "{1} は相手の {2} にラップされました!"}, {Language.GER, "{1} wurde vom gegnerischen {2} umwickelt!"}, {Language.FRE, "{1} a été enroulé par le {2} adverse !"}, {Language.SPN, "¡{1} fue envuelto por el oponente {2}!"}, {Language.ITA, "{1} è stato avvolto dal {2} avversario!"}, {Language.KOR, "{1}이(가) 상대 {2}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "{1}被对方的{2}包围了！"}, {Language.CHN_TRA, "{1}被對方的{2}包圍了！"}, }},
+			{MON_WAS_WRAPPED_BY_PLAYER_MON, new() {{Language.ENG, "{1} was wrapped by {2}'s {3}!"}, {Language.JPN, "{1} は {2} の {3} によってラップされました!"}, {Language.GER, "{1} wurde von {2}s {3} umwickelt!"}, {Language.FRE, "{1} a été emballé par {3} de {2} !"}, {Language.SPN, "¡{1} fue envuelto por el {3} de {2}!"}, {Language.ITA, "{1} è stato avvolto dal {3} di {2}!"}, {Language.KOR, "{1}은(는) {2}의 {3}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "{1}被{2}的{3}包裹了！"}, {Language.CHN_TRA, "{1}被{2}的{3}包裹了！"}, }},
+			{WILD_MON_WAS_WRAPPED_BY_MON, new() {{Language.ENG, "The wild {1} was wrapped by {2}!"}, {Language.JPN, "野生の {1} は {2} によって包まれました!"}, {Language.GER, "Der wilde {1} wurde von {2} umwickelt!"}, {Language.FRE, "Le {1} sauvage a été enveloppé par {2} !"}, {Language.SPN, "¡El comodín {1} fue envuelto por {2}!"}, {Language.ITA, "Il {1} ​​selvaggio è stato avvolto da {2}!"}, {Language.KOR, "야생 {1}이(가) {2}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "狂野的{1}被{2}包裹了！"}, {Language.CHN_TRA, "狂野的{1}被{2}包裹了！"}, }},
+			{WILD_MON_WAS_WRAPPED_BY_WILD_MON, new() {{Language.ENG, "The wild {1} was wrapped by the wild {2}!"}, {Language.JPN, "野生の {1} が野生の {2} に包まれました!"}, {Language.GER, "Das wilde {1} wurde vom wilden {2} umhüllt!"}, {Language.FRE, "Le {1} sauvage a été enveloppé par le {2} sauvage !"}, {Language.SPN, "¡El comodín {1} fue envuelto por el comodín {2}!"}, {Language.ITA, "Il {1} ​​selvaggio è stato avvolto dal {2} selvaggio!"}, {Language.KOR, "야생 {1}이(가) 야생 {2}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "野{1}被野{2}包裹了！"}, {Language.CHN_TRA, "野{1}被野{2}包裹了！"}, }},
+			{WILD_MON_WAS_WRAPPED_BY_OPPOSING_MON, new() {{Language.ENG, "The wild {1} was wrapped by the opposing {2}!"}, {Language.JPN, "野生の {1} が相手の {2} に包まれました!"}, {Language.GER, "Die wilde {1} wurde von der gegnerischen {2} umwickelt!"}, {Language.FRE, "Le {1} sauvage a été enveloppé par le {2} adverse !"}, {Language.SPN, "¡El comodín {1} fue envuelto por el {2} contrario!"}, {Language.ITA, "Il {1} ​​selvaggio è stato avvolto dal {2} avversario!"}, {Language.KOR, "야생 {1}이(가) 상대 {2}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "狂野的{1}被对方的{2}包裹住了！"}, {Language.CHN_TRA, "狂野的{1}被對方的{2}包裹住了！"}, }},
+			{WILD_MON_WAS_WRAPPED_BY_PLAYER_MON, new() {{Language.ENG, "The wild {1} was wrapped by {2}'s {3}!"}, {Language.JPN, "野生の {1} は {2} の {3} によって包まれました!"}, {Language.GER, "Der wilde {1} wurde von {2}s {3} umwickelt!"}, {Language.FRE, "Le {1} sauvage a été enveloppé par le {3} de {2} !"}, {Language.SPN, "¡El comodín {1} fue envuelto por el {3} de {2}!"}, {Language.ITA, "Il {1} ​​selvaggio è stato avvolto dal {3} di {2}!"}, {Language.KOR, "야생 {1}이(가) {2}의 {3}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "野生的{1}被{2}的{3}包裹住了！"}, {Language.CHN_TRA, "野性的{1}被{2}的{3}包裹住了！"}, }},
+			{OPPOSING_MON_WAS_WRAPPED_BY_MON, new() {{Language.ENG, "The opposing {1} was wrapped by {2}!"}, {Language.JPN, "相手の {1} は {2} によってラップされました!"}, {Language.GER, "Der gegnerische {1} wurde von {2} umwickelt!"}, {Language.FRE, "Le {1} adverse a été enroulé par {2} !"}, {Language.SPN, "¡El {1} ​​contrario fue envuelto por {2}!"}, {Language.ITA, "L'{1} avversario è stato avvolto da {2}!"}, {Language.KOR, "상대 {1}이(가) {2}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "对方的{1}被{2}包裹！"}, {Language.CHN_TRA, "對方的{1}被{2}包裹！"}, }},
+			{OPPOSING_MON_WAS_WRAPPED_BY_WILD_MON, new() {{Language.ENG, "The opposing {1} was wrapped by the wild {2}!"}, {Language.JPN, "相手の {1} が野生の {2} に包まれました!"}, {Language.GER, "Der gegnerische {1} wurde vom wilden {2} umwickelt!"}, {Language.FRE, "Le {1} adverse a été enveloppé par le {2} sauvage !"}, {Language.SPN, "¡El {1} ​​contrario fue envuelto por el salvaje {2}!"}, {Language.ITA, "L'{1} avversario è stato avvolto dal {2} selvaggio!"}, {Language.KOR, "상대 {1}이(가) 야생 {2}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "对方{1}被野{2}包裹！"}, {Language.CHN_TRA, "對方{1}被野{2}包裹！"}, }},
+			{OPPOSING_MON_WAS_WRAPPED_BY_OPPOSING_MON, new() {{Language.ENG, "The opposing {1} was wrapped by the opposing {2}!"}, {Language.JPN, "相手の {1} は相手の {2} によってラップされました!"}, {Language.GER, "Der gegnerische {1} wurde vom gegnerischen {2} umwickelt!"}, {Language.FRE, "Le {1} adverse a été enveloppé par le {2} adverse !"}, {Language.SPN, "¡El {1} ​​contrario fue envuelto por el {2} contrario!"}, {Language.ITA, "L'{1} avversario è stato avvolto dal {2} avversario!"}, {Language.KOR, "상대 {1}이 상대 {2}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "对方的{1}被对方的{2}包住了！"}, {Language.CHN_TRA, "對方的{1}被對方的{2}包住了！"}, }},
+			{OPPOSING_MON_WAS_WRAPPED_BY_PLAYER_MON, new() {{Language.ENG, "The opposing {1} was wrapped by {2}'s {3}!"}, {Language.JPN, "相手の {1} は {2} の {3} によってラップされました!"}, {Language.GER, "Der gegnerische {1} wurde von {2}s {3} umwickelt!"}, {Language.FRE, "Le {1} adverse a été enveloppé par le {3} de {2} !"}, {Language.SPN, "¡El {1} ​​contrario fue envuelto por el {3} de {2}!"}, {Language.ITA, "L'{1} avversario è stato avvolto dal {3} di {2}!"}, {Language.KOR, "상대 {1}이(가) {2}의 {3}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "对方的{1}被{2}的{3}包住了！"}, {Language.CHN_TRA, "對方的{1}被{2}的{3}包住了！"}, }},
+			{PLAYER_MON_WAS_WRAPPED_BY_MON, new() {{Language.ENG, "{1}'s {2} was wrapped by {3}!"}, {Language.JPN, "{1} の {2} は {3} によってラップされました。"}, {Language.GER, "{2} von {1} wurde von {3} umwickelt!"}, {Language.FRE, "Le {2} de {1} a été enveloppé par {3} !"}, {Language.SPN, "¡El {2} de {1} fue envuelto por {3}!"}, {Language.ITA, "Il {2} di {1} è stato avvolto da {3}!"}, {Language.KOR, "{1}의 {2}이(가) {3}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "{1}的{2}被{3}包裹了！"}, {Language.CHN_TRA, "{1}的{2}被{3}包裹了！"}, }},
+			{PLAYER_MON_WAS_WRAPPED_BY_WILD_MON, new() {{Language.ENG, "{1}'s {2} was wrapped by the wild {3}!"}, {Language.JPN, "{1} の {2} が野生の {3} に包まれました！"}, {Language.GER, "{1}s {2} wurde von der Wildnis {3} umwickelt!"}, {Language.FRE, "Le {2} de {1} a été enveloppé par le {3} sauvage !"}, {Language.SPN, "¡El {2} de {1} fue envuelto por el salvaje {3}!"}, {Language.ITA, "Il {2} di {1} è stato avvolto dal {3} selvaggio!"}, {Language.KOR, "{1}의 {2}이(가) 야생 {3}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "{1}的{2}被野性的{3}包裹住了！"}, {Language.CHN_TRA, "{1}的{2}被野性的{3}包裹住了！"}, }},
+			{PLAYER_MON_WAS_WRAPPED_BY_OPPOSING_MON, new() {{Language.ENG, "{1}'s {2} was wrapped by the opposing {3}!"}, {Language.JPN, "{1} の {2} が相手の {3} にラップされました!"}, {Language.GER, "{1}s {2} wurde vom gegnerischen {3} umwickelt!"}, {Language.FRE, "Le {2} de {1} a été enveloppé par le {3} adverse !"}, {Language.SPN, "¡El {2} de {1} fue envuelto por el {3} contrario!"}, {Language.ITA, "Il {2} di {1} è stato avvolto dal {3} avversario!"}, {Language.KOR, "{1}의 {2}이(가) 상대 {3}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "{1}的{2}被对方的{3}包住了！"}, {Language.CHN_TRA, "{1}的{2}被對方的{3}包住了！"}, }},
+			{PLAYER_MON_WAS_WRAPPED_BY_PLAYER_MON, new() {{Language.ENG, "{1}'s {2} was wrapped by {3}'s {4}!"}, {Language.JPN, "{1} の {2} は {3} の {4} によってラップされました。"}, {Language.GER, "{2} von {1} wurde von {4} von {3} umwickelt!"}, {Language.FRE, "Le {2} de {1} a été enveloppé par le {4} de {3} !"}, {Language.SPN, "¡El {2} de {1} fue envuelto por el {4} de {3}!"}, {Language.ITA, "Il {2} di {1} è stato avvolto dal {4} di {3}!"}, {Language.KOR, "{1}의 {2}가 {3}의 {4}에 의해 래핑되었습니다!"}, {Language.CHN_SIM, "{1}的{2}被{3}的{4}包裹着！"}, {Language.CHN_TRA, "{1}的{2}被{3}的{4}包裹著！"}, }},
+			{MON_CLAMPED_DOWN_ON_MON, new() {{Language.ENG, "{1} clamped down on {2}!"}, {Language.JPN, "{1}が{2}を取り締まりました！"}, {Language.GER, "{1} hat gegen {2} vorgegangen!"}, {Language.FRE, "{1} a réprimé {2} !"}, {Language.SPN, "¡{1} tomó medidas drásticas contra {2}!"}, {Language.ITA, "{1} ha bloccato {2}!"}, {Language.KOR, "{1}이(가) {2}을(를) 단속했습니다!"}, {Language.CHN_SIM, "{1}压制了{2}！"}, {Language.CHN_TRA, "{1}壓制了{2}！"}, }},
+			{MON_CLAMPED_DOWN_ON_WILD_MON, new() {{Language.ENG, "{1} clamped down on the wild {2}!"}, {Language.JPN, "{1} が野生の {2} を取り締まりました!"}, {Language.GER, "{1} hat die Wildnis {2} unter Kontrolle gebracht!"}, {Language.FRE, "{1} a réprimé le sauvage {2} !"}, {Language.SPN, "¡{1} tomó medidas drásticas contra lo salvaje {2}!"}, {Language.ITA, "{1} ha represso i {2} selvaggi!"}, {Language.KOR, "{1}이(가) 야생 {2}을(를) 단속했습니다!"}, {Language.CHN_SIM, "{1}镇压野生动物{2}！"}, {Language.CHN_TRA, "{1}鎮壓野生動物{2}！"}, }},
+			{MON_CLAMPED_DOWN_ON_OPPOSING_MON, new() {{Language.ENG, "{1} clamped down on the opposing {2}!"}, {Language.JPN, "{1} が敵対する {2} を取り締まりました！"}, {Language.GER, "{1} schlug den gegnerischen {2} hart durch!"}, {Language.FRE, "{1} a réprimé le {2} adverse !"}, {Language.SPN, "¡{1} tomó medidas drásticas contra el {2} contrario!"}, {Language.ITA, "{1} ha bloccato il {2} avversario!"}, {Language.KOR, "{1}이(가) 상대 {2}을(를) 단속했습니다!"}, {Language.CHN_SIM, "{1}压制了对方的{2}！"}, {Language.CHN_TRA, "{1}壓制了對方的{2}！"}, }},
+			{MON_CLAMPED_DOWN_ON_PLAYER_MON, new() {{Language.ENG, "{1} clamped down on {2}'s {3}!"}, {Language.JPN, "{1} が {2} の {3} を取り締まりました!"}, {Language.GER, "{1} hat gegen {2}s {3} vorgegangen!"}, {Language.FRE, "{1} a réprimé le {3} de {2} !"}, {Language.SPN, "¡{1} tomó medidas drásticas contra el {3} de {2}!"}, {Language.ITA, "{1} ha bloccato il {3} di {2}!"}, {Language.KOR, "{1}이(가) {2}의 {3}을(를) 단속했습니다!"}, {Language.CHN_SIM, "{1}压制了{2}的{3}！"}, {Language.CHN_TRA, "{1}壓制了{2}的{3}！"}, }},
+			{WILD_MON_CLAMPED_DOWN_ON_MON, new() {{Language.ENG, "The wild {1} clamped down on {2}!"}, {Language.JPN, "野生の {1} が {2} を取り締まりました!"}, {Language.GER, "Der wilde {1} hat {2} hart durchgegriffen!"}, {Language.FRE, "Le {1} sauvage a réprimé {2} !"}, {Language.SPN, "¡El salvaje {1} tomó medidas drásticas contra {2}!"}, {Language.ITA, "Il selvaggio {1} ha bloccato {2}!"}, {Language.KOR, "야생의 {1}이(가) {2}을(를) 단속했습니다!"}, {Language.CHN_SIM, "狂野的{1}压制了{2}！"}, {Language.CHN_TRA, "狂野的{1}壓制了{2}！"}, }},
+			{WILD_MON_CLAMPED_DOWN_ON_WILD_MON, new() {{Language.ENG, "The wild {1} clamped down on the wild {2}!"}, {Language.JPN, "野生の {1} が野生の {2} を取り締まりました!"}, {Language.GER, "Der Wilde {1} ging gegen den Wilden {2} vor!"}, {Language.FRE, "Le sauvage {1} a réprimé le sauvage {2} !"}, {Language.SPN, "¡El salvaje {1} tomó medidas drásticas contra el salvaje {2}!"}, {Language.ITA, "Il {1} ​​selvaggio ha stretto un freno al {2} selvaggio!"}, {Language.KOR, "야생 {1}이(가) 야생 {2}을(를) 단속했습니다!"}, {Language.CHN_SIM, "野生{1}压制野生{2}！"}, {Language.CHN_TRA, "野生{1}壓制野生{2}！"}, }},
+			{WILD_MON_CLAMPED_DOWN_ON_OPPOSING_MON, new() {{Language.ENG, "The wild {1} clamped down on the opposing {2}!"}, {Language.JPN, "野生の {1} が敵対する {2} を取り締まりました！"}, {Language.GER, "Der wilde {1} ging hart gegen den gegnerischen {2} vor!"}, {Language.FRE, "Le {1} sauvage a réprimé le {2} adverse !"}, {Language.SPN, "¡El salvaje {1} tomó medidas drásticas contra el {2} contrario!"}, {Language.ITA, "Il {1} ​​selvaggio ha bloccato il {2} avversario!"}, {Language.KOR, "야생의 {1}이(가) 상대 {2}을(를) 단속했습니다!"}, {Language.CHN_SIM, "狂野的{1}压制了对方的{2}！"}, {Language.CHN_TRA, "狂野的{1}壓制了對方的{2}！"}, }},
+			{WILD_MON_CLAMPED_DOWN_ON_PLAYER_MON, new() {{Language.ENG, "The wild {1} clamped down on {2}'s {3}!"}, {Language.JPN, "野生の {1} が {2} の {3} を取り締まりました!"}, {Language.GER, "Der wilde {1} hat den {3} von {2} unter Kontrolle gebracht!"}, {Language.FRE, "Le {1} sauvage s'est attaqué au {3} de {2} !"}, {Language.SPN, "¡El salvaje {1} tomó medidas drásticas contra el {3} de {2}!"}, {Language.ITA, "Il {1} ​​selvaggio ha bloccato il {3} di {2}!"}, {Language.KOR, "야생의 {1}이(가) {2}의 {3}을(를) 단속했습니다!"}, {Language.CHN_SIM, "狂野的{1}压制了{2}的{3}！"}, {Language.CHN_TRA, "狂野的{1}壓制了{2}的{3}！"}, }},
+			{OPPOSING_MON_CLAMPED_DOWN_ON_MON, new() {{Language.ENG, "The opposing {1} clamped down on {2}!"}, {Language.JPN, "敵対する {1} が {2} を取り締まりました!"}, {Language.GER, "Der gegnerische {1} wehrte sich gegen {2}!"}, {Language.FRE, "Le {1} adverse a réprimé {2} !"}, {Language.SPN, "¡El {1} ​​contrario tomó medidas drásticas contra {2}!"}, {Language.ITA, "Il {1} ​​avversario ha bloccato {2}!"}, {Language.KOR, "상대 {1}이(가) {2}을(를) 단속했습니다!"}, {Language.CHN_SIM, "对方的{1}压制了{2}！"}, {Language.CHN_TRA, "對方的{1}壓制了{2}！"}, }},
+			{OPPOSING_MON_CLAMPED_DOWN_ON_WILD_MON, new() {{Language.ENG, "The opposing {1} clamped down on the wild {2}!"}, {Language.JPN, "敵対する {1} が野生の {2} を取り締まりました!"}, {Language.GER, "Der gegnerische {1} wehrte sich gegen den wilden {2}!"}, {Language.FRE, "Le {1} adverse a réprimé le {2} sauvage !"}, {Language.SPN, "¡El {1} ​​contrario tomó medidas drásticas contra el {2} salvaje!"}, {Language.ITA, "L'{1} avversario ha bloccato il {2} selvaggio!"}, {Language.KOR, "상대 {1}이(가) 야생 {2}을(를) 단속했습니다!"}, {Language.CHN_SIM, "对方的{1}压制了野性的{2}！"}, {Language.CHN_TRA, "對方的{1}壓制了野性的{2}！"}, }},
+			{OPPOSING_MON_CLAMPED_DOWN_ON_OPPOSING_MON, new() {{Language.ENG, "The opposing {1} clamped down on the opposing {2}!"}, {Language.JPN, "相手の {1} が相手の {2} を締め付けました!"}, {Language.GER, "Der gegnerische {1} schlug den gegnerischen {2} hart durch!"}, {Language.FRE, "Le {1} adverse a réprimé le {2} adverse !"}, {Language.SPN, "¡El {1} ​​contrario tomó medidas drásticas contra el {2} contrario!"}, {Language.ITA, "L'{1} avversario ha bloccato il {2} avversario!"}, {Language.KOR, "상대 {1}이 상대 {2}을(를) 단속했습니다!"}, {Language.CHN_SIM, "对方{1}压制对方{2}！"}, {Language.CHN_TRA, "對方{1}壓制對方{2}！"}, }},
+			{OPPOSING_MON_CLAMPED_DOWN_ON_PLAYER_MON, new() {{Language.ENG, "The opposing {1} clamped down on {2}'s {3}!"}, {Language.JPN, "敵対する {1} が {2} の {3} を取り締まりました！"}, {Language.GER, "Der gegnerische {1} wehrte sich gegen den {3} von {2}!"}, {Language.FRE, "Le {1} adverse a réprimé le {3} de {2} !"}, {Language.SPN, "¡El {1} ​​contrario tomó medidas drásticas contra el {3} de {2}!"}, {Language.ITA, "L'{1} avversario ha bloccato il {3} di {2}!"}, {Language.KOR, "상대 {1}이(가) {2}의 {3}을(를) 단속했습니다!"}, {Language.CHN_SIM, "对方的{1}压制了{2}的{3}！"}, {Language.CHN_TRA, "對方的{1}壓制了{2}的{3}！"}, }},
+			{PLAYER_MON_CLAMPED_DOWN_ON_MON, new() {{Language.ENG, "{1}'s {2} clamped down on {3}!"}, {Language.JPN, "{1}の{2}が{3}を取り締まりました！"}, {Language.GER, "{1}s {2} hat gegen {3} vorgegangen!"}, {Language.FRE, "Le {2} de {1} a réprimé {3} !"}, {Language.SPN, "¡El {2} de {1} tomó medidas drásticas contra {3}!"}, {Language.ITA, "{2} di {1} ha bloccato {3}!"}, {Language.KOR, "{1}의 {2}이(가) {3}을(를) 단속했습니다!"}, {Language.CHN_SIM, "{1}的{2}压制了{3}！"}, {Language.CHN_TRA, "{1}的{2}壓制了{3}！"}, }},
+			{PLAYER_MON_CLAMPED_DOWN_ON_WILD_MON, new() {{Language.ENG, "{1}'s {2} clamped down on the wild {3}!"}, {Language.JPN, "{1}の{2}が野生の{3}を取り締まりました！"}, {Language.GER, "{1}s {2} hat die Wildnis {3} unter Kontrolle gebracht!"}, {Language.FRE, "Les {2} de {1} ont réprimé le {3} sauvage !"}, {Language.SPN, "¡El {2} de {1} ha tomado medidas drásticas contra el {3} salvaje!"}, {Language.ITA, "I {2} di {1} hanno bloccato i {3} selvaggi!"}, {Language.KOR, "{1}의 {2}이(가) 야생 {3}을(를) 단속했습니다!"}, {Language.CHN_SIM, "{1}的{2}压制了野生的{3}！"}, {Language.CHN_TRA, "{1}的{2}壓制了野生的{3}！"}, }},
+			{PLAYER_MON_CLAMPED_DOWN_ON_OPPOSING_MON, new() {{Language.ENG, "{1}'s {2} clamped down on the opposing {3}!"}, {Language.JPN, "{1} の {2} が相手の {3} を取り締まりました！"}, {Language.GER, "{1}s {2} hat den gegnerischen {3} hart durchgegriffen!"}, {Language.FRE, "Les {2} de {1} ont réprimé les {3} adverses !"}, {Language.SPN, "¡El {2} de {1} tomó medidas drásticas contra el {3} contrario!"}, {Language.ITA, "Il {2} di {1} ha bloccato il {3} avversario!"}, {Language.KOR, "{1}의 {2}이(가) 상대 {3}을(를) 단속했습니다!"}, {Language.CHN_SIM, "{1}的{2}压制了对方的{3}！"}, {Language.CHN_TRA, "{1}的{2}壓制了對方的{3}！"}, }},
+			{PLAYER_MON_CLAMPED_DOWN_ON_PLAYER_MON, new() {{Language.ENG, "{1}'s {2} clamped down on {3}'s {4}!"}, {Language.JPN, "{1} の {2} が {3} の {4} を取り締まりました!"}, {Language.GER, "{1}s {2} hat gegen {3}s {4} vorgegangen!"}, {Language.FRE, "Le {2} de {1} a réprimé le {4} de {3} !"}, {Language.SPN, "¡El {2} de {1} tomó medidas drásticas contra el {4} de {3}!"}, {Language.ITA, "Il {2} di {1} ha bloccato il {4} di {3}!"}, {Language.KOR, "{1}의 {2}가 {3}의 {4}을(를) 단속했습니다!"}, {Language.CHN_SIM, "{1}的{2}压制了{3}的{4}！"}, {Language.CHN_TRA, "{1}的{2}壓制了{3}的{4}！"}, }},
+			{MON_AFFLICTED_WITH_INFESTATION, new() {{Language.ENG, "{1} has been afflicted with an infestation!"}, {Language.JPN, "{1} は感染症に悩まされています!"}, {Language.GER, "{1} wurde von einem Befall befallen!"}, {Language.FRE, "{1} a été touché par une infestation !"}, {Language.SPN, "¡{1} ha sido afectado por una infestación!"}, {Language.ITA, "{1} è stato colpito da un'infestazione!"}, {Language.KOR, "{1}이(가) 감염에 걸렸습니다!"}, {Language.CHN_SIM, "{1}已遭受感染！"}, {Language.CHN_TRA, "{1}已遭受感染！"}, }},
+			{WILD_MON_AFFLICTED_WITH_INFESTATION, new() {{Language.ENG, "The wild {1} has been afflicted with an infestation!"}, {Language.JPN, "野生の {1} が蔓延に悩まされています!"}, {Language.GER, "Die Wildnis {1} wurde von einem Befall heimgesucht!"}, {Language.FRE, "Le {1} sauvage a été touché par une infestation !"}, {Language.SPN, "¡El salvaje {1} ha sido afectado por una infestación!"}, {Language.ITA, "Il {1} ​​selvatico è stato colpito da un'infestazione!"}, {Language.KOR, "야생 {1}이(가) 감염으로 고통받고 있습니다!"}, {Language.CHN_SIM, "野生{1}已遭受侵扰！"}, {Language.CHN_TRA, "野生{1}已遭受侵擾！"}, }},
+			{OPPOSING_MON_AFFLICTED_WITH_INFESTATION, new() {{Language.ENG, "The opposing {1} has been afflicted with an infestation!"}, {Language.JPN, "敵対する {1} は感染症に悩まされています。"}, {Language.GER, "Der gegnerische {1} wurde von einem Befall befallen!"}, {Language.FRE, "Le {1} adverse a été touché par une infestation !"}, {Language.SPN, "¡El oponente {1} ha sido afectado por una infestación!"}, {Language.ITA, "Il {1} ​​avversario è stato colpito da un'infestazione!"}, {Language.KOR, "상대 {1}이(가) 감염에 걸렸습니다!"}, {Language.CHN_SIM, "对方的{1}已遭受感染！"}, {Language.CHN_TRA, "對方的{1}已遭受感染！"}, }},
+			{PLAYER_MON_AFFLICTED_WITH_INFESTATION, new() {{Language.ENG, "{1}'s {2} has been afflicted with an infestation!"}, {Language.JPN, "{1} の {2} は感染症に悩まされています。"}, {Language.GER, "{1}s {2} wurde von einem Befall befallen!"}, {Language.FRE, "Le {2} de {1} a été atteint d'une infestation !"}, {Language.SPN, "¡El {2} de {1} ha sido afectado por una infestación!"}, {Language.ITA, "Il {2} di {1} è stato colpito da un'infestazione!"}, {Language.KOR, "{1}의 {2}이(가) 감염에 걸렸습니다!"}, {Language.CHN_SIM, "{1} 的{2} 受到了感染！"}, {Language.CHN_TRA, "{1} 的{2} 受到感染了！"}, }},
+			{MON_TRAPPED_IN_WHIRLPOOL, new() {{Language.ENG, "{1} became trapped in the vortex!"}, {Language.JPN, "{1} は渦に閉じ込められました!"}, {Language.GER, "{1} wurde im Wirbel gefangen!"}, {Language.FRE, "{1} s'est retrouvé piégé dans le vortex !"}, {Language.SPN, "¡{1} quedó atrapado en el vórtice!"}, {Language.ITA, "{1} è rimasto intrappolato nel vortice!"}, {Language.KOR, "{1}이(가) 소용돌이에 갇혔습니다!"}, {Language.CHN_SIM, "{1}被困在漩涡中了！"}, {Language.CHN_TRA, "{1}被困在漩渦中了！"}, }},
+			{WILD_MON_TRAPPED_IN_WHIRLPOOL, new() {{Language.ENG, "The wild {1} became trapped in the vortex!"}, {Language.JPN, "野生の {1} が渦に閉じ込められました!"}, {Language.GER, "Der wilde {1} wurde im Wirbel gefangen!"}, {Language.FRE, "Le {1} sauvage s'est retrouvé piégé dans le vortex !"}, {Language.SPN, "¡El salvaje {1} quedó atrapado en el vórtice!"}, {Language.ITA, "Il {1} ​​selvatico è rimasto intrappolato nel vortice!"}, {Language.KOR, "야생의 {1}이(가) 소용돌이에 갇혔습니다!"}, {Language.CHN_SIM, "野生的{1}被困在漩涡里了！"}, {Language.CHN_TRA, "野生的{1}被困在漩渦裡了！"}, }},
+			{OPPOSING_MON_TRAPPED_IN_WHIRLPOOL, new() {{Language.ENG, "The opposing {1} became trapped in the vortex!"}, {Language.JPN, "相手の {1} が渦の中に閉じ込められました!"}, {Language.GER, "Der Gegner {1} wurde im Wirbel gefangen!"}, {Language.FRE, "Les {1} adverses se sont retrouvés piégés dansle vortex !"}, {Language.SPN, "¡El oponente {1} quedó atrapado enel vórtice!"}, {Language.ITA, "L'avversario {1} è rimasto intrappolato nelvortice!"}, {Language.KOR, "상대 {1}이(가) 소용돌이에 갇히게 되었습니다!"}, {Language.CHN_SIM, "对方{1}被困在漩涡中！"}, {Language.CHN_TRA, "對方{1}被困在漩渦中！"}, }},
+			{PLAYER_MON_TRAPPED_IN_WHIRLPOOL, new() {{Language.ENG, "{1}’s {2} became trapped in the vortex!"}, {Language.JPN, "{1} の {2} は渦の中に閉じ込められました!"}, {Language.GER, "{1}s {2} wurde im Wirbel gefangen!"}, {Language.FRE, "Le {2} de {1} s'est retrouvé piégédans le vortex !"}, {Language.SPN, "¡Los {2} de {1} quedaron atrapadosen el vórtice!"}, {Language.ITA, "Il {2} di {1} è rimasto intrappolato el vortice!"}, {Language.KOR, "{1}의 {2}이(가) 소용돌이에 갇히게 되었습니다!"}, {Language.CHN_SIM, "{1}的{2}被困在了漩涡中！"}, {Language.CHN_TRA, "{1}的{2}被困在漩渦中了！"}, }},
+			{MON_TRAPPED_IN_FIERY_VORTEX, new() {{Language.ENG, "{1} became trapped in the fiery vortex!"}, {Language.JPN, "{1} は炎の渦に閉じ込められました!"}, {Language.GER, "{1} wurde im feurigen Wirbel gefangen!"}, {Language.FRE, "{1} s'est retrouvé piégé dans le vortex de feu !"}, {Language.SPN, "¡{1} quedó atrapado en el vórtice de fuego!"}, {Language.ITA, "{1} è rimasto intrappolato nel vortice di fuoco!"}, {Language.KOR, "{1}이(가) 불타는 소용돌이에 갇혔습니다!"}, {Language.CHN_SIM, "{1}被困在火焰漩涡中了！"}, {Language.CHN_TRA, "{1}被困在火焰漩渦中了！"}, }},
+			{WILD_MON_TRAPPED_IN_FIERY_VORTEX, new() {{Language.ENG, "The wild {1} became trapped in the fiery vortex!"}, {Language.JPN, "野生の {1} が燃えるような渦に閉じ込められました!"}, {Language.GER, "Die Wildnis {1} wurde im feurigen Wirbel gefangen!"}, {Language.FRE, "Le sauvage {1} s'est retrouvé piégé dansle vortex de feu !"}, {Language.SPN, "¡El salvaje {1} quedó atrapado en el vórtice de fuego!"}, {Language.ITA, "La natura {1} è rimasta intrappolata nelvortice infuocato!"}, {Language.KOR, "야생의 {1}가 불타는 소용돌이에 갇히게 되었습니다!"}, {Language.CHN_SIM, "野生动物{1}被困在炽热的漩涡中！"}, {Language.CHN_TRA, "野生動物{1}被困在熾熱的漩渦中！"}, }},
+			{OPPOSING_MON_TRAPPED_IN_FIERY_VORTEX, new() {{Language.ENG, "The opposing {1} became trapped in the fiery vortex!"}, {Language.JPN, "敵対する {1} は炎の渦に閉じ込められました!"}, {Language.GER, "Der Gegner {1} wurde im feurigen Wirbel gefangen!"}, {Language.FRE, "Les {1} adverses se sont retrouvés piégés dans le vortex enflammé !"}, {Language.SPN, "¡El oponente {1} quedó atrapado enel vórtice de fuego!"}, {Language.ITA, "L'avversario {1} è rimasto intrappolato nelvortice infuocato!"}, {Language.KOR, "적대 {1}이(가) 불타는 소용돌이에 갇히게 되었습니다!"}, {Language.CHN_SIM, "对方{1}被困在炽热的漩涡中！"}, {Language.CHN_TRA, "對方{1}被困在熾熱的漩渦中！"}, }},
+			{PLAYER_MON_TRAPPED_IN_FIERY_VORTEX, new() {{Language.ENG, "{1}’s {2} became trapped in the fiery vortex!"}, {Language.JPN, "{1} の {2} は、激しい渦の中に閉じ込められました。"}, {Language.GER, "{1}s {2} wurde im feurigen Wirbel gefangen!"}, {Language.FRE, "Le {2} de {1} s'est retrouvé piégédans le vortex de feu !"}, {Language.SPN, "¡Los {2} de {1} quedaron atrapadosen el vórtice de fuego!"}, {Language.ITA, "Il {2} di {1} è rimasto intrappolato el vortice infuocato!"}, {Language.KOR, "{1}의 {2}이(가) 불타오르는 소용돌이 속에갇혔습니다!"}, {Language.CHN_SIM, "{1}的{2}被困在了炽热的漩涡中！"}, {Language.CHN_TRA, "{1}的{2}被困在熾熱的漩渦裡了！"}, }},
+			{MON_TRAPPED_BY_MAGMA, new() {{Language.ENG, "{1} became trapped by swirling magma!"}, {Language.JPN, "{1} は渦巻くマグマに閉じ込められました!"}, {Language.GER, "{1} wurde von wirbelndem Magma gefangen!"}, {Language.FRE, "{1} a été piégé par un magma tourbillonnant !"}, {Language.SPN, "¡{1} quedó atrapado por magma arremolinado!"}, {Language.ITA, "{1} è rimasto intrappolato nel magma vorticoso!"}, {Language.KOR, "{1}이(가) 소용돌이치는 마그마에 갇혔습니다!"}, {Language.CHN_SIM, "{1}被旋转的岩浆困住了！"}, {Language.CHN_TRA, "{1}被旋轉的岩漿困住了！"}, }},
+			{WILD_MON_TRAPPED_BY_MAGMA, new() {{Language.ENG, "The wild {1} became trapped by swirling magma!"}, {Language.JPN, "野生の {1} が 渦巻くマグマに閉じ込められました!"}, {Language.GER, "Die Wildnis {1} wurde von wirbelndem Magma gefangen!"}, {Language.FRE, "Le {1} sauvage a été piégé par sun magma tourbillonnant !"}, {Language.SPN, "¡El salvaje {1} quedó atrapado por magma arremolinado!"}, {Language.ITA, "I selvaggi {1} sono rimasti intrappolati nel magma vorticoso!"}, {Language.KOR, "야생 {1}가 소용돌이치는 마그마에 갇혔습니다!"}, {Language.CHN_SIM, "野生动物{1}被 旋转的岩浆困住了！"}, {Language.CHN_TRA, "野生動物{1}被 旋轉的岩漿困住了！"}, }},
+			{OPPOSING_MON_TRAPPED_BY_MAGMA, new() {{Language.ENG, "The opposing {1} became trapped by swirling magma!"}, {Language.JPN, "敵対する {1} は マグマの渦に閉じ込められました!"}, {Language.GER, "Der Gegner {1} wurde von wirbelndem Magma gefangen!"}, {Language.FRE, "Les {1} adverses ont été piégés par sun magma tourbillonnant !"}, {Language.SPN, "¡El oponente {1} quedó atrapado por magma arremolinado!"}, {Language.ITA, "L'avversario {1} è rimasto intrappolato nel magma vorticoso!"}, {Language.KOR, "상대 {1}이(가) 소용돌이치는 마그마에 갇혔습니다!"}, {Language.CHN_SIM, "对方的{1}被 旋转的岩浆困住了！"}, {Language.CHN_TRA, "對方的{1}被 旋轉的岩漿困住了！"}, }},
+			{PLAYER_MON_TRAPPED_BY_MAGMA, new() {{Language.ENG, "{1}’s {2} became trapped by swirling magma!"}, {Language.JPN, "{1} の {2} は 渦巻くマグマによって閉じ込められました!"}, {Language.GER, "{1}s {2} wurde von wirbelndem Magma gefangen!"}, {Language.FRE, "Le {2} de {1} a été piégé par du magma tourbillonnant !"}, {Language.SPN, "¡El {2} de {1} quedó atrapado por un remolino de magma!"}, {Language.ITA, "Il {2} di {1} è rimasto intrappolato dal magma vorticoso!"}, {Language.KOR, "{1}의 {2}이(가) 소용돌이치는 마그마에 갇혔습니다!"}, {Language.CHN_SIM, "{1}的{2} 被旋转的岩浆困住了！"}, {Language.CHN_TRA, "{1}的{2} 被旋轉的岩漿困住了！"}, }},
+			{MON_TRAPPED_BY_QUICKSAND, new() {{Language.ENG, "{1} became trapped by the quicksand!"}, {Language.JPN, "{1} は流砂に閉じ込められました!"}, {Language.GER, "{1} wurde vom Treibsand gefangen!"}, {Language.FRE, "{1} a été piégé par les sables mouvants !"}, {Language.SPN, "¡{1} quedó atrapado en las arenas movedizas!"}, {Language.ITA, "{1} è rimasto intrappolato nelle sabbie mobili!"}, {Language.KOR, "{1}이(가) 유사에 갇혔습니다!"}, {Language.CHN_SIM, "{1}被流沙困住了！"}, {Language.CHN_TRA, "{1}被流沙困住了！"}, }},
+			{WILD_MON_TRAPPED_BY_QUICKSAND, new() {{Language.ENG, "The wild {1} became trapped by the quicksand!"}, {Language.JPN, "野生の {1} が流砂に閉じ込められました!"}, {Language.GER, "Der wilde {1} wurde vom Treibsand gefangen!"}, {Language.FRE, "Le {1} sauvage a été piégé par les sables mouvants !"}, {Language.SPN, "¡El salvaje {1} quedó atrapado por las arenas movedizas!"}, {Language.ITA, "I {1} selvaggi sono rimasti intrappolati nelle sabbie mobili!"}, {Language.KOR, "야생 {1}이(가) 유사에 갇혔습니다!"}, {Language.CHN_SIM, "野生{1}被流沙困住了！"}, {Language.CHN_TRA, "野生{1}被流沙困住了！"}, }},
+			{OPPOSING_MON_TRAPPED_BY_QUICKSAND, new() {{Language.ENG, "The opposing {1} become trapped bythe quicksand!"}, {Language.JPN, "相手の {1} が流砂に閉じ込められてしまいます!"}, {Language.GER, "Die gegnerischen {1} werden vom Treibsand gefangen!"}, {Language.FRE, "Les {1} adverses se retrouvent piégés parles sables mouvants !"}, {Language.SPN, "¡El oponente {1} queda atrapado porlas arenas movedizas!"}, {Language.ITA, "I {1} avversari rimangono intrappolati nellesabbie mobili!"}, {Language.KOR, "상대 {1}이 유사에 갇히게 되었습니다!"}, {Language.CHN_SIM, "对方{1}被流沙困住了！"}, {Language.CHN_TRA, "對方{1}被流沙困住了！"}, }},
+			{PLAYER_MON_TRAPPED_BY_QUICKSAND, new() {{Language.ENG, "{1}’s {2} become trappedby the quicksand!"}, {Language.JPN, "{1} の {2} が流砂に閉じ込められました!"}, {Language.GER, "{1}s {2} werden vom Treibsand gefangen!"}, {Language.FRE, "Les {2} de {1} se retrouvent piégéspar les sables mouvants !"}, {Language.SPN, "¡Los {2} de {1} quedan atrapadosen las arenas movedizas!"}, {Language.ITA, "I {2} di {1} rimangono intrappolati elle sabbie mobili!"}, {Language.KOR, "{1}의 {2}이(가) 유사에 갇히게 되었습니다!"}, {Language.CHN_SIM, "{1}的{2}被流沙困了！"}, {Language.CHN_TRA, "{1}的{2}被流沙困了！"}, }},
+			{MON_TRAPPED_BY_LIGHTNING, new() {{Language.ENG, "{1} was trapped in a cage of lightning!"}, {Language.JPN, "{1} は雷の檻に閉じ込められました!"}, {Language.GER, "{1} war in einem Käfig aus Blitzen gefangen!"}, {Language.FRE, "{1} a été piégé dans une cage de foudre !"}, {Language.SPN, "¡{1} quedó atrapado en una jaula de relámpagos!"}, {Language.ITA, "{1} era intrappolato in una gabbia di fulmini!"}, {Language.KOR, "{1}이(가) 번개 우리에 갇혔습니다!"}, {Language.CHN_SIM, "{1}被困在闪电笼子里了！"}, {Language.CHN_TRA, "{1}被困在閃電籠子裡了！"}, }},
+			{WILD_MON_TRAPPED_BY_LIGHTNING, new() {{Language.ENG, "The wild {1} was trapped in a cage of lightning!"}, {Language.JPN, "野生の {1} は稲妻の檻に閉じ込められました。"}, {Language.GER, "Der wilde {1} war in einem Käfig aus Blitzen gefangen!"}, {Language.FRE, "Le sauvage {1} était piégé dans une cage de foudre !"}, {Language.SPN, "¡El salvaje {1} quedó atrapado en una jaula de relámpagos!"}, {Language.ITA, "Il {1} ​​selvatico era intrappolato in una gabbia di fulmini!"}, {Language.KOR, "야생 {1}이(가) 번개 우리에 갇혔습니다!"}, {Language.CHN_SIM, "野生{1}被困在闪电笼子里了！"}, {Language.CHN_TRA, "野生{1}被困在閃電籠子裡了！"}, }},
+			{OPPOSING_MON_TRAPPED_BY_LIGHTNING, new() {{Language.ENG, "The opposing {1} was trapped in a cage of lightning!"}, {Language.JPN, "敵対する {1} は雷の檻に閉じ込められました。"}, {Language.GER, "Der gegnerische {1} war in einem Käfig aus Blitzen gefangen!"}, {Language.FRE, "Le {1} adverse était piégé dans une cage de foudre !"}, {Language.SPN, "¡El oponente {1} quedó atrapado en una jaula de rayos!"}, {Language.ITA, "L'{1} avversario era intrappolato in una gabbia di fulmini!"}, {Language.KOR, "상대 {1}이(가) 번개 우리에 갇혔습니다!"}, {Language.CHN_SIM, "对方的{1}被困在闪电笼子里了！"}, {Language.CHN_TRA, "對方的{1}被困在閃電籠子裡了！"}, }},
+			{PLAYER_MON_TRAPPED_BY_LIGHTNING, new() {{Language.ENG, "{1}'s {2} was trapped in a cage of lightning!"}, {Language.JPN, "{1} の {2} は稲妻の檻に閉じ込められました。"}, {Language.GER, "{2} von {1} war in einem Käfig aus Blitzen gefangen!"}, {Language.FRE, "Le {2} de {1} était piégé dans une cage de foudre !"}, {Language.SPN, "¡El {2} de {1} quedó atrapado en una jaula de rayos!"}, {Language.ITA, "Il {2} di {1} era intrappolato in una gabbia di fulmini!"}, {Language.KOR, "{1}의 {2}이(가) 번개 우리에 갇혔습니다!"}, {Language.CHN_SIM, "{1}的{2}被困在闪电笼子里了！"}, {Language.CHN_TRA, "{1}的{2}被困在閃電籠子裡了！"}, }},
 			{MON_PROTECTED_BY_SAFEGUARD, new() {{Language.ENG, "{1} is protected by Safeguard!"}, {Language.JPN, "{1} はセーフガードによって保護されています!"}, {Language.GER, "{1} ist durch Safeguard geschützt!"}, {Language.FRE, "{1} est protégé par Sauvegarde !"}, {Language.SPN, "¡{1} está protegido por Safeguard!"}, {Language.ITA, "{1} è protetto da Safeguard!"}, {Language.KOR, "{1}은(는) Safeguard로 보호됩니다!"}, {Language.CHN_SIM, "{1} 受 Safeguard 保护！"}, {Language.CHN_TRA, "{1} 受 Safeguard 保護！"}, }},
 			{WILD_MON_PROTECTED_BY_SAFEGUARD, new() {{Language.ENG, "The wild {1} is protected by Safeguard!"}, {Language.JPN, "野生の {1} はセーフガードによって保護されています。"}, {Language.GER, "Das wilde {1} ist durch Safeguard geschützt!"}, {Language.FRE, "Le sauvage {1} est protégé par Sauvegarde !"}, {Language.SPN, "¡El comodín {1} está protegido por Safeguard!"}, {Language.ITA, "Il {1} ​​selvaggio è protetto da Safeguard!"}, {Language.KOR, "야생 {1}은(는) Safeguard로 보호됩니다!"}, {Language.CHN_SIM, "野生{1}受到Safeguard保护！"}, {Language.CHN_TRA, "野生{1}受到Safeguard保護！"}, }},
 			{OPPOSING_MON_PROTECTED_BY_SAFEGUARD, new() {{Language.ENG, "The opposing {1} is protected by Safeguard!"}, {Language.JPN, "相手の {1} はセーフガードによって保護されています。"}, {Language.GER, "Die gegnerische {1} ist durch Safeguard geschützt!"}, {Language.FRE, "Le {1} adverse est protégé par Sauvegarde !"}, {Language.SPN, "¡El oponente {1} está protegido por Safeguard!"}, {Language.ITA, "Il {1} ​​avversario è protetto da Salvaguardia!"}, {Language.KOR, "상대 {1}은(는) Safeguard에 의해 보호됩니다!"}, {Language.CHN_SIM, "对方的{1}受到Safeguard的保护！"}, {Language.CHN_TRA, "對方的{1}受到Safeguard的保護！"}, }},
@@ -3091,6 +3459,10 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_CAN_NO_LONGER_ESCAPE, new() {{Language.ENG, "The wild {1} can no longer escape!"}, {Language.JPN, "野生の {1} はもう逃げられません!"}, {Language.GER, "Der Wilde {1} kann nicht mehr entkommen!"}, {Language.FRE, "Le sauvage {1} ne peut plus s'échapper !"}, {Language.SPN, "¡El salvaje {1} ya no puede escapar!"}, {Language.ITA, "I {1} selvaggi non possono più scappare!"}, {Language.KOR, "야생 {1}은(는) 더 이상 탈출할 수 없습니다!"}, {Language.CHN_SIM, "野生的{1}再也无法逃脱了！"}, {Language.CHN_TRA, "野生的{1}再也無法逃脫了！"}, }},
 			{OPPOSING_MON_CAN_NO_LONGER_ESCAPE, new() {{Language.ENG, "The opposing {1} can no longer escape!"}, {Language.JPN, "相手の {1} はもう逃げることはできません!"}, {Language.GER, "Der gegnerische {1} kann nicht mehr entkommen!"}, {Language.FRE, "Le {1} adverse ne peut plus s'échapper !"}, {Language.SPN, "¡El oponente {1} ya no puede escapar!"}, {Language.ITA, "Il {1} ​​avversario non può più scappare!"}, {Language.KOR, "상대 {1}은(는) 더 이상 탈출할 수 없습니다!"}, {Language.CHN_SIM, "对方的{1}再也无法逃脱了！"}, {Language.CHN_TRA, "對方的{1}再也無法逃脫了！"}, }},
 			{PLAYER_MON_CAN_NO_LONGER_ESCAPE, new() {{Language.ENG, "{1}’s {2} can no longer escape!"}, {Language.JPN, "{1} の {2} はもう逃げられません!"}, {Language.GER, "{2} von {1} kann nicht mehr entkommen!"}, {Language.FRE, "Les {2} de {1} ne peuvent plus s'échapper !"}, {Language.SPN, "¡El {2} de {1} ya no puede escapar!"}, {Language.ITA, "Il {2} di {1} non può più scappare!"}, {Language.KOR, "{1}의 {2}은(는) 더 이상 이스케이프할 수 없습니다!"}, {Language.CHN_SIM, "{1}的{2}再也无法逃脱了！"}, {Language.CHN_TRA, "{1}的{2}再也無法逃脫了！"}, }},
+			{MON_CANT_ESCAPE, new() {{Language.ENG, "{1} can’t escape!"}, {Language.JPN, "{1} は逃げられません!"}, {Language.GER, "{1} kann nicht entkommen!"}, {Language.FRE, "{1} ne peut pas s'échapper !"}, {Language.SPN, "¡{1} no puede escapar!"}, {Language.ITA, "{1} non può scappare!"}, {Language.KOR, "{1}은(는) 탈출할 수 없습니다!"}, {Language.CHN_SIM, "{1}无法逃脱！"}, {Language.CHN_TRA, "{1}無法逃脫！"}, }},
+			{WILD_MON_CANT_ESCAPE, new() {{Language.ENG, "The wild {1} can’t escape!"}, {Language.JPN, "野生の {1} は逃げられません!"}, {Language.GER, "Die Wildnis {1} kann nicht entkommen!"}, {Language.FRE, "Le {1} sauvage ne peut pas s'échapper !"}, {Language.SPN, "¡El salvaje {1} no puede escapar!"}, {Language.ITA, "I {1} selvaggi non possono scappare!"}, {Language.KOR, "야생 {1}은(는) 탈출할 수 없습니다!"}, {Language.CHN_SIM, "野生的{1}无法逃脱！"}, {Language.CHN_TRA, "野生的{1}無法逃脫！"}, }},
+			{OPPOSING_MON_CANT_ESCAPE, new() {{Language.ENG, "The opposing {1} can’t escape!"}, {Language.JPN, "相手の {1} は逃げることができません!"}, {Language.GER, "Der gegnerische {1} kann nicht entkommen!"}, {Language.FRE, "Le {1} adverse ne peut pas s'échapper !"}, {Language.SPN, "¡El oponente {1} no puede escapar!"}, {Language.ITA, "Il {1} ​​avversario non può scappare!"}, {Language.KOR, "상대 {1}은(는) 탈출할 수 없습니다!"}, {Language.CHN_SIM, "对方的{1}无法逃脱！"}, {Language.CHN_TRA, "對方的{1}無法逃脫！"}, }},
+			{PLAYER_MON_CANT_ESCAPE, new() {{Language.ENG, "{1}’s {2} can’t escape!"}, {Language.JPN, "{1} の {2} は逃げられません!"}, {Language.GER, "{1}s {2} kann nicht entkommen!"}, {Language.FRE, "Les {2} de {1} ne peuvent pas s'échapper !"}, {Language.SPN, "¡El {2} de {1} no puede escapar!"}, {Language.ITA, "Il {2} di {1} non può scappare!"}, {Language.KOR, "{1}의 {2}은(는) 탈출할 수 없습니다!"}, {Language.CHN_SIM, "{1}的{2}无法逃脱！"}, {Language.CHN_TRA, "{1}的{2}無法逃脫！"}, }},
 			{MON_TYPE_CHANGED, new() {{Language.ENG, "{1}’s type changed to {2}!"}, {Language.JPN, "{1} のタイプが {2} に変更されました。"}, {Language.GER, "Der Typ von {1} wurde in {2} geändert!"}, {Language.FRE, "Le type de {1} est devenu {2} !"}, {Language.SPN, "¡El tipo de {1} cambió a {2}!"}, {Language.ITA, "Il tipo di {1} è cambiato in {2}!"}, {Language.KOR, "{1}의 유형이 {2}(으)로 변경되었습니다!"}, {Language.CHN_SIM, "{1} 的类型更改为 {2}！"}, {Language.CHN_TRA, "{1} 的類型改為 {2}！"}, }},
 			{WILD_MON_TYPE_CHANGED, new() {{Language.ENG, "The wild {1}’s type changed to {2}!"}, {Language.JPN, "野生の {1} のタイプが {2} に変わりました!"}, {Language.GER, "Der Typ des Wilds {1} wurde in {2} geändert!"}, {Language.FRE, "Le type du joker {1} a été modifiéen {2} !"}, {Language.SPN, "¡El tipo del comodín {1} cambióa {2}!"}, {Language.ITA, "Il tipo del selvaggio {1} è cambiatoin {2}!"}, {Language.KOR, "야생의 {1} 유형이{2}(으)로 변경되었습니다!"}, {Language.CHN_SIM, "野生{1}的类型已更改为{2}！"}, {Language.CHN_TRA, "野生{1}的類型已更改為{2}！"}, }},
 			{OPPOSING_MON_TYPE_CHANGED, new() {{Language.ENG, "The opposing {1}’s type changed to {2}!"}, {Language.JPN, "相手の {1} のタイプが {2} に変更されました!"}, {Language.GER, "Der Typ des Gegners {1} hat sich zu {2} geändert!"}, {Language.FRE, "Le type du {1} adverse a été modifiéen {2} !"}, {Language.SPN, "¡El tipo del oponente {1} cambióa {2}!"}, {Language.ITA, "Il tipo dell'avversario {1} è cambiatoin {2}!"}, {Language.KOR, "상대 {1}의 유형이{2}(으)로 변경되었습니다!"}, {Language.CHN_SIM, "对方的{1}类型已更改为{2}！"}, {Language.CHN_TRA, "對方的{1}類型已更改為{2}！"}, }},
@@ -3103,6 +3475,10 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_CANNOT_USE_MOVE, new() {{Language.ENG, "The wild {1} cannot use {2}!"}, {Language.JPN, "野生の {1} は  {2} を使用できません!"}, {Language.GER, "Die Wildnis {1} kann {2} nicht verwenden!"}, {Language.FRE, "Le {1} sauvage ne peut pas utiliser {2} !"}, {Language.SPN, "¡El salvaje {1} no puede usar {2}!"}, {Language.ITA, "Il selvaggio {1} non puòusare {2}!"}, {Language.KOR, "야생 {1}는 {2}을(를) 사용할 수 없습니다!"}, {Language.CHN_SIM, "野生的{1}无法 使用{2}！"}, {Language.CHN_TRA, "野生的{1}無法 使用{2}！"}, }},
 			{OPPOSING_MON_CANNOT_USE_MOVE, new() {{Language.ENG, "The opposing {1} cannot use {2}!"}, {Language.JPN, "相手の {1} は  {2} を使用できません!"}, {Language.GER, "Der Gegner {1} kann {2} nicht verwenden!"}, {Language.FRE, "Les {1} adverses ne peuvent pas utiliser {2} !"}, {Language.SPN, "¡El oponente {1} no puede usar {2}!"}, {Language.ITA, "L'avversario {1} non puòusare {2}!"}, {Language.KOR, "상대 {1}는 {2}을(를) 사용할 수 없습니다!"}, {Language.CHN_SIM, "对方的{1}不能 使用{2}！"}, {Language.CHN_TRA, "對方的{1}不能 用{2}！"}, }},
 			{PLAYER_MON_CANNOT_USE_MOVE, new() {{Language.ENG, "{1}’s {2} cannot use {3}!"}, {Language.JPN, "{1} の {2} は  {3} を使用できません。"}, {Language.GER, "{2} von {1} kann {3} nicht verwenden!"}, {Language.FRE, "Le {2} de {1} ne peut pas utiliser {3} !"}, {Language.SPN, "¡Los {2} de {1} no pueden usar {3}!"}, {Language.ITA, "Il {2} di {1} non puòutilizzare {3}!"}, {Language.KOR, "{1}의 {2}은 {3}을(를) 사용할 수 없습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 无法 使用 {3}！"}, {Language.CHN_TRA, "{1} 的 {2} 無法 使用 {3}！"}, }},
+			{MON_WAS_HURT_BY_X, new() {{Language.ENG, "{1} was hurt by {2}!"}, {Language.JPN, "{1}は{2}によって傷つけられました!"}, {Language.GER, "{1} wurde von {2} verletzt!"}, {Language.FRE, "{1} a été blessé par {2} !"}, {Language.SPN, "¡{1} resultó herido por {2}!"}, {Language.ITA, "{1} è stato ferito da {2}!"}, {Language.KOR, "{1}이(가) {2} 때문에 다쳤습니다!"}, {Language.CHN_SIM, "{1}被{2}伤害了！"}, {Language.CHN_TRA, "{1}被{2}傷害了！"}, }},
+			{WILD_MON_WAS_HURT_BY_X, new() {{Language.ENG, "The wild {1} was hurt by {2}!"}, {Language.JPN, "野生の {1} は {2} によって傷つけられました!"}, {Language.GER, "Der wilde {1} wurde von {2} verletzt!"}, {Language.FRE, "Le sauvage {1} a été blessé par {2} !"}, {Language.SPN, "¡El salvaje {1} fue herido por {2}!"}, {Language.ITA, "Il {1} ​​selvatico è stato ferito da {2}!"}, {Language.KOR, "야생 {1}이(가) {2}에게 상처를 입었습니다!"}, {Language.CHN_SIM, "野生{1}被{2}伤害了！"}, {Language.CHN_TRA, "野生{1}被{2}傷害了！"}, }},
+			{OPPOSING_MON_WAS_HURT_BY_X, new() {{Language.ENG, "The opposing {1} was hurt by {2}!"}, {Language.JPN, "相手の {1} は {2} によって負傷しました!"}, {Language.GER, "Der gegnerische {1} wurde durch {2} verletzt!"}, {Language.FRE, "Le {1} adverse a été blessé par {2} !"}, {Language.SPN, "¡El oponente {1} fue herido por {2}!"}, {Language.ITA, "Il {1} ​​avversario è stato ferito da {2}!"}, {Language.KOR, "상대 {1}이(가) {2}에게 피해를 입었습니다!"}, {Language.CHN_SIM, "对方的{1}被{2}伤害了！"}, {Language.CHN_TRA, "對方的{1}被{2}傷害了！"}, }},
+			{PLAYER_MON_WAS_HURT_BY_X, new() {{Language.ENG, "{1}'s {2} was hurt by {3}!"}, {Language.JPN, "{1}の{2}は{3}によって傷つけられました！"}, {Language.GER, "{2} von {1} wurde von {3} verletzt!"}, {Language.FRE, "Le {2} de {1} a été blessé par {3} !"}, {Language.SPN, "¡El {2} de {1} fue herido por {3}!"}, {Language.ITA, "Il {2} di {1} è stato ferito da {3}!"}, {Language.KOR, "{1}의 {2}이(가) {3}에 의해 손상되었습니다!"}, {Language.CHN_SIM, "{1}的{2}被{3}伤害了！"}, {Language.CHN_TRA, "{1}的{2}被{3}傷害了！"}, }},
 			{MON_IS_GETTING_PUMPED, new() {{Language.ENG, "{1} is getting pumped!"}, {Language.JPN, "{1} が盛り上がってきています!"}, {Language.GER, "{1} kommt in Schwung!"}, {Language.FRE, "{1} est excité !"}, {Language.SPN, "¡{1} está entusiasmado!"}, {Language.ITA, "{1} si sta caricando!"}, {Language.KOR, "{1}이(가) 펌핑되고 ​​있습니다!"}, {Language.CHN_SIM, "{1} 正在抽水！"}, {Language.CHN_TRA, "{1} 在抽水中！"}, }},
 			{WILD_MON_IS_GETTING_PUMPED, new() {{Language.ENG, "The wild {1} is getting pumped!"}, {Language.JPN, "野生の {1} が盛り上がっています!"}, {Language.GER, "Die wilde {1} kommt in Schwung!"}, {Language.FRE, "Le {1} sauvage est pompé !"}, {Language.SPN, "¡El salvaje {1} está siendo emocionado!"}, {Language.ITA, "Il {1} ​​selvaggio si sta caricando!"}, {Language.KOR, "야생의 {1}이(가) 펌핑되고 ​​있습니다!"}, {Language.CHN_SIM, "狂野的{1}正在变得更加充满活力！"}, {Language.CHN_TRA, "狂野的{1}正在變得更加充滿活力！"}, }},
 			{OPPOSING_MON_IS_GETTING_PUMPED, new() {{Language.ENG, "The opposing {1} is getting pumped!"}, {Language.JPN, "相手の {1} が盛り上がっています!"}, {Language.GER, "Die gegnerische {1} kommt in Schwung!"}, {Language.FRE, "Le {1} adverse est gonflé !"}, {Language.SPN, "¡El oponente {1} está entusiasmado!"}, {Language.ITA, "Il {1} ​​avversario si sta caricando!"}, {Language.KOR, "상대 {1}이(가) 펌핑되고 ​​있습니다!"}, {Language.CHN_SIM, "对方的{1} 正在被抽动！"}, {Language.CHN_TRA, "對方的{1} 正在被抽動！"}, }},
@@ -3212,6 +3588,10 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_USED_COURT_CHANGE, new() {{Language.ENG, "The wild {1} swapped the battle effects affecting each side of the field!"}, {Language.JPN, "野生の {1} が戦闘効果を交換し、 フィールドの両側に影響を与えました!"}, {Language.GER, "Das Wild {1} vertauschte die Kampfeffekte, die sich auf beide Seiten des Feldes auswirkten!"}, {Language.FRE, "Le sauvage {1} a permuté les effets de combat affectant chaque côté du terrain !"}, {Language.SPN, "¡El comodín {1} intercambió los efectos de batalla que afectan a cada lado del campo!"}, {Language.ITA, "Il {1} ​​selvaggio ha scambiato gli effetti di battaglia influenzando ogni lato del campo!"}, {Language.KOR, "야생 {1}이(가) 필드 양쪽에 영향을 미치는 전투 효과를 교환했습니다!"}, {Language.CHN_SIM, "狂野的{1}交换了 影响场地两边的战斗效果！"}, {Language.CHN_TRA, "狂野的{1}交換了 影響場地兩邊的戰鬥效果！"}, }},
 			{OPPOSING_MON_USED_COURT_CHANGE, new() {{Language.ENG, "The opposing {1} swapped the battle effects affecting each side of the field!"}, {Language.JPN, "対戦相手の {1} が戦闘効果を交換し、 フィールドの両側に影響を与えました!"}, {Language.GER, "Der gegnerische {1} vertauschte die Kampfeffekte, die sich auf beide Seiten des Feldes auswirkten!"}, {Language.FRE, "Les {1} adverses ont échangé les effets de combat affectant chaque côté du terrain !"}, {Language.SPN, "¡El oponente {1} intercambió los efectos de batalla que afectan a cada lado del campo!"}, {Language.ITA, "Il {1} ​​avversario ha scambiato gli effetti di battaglia influenzando ogni lato del campo!"}, {Language.KOR, "상대 {1}은(는) 필드의 양쪽에 영향을 미치는 전투 효과를 교환했습니다!"}, {Language.CHN_SIM, "对方的{1}交换了 影响场地双方的战斗效果！"}, {Language.CHN_TRA, "對方的{1}交換了 影響場地雙方的戰鬥效果！"}, }},
 			{PLAYER_MON_USED_COURT_CHANGE, new() {{Language.ENG, "{1}’s {2} swapped the battle effects affecting each side of the field!"}, {Language.JPN, "{1} の {2} は戦闘を交換し、 フィールドの両側に影響を及ぼします!"}, {Language.GER, "{1}s {2} haben die Kampfeffekte getauscht, die sich auf beide Seiten des Feldes auswirken!"}, {Language.FRE, "Les {2} de {1} ont permuté les effets de combat affectant chaque côté du terrain !"}, {Language.SPN, "¡El {2} de {1} intercambió los efectos de batalla que afectan a cada lado del campo!"}, {Language.ITA, "I {2} di {1} hanno scambiato gli effetti della battaglia che influenzano ogni lato del campo!"}, {Language.KOR, "{1}의 {2}는 필드의 각 측면에 영향을 미치는 전투 효과를 교환했습니다!"}, {Language.CHN_SIM, "{1}的{2}交换了 影响场上双方的战斗效果！"}, {Language.CHN_TRA, "{1}的{2}交換了 影響場上雙方的戰鬥效果！"}, }},
+			{MON_TRAPPED_BY_SNAP_TRAP, new() {{Language.ENG, "{1} got trapped by a snap trap!"}, {Language.JPN, "{1} がスナップトラップに閉じ込められました!"}, {Language.GER, "{1} wurde von einer Schnappfalle gefangen!"}, {Language.FRE, "{1} a été piégé par un piège à pression !"}, {Language.SPN, "¡{1} quedó atrapado en una trampa!"}, {Language.ITA, "{1} è rimasto intrappolato da una trappola a scatto!"}, {Language.KOR, "{1}이(가) 스냅 트랩에 갇혔습니다!"}, {Language.CHN_SIM, "{1}被弹簧陷阱困住了！"}, {Language.CHN_TRA, "{1}被彈簧陷阱困住了！"}, }},
+			{WILD_MON_TRAPPED_BY_SNAP_TRAP, new() {{Language.ENG, "The wild {1} got trapped by a snap trap!"}, {Language.JPN, "野生の {1} がスナップトラップに閉じ込められました!"}, {Language.GER, "Der wilde {1} wurde von einer Schnappfalle gefangen!"}, {Language.FRE, "Le {1} sauvage a été piégé par un piège à pression !"}, {Language.SPN, "¡El salvaje {1} quedó atrapado en una trampa!"}, {Language.ITA, "I {1} selvatici sono rimasti intrappolati in una trappola a scatto!"}, {Language.KOR, "야생 {1}이(가) 스냅 트랩에 갇혔습니다!"}, {Language.CHN_SIM, "野生动物{1}被弹簧陷阱困住了！"}, {Language.CHN_TRA, "野生動物{1}被彈簧陷阱困住了！"}, }},
+			{OPPOSING_MON_TRAPPED_BY_SNAP_TRAP, new() {{Language.ENG, "The opposing {1} got trapped by a snap trap!"}, {Language.JPN, "相手の {1} がスナップ トラップに閉じ込められました。"}, {Language.GER, "Der gegnerische {1} wurde von einer Schlagfalle gefangen!"}, {Language.FRE, "Le {1} adverse s'est fait piéger par un piège à pression !"}, {Language.SPN, "¡El oponente {1} quedó atrapado en una trampa!"}, {Language.ITA, "Il {1} ​​avversario è stato intrappolato da una trappola a scatto!"}, {Language.KOR, "상대 {1}이(가) 스냅 트랩에 갇혔습니다!"}, {Language.CHN_SIM, "对方的{1}被快速陷阱困住了！"}, {Language.CHN_TRA, "對方的{1}被快速陷阱困住了！"}, }},
+			{PLAYER_MON_TRAPPED_BY_SNAP_TRAP, new() {{Language.ENG, "{1}’s {2} got trapped by a snap trap!"}, {Language.JPN, "{1} の {2} が  スナップトラップに閉じ込められました!"}, {Language.GER, "{1}s {2} wurde voneiner Schnappfalle gefangen!"}, {Language.FRE, "Le {2} de {1} a été piégé par a un piège instantané !"}, {Language.SPN, "¡El {2} de {1} quedó atrapadoen una trampa!"}, {Language.ITA, "{2} di {1} è rimasto intrappolato dauna trappola!"}, {Language.KOR, "{1}의 {2}이(가) 스냅 트랩에 갇혔습니다!"}, {Language.CHN_SIM, "{1}的{2}被 捕捉陷阱困住了！"}, {Language.CHN_TRA, "{1}的{2}被 捕捉陷阱困住了！"}, }},
 			{MONS_PP_WAS_REDUCED, new() {{Language.ENG, "{1}’s PP was reduced!"}, {Language.JPN, "{1}のPPが減りました！"}, {Language.GER, "Die PP von {1} wurden reduziert!"}, {Language.FRE, "Les PP de {1} ont été réduits !"}, {Language.SPN, "¡El PP de {1} se redujo!"}, {Language.ITA, "I PP di {1} sono stati ridotti!"}, {Language.KOR, "{1}의 PP가 감소했습니다!"}, {Language.CHN_SIM, "{1}的PP减少了！"}, {Language.CHN_TRA, "{1}的PP減少了！"}, }},
 			{WILD_MONS_PP_WAS_REDUCED, new() {{Language.ENG, "The wild {1}’s PP was reduced!"}, {Language.JPN, "野生の{1}のPPが減りました！"}, {Language.GER, "Die PP des wilden {1} wurden reduziert!"}, {Language.FRE, "Le PP du {1} sauvage a été réduit !"}, {Language.SPN, "¡El PP del salvaje {1} fue reducido!"}, {Language.ITA, "I PP del {1} ​​selvatico sono stati ridotti!"}, {Language.KOR, "야생 {1}의 PP가 감소했습니다!"}, {Language.CHN_SIM, "野生{1}的PP减少了！"}, {Language.CHN_TRA, "野生{1}的PP減少了！"}, }},
 			{OPPOSING_MONS_PP_WAS_REDUCED, new() {{Language.ENG, "The opposing {1}’s PP was reduced!"}, {Language.JPN, "相手の{1}のPPが減少しました!"}, {Language.GER, "Der PP des gegnerischen {1} wurde reduziert!"}, {Language.FRE, "Le PP du {1} adverse a été réduit !"}, {Language.SPN, "¡El PP del oponente {1} fue reducido!"}, {Language.ITA, "I PP dell'avversario {1} sono stati ridotti!"}, {Language.KOR, "상대 {1}의 PP가 감소했습니다!"}, {Language.CHN_SIM, "对方{1}的PP减少了！"}, {Language.CHN_TRA, "對方{1}的PP減少了！"}, }},

@@ -7168,7 +7168,63 @@
 		</text>
 	</string>
 	<string>
-		<key>key5093</key>
+		<key>MON_WAS_TRAPPED_BY_X</key>
+		<text>
+			<en lang="english">{1} was trapped by {2}!</en>
+			<ja lang="japanese">{1} は {2} に閉じ込められました!</ja>
+			<de lang="german">{1} wurde von {2} gefangen!</de>
+			<fr lang="french">{1} a été piégé par {2} !</fr>
+			<es lang="spanish">¡{1} quedó atrapado por {2}!</es>
+			<it lang="italian">{1} è stato intrappolato da {2}!</it>
+			<ko lang="korean">{1}이(가) {2}에 의해 갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}被{2}困住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}被{2}困住了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_WAS_TRAPPED_BY_X</key>
+		<text>
+			<en lang="english">The wild {1} was trapped by {2}!</en>
+			<ja lang="japanese">野生の {1} が {2} に捕らえられました!</ja>
+			<de lang="german">Der wilde {1} wurde von {2} gefangen!</de>
+			<fr lang="french">Le {1} sauvage a été piégé par {2} !</fr>
+			<es lang="spanish">¡El salvaje {1} quedó atrapado por {2}!</es>
+			<it lang="italian">Il {1} ​​selvatico è stato intrappolato da {2}!</it>
+			<ko lang="korean">야생 {1}이(가) {2}에 의해 갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野生的{1}被{2}困住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野性的{1}被{2}困住了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_WAS_TRAPPED_BY_X</key>
+		<text>
+			<en lang="english">The opposing {1} was trapped by {2}!</en>
+			<ja lang="japanese">相手の {1} が {2} に閉じ込められました!</ja>
+			<de lang="german">Der gegnerische {1} wurde von {2} gefangen!</de>
+			<fr lang="french">Le {1} adverse a été piégé par {2} !</fr>
+			<es lang="spanish">¡El oponente {1} quedó atrapado por {2}!</es>
+			<it lang="italian">Il {1} ​​avversario è stato intrappolato da {2}!</it>
+			<ko lang="korean">상대 {1}이(가) {2}에 의해 갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}被{2}困住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}被{2}困住了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_WAS_TRAPPED_BY_X</key>
+		<text>
+			<en lang="english">{1}'s {2} was trapped by {3}!</en>
+			<ja lang="japanese">{1} の {2} が {3} に閉じ込められました!</ja>
+			<de lang="german">{2} von {1} wurde von {3} gefangen!</de>
+			<fr lang="french">Le {2} de {1} a été piégé par {3} !</fr>
+			<es lang="spanish">¡El {2} de {1} quedó atrapado por {3}!</es>
+			<it lang="italian">Il {2} di {1} è stato intrappolato da {3}!</it>
+			<ko lang="korean">{1}의 {2}이(가) {3}에 의해 갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}被{3}困住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}被{3}困住了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MON_WAS_FREED_FROM_X</key>
 		<text>
 			<en lang="english">{1} was freed from {2}!</en>
 			<ja lang="japanese">{1} は {2} から解放されました!</ja>
@@ -7182,45 +7238,45 @@
 		</text>
 	</string>
 	<string>
-		<key>key5094</key>
+		<key>WILD_MON_WAS_FREED_FROM_X</key>
 		<text>
-			<en lang="english">{1}The wild {2} was freedfrom {3}!</en>
-			<ja lang="japanese">{1}野生の {2} が {3} から解放されました!</ja>
-			<de lang="german">{1}Die Wildnis {2} wurdevon {3} befreit!</de>
-			<fr lang="french">{1}Le sauvage {2} a été libéréde {3} !</fr>
-			<es lang="spanish">{1}¡El salvaje {2} fue liberadode {3}!</es>
-			<it lang="italian">{1}Il selvaggio {2} è stato liberatoda {3}!</it>
-			<ko lang="korean">{1}야생 {2}이(가) {3}에서 해방되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}野生{2}已从{3}手中解救出来！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}野生{2}已從{3}手中解救出來！</zh-tw>
+			<en lang="english">The wild {1} was freed from {2}!</en>
+			<ja lang="japanese">野生の {1} が {2} から解放されました!</ja>
+			<de lang="german">Die Wildnis {1} wurdevon {2} befreit!</de>
+			<fr lang="french">Le sauvage {1} a été libéréde {2} !</fr>
+			<es lang="spanish">¡El salvaje {1} fue liberadode {2}!</es>
+			<it lang="italian">Il selvaggio {1} è stato liberatoda {2}!</it>
+			<ko lang="korean">야생 {1}이(가) {2}에서 해방되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野生{1}已从{2}手中解救出来！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野生{1}已從{2}手中解救出來！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5095</key>
+		<key>OPPOSING_MON_WAS_FREED_FROM_X</key>
 		<text>
-			<en lang="english">{1}The opposing {2} was freedfrom {3}!</en>
-			<ja lang="japanese">{1}敵対する {2} は {3} から解放されました!</ja>
-			<de lang="german">{1}Der Gegner {2} wurdevon {3} befreit!</de>
-			<fr lang="french">{1}Le {2} adverse a été libéréde {3} !</fr>
-			<es lang="spanish">{1}¡El oponente {2} fue liberadode {3}!</es>
-			<it lang="italian">{1}L'avversario {2} è stato liberatoda {3}!</it>
-			<ko lang="korean">{1}상대 {2}이(가) {3}에서 해방되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方的{2}已从{3}手中解救出来！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方的{2}已從{3}手中解救出來！</zh-tw>
+			<en lang="english">The opposing {1} was freed from {2}!</en>
+			<ja lang="japanese">敵対する {1} は {2} から解放されました!</ja>
+			<de lang="german">Der Gegner {1} wurdevon {2} befreit!</de>
+			<fr lang="french">Le {1} adverse a été libéréde {2} !</fr>
+			<es lang="spanish">¡El oponente {1} fue liberadode {2}!</es>
+			<it lang="italian">L'avversario {1} è stato liberatoda {2}!</it>
+			<ko lang="korean">상대 {1}이(가) {2}에서 해방되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}已从{2}手中解救出来！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}已從{2}手中解救出來！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5096</key>
+		<key>PLAYER_MON_WAS_FREED_FROM_X</key>
 		<text>
-			<en lang="english">{1}{2}’s {3} was freedfrom {4}!</en>
-			<ja lang="japanese">{1}{2} の {3} は {4} から解放されました!</ja>
-			<de lang="german">{1}{2}s {3} wurdevon {4} befreit!</de>
-			<fr lang="french">Le {3} de {1}{2} a été libéréde {4} !</fr>
-			<es lang="spanish">¡El {3} de {1}{2} fue liberadode {4}!</es>
-			<it lang="italian">Il {3} di {1}{2} è stato liberatoda {4}!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) {4}에서 해제되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2} 的 {3} 已从 {4} 中解救出来！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2} 的 {3} 已從 {4} 解救出來！</zh-tw>
+			<en lang="english">{1}’s {2} was freed from {3}!</en>
+			<ja lang="japanese">{1} の {2} は {3} から解放されました!</ja>
+			<de lang="german">{1}s {2} wurdevon {3} befreit!</de>
+			<fr lang="french">Le {2} de {1} a été libéréde {3} !</fr>
+			<es lang="spanish">¡El {2} de {1} fue liberadode {3}!</es>
+			<it lang="italian">Il {2} di {1} è stato liberatoda {3}!</it>
+			<ko lang="korean">{1}의 {2}이(가) {3}에서 해제되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1} 的 {2} 已从 {3} 中解救出来！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1} 的 {2} 已從 {3} 解救出來！</zh-tw>
 		</text>
 	</string>
 	<string>
@@ -15624,7 +15680,231 @@
 		</text>
 	</string>
 	<string>
-		<key>key5691</key>
+		<key>MON_WAS_WRAPPED_BY_MON</key>
+		<text>
+			<en lang="english">{1} was wrapped by {2}!</en>
+			<ja lang="japanese">{1} は {2} によってラップされました!</ja>
+			<de lang="german">{1} wurde von {2} umwickelt!</de>
+			<fr lang="french">{1} a été enveloppé par {2} !</fr>
+			<es lang="spanish">¡{1} fue envuelto por {2}!</es>
+			<it lang="italian">{1} è stato avvolto da {2}!</it>
+			<ko lang="korean">{1}이(가) {2}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1} 被 {2} 包裹！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1} 被 {2} 包裹！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MON_WAS_WRAPPED_BY_WILD_MON</key>
+		<text>
+			<en lang="english">{1} was wrapped by the wild {2}!</en>
+			<ja lang="japanese">{1} は野生の {2} に包まれました!</ja>
+			<de lang="german">{1} wurde von der Wildnis {2} umhüllt!</de>
+			<fr lang="french">{1} a été enveloppé par le sauvage {2} !</fr>
+			<es lang="spanish">¡{1} fue envuelto por el salvaje {2}!</es>
+			<it lang="italian">{1} è stato avvolto dal selvaggio {2}!</it>
+			<ko lang="korean">{1}이(가) 야생 {2}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}被狂野{2}包裹了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}被狂野{2}包裹了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MON_WAS_WRAPPED_BY_OPPOSING_MON</key>
+		<text>
+			<en lang="english">{1} was wrapped by the opposing {2}!</en>
+			<ja lang="japanese">{1} は相手の {2} にラップされました!</ja>
+			<de lang="german">{1} wurde vom gegnerischen {2} umwickelt!</de>
+			<fr lang="french">{1} a été enroulé par le {2} adverse !</fr>
+			<es lang="spanish">¡{1} fue envuelto por el oponente {2}!</es>
+			<it lang="italian">{1} è stato avvolto dal {2} avversario!</it>
+			<ko lang="korean">{1}이(가) 상대 {2}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}被对方的{2}包围了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}被對方的{2}包圍了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MON_WAS_WRAPPED_BY_PLAYER_MON</key>
+		<text>
+			<en lang="english">{1} was wrapped by {2}'s {3}!</en>
+			<ja lang="japanese">{1} は {2} の {3} によってラップされました!</ja>
+			<de lang="german">{1} wurde von {2}s {3} umwickelt!</de>
+			<fr lang="french">{1} a été emballé par {3} de {2} !</fr>
+			<es lang="spanish">¡{1} fue envuelto por el {3} de {2}!</es>
+			<it lang="italian">{1} è stato avvolto dal {3} di {2}!</it>
+			<ko lang="korean">{1}은(는) {2}의 {3}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}被{2}的{3}包裹了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}被{2}的{3}包裹了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_WAS_WRAPPED_BY_MON</key>
+		<text>
+			<en lang="english">The wild {1} was wrapped by {2}!</en>
+			<ja lang="japanese">野生の {1} は {2} によって包まれました!</ja>
+			<de lang="german">Der wilde {1} wurde von {2} umwickelt!</de>
+			<fr lang="french">Le {1} sauvage a été enveloppé par {2} !</fr>
+			<es lang="spanish">¡El comodín {1} fue envuelto por {2}!</es>
+			<it lang="italian">Il {1} ​​selvaggio è stato avvolto da {2}!</it>
+			<ko lang="korean">야생 {1}이(가) {2}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">狂野的{1}被{2}包裹了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">狂野的{1}被{2}包裹了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_WAS_WRAPPED_BY_WILD_MON</key>
+		<text>
+			<en lang="english">The wild {1} was wrapped by the wild {2}!</en>
+			<ja lang="japanese">野生の {1} が野生の {2} に包まれました!</ja>
+			<de lang="german">Das wilde {1} wurde vom wilden {2} umhüllt!</de>
+			<fr lang="french">Le {1} sauvage a été enveloppé par le {2} sauvage !</fr>
+			<es lang="spanish">¡El comodín {1} fue envuelto por el comodín {2}!</es>
+			<it lang="italian">Il {1} ​​selvaggio è stato avvolto dal {2} selvaggio!</it>
+			<ko lang="korean">야생 {1}이(가) 야생 {2}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野{1}被野{2}包裹了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野{1}被野{2}包裹了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_WAS_WRAPPED_BY_OPPOSING_MON</key>
+		<text>
+			<en lang="english">The wild {1} was wrapped by the opposing {2}!</en>
+			<ja lang="japanese">野生の {1} が相手の {2} に包まれました!</ja>
+			<de lang="german">Die wilde {1} wurde von der gegnerischen {2} umwickelt!</de>
+			<fr lang="french">Le {1} sauvage a été enveloppé par le {2} adverse !</fr>
+			<es lang="spanish">¡El comodín {1} fue envuelto por el {2} contrario!</es>
+			<it lang="italian">Il {1} ​​selvaggio è stato avvolto dal {2} avversario!</it>
+			<ko lang="korean">야생 {1}이(가) 상대 {2}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">狂野的{1}被对方的{2}包裹住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">狂野的{1}被對方的{2}包裹住了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_WAS_WRAPPED_BY_PLAYER_MON</key>
+		<text>
+			<en lang="english">The wild {1} was wrapped by {2}'s {3}!</en>
+			<ja lang="japanese">野生の {1} は {2} の {3} によって包まれました!</ja>
+			<de lang="german">Der wilde {1} wurde von {2}s {3} umwickelt!</de>
+			<fr lang="french">Le {1} sauvage a été enveloppé par le {3} de {2} !</fr>
+			<es lang="spanish">¡El comodín {1} fue envuelto por el {3} de {2}!</es>
+			<it lang="italian">Il {1} ​​selvaggio è stato avvolto dal {3} di {2}!</it>
+			<ko lang="korean">야생 {1}이(가) {2}의 {3}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野生的{1}被{2}的{3}包裹住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野性的{1}被{2}的{3}包裹住了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_WAS_WRAPPED_BY_MON</key>
+		<text>
+			<en lang="english">The opposing {1} was wrapped by {2}!</en>
+			<ja lang="japanese">相手の {1} は {2} によってラップされました!</ja>
+			<de lang="german">Der gegnerische {1} wurde von {2} umwickelt!</de>
+			<fr lang="french">Le {1} adverse a été enroulé par {2} !</fr>
+			<es lang="spanish">¡El {1} ​​contrario fue envuelto por {2}!</es>
+			<it lang="italian">L'{1} avversario è stato avvolto da {2}!</it>
+			<ko lang="korean">상대 {1}이(가) {2}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}被{2}包裹！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}被{2}包裹！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_WAS_WRAPPED_BY_WILD_MON</key>
+		<text>
+			<en lang="english">The opposing {1} was wrapped by the wild {2}!</en>
+			<ja lang="japanese">相手の {1} が野生の {2} に包まれました!</ja>
+			<de lang="german">Der gegnerische {1} wurde vom wilden {2} umwickelt!</de>
+			<fr lang="french">Le {1} adverse a été enveloppé par le {2} sauvage !</fr>
+			<es lang="spanish">¡El {1} ​​contrario fue envuelto por el salvaje {2}!</es>
+			<it lang="italian">L'{1} avversario è stato avvolto dal {2} selvaggio!</it>
+			<ko lang="korean">상대 {1}이(가) 야생 {2}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方{1}被野{2}包裹！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方{1}被野{2}包裹！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_WAS_WRAPPED_BY_OPPOSING_MON</key>
+		<text>
+			<en lang="english">The opposing {1} was wrapped by the opposing {2}!</en>
+			<ja lang="japanese">相手の {1} は相手の {2} によってラップされました!</ja>
+			<de lang="german">Der gegnerische {1} wurde vom gegnerischen {2} umwickelt!</de>
+			<fr lang="french">Le {1} adverse a été enveloppé par le {2} adverse !</fr>
+			<es lang="spanish">¡El {1} ​​contrario fue envuelto por el {2} contrario!</es>
+			<it lang="italian">L'{1} avversario è stato avvolto dal {2} avversario!</it>
+			<ko lang="korean">상대 {1}이 상대 {2}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}被对方的{2}包住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}被對方的{2}包住了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_WAS_WRAPPED_BY_PLAYER_MON</key>
+		<text>
+			<en lang="english">The opposing {1} was wrapped by {2}'s {3}!</en>
+			<ja lang="japanese">相手の {1} は {2} の {3} によってラップされました!</ja>
+			<de lang="german">Der gegnerische {1} wurde von {2}s {3} umwickelt!</de>
+			<fr lang="french">Le {1} adverse a été enveloppé par le {3} de {2} !</fr>
+			<es lang="spanish">¡El {1} ​​contrario fue envuelto por el {3} de {2}!</es>
+			<it lang="italian">L'{1} avversario è stato avvolto dal {3} di {2}!</it>
+			<ko lang="korean">상대 {1}이(가) {2}의 {3}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}被{2}的{3}包住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}被{2}的{3}包住了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_WAS_WRAPPED_BY_MON</key>
+		<text>
+			<en lang="english">{1}'s {2} was wrapped by {3}!</en>
+			<ja lang="japanese">{1} の {2} は {3} によってラップされました。</ja>
+			<de lang="german">{2} von {1} wurde von {3} umwickelt!</de>
+			<fr lang="french">Le {2} de {1} a été enveloppé par {3} !</fr>
+			<es lang="spanish">¡El {2} de {1} fue envuelto por {3}!</es>
+			<it lang="italian">Il {2} di {1} è stato avvolto da {3}!</it>
+			<ko lang="korean">{1}의 {2}이(가) {3}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}被{3}包裹了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}被{3}包裹了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_WAS_WRAPPED_BY_WILD_MON</key>
+		<text>
+			<en lang="english">{1}'s {2} was wrapped by the wild {3}!</en>
+			<ja lang="japanese">{1} の {2} が野生の {3} に包まれました！</ja>
+			<de lang="german">{1}s {2} wurde von der Wildnis {3} umwickelt!</de>
+			<fr lang="french">Le {2} de {1} a été enveloppé par le {3} sauvage !</fr>
+			<es lang="spanish">¡El {2} de {1} fue envuelto por el salvaje {3}!</es>
+			<it lang="italian">Il {2} di {1} è stato avvolto dal {3} selvaggio!</it>
+			<ko lang="korean">{1}의 {2}이(가) 야생 {3}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}被野性的{3}包裹住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}被野性的{3}包裹住了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_WAS_WRAPPED_BY_OPPOSING_MON</key>
+		<text>
+			<en lang="english">{1}'s {2} was wrapped by the opposing {3}!</en>
+			<ja lang="japanese">{1} の {2} が相手の {3} にラップされました!</ja>
+			<de lang="german">{1}s {2} wurde vom gegnerischen {3} umwickelt!</de>
+			<fr lang="french">Le {2} de {1} a été enveloppé par le {3} adverse !</fr>
+			<es lang="spanish">¡El {2} de {1} fue envuelto por el {3} contrario!</es>
+			<it lang="italian">Il {2} di {1} è stato avvolto dal {3} avversario!</it>
+			<ko lang="korean">{1}의 {2}이(가) 상대 {3}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}被对方的{3}包住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}被對方的{3}包住了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_WAS_WRAPPED_BY_PLAYER_MON</key>
+		<text>
+			<en lang="english">{1}'s {2} was wrapped by {3}'s {4}!</en>
+			<ja lang="japanese">{1} の {2} は {3} の {4} によってラップされました。</ja>
+			<de lang="german">{2} von {1} wurde von {4} von {3} umwickelt!</de>
+			<fr lang="french">Le {2} de {1} a été enveloppé par le {4} de {3} !</fr>
+			<es lang="spanish">¡El {2} de {1} fue envuelto por el {4} de {3}!</es>
+			<it lang="italian">Il {2} di {1} è stato avvolto dal {4} di {3}!</it>
+			<ko lang="korean">{1}의 {2}가 {3}의 {4}에 의해 래핑되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}被{3}的{4}包裹着！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}被{3}的{4}包裹著！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MON_CLAMPED_DOWN_ON_MON</key>
 		<text>
 			<en lang="english">{1} clamped down on {2}!</en>
 			<ja lang="japanese">{1}が{2}を取り締まりました！</ja>
@@ -15638,133 +15918,273 @@
 		</text>
 	</string>
 	<string>
-		<key>key5692</key>
+		<key>MON_CLAMPED_DOWN_ON_WILD_MON</key>
 		<text>
-			<en lang="english">{1}The wild {2} clamped down on {3}!</en>
-			<ja lang="japanese">{1}野生の {2} が  {3} を取り締まりました!</ja>
-			<de lang="german">{1}Die Wildnis {2} wird unterdrückt on {3}!</de>
-			<fr lang="french">{1}Le sauvage {2} réprimé on {3} !</fr>
-			<es lang="spanish">{1}¡Los salvajes {2} tomaron medidas drásticas on {3}!</es>
-			<it lang="italian">{1}Il selvaggio {2} ha represso on {3}!</it>
-			<ko lang="korean">{1}야생의 {2}이(가) {3}을(를) 단속했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}野生{2}镇压非{3}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}野{2}鎮壓非{3}！</zh-tw>
+			<en lang="english">{1} clamped down on the wild {2}!</en>
+			<ja lang="japanese">{1} が野生の {2} を取り締まりました!</ja>
+			<de lang="german">{1} hat die Wildnis {2} unter Kontrolle gebracht!</de>
+			<fr lang="french">{1} a réprimé le sauvage {2} !</fr>
+			<es lang="spanish">¡{1} tomó medidas drásticas contra lo salvaje {2}!</es>
+			<it lang="italian">{1} ha represso i {2} selvaggi!</it>
+			<ko lang="korean">{1}이(가) 야생 {2}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}镇压野生动物{2}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}鎮壓野生動物{2}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5693</key>
+		<key>MON_CLAMPED_DOWN_ON_OPPOSING_MON</key>
 		<text>
-			<en lang="english">{1}The opposing {2} clamped down on {3}!</en>
-			<ja lang="japanese">{1}相手の {2} が  {3} を締め上げました!</ja>
-			<de lang="german">{1}Der Gegner {2} hat hart gegen on {3} vorgegangen!</de>
-			<fr lang="french">{1}Les {2} adverses ont réprimé on {3} !</fr>
-			<es lang="spanish">{1}¡El oponente {2} tomó medidas drásticas on {3}!</es>
-			<it lang="italian">{1}L'avversario {2} ha bloccato on {3}!</it>
-			<ko lang="korean">{1}상대 {2}이(가) {3}을(를) 단속했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方{2}镇压非{3}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方{2}鎮壓非{3}！</zh-tw>
+			<en lang="english">{1} clamped down on the opposing {2}!</en>
+			<ja lang="japanese">{1} が敵対する {2} を取り締まりました！</ja>
+			<de lang="german">{1} schlug den gegnerischen {2} hart durch!</de>
+			<fr lang="french">{1} a réprimé le {2} adverse !</fr>
+			<es lang="spanish">¡{1} tomó medidas drásticas contra el {2} contrario!</es>
+			<it lang="italian">{1} ha bloccato il {2} avversario!</it>
+			<ko lang="korean">{1}이(가) 상대 {2}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}压制了对方的{2}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}壓制了對方的{2}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5694</key>
+		<key>MON_CLAMPED_DOWN_ON_PLAYER_MON</key>
 		<text>
-			<en lang="english">{1}{2}’s {3} clamped down on {4}!</en>
-			<ja lang="japanese">{1}{2} の {3} は  {4} を取り締まりました!</ja>
-			<de lang="german">{1}{2}s {3} wird unterdrückt on {4}!</de>
-			<fr lang="french">Les {3} de {1}{2} ont été réprimés on {4} !</fr>
-			<es lang="spanish">¡{1}{2} {3} ha tomado medidas drásticas on {4}!</es>
-			<it lang="italian">{3} di {1}{2} bloccato on {4}!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) {4}을(를) 단속했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}的{3}被非{4}压制！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}的{3}被非{4}壓制！</zh-tw>
+			<en lang="english">{1} clamped down on {2}'s {3}!</en>
+			<ja lang="japanese">{1} が {2} の {3} を取り締まりました!</ja>
+			<de lang="german">{1} hat gegen {2}s {3} vorgegangen!</de>
+			<fr lang="french">{1} a réprimé le {3} de {2} !</fr>
+			<es lang="spanish">¡{1} tomó medidas drásticas contra el {3} de {2}!</es>
+			<it lang="italian">{1} ha bloccato il {3} di {2}!</it>
+			<ko lang="korean">{1}이(가) {2}의 {3}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}压制了{2}的{3}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}壓制了{2}的{3}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5695</key>
+		<key>WILD_MON_CLAMPED_DOWN_ON_MON</key>
 		<text>
-			<en lang="english">{1}{2} clamped down onthe wild {3}!</en>
-			<ja lang="japanese">{1}{2} が野生の {3} を取り締まりました!</ja>
-			<de lang="german">{1}{2} hat die Wildnis {3} unter Kontrolle gebracht!</de>
-			<fr lang="french">{1}{2} a répriméle sauvage {3} !</fr>
-			<es lang="spanish">¡{1}{2} tomó medidas drásticas contralo salvaje {3}!</es>
-			<it lang="italian">{1}{2} ha repressoil selvaggio {3}!</it>
-			<ko lang="korean">{1}{2}이(가) 야생 {3}을(를) 단속했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2} 镇压野生{3}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2} 鎮壓野性{3}！</zh-tw>
+			<en lang="english">The wild {1} clamped down on {2}!</en>
+			<ja lang="japanese">野生の {1} が {2} を取り締まりました!</ja>
+			<de lang="german">Der wilde {1} hat {2} hart durchgegriffen!</de>
+			<fr lang="french">Le {1} sauvage a réprimé {2} !</fr>
+			<es lang="spanish">¡El salvaje {1} tomó medidas drásticas contra {2}!</es>
+			<it lang="italian">Il selvaggio {1} ha bloccato {2}!</it>
+			<ko lang="korean">야생의 {1}이(가) {2}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">狂野的{1}压制了{2}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">狂野的{1}壓制了{2}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5696</key>
+		<key>WILD_MON_CLAMPED_DOWN_ON_WILD_MON</key>
 		<text>
-			<en lang="english">{1}The wild {2} clamped down onthe wild {3}!</en>
-			<ja lang="japanese">{1}野生の {2} が野生の {3} を取り締まりました!</ja>
-			<de lang="german">{1}Die Wildnis {2} ging gegen die Wildnis {3} vor!</de>
-			<fr lang="french">{1}Le sauvage {2} a répriméle sauvage {3} !</fr>
-			<es lang="spanish">{1}¡Los salvajes {2} tomaron medidas drásticas contralos salvajes {3}!</es>
-			<it lang="italian">{1}Il selvaggio {2} ha represso il selvaggio {3}!</it>
-			<ko lang="korean">{1}야생 {2}가 야생 {3}을(를) 단속했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}野生{2}压制野生{3}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}野生{2}壓制野{3}！</zh-tw>
+			<en lang="english">The wild {1} clamped down on the wild {2}!</en>
+			<ja lang="japanese">野生の {1} が野生の {2} を取り締まりました!</ja>
+			<de lang="german">Der Wilde {1} ging gegen den Wilden {2} vor!</de>
+			<fr lang="french">Le sauvage {1} a réprimé le sauvage {2} !</fr>
+			<es lang="spanish">¡El salvaje {1} tomó medidas drásticas contra el salvaje {2}!</es>
+			<it lang="italian">Il {1} ​​selvaggio ha stretto un freno al {2} selvaggio!</it>
+			<ko lang="korean">야생 {1}이(가) 야생 {2}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野生{1}压制野生{2}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野生{1}壓制野生{2}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5697</key>
+		<key>WILD_MON_CLAMPED_DOWN_ON_OPPOSING_MON</key>
 		<text>
-			<en lang="english">{1}{2} clamped down onthe opposing {3}!</en>
-			<ja lang="japanese">{1}{2}は反対側の{3}を取り締まりました！</ja>
-			<de lang="german">{1}{2} ging gegen den Gegner {3} vor!</de>
-			<fr lang="french">{1}{2} a répriméles {3} adverses !</fr>
-			<es lang="spanish">¡{1}{2} tomó medidas drásticas contrael oponente {3}!</es>
-			<it lang="italian">{1}{2} ha bloccatoil {3} avversario!</it>
-			<ko lang="korean">{1}{2}이(가) 상대 {3}을(를) 단속했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}镇压了对方{3}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}鎮壓了對方{3}！</zh-tw>
+			<en lang="english">The wild {1} clamped down on the opposing {2}!</en>
+			<ja lang="japanese">野生の {1} が敵対する {2} を取り締まりました！</ja>
+			<de lang="german">Der wilde {1} ging hart gegen den gegnerischen {2} vor!</de>
+			<fr lang="french">Le {1} sauvage a réprimé le {2} adverse !</fr>
+			<es lang="spanish">¡El salvaje {1} tomó medidas drásticas contra el {2} contrario!</es>
+			<it lang="italian">Il {1} ​​selvaggio ha bloccato il {2} avversario!</it>
+			<ko lang="korean">야생의 {1}이(가) 상대 {2}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">狂野的{1}压制了对方的{2}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">狂野的{1}壓制了對方的{2}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5698</key>
+		<key>WILD_MON_CLAMPED_DOWN_ON_PLAYER_MON</key>
 		<text>
-			<en lang="english">{1}The opposing {2} clamped down onthe opposing {3}!</en>
-			<ja lang="japanese">{1}相手の {2} が相手の {3} を取り締まりました!</ja>
-			<de lang="german">{1}Der Gegner {2} ging gegen den Gegner {3} vor!</de>
-			<fr lang="french">{1}Les {2} adverses ont répriméles {3} adverses !</fr>
-			<es lang="spanish">{1}¡El oponente {2} tomó medidas drásticas contrael oponente {3}!</es>
-			<it lang="italian">{1}L'avversario {2} ha bloccatol'avversario {3}!</it>
-			<ko lang="korean">{1}상대 {2}이(가) 상대 {3}을(를) 단속했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方{2}压制对方{3}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方{2}壓制對方{3}！</zh-tw>
+			<en lang="english">The wild {1} clamped down on {2}'s {3}!</en>
+			<ja lang="japanese">野生の {1} が {2} の {3} を取り締まりました!</ja>
+			<de lang="german">Der wilde {1} hat den {3} von {2} unter Kontrolle gebracht!</de>
+			<fr lang="french">Le {1} sauvage s'est attaqué au {3} de {2} !</fr>
+			<es lang="spanish">¡El salvaje {1} tomó medidas drásticas contra el {3} de {2}!</es>
+			<it lang="italian">Il {1} ​​selvaggio ha bloccato il {3} di {2}!</it>
+			<ko lang="korean">야생의 {1}이(가) {2}의 {3}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">狂野的{1}压制了{2}的{3}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">狂野的{1}壓制了{2}的{3}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5699</key>
+		<key>OPPOSING_MON_CLAMPED_DOWN_ON_MON</key>
 		<text>
-			<en lang="english">{1}{2} clamped down on {3}’s {4}!</en>
-			<ja lang="japanese">{1}{2} が {3} の {4} を取り締まりました!</ja>
-			<de lang="german">{1}{2} hat gegen {3}s {4} vorgegangen!</de>
-			<fr lang="french">{1}{2} a réprimé le {4} de {3} !</fr>
-			<es lang="spanish">¡{1}{2} tomó medidas drásticas contra el {4} de {3}!</es>
-			<it lang="italian">{1}{2} ha bloccato il {4} di {3}!</it>
-			<ko lang="korean">{1}{2}이(가) {3}의 {4}을(를) 단속했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}压制了 {3}的{4}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}壓制了 {3}的{4}！</zh-tw>
+			<en lang="english">The opposing {1} clamped down on {2}!</en>
+			<ja lang="japanese">敵対する {1} が {2} を取り締まりました!</ja>
+			<de lang="german">Der gegnerische {1} wehrte sich gegen {2}!</de>
+			<fr lang="french">Le {1} adverse a réprimé {2} !</fr>
+			<es lang="spanish">¡El {1} ​​contrario tomó medidas drásticas contra {2}!</es>
+			<it lang="italian">Il {1} ​​avversario ha bloccato {2}!</it>
+			<ko lang="korean">상대 {1}이(가) {2}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}压制了{2}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}壓制了{2}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5700</key>
+		<key>OPPOSING_MON_CLAMPED_DOWN_ON_WILD_MON</key>
 		<text>
-			<en lang="english">{1}{2}’s {3} clamped down on {4}’s {5}!</en>
-			<ja lang="japanese">{1}{2} の {3} が {4} の {5} を取り締まりました!</ja>
-			<de lang="german">{1}{2}s {3} geht gegen {4}s {5} vor!</de>
-			<fr lang="french">Les {3} de {1}{2} ont réprimé les {5} de {4} !</fr>
-			<es lang="spanish">¡El {3} de {1}{2} tomó medidas drásticas contra el {5} de {4}!</es>
-			<it lang="italian">Il {3} di {1}{2} ha bloccato il {5} di {4}!</it>
-			<ko lang="korean">{1}{2}의 {3}이 {4}의 {5}를 단속했습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}的{3}压制 {4}的{5}！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}的{3}壓制 {4}的{5}！</zh-tw>
+			<en lang="english">The opposing {1} clamped down on the wild {2}!</en>
+			<ja lang="japanese">敵対する {1} が野生の {2} を取り締まりました!</ja>
+			<de lang="german">Der gegnerische {1} wehrte sich gegen den wilden {2}!</de>
+			<fr lang="french">Le {1} adverse a réprimé le {2} sauvage !</fr>
+			<es lang="spanish">¡El {1} ​​contrario tomó medidas drásticas contra el {2} salvaje!</es>
+			<it lang="italian">L'{1} avversario ha bloccato il {2} selvaggio!</it>
+			<ko lang="korean">상대 {1}이(가) 야생 {2}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}压制了野性的{2}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}壓制了野性的{2}！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5701</key>
+		<key>OPPOSING_MON_CLAMPED_DOWN_ON_OPPOSING_MON</key>
+		<text>
+			<en lang="english">The opposing {1} clamped down on the opposing {2}!</en>
+			<ja lang="japanese">相手の {1} が相手の {2} を締め付けました!</ja>
+			<de lang="german">Der gegnerische {1} schlug den gegnerischen {2} hart durch!</de>
+			<fr lang="french">Le {1} adverse a réprimé le {2} adverse !</fr>
+			<es lang="spanish">¡El {1} ​​contrario tomó medidas drásticas contra el {2} contrario!</es>
+			<it lang="italian">L'{1} avversario ha bloccato il {2} avversario!</it>
+			<ko lang="korean">상대 {1}이 상대 {2}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方{1}压制对方{2}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方{1}壓制對方{2}！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_CLAMPED_DOWN_ON_PLAYER_MON</key>
+		<text>
+			<en lang="english">The opposing {1} clamped down on {2}'s {3}!</en>
+			<ja lang="japanese">敵対する {1} が {2} の {3} を取り締まりました！</ja>
+			<de lang="german">Der gegnerische {1} wehrte sich gegen den {3} von {2}!</de>
+			<fr lang="french">Le {1} adverse a réprimé le {3} de {2} !</fr>
+			<es lang="spanish">¡El {1} ​​contrario tomó medidas drásticas contra el {3} de {2}!</es>
+			<it lang="italian">L'{1} avversario ha bloccato il {3} di {2}!</it>
+			<ko lang="korean">상대 {1}이(가) {2}의 {3}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}压制了{2}的{3}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}壓制了{2}的{3}！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_CLAMPED_DOWN_ON_MON</key>
+		<text>
+			<en lang="english">{1}'s {2} clamped down on {3}!</en>
+			<ja lang="japanese">{1}の{2}が{3}を取り締まりました！</ja>
+			<de lang="german">{1}s {2} hat gegen {3} vorgegangen!</de>
+			<fr lang="french">Le {2} de {1} a réprimé {3} !</fr>
+			<es lang="spanish">¡El {2} de {1} tomó medidas drásticas contra {3}!</es>
+			<it lang="italian">{2} di {1} ha bloccato {3}!</it>
+			<ko lang="korean">{1}의 {2}이(가) {3}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}压制了{3}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}壓制了{3}！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_CLAMPED_DOWN_ON_WILD_MON</key>
+		<text>
+			<en lang="english">{1}'s {2} clamped down on the wild {3}!</en>
+			<ja lang="japanese">{1}の{2}が野生の{3}を取り締まりました！</ja>
+			<de lang="german">{1}s {2} hat die Wildnis {3} unter Kontrolle gebracht!</de>
+			<fr lang="french">Les {2} de {1} ont réprimé le {3} sauvage !</fr>
+			<es lang="spanish">¡El {2} de {1} ha tomado medidas drásticas contra el {3} salvaje!</es>
+			<it lang="italian">I {2} di {1} hanno bloccato i {3} selvaggi!</it>
+			<ko lang="korean">{1}의 {2}이(가) 야생 {3}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}压制了野生的{3}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}壓制了野生的{3}！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_CLAMPED_DOWN_ON_OPPOSING_MON</key>
+		<text>
+			<en lang="english">{1}'s {2} clamped down on the opposing {3}!</en>
+			<ja lang="japanese">{1} の {2} が相手の {3} を取り締まりました！</ja>
+			<de lang="german">{1}s {2} hat den gegnerischen {3} hart durchgegriffen!</de>
+			<fr lang="french">Les {2} de {1} ont réprimé les {3} adverses !</fr>
+			<es lang="spanish">¡El {2} de {1} tomó medidas drásticas contra el {3} contrario!</es>
+			<it lang="italian">Il {2} di {1} ha bloccato il {3} avversario!</it>
+			<ko lang="korean">{1}의 {2}이(가) 상대 {3}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}压制了对方的{3}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}壓制了對方的{3}！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_CLAMPED_DOWN_ON_PLAYER_MON</key>
+		<text>
+			<en lang="english">{1}'s {2} clamped down on {3}'s {4}!</en>
+			<ja lang="japanese">{1} の {2} が {3} の {4} を取り締まりました!</ja>
+			<de lang="german">{1}s {2} hat gegen {3}s {4} vorgegangen!</de>
+			<fr lang="french">Le {2} de {1} a réprimé le {4} de {3} !</fr>
+			<es lang="spanish">¡El {2} de {1} tomó medidas drásticas contra el {4} de {3}!</es>
+			<it lang="italian">Il {2} di {1} ha bloccato il {4} di {3}!</it>
+			<ko lang="korean">{1}의 {2}가 {3}의 {4}을(를) 단속했습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}压制了{3}的{4}！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}壓制了{3}的{4}！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MON_AFFLICTED_WITH_INFESTATION</key>
+		<text>
+			<en lang="english">{1} has been afflicted with an infestation!</en>
+			<ja lang="japanese">{1} は感染症に悩まされています!</ja>
+			<de lang="german">{1} wurde von einem Befall befallen!</de>
+			<fr lang="french">{1} a été touché par une infestation !</fr>
+			<es lang="spanish">¡{1} ha sido afectado por una infestación!</es>
+			<it lang="italian">{1} è stato colpito da un'infestazione!</it>
+			<ko lang="korean">{1}이(가) 감염에 걸렸습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}已遭受感染！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}已遭受感染！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_AFFLICTED_WITH_INFESTATION</key>
+		<text>
+			<en lang="english">The wild {1} has been afflicted with an infestation!</en>
+			<ja lang="japanese">野生の {1} が蔓延に悩まされています!</ja>
+			<de lang="german">Die Wildnis {1} wurde von einem Befall heimgesucht!</de>
+			<fr lang="french">Le {1} sauvage a été touché par une infestation !</fr>
+			<es lang="spanish">¡El salvaje {1} ha sido afectado por una infestación!</es>
+			<it lang="italian">Il {1} ​​selvatico è stato colpito da un'infestazione!</it>
+			<ko lang="korean">야생 {1}이(가) 감염으로 고통받고 있습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野生{1}已遭受侵扰！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野生{1}已遭受侵擾！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_AFFLICTED_WITH_INFESTATION</key>
+		<text>
+			<en lang="english">The opposing {1} has been afflicted with an infestation!</en>
+			<ja lang="japanese">敵対する {1} は感染症に悩まされています。</ja>
+			<de lang="german">Der gegnerische {1} wurde von einem Befall befallen!</de>
+			<fr lang="french">Le {1} adverse a été touché par une infestation !</fr>
+			<es lang="spanish">¡El oponente {1} ha sido afectado por una infestación!</es>
+			<it lang="italian">Il {1} ​​avversario è stato colpito da un'infestazione!</it>
+			<ko lang="korean">상대 {1}이(가) 감염에 걸렸습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}已遭受感染！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}已遭受感染！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_AFFLICTED_WITH_INFESTATION</key>
+		<text>
+			<en lang="english">{1}'s {2} has been afflicted with an infestation!</en>
+			<ja lang="japanese">{1} の {2} は感染症に悩まされています。</ja>
+			<de lang="german">{1}s {2} wurde von einem Befall befallen!</de>
+			<fr lang="french">Le {2} de {1} a été atteint d'une infestation !</fr>
+			<es lang="spanish">¡El {2} de {1} ha sido afectado por una infestación!</es>
+			<it lang="italian">Il {2} di {1} è stato colpito da un'infestazione!</it>
+			<ko lang="korean">{1}의 {2}이(가) 감염에 걸렸습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1} 的{2} 受到了感染！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1} 的{2} 受到感染了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MON_TRAPPED_IN_WHIRLPOOL</key>
 		<text>
 			<en lang="english">{1} became trapped in the vortex!</en>
 			<ja lang="japanese">{1} は渦に閉じ込められました!</ja>
@@ -15778,7 +16198,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5702</key>
+		<key>WILD_MON_TRAPPED_IN_WHIRLPOOL</key>
 		<text>
 			<en lang="english">The wild {1} became trapped in the vortex!</en>
 			<ja lang="japanese">野生の {1} が渦に閉じ込められました!</ja>
@@ -15792,35 +16212,35 @@
 		</text>
 	</string>
 	<string>
-		<key>key5703</key>
+		<key>OPPOSING_MON_TRAPPED_IN_WHIRLPOOL</key>
 		<text>
-			<en lang="english">{1}The opposing {2} became trapped inthe vortex!</en>
-			<ja lang="japanese">{1}相手の {2} が渦の中に閉じ込められました!</ja>
-			<de lang="german">{1}Der Gegner {2} wurde im Wirbel gefangen!</de>
-			<fr lang="french">{1}Les {2} adverses se sont retrouvés piégés dansle vortex !</fr>
-			<es lang="spanish">{1}¡El oponente {2} quedó atrapado enel vórtice!</es>
-			<it lang="italian">{1}L'avversario {2} è rimasto intrappolato nelvortice!</it>
-			<ko lang="korean">{1}상대 {2}이(가) 소용돌이에 갇히게 되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方{2}被困在漩涡中！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方{2}被困在漩渦中！</zh-tw>
+			<en lang="english">The opposing {1} became trapped in the vortex!</en>
+			<ja lang="japanese">相手の {1} が渦の中に閉じ込められました!</ja>
+			<de lang="german">Der Gegner {1} wurde im Wirbel gefangen!</de>
+			<fr lang="french">Les {1} adverses se sont retrouvés piégés dansle vortex !</fr>
+			<es lang="spanish">¡El oponente {1} quedó atrapado enel vórtice!</es>
+			<it lang="italian">L'avversario {1} è rimasto intrappolato nelvortice!</it>
+			<ko lang="korean">상대 {1}이(가) 소용돌이에 갇히게 되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方{1}被困在漩涡中！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方{1}被困在漩渦中！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5704</key>
+		<key>PLAYER_MON_TRAPPED_IN_WHIRLPOOL</key>
 		<text>
-			<en lang="english">{1}{2}’s {3} became trappedin the vortex!</en>
-			<ja lang="japanese">{1}{2} の {3} は渦の中に閉じ込められました!</ja>
-			<de lang="german">{1}{2}s {3} wurde im Wirbel gefangen!</de>
-			<fr lang="french">Le {3} de {1}{2} s'est retrouvé piégédans le vortex !</fr>
-			<es lang="spanish">¡Los {3} de {1}{2} quedaron atrapadosen el vórtice!</es>
-			<it lang="italian">Il {3} di {1}{2} è rimasto intrappolato el vortice!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) 소용돌이에 갇히게 되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}的{3}被困在了漩涡中！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}的{3}被困在漩渦中了！</zh-tw>
+			<en lang="english">{1}’s {2} became trapped in the vortex!</en>
+			<ja lang="japanese">{1} の {2} は渦の中に閉じ込められました!</ja>
+			<de lang="german">{1}s {2} wurde im Wirbel gefangen!</de>
+			<fr lang="french">Le {2} de {1} s'est retrouvé piégédans le vortex !</fr>
+			<es lang="spanish">¡Los {2} de {1} quedaron atrapadosen el vórtice!</es>
+			<it lang="italian">Il {2} di {1} è rimasto intrappolato el vortice!</it>
+			<ko lang="korean">{1}의 {2}이(가) 소용돌이에 갇히게 되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}被困在了漩涡中！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}被困在漩渦中了！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5705</key>
+		<key>MON_TRAPPED_IN_FIERY_VORTEX</key>
 		<text>
 			<en lang="english">{1} became trapped in the fiery vortex!</en>
 			<ja lang="japanese">{1} は炎の渦に閉じ込められました!</ja>
@@ -15834,49 +16254,49 @@
 		</text>
 	</string>
 	<string>
-		<key>key5706</key>
+		<key>WILD_MON_TRAPPED_IN_FIERY_VORTEX</key>
 		<text>
-			<en lang="english">{1}The wild {2} became trapped inthe fiery vortex!</en>
-			<ja lang="japanese">{1}野生の {2} が燃えるような渦に閉じ込められました!</ja>
-			<de lang="german">{1}Die Wildnis {2} wurde im feurigen Wirbel gefangen!</de>
-			<fr lang="french">{1}Le sauvage {2} s'est retrouvé piégé dansle vortex de feu !</fr>
-			<es lang="spanish">{1}¡El salvaje {2} quedó atrapado en el vórtice de fuego!</es>
-			<it lang="italian">{1}La natura {2} è rimasta intrappolata nelvortice infuocato!</it>
-			<ko lang="korean">{1}야생의 {2}가 불타는 소용돌이에 갇히게 되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}野生动物{2}被困在炽热的漩涡中！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}野生動物{2}被困在熾熱的漩渦中！</zh-tw>
+			<en lang="english">The wild {1} became trapped in the fiery vortex!</en>
+			<ja lang="japanese">野生の {1} が燃えるような渦に閉じ込められました!</ja>
+			<de lang="german">Die Wildnis {1} wurde im feurigen Wirbel gefangen!</de>
+			<fr lang="french">Le sauvage {1} s'est retrouvé piégé dansle vortex de feu !</fr>
+			<es lang="spanish">¡El salvaje {1} quedó atrapado en el vórtice de fuego!</es>
+			<it lang="italian">La natura {1} è rimasta intrappolata nelvortice infuocato!</it>
+			<ko lang="korean">야생의 {1}가 불타는 소용돌이에 갇히게 되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野生动物{1}被困在炽热的漩涡中！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野生動物{1}被困在熾熱的漩渦中！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5707</key>
+		<key>OPPOSING_MON_TRAPPED_IN_FIERY_VORTEX</key>
 		<text>
-			<en lang="english">{1}The opposing {2} became trapped inthe fiery vortex!</en>
-			<ja lang="japanese">{1}敵対する {2} は炎の渦に閉じ込められました!</ja>
-			<de lang="german">{1}Der Gegner {2} wurde im feurigen Wirbel gefangen!</de>
-			<fr lang="french">{1}Les {2} adverses se sont retrouvés piégés dans le vortex enflammé !</fr>
-			<es lang="spanish">{1}¡El oponente {2} quedó atrapado enel vórtice de fuego!</es>
-			<it lang="italian">{1}L'avversario {2} è rimasto intrappolato nelvortice infuocato!</it>
-			<ko lang="korean">{1}적대 {2}이(가) 불타는 소용돌이에 갇히게 되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方{2}被困在炽热的漩涡中！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方{2}被困在熾熱的漩渦中！</zh-tw>
+			<en lang="english">The opposing {1} became trapped in the fiery vortex!</en>
+			<ja lang="japanese">敵対する {1} は炎の渦に閉じ込められました!</ja>
+			<de lang="german">Der Gegner {1} wurde im feurigen Wirbel gefangen!</de>
+			<fr lang="french">Les {1} adverses se sont retrouvés piégés dans le vortex enflammé !</fr>
+			<es lang="spanish">¡El oponente {1} quedó atrapado enel vórtice de fuego!</es>
+			<it lang="italian">L'avversario {1} è rimasto intrappolato nelvortice infuocato!</it>
+			<ko lang="korean">적대 {1}이(가) 불타는 소용돌이에 갇히게 되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方{1}被困在炽热的漩涡中！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方{1}被困在熾熱的漩渦中！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5708</key>
+		<key>PLAYER_MON_TRAPPED_IN_FIERY_VORTEX</key>
 		<text>
-			<en lang="english">{1}{2}’s {3} became trappedin the fiery vortex!</en>
-			<ja lang="japanese">{1}{2} の {3} は、激しい渦の中に閉じ込められました。</ja>
-			<de lang="german">{1}{2}s {3} wurde im feurigen Wirbel gefangen!</de>
-			<fr lang="french">Le {3} de {1}{2} s'est retrouvé piégédans le vortex de feu !</fr>
-			<es lang="spanish">¡Los {3} de {1}{2} quedaron atrapadosen el vórtice de fuego!</es>
-			<it lang="italian">Il {3} di {1}{2} è rimasto intrappolato el vortice infuocato!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) 불타오르는 소용돌이 속에갇혔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}的{3}被困在了炽热的漩涡中！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}的{3}被困在熾熱的漩渦裡了！</zh-tw>
+			<en lang="english">{1}’s {2} became trapped in the fiery vortex!</en>
+			<ja lang="japanese">{1} の {2} は、激しい渦の中に閉じ込められました。</ja>
+			<de lang="german">{1}s {2} wurde im feurigen Wirbel gefangen!</de>
+			<fr lang="french">Le {2} de {1} s'est retrouvé piégédans le vortex de feu !</fr>
+			<es lang="spanish">¡Los {2} de {1} quedaron atrapadosen el vórtice de fuego!</es>
+			<it lang="italian">Il {2} di {1} è rimasto intrappolato el vortice infuocato!</it>
+			<ko lang="korean">{1}의 {2}이(가) 불타오르는 소용돌이 속에갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}被困在了炽热的漩涡中！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}被困在熾熱的漩渦裡了！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5709</key>
+		<key>MON_TRAPPED_BY_MAGMA</key>
 		<text>
 			<en lang="english">{1} became trapped by swirling magma!</en>
 			<ja lang="japanese">{1} は渦巻くマグマに閉じ込められました!</ja>
@@ -15890,49 +16310,49 @@
 		</text>
 	</string>
 	<string>
-		<key>key5710</key>
+		<key>WILD_MON_TRAPPED_BY_MAGMA</key>
 		<text>
-			<en lang="english">{1}The wild {2} became trapped by swirling magma!</en>
-			<ja lang="japanese">{1}野生の {2} が 渦巻くマグマに閉じ込められました!</ja>
-			<de lang="german">{1}Die Wildnis {2} wurde von wirbelndem Magma gefangen!</de>
-			<fr lang="french">{1}Le {2} sauvage a été piégé par sun magma tourbillonnant !</fr>
-			<es lang="spanish">{1}¡El salvaje {2} quedó atrapado por magma arremolinado!</es>
-			<it lang="italian">{1}I selvaggi {2} sono rimasti intrappolati nel magma vorticoso!</it>
-			<ko lang="korean">{1}야생 {2}가 소용돌이치는 마그마에 갇혔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}野生动物{2}被 旋转的岩浆困住了！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}野生動物{2}被 旋轉的岩漿困住了！</zh-tw>
+			<en lang="english">The wild {1} became trapped by swirling magma!</en>
+			<ja lang="japanese">野生の {1} が 渦巻くマグマに閉じ込められました!</ja>
+			<de lang="german">Die Wildnis {1} wurde von wirbelndem Magma gefangen!</de>
+			<fr lang="french">Le {1} sauvage a été piégé par sun magma tourbillonnant !</fr>
+			<es lang="spanish">¡El salvaje {1} quedó atrapado por magma arremolinado!</es>
+			<it lang="italian">I selvaggi {1} sono rimasti intrappolati nel magma vorticoso!</it>
+			<ko lang="korean">야생 {1}가 소용돌이치는 마그마에 갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野生动物{1}被 旋转的岩浆困住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野生動物{1}被 旋轉的岩漿困住了！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5711</key>
+		<key>OPPOSING_MON_TRAPPED_BY_MAGMA</key>
 		<text>
-			<en lang="english">{1}The opposing {2} became trapped by swirling magma!</en>
-			<ja lang="japanese">{1}敵対する {2} は マグマの渦に閉じ込められました!</ja>
-			<de lang="german">{1}Der Gegner {2} wurde von wirbelndem Magma gefangen!</de>
-			<fr lang="french">{1}Les {2} adverses ont été piégés par sun magma tourbillonnant !</fr>
-			<es lang="spanish">{1}¡El oponente {2} quedó atrapado por magma arremolinado!</es>
-			<it lang="italian">{1}L'avversario {2} è rimasto intrappolato nel magma vorticoso!</it>
-			<ko lang="korean">{1}상대 {2}이(가) 소용돌이치는 마그마에 갇혔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方的{2}被 旋转的岩浆困住了！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方的{2}被 旋轉的岩漿困住了！</zh-tw>
+			<en lang="english">The opposing {1} became trapped by swirling magma!</en>
+			<ja lang="japanese">敵対する {1} は マグマの渦に閉じ込められました!</ja>
+			<de lang="german">Der Gegner {1} wurde von wirbelndem Magma gefangen!</de>
+			<fr lang="french">Les {1} adverses ont été piégés par sun magma tourbillonnant !</fr>
+			<es lang="spanish">¡El oponente {1} quedó atrapado por magma arremolinado!</es>
+			<it lang="italian">L'avversario {1} è rimasto intrappolato nel magma vorticoso!</it>
+			<ko lang="korean">상대 {1}이(가) 소용돌이치는 마그마에 갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}被 旋转的岩浆困住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}被 旋轉的岩漿困住了！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5712</key>
+		<key>PLAYER_MON_TRAPPED_BY_MAGMA</key>
 		<text>
-			<en lang="english">{1}{2}’s {3} became trapped by swirling magma!</en>
-			<ja lang="japanese">{1}{2} の {3} は 渦巻くマグマによって閉じ込められました!</ja>
-			<de lang="german">{1}{2}s {3} wurde von wirbelndem Magma gefangen!</de>
-			<fr lang="french">Le {3} de {1}{2} a été piégé par du magma tourbillonnant !</fr>
-			<es lang="spanish">¡El {3} de {1}{2} quedó atrapado por un remolino de magma!</es>
-			<it lang="italian">Il {3} di {1}{2} è rimasto intrappolato dal magma vorticoso!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) 소용돌이치는 마그마에 갇혔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}的{3} 被旋转的岩浆困住了！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}的{3} 被旋轉的岩漿困住了！</zh-tw>
+			<en lang="english">{1}’s {2} became trapped by swirling magma!</en>
+			<ja lang="japanese">{1} の {2} は 渦巻くマグマによって閉じ込められました!</ja>
+			<de lang="german">{1}s {2} wurde von wirbelndem Magma gefangen!</de>
+			<fr lang="french">Le {2} de {1} a été piégé par du magma tourbillonnant !</fr>
+			<es lang="spanish">¡El {2} de {1} quedó atrapado por un remolino de magma!</es>
+			<it lang="italian">Il {2} di {1} è rimasto intrappolato dal magma vorticoso!</it>
+			<ko lang="korean">{1}의 {2}이(가) 소용돌이치는 마그마에 갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2} 被旋转的岩浆困住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2} 被旋轉的岩漿困住了！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5713</key>
+		<key>MON_TRAPPED_BY_QUICKSAND</key>
 		<text>
 			<en lang="english">{1} became trapped by the quicksand!</en>
 			<ja lang="japanese">{1} は流砂に閉じ込められました!</ja>
@@ -15946,7 +16366,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5714</key>
+		<key>WILD_MON_TRAPPED_BY_QUICKSAND</key>
 		<text>
 			<en lang="english">The wild {1} became trapped by the quicksand!</en>
 			<ja lang="japanese">野生の {1} が流砂に閉じ込められました!</ja>
@@ -15960,31 +16380,87 @@
 		</text>
 	</string>
 	<string>
-		<key>key5715</key>
+		<key>OPPOSING_MON_TRAPPED_BY_QUICKSAND</key>
 		<text>
-			<en lang="english">{1}The opposing {2} become trapped bythe quicksand!</en>
-			<ja lang="japanese">{1}相手の {2} が流砂に閉じ込められてしまいます!</ja>
-			<de lang="german">{1}Die gegnerischen {2} werden vom Treibsand gefangen!</de>
-			<fr lang="french">{1}Les {2} adverses se retrouvent piégés parles sables mouvants !</fr>
-			<es lang="spanish">{1}¡El oponente {2} queda atrapado porlas arenas movedizas!</es>
-			<it lang="italian">{1}I {2} avversari rimangono intrappolati nellesabbie mobili!</it>
-			<ko lang="korean">{1}상대 {2}이 유사에 갇히게 되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}对方{2}被流沙困住了！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}對方{2}被流沙困住了！</zh-tw>
+			<en lang="english">The opposing {1} become trapped bythe quicksand!</en>
+			<ja lang="japanese">相手の {1} が流砂に閉じ込められてしまいます!</ja>
+			<de lang="german">Die gegnerischen {1} werden vom Treibsand gefangen!</de>
+			<fr lang="french">Les {1} adverses se retrouvent piégés parles sables mouvants !</fr>
+			<es lang="spanish">¡El oponente {1} queda atrapado porlas arenas movedizas!</es>
+			<it lang="italian">I {1} avversari rimangono intrappolati nellesabbie mobili!</it>
+			<ko lang="korean">상대 {1}이 유사에 갇히게 되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方{1}被流沙困住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方{1}被流沙困住了！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5716</key>
+		<key>PLAYER_MON_TRAPPED_BY_QUICKSAND</key>
 		<text>
-			<en lang="english">{1}{2}’s {3} become trappedby the quicksand!</en>
-			<ja lang="japanese">{1}{2} の {3} が流砂に閉じ込められました!</ja>
-			<de lang="german">{1}{2}s {3} werden vom Treibsand gefangen!</de>
-			<fr lang="french">Les {3} de {1}{2} se retrouvent piégéspar les sables mouvants !</fr>
-			<es lang="spanish">¡Los {3} de {1}{2} quedan atrapadosen las arenas movedizas!</es>
-			<it lang="italian">I {3} di {1}{2} rimangono intrappolati elle sabbie mobili!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) 유사에 갇히게 되었습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}的{3}被流沙困了！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}的{3}被流沙困了！</zh-tw>
+			<en lang="english">{1}’s {2} become trappedby the quicksand!</en>
+			<ja lang="japanese">{1} の {2} が流砂に閉じ込められました!</ja>
+			<de lang="german">{1}s {2} werden vom Treibsand gefangen!</de>
+			<fr lang="french">Les {2} de {1} se retrouvent piégéspar les sables mouvants !</fr>
+			<es lang="spanish">¡Los {2} de {1} quedan atrapadosen las arenas movedizas!</es>
+			<it lang="italian">I {2} di {1} rimangono intrappolati elle sabbie mobili!</it>
+			<ko lang="korean">{1}의 {2}이(가) 유사에 갇히게 되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}被流沙困了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}被流沙困了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MON_TRAPPED_BY_LIGHTNING</key>
+		<text>
+			<en lang="english">{1} was trapped in a cage of lightning!</en>
+			<ja lang="japanese">{1} は雷の檻に閉じ込められました!</ja>
+			<de lang="german">{1} war in einem Käfig aus Blitzen gefangen!</de>
+			<fr lang="french">{1} a été piégé dans une cage de foudre !</fr>
+			<es lang="spanish">¡{1} quedó atrapado en una jaula de relámpagos!</es>
+			<it lang="italian">{1} era intrappolato in una gabbia di fulmini!</it>
+			<ko lang="korean">{1}이(가) 번개 우리에 갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}被困在闪电笼子里了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}被困在閃電籠子裡了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_TRAPPED_BY_LIGHTNING</key>
+		<text>
+			<en lang="english">The wild {1} was trapped in a cage of lightning!</en>
+			<ja lang="japanese">野生の {1} は稲妻の檻に閉じ込められました。</ja>
+			<de lang="german">Der wilde {1} war in einem Käfig aus Blitzen gefangen!</de>
+			<fr lang="french">Le sauvage {1} était piégé dans une cage de foudre !</fr>
+			<es lang="spanish">¡El salvaje {1} quedó atrapado en una jaula de relámpagos!</es>
+			<it lang="italian">Il {1} ​​selvatico era intrappolato in una gabbia di fulmini!</it>
+			<ko lang="korean">야생 {1}이(가) 번개 우리에 갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野生{1}被困在闪电笼子里了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野生{1}被困在閃電籠子裡了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_TRAPPED_BY_LIGHTNING</key>
+		<text>
+			<en lang="english">The opposing {1} was trapped in a cage of lightning!</en>
+			<ja lang="japanese">敵対する {1} は雷の檻に閉じ込められました。</ja>
+			<de lang="german">Der gegnerische {1} war in einem Käfig aus Blitzen gefangen!</de>
+			<fr lang="french">Le {1} adverse était piégé dans une cage de foudre !</fr>
+			<es lang="spanish">¡El oponente {1} quedó atrapado en una jaula de rayos!</es>
+			<it lang="italian">L'{1} avversario era intrappolato in una gabbia di fulmini!</it>
+			<ko lang="korean">상대 {1}이(가) 번개 우리에 갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}被困在闪电笼子里了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}被困在閃電籠子裡了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_TRAPPED_BY_LIGHTNING</key>
+		<text>
+			<en lang="english">{1}'s {2} was trapped in a cage of lightning!</en>
+			<ja lang="japanese">{1} の {2} は稲妻の檻に閉じ込められました。</ja>
+			<de lang="german">{2} von {1} war in einem Käfig aus Blitzen gefangen!</de>
+			<fr lang="french">Le {2} de {1} était piégé dans une cage de foudre !</fr>
+			<es lang="spanish">¡El {2} de {1} quedó atrapado en una jaula de rayos!</es>
+			<it lang="italian">Il {2} di {1} era intrappolato in una gabbia di fulmini!</it>
+			<ko lang="korean">{1}의 {2}이(가) 번개 우리에 갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}被困在闪电笼子里了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}被困在閃電籠子裡了！</zh-tw>
 		</text>
 	</string>
 	<string>
@@ -16716,7 +17192,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5769</key>
+		<key>MON_CANT_ESCAPE</key>
 		<text>
 			<en lang="english">{1} can’t escape!</en>
 			<ja lang="japanese">{1} は逃げられません!</ja>
@@ -16730,7 +17206,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5770</key>
+		<key>WILD_MON_CANT_ESCAPE</key>
 		<text>
 			<en lang="english">The wild {1} can’t escape!</en>
 			<ja lang="japanese">野生の {1} は逃げられません!</ja>
@@ -16744,7 +17220,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5771</key>
+		<key>OPPOSING_MON_CANT_ESCAPE</key>
 		<text>
 			<en lang="english">The opposing {1} can’t escape!</en>
 			<ja lang="japanese">相手の {1} は逃げることができません!</ja>
@@ -16758,7 +17234,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5772</key>
+		<key>PLAYER_MON_CANT_ESCAPE</key>
 		<text>
 			<en lang="english">{1}’s {2} can’t escape!</en>
 			<ja lang="japanese">{1} の {2} は逃げられません!</ja>
@@ -19681,6 +20157,62 @@
 			<ko lang="korean">{1}의 {2}는 {3}을 사용하여 다음 동작의 정확도를 높였습니다!</ko>
 			<zh-cn lang="chinese (simplified)">{1} 的 {2} 使用 {3}  提高了其下一步动作的准确性！</zh-cn>
 			<zh-tw lang="chinese (traditional)">{1} 的 {2} 使用 {3}  提高了其下一步動作的準確性！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>MON_WAS_HURT_BY_X</key>
+		<text>
+			<en lang="english">{1} was hurt by {2}!</en>
+			<ja lang="japanese">{1}は{2}によって傷つけられました!</ja>
+			<de lang="german">{1} wurde von {2} verletzt!</de>
+			<fr lang="french">{1} a été blessé par {2} !</fr>
+			<es lang="spanish">¡{1} resultó herido por {2}!</es>
+			<it lang="italian">{1} è stato ferito da {2}!</it>
+			<ko lang="korean">{1}이(가) {2} 때문에 다쳤습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}被{2}伤害了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}被{2}傷害了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>WILD_MON_WAS_HURT_BY_X</key>
+		<text>
+			<en lang="english">The wild {1} was hurt by {2}!</en>
+			<ja lang="japanese">野生の {1} は {2} によって傷つけられました!</ja>
+			<de lang="german">Der wilde {1} wurde von {2} verletzt!</de>
+			<fr lang="french">Le sauvage {1} a été blessé par {2} !</fr>
+			<es lang="spanish">¡El salvaje {1} fue herido por {2}!</es>
+			<it lang="italian">Il {1} ​​selvatico è stato ferito da {2}!</it>
+			<ko lang="korean">야생 {1}이(가) {2}에게 상처를 입었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">野生{1}被{2}伤害了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">野生{1}被{2}傷害了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>OPPOSING_MON_WAS_HURT_BY_X</key>
+		<text>
+			<en lang="english">The opposing {1} was hurt by {2}!</en>
+			<ja lang="japanese">相手の {1} は {2} によって負傷しました!</ja>
+			<de lang="german">Der gegnerische {1} wurde durch {2} verletzt!</de>
+			<fr lang="french">Le {1} adverse a été blessé par {2} !</fr>
+			<es lang="spanish">¡El oponente {1} fue herido por {2}!</es>
+			<it lang="italian">Il {1} ​​avversario è stato ferito da {2}!</it>
+			<ko lang="korean">상대 {1}이(가) {2}에게 피해를 입었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">对方的{1}被{2}伤害了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">對方的{1}被{2}傷害了！</zh-tw>
+		</text>
+	</string>
+	<string>
+		<key>PLAYER_MON_WAS_HURT_BY_X</key>
+		<text>
+			<en lang="english">{1}'s {2} was hurt by {3}!</en>
+			<ja lang="japanese">{1}の{2}は{3}によって傷つけられました！</ja>
+			<de lang="german">{2} von {1} wurde von {3} verletzt!</de>
+			<fr lang="french">Le {2} de {1} a été blessé par {3} !</fr>
+			<es lang="spanish">¡El {2} de {1} fue herido por {3}!</es>
+			<it lang="italian">Il {2} di {1} è stato ferito da {3}!</it>
+			<ko lang="korean">{1}의 {2}이(가) {3}에 의해 손상되었습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}被{3}伤害了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}被{3}傷害了！</zh-tw>
 		</text>
 	</string>
 	<string>
@@ -28224,7 +28756,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6559</key>
+		<key>MON_TRAPPED_BY_SNAP_TRAP</key>
 		<text>
 			<en lang="english">{1} got trapped by a snap trap!</en>
 			<ja lang="japanese">{1} がスナップトラップに閉じ込められました!</ja>
@@ -28238,7 +28770,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6560</key>
+		<key>WILD_MON_TRAPPED_BY_SNAP_TRAP</key>
 		<text>
 			<en lang="english">The wild {1} got trapped by a snap trap!</en>
 			<ja lang="japanese">野生の {1} がスナップトラップに閉じ込められました!</ja>
@@ -28252,7 +28784,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6561</key>
+		<key>OPPOSING_MON_TRAPPED_BY_SNAP_TRAP</key>
 		<text>
 			<en lang="english">The opposing {1} got trapped by a snap trap!</en>
 			<ja lang="japanese">相手の {1} がスナップ トラップに閉じ込められました。</ja>
@@ -28266,17 +28798,17 @@
 		</text>
 	</string>
 	<string>
-		<key>key6562</key>
+		<key>PLAYER_MON_TRAPPED_BY_SNAP_TRAP</key>
 		<text>
-			<en lang="english">{1}{2}’s {3} got trapped by a snap trap!</en>
-			<ja lang="japanese">{1}{2} の {3} が  スナップトラップに閉じ込められました!</ja>
-			<de lang="german">{1}{2}s {3} wurde voneiner Schnappfalle gefangen!</de>
-			<fr lang="french">Le {3} de {1}{2} a été piégé par a un piège instantané !</fr>
-			<es lang="spanish">¡El {3} de {1}{2} quedó atrapadoen una trampa!</es>
-			<it lang="italian">{3} di {1}{2} è rimasto intrappolato dauna trappola!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) 스냅 트랩에 갇혔습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2}的{3}被 捕捉陷阱困住了！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2}的{3}被 捕捉陷阱困住了！</zh-tw>
+			<en lang="english">{1}’s {2} got trapped by a snap trap!</en>
+			<ja lang="japanese">{1} の {2} が  スナップトラップに閉じ込められました!</ja>
+			<de lang="german">{1}s {2} wurde voneiner Schnappfalle gefangen!</de>
+			<fr lang="french">Le {2} de {1} a été piégé par a un piège instantané !</fr>
+			<es lang="spanish">¡El {2} de {1} quedó atrapadoen una trampa!</es>
+			<it lang="italian">{2} di {1} è rimasto intrappolato dauna trappola!</it>
+			<ko lang="korean">{1}의 {2}이(가) 스냅 트랩에 갇혔습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1}的{2}被 捕捉陷阱困住了！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1}的{2}被 捕捉陷阱困住了！</zh-tw>
 		</text>
 	</string>
 	<string>

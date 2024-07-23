@@ -76,6 +76,11 @@ namespace PkmnEngine {
 			for (u8 i = 0; i < targets.Length; i++) {
 				defender = battle.GetMonInSlot(state, targets[i]);
 
+				if (defender == null || defender.HasStatus(Status.FAINTED)) {
+					continue;
+				}
+
+				// BUG: This will NOT work even slightly logically with multiple targets.
 				if (!MoveHit(battle, state, attacker, defender, moveID)) {
 					await MessageBox(GetString(STRINGS, BATTLE_COMMON.MON_USED_MOVE, attacker.GetName(), GetMoveName(moveID)));
 					await MessageBox(GetString(STRINGS, BATTLE_COMMON.MON_AVOIDED_ATTACK, defender.GetName()));

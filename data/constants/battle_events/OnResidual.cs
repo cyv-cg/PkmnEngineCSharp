@@ -155,6 +155,45 @@ namespace PkmnEngine {
 
 			return null;
 		}
+		public static async Task<object> Status_Bound_OnResidual(object p) {
+			OnResidualParams args = ValidateParams<OnResidualParams>(p);
+
+			string bindName = Lang.GetString(StringResource.Namespace.MOVE, args.bm.GetStatusParam(StatusParam.BIND_TYPE) switch {
+				StatusEffects.BIND_BIND			=> MOVE_NAMES.BIND,
+				StatusEffects.BIND_CLAMP		=> MOVE_NAMES.CLAMP,
+				StatusEffects.BIND_SAND_TOMB	=> MOVE_NAMES.SAND_TOMB,
+				StatusEffects.BIND_FIRE_SPIN	=> MOVE_NAMES.FIRE_SPIN,
+				StatusEffects.BIND_INFESTATION	=> MOVE_NAMES.INFESTATION,
+				StatusEffects.BIND_MAGMA_STORM	=> MOVE_NAMES.MAGMA_STORM,
+				StatusEffects.BIND_SNAP_TRAP	=> MOVE_NAMES.SNAP_TRAP,
+				StatusEffects.BIND_THUNDER_CAGE	=> MOVE_NAMES.THUNDER_CAGE,
+				StatusEffects.BIND_WHIRLPOOL	=> MOVE_NAMES.WHIRLPOOL,
+				StatusEffects.BIND_WRAP			=> MOVE_NAMES.WRAP,
+				_ => MOVE_NAMES.NONE
+			});
+
+			// Check if the bound status is still in effect.
+			if (args.bm.StatusDuration(Status.BOUND) > 0) {
+				// Decrement the duration.
+				args.bm.DecrementStatusDuration(Status.BOUND);
+			}
+			else {
+				// Otherwise free the mon.
+				args.bm.RemoveStatus(Status.BOUND);
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_WAS_FREED_FROM_X, args.bm), args.bm.GetName(), bindName));
+				return null;
+			}
+
+			// Display the mon was hurt.
+			StringResource resource =  BattleUtils.GetContextString(BATTLE_COMMON.MON_WAS_HURT_BY_X, args.bm);
+			// If the attacker was holding a Binding Band, damage is 1/6 the mon's max HP.
+			// Otherwise, the damage is 1/8.
+			float percent = args.bm.GetStatusParam(StatusParam.BINDING_BAND) != 0 ? 1f / 6 : 1f / 8;
+			U16 damage = new(args.bm.GetPercentOfMaxHp(percent));
+			await args.bm.DamageMon(damage, false, false, Lang.GetString(STRINGS, resource, args.bm.GetName(), bindName));
+
+			return null;
+		}
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	} 
 }

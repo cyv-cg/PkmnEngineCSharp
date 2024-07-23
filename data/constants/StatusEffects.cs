@@ -148,6 +148,18 @@ namespace PkmnEngine {
 		public const u8 SEMI_INVULNERABLE_WATER		= 1 << 2;
 		public const u8 SEMI_INVULNERABLE_PHANTOM	= 1 << 3;
 
+		// Binding effects from: Bind, Clamp, Sand Tomb, Fire Spin, Infestation, Magma Storm, Snap Trap, Thunder Cage, Whirlpool, and Wrap
+		public const u16 BIND_BIND			= 1 << 0;
+		public const u16 BIND_CLAMP			= 1 << 1;
+		public const u16 BIND_SAND_TOMB		= 1 << 2;
+		public const u16 BIND_FIRE_SPIN		= 1 << 3;
+		public const u16 BIND_INFESTATION	= 1 << 4;
+		public const u16 BIND_MAGMA_STORM	= 1 << 5;
+		public const u16 BIND_SNAP_TRAP		= 1 << 6;
+		public const u16 BIND_THUNDER_CAGE	= 1 << 7;
+		public const u16 BIND_WHIRLPOOL		= 1 << 8;
+		public const u16 BIND_WRAP			= 1 << 9;
+
 		public static (BattleEvent callback, sbyte priority) gStatusEvents(Status status, Callback cb) {
 			if (StatusEvents.ContainsKey(status) && StatusEvents[status].ContainsKey(cb)) {
 				return StatusEvents[status][cb];
@@ -158,7 +170,8 @@ namespace PkmnEngine {
 		}
 
 		private static readonly Dictionary<Status, Dictionary<Callback, (BattleEvent callback, sbyte priority)>> StatusEvents = new() { {
-		
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+
 			Status.BURN,
 			new Dictionary<Callback, (BattleEvent, sbyte)>() {{
 				Callback.OnResidual,
@@ -312,9 +325,7 @@ namespace PkmnEngine {
 			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
 				{
 					Callback.DurationCallback,
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 					(async (object p) => { return (u8)4; }, 0)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 				},
 				{
 					Callback.OnResidual,
@@ -404,9 +415,31 @@ namespace PkmnEngine {
 				Callback.OnTryMove,
 				(Status_Infatuation_OnTryMove, 8)
 			}}
+		},
+		{
+			Status.BOUND,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback, 
+					(async (object p) => {
+						if (((DurationCallbackParams)p).source.HeldItem == Item.GRIP_CLAW) {
+							return (u8)7;
+						}
+						return ((DurationCallbackParams)p).battle.RandRange(4, 5);
+					}, 0)
+				},
+				{
+					Callback.OnResidual,
+					(Status_Bound_OnResidual, 13)
+				},
+				{
+					Callback.OnTrySwitchOut,
+					(Status_Bound_OnTrySwitchOut, 0)
+				}
+			}
 		}
 
-
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 		};
 	}
 
@@ -443,20 +476,25 @@ namespace PkmnEngine {
 		TOXIC_BUILDUP,			// How many stacks toxic has build up for.
 		LAST_MOVE_HIT_BY,		// The ID of the last move the mon was hit with.
 		MON_INFATUATED_BY,		// The NUUID of the mon that this mon is infatuated by.
+		BIND_TYPE,				// Bind, Clamp, Sand Tomb, Fire Spin, Infestation, Magma Storm, Snap Trap, Thunder Cage, Whirlpool or Wrap
+		MON_BOUND_BY,			// NUUID of the mon that used Bind on this mon.
+		BINDING_BAND,			// Whether or not the mon using a binding move is holding the Binding Band at the time.
 		NR_ITEMS
 	};
 
 	public enum Status {
+		NONE,
 		FAINTED,
-		// Non-volatile
+		#region Non-volatile
 			BURN,
 			FREEZE,
 			PARALYSIS,
 			POISON,
 			TOXIC,
 			SLEEP,
-		// Volatile
-			// Major
+		#endregion
+		#region Volatile
+			#region Major
 				ABILITY_CHANGE,
 				ABILITY_SUPPRESSION,
 				TYPE_CHANGE,
@@ -464,35 +502,42 @@ namespace PkmnEngine {
 				SUBSTITUTE,
 				TRANSFORMED,
 				ILLUSION,
-			// Damaging
+			#endregion
+			#region Damaging
 				BOUND,
 				CURSE,
 				NIGHTMARE,
 				PERISH_SONG,
 				SEEDED,
 				SALT_CURE,
-			// Effectiveness
+			#endregion
+			#region Effectiveness
 				AUTOTOMIZE,
 				IDENTIFIED,
 				MINIMIZE,
 				TAR_SHOT,
-			// Groundedness
+			#endregion
+			#region Groundedness
 				GROUNDED,
 				MAGNETIC_LEVITATION,
 				TELEKINESIS,
-			// Healing
+			#endregion
+			#region Healing
 				AQUA_RING,
 				ROOTING,
-			// Next Turn
+			#endregion
+			#region Next Turn
 				LASER_FOCUS,
 				TAKING_AIM,
 				DROWSY,
-			// Priming
+			#endregion
+			#region Priming
 				CHARGED,
 				STOCKPILE_COUNT,
 				DEFENSE_CURL,
 				DESTINY_BOND,
-			// Prevention
+			#endregion
+			#region Prevention
 				CANT_ESCAPE,
 				NO_RETREAT,
 				OCTOLOCK,
@@ -505,25 +550,29 @@ namespace PkmnEngine {
 				TORMENT,
 				CONFUSION,
 				INFATUATION,
-			// Stats
+			#endregion
+			#region Stats
 				GETTING_PUMPED,
 				GUARD_SPLIT,
 				POWER_SPLIT,
 				POWER_SHIFT,
 				SPEED_SWAP,
 				POWER_TRICK,
-			// Forced Move
+			#endregion
+			#region Forced Move
 				CHOICE_LOCK,
 				ENCORE,
 				RAMPAGE,
 				ROLLING,
 				MAKING_AN_UPROAR,
-			// Multi-turn Move
+			#endregion
+			#region Multi-turn Move
 				BIDE,
 				RECHARGING,
 				CHARGING_TURN,
 				SEMI_INVULNERABLE_TURN,
-			// Transient
+			#endregion
+			#region Transient
 				FLINCH,
 				BRACING,
 				CENTER_OF_ATTENTION,
@@ -533,6 +582,8 @@ namespace PkmnEngine {
 				OBSTRUCT,
 				LUCKY_CHANT,
 				RAGE,
+			#endregion
+		#endregion
 		NR_ITEMS // This one is just to keep track of the total number of bits needed to store statuses and should not be used.
 	};
 }

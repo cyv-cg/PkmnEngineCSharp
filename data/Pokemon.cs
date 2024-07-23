@@ -209,7 +209,7 @@ namespace PkmnEngine {
 			
 			buffer.AddValue(Nickname, MAX_NAME_LENGTH);
 
-			buffer.AddValue(status);
+			buffer.AddValue((u16)nvStatus);
 			buffer.AddValue(friendship);
 
 			buffer.AddValue(maxHp);
@@ -247,7 +247,7 @@ namespace PkmnEngine {
 
 			mon.Nickname = data.ReadString(MAX_NAME_LENGTH);
 
-			mon.status		= data.Read8();
+			mon.nvStatus	= (Status)data.Read16();
 			mon.friendship	= data.Read8();
 
 			mon.maxHp	= data.Read16();
@@ -292,7 +292,7 @@ namespace PkmnEngine {
 			this.level = level;
 			this.exp = gExperienceTables(gBaseStats(species).growth, level);
 
-			this.status = 0;
+			this.nvStatus = 0;
 
 			this.Moves = new BattleMoveID[MAX_MOVES];
 			this.MaxPP = new u8[MAX_MOVES];
@@ -328,16 +328,10 @@ namespace PkmnEngine {
 			}
 		}
 
-		/// @brief Non-volatile status condition.
-		/// @note 00000000 none
-		/// @note 00000001 burn
-		/// @note 00000010 freeze
-		/// @note 00000100 paralysis
-		/// @note 00001000 poison
-		/// @note 00010000 toxic
-		/// @note 00100000 sleep
-		/// @note 10000000 fainted
-		public u8 status;
+		/// <summary>
+		/// Non-volatile status condition.
+		/// </summary>
+		public Status nvStatus = Status.NONE;
 
 		public u16 maxHp;
 		public u16 hp;
@@ -786,6 +780,11 @@ namespace PkmnEngine {
 				data.AddValue((u16)key);
 				data.AddValue(status[key]);
 			}
+			data.AddValue((u8)statusDuration.Count);
+			foreach (Status key in statusDuration.Keys) {
+				data.AddValue((u16)key);
+				data.AddValue(status[key]);
+			}
 			data.AddValue((u8)statusParams.Count);
 			foreach (StatusParam key in statusParams.Keys) {
 				data.AddValue((u16)key);
@@ -849,6 +848,12 @@ namespace PkmnEngine {
 				Status key = (Status)data.Read16();
 				bm.status[key] = data.ReadBool();
 			}
+			u8 statusDurationCount = data.Read8();
+			bm.statusDuration = new Dictionary<Status, u8>();
+			for (u8 i = 0; i < statusDurationCount; i++) {
+				Status key = (Status)data.Read16();
+				bm.statusDuration[key] = data.Read8();
+			}
 			u8 statusParamCount = data.Read8();
 			bm.statusParams = new Dictionary<StatusParam, u32>();
 			for (u8 i = 0; i < statusParamCount; i++) {
@@ -904,7 +909,12 @@ namespace PkmnEngine {
 			this.flags = 0;
 			
 			this.status = new Dictionary<Status, bool>();
+			this.statusDuration = new Dictionary<Status, u8>();
 			this.statusParams = new Dictionary<StatusParam, u32>();
+
+			if (src.nvStatus != Status.NONE) {
+				this.GiveStatus(src.nvStatus);
+			}
 		}
 
 		/// <summary>
@@ -952,8 +962,10 @@ namespace PkmnEngine {
 
 		public delegate Task BattleMonEventHandler(BattleMon bm);
 		public BattleMonEventHandler OnMonFainted { get; set; }
+		public Func<Task> OnSwitchOut;
 		
 		private Dictionary<Status, bool> status;
+		private Dictionary<Status, u8> statusDuration;
 		public Dictionary<StatusParam, u32> statusParams;
 		public Status[] Statuses { get {
 				List<Status> statuses = new List<Status>();
@@ -1205,8 +1217,10 @@ namespace PkmnEngine {
 		/// 
 		/// </summary>
 		/// <param name="status"></param>
-		public void GiveStatus(Status status) {
+		/// <param name="duration">Optional. Stores the duration of the status.</param>
+		public void GiveStatus(Status status, u8 duration = u8.MaxValue) {
 			this.status[status] = true;
+			this.statusDuration[status] = duration;
 		}
 		/// <summary>
 		/// 
@@ -1229,6 +1243,28 @@ namespace PkmnEngine {
 				}
 			}
 			return false;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="status"></param>
+		/// <returns></returns>
+		public u8 StatusDuration(Status status) {
+			if (statusDuration.ContainsKey(status)) {
+				return statusDuration[status];
+			}
+			return 0;
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="status"></param>
+		/// <param name="n"></param>
+		public void DecrementStatusDuration(Status status, u8 n = 1) {
+			if (statusDuration.ContainsKey(status)) {
+				statusDuration[status] -= n;
+			}
 		}
 
 		/// <summary>

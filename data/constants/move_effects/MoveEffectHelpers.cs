@@ -260,6 +260,49 @@ namespace PkmnEngine {
 			}
 			return 0;
 		}
+
+		private static async Task<u32> BindTarget(MoveEffectParams p, u16 bindType) {
+			// A mon can only be bound by 1 move at a time.
+			if (p.target.HasStatus(Status.BOUND)) {
+				return FLAG_NO_BIND;
+			}
+
+			// Set the binding status and parameters.
+			p.target.GiveStatus(Status.BOUND, BattleEvents.EventDuration(p.battle, p.attacker, Status.BOUND).Result);
+			p.target.SetStatusParam(StatusParam.BIND_TYPE, BIND_BIND);
+			p.target.SetStatusParam(StatusParam.MON_BOUND_BY, p.attacker.NUUID);
+			p.target.SetStatusParam(StatusParam.BINDING_BAND, (u32)(p.attacker.HeldItem == Item.BINDING_BAND ? 1 : 0));
+			
+			// Add a listener to remove the status when the attacker leaves the field.
+			p.attacker.OnSwitchOut += async () => {
+				foreach (BattleMon bm in p.battle.GetAllActiveMons()) {
+					if (bm.HasStatus(Status.BOUND) && bm.GetStatusParam(StatusParam.MON_BOUND_BY) == p.attacker.NUUID) {
+						bm.RemoveStatus(Status.BOUND);
+						await MessageBox(Lang.GetString(
+							STRINGS, 
+							BattleUtils.GetContextString(BATTLE_COMMON.MON_WAS_FREED_FROM_X, bm), 
+							bm.GetName(), 
+							Lang.GetString(StringResource.Namespace.MOVE, bm.GetStatusParam(StatusParam.BIND_TYPE) switch {
+								BIND_BIND			=> MOVE_NAMES.BIND,
+								BIND_CLAMP			=> MOVE_NAMES.CLAMP,
+								BIND_SAND_TOMB		=> MOVE_NAMES.SAND_TOMB,
+								BIND_FIRE_SPIN		=> MOVE_NAMES.FIRE_SPIN,
+								BIND_INFESTATION	=> MOVE_NAMES.INFESTATION,
+								BIND_MAGMA_STORM	=> MOVE_NAMES.MAGMA_STORM,
+								BIND_SNAP_TRAP		=> MOVE_NAMES.SNAP_TRAP,
+								BIND_THUNDER_CAGE	=> MOVE_NAMES.THUNDER_CAGE,
+								BIND_WHIRLPOOL		=> MOVE_NAMES.WHIRLPOOL,
+								BIND_WRAP			=> MOVE_NAMES.WRAP,
+								_ => MOVE_NAMES.NONE
+							})
+						));
+					}
+				}
+			};
+
+			p.target.SetStatusParam(StatusParam.BIND_TYPE, bindType);
+			return 0;
+		}
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 
 		/// <summary>

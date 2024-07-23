@@ -38,9 +38,15 @@ namespace PkmnEngine.BattleControllers {
 		/// <param name="state">The current BattleState.</param>
 		/// <param name="slot">Slot of the mon acting.</param>
 		/// <returns>Action code for switching mons.</returns>
-		public async Task<u64> MenuSelectSwitchToMon(Battle battle, BattleState state, u8 slot) {			
+		public async Task<u64> MenuSelectSwitchToMon(Battle battle, BattleState state, u8 slot) {
 			// Get the option selected in the mon selection menu.
 			option = await Inputs.gMenuFuncs[MenuCode.SWITCH_TO_MON](battle.PlayerControllingSlot(slot).team);
+
+			// Check if the mon can actually be switched out.
+			if (!await Battle.RunEventCheck(Callback.OnTrySwitchOut, battle.GetMonInSlot(state, slot), new OnTrySwitchOutParams(battle, state, battle.GetMonInSlot(state, slot), true))) {
+				option = new MenuArg(MenuCode.CONTINUE, 0);
+				return 0;
+			}
 			
 			// Convert result into an action code.
 			u64 action = BATTLE_ACTION_SWITCH(slot, (u8)option.args);
@@ -54,7 +60,7 @@ namespace PkmnEngine.BattleControllers {
 		/// <param name="state">Current BattleState.</param>
 		/// <param name="slot">Slot of the acting mon.</param>
 		/// <returns>Action code for the chosen move.</returns>
-		public async Task<u64>  MenuSelectUseMove(Battle battle, BattleState state, u8 slot) {
+		public async Task<u64> MenuSelectUseMove(Battle battle, BattleState state, u8 slot) {
 			BattleMon bm = battle.GetMonInSlot(state, slot);
 
 			// Determine if the user has any usable moves left.

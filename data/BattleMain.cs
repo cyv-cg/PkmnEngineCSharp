@@ -70,6 +70,9 @@ namespace PkmnEngine {
 		public u64 Random64() {
 			return ((u64)Random32() << 32) | Random32();
 		}
+		public u8 RandRange(u8 a, u8 b) {
+			return (u8)(Random01() * (b - a) + a);
+		}
 
 		public static async Task<float> RunEventChain(Callback cb, BattleMon target, object args) {
 			float chain = 1;
@@ -443,6 +446,7 @@ namespace PkmnEngine {
 			}
 
 			bm.SetStatusParam(StatusParam.LAST_USED_MOVE, u8.MaxValue);
+			bm.OnSwitchOut = null;
 	
 			// Entry hazards.
 			//DoEntryHazards(state, mon, GetSideFromSlot(teamIndex));
@@ -463,18 +467,30 @@ namespace PkmnEngine {
 		/// <param name="slot"></param>
 		/// <returns>False if the mon cannot be switched out.</returns>
 		public async Task<bool> TakeOutMon(BattleState state, u8 slot, bool print = true, bool checkPursuit = false) {
-			bool retVal = true;
-
 			BattleMon monToWithdraw = GetMonInSlot(state, slot);
-			if (print && !monToWithdraw.HasStatus(Status.FAINTED)) {
-				await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.PLAYER_WITHDREW_MON, PlayerControllingSlot(slot).profile.Name, monToWithdraw.GetName()));
+			bool retVal = true;
+			bool fainted = monToWithdraw.HasStatus(Status.FAINTED);
 
-				if (checkPursuit) {
-					// This check returns 1 if pursuit activates and faints the target.
-					// In that case, don't go forward with the switch.
-					if (await MoveEffects.CheckPursuit(this, state, slot) != 0) {
-						retVal = false;
+			if (!fainted) {
+				// First check if the mon can switch out.
+				if (!await RunEventCheck(Callback.OnTrySwitchOut, monToWithdraw, new OnTrySwitchOutParams(this, state, monToWithdraw, print))) {
+					return false;
+				}
+
+				if (print) {
+					await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.PLAYER_WITHDREW_MON, PlayerControllingSlot(slot).profile.Name, monToWithdraw.GetName()));
+
+					if (checkPursuit) {
+						// This check returns 1 if pursuit activates and faints the target.
+						// In that case, don't go forward with the switch.
+						if (await MoveEffects.CheckPursuit(this, state, slot) != 0) {
+							retVal = false;
+						}
 					}
+				}
+
+				if (monToWithdraw.OnSwitchOut != null) {
+					await monToWithdraw.OnSwitchOut?.Invoke();
 				}
 			}
 
@@ -733,6 +749,9 @@ namespace PkmnEngine {
 
 				// Now that the mon has had an opportunity to move, mark that it has not just switched in.
 				actor.RemoveFlag(BattleMon.Flag.JUST_SWITCHED_IN);
+
+				// Wait 0.5 seconds between actions.
+				await Task.Delay(500);
 			}
 
 			await DoEventsAfterTurn();
@@ -1030,14 +1049,14 @@ namespace PkmnEngine {
 		/// </summary>
 		/// <param name="weather">Weather condition to set.</param>
 		/// <param name="duration">Duration of the weather effect in turns. Set to 255 (UINT8_MAX) for (effectively) infinite duration.</param>
-		public async void SetWeather(Condition weather, BattleMon source) {
+		public async void SetWeather(Battle battle, Condition weather, BattleMon source) {
 			if (!(weather >= Condition.WEATHER_HARSH_SUNLIGHT && weather <= Condition.WEATHER_SHADOWY_AURA)) {
 				throw new System.ArgumentException();
 			}
 			if (!await Battle.RunEventCheck(Callback.OnTrySetWeather, this, null)) {
 				return;
 			}
-			u8 duration = await BattleEvents.EventDuration(source, weather);
+			u8 duration = await BattleEvents.EventDuration(battle, source, weather);
 			Weather.SetWeatherTerrain(weather, duration);
 			Battle.RunEvent(Callback.OnWeatherSet, this, new OnWeatherSetParams(this, source));
 		}
@@ -1046,7 +1065,7 @@ namespace PkmnEngine {
 		/// </summary>
 		/// <param name="terrain">Terrain condition to set.</param>
 		/// <param name="duration">Duration of the terrain effect in turns. Set to 255 (UINT8_MAX) for (effectively) infinite duration.</param>
-		public void SetTerrain(Condition terrain, BattleMon source) {
+		public void SetTerrain(Battle battle, Condition terrain, BattleMon source) {
 			if (!(terrain >= Condition.TERRAIN_ELECTRIC && terrain <= Condition.TERRAIN_PSYCHIC)) {
 				throw new System.ArgumentException();
 			}
@@ -1055,20 +1074,20 @@ namespace PkmnEngine {
 			//	return;
 			//}
 
-			u8 duration = BattleEvents.EventDuration(source, terrain).Result;
+			u8 duration = BattleEvents.EventDuration(battle, source, terrain).Result;
 			Terrain.SetWeatherTerrain(terrain, duration);
 			Battle.RunEvent(Callback.OnWeatherSet, this, new OnWeatherSetParams(this, source));
 		}
 
-		public async void SetFieldCondition(Condition condition, BattleMon source) {
-			u8 duration = (u8)await PkmnEngine.FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+		public async void SetFieldCondition(Battle battle, Condition condition, BattleMon source) {
+			u8 duration = (u8)await PkmnEngine.FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(battle, source));
 			SetFieldCondition(condition, duration);
 		}
 		private void SetFieldCondition(Condition condition, u8 duration = u8.MaxValue) {
 			Conditions.Add(new FieldCondition(condition, true, 0, false, duration));
 		}
-		public async void SetSideCondition(u8 side, Condition condition, BattleMon source) {
-			u8 duration = (u8)await PkmnEngine.FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+		public async void SetSideCondition(Battle battle, u8 side, Condition condition, BattleMon source) {
+			u8 duration = (u8)await PkmnEngine.FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(battle, source));
 			SetSideCondition(side, condition, duration);
 		}
 		private void SetSideCondition(u8 side, Condition condition, u8 duration = u8.MaxValue) {

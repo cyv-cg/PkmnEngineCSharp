@@ -18,11 +18,11 @@ namespace PkmnEngine {
 			return (T)p;
 		}
 
-		public static async Task<u8> EventDuration(BattleMon source, Status status) {
-			return (u8)await StatusEffects.gStatusEvents(status, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+		public static async Task<u8> EventDuration(Battle battle, BattleMon source, Status status) {
+			return (u8)await StatusEffects.gStatusEvents(status, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(battle, source));
 		}
-		public static async Task<u8> EventDuration(BattleMon source, Condition condition) {
-			return (u8)await FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(source));
+		public static async Task<u8> EventDuration(Battle battle, BattleMon source, Condition condition) {
+			return (u8)await FieldConditions.gConditionEvents(condition, Callback.DurationCallback).callback.Invoke(new DurationCallbackParams(battle, source));
 		}
 	}
 
@@ -48,9 +48,11 @@ namespace PkmnEngine {
 	}
 
 	public struct DurationCallbackParams {
-		public DurationCallbackParams(BattleMon source) {
+		public DurationCallbackParams(Battle battle, BattleMon source) {
+			this.battle = battle;
 			this.source = source;
 		}
+		public Battle battle;
 		public BattleMon source;
 	}
 
@@ -100,5 +102,6 @@ namespace PkmnEngine {
 		OnCheckIsGrounded,
 		OnCheckIsUngrounded,
 		OnTryRemoveItem,
+		OnTrySwitchOut,
 	}
 }
