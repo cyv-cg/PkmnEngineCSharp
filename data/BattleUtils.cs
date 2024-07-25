@@ -152,7 +152,7 @@ namespace PkmnEngine {
 				true,
 				i_flags
 			);
-			u32 flags = await gMoveEffectMap(gBattleMoves(moveID).primaryEffect)(data);
+			u32 flags = await gBattleMoves(moveID).primaryEffect.Invoke(data);
 
 			// Record the slot of the user as the last mon that attacked the target.
 			defender.SetStatusParam(StatusParam.LAST_MON_HIT_BY, slotUser);
@@ -166,9 +166,9 @@ namespace PkmnEngine {
 
 			// Do the secondary effect, if there is one and the primary effect does not prefent it.
 			if (EffectHit(battle, gBattleMoves(moveID).secondaryEffectChance)) {
-				if ((flags & FLAG_DO_NOT_DO_SECONDARY_EFFECT) == 0 && gBattleMoves(moveID).secondaryEffect != MoveEffectID.NONE) {
+				if ((flags & FLAG_DO_NOT_DO_SECONDARY_EFFECT) == 0 && gBattleMoves(moveID).secondaryEffect != Effect_None) {
 					data.isPrimaryEffect = false;
-					flags = await gMoveEffectMap(gBattleMoves(moveID).secondaryEffect)(data);
+					flags = await gBattleMoves(moveID).secondaryEffect.Invoke(data);
 				}
 			}
 

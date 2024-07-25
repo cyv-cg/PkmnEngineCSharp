@@ -33,6 +33,10 @@ namespace PkmnEngine {
 
 		#region effects
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+		public static async Task<u32> Effect_None(MoveEffectParams p) {
+			return 0;
+		}
+
 		public static async Task<u32> Effect_Hit(MoveEffectParams p) {
 			return await Attack(p);
 		}
@@ -811,7 +815,7 @@ namespace PkmnEngine {
 				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
 				p.attacker.RemoveFlag(BattleMon.Flag.MON_INDUCED_SEMI_INVUL);
 
-				p.target.RemoveStatus(Status.PROTECTION);
+				await Effect_RemoveProtectionHit(p);
 				
 				return await Attack(p);
 			}
@@ -828,6 +832,7 @@ namespace PkmnEngine {
 			else {
 				p.attacker.RemoveStatus(Status.SEMI_INVULNERABLE_TURN);
 				p.attacker.RemoveFlag(BattleMon.Flag.MON_INDUCED_SEMI_INVUL);
+			await Effect_RemoveProtectionHit(p);
 
 				return await Attack(p);
 			}
@@ -1021,6 +1026,10 @@ namespace PkmnEngine {
 		}
 		#endregion
 		
+		public static async Task<u32> Effect_RemoveProtectionHit(MoveEffectParams p) {
+			p.target.RemoveStatus(Status.PROTECTION);
+			return 0;
+		}
 		public static async Task<u32> Effect_JumpKick(MoveEffectParams p) {
 			// TODO:
 			return 0;
@@ -2479,10 +2488,6 @@ namespace PkmnEngine {
 			//await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.NO_ONE_CAN_ESCAPE));
 			return 0;
 		}
-		public static async Task<u32> Effect_Feint(MoveEffectParams p) {
-			// TODO:
-			return 0;
-		}
 		public static async Task<u32> Effect_FellStinger(MoveEffectParams p) {
 			u32 flags = await Attack(p);
 			if ((flags & FLAG_TARGET_FAINTED) != 0) {
@@ -2734,7 +2739,7 @@ namespace PkmnEngine {
 			}
 
 			await Effect_DefenseDownHit(p);
-			p.target.RemoveStatus(Status.PROTECTION);
+			await Effect_RemoveProtectionHit(p);
 
 			return await Attack(p);
 		}
@@ -2955,8 +2960,8 @@ namespace PkmnEngine {
 			p.target.GiveStatus(Status.ABILITY_SUPPRESSION);
 			// Photon Geyser can be either physical or special depending on which of the user's stats is higher.
 			BattleMove photonGeyser = new BattleMove(
-				MoveEffectID.NONE, 
-				MoveEffectID.NONE,
+				Effect_None, 
+				Effect_None,
 				p.move.moveType,
 				p.move.power,
 				p.move.accuracy,
@@ -3511,8 +3516,8 @@ namespace PkmnEngine {
 					break;
 			}
 			BattleMove terrainPulse = new BattleMove(
-				MoveEffectID.NONE, 
-				MoveEffectID.NONE,
+				Effect_None, 
+				Effect_None,
 				type,
 				p.move.power,
 				p.move.accuracy,
