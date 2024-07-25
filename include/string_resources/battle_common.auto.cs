@@ -1806,6 +1806,38 @@ namespace PkmnEngine.Strings {
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_CANT_ESCAPE = new("PLAYER_MON_CANT_ESCAPE", 2);
 		/// <summary>
+		/// {1} was prevented from healing!
+		/// </summary>
+		public static readonly StringResource MON_WAS_PREVENTED_FROM_HEALING = new("MON_WAS_PREVENTED_FROM_HEALING", 1);
+		/// <summary>
+		/// The wild {1} was prevented from healing!
+		/// </summary>
+		public static readonly StringResource WILD_MON_WAS_PREVENTED_FROM_HEALIN = new("WILD_MON_WAS_PREVENTED_FROM_HEALIN", 1);
+		/// <summary>
+		/// The opposing {1} was prevented from healing!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_WAS_PREVENTED_FROM_HEALING = new("OPPOSING_MON_WAS_PREVENTED_FROM_HEALING", 1);
+		/// <summary>
+		/// {1}’s {2} was prevented from healing!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_WAS_PREVENTED_FROM_HEALING = new("PLAYER_MON_WAS_PREVENTED_FROM_HEALING", 2);
+		/// <summary>
+		/// {1}’s Heal Block wore off!
+		/// </summary>
+		public static readonly StringResource MON_HEAL_BLOCK_WORE_OFF = new("MON_HEAL_BLOCK_WORE_OFF", 1);
+		/// <summary>
+		/// The wild {1}’s Heal Block wore off!
+		/// </summary>
+		public static readonly StringResource WILD_MON_HEAL_BLOCK_WORE_OFF = new("WILD_MON_HEAL_BLOCK_WORE_OFF", 1);
+		/// <summary>
+		/// The opposing {1}’s Heal Block wore off!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_HEAL_BLOCK_WORE_OFF = new("OPPOSING_MON_HEAL_BLOCK_WORE_OFF", 1);
+		/// <summary>
+		/// {1}’s {2}’s Heal Block wore off!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_HEAL_BLOCK_WORE_OFF = new("PLAYER_MON_HEAL_BLOCK_WORE_OFF", 2);
+		/// <summary>
 		/// {1}’s type changed to {2}!
 		/// </summary>
 		public static readonly StringResource MON_TYPE_CHANGED = new("MON_TYPE_CHANGED", 2);
@@ -2237,6 +2269,22 @@ namespace PkmnEngine.Strings {
 		/// {1}'s {2} is overflowing with space power!
 		/// </summary>
 		public static readonly StringResource PLAYER_MON_IS_OVERFLOWING_WITH_SPACE_POWER = new("PLAYER_MON_IS_OVERFLOWING_WITH_SPACE_POWER", 2);
+		/// <summary>
+		/// {1} was hurt!
+		/// </summary>
+		public static readonly StringResource MON_WAS_HURT = new("MON_WAS_HURT", 1);
+		/// <summary>
+		/// The wild {1} was hurt!
+		/// </summary>
+		public static readonly StringResource WILD_MON_WAS_HURT = new("WILD_MON_WAS_HURT", 1);
+		/// <summary>
+		/// The opposing {1} was hurt!
+		/// </summary>
+		public static readonly StringResource OPPOSING_MON_WAS_HURT = new("OPPOSING_MON_WAS_HURT", 1);
+		/// <summary>
+		/// {1}’s {2} was hurt!
+		/// </summary>
+		public static readonly StringResource PLAYER_MON_WAS_HURT = new("PLAYER_MON_WAS_HURT", 2);
 		/// <summary>
 		/// {1} switched Speed with its target!
 		/// </summary>
@@ -3463,6 +3511,14 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_CANT_ESCAPE, new() {{Language.ENG, "The wild {1} can’t escape!"}, {Language.JPN, "野生の {1} は逃げられません!"}, {Language.GER, "Die Wildnis {1} kann nicht entkommen!"}, {Language.FRE, "Le {1} sauvage ne peut pas s'échapper !"}, {Language.SPN, "¡El salvaje {1} no puede escapar!"}, {Language.ITA, "I {1} selvaggi non possono scappare!"}, {Language.KOR, "야생 {1}은(는) 탈출할 수 없습니다!"}, {Language.CHN_SIM, "野生的{1}无法逃脱！"}, {Language.CHN_TRA, "野生的{1}無法逃脫！"}, }},
 			{OPPOSING_MON_CANT_ESCAPE, new() {{Language.ENG, "The opposing {1} can’t escape!"}, {Language.JPN, "相手の {1} は逃げることができません!"}, {Language.GER, "Der gegnerische {1} kann nicht entkommen!"}, {Language.FRE, "Le {1} adverse ne peut pas s'échapper !"}, {Language.SPN, "¡El oponente {1} no puede escapar!"}, {Language.ITA, "Il {1} ​​avversario non può scappare!"}, {Language.KOR, "상대 {1}은(는) 탈출할 수 없습니다!"}, {Language.CHN_SIM, "对方的{1}无法逃脱！"}, {Language.CHN_TRA, "對方的{1}無法逃脫！"}, }},
 			{PLAYER_MON_CANT_ESCAPE, new() {{Language.ENG, "{1}’s {2} can’t escape!"}, {Language.JPN, "{1} の {2} は逃げられません!"}, {Language.GER, "{1}s {2} kann nicht entkommen!"}, {Language.FRE, "Les {2} de {1} ne peuvent pas s'échapper !"}, {Language.SPN, "¡El {2} de {1} no puede escapar!"}, {Language.ITA, "Il {2} di {1} non può scappare!"}, {Language.KOR, "{1}의 {2}은(는) 탈출할 수 없습니다!"}, {Language.CHN_SIM, "{1}的{2}无法逃脱！"}, {Language.CHN_TRA, "{1}的{2}無法逃脫！"}, }},
+			{MON_WAS_PREVENTED_FROM_HEALING, new() {{Language.ENG, "{1} was prevented from healing!"}, {Language.JPN, "{1} は治癒を妨げられました。"}, {Language.GER, "{1} wurde an der Heilung gehindert!"}, {Language.FRE, "{1} n'a pas pu guérir !"}, {Language.SPN, "¡A {1} se le impidió sanar!"}, {Language.ITA, "A {1} è stata impedita la guarigione!"}, {Language.KOR, "{1}이(가) 치유되지 않았습니다!"}, {Language.CHN_SIM, "{1} 无法愈合！"}, {Language.CHN_TRA, "{1} 無法癒合！"}, }},
+			{WILD_MON_WAS_PREVENTED_FROM_HEALIN, new() {{Language.ENG, "The wild {1} was prevented from healing!"}, {Language.JPN, "野生の {1} は治癒を妨げられました。"}, {Language.GER, "Die Heilung des wilden {1} wurde verhindert!"}, {Language.FRE, "Le {1} sauvage n'a pas pu guérir !"}, {Language.SPN, "¡Se impidió que el {1} ​​salvaje se curara!"}, {Language.ITA, "Al {1} ​​selvatico è stato impedito di guarire!"}, {Language.KOR, "야생 {1}이(가) 치유되지 않았습니다!"}, {Language.CHN_SIM, "野生{1}无法愈合！"}, {Language.CHN_TRA, "野生{1}無法癒合！"}, }},
+			{OPPOSING_MON_WAS_PREVENTED_FROM_HEALING, new() {{Language.ENG, "The opposing {1} was prevented from healing!"}, {Language.JPN, "相手の {1} は回復できませんでした!"}, {Language.GER, "Der gegnerische {1} wurde an der Heilung gehindert!"}, {Language.FRE, "Le {1} adverse n'a pas pu guérir !"}, {Language.SPN, "¡Al {1} ​​contrario se le impidió curarse!"}, {Language.ITA, "All'{1} avversario è stato impedito di guarire!"}, {Language.KOR, "상대 {1}이(가) 치유되지 못했습니다!"}, {Language.CHN_SIM, "对方的{1}无法愈合！"}, {Language.CHN_TRA, "對方的{1}無法癒合！"}, }},
+			{PLAYER_MON_WAS_PREVENTED_FROM_HEALING, new() {{Language.ENG, "{1}’s {2} was prevented from healing!"}, {Language.JPN, "{1} の {2} は治癒を妨げられました。"}, {Language.GER, "{1}s {2} wurde an der Heilung gehindert!"}, {Language.FRE, "Le {2} de {1} n'a pas pu guérir !"}, {Language.SPN, "¡Se impidió que {2} de {1} sanara!"}, {Language.ITA, "A {2} di {1} è stata impeditala guarigione!"}, {Language.KOR, "{1}의 {2}이(가) 치유되지 않았습니다!"}, {Language.CHN_SIM, "{1} 的 {2} 无法愈合！"}, {Language.CHN_TRA, "{1} 的 {2} 無法癒合！"}, }},
+			{MON_HEAL_BLOCK_WORE_OFF, new() {{Language.ENG, "{1}’s Heal Block wore off!"}, {Language.JPN, "{1}のヒールブロックが切れました！"}, {Language.GER, "Die Heilblockade von {1} ließ nach!"}, {Language.FRE, "Le blocage de soins de {1} s'est dissipé !"}, {Language.SPN, "¡El bloqueo de curación de {1} desapareció!"}, {Language.ITA, "Il Blocco della guarigione di {1} è svanito!"}, {Language.KOR, "{1}의 Heal Block이 닳았습니다!"}, {Language.CHN_SIM, "{1}的治疗块消失了！"}, {Language.CHN_TRA, "{1}的治療塊消失了！"}, }},
+			{WILD_MON_HEAL_BLOCK_WORE_OFF, new() {{Language.ENG, "The wild {1}’s Heal Block wore off!"}, {Language.JPN, "野生の {1} のヒールブロックが切れました！"}, {Language.GER, "Die Heilblockade des wilden {1} ließ nach!"}, {Language.FRE, "Le blocage des soins du {1} sauvage s'est dissipé !"}, {Language.SPN, "¡El bloqueo de curación del salvaje {1} desapareció!"}, {Language.ITA, "Il Blocco Guarigione del {1} ​​selvatico è svanito!"}, {Language.KOR, "야생의 {1}의 치유 블록이 사라졌습니다!"}, {Language.CHN_SIM, "狂野{1}的治疗方块消失了！"}, {Language.CHN_TRA, "狂野{1}的治療方塊消失了！"}, }},
+			{OPPOSING_MON_HEAL_BLOCK_WORE_OFF, new() {{Language.ENG, "The opposing {1}’s Heal Block wore off!"}, {Language.JPN, "相手の{1}のヒールブロックが切れました！"}, {Language.GER, "Der Heilblock des gegnerischen {1} ließ nach!"}, {Language.FRE, "Le Blocage de Soins du {1} adverse s'est dissipé !"}, {Language.SPN, "¡El bloqueo de curación del oponente {1} desapareció!"}, {Language.ITA, "Il Blocco Guarigione dell'avversario {1} è svanito!"}, {Language.KOR, "상대 {1}의 힐 블록이 사라졌습니다!"}, {Language.CHN_SIM, "对方{1}的治疗格挡消失了！"}, {Language.CHN_TRA, "對方{1}的治療格擋消失了！"}, }},
+			{PLAYER_MON_HEAL_BLOCK_WORE_OFF, new() {{Language.ENG, "{1}’s {2}’s Heal Block wore off!"}, {Language.JPN, "{1}の{2}のヒールブロックが切れました！"}, {Language.GER, "Die Heilblockade von {1} und {2} hat nachgelassen!"}, {Language.FRE, "Le blocage de soins de {1} et {2} s'est dissipé !"}, {Language.SPN, "¡El bloqueo de curación de {1} y {2} desapareció!"}, {Language.ITA, "Il Blocco della guarigione di {2} di {1} è svanito!"}, {Language.KOR, "{1}의 {2}의 Heal Block이 사라졌습니다!"}, {Language.CHN_SIM, "{1}的{2}的治疗块消失了！"}, {Language.CHN_TRA, "{1}的{2}的治療塊消失了！"}, }},
 			{MON_TYPE_CHANGED, new() {{Language.ENG, "{1}’s type changed to {2}!"}, {Language.JPN, "{1} のタイプが {2} に変更されました。"}, {Language.GER, "Der Typ von {1} wurde in {2} geändert!"}, {Language.FRE, "Le type de {1} est devenu {2} !"}, {Language.SPN, "¡El tipo de {1} cambió a {2}!"}, {Language.ITA, "Il tipo di {1} è cambiato in {2}!"}, {Language.KOR, "{1}의 유형이 {2}(으)로 변경되었습니다!"}, {Language.CHN_SIM, "{1} 的类型更改为 {2}！"}, {Language.CHN_TRA, "{1} 的類型改為 {2}！"}, }},
 			{WILD_MON_TYPE_CHANGED, new() {{Language.ENG, "The wild {1}’s type changed to {2}!"}, {Language.JPN, "野生の {1} のタイプが {2} に変わりました!"}, {Language.GER, "Der Typ des Wilds {1} wurde in {2} geändert!"}, {Language.FRE, "Le type du joker {1} a été modifiéen {2} !"}, {Language.SPN, "¡El tipo del comodín {1} cambióa {2}!"}, {Language.ITA, "Il tipo del selvaggio {1} è cambiatoin {2}!"}, {Language.KOR, "야생의 {1} 유형이{2}(으)로 변경되었습니다!"}, {Language.CHN_SIM, "野生{1}的类型已更改为{2}！"}, {Language.CHN_TRA, "野生{1}的類型已更改為{2}！"}, }},
 			{OPPOSING_MON_TYPE_CHANGED, new() {{Language.ENG, "The opposing {1}’s type changed to {2}!"}, {Language.JPN, "相手の {1} のタイプが {2} に変更されました!"}, {Language.GER, "Der Typ des Gegners {1} hat sich zu {2} geändert!"}, {Language.FRE, "Le type du {1} adverse a été modifiéen {2} !"}, {Language.SPN, "¡El tipo del oponente {1} cambióa {2}!"}, {Language.ITA, "Il tipo dell'avversario {1} è cambiatoin {2}!"}, {Language.KOR, "상대 {1}의 유형이{2}(으)로 변경되었습니다!"}, {Language.CHN_SIM, "对方的{1}类型已更改为{2}！"}, {Language.CHN_TRA, "對方的{1}類型已更改為{2}！"}, }},
@@ -3571,6 +3627,10 @@ namespace PkmnEngine.Strings {
 			{WILD_MON_IS_OVERFLOWING_WITH_SPACE_POWER, new() {{Language.ENG, "The wild {1} is overflowing with space power!"}, {Language.JPN, "野生の {1} はスペースパワーに溢れています!"}, {Language.GER, "Die Wildnis {1} strotzt nur so vor Weltraumkraft!"}, {Language.FRE, "Le sauvage {1} déborde de puissance spatiale !"}, {Language.SPN, "¡El salvaje {1} está repleto de poder espacial!"}, {Language.ITA, "Il {1} ​​selvaggio trabocca di potere spaziale!"}, {Language.KOR, "야생의 {1}에는 우주력이 넘쳐납니다!"}, {Language.CHN_SIM, "狂野的{1}充满了空间力量！"}, {Language.CHN_TRA, "狂野的{1}充滿了空間力量！"}, }},
 			{OPPOSING_MON_IS_OVERFLOWING_WITH_SPACE_POWER, new() {{Language.ENG, "The opposing {1} is overflowing with space power!"}, {Language.JPN, "相手の{1}はスペースパワーに溢れています！"}, {Language.GER, "Die gegnerische {1} strotzt nur so vor Raumkraft!"}, {Language.FRE, "Le {1} adverse déborde de puissance spatiale !"}, {Language.SPN, "¡El {1} ​​enemigo está repleto de poder espacial!"}, {Language.ITA, "L'avversario {1} trabocca di potere spaziale!"}, {Language.KOR, "상대 {1}은(는) 우주력이 넘쳐납니다!"}, {Language.CHN_SIM, "对方的{1}空间力量溢出！"}, {Language.CHN_TRA, "對方的{1}空間力量溢出！"}, }},
 			{PLAYER_MON_IS_OVERFLOWING_WITH_SPACE_POWER, new() {{Language.ENG, "{1}'s {2} is overflowing with space power!"}, {Language.JPN, "{1}の{2}はスペースパワーに溢れています！"}, {Language.GER, "{1}s {2} strotzt nur so vor Weltraumkraft!"}, {Language.FRE, "Le {2} de {1} déborde de puissance spatiale !"}, {Language.SPN, "¡El {2} de {1} está repleto de poder espacial!"}, {Language.ITA, "Il {2} di {1} trabocca di potere spaziale!"}, {Language.KOR, "{1}의 {2}에는 우주력이 넘쳐납니다!"}, {Language.CHN_SIM, "{1}的{2}充满了空间力量！"}, {Language.CHN_TRA, "{1}的{2}充滿了空間力量！"}, }},
+			{MON_WAS_HURT, new() {{Language.ENG, "{1} was hurt!"}, {Language.JPN, "{1} が怪我をしました!"}, {Language.GER, "{1} wurde verletzt!"}, {Language.FRE, "{1} a été blessé !"}, {Language.SPN, "¡{1} resultó herido!"}, {Language.ITA, "{1} è rimasto ferito!"}, {Language.KOR, "{1}이(가) 다쳤습니다!"}, {Language.CHN_SIM, "{1}受伤了！"}, {Language.CHN_TRA, "{1}受傷了！"}, }},
+			{WILD_MON_WAS_HURT, new() {{Language.ENG, "The wild {1} was hurt!"}, {Language.JPN, "野生の {1} が怪我をしました!"}, {Language.GER, "Der wilde {1} wurde verletzt!"}, {Language.FRE, "Le sauvage {1} a été blessé !"}, {Language.SPN, "¡El salvaje {1} resultó herido!"}, {Language.ITA, "Il {1} ​​selvatico è stato ferito!"}, {Language.KOR, "야생의 {1}이(가) 다쳤습니다!"}, {Language.CHN_SIM, "野生{1}受伤了！"}, {Language.CHN_TRA, "野生{1}受傷了！"}, }},
+			{OPPOSING_MON_WAS_HURT, new() {{Language.ENG, "The opposing {1} was hurt!"}, {Language.JPN, "相手の {1} が負傷しました!"}, {Language.GER, "Der gegnerische {1} wurde verletzt!"}, {Language.FRE, "Le {1} adverse a été blessé !"}, {Language.SPN, "¡El oponente {1} resultó herido!"}, {Language.ITA, "Il {1} ​​avversario è stato ferito!"}, {Language.KOR, "상대 {1}이(가) 다쳤습니다!"}, {Language.CHN_SIM, "对方{1}受伤了！"}, {Language.CHN_TRA, "對方{1}受傷了！"}, }},
+			{PLAYER_MON_WAS_HURT, new() {{Language.ENG, "{1}’s {2} was hurt!"}, {Language.JPN, "{1} の {2} が怪我をしました!"}, {Language.GER, "{2} von {1} wurde verletzt!"}, {Language.FRE, "Le {2} de {1} a été blessé !"}, {Language.SPN, "¡El {2} de {1} resultó herido!"}, {Language.ITA, "Il {2} di {1} è rimasto ferito!"}, {Language.KOR, "{1}의 {2}이(가) 다쳤습니다!"}, {Language.CHN_SIM, "{1}的{2}受伤了！"}, {Language.CHN_TRA, "{1}的{2}受傷了！"}, }},
 			{MON_SWITCHED_SPEED_WITH_TARGET, new() {{Language.ENG, "{1} switched Speed with its target!"}, {Language.JPN, "{1} はターゲットの速度を切り替えました!"}, {Language.GER, "{1} hat die Geschwindigkeit mit seinem Ziel vertauscht!"}, {Language.FRE, "{1} a changé de vitesse avec sa cible !"}, {Language.SPN, "¡{1} cambió la velocidad con su objetivo!"}, {Language.ITA, "{1} ha scambiato la velocità con il suo bersaglio!"}, {Language.KOR, "{1}이(가) 목표와 속도를 바꿨습니다!"}, {Language.CHN_SIM, "{1} 改变了目标的速度！"}, {Language.CHN_TRA, "{1} 改變了目標的速度！"}, }},
 			{WILD_MON_SWITCHED_SPEED_WITH_TARGET, new() {{Language.ENG, "The wild {1} switched Speed with its target!"}, {Language.JPN, "野生の {1} がターゲットと速度を切り替えました!"}, {Language.GER, "Der wilde {1} vertauschte die Geschwindigkeit mit seinem Ziel!"}, {Language.FRE, "Le sauvage {1} a changé de vitesse avec sa cible !"}, {Language.SPN, "¡El salvaje {1} cambió la velocidad con su objetivo!"}, {Language.ITA, "Il {1} ​​selvaggio ha scambiato la Velocità con il suo bersaglio!"}, {Language.KOR, "야생 {1}이(가) 대상과 속도를 바꿨습니다!"}, {Language.CHN_SIM, "狂野的{1}改变了目标的速度！"}, {Language.CHN_TRA, "狂野的{1}改變了目標的速度！"}, }},
 			{OPPOSING_MON_SWITCHED_SPEED_WITH_TARGET, new() {{Language.ENG, "The opposing {1} switched Speed with its target!"}, {Language.JPN, "相手の {1} はターゲットとの速度を 切り替えました!"}, {Language.GER, "Der Gegner {1} wechselte die Geschwindigkeit mit seinem Ziel!"}, {Language.FRE, "Les {1} adversaires ont changé de vitesse avec its leur cible !"}, {Language.SPN, "¡El oponente {1} cambió la velocidad con su objetivo!"}, {Language.ITA, "L'avversario {1} ha cambiato Velocità con il suo bersaglio!"}, {Language.KOR, "상대 {1}의 속도가 목표와 전환되었습니다!"}, {Language.CHN_SIM, "对方{1}改变了 目标的速度！"}, {Language.CHN_TRA, "對方{1}改變了 目標的速度！"}, }},

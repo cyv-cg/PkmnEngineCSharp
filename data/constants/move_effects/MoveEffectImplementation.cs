@@ -1658,6 +1658,11 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_Protect(MoveEffectParams p) {
+			// Fail if this moves after everything else.
+			if (p.actionIndex == p.state.ActionCount - 1) {
+				return FLAG_MOVE_FAILED;
+			}
+
 			u8 successiveUses = (u8)p.target.GetStatusParam(StatusParam.SUCCESSIVE_MOVE_USES);
 			float successRate = System.MathF.Pow(0.33f, successiveUses);
 
@@ -1666,6 +1671,7 @@ namespace PkmnEngine {
 			}
 
 			p.target.GiveStatus(Status.PROTECTION);
+			p.target.SetStatusParam(StatusParam.PROTECTION_TYPE, PROT_PROTECT);
 			await MessageBox(Lang.GetString(STRINGS, BATTLE_COMMON.MON_PROTECTED_ITSELF, p.target.GetName()));
 			
 			return 0;
@@ -2235,9 +2241,7 @@ namespace PkmnEngine {
 			if (await Effect_Protect(p) == FLAG_MOVE_FAILED) {
 				return FLAG_MOVE_FAILED;
 			}
-
-			p.target.GiveStatus(Status.BANEFUL_BUNKER);
-
+			p.target.SetStatusParam(StatusParam.PROTECTION_TYPE, PROT_BANEFUL_BUNKER);
 			return 0;
 		}
 		public static async Task<u32> Effect_BarbBarrage(MoveEffectParams p) {
@@ -2302,6 +2306,13 @@ namespace PkmnEngine {
 			if (p.target.HasFlag(BattleMon.Flag.STAT_INCREASED_THIS_TURN)) {
 				return await Effect_BurnHit(p);
 			}
+			return 0;
+		}
+		public static async Task<u32> Effect_BurningBulwark(MoveEffectParams p) {
+			if (await Effect_Protect(p) == FLAG_MOVE_FAILED) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.target.SetStatusParam(StatusParam.PROTECTION_TYPE, PROT_BURNING_BULWARK);
 			return 0;
 		}
 		public static async Task<u32> Effect_Captivate(MoveEffectParams p) {
@@ -2656,7 +2667,9 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_HealBlock(MoveEffectParams p) {
-			// TODO:
+			// TODO: warning when trying to target a mon with the Heal Block status with a healing move?
+			p.target.GiveStatus(Status.HEAL_BLOCK, await BattleEvents.EventDuration(p.battle, p.attacker, Status.HEAL_BLOCK));
+			await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_WAS_PREVENTED_FROM_HEALING, p.target), p.target.GetName()));
 			return 0;
 		}
 		public static async Task<u32> Effect_HeartSwap(MoveEffectParams p) {
@@ -2689,8 +2702,24 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_HeavySlam(MoveEffectParams p) {
-			// TODO:
-			return 0;
+			float relativeWeight = p.target.weight / p.attacker.weight;
+			/*
+				Target's relative weight	Power
+				More than 50%				40
+				33.35% - 50%				60
+				25.01% - 33.34%				80
+				20.01% - 25%				100
+				20% or less					120
+			*/
+			u16 power = (u16)(
+				relativeWeight > 0.5 ? 40 :
+				relativeWeight <= 0.5 && relativeWeight > 0.3334 ? 60 :
+				relativeWeight <= 0.3334 && relativeWeight > 0.25 ? 80 :
+				relativeWeight <= 0.25 && relativeWeight > 0.2 ? 100 :
+				120
+			);
+			// Additionally double power if the target is minimized
+			return await OverridePower(p, (u16)(power * (p.target.HasStatus(Status.MINIMIZE) ? 2 : 1)));
 		}
 		public static async Task<u32> Effect_Hex(MoveEffectParams p) {
 			return await DoublePowerIf(p, p.target.HasStatus(STATUS_MASK_NON_VOLATILE));
@@ -2745,6 +2774,10 @@ namespace PkmnEngine {
 		}
 		public static async Task<u32> Effect_KingsShield(MoveEffectParams p) {
 			// TODO:
+			if (await Effect_Protect(p) == FLAG_MOVE_FAILED) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.target.SetStatusParam(StatusParam.PROTECTION_TYPE, PROT_KINGS_SHIELD);
 			return 0;
 		}
 		public static async Task<u32> Effect_LaserFocus(MoveEffectParams p) {
@@ -2794,7 +2827,15 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_MatBlock(MoveEffectParams p) {
-			// TODO:
+			if (!p.attacker.HasFlag(BattleMon.Flag.JUST_SWITCHED_IN)) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			if (await Effect_Protect(p) == FLAG_MOVE_FAILED) {
+				return FLAG_MOVE_FAILED;
+			}
+
+			p.target.SetStatusParam(StatusParam.PROTECTION_TYPE, PROT_MAT_BLOCK);
 			return 0;
 		}
 		public static async Task<u32> Effect_MeFirst(MoveEffectParams p) {
@@ -3102,7 +3143,10 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_QuickGuard(MoveEffectParams p) {
-			// TODO:
+			if (await Effect_Protect(p) == FLAG_MOVE_FAILED) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.target.SetStatusParam(StatusParam.PROTECTION_TYPE, PROT_QUICK_GUARD);
 			return 0;
 		}
 		public static async Task<u32> Effect_Rage(MoveEffectParams p) {
@@ -3190,7 +3234,10 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_SilkTrap(MoveEffectParams p) {
-			// TODO:
+			if (await Effect_Protect(p) == FLAG_MOVE_FAILED) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.target.SetStatusParam(StatusParam.PROTECTION_TYPE, PROT_SILK_TRAP);
 			return 0;
 		}
 		public static async Task<u32> Effect_SimpleBeam(MoveEffectParams p) {
@@ -3268,7 +3315,10 @@ namespace PkmnEngine {
 			return 0;
 		}
 		public static async Task<u32> Effect_SpikyShield(MoveEffectParams p) {
-			// TODO:
+			if (await Effect_Protect(p) == FLAG_MOVE_FAILED) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.target.SetStatusParam(StatusParam.PROTECTION_TYPE, PROT_SPIKY_SHIELD);
 			return 0;
 		}
 		public static async Task<u32> Effect_SteamEruption(MoveEffectParams p) {
@@ -3643,6 +3693,13 @@ namespace PkmnEngine {
 				await Effect_SpecialDefenseDown(p) |
 				await Effect_SpeedDown(p);
 		}
+		public static async Task<u32> Effect_CraftyShield(MoveEffectParams p) {
+			if (await Effect_Protect(p) == FLAG_MOVE_FAILED) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.target.SetStatusParam(StatusParam.PROTECTION_TYPE, PROT_CRAFTY_SHIELD);
+			return 0;
+		}
 		public static async Task<u32> Effect_VenomDrench(MoveEffectParams p) {
 			if (p.target.IsPoisoned()) {
 				await Effect_AttackDownHit(p);
@@ -3662,7 +3719,10 @@ namespace PkmnEngine {
 			return await DoublePowerIf(p, p.target.IsAsleep());
 		}
 		public static async Task<u32> Effect_WideGuard(MoveEffectParams p) {
-			// TODO:
+			if (await Effect_Protect(p) == FLAG_MOVE_FAILED) {
+				return FLAG_MOVE_FAILED;
+			}
+			p.target.SetStatusParam(StatusParam.PROTECTION_TYPE, PROT_WIDE_GUARD);
 			return 0;
 		}
 		public static async Task<u32> Effect_WonderRoom(MoveEffectParams p) {

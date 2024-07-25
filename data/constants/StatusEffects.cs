@@ -10,29 +10,29 @@ using System.Collections.Generic;
 
 namespace PkmnEngine {
 	public static class StatusEffects {
-		public const u16 NUM_STATUSES = (u16)Status.NR_ITEMS;
+		internal const u16 NUM_STATUSES = (u16)Status.NR_ITEMS;
 	
-		public const float BURN_ATTACK_MULTIPLIER =	0.5f;
-		public const float PARALYSIS_SPEED_MULTIPLIER = 0.5f;
+		internal const float BURN_ATTACK_MULTIPLIER =	0.5f;
+		internal const float PARALYSIS_SPEED_MULTIPLIER = 0.5f;
 
-		public const float PARALYSIS_PROC_CHANCE = 0.25f;
-		public const float FREEZE_THAW_CHANCE = 0.2f;
+		internal const float PARALYSIS_PROC_CHANCE = 0.25f;
+		internal const float FREEZE_THAW_CHANCE = 0.2f;
 
-		public const u8 SLEEP_MIN_TURNS = 1;
-		public const u8 SLEEP_MAX_TURNS = 6;
+		internal const u8 SLEEP_MIN_TURNS = 1;
+		internal const u8 SLEEP_MAX_TURNS = 6;
 		// TODO: this should not use the global Random16
-		public static u8 GetRandSleepTurns() { return (u8)(Random16() % SLEEP_MAX_TURNS + SLEEP_MIN_TURNS); }
+		internal static u8 GetRandSleepTurns() { return (u8)(Random16() % SLEEP_MAX_TURNS + SLEEP_MIN_TURNS); }
 
-		public const float BURN_CHIP_DAMAGE	= 1.0f / 8;
-		public const float POISON_CHIP_DAMAGE = 1.0f / 8;
-		public const float TOXIC_CHIP_DAMAGE = 1.0f / 16;
+		internal const float BURN_CHIP_DAMAGE	= 1.0f / 8;
+		internal const float POISON_CHIP_DAMAGE = 1.0f / 8;
+		internal const float TOXIC_CHIP_DAMAGE = 1.0f / 16;
 
-		public const float AQUA_RING_HEAL_AMOUNT = 1.0f / 16;
-		public const float LEECH_SEED_DRAIN_AMOUNT = 1.0f / 8;
+		internal const float AQUA_RING_HEAL_AMOUNT = 1.0f / 16;
+		internal const float LEECH_SEED_DRAIN_AMOUNT = 1.0f / 8;
 
 		#region masks
 		// Statuses that persist after battle and when not on field. A Pokemon cannot have more than one at a time.
-		public static readonly Status[] STATUS_MASK_NON_VOLATILE = new Status[] {
+		internal static readonly Status[] STATUS_MASK_NON_VOLATILE = new Status[] {
 			Status.FAINTED,
 			Status.BURN,
 			Status.FREEZE,
@@ -43,7 +43,7 @@ namespace PkmnEngine {
 		};
 		
 		// Statuses that do not persist off field and outside battle. A Pokemon can have any number of these at the same time.
-		public static readonly Status[] STATUS_MASK_VOLATILE = new Status[] {
+		internal static readonly Status[] STATUS_MASK_VOLATILE = new Status[] {
 			Status.ABILITY_CHANGE,
 			Status.ABILITY_SUPPRESSION,
 			Status.TYPE_CHANGE,
@@ -104,13 +104,12 @@ namespace PkmnEngine {
 			Status.CENTER_OF_ATTENTION,
 			Status.MAGIC_COAT,
 			Status.PROTECTION,
-			Status.BANEFUL_BUNKER,
 			Status.OBSTRUCT,
 			Status.LUCKY_CHANT,
 			Status.DESTINY_BOND
 		};
 		// These statuses are passed along when using Baton Pass.
-		public static readonly Status[] STATUS_MASK_BATON_PASSABLE = new Status[] {
+		internal static readonly Status[] STATUS_MASK_BATON_PASSABLE = new Status[] {
 			Status.CONFUSION,
 			Status.GETTING_PUMPED,
 			Status.TAKING_AIM,
@@ -130,35 +129,47 @@ namespace PkmnEngine {
 			Status.TELEKINESIS
 		};
 		// These effects pass at the end of the turn.
-		public static readonly Status[] STATUS_MASK_TRANSIENT = new Status[] {
+		internal static readonly Status[] STATUS_MASK_TRANSIENT = new Status[] {
 			Status.FLINCH,
 			Status.BRACING,
 			Status.CENTER_OF_ATTENTION,
 			Status.MAGIC_COAT,
 			Status.PROTECTION,
-			Status.BANEFUL_BUNKER,
 			Status.OBSTRUCT,
 			Status.LUCKY_CHANT,
 			Status.RAGE
 		};
 		#endregion
 
-		public const u8 SEMI_INVULNERABLE_GROUND	= 1 << 0;
-		public const u8 SEMI_INVULNERABLE_AIR		= 1 << 1;
-		public const u8 SEMI_INVULNERABLE_WATER		= 1 << 2;
-		public const u8 SEMI_INVULNERABLE_PHANTOM	= 1 << 3;
+		internal const u8 SEMI_INVULNERABLE_GROUND	= 1 << 0;
+		internal const u8 SEMI_INVULNERABLE_AIR		= 1 << 1;
+		internal const u8 SEMI_INVULNERABLE_WATER		= 1 << 2;
+		internal const u8 SEMI_INVULNERABLE_PHANTOM	= 1 << 3;
 
 		// Binding effects from: Bind, Clamp, Sand Tomb, Fire Spin, Infestation, Magma Storm, Snap Trap, Thunder Cage, Whirlpool, and Wrap
-		public const u16 BIND_BIND			= 1 << 0;
-		public const u16 BIND_CLAMP			= 1 << 1;
-		public const u16 BIND_SAND_TOMB		= 1 << 2;
-		public const u16 BIND_FIRE_SPIN		= 1 << 3;
-		public const u16 BIND_INFESTATION	= 1 << 4;
-		public const u16 BIND_MAGMA_STORM	= 1 << 5;
-		public const u16 BIND_SNAP_TRAP		= 1 << 6;
-		public const u16 BIND_THUNDER_CAGE	= 1 << 7;
-		public const u16 BIND_WHIRLPOOL		= 1 << 8;
-		public const u16 BIND_WRAP			= 1 << 9;
+		internal const u16 BIND_BIND			= 1 << 0;
+		internal const u16 BIND_CLAMP			= 1 << 1;
+		internal const u16 BIND_SAND_TOMB		= 1 << 2;
+		internal const u16 BIND_FIRE_SPIN		= 1 << 3;
+		internal const u16 BIND_INFESTATION	= 1 << 4;
+		internal const u16 BIND_MAGMA_STORM	= 1 << 5;
+		internal const u16 BIND_SNAP_TRAP		= 1 << 6;
+		internal const u16 BIND_THUNDER_CAGE	= 1 << 7;
+		internal const u16 BIND_WHIRLPOOL		= 1 << 8;
+		internal const u16 BIND_WRAP			= 1 << 9;
+
+		internal const u16 PROT_PROTECT			= 1 << 0;
+		internal const u16 PROT_DETECT			= 1 << 1;
+		internal const u16 PROT_BANEFUL_BUNKER	= 1 << 2;
+		internal const u16 PROT_KINGS_SHIELD	= 1 << 3;
+		internal const u16 PROT_OBSTRUCT		= 1 << 4;
+		internal const u16 PROT_SILK_TRAP		= 1 << 5;
+		internal const u16 PROT_SPIKY_SHIELD	= 1 << 6;
+		internal const u16 PROT_CRAFTY_SHIELD	= 1 << 7;
+		internal const u16 PROT_MAT_BLOCK		= 1 << 8;
+		internal const u16 PROT_WIDE_GUARD		= 1 << 9;
+		internal const u16 PROT_QUICK_GUARD		= 1 << 10;
+		internal const u16 PROT_BURNING_BULWARK	= 1 << 11;
 
 		public static (BattleEvent callback, sbyte priority) gStatusEvents(Status status, Callback cb) {
 			if (StatusEvents.ContainsKey(status) && StatusEvents[status].ContainsKey(cb)) {
@@ -171,7 +182,7 @@ namespace PkmnEngine {
 
 		private static readonly Dictionary<Status, Dictionary<Callback, (BattleEvent callback, sbyte priority)>> StatusEvents = new() { {
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-
+		
 			Status.BURN,
 			new Dictionary<Callback, (BattleEvent, sbyte)>() {{
 				Callback.OnResidual,
@@ -437,6 +448,23 @@ namespace PkmnEngine {
 					(Status_Bound_OnTrySwitchOut, 0)
 				}
 			}
+		},
+		{
+			Status.HEAL_BLOCK,
+			new Dictionary<Callback, (BattleEvent callback, sbyte priority)>() {
+				{
+					Callback.DurationCallback, 
+					(async (object p) => 5, 0)
+				},
+				{
+					Callback.OnTryHeal,
+					(Status_HealBlock_OnTryHeal, 0)
+				},
+				{
+					Callback.OnResidual,
+					(Status_HealBlock_OnResidual, 0)
+				}
+			}
 		}
 
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -479,6 +507,7 @@ namespace PkmnEngine {
 		BIND_TYPE,				// Bind, Clamp, Sand Tomb, Fire Spin, Infestation, Magma Storm, Snap Trap, Thunder Cage, Whirlpool or Wrap
 		MON_BOUND_BY,			// NUUID of the mon that used Bind on this mon.
 		BINDING_BAND,			// Whether or not the mon using a binding move is holding the Binding Band at the time.
+		PROTECTION_TYPE,		// Which specific effects tied to the protection status.
 		NR_ITEMS
 	};
 
@@ -578,7 +607,6 @@ namespace PkmnEngine {
 				CENTER_OF_ATTENTION,
 				MAGIC_COAT,
 				PROTECTION,
-				BANEFUL_BUNKER,
 				OBSTRUCT,
 				LUCKY_CHANT,
 				RAGE,

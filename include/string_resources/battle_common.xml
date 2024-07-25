@@ -17304,7 +17304,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5777</key>
+		<key>MON_WAS_PREVENTED_FROM_HEALING</key>
 		<text>
 			<en lang="english">{1} was prevented from healing!</en>
 			<ja lang="japanese">{1} は治癒を妨げられました。</ja>
@@ -17318,7 +17318,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5778</key>
+		<key>WILD_MON_WAS_PREVENTED_FROM_HEALIN</key>
 		<text>
 			<en lang="english">The wild {1} was prevented from healing!</en>
 			<ja lang="japanese">野生の {1} は治癒を妨げられました。</ja>
@@ -17332,7 +17332,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5779</key>
+		<key>OPPOSING_MON_WAS_PREVENTED_FROM_HEALING</key>
 		<text>
 			<en lang="english">The opposing {1} was prevented from healing!</en>
 			<ja lang="japanese">相手の {1} は回復できませんでした!</ja>
@@ -17346,21 +17346,21 @@
 		</text>
 	</string>
 	<string>
-		<key>key5780</key>
+		<key>PLAYER_MON_WAS_PREVENTED_FROM_HEALING</key>
 		<text>
-			<en lang="english">{1}{2}’s {3} was preventedfrom healing!</en>
-			<ja lang="japanese">{1}{2} の {3} は治癒を妨げられました。</ja>
-			<de lang="german">{1}{2}s {3} wurde an der Heilung gehindert!</de>
-			<fr lang="french">Le {3} de {1}{2} n'a pas pu guérir !</fr>
-			<es lang="spanish">¡Se impidió que {3} de {1}{2} sanara!</es>
-			<it lang="italian">A {3} di {1}{2} è stata impeditala guarigione!</it>
-			<ko lang="korean">{1}{2}의 {3}이(가) 치유되지 않았습니다!</ko>
-			<zh-cn lang="chinese (simplified)">{1}{2} 的 {3} 无法愈合！</zh-cn>
-			<zh-tw lang="chinese (traditional)">{1}{2} 的 {3} 無法癒合！</zh-tw>
+			<en lang="english">{1}’s {2} was prevented from healing!</en>
+			<ja lang="japanese">{1} の {2} は治癒を妨げられました。</ja>
+			<de lang="german">{1}s {2} wurde an der Heilung gehindert!</de>
+			<fr lang="french">Le {2} de {1} n'a pas pu guérir !</fr>
+			<es lang="spanish">¡Se impidió que {2} de {1} sanara!</es>
+			<it lang="italian">A {2} di {1} è stata impeditala guarigione!</it>
+			<ko lang="korean">{1}의 {2}이(가) 치유되지 않았습니다!</ko>
+			<zh-cn lang="chinese (simplified)">{1} 的 {2} 无法愈合！</zh-cn>
+			<zh-tw lang="chinese (traditional)">{1} 的 {2} 無法癒合！</zh-tw>
 		</text>
 	</string>
 	<string>
-		<key>key5781</key>
+		<key>MON_HEAL_BLOCK_WORE_OFF</key>
 		<text>
 			<en lang="english">{1}’s Heal Block wore off!</en>
 			<ja lang="japanese">{1}のヒールブロックが切れました！</ja>
@@ -17374,7 +17374,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5782</key>
+		<key>WILD_MON_HEAL_BLOCK_WORE_OFF</key>
 		<text>
 			<en lang="english">The wild {1}’s Heal Block wore off!</en>
 			<ja lang="japanese">野生の {1} のヒールブロックが切れました！</ja>
@@ -17388,7 +17388,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5783</key>
+		<key>OPPOSING_MON_HEAL_BLOCK_WORE_OFF</key>
 		<text>
 			<en lang="english">The opposing {1}’s Heal Block wore off!</en>
 			<ja lang="japanese">相手の{1}のヒールブロックが切れました！</ja>
@@ -17402,7 +17402,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key5784</key>
+		<key>PLAYER_MON_HEAL_BLOCK_WORE_OFF</key>
 		<text>
 			<en lang="english">{1}’s {2}’s Heal Block wore off!</en>
 			<ja lang="japanese">{1}の{2}のヒールブロックが切れました！</ja>
@@ -24080,7 +24080,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6225</key>
+		<key>MON_WAS_HURT</key>
 		<text>
 			<en lang="english">{1} was hurt!</en>
 			<ja lang="japanese">{1} が怪我をしました!</ja>
@@ -24094,7 +24094,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6226</key>
+		<key>WILD_MON_WAS_HURT</key>
 		<text>
 			<en lang="english">The wild {1} was hurt!</en>
 			<ja lang="japanese">野生の {1} が怪我をしました!</ja>
@@ -24108,7 +24108,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6227</key>
+		<key>OPPOSING_MON_WAS_HURT</key>
 		<text>
 			<en lang="english">The opposing {1} was hurt!</en>
 			<ja lang="japanese">相手の {1} が負傷しました!</ja>
@@ -24122,7 +24122,7 @@
 		</text>
 	</string>
 	<string>
-		<key>key6228</key>
+		<key>PLAYER_MON_WAS_HURT</key>
 		<text>
 			<en lang="english">{1}’s {2} was hurt!</en>
 			<ja lang="japanese">{1} の {2} が怪我をしました!</ja>

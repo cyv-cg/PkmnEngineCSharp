@@ -103,5 +103,7 @@ namespace PkmnEngine {
 		OnCheckIsUngrounded,
 		OnTryRemoveItem,
 		OnTrySwitchOut,
+		OnTryHeal,
+		OnContactMade,
 	}
 }

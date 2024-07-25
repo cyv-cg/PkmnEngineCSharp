@@ -119,20 +119,11 @@ namespace PkmnEngine {
 			// If the move is ineffective and the move does not ignore the type chart, then stop here.
 			if (MonIsImmune(state, defender, moveID)) {
 				await MessageBox(GetString(STRINGS, BATTLE_COMMON.MON_IS_NOT_AFFECTED, defender.GetName()));
-				// Do Contact events.
-				if ((gBattleMoves(moveID).flags & BattleMoves.Flag.MAKES_CONTACT) != 0) {
-					//TODO: OnContactMade(state, attacker, defender);
-				}
-				return FLAG_MOVE_FAILED;
+				return 0;
 			}
 
 			// Check for protect.
-			if ((gBattleMoves(moveID).flags & BattleMoves.Flag.PROTECT_AFFECTED) != 0 && defender.HasStatus(Status.PROTECTION)) {
-				await MessageBox(GetString(STRINGS, BATTLE_COMMON.MON_PROTECTED_ITSELF, defender.GetName()));
-				// Do contact events.
-				if ((gBattleMoves(moveID).flags & BattleMoves.Flag.MAKES_CONTACT) != 0) {
-			//		// TODO: OnContactMade(state, attacker, defender);
-				}
+			if (await Protection(state, attacker, defender, moveID)) {
 				return FLAG_MOVE_FAILED;
 			}
 
@@ -181,12 +172,98 @@ namespace PkmnEngine {
 				}
 			}
 
-			// Do contact events.
+			// Do Contact events.
 			if ((gBattleMoves(moveID).flags & BattleMoves.Flag.MAKES_CONTACT) != 0) {
-				//TODO: OnContactMade(state, attacker, defender);
+				await Battle.RunEvent(Callback.OnContactMade, defender, new OnContactMadeParams(state, attacker, defender));
 			}
 
 			return flags;
+		}
+
+		private static async Task<bool> Protection(BattleState state, BattleMon attacker, BattleMon defender, BattleMoveID moveID) {
+			if (!defender.HasStatus(Status.PROTECTION)) {
+				return false;
+			}
+			if ((gBattleMoves(moveID).flags & BattleMoves.Flag.PROTECT_AFFECTED) == 0) {
+				return false;
+			}
+
+			MoveCategory cat = gBattleMoves(moveID).moveCat;
+			bool retVal = false;
+
+			switch (defender.GetStatusParam(StatusParam.PROTECTION_TYPE)) {
+				case StatusEffects.PROT_PROTECT:
+				case StatusEffects.PROT_BANEFUL_BUNKER:
+				case StatusEffects.PROT_DETECT:
+				case StatusEffects.PROT_SPIKY_SHIELD:
+					retVal = true; // Protect from all moves.
+					break;
+				case StatusEffects.PROT_BURNING_BULWARK:
+				case StatusEffects.PROT_KINGS_SHIELD:
+				case StatusEffects.PROT_OBSTRUCT:
+				case StatusEffects.PROT_SILK_TRAP:
+				case StatusEffects.PROT_MAT_BLOCK:
+					retVal = cat == MoveCategory.PHYSICAL || cat == MoveCategory.SPECIAL; // Protect from physical and special moves.
+					break;
+				case StatusEffects.PROT_CRAFTY_SHIELD:
+					// Protect from status moves that 1) aren't targeting an ally 2) don't target everyone and 3) aren't entry hazards.
+					retVal = 
+						cat == MoveCategory.STATUS && 
+						attacker.Side != defender.Side && 
+						(gBattleMoves(moveID).target & BattleMoves.MOVE_TARGET_ALL) == 0 &&
+						(gBattleMoves(moveID).flags & BattleMoves.Flag.ENTRY_HAZARD) == 0;
+					break;
+				case StatusEffects.PROT_QUICK_GUARD:
+					retVal = gBattleMoves(moveID).priority > 0; // Protect from priority moves.
+					break;
+				case StatusEffects.PROT_WIDE_GUARD:
+					retVal = (gBattleMoves(moveID).target & BattleMoves.MASK_MOVE_TARGET_MULTIPLE) != 0; // Protect from moves that can hit multiple targets.
+					break;
+				default:
+					retVal = false;
+					break;
+			}
+
+			if (!retVal) {
+				return false;
+			}
+
+			await MessageBox(GetString(STRINGS, BATTLE_COMMON.MON_PROTECTED_ITSELF, defender.GetName()));
+			
+			// Do specific contact events.
+			if ((gBattleMoves(moveID).flags & BattleMoves.Flag.MAKES_CONTACT) != 0) {
+				switch (defender.GetStatusParam(StatusParam.PROTECTION_TYPE)) {
+					case StatusEffects.PROT_BANEFUL_BUNKER:
+						await PoisonMon(state, attacker);
+						break;
+					case StatusEffects.PROT_BURNING_BULWARK:
+						await BurnMon(state, attacker);
+						break;
+					case StatusEffects.PROT_SPIKY_SHIELD:
+						U16 damage = new(attacker.GetPercentOfMaxHp(1f / 8));
+						await attacker.DamageMon(damage, false, false, GetString(STRINGS, GetContextString(BATTLE_COMMON.MON_WAS_HURT, attacker), attacker.GetName()));
+						break;
+					case StatusEffects.PROT_OBSTRUCT:
+						await ChangeStat(state, attacker, -2, Stat.ATTACK);
+						break;
+					case StatusEffects.PROT_KINGS_SHIELD:
+						await ChangeStat(state, attacker, -1, Stat.ATTACK);
+						break;
+					case StatusEffects.PROT_SILK_TRAP:
+						await ChangeStat(state, attacker, -1, Stat.SPEED);
+						break;
+					case StatusEffects.PROT_PROTECT:
+					case StatusEffects.PROT_DETECT:
+					case StatusEffects.PROT_QUICK_GUARD:
+					case StatusEffects.PROT_WIDE_GUARD:
+					case StatusEffects.PROT_MAT_BLOCK:
+					case StatusEffects.PROT_CRAFTY_SHIELD:
+					default:
+						break;
+				}
+			}
+			
+			return true;
 		}
 
 		/// <summary>
@@ -270,6 +347,9 @@ namespace PkmnEngine {
 			if ((move.flags & Flag.ALWAYS_HIT_HAIL) != 0 && 
 				(state.Weather.Condition == Condition.WEATHER_HAIL || state.Weather.Condition == Condition.WEATHER_SNOW)
 			) {
+				return true;
+			}
+			if ((move.flags & Flag.ALWAYS_HIT_MINIMIZE) != 0 && defender.HasStatus(Status.MINIMIZE)) {
 				return true;
 			}
 

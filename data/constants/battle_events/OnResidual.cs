@@ -194,6 +194,18 @@ namespace PkmnEngine {
 
 			return null;
 		}
+		public static async Task<object> Status_HealBlock_OnResidual(object p) {
+			OnResidualParams args = ValidateParams<OnResidualParams>(p);
+			
+			if (args.bm.StatusDuration(Status.HEAL_BLOCK) > 0) {
+				args.bm.DecrementStatusDuration(Status.HEAL_BLOCK);
+			}
+			else {
+				await MessageBox(Lang.GetString(STRINGS, BattleUtils.GetContextString(BATTLE_COMMON.MON_HEAL_BLOCK_WORE_OFF, args.bm), args.bm.GetName()));
+			}
+			
+			return null;
+		}
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 	} 
 }

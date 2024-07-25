@@ -483,6 +483,7 @@ namespace PkmnEngine {
 				MoveEffectID.REFLECT => Effect_Reflect,
 				MoveEffectID.LIGHTSCREEN => Effect_LightScreen,
 				MoveEffectID.AURORAVEIL => Effect_AuroraVeil,
+				MoveEffectID.CRAFTYSHIELD => Effect_CraftyShield,
 				_ => throw new System.ArgumentException($"Effect '{id}' not recognized."),
 			};
 		}
@@ -495,6 +496,7 @@ namespace PkmnEngine {
 		BURNHIT,
 		CUREBURN,
 		CUREBURNHIT,
+		CRAFTYSHIELD,
 		FREEZE,
 		FREEZEHIT,
 		THAW,
@@ -776,6 +778,7 @@ namespace PkmnEngine {
 		BUGBITE,
 		BURNUP,
 		BURNINGJEALOUSY,
+		BURNINGBULWARK,
 		CAPTIVATE,
 		CHIPAWAY,
 		SWITCHTONEXTHIT,

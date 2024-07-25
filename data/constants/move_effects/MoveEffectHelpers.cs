@@ -303,6 +303,12 @@ namespace PkmnEngine {
 			p.target.SetStatusParam(StatusParam.BIND_TYPE, bindType);
 			return 0;
 		}
+
+		private static async Task<u32> RemoveProtectionHit(MoveEffectParams p) {
+			p.target.RemoveStatus(Status.PROTECTION);
+			
+			return 0;
+		}
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 
 		/// <summary>

@@ -24,9 +24,31 @@ namespace PkmnEngine {
 			public const u32 MOVE_TARGET_ALL					= 1 << 12;	// All mons on field
 			public const u32 MOVE_TARGET_ANY					= 1 << 13;	// Any one mon
 			public const u32 MOVE_TARGET_ALL_OPPONENTS			= 1 << 14;	// Every opponent, no allies
-			public const u32 MOVE_TARGET_USER_FIELD_AND_PARTY	= 1 << 15; // All allies and all mons in the user's party
+			public const u32 MOVE_TARGET_USER_FIELD_AND_PARTY	= 1 << 15;	// All allies and all mons in the user's party
+			public const u32 MOVE_TARGET_USER_PARTY_SELECTED	= 1 << 16;	// A selected mon in the user's party
 
-		[System.Flags] public enum Flag : ulong {
+			internal const u32 MASK_MOVE_TARGET_SINGLE =
+				MOVE_TARGET_SELECTED |
+				MOVE_TARGET_DEPENDS |
+				MOVE_TARGET_USER_OR_SELECTED |
+				MOVE_TARGET_RANDOM |
+				MOVE_TARGET_USER |
+				MOVE_TARGET_SELECTED_OPPONENT |
+				MOVE_TARGET_USER_OR_ALLY |
+				MOVE_TARGET_SELECTED_ALLY |
+				MOVE_TARGET_ANY_NOT_USER |
+				MOVE_TARGET_ANY  |
+				MOVE_TARGET_USER_PARTY_SELECTED;
+			internal const u32 MASK_MOVE_TARGET_MULTIPLE = 
+				MOVE_TARGET_BOTH |
+				MOVE_TARGET_FOES_AND_ALLY |
+				MOVE_TARGET_OPPONENTS_FIELD |
+				MOVE_TARGET_USER_FIELD |
+				MOVE_TARGET_ALL |
+				MOVE_TARGET_ALL_OPPONENTS |
+				MOVE_TARGET_USER_FIELD_AND_PARTY;
+
+		[System.Flags] public enum Flag : u64 {
 			MAKES_CONTACT				= 1L << 0,
 			PROTECT_AFFECTED			= 1L << 1,
 			MAGIC_COAT_AFFECTED			= 1L << 2,
@@ -68,6 +90,9 @@ namespace PkmnEngine {
 			HITS_UNGROUNDED				= 1L << 38,
 			CANNOT_USE_MOVE_TWICE		= 1L << 39,
 			DOUBLE_DAMAGE_MINIMIZE		= 1L << 40,
+			ALWAYS_HIT_MINIMIZE			= 1L << 41,
+			HEALING_MOVE				= 1L << 42,
+			ENTRY_HAZARD				= 1L << 43,
 		}
 		#endregion
 	
@@ -168,6 +193,7 @@ namespace PkmnEngine {
 				BattleMoveID.BULLET_SEED => Definitions.MOVE_BULLET_SEED,
 				BattleMoveID.BURN_UP => Definitions.MOVE_BURN_UP,
 				BattleMoveID.BURNING_JEALOUSY => Definitions.MOVE_BURNING_JEALOUSY,
+				BattleMoveID.BURNING_BULWARK => Definitions.MOVE_BURNING_BULWARK,
 				BattleMoveID.CALM_MIND => Definitions.MOVE_CALM_MIND,
 				BattleMoveID.CAMOUFLAGE => Definitions.MOVE_CAMOUFLAGE,
 				BattleMoveID.CAPTIVATE => Definitions.MOVE_CAPTIVATE,
@@ -889,2112 +915,2129 @@ namespace PkmnEngine {
 			};
 		}
 
-		static class Definitions {
+		private static class Definitions {
 			public static BattleMove MOVE_NONE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NONE,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 0,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ 0,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.NONE,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NONE,
+						power:					0,
+						accuracy:				0,
+						pp:						0,
+						secondaryEffectChance:	100,
+						target:					0,
+						priority:				0,
+						moveCat:				MoveCategory.NONE,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_ABSORB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ABSORB50PERCENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 20,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.LIQUID_OOZE_AFFECTED
+						primaryEffect:			MoveEffectID.ABSORB50PERCENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					20,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.LIQUID_OOZE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ACCELEROCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					40,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ACID {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED_OPPONENT,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALDEFENSEDOWNHIT,
+						moveType:				Type.POISON,
+						power:					40,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED_OPPONENT,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ACID_ARMOR {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFENSEUP2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.DEFENSEUP2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_ACID_SPRAY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEDOWNHIT2,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.BULLETPROOF_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEDOWNHIT2,
+						moveType:				Type.POISON,
+						power:					40,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ACROBATICS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ACROBATICS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 55,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ACROBATICS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					55,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ACUPRESSURE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RANDOMUP2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_OR_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.RANDOMUP2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_OR_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_AERIAL_ACE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 60,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.SHARPNESS_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.MAKES_CONTACT
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					60,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.ALWAYS_HIT | Flag.SHARPNESS_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.MAKES_CONTACT
 					);
 				}
 			}
 			public static BattleMove MOVE_AEROBLAST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 100,
-						/*accuracy =*/ 95,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					100,
+						accuracy:				95,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
 					);
 				}
 			}
 			public static BattleMove MOVE_AFTER_YOU {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.AFTERYOU,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.AFTERYOU,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_AGILITY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPEEDUP2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SPEEDUP2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AIR_CUTTER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 60,
-						/*accuracy =*/ 95,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					60,
+						accuracy:				95,
+						pp:						25,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AIR_SLASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 75,
-						/*accuracy =*/ 95,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.FLYING,
+						power:					75,
+						accuracy:				95,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.SHARPNESS_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ALLY_SWITCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ALLYSWITCH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 2,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.ALLYSWITCH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				2,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_AMNESIA {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPECIALDEFENSEUP2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SPECIALDEFENSEUP2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ANCHOR_SHOT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.TRAP,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.TRAP,
+						moveType:				Type.STEEL,
+						power:					80,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ANCIENT_POWER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ALLSTATSUP,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ALLSTATSUP,
+						moveType:				Type.ROCK,
+						power:					60,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_APPLE_ACID {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALDEFENSEDOWNHIT,
+						moveType:				Type.GRASS,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AQUA_CUTTER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL | Flag.SHARPNESS_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					70,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL | Flag.SHARPNESS_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AQUA_JET {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					40,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AQUA_RING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.AQUARING,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.AQUARING,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AQUA_STEP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDUP,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDUP,
+						moveType:				Type.WATER,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AQUA_TAIL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 90,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					90,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ARM_THRUST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 15,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					15,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ARMOR_CANNON {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFANDSPDEFDOWN,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFANDSPDEFDOWN,
+						moveType:				Type.FIRE,
+						power:					120,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AROMATHERAPY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CURENONVOLATILESTATUSHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.CURENONVOLATILESTATUSHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AROMATIC_MIST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPECIALDEFENSEUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.SPECIALDEFENSEUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_ASSIST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ASSIST,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK
+						primaryEffect:			MoveEffectID.ASSIST,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK
 					);
 				}
 			}
 			public static BattleMove MOVE_ASSURANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ASSURANCE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ASSURANCE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					60,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ASTONISH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 30,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.GHOST,
+						power:					30,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ASTRAL_BARRAGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					120,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ATTACK_ORDER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					90,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ATTRACT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATTRACT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.IGNORE_TYPE_EFF
+						primaryEffect:			MoveEffectID.ATTRACT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.IGNORE_TYPE_EFF
 					);
 				}
 			}
 			public static BattleMove MOVE_AURA_SPHERE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 80,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.PULSE_MOVE | Flag.MEGA_LAUNCHER_AFFECTED | Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					80,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.ALWAYS_HIT | Flag.PULSE_MOVE | Flag.MEGA_LAUNCHER_AFFECTED | Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AURA_WHEEL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDUP,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 110,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDUP,
+						moveType:				Type.ELECTRIC,
+						power:					110,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AURORA_BEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATTACKDOWNHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATTACKDOWNHIT,
+						moveType:				Type.ICE,
+						power:					65,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AURORA_VEIL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.AURORAVEIL,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.AURORAVEIL,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AUTOTOMIZE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.AUTOTOMIZE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.AUTOTOMIZE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AVALANCHE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.AVALANCHE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ -4,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.AVALANCHE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					60,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				-4,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_AXE_KICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.JUMPKICK,
-						/*secondaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 120,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.JUMPKICK,
+						secondaryEffect:		MoveEffectID.CONFUSEHIT,
+						moveType:				Type.FIGHTING,
+						power:					120,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BABY_DOLL_EYES {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATTACKDOWNHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.ATTACKDOWNHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BANEFUL_BUNKER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BANEFULBUNKER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 4,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECTS
+						primaryEffect:			MoveEffectID.BANEFULBUNKER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				4,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECTS
 					);
 				}
 			}
 			public static BattleMove MOVE_BARB_BARRAGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BARBBARRAGE,
-						/*secondaryEffect =*/ MoveEffectID.POISONHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.BARBBARRAGE,
+						secondaryEffect:		MoveEffectID.POISONHIT,
+						moveType:				Type.POISON,
+						power:					60,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BARRAGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 15,
-						/*accuracy =*/ 85,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					15,
+						accuracy:				85,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BARRIER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFENSEUP2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.DEFENSEUP2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BATON_PASS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BATONPASS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.BATONPASS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_BEAK_BLAST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BEAKBLAST,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ -3,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BEAKBLAST,
+						moveType:				Type.FLYING,
+						power:					100,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				-3,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BEAT_UP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BEATUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.BEATUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BEHEMOTH_BASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BEHEMOTH_BLADE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BELCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BELCH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 120,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.BELCH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					120,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BELLY_DRUM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BELLYDRUM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.BELLYDRUM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BESTOW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BESTOW,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.BESTOW,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BIDE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BIDE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
+						primaryEffect:			MoveEffectID.BIDE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_BIND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BIND,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 15,
-						/*accuracy =*/ 85,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.BIND,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					15,
+						accuracy:				85,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BITE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.DARK,
+						power:					60,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BITTER_BLADE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.HEALHALF,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.SHARPNESS_AFFECTED | Flag.LIQUID_OOZE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.HEALHALF,
+						moveType:				Type.FIRE,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.SHARPNESS_AFFECTED | Flag.LIQUID_OOZE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BITTER_MALICE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATTACKDOWNHIT,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATTACKDOWNHIT,
+						moveType:				Type.GHOST,
+						power:					75,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BLAST_BURN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RECHARGE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 150,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RECHARGE,
+						moveType:				Type.FIRE,
+						power:					150,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BLAZE_KICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 85,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HIGH_CRITICAL
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					85,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HIGH_CRITICAL
 					);
 				}
 			}
 			public static BattleMove MOVE_BLEAKWIND_STORM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 100,
-						/*accuracy =*/ 80,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT_RAIN
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.FLYING,
+						power:					100,
+						accuracy:				80,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT_RAIN
 					);
 				}
 			}
 			public static BattleMove MOVE_BLIZZARD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FREEZEHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 110,
-						/*accuracy =*/ 70,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.WIND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT_HAIL
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FREEZEHIT,
+						moveType:				Type.ICE,
+						power:					110,
+						accuracy:				70,
+						pp:						5,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.WIND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT_HAIL
 					);
 				}
 			}
 			public static BattleMove MOVE_BLOCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TRAP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.TRAP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BLUE_FLARE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 130,
-						/*accuracy =*/ 85,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					130,
+						accuracy:				85,
+						pp:						5,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BODY_PRESS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BODYPRESS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.BODYPRESS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BODY_SLAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 85,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.NORMAL,
+						power:					85,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BOLT_BEAK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BOLTBEAK,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 85,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BOLTBEAK,
+						moveType:				Type.ELECTRIC,
+						power:					85,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BOLT_STRIKE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 130,
-						/*accuracy =*/ 85,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ELECTRIC,
+						power:					130,
+						accuracy:				85,
+						pp:						5,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BONE_CLUB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 65,
-						/*accuracy =*/ 85,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.GROUND,
+						power:					65,
+						accuracy:				85,
+						pp:						20,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BONE_RUSH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 25,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					25,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BONEMERANG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DOUBLEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 50,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.DOUBLEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					50,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BOOMBURST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 140,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					140,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BOUNCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BOUNCE,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 85,
-						/*accuracy =*/ 85,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SEMI_INVUL_TURN
+						primaryEffect:			MoveEffectID.BOUNCE,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.FLYING,
+						power:					85,
+						accuracy:				85,
+						pp:						5,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_BRANCH_POKE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					40,
+						accuracy:				100,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BRAVE_BIRD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECOILTHIRDDEALT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RECOILTHIRDDEALT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					120,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BREAKING_SWIPE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATTACKDOWNHIT,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATTACKDOWNHIT,
+						moveType:				Type.DRAGON,
+						power:					60,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BRICK_BREAK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PSYCHICFANGS,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PSYCHICFANGS,
+						moveType:				Type.FIGHTING,
+						power:					75,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BRINE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BRINE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.BRINE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					65,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BRUTAL_SWING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					60,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BUBBLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.WATER,
+						power:					40,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BUBBLE_BEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.WATER,
+						power:					65,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BUG_BITE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BUGBITE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BUGBITE,
+						moveType:				Type.BUG,
+						power:					60,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BUG_BUZZ {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALDEFENSEDOWNHIT,
+						moveType:				Type.BUG,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_BULK_UP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BULKUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.BULKUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BULLDOZE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_GROUND
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.GROUND,
+						power:					60,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_GROUND
 					);
 				}
 			}
 			public static BattleMove MOVE_BULLET_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					40,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BULLET_SEED {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 25,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					25,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BURN_UP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNUP,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 130,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNUP,
+						moveType:				Type.FIRE,
+						power:					130,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_BURNING_JEALOUSY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNINGJEALOUSY,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNINGJEALOUSY,
+						moveType:				Type.FIRE,
+						power:					70,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+					);
+				}
+			}
+			public static BattleMove MOVE_BURNING_BULWARK {
+				get {
+					return new BattleMove(
+						primaryEffect:			MoveEffectID.BURNINGBULWARK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIRE,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				4,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_CALM_MIND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CALMMIND,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.CALMMIND,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CAMOUFLAGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CAMOUFLAGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.CAMOUFLAGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CAPTIVATE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CAPTIVATE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.CAPTIVATE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CEASELESS_EDGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 65,
-						/*accuracy =*/ 90,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					65,
+						accuracy:				90,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ENTRY_HAZARD
 					);
 				}
 			}
 			public static BattleMove MOVE_CHARGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CHARGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.CHARGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CHARGE_BEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKUP,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 50,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 70,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKUP,
+						moveType:				Type.ELECTRIC,
+						power:					50,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	70,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CHARM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATTACKDOWNHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.ATTACKDOWNHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CHATTER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.CANNOT_BE_SKETCHED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.CONFUSEHIT,
+						moveType:				Type.FLYING,
+						power:					65,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.CANNOT_BE_SKETCHED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_CHILLING_WATER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATTACKDOWNHIT,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATTACKDOWNHIT,
+						moveType:				Type.WATER,
+						power:					50,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CHILLY_RECEPTION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CHILLYRECEPTION,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.CHILLYRECEPTION,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_CHIP_AWAY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CHIPAWAY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHIP_AWAY
+						primaryEffect:			MoveEffectID.CHIPAWAY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					70,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHIP_AWAY
 					);
 				}
 			}
 			public static BattleMove MOVE_CHLOROBLAST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RECOILHALFMAXHP,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 150,
-						/*accuracy =*/ 95,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RECOILHALFMAXHP,
+						moveType:				Type.GRASS,
+						power:					150,
+						accuracy:				95,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CIRCLE_THROW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SWITCHTONEXTHIT,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 60,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ -6,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SWITCHTONEXTHIT,
+						moveType:				Type.FIGHTING,
+						power:					60,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				-6,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CLAMP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CLAMP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 35,
-						/*accuracy =*/ 85,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.CLAMP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					35,
+						accuracy:				85,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CLANGING_SCALES {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEDOWN,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEDOWN,
+						moveType:				Type.DRAGON,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_CLANGOROUS_SOUL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CLANGOROUSSOUL,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.CLANGOROUSSOUL,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_CLEAR_SMOG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.HAZE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 50,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.HAZE,
+						moveType:				Type.POISON,
+						power:					50,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CLOSE_COMBAT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFANDSPDEFDOWN,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFANDSPDEFDOWN,
+						moveType:				Type.FIGHTING,
+						power:					120,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_COACHING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATKANDDEFUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.ATKANDDEFUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_COIL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATKDEFACCUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.ATKDEFACCUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_COLLISION_COURSE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.COLLISIONCOURSE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.COLLISIONCOURSE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_COMET_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 18,
-						/*accuracy =*/ 85,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					18,
+						accuracy:				85,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_COMEUPPANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.COMEUPPANCE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.COMEUPPANCE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CONFIDE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPECIALATTACKDOWNHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.SPECIALATTACKDOWNHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_CONFUSE_RAY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.CONFUSEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CONFUSION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.CONFUSEHIT,
+						moveType:				Type.PSYCHIC,
+						power:					50,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CONSTRICT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 10,
-						/*accuracy =*/ 100,
-						/*pp =*/ 35,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.NORMAL,
+						power:					10,
+						accuracy:				100,
+						pp:						35,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CONVERSION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CONVERSION,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.CONVERSION,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CONVERSION_2 {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CONVERSION2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.CONVERSION2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_COPYCAT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.COPYCAT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK
+						primaryEffect:			MoveEffectID.COPYCAT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK
 					);
 				}
 			}
 			public static BattleMove MOVE_CORE_ENFORCER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.COREENFORCER,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.COREENFORCER,
+						moveType:				Type.DRAGON,
+						power:					100,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CORROSIVE_GAS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CORROSIVEGAS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.CORROSIVEGAS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					0,
+						accuracy:				100,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_COSMIC_POWER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.COSMICPOWER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.COSMICPOWER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_COTTON_GUARD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFENSEUP3,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.DEFENSEUP3,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -3002,544 +3045,544 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_COTTON_SPORE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPEEDDOWNHIT2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SPEEDDOWNHIT2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				100,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_COUNTER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.COUNTER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ -5,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.IGNORE_TYPE_EFF
+						primaryEffect:			MoveEffectID.COUNTER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				-5,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.IGNORE_TYPE_EFF
 					);
 				}
 			}
 			public static BattleMove MOVE_COURT_CHANGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.COURTCHANGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.COURTCHANGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_COVET {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.THIEF,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.THIEF,
+						moveType:				Type.NORMAL,
+						power:					60,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CRABHAMMER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 100,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED |Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					100,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED |Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CRAFTY_SHIELD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PROTECT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 3,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.CRAFTYSHIELD,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				3,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_CROSS_CHOP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 100,
-						/*accuracy =*/ 80,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					100,
+						accuracy:				80,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CROSS_POISON {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.POISONHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.POISONHIT,
+						moveType:				Type.POISON,
+						power:					70,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
 					);
 				}
 			}
 			public static BattleMove MOVE_CRUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.DARK,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CRUSH_CLAW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEDOWNHIT,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 75,
-						/*accuracy =*/ 95,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 50,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEDOWNHIT,
+						moveType:				Type.NORMAL,
+						power:					75,
+						accuracy:				95,
+						pp:						10,
+						secondaryEffectChance:	50,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CRUSH_GRIP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CRUSHGRIP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.CRUSHGRIP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_CURSE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CURSE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.CURSE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_CUT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 50,
-						/*accuracy =*/ 95,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					50,
+						accuracy:				95,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
 					);
 				}
 			}
 			public static BattleMove MOVE_DARK_PULSE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PULSE_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.DARK,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PULSE_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DARK_VOID {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SLEEP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 50,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SLEEP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				50,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DARKEST_LARIAT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CHIPAWAY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 85,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHIP_AWAY
+						primaryEffect:			MoveEffectID.CHIPAWAY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					85,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHIP_AWAY
 					);
 				}
 			}
 			public static BattleMove MOVE_DAZZLING_GLEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DECORATE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATKANDSPATKUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.ATKANDSPATKUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_DEFEND_ORDER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFANDSPDEFUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.DEFANDSPDEFUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DEFENSE_CURL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFENSECURL,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.DEFENSECURL,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DEFOG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFOG,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
+						primaryEffect:			MoveEffectID.DEFOG,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
 					);
 				}
 			}
 			public static BattleMove MOVE_DESTINY_BOND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DESTINYBOND,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.DESTINYBOND,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_DETECT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PROTECT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 4,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECTS
+						primaryEffect:			MoveEffectID.PROTECT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				4,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECTS
 					);
 				}
 			}
 			public static BattleMove MOVE_DIAMOND_STORM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEUP2,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 100,
-						/*accuracy =*/ 95,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 50,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEUP2,
+						moveType:				Type.ROCK,
+						power:					100,
+						accuracy:				95,
+						pp:						5,
+						secondaryEffectChance:	50,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DIG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DIG,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.USABLE_OUT_OF_BATTLE | Flag.SEMI_INVUL_TURN
+						primaryEffect:			MoveEffectID.DIG,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.USABLE_OUT_OF_BATTLE | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_DIRE_CLAW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DIRECLAW,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.DIRECLAW,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DISABLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DISABLE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.DISABLE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DISARMING_VOICE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 40,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					40,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_DISCHARGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ELECTRIC,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DIVE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DIVE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.USABLE_OUT_OF_BATTLE | Flag.SEMI_INVUL_TURN
+						primaryEffect:			MoveEffectID.DIVE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.USABLE_OUT_OF_BATTLE | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_DIZZY_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.CONFUSEHIT,
+						moveType:				Type.NORMAL,
+						power:					70,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DOODLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DOODLE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED_OPPONENT,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.DOODLE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED_OPPONENT,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
@@ -3547,221 +3590,221 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_DOOM_DESIRE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FUTURESIGHT,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 140,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FUTURESIGHT,
+						moveType:				Type.STEEL,
+						power:					140,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_DOUBLE_HIT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DOUBLEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 35,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.DOUBLEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					35,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DOUBLE_IRON_BASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DOUBLEHIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.DOUBLEHIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.STEEL,
+						power:					60,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DOUBLE_KICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DOUBLEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 30,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.DOUBLEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					30,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DOUBLE_SHOCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DOUBLESHOCK,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DOUBLESHOCK,
+						moveType:				Type.ELECTRIC,
+						power:					120,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DOUBLE_SLAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 15,
-						/*accuracy =*/ 85,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					15,
+						accuracy:				85,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DOUBLE_TEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.EVASIONUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.EVASIONUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DOUBLE_EDGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECOILTHIRDDEALT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RECOILTHIRDDEALT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					120,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRACO_METEOR {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKDOWN2,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 130,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKDOWN2,
+						moveType:				Type.DRAGON,
+						power:					130,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRAGON_ASCENT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFANDSPDEFDOWN,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFANDSPDEFDOWN,
+						moveType:				Type.DRAGON,
+						power:					120,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRAGON_BREATH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.DRAGON,
+						power:					60,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRAGON_CLAW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRAGON_DANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DRAGONDANCE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.DRAGONDANCE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
@@ -3769,867 +3812,867 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_DRAGON_DARTS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DOUBLEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.DOUBLEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					50,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRAGON_ENERGY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ERUPTION,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 150,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ERUPTION,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					150,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRAGON_HAMMER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					90,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRAGON_PULSE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 85,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PULSE_MOVE | Flag.MEGA_LAUNCHER_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					85,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PULSE_MOVE | Flag.MEGA_LAUNCHER_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRAGON_RAGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DRAGONRAGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.DRAGONRAGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRAGON_RUSH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 100,
-						/*accuracy =*/ 75,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.DRAGON,
+						power:					100,
+						accuracy:				75,
+						pp:						10,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRAGON_TAIL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SWITCHTONEXTHIT,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 60,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ -6,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SWITCHTONEXTHIT,
+						moveType:				Type.DRAGON,
+						power:					60,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				-6,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRAIN_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ABSORB50PERCENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PUNCH_MOVE | Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ABSORB50PERCENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					75,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PUNCH_MOVE | Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRAINING_KISS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ABSORB75PERCENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED
+						primaryEffect:			MoveEffectID.ABSORB75PERCENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					50,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DREAM_EATER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DREAMEATER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.BIG_ROOT_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.DREAMEATER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					100,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.BIG_ROOT_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRILL_PECK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED_OPPONENT,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					80,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED_OPPONENT,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRILL_RUN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 80,
-						/*accuracy =*/ 95,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					80,
+						accuracy:				95,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DRUM_BEATING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.GRASS,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DUAL_CHOP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DOUBLEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 40,
-						/*accuracy =*/ 90,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.DOUBLEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					40,
+						accuracy:				90,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DUAL_WINGBEAT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DOUBLEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 40,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.DOUBLEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					40,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DYNAMAX_CANNON {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_DYNAMIC_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 100,
-						/*accuracy =*/ 50,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.CONFUSEHIT,
+						moveType:				Type.FIGHTING,
+						power:					100,
+						accuracy:				50,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_EARTH_POWER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALDEFENSEDOWNHIT,
+						moveType:				Type.GROUND,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_EARTHQUAKE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.EARTHQUAKE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_GROUND
+						primaryEffect:			MoveEffectID.EARTHQUAKE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					100,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_GROUND
 					);
 				}
 			}
 			public static BattleMove MOVE_ECHOED_VOICE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ECHOEDVOICE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ECHOEDVOICE,
+						moveType:				Type.NORMAL,
+						power:					40,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_EERIE_IMPULSE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPECIALATTACKDOWNHIT2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SPECIALATTACKDOWNHIT2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_EERIE_SPELL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.EERIESPELL,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.EERIESPELL,
+						moveType:				Type.PSYCHIC,
+						power:					80,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_EGG_BOMB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 100,
-						/*accuracy =*/ 75,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					100,
+						accuracy:				75,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ELECTRIC_TERRAIN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ELECTRICTERRAIN,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.ELECTRICTERRAIN,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_ELECTRIFY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ELECTRIFY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.ELECTRIFY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ELECTRO_BALL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ELECTROBALL,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
+						primaryEffect:			MoveEffectID.ELECTROBALL,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ELECTRO_DRIFT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.COLLISIONCOURSE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.COLLISIONCOURSE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ELECTROWEB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 55,
-						/*accuracy =*/ 95,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.ELECTRIC,
+						power:					55,
+						accuracy:				95,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_EMBARGO {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.EMBARGO,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.EMBARGO,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_EMBER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					40,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ENCORE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ENCORE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.ENCORE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ENDEAVOR {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ENDEAVOR,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ENDEAVOR,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ENDURE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ENDURE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 4,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.ENDURE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_USER,
+						priority:				4,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_ENERGY_BALL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BULLETPROOF_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALDEFENSEDOWNHIT,
+						moveType:				Type.GRASS,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ENTRAINMENT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DOODLE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.DOODLE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ERUPTION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ERUPTION,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 150,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ERUPTION,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIRE,
+						power:					150,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ESPER_WING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDUP,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDUP,
+						moveType:				Type.PSYCHIC,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
 					);
 				}
 			}
 			public static BattleMove MOVE_ETERNABEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RECHARGE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 160,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RECHARGE,
+						moveType:				Type.DRAGON,
+						power:					160,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_EXPANDING_FORCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.EXPANDINGFORCE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.EXPANDINGFORCE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_EXPLOSION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.EXPLOSION,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 250,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.EXPLOSION,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					250,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_EXTRASENSORY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.PSYCHIC,
+						power:					80,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_EXTREME_SPEED {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 2,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					80,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				2,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FACADE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FACADE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.FACADE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					70,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FAIRY_LOCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FAIRYLOCK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.FAIRYLOCK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FAIRY_WIND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					40,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FAKE_OUT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FAKEOUT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 3,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.FAKEOUT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.NORMAL,
+						power:					40,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				3,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FAKE_TEARS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SPECIALDEFENSEDOWNHIT2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FALSE_SURRENDER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 80,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					80,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FALSE_SWIPE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FALSESWIPE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.FALSESWIPE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					40,
+						accuracy:				100,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FEATHER_DANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATTACKDOWNHIT2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.ATTACKDOWNHIT2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FEINT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FEINT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 30,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 2,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.FEINT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					30,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				2,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -4637,6035 +4680,6035 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_FEINT_ATTACK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 60,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					60,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FELL_STINGER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FELLSTINGER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.FELLSTINGER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					50,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FIERY_DANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKUP,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 50,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKUP,
+						moveType:				Type.FIRE,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	50,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FIERY_WRATH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.DARK,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FILLET_AWAY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FILLETAWAY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.FILLETAWAY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FINAL_GAMBIT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FINALGAMBIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.FINALGAMBIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FIRE_BLAST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 110,
-						/*accuracy =*/ 85,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					110,
+						accuracy:				85,
+						pp:						5,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FIRE_FANG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BITE,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 65,
-						/*accuracy =*/ 95,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.BITE,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					65,
+						accuracy:				95,
+						pp:						15,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FIRE_LASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEDOWNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEDOWNHIT,
+						moveType:				Type.FIRE,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FIRE_PLEDGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FIREPLEDGE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FIREPLEDGE,
+						moveType:				Type.FIRE,
+						power:					50,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FIRE_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					75,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PUNCH_MOVE | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FIRE_SPIN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FIRESPIN,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 35,
-						/*accuracy =*/ 85,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.FIRESPIN,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIRE,
+						power:					35,
+						accuracy:				85,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FIRST_IMPRESSION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FAKEOUT,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 2,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FAKEOUT,
+						moveType:				Type.BUG,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				2,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FISHIOUS_REND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FISHIOUSREND,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 85,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FISHIOUSREND,
+						moveType:				Type.WATER,
+						power:					85,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FISSURE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.OHKO,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 0,
-						/*accuracy =*/ 30,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.HITS_SEMI_INVUL_GROUND
+						primaryEffect:			MoveEffectID.OHKO,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					0,
+						accuracy:				30,
+						pp:						5,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.HITS_SEMI_INVUL_GROUND
 					);
 				}
 			}
 			public static BattleMove MOVE_FLAIL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FLAIL,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.FLAIL,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FLAME_BURST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLAMEBURST,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLAMEBURST,
+						moveType:				Type.FIRE,
+						power:					70,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FLAME_CHARGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDUP,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDUP,
+						moveType:				Type.FIRE,
+						power:					50,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FLAME_WHEEL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.THAWS_USER
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					60,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.THAWS_USER
 					);
 				}
 			}
 			public static BattleMove MOVE_FLAMETHROWER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					90,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FLARE_BLITZ {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECOILTHIRDDEALT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.THAWS_USER
+						primaryEffect:			MoveEffectID.RECOILTHIRDDEALT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					120,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.THAWS_USER
 					);
 				}
 			}
 			public static BattleMove MOVE_FLASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ACCURACYDOWNHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
+						primaryEffect:			MoveEffectID.ACCURACYDOWNHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
 					);
 				}
 			}
 			public static BattleMove MOVE_FLASH_CANNON {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALDEFENSEDOWNHIT,
+						moveType:				Type.STEEL,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FLATTER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FLATTER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.FLATTER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FLEUR_CANNON {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKDOWN2,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 130,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKDOWN2,
+						moveType:				Type.FAIRY,
+						power:					130,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FLING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FLING,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.FLING,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FLIP_TURN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.UTURN,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.UTURN,
+						moveType:				Type.WATER,
+						power:					60,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FLORAL_HEALING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FLORALHEALING,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.FLORALHEALING,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.ALWAYS_HIT | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_FLOWER_SHIELD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FLOWERSHIELD,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.FLOWERSHIELD,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_FLOWER_TRICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 70,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					70,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FLY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FLY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 90,
-						/*accuracy =*/ 95,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED_OPPONENT,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.USABLE_OUT_OF_BATTLE | Flag.SEMI_INVUL_TURN
+						primaryEffect:			MoveEffectID.FLY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					90,
+						accuracy:				95,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED_OPPONENT,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.USABLE_OUT_OF_BATTLE | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_FLYING_PRESS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 100,
-						/*accuracy =*/ 95,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					100,
+						accuracy:				95,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FOCUS_BLAST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 120,
-						/*accuracy =*/ 70,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BULLETPROOF_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALDEFENSEDOWNHIT,
+						moveType:				Type.FIGHTING,
+						power:					120,
+						accuracy:				70,
+						pp:						5,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FOCUS_ENERGY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FOCUSENERGY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.FOCUSENERGY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FOCUS_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FOCUSPUNCH,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 150,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ -3,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FOCUSPUNCH,
+						moveType:				Type.FIGHTING,
+						power:					150,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				-3,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FOLLOW_ME {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FOLLOWME,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 2,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.FOLLOWME,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				2,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_FORCE_PALM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.FIGHTING,
+						power:					60,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FORESIGHT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FORESIGHT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.FORESIGHT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_FOREST_S_CURSE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FORESTSCURSE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.FORESTSCURSE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FOUL_PLAY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FOULPLAY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 95,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.FOULPLAY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					95,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FREEZE_SHOCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FREEZESHOCK,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 140,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
+						primaryEffect:			MoveEffectID.FREEZESHOCK,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ICE,
+						power:					140,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_FREEZE_DRY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FREEZEHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FREEZEHIT,
+						moveType:				Type.ICE,
+						power:					70,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FREEZING_GLARE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FREEZEHIT,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FREEZEHIT,
+						moveType:				Type.PSYCHIC,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FRENZY_PLANT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RECHARGE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 150,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RECHARGE,
+						moveType:				Type.GRASS,
+						power:					150,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FROST_BREATH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 60,
-						/*accuracy =*/ 90,
-						/*pp =*/ 0,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.ALWAYS_CRITICAL | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					60,
+						accuracy:				90,
+						pp:						0,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.ALWAYS_CRITICAL | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FRUSTRATION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FRUSTRATION,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.FRUSTRATION,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FURY_ATTACK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 15,
-						/*accuracy =*/ 85,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					15,
+						accuracy:				85,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FURY_CUTTER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FURYCUTTER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 40,
-						/*accuracy =*/ 95,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SHARPNESS_AFFECTED
+						primaryEffect:			MoveEffectID.FURYCUTTER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					40,
+						accuracy:				95,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SHARPNESS_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FURY_SWIPES {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 18,
-						/*accuracy =*/ 80,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					18,
+						accuracy:				80,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FUSION_BOLT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FUSIONBOLT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.FUSIONBOLT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FUSION_FLARE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FUSIONFLARE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.FUSIONFLARE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIRE,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_FUTURE_SIGHT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FUTURESIGHT,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FUTURESIGHT,
+						moveType:				Type.PSYCHIC,
+						power:					120,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_GASTRO_ACID {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GASTROACID,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.GASTROACID,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GEAR_GRIND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DOUBLEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 50,
-						/*accuracy =*/ 85,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.DOUBLEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					50,
+						accuracy:				85,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GEAR_UP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GEARUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.GEARUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GEOMANCY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GEOMANCY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.CHARGING_TURN
+						primaryEffect:			MoveEffectID.GEOMANCY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.CHARGING_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_GIGA_DRAIN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ABSORB50PERCENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.ABSORB50PERCENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					75,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GIGA_IMPACT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RECHARGE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 150,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RECHARGE,
+						moveType:				Type.NORMAL,
+						power:					150,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GIGATON_HAMMER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 160,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CANNOT_USE_MOVE_TWICE
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					160,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CANNOT_USE_MOVE_TWICE
 					);
 				}
 			}
 			public static BattleMove MOVE_GLACIAL_LANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					120,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GLACIATE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 65,
-						/*accuracy =*/ 95,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.ICE,
+						power:					65,
+						accuracy:				95,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GLAIVE_RUSH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.GLAIVERUSH,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.GLAIVERUSH,
+						moveType:				Type.DRAGON,
+						power:					120,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GLARE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.PARALYZEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GRASS_KNOT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GRASSKNOT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.GRASSKNOT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GRASS_PLEDGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.GRASSPLEDGE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.GRASSPLEDGE,
+						moveType:				Type.GRASS,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GRASS_WHISTLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SLEEPHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 55,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.SLEEPHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				55,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_GRASSY_TERRAIN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GRASSYTERRAIN,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.GRASSYTERRAIN,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_GRAV_APPLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GRAVAPPLE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.GRAVAPPLE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GRAVITY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GRAVITY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.GRAVITY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_GROWL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATTACKDOWNHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.ATTACKDOWNHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_GROWTH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GROWTH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.GROWTH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GRUDGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GRUDGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.GRUDGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_GUARD_SPLIT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GUARDSPLIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.GUARDSPLIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_GUARD_SWAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GUARDSWAP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.GUARDSWAP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_GUILLOTINE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.OHKO,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 30,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED
+						primaryEffect:			MoveEffectID.OHKO,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				30,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GUNK_SHOT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.POISONHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 120,
-						/*accuracy =*/ 80,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.POISONHIT,
+						moveType:				Type.POISON,
+						power:					120,
+						accuracy:				80,
+						pp:						5,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_GUST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GUST,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 35,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
+						primaryEffect:			MoveEffectID.GUST,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					40,
+						accuracy:				100,
+						pp:						35,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
 					);
 				}
 			}
 			public static BattleMove MOVE_GYRO_BALL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GYROBALL,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.BULLETPROOF_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.GYROBALL,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					0,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.BULLETPROOF_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HAIL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HAIL,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.HAIL,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_HAMMER_ARM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWN,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 100,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWN,
+						moveType:				Type.FIGHTING,
+						power:					100,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HAPPY_HOUR {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HAPPYHOUR,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.HAPPYHOUR,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_HARDEN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFENSEUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.DEFENSEUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HAZE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HAZE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.HAZE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_HEAD_CHARGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECOILQUARTERDEALT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RECOILQUARTERDEALT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					120,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HEAD_SMASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECOILHALFDEALT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 150,
-						/*accuracy =*/ 80,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RECOILHALFDEALT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					150,
+						accuracy:				80,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HEADBUTT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.NORMAL,
+						power:					70,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HEADLONG_RUSH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFANDSPDEFDOWN,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFANDSPDEFDOWN,
+						moveType:				Type.GROUND,
+						power:					120,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HEAL_BELL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CURENONVOLATILESTATUSHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD_AND_PARTY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.CURENONVOLATILESTATUSHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD_AND_PARTY,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_HEAL_BLOCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEALBLOCK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HEALBLOCK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HEAL_ORDER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEALHALF,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.HEALHALF,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_HEAL_PULSE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEALHALFHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PULSE_MOVE | Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
+						primaryEffect:			MoveEffectID.HEALHALFHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PULSE_MOVE | Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HEALING_WISH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEALINGWISH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.HEALINGWISH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_HEART_STAMP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.PSYCHIC,
+						power:					60,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HEART_SWAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEARTSWAP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.HEARTSWAP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_HEAT_CRASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEAVYSLAM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HEAVYSLAM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIRE,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HEAT_WAVE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 95,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					95,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HEAVY_SLAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEAVYSLAM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HEAVYSLAM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT_MINIMIZE
 					);
 				}
 			}
 			public static BattleMove MOVE_HELPING_HAND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HELPINGHAND,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.HITS_SEMI_INVUL_GROUND | Flag.HITS_SEMI_INVUL_WATER | Flag.HITS_SEMI_INVUL_AIR
+						primaryEffect:			MoveEffectID.HELPINGHAND,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.HITS_SEMI_INVUL_GROUND | Flag.HITS_SEMI_INVUL_WATER | Flag.HITS_SEMI_INVUL_AIR
 					);
 				}
 			}
 			public static BattleMove MOVE_HEX {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEX,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HEX,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					65,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HIDDEN_POWER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIDDENPOWER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIDDENPOWER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					50,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HIGH_HORSEPOWER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 95,
-						/*accuracy =*/ 95,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					95,
+						accuracy:				95,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HIGH_JUMP_KICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.JUMPKICK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 130,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.GRAVITY_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.JUMPKICK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					130,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.GRAVITY_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HOLD_BACK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FALSESWIPE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.FALSESWIPE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					40,
+						accuracy:				100,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HONE_CLAWS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATKDEFACCUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.ATKDEFACCUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HORN_ATTACK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 35,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					65,
+						accuracy:				100,
+						pp:						35,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HORN_DRILL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.OHKO,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 30,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED
+						primaryEffect:			MoveEffectID.OHKO,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				30,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HORN_LEECH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ABSORB50PERCENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED
+						primaryEffect:			MoveEffectID.ABSORB50PERCENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					75,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HOWL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATTACKUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.ATTACKUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_HURRICANE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GUST,
-						/*secondaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 110,
-						/*accuracy =*/ 70,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.ALWAYS_HIT_RAIN
+						primaryEffect:			MoveEffectID.GUST,
+						secondaryEffect:		MoveEffectID.CONFUSEHIT,
+						moveType:				Type.FLYING,
+						power:					110,
+						accuracy:				70,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.ALWAYS_HIT_RAIN
 					);
 				}
 			}
 			public static BattleMove MOVE_HYDRO_CANNON {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RECHARGE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 150,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RECHARGE,
+						moveType:				Type.WATER,
+						power:					150,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HYDRO_PUMP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 110,
-						/*accuracy =*/ 80,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					110,
+						accuracy:				80,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HYDRO_STEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HYDROSTEAM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HYDROSTEAM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HYPER_BEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RECHARGE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 150,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RECHARGE,
+						moveType:				Type.NORMAL,
+						power:					150,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HYPER_DRILL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HYPER_FANG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 80,
-						/*accuracy =*/ 90,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BITE_MOVE
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.NORMAL,
+						power:					80,
+						accuracy:				90,
+						pp:						15,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BITE_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_HYPER_VOICE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HYPERSPACE_FURY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HYPERSPACEFURY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 100,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.HYPERSPACEFURY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					100,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_HYPERSPACE_HOLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					80,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.ALWAYS_HIT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_HYPNOSIS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SLEEPHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 60,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SLEEPHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				60,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ICE_BALL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ROLLOUT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 30,
-						/*accuracy =*/ 90,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ROLLOUT,
+						moveType:				Type.ICE,
+						power:					30,
+						accuracy:				90,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ICE_BEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FREEZEHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FREEZEHIT,
+						moveType:				Type.ICE,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ICE_BURN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ICEBURN,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 140,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
+						primaryEffect:			MoveEffectID.ICEBURN,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.ICE,
+						power:					140,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_ICE_FANG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BITE,
-						/*secondaryEffect =*/ MoveEffectID.FREEZEHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 65,
-						/*accuracy =*/ 95,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.BITE_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.BITE,
+						secondaryEffect:		MoveEffectID.FREEZEHIT,
+						moveType:				Type.ICE,
+						power:					65,
+						accuracy:				95,
+						pp:						15,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.BITE_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ICE_HAMMER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWN2,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 100,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWN2,
+						moveType:				Type.ICE,
+						power:					100,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ICE_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FREEZEHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FREEZEHIT,
+						moveType:				Type.ICE,
+						power:					75,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ICE_SHARD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					40,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ICE_SPINNER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.CLEARTERRAIN,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.CLEARTERRAIN,
+						moveType:				Type.ICE,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ICICLE_CRASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 85,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.ICE,
+						power:					85,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ICICLE_SPEAR {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 25,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					25,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ICY_WIND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 55,
-						/*accuracy =*/ 95,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.ICE,
+						power:					55,
+						accuracy:				95,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_IMPRISON {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.IMPRISON,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.IMPRISON,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_INCINERATE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.INCINERATE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.INCINERATE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIRE,
+						power:					60,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_INFERNAL_PARADE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.INFERNALPARADE,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.INFERNALPARADE,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.GHOST,
+						power:					60,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_INFERNO {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 100,
-						/*accuracy =*/ 50,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					100,
+						accuracy:				50,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_INFESTATION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.INFESTATION,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 20,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.INFESTATION,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					20,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_INGRAIN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.INGRAIN,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.INGRAIN,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_INSTRUCT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.INSTRUCT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED
+						primaryEffect:			MoveEffectID.INSTRUCT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ION_DELUGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.IONDELUGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.IONDELUGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					0,
+						accuracy:				0,
+						pp:						25,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				1,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_IRON_DEFENSE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFENSEUP2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.DEFENSEUP2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_IRON_HEAD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.STEEL,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_IRON_TAIL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEDOWNHIT,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 100,
-						/*accuracy =*/ 75,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEDOWNHIT,
+						moveType:				Type.STEEL,
+						power:					100,
+						accuracy:				75,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_JAW_LOCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.TRAP,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.TRAP,
+						moveType:				Type.DARK,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_JET_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					60,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_JUDGMENT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.JUDGMENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.JUDGMENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					100,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_JUMP_KICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.JUMPKICK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 100,
-						/*accuracy =*/ 95,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.GRAVITY_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.JUMPKICK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					100,
+						accuracy:				95,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.GRAVITY_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_JUNGLE_HEALING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.JUNGLEHEALING,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.JUNGLEHEALING,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_KARATE_CHOP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					50,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_KINESIS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ACCURACYDOWNHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 80,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.ACCURACYDOWNHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				80,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_KING_S_SHIELD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.KINGSSHIELD,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 4,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECTS
+						primaryEffect:			MoveEffectID.KINGSSHIELD,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				4,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECTS
 					);
 				}
 			}
 			public static BattleMove MOVE_KNOCK_OFF {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.KNOCKOFF,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.KNOCKOFF,
+						moveType:				Type.DARK,
+						power:					65,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_KOWTOW_CLEAVE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 85,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					85,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LAND_S_WRATH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LASER_FOCUS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LASERFOCUS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.LASERFOCUS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LASH_OUT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.LASHOUT,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.LASHOUT,
+						moveType:				Type.DARK,
+						power:					75,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LAST_RESORT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LASTRESORT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 140,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.LASTRESORT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					140,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LAST_RESPECTS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LASTRESPECTS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.LASTRESPECTS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					50,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LAVA_PLUME {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LEAF_BLADE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					90,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LEAF_STORM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKDOWN2,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 130,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKDOWN2,
+						moveType:				Type.GRASS,
+						power:					130,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LEAF_TORNADO {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ACCURACYDOWNHIT,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 65,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 50,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ACCURACYDOWNHIT,
+						moveType:				Type.GRASS,
+						power:					65,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	50,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LEAFAGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					40,
+						accuracy:				100,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LEECH_LIFE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ABSORB50PERCENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.BIG_ROOT_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ABSORB50PERCENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.BIG_ROOT_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LEECH_SEED {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LEECHSEED,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.LEECHSEED,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LEER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFENSEDOWNHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.DEFENSEDOWNHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 30,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.GHOST,
+						power:					30,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LIFE_DEW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEALQUARTER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.HEALQUARTER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LIGHT_OF_RUIN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECOILHALFDEALT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 140,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RECOILHALFDEALT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					140,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LIGHT_SCREEN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LIGHTSCREEN,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.LIGHTSCREEN,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LIQUIDATION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEDOWNHIT,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 85,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEDOWNHIT,
+						moveType:				Type.WATER,
+						power:					85,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LOCK_ON {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LOCKON,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.LOCKON,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LOVELY_KISS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SLEEPHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 75,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SLEEPHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				75,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LOW_KICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LOWKICK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.LOWKICK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LOW_SWEEP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.FIGHTING,
+						power:					65,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LUCKY_CHANT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LUCKYCHANT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.LUCKYCHANT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LUMINA_CRASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT2,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALDEFENSEDOWNHIT2,
+						moveType:				Type.PSYCHIC,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LUNAR_BLESSING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LUNARBLESSING,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.LUNARBLESSING,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_LUNAR_DANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LUNARDANCE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.LUNARDANCE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_LUNGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATTACKDOWNHIT,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATTACKDOWNHIT,
+						moveType:				Type.BUG,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_LUSTER_PURGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 50,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALDEFENSEDOWNHIT,
+						moveType:				Type.PSYCHIC,
+						power:					70,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	50,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MACH_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					40,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MAGIC_COAT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MAGICCOAT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 4,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.MAGICCOAT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				4,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_MAGIC_POWDER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MAGICPOWDER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.MAGICPOWDER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MAGIC_ROOM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MAGICROOM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.MAGICROOM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MAGICAL_LEAF {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 60,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					60,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MAGMA_STORM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MAGMA_STORM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 100,
-						/*accuracy =*/ 75,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MAGMA_STORM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIRE,
+						power:					100,
+						accuracy:				75,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MAGNET_BOMB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 60,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					60,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.ALWAYS_HIT | Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MAGNET_RISE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MAGNETRISE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.MAGNETRISE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MAGNETIC_FLUX {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFANDSPDEFUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.DEFANDSPDEFUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MAGNITUDE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MAGNITUDE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_GROUND
+						primaryEffect:			MoveEffectID.MAGNITUDE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					0,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_GROUND
 					);
 				}
 			}
 			public static BattleMove MOVE_MAKE_IT_RAIN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.MAKEITRAIN,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.MAKEITRAIN,
+						moveType:				Type.STEEL,
+						power:					120,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MAT_BLOCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MATBLOCK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.MATBLOCK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ME_FIRST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MEFIRST,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED
+						primaryEffect:			MoveEffectID.MEFIRST,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MEAN_LOOK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MEANLOOK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.MEANLOOK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MEDITATE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATTACKUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.ATTACKUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MEGA_DRAIN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ABSORB50PERCENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.BIG_ROOT_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ABSORB50PERCENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					40,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.BIG_ROOT_AFFECTED | Flag.LIQUID_OOZE_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MEGA_KICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 120,
-						/*accuracy =*/ 70,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					120,
+						accuracy:				70,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MEGA_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 80,
-						/*accuracy =*/ 85,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					80,
+						accuracy:				85,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MEGAHORN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 120,
-						/*accuracy =*/ 85,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					120,
+						accuracy:				85,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MEMENTO {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MEMENTO,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.MEMENTO,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_METAL_BURST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.METALBURST,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.METALBURST,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_METAL_CLAW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATTACKUP,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 50,
-						/*accuracy =*/ 95,
-						/*pp =*/ 35,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATTACKUP,
+						moveType:				Type.STEEL,
+						power:					50,
+						accuracy:				95,
+						pp:						35,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_METAL_SOUND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 0,
-						/*accuracy =*/ 85,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SPECIALDEFENSEDOWNHIT2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					0,
+						accuracy:				85,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_METEOR_ASSAULT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RECHARGE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 150,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RECHARGE,
+						moveType:				Type.FIGHTING,
+						power:					150,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_METEOR_BEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.METEORBEAM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 120,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
+						primaryEffect:			MoveEffectID.METEORBEAM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					120,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_METEOR_MASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATTACKUP,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 90,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATTACKUP,
+						moveType:				Type.STEEL,
+						power:					90,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_METRONOME {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.METRONOME,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK
+						primaryEffect:			MoveEffectID.METRONOME,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK
 					);
 				}
 			}
 			public static BattleMove MOVE_MILK_DRINK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEALHALF,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
+						primaryEffect:			MoveEffectID.HEALHALF,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.USABLE_OUT_OF_BATTLE | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_MIMIC {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MIRRORMOVE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.MIRRORMOVE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_MIND_BLOWN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MINDBLOWN,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 150,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MINDBLOWN,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIRE,
+						power:					150,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MIND_READER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LOCKON,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.LOCKON,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MINIMIZE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MINIMIZE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.MINIMIZE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MIRACLE_EYE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MIRACLEEYE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.MIRACLEEYE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MIRROR_COAT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MIRRORCOAT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ -5,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MIRRORCOAT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				-5,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MIRROR_MOVE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MIRRORMOVE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.CANNOT_BE_SKETCHED | Flag.UNUSABLE_BY_SLEEP_TALK
+						primaryEffect:			MoveEffectID.MIRRORMOVE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.CANNOT_BE_SKETCHED | Flag.UNUSABLE_BY_SLEEP_TALK
 					);
 				}
 			}
 			public static BattleMove MOVE_MIRROR_SHOT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ACCURACYDOWNHIT,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 65,
-						/*accuracy =*/ 85,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ACCURACYDOWNHIT,
+						moveType:				Type.STEEL,
+						power:					65,
+						accuracy:				85,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MIST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MIST,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.MIST,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MIST_BALL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKDOWNHIT,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 50,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKDOWNHIT,
+						moveType:				Type.PSYCHIC,
+						power:					70,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	50,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MISTY_EXPLOSION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MISTYEXPLOSION,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MISTYEXPLOSION,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MISTY_TERRAIN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MISTYTERRAIN,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.MISTYTERRAIN,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_MOONBLAST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKDOWNHIT,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 95,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKDOWNHIT,
+						moveType:				Type.FAIRY,
+						power:					95,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MOONGEIST_BEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.MOONGEISTBEAM,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.MOONGEISTBEAM,
+						moveType:				Type.GHOST,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MOONLIGHT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SYNTHESIS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SYNTHESIS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_MORNING_SUN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SYNTHESIS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SYNTHESIS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_MORTAL_SPIN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RAPIDSPIN,
-						/*secondaryEffect =*/ MoveEffectID.POISONHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 30,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RAPIDSPIN,
+						secondaryEffect:		MoveEffectID.POISONHIT,
+						moveType:				Type.POISON,
+						power:					30,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MOUNTAIN_GALE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 100,
-						/*accuracy =*/ 85,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.ICE,
+						power:					100,
+						accuracy:				85,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MUD_BOMB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ACCURACYDOWNHIT,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 65,
-						/*accuracy =*/ 85,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ACCURACYDOWNHIT,
+						moveType:				Type.GROUND,
+						power:					65,
+						accuracy:				85,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MUD_SHOT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 55,
-						/*accuracy =*/ 95,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.GROUND,
+						power:					55,
+						accuracy:				95,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MUD_SPORT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MUDSPORT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.MUDSPORT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_MUD_SLAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ACCURACYDOWNHIT,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 20,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ACCURACYDOWNHIT,
+						moveType:				Type.GROUND,
+						power:					20,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MUDDY_WATER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ACCURACYDOWNHIT,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 90,
-						/*accuracy =*/ 85,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ACCURACYDOWNHIT,
+						moveType:				Type.WATER,
+						power:					90,
+						accuracy:				85,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MULTI_ATTACK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.MULTIATTACK,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.MULTIATTACK,
+						moveType:				Type.NORMAL,
+						power:					120,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MYSTICAL_FIRE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKUP,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKUP,
+						moveType:				Type.FIRE,
+						power:					75,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_MYSTICAL_POWER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MYSTICALPOWER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 70,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MYSTICALPOWER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					70,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_NASTY_PLOT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPECIALATTACKUP2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SPECIALATTACKUP2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_NATURAL_GIFT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.NATURALGIFT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.NATURALGIFT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_NATURE_POWER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.NATUREPOWER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.NATUREPOWER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_NATURE_S_MADNESS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.NATURESMADNESS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.NATURESMADNESS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_NEEDLE_ARM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.GRASS,
+						power:					60,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_NIGHT_DAZE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ACCURACYDOWNHIT,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 85,
-						/*accuracy =*/ 95,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 40,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ACCURACYDOWNHIT,
+						moveType:				Type.DARK,
+						power:					85,
+						accuracy:				95,
+						pp:						10,
+						secondaryEffectChance:	40,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_NIGHT_SHADE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LEVELDAMAGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.LEVELDAMAGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_NIGHT_SLASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					70,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_NIGHTMARE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.NIGHTMARE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.NIGHTMARE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_NO_RETREAT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.NORETREAT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.NORETREAT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_NOBLE_ROAR {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATKANDSPATKDOWNHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.ATKANDSPATKDOWNHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_NUZZLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 20,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ELECTRIC,
+						power:					20,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_OBLIVION_WING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ABSORB75PERCENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ABSORB75PERCENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_OBSTRUCT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.OBSTRUCT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 4,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECTS
+						primaryEffect:			MoveEffectID.OBSTRUCT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_USER,
+						priority:				4,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECTS
 					);
 				}
 			}
 			public static BattleMove MOVE_OCTAZOOKA {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ACCURACYDOWNHIT,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 65,
-						/*accuracy =*/ 85,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 50,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ACCURACYDOWNHIT,
+						moveType:				Type.WATER,
+						power:					65,
+						accuracy:				85,
+						pp:						10,
+						secondaryEffectChance:	50,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_OCTOLOCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.OCTOLOCK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.OCTOLOCK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ODOR_SLEUTH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ODORSLEUTH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.ODORSLEUTH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_OMINOUS_WIND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ALLSTATSUP,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ALLSTATSUP,
+						moveType:				Type.GHOST,
+						power:					60,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ORDER_UP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ORDERUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ORDERUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ORIGIN_PULSE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 110,
-						/*accuracy =*/ 85,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.MEGA_LAUNCHER_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					110,
+						accuracy:				85,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.MEGA_LAUNCHER_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_OUTRAGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.OUTRAGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.OUTRAGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					120,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_OVERDRIVE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_OVERHEAT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKDOWN2,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 130,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKDOWN2,
+						moveType:				Type.FIRE,
+						power:					130,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PAIN_SPLIT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PAINSPLIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT | Flag.IGNORE_TYPE_EFF
+						primaryEffect:			MoveEffectID.PAINSPLIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT | Flag.IGNORE_TYPE_EFF
 					);
 				}
 			}
 			public static BattleMove MOVE_PARABOLIC_CHARGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ABSORB50PERCENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ABSORB50PERCENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					65,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.LIQUID_OOZE_AFFECTED | Flag.BIG_ROOT_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PARTING_SHOT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PARTINGSHOT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.PARTINGSHOT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PAY_DAY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PAYDAY,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PAYDAY,
+						moveType:				Type.NORMAL,
+						power:					40,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PAYBACK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PAYBACK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.PAYBACK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					50,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PECK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 35,
-						/*accuracy =*/ 100,
-						/*pp =*/ 35,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					35,
+						accuracy:				100,
+						pp:						35,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PERISH_SONG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PERISHSONG,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.PERISHSONG,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_PETAL_BLIZZARD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					90,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PETAL_DANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.OUTRAGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.OUTRAGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					120,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PHANTOM_FORCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PHANTOMFORCE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SEMI_INVUL_TURN
+						primaryEffect:			MoveEffectID.PHANTOMFORCE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_PHOTON_GEYSER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PHOTONGEYSER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.PHOTONGEYSER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PIN_MISSILE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 25,
-						/*accuracy =*/ 95,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					25,
+						accuracy:				95,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PLASMA_FISTS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PLASMAFISTS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.PLASMAFISTS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					100,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PLAY_NICE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATTACKDOWNHIT,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATTACKDOWNHIT,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_PLAY_ROUGH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATTACKDOWNHIT,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 90,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATTACKDOWNHIT,
+						moveType:				Type.FAIRY,
+						power:					90,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PLUCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PLUCK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.PLUCK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					60,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POISON_FANG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.TOXIC,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 50,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.TOXIC,
+						moveType:				Type.POISON,
+						power:					50,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	50,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.BITE_MOVE | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POISON_GAS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.POISONHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 0,
-						/*accuracy =*/ 90,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.POISONHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					0,
+						accuracy:				90,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POISON_JAB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.POISONHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.POISONHIT,
+						moveType:				Type.POISON,
+						power:					80,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POISON_POWDER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.POISONHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 0,
-						/*accuracy =*/ 75,
-						/*pp =*/ 35,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.POISONHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					0,
+						accuracy:				75,
+						pp:						35,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POISON_STING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.POISONHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 15,
-						/*accuracy =*/ 100,
-						/*pp =*/ 35,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.POISONHIT,
+						moveType:				Type.POISON,
+						power:					15,
+						accuracy:				100,
+						pp:						35,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POISON_TAIL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.POISONHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.POISONHIT,
+						moveType:				Type.POISON,
+						power:					50,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POLLEN_PUFF {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.POLLENPUFF,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
+						primaryEffect:			MoveEffectID.POLLENPUFF,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					90,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POLTERGEIST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.POLTERGEIST,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 110,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.POLTERGEIST,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					110,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POPULATION_BOMB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.POPULATIONBOMB,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 20,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.POPULATIONBOMB,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					20,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.SHARPNESS_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POUNCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.BUG,
+						power:					50,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POUND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 35,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					40,
+						accuracy:				100,
+						pp:						35,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POWDER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.POWDER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.POWDER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POWDER_SNOW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FREEZEHIT,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FREEZEHIT,
+						moveType:				Type.ICE,
+						power:					40,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POWER_GEM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					80,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POWER_SHIFT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.POWERSHIFT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.POWERSHIFT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POWER_SPLIT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.POWERSPLIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.POWERSPLIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_POWER_SWAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.POWERSWAP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.POWERSWAP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POWER_TRICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.POWERTRICK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.POWERTRICK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POWER_TRIP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PUNISHMENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 20,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.PUNISHMENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					20,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POWER_WHIP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 120,
-						/*accuracy =*/ 85,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					120,
+						accuracy:				85,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_POWER_UP_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATTACKUP,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATTACKUP,
+						moveType:				Type.FIGHTING,
+						power:					40,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PRECIPICE_BLADES {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 120,
-						/*accuracy =*/ 85,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					120,
+						accuracy:				85,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PRESENT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PRESENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 90,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.PRESENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				90,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PRISMATIC_LASER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RECHARGE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 160,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RECHARGE,
+						moveType:				Type.PSYCHIC,
+						power:					160,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PROTECT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PROTECT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 4,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECTS
+						primaryEffect:			MoveEffectID.PROTECT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				4,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECTS
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYBEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.CONFUSEHIT,
+						moveType:				Type.PSYCHIC,
+						power:					65,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYBLADE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PSYBLADE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.PSYBLADE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.SHARPNESS_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYCH_UP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PSYCHUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.PSYCHUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYCHIC {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALDEFENSEDOWNHIT,
+						moveType:				Type.PSYCHIC,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYCHIC_FANGS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PSYCHICFANGS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 85,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BITE_MOVE
+						primaryEffect:			MoveEffectID.PSYCHICFANGS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					85,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BITE_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYCHIC_TERRAIN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PSYCHICTERRAIN,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.PSYCHICTERRAIN,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYCHO_BOOST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKDOWN2,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 140,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKDOWN2,
+						moveType:				Type.PSYCHIC,
+						power:					140,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYCHO_CUT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					70,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYCHO_SHIFT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PSYCHOSHIFT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.PSYCHOSHIFT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYSHIELD_BASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEUP,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 70,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEUP,
+						moveType:				Type.PSYCHIC,
+						power:					70,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYSHOCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PSYSHOCK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.PSYSHOCK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYSTRIKE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PSYSHOCK,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PSYSHOCK,
+						moveType:				Type.PSYCHIC,
+						power:					100,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PSYWAVE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PSYWAVE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.PSYWAVE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PUNISHMENT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PUNISHMENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.PUNISHMENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PURIFY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PURIFY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
+						primaryEffect:			MoveEffectID.PURIFY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_PURSUIT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PURSUIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.PURSUIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					40,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_PYRO_BALL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 120,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.THAWS_USER
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					120,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.BULLETPROOF_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.THAWS_USER
 					);
 				}
 			}
 			public static BattleMove MOVE_QUASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.QUASH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.QUASH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_QUICK_ATTACK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					40,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_QUICK_GUARD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.QUICKGUARD,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 3,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.QUICKGUARD,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				3,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_QUIVER_DANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPATKSPDEFSPDUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SPATKSPDEFSPDUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_RAGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 20,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					20,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_RAGE_FIST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RAGEFIST,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RAGEFIST,
+						moveType:				Type.GHOST,
+						power:					50,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_RAGE_POWDER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FOLLOWME,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 2,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.FOLLOWME,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				2,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_RAGING_BULL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PSYCHICFANGS,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PSYCHICFANGS,
+						moveType:				Type.NORMAL,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_RAGING_FURY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.OUTRAGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.OUTRAGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIRE,
+						power:					120,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_RAIN_DANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RAINDANCE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.RAINDANCE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_RAPID_SPIN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RAPIDSPIN,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RAPIDSPIN,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					50,
+						accuracy:				100,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_RAZOR_LEAF {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 55,
-						/*accuracy =*/ 95,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					55,
+						accuracy:				95,
+						pp:						25,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_RAZOR_SHELL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEDOWNHIT,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 75,
-						/*accuracy =*/ 95,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 50,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEDOWNHIT,
+						moveType:				Type.WATER,
+						power:					75,
+						accuracy:				95,
+						pp:						10,
+						secondaryEffectChance:	50,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.SHARPNESS_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_RAZOR_WIND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RAZORWIND,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL | Flag.CHARGING_TURN
+						primaryEffect:			MoveEffectID.RAZORWIND,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL | Flag.CHARGING_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_RECOVER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEALHALF,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.HEALHALF,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_RECYCLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECYCLE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.RECYCLE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_REFLECT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.REFLECT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.REFLECT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_REFLECT_TYPE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.REFLECTTYPE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED
+						primaryEffect:			MoveEffectID.REFLECTTYPE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_REFRESH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.REFRESH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.REFRESH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_RELIC_SONG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SLEEPHIT,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SLEEPHIT,
+						moveType:				Type.NORMAL,
+						power:					75,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_REST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.REST,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.REST,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_RETALIATE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RETALIATE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RETALIATE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					70,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_RETURN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RETURN,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RETURN,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_REVELATION_DANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.REVELATIONDANCE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.REVELATIONDANCE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					90,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_REVENGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.REVENGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ -4,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.REVENGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					60,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				-4,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_REVERSAL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FLAIL,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.FLAIL,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_REVIVAL_BLESSING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.REVIVALBLESSING,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 1,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.REVIVALBLESSING,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						1,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_RISING_VOLTAGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RISINGVOLTAGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RISINGVOLTAGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					70,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ROAR {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ROAR,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ -6,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.ROAR,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				-6,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_ROAR_OF_TIME {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RECHARGE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 150,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RECHARGE,
+						moveType:				Type.DRAGON,
+						power:					150,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ROCK_BLAST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 25,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					25,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ROCK_CLIMB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 90,
-						/*accuracy =*/ 85,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.CONFUSEHIT,
+						moveType:				Type.NORMAL,
+						power:					90,
+						accuracy:				85,
+						pp:						20,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ROCK_POLISH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPEEDUP2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SPEEDUP2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ROCK_SLIDE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 75,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.ROCK,
+						power:					75,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ROCK_SMASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEDOWNHIT,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 50,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEDOWNHIT,
+						moveType:				Type.FIGHTING,
+						power:					40,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	50,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ROCK_THROW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 50,
-						/*accuracy =*/ 90,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					50,
+						accuracy:				90,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ROCK_TOMB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 60,
-						/*accuracy =*/ 95,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.ROCK,
+						power:					60,
+						accuracy:				95,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ROCK_WRECKER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RECHARGE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 150,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RECHARGE,
+						moveType:				Type.ROCK,
+						power:					150,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ROLE_PLAY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ROLEPLAY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.ROLEPLAY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_ROLLING_KICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 60,
-						/*accuracy =*/ 85,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.FIGHTING,
+						power:					60,
+						accuracy:				85,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ROLLOUT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ROLLOUT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 30,
-						/*accuracy =*/ 90,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ROLLOUT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					30,
+						accuracy:				90,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
@@ -10679,3944 +10722,3944 @@ namespace PkmnEngine {
 			public static BattleMove MOVE_ROOST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ROOST,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.ROOST,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_ROTOTILLER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ROTOTILLER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.ROTOTILLER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_ROUND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ROUND,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ROUND,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					60,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_RUINATION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SUPERFANG,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.SUPERFANG,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SACRED_FIRE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATTACKANDTHAWHIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 100,
-						/*accuracy =*/ 95,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 50,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.ATTACKANDTHAWHIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					100,
+						accuracy:				95,
+						pp:						5,
+						secondaryEffectChance:	50,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SACRED_SWORD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CHIPAWAY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHIP_AWAY | Flag.SHARPNESS_AFFECTED
+						primaryEffect:			MoveEffectID.CHIPAWAY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					90,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHIP_AWAY | Flag.SHARPNESS_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SAFEGUARD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SAFEGUARD,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SAFEGUARD,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						25,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SALT_CURE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SALTCURE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SALTCURE,
+						moveType:				Type.ROCK,
+						power:					40,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SAND_ATTACK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ACCURACYDOWNHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.ACCURACYDOWNHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SAND_TOMB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SAND_TOMB,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 35,
-						/*accuracy =*/ 85,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.SAND_TOMB,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					35,
+						accuracy:				85,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SANDSEAR_STORM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 100,
-						/*accuracy =*/ 80,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT_RAIN
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.GROUND,
+						power:					100,
+						accuracy:				80,
+						pp:						10,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT_RAIN
 					);
 				}
 			}
 			public static BattleMove MOVE_SANDSTORM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SANDSTORM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.SANDSTORM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_SCALD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATTACKANDTHAWHIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.ATTACKANDTHAWHIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.WATER,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SCALE_SHOT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SCALESHOT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 25,
-						/*accuracy =*/ 90,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.SCALESHOT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					25,
+						accuracy:				90,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SCARY_FACE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPEEDDOWNHIT2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SPEEDDOWNHIT2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SCORCHING_SANDS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SCORCHINGSANDS,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.THAWS_USER
+						primaryEffect:			MoveEffectID.SCORCHINGSANDS,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.GROUND,
+						power:					70,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.THAWS_USER
 					);
 				}
 			}
 			public static BattleMove MOVE_SCRATCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 35,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					40,
+						accuracy:				100,
+						pp:						35,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SCREECH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFENSEDOWNHIT2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 85,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.DEFENSEDOWNHIT2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				85,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_SEARING_SHOT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.FIRE,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SECRET_POWER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SECRETPOWER,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SECRETPOWER,
+						moveType:				Type.NORMAL,
+						power:					70,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SECRET_SWORD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SECRETSWORD,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 85,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.SECRETSWORD,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					85,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SEED_BOMB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SEED_FLARE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT2,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 120,
-						/*accuracy =*/ 85,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 40,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALDEFENSEDOWNHIT2,
+						moveType:				Type.GRASS,
+						power:					120,
+						accuracy:				85,
+						pp:						5,
+						secondaryEffectChance:	40,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SEISMIC_TOSS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.LEVELDAMAGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.LEVELDAMAGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SELF_DESTRUCT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.EXPLOSION,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 200,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.EXPLOSION,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					200,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHADOW_BALL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALDEFENSEDOWNHIT,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALDEFENSEDOWNHIT,
+						moveType:				Type.GHOST,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHADOW_BONE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEDOWNHIT,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 85,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEDOWNHIT,
+						moveType:				Type.GHOST,
+						power:					85,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHADOW_CLAW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					70,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHADOW_FORCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SHADOWFORCE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SEMI_INVUL_TURN
+						primaryEffect:			MoveEffectID.SHADOWFORCE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					120,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_SHADOW_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 60,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					60,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHADOW_SNEAK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					40,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHARPEN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATTACKUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.ATTACKUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHED_TAIL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SUBSTITUTE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.SUBSTITUTE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_SHEER_COLD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.OHKO,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 0,
-						/*accuracy =*/ 30,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED
+						primaryEffect:			MoveEffectID.OHKO,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					0,
+						accuracy:				30,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHELL_SIDE_ARM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SHELLSIDEARM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.SHELLSIDEARM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHELL_SMASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SHELLSMASH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SHELLSMASH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHELL_TRAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SHELLTRAP,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 150,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ -3,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SHELLTRAP,
+						moveType:				Type.FIRE,
+						power:					150,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				-3,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHELTER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFENSEUP2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.DEFENSEUP2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHIFT_GEAR {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SHIFTGEAR,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SHIFTGEAR,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHOCK_WAVE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 60,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					60,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SHORE_UP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SHOREUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SHOREUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_SIGNAL_BEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.CONFUSEHIT,
+						moveType:				Type.BUG,
+						power:					75,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SILK_TRAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SILKTRAP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 4,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECTS
+						primaryEffect:			MoveEffectID.SILKTRAP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				4,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECTS
 					);
 				}
 			}
 			public static BattleMove MOVE_SILVER_WIND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ALLSTATSUP,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ALLSTATSUP,
+						moveType:				Type.BUG,
+						power:					60,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SIMPLE_BEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SIMPLEBEAM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SIMPLEBEAM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SLEEPHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 55,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.SLEEPHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				55,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_SKETCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SKETCH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 1,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.CANNOT_BE_SKETCHED | Flag.UNUSABLE_BY_SLEEP_TALK | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.SKETCH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						1,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.CANNOT_BE_SKETCHED | Flag.UNUSABLE_BY_SLEEP_TALK | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_SKILL_SWAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SKILLSWAP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SKILLSWAP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SKITTER_SMACK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKDOWNHIT,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 70,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKDOWNHIT,
+						moveType:				Type.BUG,
+						power:					70,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SKULL_BASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SKULLBASH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 130,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
+						primaryEffect:			MoveEffectID.SKULLBASH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					130,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_SKY_ATTACK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SKYATTACK,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 140,
-						/*accuracy =*/ 90,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.CHARGING_TURN | Flag.HIGH_CRITICAL
+						primaryEffect:			MoveEffectID.SKYATTACK,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.FLYING,
+						power:					140,
+						accuracy:				90,
+						pp:						5,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.CHARGING_TURN | Flag.HIGH_CRITICAL
 					);
 				}
 			}
 			public static BattleMove MOVE_SKY_DROP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SKYDROP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SEMI_INVUL_TURN
+						primaryEffect:			MoveEffectID.SKYDROP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					60,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SEMI_INVUL_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_SKY_UPPERCUT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GUST,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 85,
-						/*accuracy =*/ 90,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
+						primaryEffect:			MoveEffectID.GUST,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					85,
+						accuracy:				90,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
 					);
 				}
 			}
 			public static BattleMove MOVE_SLACK_OFF {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEALHALF,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.HEALHALF,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_SLAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 80,
-						/*accuracy =*/ 75,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					80,
+						accuracy:				75,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SLASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					70,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SLEEP_POWDER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SLEEPHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 75,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SLEEPHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				75,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SLEEP_TALK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SLEEPTALK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.CANNOT_BE_SKETCHED | Flag.USABLE_WHILE_ASLEEP | Flag.UNUSABLE_BY_SLEEP_TALK
+						primaryEffect:			MoveEffectID.SLEEPTALK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.CANNOT_BE_SKETCHED | Flag.USABLE_WHILE_ASLEEP | Flag.UNUSABLE_BY_SLEEP_TALK
 					);
 				}
 			}
 			public static BattleMove MOVE_SLUDGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.POISONHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.POISONHIT,
+						moveType:				Type.POISON,
+						power:					65,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SLUDGE_BOMB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.POISONHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BULLETPROOF_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.POISONHIT,
+						moveType:				Type.POISON,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BULLETPROOF_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SLUDGE_WAVE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.POISONHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 95,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.POISONHIT,
+						moveType:				Type.POISON,
+						power:					95,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SMACK_DOWN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SMACKDOWN,
-						/*secondaryEffect =*/ MoveEffectID.GROUNDHIT,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
+						primaryEffect:			MoveEffectID.SMACKDOWN,
+						secondaryEffect:		MoveEffectID.GROUNDHIT,
+						moveType:				Type.ROCK,
+						power:					50,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
 					);
 				}
 			}
 			public static BattleMove MOVE_SMART_STRIKE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 70,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.STEEL,
+						power:					70,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SMELLING_SALTS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SMELLINGSALTS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SMELLINGSALTS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					70,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SMOG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.POISONHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 30,
-						/*accuracy =*/ 70,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 40,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.POISONHIT,
+						moveType:				Type.POISON,
+						power:					30,
+						accuracy:				70,
+						pp:						20,
+						secondaryEffectChance:	40,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SMOKESCREEN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ACCURACYDOWNHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.ACCURACYDOWNHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SNAP_TRAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SNAP_TRAP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 35,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.SNAP_TRAP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					35,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SNARL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKDOWNHIT,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 55,
-						/*accuracy =*/ 95,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKDOWNHIT,
+						moveType:				Type.DARK,
+						power:					55,
+						accuracy:				95,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SNATCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SNATCH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 40,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.SNATCH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				40,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_SNIPE_SHOT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SNIPESHOT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
+						primaryEffect:			MoveEffectID.SNIPESHOT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
 					);
 				}
 			}
 			public static BattleMove MOVE_SNORE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SNORE,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE | Flag.USABLE_WHILE_ASLEEP
+						primaryEffect:			MoveEffectID.SNORE,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.NORMAL,
+						power:					50,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.SOUND_MOVE | Flag.USABLE_WHILE_ASLEEP
 					);
 				}
 			}
 			public static BattleMove MOVE_SNOWSCAPE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SNOWSCAPE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.SNOWSCAPE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_SOAK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SOAK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SOAK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SOFT_BOILED {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HEALHALF,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
+						primaryEffect:			MoveEffectID.HEALHALF,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.USABLE_OUT_OF_BATTLE | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_SOLAR_BEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SOLARBEAM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
+						primaryEffect:			MoveEffectID.SOLARBEAM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					120,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_SOLAR_BLADE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SOLARBEAM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 125,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
+						primaryEffect:			MoveEffectID.SOLARBEAM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					125,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.CHARGING_TURN
 					);
 				}
 			}
 			public static BattleMove MOVE_SONIC_BOOM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SONICBOOM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 90,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.SONICBOOM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				90,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPACIAL_REND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 100,
-						/*accuracy =*/ 95,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL2 | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DRAGON,
+						power:					100,
+						accuracy:				95,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL2 | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPARK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ELECTRIC,
+						power:					65,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPARKLING_ARIA {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.CUREBURNHIT,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.CUREBURNHIT,
+						moveType:				Type.WATER,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPECTRAL_THIEF {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECTRALTHIEF,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECTRALTHIEF,
+						moveType:				Type.GHOST,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPEED_SWAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPEEDSWAP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.SPEEDSWAP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_SPICY_EXTRACT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPICYEXTRACT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.SPICYEXTRACT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_SPIDER_WEB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPIDERWEB,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SPIDERWEB,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPIKE_CANNON {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 20,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					20,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPIKES {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPIKES,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL_OPPONENTS,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED
+						primaryEffect:			MoveEffectID.SPIKES,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL_OPPONENTS,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAGIC_COAT_AFFECTED | Flag.ENTRY_HAZARD
 					);
 				}
 			}
 			public static BattleMove MOVE_SPIKY_SHIELD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPIKYSHIELD,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 4,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECTS
+						primaryEffect:			MoveEffectID.SPIKYSHIELD,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				4,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECTS
 					);
 				}
 			}
 			public static BattleMove MOVE_SPIN_OUT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWN2,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWN2,
+						moveType:				Type.STEEL,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPIRIT_BREAK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKDOWNHIT,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKDOWNHIT,
+						moveType:				Type.FAIRY,
+						power:					75,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPIRIT_SHACKLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.TRAP,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.TRAP,
+						moveType:				Type.GHOST,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPIT_UP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPITUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.SPITUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPITE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPITE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SPITE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPLASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPLASH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.SPLASH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_SPORE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SLEEPHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.SLEEPHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPOTLIGHT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.FOLLOWME,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 3,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
+						primaryEffect:			MoveEffectID.FOLLOWME,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				3,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SPRINGTIDE_STORM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATTACKDOWNHIT,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 100,
-						/*accuracy =*/ 80,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATTACKDOWNHIT,
+						moveType:				Type.FAIRY,
+						power:					100,
+						accuracy:				80,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STEALTH_ROCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.STEALTHROCK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL_OPPONENTS,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED
+						primaryEffect:			MoveEffectID.STEALTHROCK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL_OPPONENTS,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAGIC_COAT_AFFECTED | Flag.ENTRY_HAZARD
 					);
 				}
 			}
 			public static BattleMove MOVE_STEAM_ERUPTION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.STEAMERUPTION,
-						/*secondaryEffect =*/ MoveEffectID.BURNHIT,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 110,
-						/*accuracy =*/ 95,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.THAWS_USER
+						primaryEffect:			MoveEffectID.STEAMERUPTION,
+						secondaryEffect:		MoveEffectID.BURNHIT,
+						moveType:				Type.WATER,
+						power:					110,
+						accuracy:				95,
+						pp:						5,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.THAWS_USER
 					);
 				}
 			}
 			public static BattleMove MOVE_STEAMROLLER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.DOUBLE_DAMAGE_MINIMIZE
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.BUG,
+						power:					65,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.DOUBLE_DAMAGE_MINIMIZE
 					);
 				}
 			}
 			public static BattleMove MOVE_STEEL_BEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.RECOILHALFMAXHP,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 140,
-						/*accuracy =*/ 95,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.RECOILHALFMAXHP,
+						moveType:				Type.STEEL,
+						power:					140,
+						accuracy:				95,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STEEL_ROLLER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.CLEARTERRAIN,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 130,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.CLEARTERRAIN,
+						moveType:				Type.STEEL,
+						power:					130,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STEEL_WING {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEUP,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 70,
-						/*accuracy =*/ 90,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEUP,
+						moveType:				Type.STEEL,
+						power:					70,
+						accuracy:				90,
+						pp:						25,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STICKY_WEB {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.STICKYWEB,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL_OPPONENTS,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED
+						primaryEffect:			MoveEffectID.STICKYWEB,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL_OPPONENTS,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAGIC_COAT_AFFECTED | Flag.ENTRY_HAZARD
 					);
 				}
 			}
 			public static BattleMove MOVE_STOCKPILE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.STOCKPILE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.STOCKPILE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STOMP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.NORMAL,
+						power:					65,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STOMPING_TANTRUM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.STOMPINGTANTRUM,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.STOMPINGTANTRUM,
+						moveType:				Type.GROUND,
+						power:					75,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STONE_AXE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.STEALTHROCK,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 65,
-						/*accuracy =*/ 90,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.STEALTHROCK,
+						moveType:				Type.ROCK,
+						power:					65,
+						accuracy:				90,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.SHARPNESS_AFFECTED | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ENTRY_HAZARD
 					);
 				}
 			}
 			public static BattleMove MOVE_STONE_EDGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 100,
-						/*accuracy =*/ 80,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					100,
+						accuracy:				80,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.HIGH_CRITICAL | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STORED_POWER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.STOREDPOWER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 20,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.STOREDPOWER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					20,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STORM_THROW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.ALWAYS_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					60,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.ALWAYS_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STRANGE_STEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 90,
-						/*accuracy =*/ 95,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.CONFUSEHIT,
+						moveType:				Type.FAIRY,
+						power:					90,
+						accuracy:				95,
+						pp:						10,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STRENGTH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STRENGTH_SAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.STRENGTHSAP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.STRENGTHSAP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_STRING_SHOT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPEEDDOWNHIT2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 0,
-						/*accuracy =*/ 95,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SPEEDDOWNHIT2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					0,
+						accuracy:				95,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STRUGGLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.STRUGGLE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NONE,
-						/*power =*/ 50,
-						/*accuracy =*/ 0,
-						/*pp =*/ 255,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_RANDOM,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.CANNOT_BE_SKETCHED | Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.STRUGGLE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NONE,
+						power:					50,
+						accuracy:				0,
+						pp:						255,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_RANDOM,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.CANNOT_BE_SKETCHED | Flag.UNUSABLE_BY_SLEEP_TALK | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STRUGGLE_BUG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKDOWNHIT,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKDOWNHIT,
+						moveType:				Type.BUG,
+						power:					50,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STUFF_CHEEKS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.STUFFCHEEKS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.STUFFCHEEKS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_STUN_SPORE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 75,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.PARALYZEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				75,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SUBMISSION {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECOILQUARTERDEALT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 80,
-						/*accuracy =*/ 80,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RECOILQUARTERDEALT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					80,
+						accuracy:				80,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SUBSTITUTE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SUBSTITUTE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SUBSTITUTE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SUCKER_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SUCKERPUNCH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.SUCKERPUNCH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					70,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SUNNY_DAY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SUNNYDAY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.SUNNYDAY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIRE,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_SUNSTEEL_STRIKE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SUNSTEELSTRIKE,
-						/*moveType =*/ Type.STEEL,
-						/*power =*/ 100,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SUNSTEELSTRIKE,
+						moveType:				Type.STEEL,
+						power:					100,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SUPER_FANG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SUPERFANG,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SUPERFANG,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SUPERPOWER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATKDEFDOWN,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATKDEFDOWN,
+						moveType:				Type.FIGHTING,
+						power:					120,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SUPERSONIC {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 55,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.CONFUSEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				55,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SOUND_MOVE | Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SURF {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SURF,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_WATER
+						primaryEffect:			MoveEffectID.SURF,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					90,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_WATER
 					);
 				}
 			}
 			public static BattleMove MOVE_SURGING_STRIKES {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SURGINGSTRIKES,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 25,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_CRITICAL
+						primaryEffect:			MoveEffectID.SURGINGSTRIKES,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					25,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_CRITICAL
 					);
 				}
 			}
 			public static BattleMove MOVE_SWAGGER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SWAGGER,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 85,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SWAGGER,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				85,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SWALLOW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SWALLOW,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SWALLOW,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SWEET_KISS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FAIRY,
-						/*power =*/ 0,
-						/*accuracy =*/ 75,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.CONFUSEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FAIRY,
+						power:					0,
+						accuracy:				75,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SWEET_SCENT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.EVASIONDOWNHIT2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
+						primaryEffect:			MoveEffectID.EVASIONDOWNHIT2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.USABLE_OUT_OF_BATTLE
 					);
 				}
 			}
 			public static BattleMove MOVE_SWIFT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 60,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					60,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.ALWAYS_HIT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SWITCHEROO {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SWITCHEROO,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.SWITCHEROO,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SWORDS_DANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATTACKUP2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.ATTACKUP2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SYNCHRONOISE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SYNCHRONOISE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.SYNCHRONOISE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					120,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_SYNTHESIS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SYNTHESIS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SYNTHESIS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_TACKLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 35,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					40,
+						accuracy:				100,
+						pp:						35,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TAIL_GLOW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.SPECIALATTACKUP2,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.SPECIALATTACKUP2,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TAIL_SLAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 25,
-						/*accuracy =*/ 85,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					25,
+						accuracy:				85,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TAIL_WHIP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFENSEDOWNHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.DEFENSEDOWNHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TAILWIND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TAILWIND,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.TAILWIND,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TAKE_DOWN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECOILQUARTERDEALT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 90,
-						/*accuracy =*/ 85,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RECOILQUARTERDEALT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					90,
+						accuracy:				85,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TAKE_HEART {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TAKEHEART,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.TAKEHEART,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TAR_SHOT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TARSHOT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.TARSHOT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TAUNT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TAUNT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.TAUNT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TEARFUL_LOOK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TEARFULLOOK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.TEARFULLOOK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_TEATIME {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TEATIME,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.TEATIME,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_TECHNO_BLAST {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TECHNOBLAST,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.TECHNOBLAST,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					120,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TEETER_DANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_FOES_AND_ALLY,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.CONFUSEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_FOES_AND_ALLY,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TELEKINESIS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TELEKINESIS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
+						primaryEffect:			MoveEffectID.TELEKINESIS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TELEPORT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TELEPORT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.USABLE_OUT_OF_BATTLE
+						primaryEffect:			MoveEffectID.TELEPORT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.USABLE_OUT_OF_BATTLE
 					);
 				}
 			}
 			public static BattleMove MOVE_TERRAIN_PULSE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TERRAINPULSE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.MEGA_LAUNCHER_AFFECTED
+						primaryEffect:			MoveEffectID.TERRAINPULSE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					50,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.MEGA_LAUNCHER_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_THIEF {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.THIEF,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.THIEF,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					60,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_THOUSAND_ARROWS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.THOUSANDARROWS,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.HITS_UNGROUNDED | Flag.IGNORE_TYPE_EFF
+						primaryEffect:			MoveEffectID.THOUSANDARROWS,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GROUND,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.HITS_UNGROUNDED | Flag.IGNORE_TYPE_EFF
 					);
 				}
 			}
 			public static BattleMove MOVE_THOUSAND_WAVES {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.THOUSANDWAVES,
-						/*moveType =*/ Type.GROUND,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.THOUSANDWAVES,
+						moveType:				Type.GROUND,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_THRASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.OUTRAGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.OUTRAGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					120,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_THROAT_CHOP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.THROATCHOP,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.THROATCHOP,
+						moveType:				Type.DARK,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_THUNDER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 110,
-						/*accuracy =*/ 70,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.ALWAYS_HIT_RAIN | Flag.ACC_LOSS_IN_SUNLIGHT
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ELECTRIC,
+						power:					110,
+						accuracy:				70,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.ALWAYS_HIT_RAIN | Flag.ACC_LOSS_IN_SUNLIGHT
 					);
 				}
 			}
 			public static BattleMove MOVE_THUNDER_CAGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.THUNDER_CAGE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 90,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.THUNDER_CAGE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					80,
+						accuracy:				90,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_THUNDER_FANG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BITE,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 65,
-						/*accuracy =*/ 95,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BITE_MOVE
+						primaryEffect:			MoveEffectID.BITE,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ELECTRIC,
+						power:					65,
+						accuracy:				95,
+						pp:						15,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.BITE_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_THUNDER_PUNCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 75,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ELECTRIC,
+						power:					75,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_THUNDER_SHOCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ELECTRIC,
+						power:					40,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_THUNDER_WAVE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 90,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.PARALYZEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					0,
+						accuracy:				90,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_THUNDERBOLT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ELECTRIC,
+						power:					90,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_THUNDEROUS_KICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.DEFENSEDOWNHIT,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.DEFENSEDOWNHIT,
+						moveType:				Type.FIGHTING,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TICKLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TICKLE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.TICKLE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TIDY_UP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TIDYUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.TIDYUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_TOPSY_TURVY {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TOPSYTURVY,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.TOPSYTURVY,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_TORCH_SONG {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPECIALATTACKUP,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPECIALATTACKUP,
+						moveType:				Type.FIRE,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_TORMENT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TORMENT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.TORMENT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					0,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TOXIC {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TOXICHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 0,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.TOXICHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					0,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TOXIC_SPIKES {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TOXICSPIKES,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL_OPPONENTS,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED
+						primaryEffect:			MoveEffectID.TOXICSPIKES,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL_OPPONENTS,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAGIC_COAT_AFFECTED | Flag.ENTRY_HAZARD
 					);
 				}
 			}
 			public static BattleMove MOVE_TOXIC_THREAD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.POISONHIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDDOWNHIT,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.POISONHIT,
+						secondaryEffect:		MoveEffectID.SPEEDDOWNHIT,
+						moveType:				Type.POISON,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TRAILBLAZE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.SPEEDUP,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.SPEEDUP,
+						moveType:				Type.GRASS,
+						power:					50,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TRANSFORM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TRANSFORM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.IGNORE_TYPE_EFF
+						primaryEffect:			MoveEffectID.TRANSFORM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.ALWAYS_HIT | Flag.IGNORE_TYPE_EFF
 					);
 				}
 			}
 			public static BattleMove MOVE_TRI_ATTACK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.TRIATTACK,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.TRIATTACK,
+						moveType:				Type.NORMAL,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TRICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TRICK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.TRICK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TRICK_ROOM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TRICKROOM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 7,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.TRICKROOM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				7,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TRICK_OR_TREAT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TRICKORTREAT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GHOST,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.TRICKORTREAT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GHOST,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TRIPLE_ARROWS {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.TRIPLEARROWS,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.TRIPLEARROWS,
+						moveType:				Type.FIGHTING,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HIGH_CRITICAL
 					);
 				}
 			}
 			public static BattleMove MOVE_TRIPLE_AXEL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TRIPLEAXEL,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ICE,
-						/*power =*/ 20,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.TRIPLEAXEL,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ICE,
+						power:					20,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TRIPLE_DIVE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TRIPLEDIVE,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 30,
-						/*accuracy =*/ 95,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.TRIPLEDIVE,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					30,
+						accuracy:				95,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TRIPLE_KICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TRIPLEKICK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 10,
-						/*accuracy =*/ 90,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.TRIPLEKICK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					10,
+						accuracy:				90,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TROP_KICK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.ATTACKDOWNHIT,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.ATTACKDOWNHIT,
+						moveType:				Type.GRASS,
+						power:					70,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TRUMP_CARD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.TRUMPCARD,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.TRUMPCARD,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_TWIN_BEAM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DOUBLEHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.DOUBLEHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					40,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TWINEEDLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DOUBLEHIT,
-						/*secondaryEffect =*/ MoveEffectID.POISONHIT,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 25,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.DOUBLEHIT,
+						secondaryEffect:		MoveEffectID.POISONHIT,
+						moveType:				Type.BUG,
+						power:					25,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_TWISTER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.GUST,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.DRAGON,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
+						primaryEffect:			MoveEffectID.GUST,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.DRAGON,
+						power:					40,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HITS_SEMI_INVUL_AIR
 					);
 				}
 			}
 			public static BattleMove MOVE_U_TURN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.UTURN,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.UTURN,
+						moveType:				Type.BUG,
+						power:					70,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_UPROAR {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.UPROAR,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
+						primaryEffect:			MoveEffectID.UPROAR,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					90,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.UNUSABLE_BY_SLEEP_TALK | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.SOUND_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_V_CREATE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.VCREATE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 180,
-						/*accuracy =*/ 95,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.VCREATE,
+						moveType:				Type.FIRE,
+						power:					180,
+						accuracy:				95,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_VACUUM_WAVE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					40,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_VENOM_DRENCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.VENOMDRENCH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
+						primaryEffect:			MoveEffectID.VENOMDRENCH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					0,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_VENOSHOCK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.VENOSHOCK,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.POISON,
-						/*power =*/ 65,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.VENOSHOCK,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.POISON,
+						power:					65,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_VICTORY_DANCE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATKDEFSPDUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.ATKDEFSPDUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_VINE_WHIP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 45,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					45,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_VISE_GRIP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 55,
-						/*accuracy =*/ 100,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					55,
+						accuracy:				100,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_VITAL_THROW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 70,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ -1,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIGHTING,
+						power:					70,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				-1,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.ALWAYS_HIT | Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_VOLT_SWITCH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.UTURN,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.UTURN,
+						moveType:				Type.ELECTRIC,
+						power:					70,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_VOLT_TACKLE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECOILTHIRDDEALT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 10,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RECOILTHIRDDEALT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ELECTRIC,
+						power:					120,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	10,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WAKE_UP_SLAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.WAKEUPSLAP,
-						/*secondaryEffect =*/ MoveEffectID.WAKEUPHIT,
-						/*moveType =*/ Type.FIGHTING,
-						/*power =*/ 70,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.WAKEUPSLAP,
+						secondaryEffect:		MoveEffectID.WAKEUPHIT,
+						moveType:				Type.FIGHTING,
+						power:					70,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WATER_GUN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 40,
-						/*accuracy =*/ 100,
-						/*pp =*/ 25,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					40,
+						accuracy:				100,
+						pp:						25,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WATER_PLEDGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.WATERPLEDGE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.WATERPLEDGE,
+						moveType:				Type.WATER,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WATER_PULSE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.CONFUSEHIT,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.CONFUSEHIT,
+						moveType:				Type.WATER,
+						power:					60,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WATER_SHURIKEN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.MULTIHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 15,
-						/*accuracy =*/ 100,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 1,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.MULTIHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					15,
+						accuracy:				100,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				1,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WATER_SPORT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.WATERSPORT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ 0
+						primaryEffect:			MoveEffectID.WATERSPORT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					0,
+						accuracy:				0,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: 0
 					);
 				}
 			}
 			public static BattleMove MOVE_WATER_SPOUT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ERUPTION,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 150,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.ERUPTION,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					150,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WATERFALL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.WATER,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WAVE_CRASH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECOILTHIRDDEALT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RECOILTHIRDDEALT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					120,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WEATHER_BALL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.WEATHERBALL,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 50,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.WEATHERBALL,
+						moveType:				Type.NORMAL,
+						power:					50,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WHIRLPOOL {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.WHIRLPOOL,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 35,
-						/*accuracy =*/ 85,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_WATER
+						primaryEffect:			MoveEffectID.WHIRLPOOL,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					35,
+						accuracy:				85,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.HITS_SEMI_INVUL_WATER
 					);
 				}
 			}
 			public static BattleMove MOVE_WHIRLWIND {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ROAR,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ -6,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.ROAR,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				-6,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.HITS_SEMI_INVUL_AIR | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_WICKED_BLOW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.DARK,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.ALWAYS_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.DARK,
+						power:					80,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.ALWAYS_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WIDE_GUARD {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.WIDEGUARD,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ROCK,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER_FIELD,
-						/*priority =*/ 3,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.WIDEGUARD,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ROCK,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER_FIELD,
+						priority:				3,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WILD_CHARGE {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECOILQUARTERDEALT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 90,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RECOILQUARTERDEALT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.ELECTRIC,
+						power:					90,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WILDBOLT_STORM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 100,
-						/*accuracy =*/ 80,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_OPPONENTS_FIELD,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT_RAIN
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ELECTRIC,
+						power:					100,
+						accuracy:				80,
+						pp:						10,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_OPPONENTS_FIELD,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED | Flag.ALWAYS_HIT_RAIN
 					);
 				}
 			}
 			public static BattleMove MOVE_WILL_O_WISP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.BURNHIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FIRE,
-						/*power =*/ 0,
-						/*accuracy =*/ 85,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.BURNHIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FIRE,
+						power:					0,
+						accuracy:				85,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WING_ATTACK {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.FLYING,
-						/*power =*/ 60,
-						/*accuracy =*/ 100,
-						/*pp =*/ 35,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ANY_NOT_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.FLYING,
+						power:					60,
+						accuracy:				100,
+						pp:						35,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ANY_NOT_USER,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WISH {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.WISH,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.WISH,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED | Flag.HEALING_MOVE
 					);
 				}
 			}
 			public static BattleMove MOVE_WITHDRAW {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.DEFENSEUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.WATER,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 40,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.DEFENSEUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.WATER,
+						power:					0,
+						accuracy:				0,
+						pp:						40,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WONDER_ROOM {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.WONDERROOM,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_ALL,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.WONDERROOM,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.PSYCHIC,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_ALL,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WOOD_HAMMER {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.RECOILTHIRDDEALT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 120,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.RECOILTHIRDDEALT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					120,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WORK_UP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.ATKANDSPATKUP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 30,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_USER,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.SNATCH_AFFECTED
+						primaryEffect:			MoveEffectID.ATKANDSPATKUP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						30,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_USER,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.SNATCH_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WORRY_SEED {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.WORRYSEED,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.GRASS,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.WORRYSEED,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.GRASS,
+						power:					0,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WRAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.WRAP,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 15,
-						/*accuracy =*/ 90,
-						/*pp =*/ 20,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.WRAP,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					15,
+						accuracy:				90,
+						pp:						20,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_WRING_OUT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.WRINGOUT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 100,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.WRINGOUT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				100,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_X_SCISSOR {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.BUG,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.BUG,
+						power:					80,
+						accuracy:				100,
+						pp:						15,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.SHARPNESS_AFFECTED | Flag.HIGH_CRITICAL | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.KINGS_ROCK_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_YAWN {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.YAWN,
-						/*secondaryEffect =*/ MoveEffectID.NONE,
-						/*moveType =*/ Type.NORMAL,
-						/*power =*/ 0,
-						/*accuracy =*/ 0,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.STATUS,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
+						primaryEffect:			MoveEffectID.YAWN,
+						secondaryEffect:		MoveEffectID.NONE,
+						moveType:				Type.NORMAL,
+						power:					0,
+						accuracy:				0,
+						pp:						10,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.STATUS,
+						flags: Flag.PROTECT_AFFECTED | Flag.MAGIC_COAT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED | Flag.ALWAYS_HIT
 					);
 				}
 			}
 			public static BattleMove MOVE_ZAP_CANNON {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.PARALYZEHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 120,
-						/*accuracy =*/ 50,
-						/*pp =*/ 5,
-						/*secondaryEffectChance =*/ 100,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.SPECIAL,
-						/*flags =*/ Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.PARALYZEHIT,
+						moveType:				Type.ELECTRIC,
+						power:					120,
+						accuracy:				50,
+						pp:						5,
+						secondaryEffectChance:	100,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.SPECIAL,
+						flags: Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ZEN_HEADBUTT {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.PSYCHIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 90,
-						/*pp =*/ 15,
-						/*secondaryEffectChance =*/ 20,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.PSYCHIC,
+						power:					80,
+						accuracy:				90,
+						pp:						15,
+						secondaryEffectChance:	20,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
 			public static BattleMove MOVE_ZING_ZAP {
 				get {
 					return new BattleMove(
-						/*primaryEffect =*/ MoveEffectID.HIT,
-						/*secondaryEffect =*/ MoveEffectID.FLINCHHIT,
-						/*moveType =*/ Type.ELECTRIC,
-						/*power =*/ 80,
-						/*accuracy =*/ 100,
-						/*pp =*/ 10,
-						/*secondaryEffectChance =*/ 30,
-						/*target =*/ MOVE_TARGET_SELECTED,
-						/*priority =*/ 0,
-						/*moveCat =*/ MoveCategory.PHYSICAL,
-						/*flags =*/ Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
+						primaryEffect:			MoveEffectID.HIT,
+						secondaryEffect:		MoveEffectID.FLINCHHIT,
+						moveType:				Type.ELECTRIC,
+						power:					80,
+						accuracy:				100,
+						pp:						10,
+						secondaryEffectChance:	30,
+						target:					MOVE_TARGET_SELECTED,
+						priority:				0,
+						moveCat:				MoveCategory.PHYSICAL,
+						flags: Flag.MAKES_CONTACT | Flag.PROTECT_AFFECTED | Flag.MIRROR_MOVE_AFFECTED
 					);
 				}
 			}
@@ -14790,6 +14833,7 @@ namespace PkmnEngine {
 		BULLET_SEED,
 		BURN_UP,
 		BURNING_JEALOUSY,
+		BURNING_BULWARK,
 		//BUZZY_BUZZ,
 		CALM_MIND,
 		CAMOUFLAGE,

@@ -90,18 +90,18 @@ namespace PkmnEngine {
 			}
 		}
 	
-		public static async Task<u32> BurnMon(BattleState state, BattleMon bm, u8 duration) {
-			return await GiveMonNonVolatileStatus(state, bm, Status.BURN, true, duration);
+		public static async Task<u32> BurnMon(BattleState state, BattleMon bm) {
+			return await GiveMonNonVolatileStatus(state, bm, Status.BURN, true, u8.MaxValue);
 		}
 		public static async Task<u32> SleepMon(BattleState state, BattleMon bm, u8 duration) {
 			bm.SetStatusParam(StatusParam.SLEEPING_TURNS, 0);
 			return await GiveMonNonVolatileStatus(state, bm, Status.SLEEP, true, duration);
 		}
-		public static async Task<u32> PoisonMon(BattleState state, BattleMon bm, u8 duration) {
-			return await GiveMonNonVolatileStatus(state, bm, Status.POISON, true, duration);
+		public static async Task<u32> PoisonMon(BattleState state, BattleMon bm) {
+			return await GiveMonNonVolatileStatus(state, bm, Status.POISON, true, u8.MaxValue);
 		}
-		public static async Task<u32> ToxicMon(BattleState state, BattleMon bm, u8 duration) {
-			return await GiveMonNonVolatileStatus(state, bm, Status.TOXIC, true, duration);
+		public static async Task<u32> ToxicMon(BattleState state, BattleMon bm) {
+			return await GiveMonNonVolatileStatus(state, bm, Status.TOXIC, true, u8.MaxValue);
 		}
 		public static async Task<u32> CureBurn(BattleMon bm) {
 			if (!bm.HasStatus(Status.BURN)) {

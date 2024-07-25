@@ -42,10 +42,14 @@ namespace PkmnEngine.BattleControllers {
 			// Get the option selected in the mon selection menu.
 			option = await Inputs.gMenuFuncs[MenuCode.SWITCH_TO_MON](battle.PlayerControllingSlot(slot).team);
 
-			// Check if the mon can actually be switched out.
-			if (!await Battle.RunEventCheck(Callback.OnTrySwitchOut, battle.GetMonInSlot(state, slot), new OnTrySwitchOutParams(battle, state, battle.GetMonInSlot(state, slot), true))) {
-				option = new MenuArg(MenuCode.CONTINUE, 0);
-				return 0;
+			BattleMon monToWithdraw = battle.GetMonInSlot(state, slot);
+			// If the mon isn't fainted...
+			if (monToWithdraw != null && !monToWithdraw.HasStatus(Status.FAINTED)) {
+			// ...check if it can actually be switched out.
+				if (!await Battle.RunEventCheck(Callback.OnTrySwitchOut, monToWithdraw, new OnTrySwitchOutParams(battle, state, monToWithdraw, true))) {
+					option = new MenuArg(MenuCode.CONTINUE, 0);
+					return 0;
+				}
 			}
 			
 			// Convert result into an action code.

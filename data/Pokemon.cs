@@ -1136,6 +1136,8 @@ namespace PkmnEngine {
 		public async Task<bool> HealMon(U16 amount, bool force) {
 			u16 oldHp = HP;
 
+			bool doHeal = force || await Battle.RunEventCheck(Callback.OnTryHeal, this, new OnTryHealParams(this, amount, force));
+
 			amount.Value = (u16)Mathf.Min(amount.Value, MaxHP - HP);
 
 			// Immediately set the HP value.
